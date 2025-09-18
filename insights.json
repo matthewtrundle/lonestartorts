@@ -1,0 +1,145 @@
+{
+  "market_research": {
+    "timestamp": "2025-09-18",
+    "executive_summary": "Tortilla resale market shows strong growth potential with existing players demonstrating viable business models. Premium positioning with shelf-stable products offers best risk-reward profile for new entrants.",
+
+    "competitive_landscape": {
+      "existing_resellers": {
+        "johnnys_goods": {
+          "model": "Independent third-party reseller",
+          "strategy": "Purchases H-E-B items at retail, ships promptly",
+          "requirements": "Minimum 2 units, ships next day due to short shelf life",
+          "positioning": "Service-focused convenience reseller"
+        },
+        "amazon": {
+          "offering": "H-E-B Original Flour Tortillas",
+          "packaging": "20-count bags, Pack of 4",
+          "advantage": "Free shipping on eligible items, Prime integration"
+        },
+        "ebay": {
+          "product": "H-E-B Butter Flour Tortillas",
+          "pricing_tiers": {
+            "1_unit": "$34.99",
+            "2_units": "$33.24 each",
+            "3_units": "$31.49 each",
+            "4_plus_units": "$29.74 each"
+          },
+          "shipping": "Free USPS Ground Advantage"
+        }
+      },
+
+      "pricing_intelligence": {
+        "bulk_discount_strategy": "5-15% reduction for multi-unit purchases",
+        "free_shipping_threshold": "Common at $35-50 order value",
+        "premium_for_convenience": "20-40% markup acceptable for hard-to-find items"
+      }
+    },
+
+    "cold_chain_analysis": {
+      "market_size": {
+        "2025": "$83.02 billion",
+        "2030_projected": "$110.22 billion",
+        "CAGR": "5.83%"
+      },
+      "dtc_food_beverage": {
+        "monthly_sales": "$7.2 billion",
+        "growth_driver": "Post-pandemic comfort with online perishable purchases"
+      },
+      "temperature_requirements": {
+        "refrigerated": "2°C to 8°C",
+        "frozen": "-18°C",
+        "ultra_low": "-80°C"
+      },
+      "fulfillment_strategy": {
+        "micro_warehouses": "Urban/suburban locations for last-mile reduction",
+        "optimal_coverage": "KS warehouse reaches 99.9% continental US in 1-3 days",
+        "seasonal_adjustments": "Required for summer shipping challenges"
+      }
+    },
+
+    "shelf_life_optimization": {
+      "shelf_stable_advantages": {
+        "unopened_life": "6-8 months in cool, dark place",
+        "room_temp_duration": "2-3 weeks sealed",
+        "shipping_complexity": "Standard packaging sufficient",
+        "cost_advantage": "No cold chain premium"
+      },
+      "refrigerated_challenges": {
+        "shelf_life": "3-4 weeks refrigerated after opening",
+        "shipping_requirement": "Cold packs, insulated packaging",
+        "cost_premium": "$7-15 additional per shipment",
+        "summer_risk": "High spoilage risk in warm months"
+      },
+      "recommendation": "Focus on shelf-stable SKUs initially, add refrigerated once logistics mature"
+    },
+
+    "consumer_insights": {
+      "price_sensitivity": {
+        "premium_delivery": "24% will pay more for 1-2 hour delivery window",
+        "quality_over_discount": "Food customers respond equally to non-discount incentives",
+        "convenience_premium": "Willing to pay 20-40% more for hard-to-find items"
+      },
+      "purchase_patterns": {
+        "bulk_buying": "Common for shelf-stable items",
+        "frequency": "Monthly for pantry staples",
+        "trial_barrier": "First purchase requires trust signals"
+      }
+    },
+
+    "strategic_recommendations": {
+      "positioning": {
+        "primary": "Premium convenience reseller for authentic Texas tortillas",
+        "differentiator": "Curated selection, not available everywhere",
+        "voice": "Sophisticated yet approachable, emphasizing quality"
+      },
+
+      "pricing_strategy": {
+        "base_markup": "30-40% over retail for single units",
+        "bulk_discounts": {
+          "2_units": "5% off",
+          "3_units": "10% off",
+          "4_plus": "15% off"
+        },
+        "shipping": {
+          "standard": "$4.99 flat rate",
+          "free_threshold": "$45",
+          "expedited": "$12.99 for 2-day"
+        }
+      },
+
+      "operational_priorities": {
+        "phase_1": [
+          "Launch with shelf-stable SKUs only",
+          "Establish reliable fulfillment partner",
+          "Build trust through quality packaging and communication"
+        ],
+        "phase_2": [
+          "Introduce subscription model for regular customers",
+          "Add complementary products (salsas, hot sauces)",
+          "Test limited refrigerated items in cooler months"
+        ],
+        "phase_3": [
+          "Full refrigerated line with proper cold chain",
+          "Regional micro-fulfillment centers",
+          "White-label or private label opportunities"
+        ]
+      },
+
+      "risk_mitigation": {
+        "legal": "Maintain clear independent reseller status",
+        "quality": "Partner with established fulfillment provider",
+        "seasonal": "Adjust inventory and shipping methods by season",
+        "competition": "Focus on premium experience vs price competition"
+      }
+    },
+
+    "key_metrics_to_track": {
+      "customer_acquisition_cost": "$15-25 target",
+      "lifetime_value": "$150+ target",
+      "repeat_purchase_rate": "30% within 60 days",
+      "cart_abandonment": "Below 70%",
+      "shipping_damage_rate": "Below 2%",
+      "customer_satisfaction": "4.5+ stars average"
+    }
+  }
+}

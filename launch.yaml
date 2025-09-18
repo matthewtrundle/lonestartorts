@@ -1,0 +1,158 @@
+# Tortilla Rodeo Co. - Launch Strategy
+
+launch_phases:
+  phase_1:
+    name: "Soft Launch"
+    duration: "2 weeks"
+    features:
+      - "Shelf-stable products only"
+      - "Basic order tracking"
+      - "Email notifications"
+      - "Stripe checkout integration"
+    marketing:
+      - "Friends & family beta"
+      - "Limited social media presence"
+      - "Collect initial feedback"
+    success_metrics:
+      - "50+ successful orders"
+      - "< 2% checkout abandonment"
+      - "Zero compliance issues"
+
+  phase_2:
+    name: "Public Launch"
+    duration: "4 weeks"
+    features:
+      - "Full marketing website"
+      - "SEO optimization"
+      - "Customer reviews"
+      - "Enhanced order tracking"
+    marketing:
+      - "Social media campaign"
+      - "Email marketing launch"
+      - "Influencer partnerships (Texas food bloggers)"
+    success_metrics:
+      - "500+ orders"
+      - "4.5+ star average rating"
+      - "< 1% return rate"
+
+  phase_3:
+    name: "Scale & Expand"
+    duration: "Ongoing"
+    features:
+      - "Refrigerated products (when ALLOW_REFRIGERATED=true)"
+      - "Subscription service"
+      - "Bulk ordering"
+      - "B2B portal"
+    marketing:
+      - "Paid advertising"
+      - "Affiliate program"
+      - "Content marketing"
+    success_metrics:
+      - "2000+ monthly orders"
+      - "20% subscription adoption"
+      - "Positive unit economics"
+
+marketing_channels:
+  organic:
+    - platform: "Instagram"
+      content: "Product shots, Texas culture, recipe ideas"
+      frequency: "Daily"
+    - platform: "TikTok"
+      content: "Tortilla recipes, behind-the-scenes"
+      frequency: "3x weekly"
+    - platform: "Email"
+      content: "Product launches, recipes, promotions"
+      frequency: "Weekly newsletter"
+
+  paid:
+    - platform: "Google Ads"
+      budget: "$500/month initial"
+      keywords:
+        - "buy texas tortillas online"
+        - "mi tienda tortillas delivery"
+        - "authentic corn tortillas shipped"
+    - platform: "Facebook/Instagram Ads"
+      budget: "$300/month initial"
+      targeting: "Texas expats, Mexican food enthusiasts"
+
+  partnerships:
+    - type: "Food Bloggers"
+      focus: "Texas cuisine, Mexican recipes"
+      compensation: "Product samples + affiliate commission"
+    - type: "Recipe Sites"
+      focus: "Authentic Mexican cooking"
+      compensation: "Sponsored content"
+
+customer_acquisition:
+  strategies:
+    - name: "Texas Expat Focus"
+      description: "Target people who've moved from Texas and miss authentic tortillas"
+      channels: ["Social media groups", "Reddit communities", "Alumni networks"]
+
+    - name: "Recipe Content Marketing"
+      description: "Create valuable recipe content that naturally features our products"
+      channels: ["Blog", "YouTube", "Pinterest"]
+
+    - name: "Referral Program"
+      description: "Incentivize customers to share with friends"
+      offer: "Give $5, Get $5"
+
+pricing_strategy:
+  positioning: "Premium convenience"
+  justification:
+    - "Authentic Texas products"
+    - "Direct-to-door delivery"
+    - "No need to find specialty stores"
+    - "Guaranteed freshness"
+  promotions:
+    launch: "15% off first order with code YEEHAW"
+    recurring: "Free shipping on orders over $25"
+    seasonal: "Texas Independence Day special - March 2"
+
+risk_mitigation:
+  compliance:
+    - "Clear disclaimer on all pages"
+    - "No use of H-E-B visual assets"
+    - "Regular legal review of copy"
+
+  operational:
+    - "Start with shelf-stable only"
+    - "Partner with reliable fulfillment"
+    - "Clear shipping expectations"
+
+  reputation:
+    - "Proactive customer service"
+    - "Quality guarantee"
+    - "Transparent about reseller status"
+
+success_indicators:
+  week_1:
+    - "Website live with zero errors"
+    - "10+ test orders processed"
+    - "Email flow functioning"
+
+  month_1:
+    - "100+ orders"
+    - "< 5% customer service inquiries"
+    - "Positive initial reviews"
+
+  quarter_1:
+    - "1000+ total orders"
+    - "Break-even on CAC"
+    - "Ready for phase 2 features"
+
+competitor_differentiation:
+  vs_grocery_delivery:
+    - "Specialized in authentic Texas products"
+    - "No membership required"
+    - "Ships nationwide"
+
+  vs_local_stores:
+    - "Convenience of home delivery"
+    - "Consistent availability"
+    - "No searching required"
+
+  vs_other_online:
+    - "Focus on Texas authenticity"
+    - "Curated selection"
+    - "Personal service"

@@ -1,0 +1,50 @@
+brand:
+  name: Lone Star Tortilla
+  tagline: Premium H-E-B tortillas from Texas, shipped nationwide
+  voice: playful, confident, cheeky; no implied affiliation
+  subtitle: Authentic Texas tortillas sourced from H-E-B
+
+legal:
+  disclaimer: Independent reseller. Not affiliated with or endorsed by H-E-B®.
+  labeling:
+    shelf_stable_copy: Store in a cool, dry place.
+    refrigerated_copy: Keep Refrigerated. Ships with cold packs.
+
+store:
+  allow_refrigerated: false
+  shipping:
+    std_days: 2-3
+    cold_surcharge: 7.00
+
+products:
+  - sku: TTC-MT-CORN-SS
+    name: Mi Tienda-style Corn Tortillas (Shelf-Stable)
+    price: 4.99
+    storage: shelf_stable
+  - sku: TTC-BUTTER-FLOUR
+    name: Butter Flour Tortillas (Family Pack)
+    price: 5.99
+    storage: shelf_stable
+
+tech:
+  stack:
+    - Next.js 14 App Router
+    - TypeScript
+    - Tailwind CSS
+    - shadcn/ui
+    - Framer Motion
+    - Stripe Checkout
+    - Prisma/KV
+    - Resend/Nodemailer
+  env:
+    - STRIPE_SECRET_KEY
+    - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    - STRIPE_WEBHOOK_SECRET
+    - DATABASE_URL
+    - RESEND_API_KEY
+    - ADMIN_TOKEN
+    - ALLOW_REFRIGERATED=false
+
+image_generation:
+  tool_path: /Users/mattrundle/Documents/image-generator-tool
+  api_key: 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

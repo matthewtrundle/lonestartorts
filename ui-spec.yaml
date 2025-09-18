@@ -1,0 +1,353 @@
+# Tortilla Rodeo Co. - Premium UI/UX Specification
+# Inspired by promeat.chipsa.design aesthetic
+
+design_system:
+  colors:
+    # Monochromatic palette - premium and sophisticated
+    primary:
+      black: "#000000"
+      charcoal: "#1A1A1A"
+      dark_gray: "#2D2D2D"
+    neutral:
+      white: "#FFFFFF"
+      off_white: "#FAFAFA"
+      light_gray: "#F5F5F5"
+      medium_gray: "#E5E5E5"
+      gray: "#B3B3B3"
+      dark: "#666666"
+    accent:
+      # Minimal accent use - only for critical CTAs
+      texas_amber: "#D97706"  # Used sparingly for primary actions
+      error: "#DC2626"
+
+  typography:
+    fonts:
+      heading: "'Helvetica Neue', -apple-system, system-ui, sans-serif"
+      body: "'Helvetica Neue', -apple-system, system-ui, sans-serif"
+      display: "'Times New Roman', Georgia, serif"  # For premium touches
+    weights:
+      light: 300
+      regular: 400
+      medium: 500
+      bold: 700
+      black: 900
+    sizes:
+      xs: "0.75rem"     # 12px - micro text
+      sm: "0.875rem"    # 14px - captions
+      base: "1rem"      # 16px - body
+      lg: "1.125rem"    # 18px - large body
+      xl: "1.25rem"     # 20px - small heading
+      2xl: "1.75rem"    # 28px - heading
+      3xl: "2.5rem"     # 40px - large heading
+      4xl: "3.5rem"     # 56px - display
+      5xl: "4.5rem"     # 72px - hero
+      6xl: "6rem"       # 96px - statement
+    line_heights:
+      tight: 1.1
+      snug: 1.2
+      normal: 1.5
+      relaxed: 1.7
+    letter_spacing:
+      tight: "-0.02em"
+      normal: "0"
+      wide: "0.02em"
+      wider: "0.05em"
+      widest: "0.1em"
+
+  spacing:
+    # Based on 8px grid for precision
+    unit: "0.5rem"      # 8px base
+    scale:
+      0: "0"
+      xs: "0.5rem"      # 8px
+      sm: "1rem"        # 16px
+      md: "2rem"        # 32px
+      lg: "3rem"        # 48px
+      xl: "4rem"        # 64px
+      2xl: "6rem"       # 96px
+      3xl: "8rem"       # 128px
+      4xl: "12rem"      # 192px
+
+  border_radius:
+    none: "0"
+    sm: "2px"
+    md: "4px"
+    lg: "8px"
+
+  shadows:
+    none: "none"
+    subtle: "0 1px 3px rgba(0,0,0,0.05)"
+    soft: "0 4px 6px rgba(0,0,0,0.07)"
+    medium: "0 10px 20px rgba(0,0,0,0.1)"
+    large: "0 20px 40px rgba(0,0,0,0.15)"
+
+layout:
+  grid:
+    columns: 12
+    max_width: "1440px"
+    container_padding:
+      mobile: "1.5rem"   # 24px
+      tablet: "2rem"     # 32px
+      desktop: "3rem"    # 48px
+    gutter: "2rem"
+    breakpoints:
+      mobile: "640px"
+      tablet: "768px"
+      desktop: "1024px"
+      wide: "1440px"
+      ultra: "1920px"
+
+  header:
+    style: "minimal"
+    height:
+      mobile: "72px"
+      desktop: "96px"
+    background: "transparent initially, white on scroll"
+    logo: "wordmark, black, minimal"
+    navigation: "horizontal, right-aligned, subtle"
+    mobile_menu: "fullscreen overlay, black background"
+
+  footer:
+    style: "minimal"
+    background: "#000000"
+    text_color: "#FFFFFF"
+    padding: "4rem 0"
+    layout: "4 columns on desktop, stacked on mobile"
+
+sections:
+  hero:
+    style: "fullscreen immersive"
+    height: "100vh"
+    image: "full-bleed, high-quality tortilla photography"
+    content_placement: "center or bottom-left"
+    typography:
+      headline:
+        size: "6xl on desktop, 4xl on mobile"
+        weight: "black"
+        color: "white with text shadow"
+      subheadline:
+        size: "xl"
+        weight: "light"
+        letter_spacing: "wider"
+    cta:
+      style: "minimal outline initially, solid on hover"
+      size: "large"
+      padding: "1.25rem 3rem"
+
+  product_showcase:
+    layout: "asymmetric grid"
+    image_treatment: "large, editorial-style photography"
+    hover: "subtle zoom on image, fade in product details"
+    cards:
+      background: "white"
+      border: "1px solid #E5E5E5"
+      hover_border: "1px solid #000000"
+      image_ratio: "4:5"
+      content_padding: "2rem"
+      typography:
+        name:
+          size: "2xl"
+          weight: "medium"
+          color: "#000000"
+        price:
+          size: "lg"
+          weight: "light"
+          color: "#666666"
+        description:
+          size: "base"
+          weight: "regular"
+          color: "#666666"
+          line_height: "relaxed"
+
+  storytelling:
+    style: "editorial"
+    layout: "alternating full-width image and text blocks"
+    image_width: "60% on desktop"
+    text_width: "40% on desktop"
+    typography:
+      headline: "3xl, serif font for elegance"
+      body: "lg, relaxed line-height"
+    spacing: "generous white space between sections"
+
+  ingredients:
+    style: "minimalist grid"
+    background: "#FAFAFA"
+    icons: "thin line icons or none"
+    layout: "3 columns, centered"
+    typography:
+      labels: "uppercase, letter-spacing wide, size sm"
+      values: "size xl, weight light"
+
+  disclaimer:
+    style: "subtle but present"
+    placement: "footer and checkout"
+    background: "#F5F5F5"
+    border: "1px solid #E5E5E5"
+    typography:
+      size: "sm"
+      color: "#666666"
+      line_height: "relaxed"
+
+components:
+  Button:
+    primary:
+      background: "#000000"
+      text: "#FFFFFF"
+      border: "none"
+      hover_background: "#1A1A1A"
+      active_background: "#2D2D2D"
+      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+    secondary:
+      background: "transparent"
+      text: "#000000"
+      border: "1px solid #000000"
+      hover_background: "#000000"
+      hover_text: "#FFFFFF"
+    ghost:
+      background: "transparent"
+      text: "#666666"
+      border: "none"
+      hover_text: "#000000"
+    sizing:
+      padding:
+        sm: "0.75rem 1.5rem"
+        md: "1rem 2rem"
+        lg: "1.25rem 3rem"
+      font_size:
+        sm: "0.875rem"
+        md: "1rem"
+        lg: "1.125rem"
+      letter_spacing: "0.05em"
+      text_transform: "uppercase"
+
+  ProductCard:
+    container:
+      background: "#FFFFFF"
+      border: "none initially"
+      hover_shadow: "0 20px 40px rgba(0,0,0,0.1)"
+      transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+    image:
+      aspect_ratio: "4:5"
+      object_fit: "cover"
+      hover_scale: "1.05"
+      transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+    content:
+      padding: "2rem"
+      alignment: "left"
+    overlay:
+      style: "fade in on hover"
+      background: "rgba(0,0,0,0.8)"
+      content: "View Details in white text"
+
+  Navigation:
+    links:
+      color: "#000000"
+      hover_color: "#666666"
+      font_size: "0.875rem"
+      font_weight: "500"
+      letter_spacing: "0.05em"
+      text_transform: "uppercase"
+      underline: "2px on hover, offset 4px"
+    mobile:
+      background: "#000000"
+      text_color: "#FFFFFF"
+      font_size: "2rem"
+      font_weight: "300"
+
+  Badge:
+    storage:
+      style: "minimal text, no background"
+      font_size: "0.75rem"
+      letter_spacing: "0.1em"
+      text_transform: "uppercase"
+      color: "#666666"
+    new:
+      background: "#000000"
+      color: "#FFFFFF"
+      padding: "0.25rem 0.75rem"
+
+animations:
+  philosophy: "subtle, purposeful, elegant"
+
+  page_load:
+    hero_image: "fade in and subtle scale from 1.1 to 1"
+    content: "fade up with 20px translate"
+    stagger: "100ms between elements"
+    duration: "1s"
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+
+  scroll_reveal:
+    trigger: "when 20% in viewport"
+    animation: "fade up 30px"
+    duration: "0.8s"
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+
+  hover_states:
+    images: "scale 1.05, 0.6s ease"
+    buttons: "background transition 0.3s"
+    links: "underline slide in from left"
+
+  parallax:
+    hero: "subtle 0.5 speed ratio"
+    product_images: "0.8 speed ratio"
+    background_textures: "0.3 speed ratio"
+
+photography:
+  style: "premium, editorial, minimalist"
+  requirements:
+    - "High resolution, minimum 2000px width"
+    - "Natural lighting, soft shadows"
+    - "Neutral color grading"
+    - "Focus on texture and craftsmanship"
+    - "Clean, uncluttered compositions"
+    - "Authentic, artisanal feel"
+  treatments:
+    - "Subtle vignetting"
+    - "Muted colors"
+    - "High contrast black and white options"
+    - "Film grain texture (subtle)"
+
+accessibility:
+  requirements:
+    - "WCAG 2.1 AAA for contrast where possible"
+    - "Focus states with 2px black outline"
+    - "Skip navigation link"
+    - "Semantic HTML structure"
+    - "ARIA labels for interactive elements"
+    - "Reduced motion media query support"
+
+responsive_strategy:
+  mobile_first: true
+  breakpoint_philosophy: "content-driven, not device-driven"
+
+  mobile:
+    - "Single column layout"
+    - "Full-width imagery"
+    - "Thumb-friendly tap targets (min 44px)"
+    - "Simplified navigation"
+    - "Optimized font sizes for readability"
+
+  tablet:
+    - "Introduce 2-column layouts"
+    - "Larger typography"
+    - "More generous spacing"
+
+  desktop:
+    - "Full editorial layouts"
+    - "Asymmetric grids"
+    - "Mouse-hover interactions"
+    - "Parallax effects enabled"
+
+performance:
+  targets:
+    - "LCP < 2.0s"
+    - "FID < 50ms"
+    - "CLS < 0.05"
+    - "Lighthouse score > 95"
+  strategies:
+    - "Next.js Image with blur placeholders"
+    - "Font subsetting and preloading"
+    - "Critical CSS inlining"
+    - "Progressive image loading"
+    - "Lazy load below-fold content"
+    - "CDN for all assets"

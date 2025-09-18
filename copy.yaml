@@ -1,0 +1,87 @@
+# Tortilla Rodeo Co. - Brand Copy Guidelines
+
+hero:
+  headline: "Texas Tortillas, Delivered Fresh to Your Door"
+  subheadline: "Authentic Mi Tienda-style tortillas, shipped anywhere the salsa flows"
+  cta_primary: "Shop Tortillas"
+  cta_secondary: "Track Your Order"
+  disclaimer_placement: footer # Prominent placement required
+
+product_descriptions:
+  TTC-MT-CORN-SS:
+    display_name: "Mi Tienda-style Corn Tortillas"
+    short_description: "Authentic Texas corn tortillas with that perfect texture"
+    long_description: |
+      These shelf-stable corn tortillas bring the authentic taste of Texas to your table.
+      Made in the traditional Mi Tienda style, they're perfect for tacos, enchiladas,
+      or enjoying warm with butter. Each package stays fresh without refrigeration.
+    features:
+      - "Authentic Mi Tienda-style recipe"
+      - "Perfect for tacos and enchiladas"
+      - "Shelf-stable packaging"
+      - "No refrigeration needed"
+    storage: "Store in a cool, dry place."
+
+  TTC-BUTTER-FLOUR:
+    display_name: "Butter Flour Tortillas (Family Pack)"
+    short_description: "Soft, buttery flour tortillas perfect for the whole family"
+    long_description: |
+      Our premium butter flour tortillas deliver that melt-in-your-mouth softness
+      Texas is famous for. This family-sized pack ensures you'll have plenty for
+      breakfast tacos, burritos, or quesadillas. No refrigeration required.
+    features:
+      - "Rich, buttery flavor"
+      - "Family-sized pack"
+      - "Perfect for breakfast tacos"
+      - "Stays fresh without refrigeration"
+    storage: "Store in a cool, dry place."
+
+value_propositions:
+  - title: "Authentic Texas Taste"
+    description: "Get the real deal - genuine Texas tortillas shipped nationwide"
+  - title: "Fresh to Your Door"
+    description: "2-3 day shipping ensures maximum freshness"
+  - title: "No Refrigeration Needed"
+    description: "Shelf-stable packaging keeps tortillas fresh"
+
+trust_signals:
+  shipping: "Fast 2-3 day shipping"
+  guarantee: "Satisfaction guaranteed"
+  support: "Questions? We're here to help"
+
+footer:
+  disclaimer: "Independent reseller. Not affiliated with or endorsed by H-E-B®."
+  disclaimer_style: "prominent, above fold in footer"
+  copyright: "© 2024 Tortilla Rodeo Co. All rights reserved."
+
+checkout:
+  empty_cart: "Your tortilla basket is empty"
+  processing: "Wrangling up your order..."
+  success: "Yeehaw! Your tortillas are on the way!"
+  error: "Whoops! Something went sideways. Please try again."
+
+email_templates:
+  order_confirmation:
+    subject: "Your Tortilla Rodeo Co. Order Confirmation"
+    greeting: "Howdy, Partner!"
+    body: "Your authentic Texas tortillas are being prepared for shipment."
+  shipping_notification:
+    subject: "Your tortillas are on the trail!"
+    body: "Good news - your order has shipped and will arrive in 2-3 business days."
+
+brand_voice_guidelines:
+  tone:
+    - "Playful and confident"
+    - "Texas-proud but inclusive"
+    - "Cheeky without being offensive"
+    - "Professional in transactional contexts"
+  avoid:
+    - "Any implication of H-E-B affiliation"
+    - "Use of H-E-B trademarks beyond nominative reference"
+    - "Overly folksy or cliché Western terminology"
+    - "Claims about manufacturing or production"
+  emphasize:
+    - "Independent reseller status"
+    - "Authentic Texas products"
+    - "Quality and freshness"
+    - "Customer service excellence"
