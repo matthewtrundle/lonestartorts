@@ -131,22 +131,22 @@ export default function Home() {
         </section>
 
         {/* Magazine Typography Section */}
-        <section className="relative py-32 bg-gradient-to-b from-cream-50 to-cream-100 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-b from-cream-50 to-cream-100 overflow-hidden">
           <div className="container mx-auto px-8">
-            <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="grid lg:grid-cols-12 gap-12 items-center min-h-[80vh]">
               {/* Left Column - Large Typography */}
-              <div className="lg:col-span-7 space-y-8">
+              <div className="lg:col-span-7 space-y-4">
                 <h2 className="magazine-text">
-                  <span className="block text-7xl md:text-8xl lg:text-9xl font-display font-black leading-[0.8] text-gradient">
+                  <span className="block text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.8] text-gradient">
                     TASTE
                   </span>
-                  <span className="block text-5xl md:text-6xl lg:text-7xl font-display font-light mt-4">
+                  <span className="block text-4xl md:text-5xl lg:text-6xl font-display font-light mt-3">
                     the difference
                   </span>
-                  <span className="block text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.9] mt-6">
+                  <span className="block text-5xl md:text-6xl lg:text-7xl font-display font-black leading-[0.9] mt-4">
                     TRADITION
                   </span>
-                  <span className="block text-4xl md:text-5xl lg:text-6xl font-display italic font-light text-masa-600 mt-4">
+                  <span className="block text-3xl md:text-4xl lg:text-5xl font-display italic font-light text-masa-600 mt-3">
                     makes
                   </span>
                 </h2>
@@ -214,8 +214,8 @@ export default function Home() {
                 img: '/images/heritage-kitchen.webp'
               },
             ].map((product, i) => (
-              <div key={i} className="horizontal-item min-w-screen flex-shrink-0 flex items-center justify-center px-20 perspective-1000">
-                <div className="text-center space-y-8 preserve-3d max-w-3xl">
+              <div key={i} className="horizontal-item flex-shrink-0 flex items-center justify-center px-16 perspective-1000" style={{ width: '90vw' }}>
+                <div className="text-center space-y-6 preserve-3d max-w-2xl">
                   {/* Product Image with artistic treatment */}
                   <div className="relative mx-auto group">
                     {/* Floating accent shapes */}
@@ -295,17 +295,17 @@ export default function Home() {
         </section>
 
         {/* Feature Grid with Artistic Treatment */}
-        <section className="py-32 bg-gradient-to-b from-charcoal-950 to-charcoal-900 relative overflow-hidden">
+        <section className="py-20 bg-gradient-to-b from-charcoal-950 to-charcoal-900 relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-sunset-500/10 to-transparent blur-3xl" />
           </div>
 
-          <div className="container mx-auto px-8 relative z-10">
+          <div className="container mx-auto px-8 relative z-20">
             <div className="text-center mb-16">
-              <h2 className="text-5xl lg:text-7xl font-display font-black text-cream-50 mb-4 reveal-text">
+              <h2 className="text-5xl lg:text-7xl font-display font-black text-cream-50 mb-4 reveal-text relative z-30">
                 WHY CHOOSE
               </h2>
-              <p className="text-2xl lg:text-3xl font-display italic text-gradient">Lone Star Tortilla</p>
+              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">Lone Star Tortilla</p>
             </div>
 
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -371,7 +371,7 @@ export default function Home() {
         </section>
 
         {/* Product Cards with Premium Design */}
-        <section className="py-32 bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50 relative overflow-hidden">
+        <section className="py-16 bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50 relative overflow-hidden">
           <div className="container mx-auto px-8">
             <div className="mb-16">
               <h2 className="text-7xl lg:text-8xl font-display font-black text-charcoal-950 reveal-text">
@@ -438,8 +438,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Pinned CTA Section */}
-        <section className="pin-section min-h-screen relative overflow-hidden bg-charcoal-950">
+        {/* CTA Section */}
+        <section className="py-20 relative overflow-hidden bg-charcoal-950">
           <div className="absolute inset-0 parallax-img" data-speed="0.5">
             <Image
               src="/images/masa-preparation.webp"
@@ -450,7 +450,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/80 to-transparent" />
           </div>
 
-          <div className="pin-content relative z-10 min-h-screen flex items-center justify-center">
+          <div className="relative z-10 min-h-[60vh] flex items-center justify-center">
             <div className="text-center space-y-6 px-8 max-w-4xl mx-auto">
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-cream-50 split-text leading-tight">
                 READY TO TASTE TEXAS?

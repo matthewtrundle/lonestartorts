@@ -1,0 +1,265 @@
+# Premium Website Build Workflow
+# Complete end-to-end premium web experience development
+
+workflow_name: "Premium Website Build"
+version: "1.0.0"
+description: "Complete premium website development with legal compliance, advanced animations, and e-commerce capabilities"
+
+# Learned from Lone Star Tortilla Co. project success patterns
+success_criteria:
+  - "Legal compliance verification passed"
+  - "Design system implemented with premium animations"
+  - "Performance metrics: Lighthouse 90+ scores"
+  - "E-commerce functionality fully operational"
+  - "Accessibility compliance verified"
+
+stages:
+  - name: "Project Initialization & Compliance"
+    agent: "Trail Boss Orchestrator"
+    duration: "1-2 hours"
+    priority: "critical"
+
+    inputs:
+      required:
+        - project_brief.md
+        - brand_guidelines
+        - legal_requirements
+        - target_audience_definition
+
+    deliverables:
+      - "project-spec.yaml (central source of truth)"
+      - "legal-compliance-framework.md"
+      - "agent-coordination-plan.md"
+      - "quality-gates-definition.md"
+      - "risk-assessment.md"
+
+    quality_gates:
+      - "Legal compliance framework established"
+      - "All mandatory disclaimers defined"
+      - "Brand usage guidelines approved"
+      - "Agent workflow coordination plan validated"
+
+    handoff_criteria:
+      - "Project specification approved by stakeholders"
+      - "Legal framework ready for enforcement"
+      - "Clear go/no-go decision made"
+
+  - name: "Market Intelligence & Positioning"
+    agent: "Scout Market Researcher"
+    duration: "2-4 hours"
+    depends_on: ["Project Initialization"]
+
+    inputs:
+      receives:
+        - project-spec.yaml
+        - competitive-research-requirements.md
+
+    deliverables:
+      - "competitive-analysis.md"
+      - "pricing-strategy-recommendations.md"
+      - "market-positioning-insights.md"
+      - "shipping-threshold-analysis.md"
+      - "category-benchmarking-report.md"
+
+    quality_gates:
+      - "Competitive landscape mapped"
+      - "Pricing strategy validated"
+      - "Market positioning differentiated"
+      - "Shipping strategies optimized"
+
+    handoff_criteria:
+      - "Strategic insights ready for design application"
+      - "Competitive advantages clearly defined"
+
+  - name: "Design System & Motion Architecture"
+    agent: "Stagecoach Stylist"
+    duration: "1-2 days"
+    depends_on: ["Market Intelligence"]
+
+    inputs:
+      receives:
+        - competitive-analysis.md
+        - brand-requirements.md
+        - project-spec.yaml
+
+    deliverables:
+      - "design-system.json (complete token system)"
+      - "component-specifications.md"
+      - "animation-choreography.md"
+      - "typography-scale-definition.md"
+      - "color-palette-with-usage.md"
+      - "responsive-breakpoint-strategy.md"
+      - "accessibility-design-requirements.md"
+
+    quality_gates:
+      - "Design system tokens defined"
+      - "Animation choreography documented"
+      - "Component architecture specified"
+      - "Responsive strategy validated"
+      - "Accessibility requirements integrated"
+
+    handoff_criteria:
+      - "Design system ready for implementation"
+      - "Animation specifications technically feasible"
+      - "Brand personality expressed through design"
+
+  - name: "Full-Stack Implementation"
+    agent: "NextJS Fullstack Wrangler"
+    duration: "3-5 days"
+    depends_on: ["Design System"]
+
+    inputs:
+      receives:
+        - design-system.json
+        - component-specifications.md
+        - animation-choreography.md
+        - project-spec.yaml
+
+    deliverables:
+      - "complete-nextjs-application/"
+      - "stripe-payment-integration/"
+      - "gsap-animation-system/"
+      - "responsive-component-library/"
+      - "deployment-configuration/"
+      - "environment-setup-guide.md"
+      - "performance-optimization-report.md"
+
+    quality_gates:
+      - "TypeScript compilation without errors"
+      - "All animations respect reduced motion preferences"
+      - "Stripe integration passes test validation"
+      - "Responsive design works across breakpoints"
+      - "Performance targets achieved (Lighthouse 90+)"
+
+    handoff_criteria:
+      - "Application deployed and accessible"
+      - "Core functionality fully operational"
+      - "Performance metrics meet standards"
+
+  - name: "Legal Compliance Review"
+    agent: "Compliance Legal Ranger"
+    duration: "2-4 hours"
+    depends_on: ["Full-Stack Implementation"]
+    parallel_execution: true
+
+    inputs:
+      receives:
+        - deployed_application_url
+        - all_customer_facing_content
+        - legal-compliance-framework.md
+
+    deliverables:
+      - "legal-compliance-audit.md"
+      - "copy-review-report.md"
+      - "disclaimer-placement-verification.md"
+      - "trademark-usage-compliance.md"
+      - "required-corrections.md"
+
+    quality_gates:
+      - "All disclaimers properly placed"
+      - "Trademark usage compliant"
+      - "Independent reseller status clear"
+      - "No brand safety violations"
+
+    handoff_criteria:
+      - "Legal approval granted for launch"
+      - "All compliance issues resolved"
+
+  - name: "Quality Assurance & Performance Audit"
+    agent: "Wrangler Auditor"
+    duration: "1-2 days"
+    depends_on: ["Full-Stack Implementation"]
+    parallel_execution: true
+
+    inputs:
+      receives:
+        - deployed_application_url
+        - source_code_repository
+        - performance_targets
+        - feature_requirements
+
+    deliverables:
+      - "comprehensive-qa-report.md"
+      - "performance-audit-results.md"
+      - "accessibility-compliance-verification.md"
+      - "cross-browser-testing-report.md"
+      - "lighthouse-performance-scores.md"
+      - "bug-report-and-fixes.md"
+
+    quality_gates:
+      - "All critical user flows tested"
+      - "Performance scores meet targets"
+      - "Accessibility compliance verified"
+      - "Cross-browser compatibility confirmed"
+      - "No critical bugs remaining"
+
+    handoff_criteria:
+      - "Quality approval granted"
+      - "Performance standards exceeded"
+      - "Ready for production launch"
+
+# Parallel execution strategy
+parallel_stages:
+  legal_and_qa:
+    description: "Legal compliance review and QA testing can run simultaneously"
+    stages: ["Legal Compliance Review", "Quality Assurance"]
+    coordination: "Results must both pass before final approval"
+
+# Success metrics
+final_deliverables:
+  technical:
+    - "Production-ready Next.js application"
+    - "Stripe payment processing system"
+    - "Premium GSAP animation system"
+    - "Responsive component library"
+    - "Performance-optimized deployment"
+
+  compliance:
+    - "Legal compliance certification"
+    - "Brand safety verification"
+    - "Accessibility compliance report"
+    - "Performance audit results"
+
+  business:
+    - "Competitive positioning analysis"
+    - "Market-validated pricing strategy"
+    - "Launch-ready e-commerce platform"
+    - "Scalable technical architecture"
+
+# Handoff JSON template
+handoff_template: |
+  ```json
+  {
+    "from": "<completing_agent>",
+    "to": "<receiving_agent>",
+    "stage_completed": "<stage_name>",
+    "ready_if": ["condition1", "condition2"],
+    "artifacts": ["path/to/deliverable1", "path/to/deliverable2"],
+    "quality_gates_passed": ["gate1", "gate2"],
+    "risks_identified": ["risk1", "risk2"],
+    "open_questions": ["question1", "question2"],
+    "next_steps": ["step1", "step2"],
+    "estimated_effort": "<duration>",
+    "confidence_level": "<high|medium|low>"
+  }
+  ```
+
+# Emergency escalation procedures
+escalation_triggers:
+  - "Legal compliance issues blocking progress"
+  - "Performance targets cannot be achieved"
+  - "Technical blockers requiring architecture changes"
+  - "Timeline conflicts requiring scope adjustment"
+
+escalation_process:
+  1. "Immediate notification to Trail Boss Orchestrator"
+  2. "Stakeholder communication with impact assessment"
+  3. "Solution evaluation with revised timeline"
+  4. "Go/no-go decision with clear next steps"
+
+# Quality assurance checkpoints
+continuous_quality_gates:
+  - "Legal compliance verified at each content-creation step"
+  - "Performance monitoring throughout development"
+  - "Accessibility testing integrated into design process"
+  - "Brand consistency maintained across all outputs"

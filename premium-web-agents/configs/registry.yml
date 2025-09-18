@@ -1,0 +1,73 @@
+# Premium Web Experience Agent Pack Registry
+# Learned intelligence from Lone Star Tortilla project
+
+pack_name: "Premium Web Experience Agents"
+version: "1.0.0"
+created_from: "Lone Star Tortilla Co. Project"
+
+agents:
+  - file: agents/trail-boss-orchestrator.yaml
+    description: "Master coordinator with project compliance expertise"
+  - file: agents/stagecoach-stylist.yaml
+    description: "Design systems expert with premium animation knowledge"
+  - file: agents/nextjs-fullstack-wrangler.yaml
+    description: "Full-stack implementation with e-commerce mastery"
+  - file: agents/scout-market-researcher.yaml
+    description: "Competitive intelligence and pricing strategy"
+  - file: agents/wrangler-auditor.yaml
+    description: "QA automation with performance optimization"
+  - file: agents/compliance-legal-ranger.yaml
+    description: "Legal review and brand safety enforcement"
+
+skills:
+  - file: skills/gsap-premium-animations.md
+    description: "Advanced GSAP ScrollTrigger patterns"
+  - file: skills/magazine-typography.md
+    description: "Editorial design and typography mastery"
+  - file: skills/stripe-ecommerce.md
+    description: "Complete payment processing workflows"
+  - file: skills/performance-optimization.md
+    description: "Lighthouse and Core Web Vitals expertise"
+  - file: skills/compliance-frameworks.md
+    description: "Legal compliance and trademark usage"
+
+workflows:
+  - file: workflows/premium-website-build.yml
+    description: "Complete premium site development pipeline"
+  - file: workflows/ecommerce-mvp.yml
+    description: "Rapid e-commerce MVP deployment"
+  - file: workflows/design-system-creation.yml
+    description: "Comprehensive design system development"
+
+policies:
+  - file: policies/brand-safety.md
+    description: "Brand compliance and legal safety rails"
+  - file: policies/performance-standards.md
+    description: "Quality benchmarks and performance targets"
+  - file: policies/animation-principles.md
+    description: "Motion design best practices"
+
+templates:
+  - file: templates/project-brief.md
+  - file: templates/design-tokens.json
+  - file: templates/animation-library.css
+  - file: templates/context-map.yml
+
+tools:
+  - name: "GSAP ScrollTrigger"
+    description: "Advanced scroll-driven animations"
+  - name: "Lenis Smooth Scroll"
+    description: "Premium scroll normalization"
+  - name: "Stripe Checkout"
+    description: "Payment processing integration"
+  - name: "Next.js 14"
+    description: "Modern React framework"
+  - name: "Tailwind CSS"
+    description: "Utility-first styling"
+
+defaults:
+  model: "claude-sonnet-4"
+  temperature: 0.2
+  output_format: "markdown+code_blocks"
+  quality_standard: "premium"
+  performance_target: "lighthouse_90+"

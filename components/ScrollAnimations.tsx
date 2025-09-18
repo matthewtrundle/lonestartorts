@@ -271,16 +271,19 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
       const items = wrapper?.querySelectorAll('.horizontal-item')
 
       if (wrapper && items) {
-        const scrollWidth = wrapper.scrollWidth - section.offsetWidth
+        // Calculate tighter scroll distance
+        const totalWidth = items.length * window.innerWidth * 0.9
+        const scrollWidth = totalWidth - section.offsetWidth
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => `+=${scrollWidth * 1.5}`,
+            end: () => `+=${scrollWidth}`,
             pin: true,
-            scrub: 1.2,
+            scrub: 0.8,
             invalidateOnRefresh: true,
+            anticipatePin: 1,
           },
         })
 
@@ -289,20 +292,20 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
           ease: 'none',
         })
 
-        // Add depth to items as they scroll
+        // Add smoother item animations
         items.forEach((item: any, i: number) => {
           tl.fromTo(item,
             {
-              scale: 0.8,
-              rotateY: 45,
+              scale: 0.95,
+              opacity: 0.8,
             },
             {
               scale: 1,
-              rotateY: 0,
-              duration: 0.5,
+              opacity: 1,
+              duration: 0.3,
               ease: 'power2.out',
             },
-            i * 0.1
+            i * 0.05
           )
         })
       }
