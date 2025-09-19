@@ -21,6 +21,9 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
       return
     }
 
+    // Remove loading state once animations are ready
+    document.body.classList.add('animations-loading')
+
     // Initialize Lenis smooth scroll with premium settings
     const lenis = new Lenis({
       duration: 1.5,
@@ -73,6 +76,9 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
       element.innerHTML = chars.map((char: string, i: number) =>
         `<span class="inline-block" style="--char-index: ${i}">${char === ' ' ? '&nbsp;' : char}</span>`
       ).join('')
+
+      // Set parent element visible
+      gsap.set(element, { opacity: 1 })
 
       gsap.fromTo(element.children,
         {
@@ -456,6 +462,12 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
         yoyo: true,
         ease: 'power1.inOut',
       })
+    })
+
+    // Remove loading class after animations are initialized
+    requestAnimationFrame(() => {
+      document.body.classList.remove('animations-loading')
+      document.body.classList.add('animations-ready')
     })
 
     // Cleanup

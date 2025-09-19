@@ -307,10 +307,36 @@ body::before {
   }
 }
 
+/* Initial states for GSAP animations - prevent flash of unstyled content */
+.hero-title,
+.slide-left,
+.slide-right,
+.scale-in,
+.reveal-text,
+.stagger-item,
+.float-element,
+.magazine-text {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* When animations are ready, make elements visible for GSAP to animate */
+body.animations-ready .hero-title,
+body.animations-ready .slide-left,
+body.animations-ready .slide-right,
+body.animations-ready .scale-in,
+body.animations-ready .reveal-text,
+body.animations-ready .stagger-item,
+body.animations-ready .float-element,
+body.animations-ready .magazine-text {
+  visibility: visible;
+}
+
 /* Split text animation */
 .split-text {
   display: inline-block;
   overflow: hidden;
+  opacity: 0;
 }
 
 .split-text span {
