@@ -123,9 +123,7 @@ export default function Home() {
                 {/* Creative subtitle with lasso decoration */}
                 <div className="relative mt-6 hero-title">
                   <span className="block text-5xl md:text-6xl lg:text-7xl font-display font-light italic text-gradient">
-                    <span className="inline-block">Tortilla</span>
-                    <span className="inline-block ml-3 text-3xl md:text-4xl lg:text-5xl">🤠</span>
-                    <span className="inline-block ml-3">Co.</span>
+                    <span className="inline-block">Tortilla Co.</span>
                   </span>
                   {/* Decorative lasso swoosh */}
                   <svg className="absolute -bottom-4 left-0 w-full h-12 pointer-events-none" viewBox="0 0 400 40">
@@ -153,9 +151,9 @@ export default function Home() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed max-w-3xl mb-8 slide-left">
+              <p className="text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed max-w-3xl mb-8 slide-left text-charcoal-800">
                 We are wranglin authentic Texas tortillas and
-                <span className="text-gradient-masa font-medium"> airliftin em nationwide</span> partner!
+                <span className="text-sunset-600 font-bold"> airliftin em nationwide</span> partner!
               </p>
 
               {/* CTA Buttons */}
@@ -219,13 +217,13 @@ export default function Home() {
                 <div className="flex items-center gap-4">
                   <span className="text-sunset-500 text-6xl">✦</span>
                   <div>
-                    <p className="text-sm font-medium tracking-mega uppercase text-masa-700">Since 1905</p>
-                    <p className="text-2xl font-display">H-E-B Excellence</p>
+                    <p className="text-sm font-medium tracking-mega uppercase text-masa-700">Est. 2020</p>
+                    <p className="text-2xl font-display">Texas Excellence</p>
                   </div>
                 </div>
                 <p className="text-lg leading-relaxed text-charcoal-700">
                   From the heart of Texas comes a tradition of quality that spans generations.
-                  Each tortilla carries the authentic taste that has made H-E-B a household name.
+                  Each tortilla carries the authentic taste that has made Texas tortillas legendary.
                 </p>
                 <blockquote className="border-l-4 border-sunset-500 pl-6 py-2">
                   <p className="text-xl font-display italic text-charcoal-800">
@@ -250,28 +248,28 @@ export default function Home() {
               {
                 title: 'FLOUR',
                 subtitle: 'Soft & Versatile',
-                desc: 'H-E-B Butter Tortillas',
+                desc: 'Butter Flour Tortillas',
                 color: 'from-sunset-400 to-sunset-600',
                 img: '/images/product-hero.webp'
               },
               {
                 title: 'CORN',
                 subtitle: 'Authentic & Traditional',
-                desc: 'Mi Tienda Corn Tortillas',
+                desc: 'Traditional Corn Tortillas',
                 color: 'from-masa-400 to-masa-600',
                 img: '/images/fresh-ingredients.webp'
               },
               {
                 title: 'WHOLE WHEAT',
                 subtitle: 'Healthy & Hearty',
-                desc: 'H-E-B Whole Grain',
+                desc: 'Whole Grain Tortillas',
                 color: 'from-cream-400 to-cream-600',
                 img: '/images/artisan-hands.webp'
               },
               {
                 title: 'SPECIALTY',
                 subtitle: 'Fresh & Flavorful',
-                desc: 'H-E-B Spinach & Herbs',
+                desc: 'Spinach & Herb Tortillas',
                 color: 'from-lime-500 to-lime-700',
                 img: '/images/heritage-kitchen.webp'
               },
@@ -332,7 +330,7 @@ export default function Home() {
                 The most<br />
                 <span className="text-gradient-masa">authentically</span><br />
                 pleasing<br />
-                <span className="font-black">H-E-B selection</span>
+                <span className="font-black">Texas selection</span>
               </h3>
               <div className="space-y-2 text-charcoal-700">
                 <p className="font-semibold text-lg">Maria Rodriguez</p>
@@ -519,12 +517,12 @@ export default function Home() {
               </h2>
 
               <p className="text-xl lg:text-2xl text-cream-200 font-light slide-left">
-                Order authentic H-E-B tortillas delivered fresh to your door
+                Order authentic Texas tortillas delivered fresh to your door
               </p>
 
               <div className="flex flex-wrap gap-6 justify-center mt-12 scale-in">
                 <Link href="/shop" className="group relative overflow-hidden bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover-glow">
-                  <span className="relative z-10">Shop H-E-B Selection</span>
+                  <span className="relative z-10">Shop Texas Selection</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-sunset-600 to-sunset-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                 </Link>
 
@@ -550,7 +548,7 @@ export default function Home() {
               <div className="md:col-span-2">
                 <LogoFull className="text-cream-50 mb-6" />
                 <p className="text-cream-300 leading-relaxed">
-                  Bringing authentic H-E-B tortillas from the heart of Texas to tables across America.
+                  Bringing authentic tortillas from the heart of Texas to tables across America.
                 </p>
               </div>
 
@@ -580,7 +578,7 @@ export default function Home() {
             <div className="border-t border-masa-800/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-cream-500">© 2024 Lone Star Tortilla Co. All rights reserved.</p>
               <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
-                Independent reseller of H-E-B products • Not affiliated with or endorsed by H-E-B
+                Independent Texas retailer • We source authentic tortillas • Not affiliated with or endorsed by H-E-B
               </p>
             </div>
           </div>

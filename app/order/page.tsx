@@ -106,7 +106,7 @@ export default function OrderPage() {
         <section className="pt-32 pb-12">
           <div className="container mx-auto px-8 text-center">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black mb-4 hero-title">
-              🤠 LASSO YOUR TORTILLAS 🤠
+              LASSO YOUR TORTILLAS
             </h1>
             <p className="text-xl text-charcoal-700 mb-2">
               One-click ordering • Shelf-stable goodness • No refrigeration needed!

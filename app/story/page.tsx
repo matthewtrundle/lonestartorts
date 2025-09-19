@@ -62,7 +62,7 @@ export default function StoryPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              Since 1905, H-E-B has been crafting tortillas that bring families together. Now, we are bringing that Texas tradition to tables nationwide.
+              Born from a love of authentic Texas tortillas, we are bringing the Lone Star State's finest to tables nationwide.
             </p>
           </div>
         </section>
@@ -77,30 +77,30 @@ export default function StoryPage() {
             <div className="max-w-4xl mx-auto">
               {[
                 {
-                  year: '1905',
-                  title: 'H-E-B Founded',
-                  desc: 'C.C. Butt opens the first store in Kerrville, Texas, with $60 in startup capital',
+                  year: '2020',
+                  title: 'The Dream Begins',
+                  desc: 'Texans missing home start sharing authentic tortillas with friends nationwide',
                   highlight: true,
                 },
                 {
-                  year: '1920s',
-                  title: 'Tortilla Tradition Begins',
-                  desc: 'First tortillas made fresh in-store using traditional Mexican recipes',
+                  year: '2021',
+                  title: 'Finding Our Partners',
+                  desc: 'We connect with the best Texas tortilla makers who share our passion',
                 },
                 {
-                  year: '1950s',
-                  title: 'Mi Tienda Launch',
-                  desc: 'H-E-B introduces Mi Tienda, celebrating authentic Mexican flavors',
+                  year: '2022',
+                  title: 'Shelf-Stable Innovation',
+                  desc: 'Perfecting packaging to deliver fresh Texas taste without refrigeration',
                 },
                 {
-                  year: '1980s',
-                  title: 'Innovation Era',
-                  desc: 'Butter tortillas revolutionize the Texas tortilla game',
+                  year: '2023',
+                  title: 'National Expansion',
+                  desc: 'Launching nationwide shipping to bring Texas tortillas coast to coast',
                 },
                 {
-                  year: '2020',
-                  title: 'Lone Star Tortilla',
-                  desc: 'Independent retailers begin sharing H-E-B quality nationwide',
+                  year: '2024',
+                  title: 'Growing Family',
+                  desc: 'Thousands of families enjoying authentic Texas tortillas delivered fresh',
                   highlight: true,
                 },
                 {
@@ -161,7 +161,7 @@ export default function StoryPage() {
                 },
                 {
                   value: 'COMMUNITY',
-                  desc: 'Bringing families together around the table since 1905',
+                  desc: 'Bringing families together around the table with Texas tradition',
                   icon: '❤',
                 },
               ].map((item, i) => (
@@ -186,10 +186,9 @@ export default function StoryPage() {
                 "To share the authentic taste of Texas with every table in America"
               </p>
               <p className="text-lg text-charcoal-700 mb-12">
-                We believe everyone deserves access to the quality and tradition that H-E-B represents.
-                As independent retailers, we are proud to bridge the gap between Texas excellence and
-                nationwide availability, ensuring that authentic H-E-B tortillas can be enjoyed from
-                coast to coast.
+                We believe everyone deserves access to authentic Texas tortillas.
+                As independent retailers, we are proud to source the finest tortillas from Texas
+                and deliver them nationwide with the convenience of shelf-stable shipping.
               </p>
 
               <div className="grid md:grid-cols-3 gap-8 mt-16">
@@ -221,14 +220,13 @@ export default function StoryPage() {
                     Founder, Lone Star Tortilla Co.
                   </p>
                   <p className="text-cream-300 mb-6">
-                    "Growing up in San Antonio, H-E-B tortillas were at every family gathering.
-                    When I moved to New York, I missed that authentic taste so much that I started
-                    Lone Star Tortilla to share these incredible products with everyone who cannot
-                    shop at H-E-B."
+                    "Growing up in San Antonio, authentic tortillas were at every family gathering.
+                    When I moved to New York, I missed that Texas taste so much that I started
+                    Lone Star Tortilla to share these incredible products with everyone across America."
                   </p>
                   <p className="text-cream-300">
-                    "We are not H-E-B, and we are proud to say that. We are Texans who love these
-                    products and want to share them with the world, one tortilla at a time."
+                    "We are independent Texas retailers who source the best tortillas from
+                    the Lone Star State and deliver them fresh to your door, one order at a time."
                   </p>
                 </div>
                 <div className="relative h-96 rounded-lg overflow-hidden">
