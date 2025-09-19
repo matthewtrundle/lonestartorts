@@ -5,11 +5,15 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
+import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 
 export default function Home() {
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
+        {/* Prominent Disclaimer Banner */}
+        <DisclaimerBanner />
+
         {/* Background Music Player */}
         <BackgroundMusic />
         {/* Artistic background gradients */}
@@ -19,7 +23,7 @@ export default function Home() {
         </div>
 
         {/* Premium Header with Glass Effect */}
-        <header className="shrink-header fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
+        <header className="shrink-header fixed top-12 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
           <div className="container mx-auto px-8">
             <div className="flex justify-between items-center py-6">
               <div className="logo-wrapper">
@@ -80,7 +84,7 @@ export default function Home() {
               {/* Small accent text */}
               <div className="flex items-center gap-4 mb-6 reveal-text">
                 <span className="inline-block w-20 h-px bg-sunset-500" />
-                <span className="text-sm font-medium tracking-wider uppercase text-sunset-600">Authentic Texas Tradition</span>
+                <span className="text-sm font-medium tracking-wider uppercase text-sunset-600">The Great Texas Tortilla Airlift 🚁</span>
               </div>
 
               {/* Main Title with Split Animation */}
@@ -95,18 +99,18 @@ export default function Home() {
 
               {/* Subtitle */}
               <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed max-w-3xl mb-8 slide-left">
-                Premium H-E-B tortillas, crafted with heritage and
-                <span className="text-gradient-masa font-medium"> delivered fresh</span> to your door
+                We're wranglin' authentic Texas tortillas and
+                <span className="text-gradient-masa font-medium"> airliftin' 'em nationwide</span> partner!
               </p>
 
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-6 scale-in">
                 <Link href="/shop" className="group relative overflow-hidden bg-charcoal-950 text-cream-50 px-10 py-5 text-lg font-medium tracking-wide uppercase hover-lift inline-block">
-                  <span className="relative z-10">Explore Collection</span>
+                  <span className="relative z-10">🤠 Lasso Yours Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-sunset-500 to-sunset-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                 </Link>
                 <Link href="/story" className="border-2 border-charcoal-950 px-10 py-5 text-lg font-medium tracking-wide uppercase hover:bg-charcoal-950 hover:text-cream-50 transition-all duration-300 inline-block">
-                  Our Heritage
+                  🌵 Our Wild Story
                 </Link>
               </div>
 
@@ -314,39 +318,39 @@ export default function Home() {
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: '★',
-                  title: 'H-E-B QUALITY',
-                  desc: 'Authentic products from Texas favorite grocer',
+                  icon: '🤠',
+                  title: 'YEEHAW AUTHENTIC',
+                  desc: 'Real Texas tortillas, not some impostor nonsense',
                   gradient: 'from-sunset-400 to-sunset-600'
                 },
                 {
-                  icon: '◆',
-                  title: 'NATIONWIDE SHIPPING',
-                  desc: 'Fresh delivery to all 50 states',
+                  icon: '🚀',
+                  title: 'TORTILLA EXPRESS',
+                  desc: 'Shelf-stable goodness shipped to all 50 states',
                   gradient: 'from-masa-400 to-masa-600'
                 },
                 {
-                  icon: '✦',
-                  title: 'PREMIUM SELECTION',
-                  desc: 'Mi Tienda, butter-rich, and specialty varieties',
+                  icon: '🌮',
+                  title: 'CURATED SELECTION',
+                  desc: 'Only the best tortillas make the cut, partner',
                   gradient: 'from-lime-500 to-lime-700'
                 },
                 {
-                  icon: '●',
-                  title: 'TEXAS TRADITION',
-                  desc: 'Bringing H-E-B excellence coast to coast',
+                  icon: '⭐',
+                  title: 'TEXAS-SIZED VALUE',
+                  desc: 'Big flavor, fair prices, no bull',
                   gradient: 'from-sunset-500 to-masa-500'
                 },
                 {
-                  icon: '■',
-                  title: 'FRESH GUARANTEE',
-                  desc: 'Temperature-controlled shipping',
+                  icon: '📦',
+                  title: 'SHELF-STABLE MAGIC',
+                  desc: 'No refrigeration needed - pantry-ready!',
                   gradient: 'from-cream-400 to-cream-600'
                 },
                 {
-                  icon: '▲',
-                  title: 'SATISFACTION PROMISE',
-                  desc: '100% happiness or your money back',
+                  icon: '💯',
+                  title: 'HAPPINESS GUARANTEE',
+                  desc: 'Love 'em or we'll make it right',
                   gradient: 'from-charcoal-600 to-charcoal-400'
                 },
               ].map((feature, i) => (
@@ -378,36 +382,36 @@ export default function Home() {
           <div className="container mx-auto px-8">
             <div className="mb-16">
               <h2 className="text-7xl lg:text-8xl font-display font-black text-charcoal-950 reveal-text">
-                H-E-B PRODUCTS
+                OUR TREASURES
               </h2>
-              <p className="text-2xl text-charcoal-700 mt-4 slide-left">Premium selection, delivered nationwide</p>
+              <p className="text-2xl text-charcoal-700 mt-4 slide-left">🌵 Shelf-stable Texas gold, ready for your pantry 🌵</p>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-12">
               {[
                 {
-                  name: 'MI TIENDA',
-                  type: 'Corn Tortillas',
-                  style: 'Traditional Style',
-                  badge: 'H-E-B Exclusive',
+                  name: 'CORN CLASSICS',
+                  type: 'Traditional Corn Tortillas',
+                  style: 'Shelf-Stable • No Refrigeration',
+                  badge: '📦 Pantry Ready',
                   gradient: 'bg-gradient-to-br from-sunset-100 to-sunset-200',
                   accent: 'text-sunset-600',
                   shadow: 'shadow-sunset'
                 },
                 {
-                  name: 'BUTTER',
-                  type: 'Flour Tortillas',
-                  style: 'Soft & Rich',
-                  badge: 'Family Pack',
+                  name: 'FLOUR POWER',
+                  type: 'Soft Flour Tortillas',
+                  style: 'Shelf-Stable • 30-Day Fresh',
+                  badge: '🏆 Best Seller',
                   gradient: 'bg-gradient-to-br from-masa-100 to-masa-200',
                   accent: 'text-masa-600',
                   shadow: 'shadow-masa'
                 },
                 {
-                  name: 'SPECIALTY',
-                  type: 'Artisan Selection',
-                  style: 'Premium Varieties',
-                  badge: 'Coming Soon',
+                  name: 'WILD CARDS',
+                  type: 'Specialty Varieties',
+                  style: 'Shelf-Stable • Limited Edition',
+                  badge: '🔥 Coming Soon',
                   gradient: 'bg-gradient-to-br from-lime-100 to-lime-200',
                   accent: 'text-lime-700',
                   shadow: 'shadow-xl'

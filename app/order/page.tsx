@@ -6,75 +6,79 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
+import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 
 export default function OrderPage() {
-  const [quantities, setQuantities] = useState<Record<string, number>>({
-    'TTC-MT-CORN-SS': 0,
-    'TTC-BUTTER-FLOUR': 0,
-  })
   const [isProcessing, setIsProcessing] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
+  const [quantity, setQuantity] = useState(1)
 
   const products = [
     {
-      sku: 'TTC-MT-CORN-SS',
-      name: 'Mi Tienda Corn Tortillas',
-      desc: 'Authentic Texas corn tortillas with perfect texture',
+      sku: 'TTC-CORN-SS',
+      name: '🌽 Corn Classics',
+      desc: 'Traditional corn tortillas that'll make your abuela jealous',
+      storage: '📦 SHELF-STABLE: Store in cool, dry place. No fridge needed!',
       price: 4.99,
-      pack: '30 count',
-      highlight: 'Most Popular',
+      pack: '30 count bag',
+      highlight: '🏆 MOST POPULAR',
     },
     {
-      sku: 'TTC-BUTTER-FLOUR',
-      name: 'Butter Flour Tortillas',
-      desc: 'Soft, buttery flour tortillas for the whole family',
+      sku: 'TTC-FLOUR-SS',
+      name: '🌾 Flour Power',
+      desc: 'Soft flour tortillas smoother than a Texas two-step',
+      storage: '📦 SHELF-STABLE: Pantry-ready for up to 30 days!',
       price: 5.99,
       pack: 'Family Pack (20 count)',
-      highlight: 'Customer Favorite',
+      highlight: '⭐ FAN FAVORITE',
+    },
+    {
+      sku: 'TTC-VARIETY-SS',
+      name: '🎉 Fiesta Pack',
+      desc: 'Mix of corn and flour - because why choose?',
+      storage: '📦 SHELF-STABLE: Your emergency taco kit!',
+      price: 9.99,
+      pack: 'Variety Pack (40 count)',
+      highlight: '🔥 BEST VALUE',
     },
   ]
 
-  const subtotal = products.reduce((sum, product) =>
-    sum + (quantities[product.sku] * product.price), 0
-  )
-  const shipping = subtotal > 0 ? 7.99 : 0
-  const total = subtotal + shipping
-
-  const handleCheckout = async () => {
+  const handleDirectCheckout = async (product: typeof products[0]) => {
     setIsProcessing(true)
-
-    const items = products
-      .filter(p => quantities[p.sku] > 0)
-      .map(p => ({ sku: p.sku, quantity: quantities[p.sku] }))
+    setSelectedProduct(product.sku)
 
     try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({
+          items: [{ sku: product.sku, quantity }]
+        }),
       })
 
       const { sessionId } = await response.json()
 
-      // Redirect to Stripe Checkout
       if (typeof window !== 'undefined' && sessionId) {
-        // In production, you'd use Stripe.js here
-        window.location.href = `/track?session=${sessionId}`
+        // In production, use Stripe.js redirectToCheckout
+        alert(`🚀 Yeehaw! Taking you to checkout for ${quantity}x ${product.name}`)
       }
     } catch (error) {
       console.error('Checkout error:', error)
-      alert('Checkout is currently in test mode. Please contact us to place an order.')
+      alert('Hold your horses! Checkout is getting saddled up. Try again in a moment!')
     } finally {
       setIsProcessing(false)
+      setSelectedProduct(null)
     }
   }
 
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden min-h-screen">
+        <DisclaimerBanner />
         <BackgroundMusic />
 
         {/* Header */}
-        <header className="shrink-header fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
+        <header className="shrink-header fixed top-12 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
           <div className="container mx-auto px-8">
             <div className="flex justify-between items-center py-6">
               <Link href="/" className="logo-wrapper">
@@ -98,168 +102,152 @@ export default function OrderPage() {
           </div>
         </header>
 
-        {/* Order Form Section */}
-        <section className="pt-32 pb-20">
+        {/* Hero Section */}
+        <section className="pt-40 pb-12">
+          <div className="container mx-auto px-8 text-center">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black mb-4 hero-title">
+              🤠 LASSO YOUR TORTILLAS 🤠
+            </h1>
+            <p className="text-xl text-charcoal-700 mb-2">
+              One-click ordering • Shelf-stable goodness • No refrigeration needed!
+            </p>
+            <p className="text-lg text-sunset-600 font-bold">
+              🚚 FREE SHIPPING on orders over $25 • Ships in 1-2 business days
+            </p>
+          </div>
+        </section>
+
+        {/* Products Grid - Simple One-Click Buy */}
+        <section className="pb-20">
           <div className="container mx-auto px-8">
-            <div className="text-center mb-12">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black mb-4 hero-title">
-                ORDER NOW
-              </h1>
-              <p className="text-xl text-charcoal-700">
-                Select your tortillas and we'll deliver them fresh to your door
-              </p>
-            </div>
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {products.map((product) => (
+                <div key={product.sku} className="bg-white rounded-xl shadow-xl overflow-hidden hover-lift">
+                  {/* Product Badge */}
+                  <div className="bg-gradient-to-r from-sunset-500 to-sunset-600 text-cream-50 text-center py-2">
+                    <span className="font-bold text-sm">{product.highlight}</span>
+                  </div>
 
-            <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-12">
-              {/* Products Column */}
-              <div className="lg:col-span-2 space-y-6">
-                <h2 className="text-2xl font-bold mb-4">Select Your Tortillas</h2>
+                  {/* Product Content */}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
+                    <p className="text-charcoal-600 mb-3">{product.desc}</p>
 
-                {products.map((product) => (
-                  <div key={product.sku} className="bg-white rounded-xl p-6 shadow-lg hover-lift">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex-grow">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-xl font-bold">{product.name}</h3>
-                          {product.highlight && (
-                            <span className="bg-sunset-500 text-cream-50 text-xs px-2 py-1 rounded-full">
-                              {product.highlight}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-charcoal-600 mb-1">{product.desc}</p>
-                        <p className="text-sm text-masa-600">{product.pack}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-sunset-600">${product.price}</p>
+                    {/* Storage Info - BIG AND CLEAR */}
+                    <div className="bg-lime-50 border-2 border-lime-500 rounded-lg p-3 mb-4">
+                      <p className="text-sm font-bold text-lime-800">{product.storage}</p>
+                    </div>
+
+                    <div className="flex justify-between items-center mb-4">
+                      <div>
+                        <p className="text-3xl font-bold text-sunset-600">${product.price}</p>
+                        <p className="text-sm text-charcoal-500">{product.pack}</p>
                       </div>
                     </div>
 
                     {/* Quantity Selector */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <button
-                          onClick={() => setQuantities(prev => ({
-                            ...prev,
-                            [product.sku]: Math.max(0, prev[product.sku] - 1)
-                          }))}
-                          className="w-10 h-10 rounded-full border-2 border-masa-400 text-masa-600 hover:bg-masa-100 transition-colors"
-                          disabled={quantities[product.sku] === 0}
-                        >
-                          −
-                        </button>
-                        <span className="w-12 text-center font-bold text-lg">
-                          {quantities[product.sku]}
-                        </span>
-                        <button
-                          onClick={() => setQuantities(prev => ({
-                            ...prev,
-                            [product.sku]: prev[product.sku] + 1
-                          }))}
-                          className="w-10 h-10 rounded-full bg-sunset-500 text-cream-50 hover:bg-sunset-600 transition-colors"
-                        >
-                          +
-                        </button>
-                      </div>
-                      <p className="text-lg font-bold">
-                        ${(quantities[product.sku] * product.price).toFixed(2)}
-                      </p>
+                    <div className="flex items-center gap-2 mb-4">
+                      <label className="text-sm font-bold">Qty:</label>
+                      <select
+                        className="border-2 border-masa-400 rounded px-3 py-1"
+                        value={quantity}
+                        onChange={(e) => setQuantity(Number(e.target.value))}
+                      >
+                        {[1,2,3,4,5,6,12,24].map(n => (
+                          <option key={n} value={n}>{n} {n > 1 ? 'bags' : 'bag'}</option>
+                        ))}
+                      </select>
+                      <span className="ml-auto font-bold text-lg">
+                        Total: ${(product.price * quantity).toFixed(2)}
+                      </span>
                     </div>
-                  </div>
-                ))}
 
-                {/* Shipping Info */}
-                <div className="bg-masa-100 rounded-xl p-6">
-                  <h3 className="font-bold mb-2">📦 Shipping Information</h3>
-                  <ul className="text-sm text-charcoal-700 space-y-1">
-                    <li>• Ships within 1-2 business days</li>
-                    <li>• Delivered fresh in 2-3 days via refrigerated shipping</li>
-                    <li>• Free shipping on orders over $50</li>
-                    <li>• Currently shipping to all 50 states</li>
-                  </ul>
+                    {/* One-Click Buy Button */}
+                    <button
+                      onClick={() => handleDirectCheckout(product)}
+                      disabled={isProcessing && selectedProduct === product.sku}
+                      className={`w-full py-4 rounded-full font-bold text-lg tracking-wide transition-all ${
+                        isProcessing && selectedProduct === product.sku
+                          ? 'bg-charcoal-400 cursor-wait'
+                          : 'bg-sunset-500 hover:bg-sunset-600 text-cream-50 hover-glow'
+                      }`}
+                    >
+                      {isProcessing && selectedProduct === product.sku
+                        ? '🐎 Saddling up...'
+                        : '🛒 BUY NOW'}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
 
-              {/* Order Summary Column */}
-              <div className="lg:col-span-1">
-                <div className="bg-charcoal-950 text-cream-50 rounded-xl p-6 sticky top-32">
-                  <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
-
-                  <div className="space-y-3 mb-6">
-                    {products.map(product =>
-                      quantities[product.sku] > 0 && (
-                        <div key={product.sku} className="flex justify-between text-sm">
-                          <span>{product.name} x{quantities[product.sku]}</span>
-                          <span>${(quantities[product.sku] * product.price).toFixed(2)}</span>
-                        </div>
-                      )
-                    )}
+            {/* Shipping Promise */}
+            <div className="mt-16 max-w-3xl mx-auto">
+              <div className="bg-masa-100 rounded-xl p-8 text-center">
+                <h3 className="text-2xl font-bold mb-4">🚀 The Great Texas Tortilla Airlift Promise</h3>
+                <div className="grid md:grid-cols-3 gap-4 text-left">
+                  <div>
+                    <p className="font-bold mb-1">📦 Shelf-Stable Shipping</p>
+                    <p className="text-sm">No ice packs, no worries! Regular mail delivery to your door.</p>
                   </div>
-
-                  <div className="border-t border-cream-200/20 pt-4 space-y-2">
-                    <div className="flex justify-between">
-                      <span>Subtotal</span>
-                      <span>${subtotal.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Shipping</span>
-                      <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
-                    </div>
-                    <div className="border-t border-cream-200/20 pt-2">
-                      <div className="flex justify-between text-xl font-bold">
-                        <span>Total</span>
-                        <span className="text-sunset-400">${total.toFixed(2)}</span>
-                      </div>
-                    </div>
+                  <div>
+                    <p className="font-bold mb-1">🏃 Fast & Fresh</p>
+                    <p className="text-sm">Ships within 1-2 business days, arrives in 3-5 days nationwide.</p>
                   </div>
-
-                  <button
-                    onClick={handleCheckout}
-                    disabled={subtotal === 0 || isProcessing}
-                    className={`w-full mt-6 py-4 rounded-full font-bold tracking-wide uppercase transition-all ${
-                      subtotal > 0 && !isProcessing
-                        ? 'bg-sunset-500 hover:bg-sunset-600 hover-glow'
-                        : 'bg-charcoal-700 cursor-not-allowed'
-                    }`}
-                  >
-                    {isProcessing ? 'Processing...' : subtotal === 0 ? 'Select Items' : 'Checkout'}
-                  </button>
-
-                  <p className="text-xs text-cream-400 mt-4 text-center">
-                    Secure checkout powered by Stripe
-                  </p>
+                  <div>
+                    <p className="font-bold mb-1">💯 Happiness Guarantee</p>
+                    <p className="text-sm">Love 'em or we'll make it right. That's the Texas way!</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Disclaimer */}
-            <div className="text-center mt-12">
-              <p className="text-sm text-charcoal-500 tracking-wider uppercase">
-                Independent reseller • Not affiliated with or endorsed by H-E-B
-              </p>
+            {/* Trust Badges */}
+            <div className="mt-12 text-center">
+              <div className="inline-flex gap-8 items-center">
+                <div className="text-center">
+                  <div className="text-4xl mb-2">🔒</div>
+                  <p className="text-sm font-bold">Secure Checkout</p>
+                  <p className="text-xs text-charcoal-500">Powered by Stripe</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl mb-2">🌮</div>
+                  <p className="text-sm font-bold">100% Authentic</p>
+                  <p className="text-xs text-charcoal-500">Real Texas tortillas</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl mb-2">📦</div>
+                  <p className="text-sm font-bold">No Refrigeration</p>
+                  <p className="text-xs text-charcoal-500">Pantry-ready goodness</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Benefits Section */}
+        {/* FAQ Section */}
         <section className="py-20 bg-gradient-to-b from-cream-100 to-cream-50">
-          <div className="container mx-auto px-8">
+          <div className="container mx-auto px-8 max-w-3xl">
             <h2 className="text-3xl font-display font-black text-center mb-12">
-              WHY ORDER FROM US
+              🤔 FREQUENTLY ASKED QUESTIONS
             </h2>
-            <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              {[
-                { icon: '🚚', title: 'Fast Shipping', desc: '2-3 day delivery' },
-                { icon: '❄️', title: 'Fresh Guaranteed', desc: 'Temperature controlled' },
-                { icon: '✓', title: '100% Authentic', desc: 'Genuine H-E-B products' },
-                { icon: '💯', title: 'Satisfaction', desc: 'Money-back guarantee' },
-              ].map((benefit, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-4xl mb-3">{benefit.icon}</div>
-                  <h3 className="font-bold mb-1">{benefit.title}</h3>
-                  <p className="text-sm text-charcoal-600">{benefit.desc}</p>
-                </div>
-              ))}
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-bold text-lg mb-2">Are these really shelf-stable?</h3>
+                <p className="text-charcoal-700">You betcha! All our tortillas are shelf-stable and ship without refrigeration. Store 'em in your pantry just like bread!</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-2">How long do they last?</h3>
+                <p className="text-charcoal-700">Corn tortillas: 2-3 weeks unopened. Flour tortillas: 3-4 weeks unopened. Once opened, use within a week for best quality!</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-2">Where do you source these tortillas?</h3>
+                <p className="text-charcoal-700">We're independent Texas folks who source authentic tortillas from the best producers in the Lone Star State. We're not affiliated with any particular brand - just tortilla enthusiasts!</p>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-2">Do you ship to my state?</h3>
+                <p className="text-charcoal-700">If you're in the USA, we got you covered! All 50 states, from sea to shining sea! 🇺🇸</p>
+              </div>
             </div>
           </div>
         </section>
