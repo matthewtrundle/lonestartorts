@@ -61,7 +61,7 @@ export default function Home() {
         </header>
 
         {/* Hero Section with Editorial Design */}
-        <section className="min-h-screen relative flex items-center justify-center overflow-hidden spotlight" id="hero-section">
+        <section className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden spotlight" id="hero-section">
           {/* Multi-layer Parallax Background System */}
           <div className="absolute inset-0 hero-background-system">
             {/* Layer 1: Deep background with texture */}
@@ -131,9 +131,9 @@ export default function Home() {
           </div>
 
           {/* Hero Content */}
-          <div className="relative z-10 container mx-auto px-8 pt-20">
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-32">
 
-            <div className="max-w-6xl mx-auto">
+            <div className="w-full">
               {/* Main Hero Typography - MASSIVE IMPACT */}
               <div className="text-center">
                 {/* Small Quality Badge */}
@@ -151,25 +151,23 @@ export default function Home() {
                     <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-masa-300/15 via-transparent to-transparent blur-[100px] animate-glow-pulse-delayed"></div>
                   </div>
 
-                  {/* TORTILLA - Main Hero Text with Premium Effects */}
-                  <span className="hero-text-main block text-[200px] md:text-[400px] lg:text-[600px] xl:text-[700px] font-black leading-[0.65] tracking-[-0.06em] mb-0 relative transform-gpu whitespace-nowrap">
-                    <span className="text-layer text-layer-back absolute inset-0 text-charcoal-950/20 blur-[2px] transform translate-x-[4px] translate-y-[4px] whitespace-nowrap">TORTILLA</span>
-                    <span className="text-layer text-layer-mid absolute inset-0 text-gradient-premium transform translate-x-[2px] translate-y-[2px] whitespace-nowrap">TORTILLA</span>
-                    <span className="text-layer text-layer-front relative text-charcoal-950 text-stroke-premium whitespace-nowrap">TORTILLA</span>
-                  </span>
+                  {/* Main Hero Text - MASSIVE but Responsive */}
+                  <div className="hero-text-container">
+                    {/* TORTILLA - Main Impact Text */}
+                    <h1 className="text-[80px] sm:text-[120px] md:text-[180px] lg:text-[250px] xl:text-[320px] font-black leading-[0.8] tracking-[-0.04em] text-charcoal-950">
+                      TORTILLA
+                    </h1>
 
-                  {/* RODEO - Accent Text with Elegant Treatment */}
-                  <span className="hero-text-accent block text-[120px] md:text-[240px] lg:text-[350px] xl:text-[400px] font-thin leading-[0.75] tracking-[0.08em] mt-[-50px] md:mt-[-100px] lg:mt-[-150px] xl:mt-[-180px] relative transform-gpu whitespace-nowrap">
-                    <span className="text-layer absolute inset-0 text-sunset-600/30 blur-[20px] transform scale-105 whitespace-nowrap">RODEO</span>
-                    <span className="text-layer absolute inset-0 text-gradient-sunset whitespace-nowrap">RODEO</span>
-                    <span className="text-layer relative text-sunset-600 mix-blend-multiply whitespace-nowrap">RODEO</span>
-                  </span>
+                    {/* RODEO - Secondary Text */}
+                    <div className="text-[50px] sm:text-[80px] md:text-[120px] lg:text-[160px] xl:text-[200px] font-light leading-[0.8] tracking-[0.05em] text-sunset-600 -mt-4 sm:-mt-8 md:-mt-12 lg:-mt-16 xl:-mt-20">
+                      RODEO
+                    </div>
 
-                  {/* CO. - Bold Ending with Premium Shadow */}
-                  <span className="hero-text-suffix block text-[60px] md:text-[120px] lg:text-[180px] xl:text-[200px] font-black leading-[0.9] tracking-[0.3em] mt-[-20px] md:mt-[-40px] lg:mt-[-60px] xl:mt-[-70px] relative transform-gpu whitespace-nowrap">
-                    <span className="text-layer absolute inset-0 text-charcoal-950/10 blur-[1px] transform translate-x-[2px] translate-y-[2px] whitespace-nowrap">CO.</span>
-                    <span className="text-layer relative text-charcoal-950 whitespace-nowrap">CO.</span>
-                  </span>
+                    {/* CO. - Accent Text */}
+                    <div className="text-[30px] sm:text-[50px] md:text-[70px] lg:text-[90px] xl:text-[110px] font-black leading-[0.9] tracking-[0.2em] text-charcoal-950 -mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8">
+                      CO.
+                    </div>
+                  </div>
 
                   {/* Premium decorative elements */}
                   <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[90%]">
@@ -190,50 +188,24 @@ export default function Home() {
                   <span className="block w-20 h-px bg-charcoal-300"></span>
                 </div>
 
-                {/* Tagline - Bold Statement with Premium Typography */}
-                <div className="slide-left max-w-5xl mx-auto relative">
-                  {/* Background accent */}
-                  <div className="absolute inset-0 -z-10">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[200%] bg-gradient-radial from-sunset-100/10 to-transparent blur-3xl" />
-                  </div>
-
-                  <p className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tight text-charcoal-950 mb-6 uppercase leading-[0.9] relative">
-                    <span className="inline-block hover-lift-text" data-text="AUTHENTIC">AUTHENTIC</span>{' '}
-                    <span className="inline-block hover-lift-text text-gradient-premium" data-text="TEXAS">TEXAS</span>{' '}
-                    <span className="inline-block hover-lift-text" data-text="TORTILLAS">TORTILLAS</span>
+                {/* Tagline - Bold Statement */}
+                <div className="mt-8 mb-12 max-w-4xl mx-auto text-center">
+                  <p className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight text-charcoal-950 mb-4 uppercase">
+                    AUTHENTIC TEXAS TORTILLAS
                   </p>
-                  <p className="text-xl md:text-3xl lg:text-4xl font-light tracking-widest text-masa-700 italic relative overflow-hidden">
-                    <span className="relative z-10">only the best, delivered nationwide</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-masa-200/30 to-transparent -skew-x-12 transform translate-x-[-100%] animate-shine" />
+                  <p className="text-lg md:text-xl lg:text-2xl font-light tracking-wider text-masa-700 italic">
+                    only the best, delivered nationwide
                   </p>
                 </div>
               </div>
 
-              {/* CTA Buttons - Premium Minimal with Advanced Interactions */}
-              <div className="flex flex-wrap gap-8 justify-center mt-20 scale-in">
-                <Link href="/order" className="premium-button group relative overflow-hidden bg-charcoal-950 text-cream-50 px-20 py-8 text-lg font-bold tracking-[0.3em] uppercase transform-gpu">
-                  {/* Multi-layer button effects */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-sunset-500 to-sunset-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-                  <span className="absolute inset-0 bg-charcoal-950 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out delay-100" />
-                  <span className="relative z-10 flex items-center gap-4">
-                    SHOP COLLECTION
-                    <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-[-2px] bg-gradient-to-r from-sunset-400 via-sunset-500 to-sunset-400 blur-lg" />
-                  </div>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 justify-center mt-16">
+                <Link href="/order" className="bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl">
+                  SHOP COLLECTION
                 </Link>
-
-                <Link href="/story" className="premium-button-outline group relative overflow-hidden border-2 border-charcoal-950 text-charcoal-950 px-20 py-8 text-lg font-bold tracking-[0.3em] uppercase transform-gpu">
-                  <span className="absolute inset-0 bg-charcoal-950 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                  <span className="relative z-10 group-hover:text-cream-50 transition-colors duration-500 delay-100">
-                    OUR STORY
-                  </span>
-                  {/* Magnetic corners */}
-                  <span className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-charcoal-950 transform -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
-                  <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-charcoal-950 transform translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
+                <Link href="/story" className="border-2 border-charcoal-950 text-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors">
+                  OUR STORY
                 </Link>
               </div>
 

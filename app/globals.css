@@ -1079,6 +1079,14 @@ h1 span {
   paint-order: stroke fill;
 }
 
+/* Hero Text Container */
+.hero-text-container {
+  text-align: center;
+  white-space: nowrap;
+  overflow: visible;
+  width: 100%;
+}
+
 /* Hero Text Layered Effects */
 .hero-text-main {
   position: relative;
