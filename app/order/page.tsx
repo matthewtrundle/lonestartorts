@@ -16,7 +16,7 @@ export default function OrderPage() {
   const products = [
     {
       sku: 'TTC-CORN-SS',
-      name: '🌽 Corn Classics',
+      name: 'Corn Classics',
       desc: 'Traditional corn tortillas that will make your abuela jealous',
       storage: '📦 SHELF-STABLE: Store in cool, dry place. No fridge needed!',
       price: 4.99,
@@ -25,7 +25,7 @@ export default function OrderPage() {
     },
     {
       sku: 'TTC-FLOUR-SS',
-      name: '🌾 Flour Power',
+      name: 'Flour Power',
       desc: 'Soft flour tortillas smoother than a Texas two-step',
       storage: '📦 SHELF-STABLE: Pantry-ready for up to 30 days!',
       price: 5.99,
@@ -34,7 +34,7 @@ export default function OrderPage() {
     },
     {
       sku: 'TTC-VARIETY-SS',
-      name: '🎉 Fiesta Pack',
+      name: 'Fiesta Pack',
       desc: 'Mix of corn and flour - because why choose?',
       storage: '📦 SHELF-STABLE: Your emergency taco kit!',
       price: 9.99,
@@ -242,7 +242,7 @@ export default function OrderPage() {
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-2">Where do you source these tortillas?</h3>
-                <p className="text-charcoal-700">We are independent Texas folks who source authentic tortillas from the best producers in the Lone Star State. We are not affiliated with any particular brand - just tortilla enthusiasts!</p>
+                <p className="text-charcoal-700">We are independent Texas folks who source authentic tortillas from the best producers in Texas. We are not affiliated with any particular brand - just tortilla enthusiasts!</p>
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-2">Do you ship to my state?</h3>

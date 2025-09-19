@@ -44,10 +44,10 @@ export function Logo({ className = '', animated = false, size = 'md' }: LogoProp
         {/* Inner Circle with Gradient */}
         <div className="absolute inset-2 rounded-full bg-gradient-to-br from-transparent to-current opacity-5" />
 
-        {/* Logo Mark - Stylized Star for Lone Star */}
+        {/* Logo Mark - Stylized Star for Texas */}
         <div className="relative flex flex-col items-center justify-center">
           <span className={`font-display font-bold ${text} leading-none`}>★</span>
-          <span className={`${subtext} tracking-[0.2em] uppercase opacity-60 absolute -bottom-1`}>LS</span>
+          <span className={`${subtext} tracking-[0.2em] uppercase opacity-60 absolute -bottom-1`}>TR</span>
         </div>
       </div>
     </motion.div>
@@ -78,8 +78,8 @@ export function LogoFull({ className = '', animated = false }: { className?: str
         animate={animated ? 'animate' : undefined}
         className="flex flex-col"
       >
-        <span className="text-lg font-light tracking-wider uppercase leading-tight">Lone Star</span>
         <span className="text-lg font-light tracking-wider uppercase leading-tight">Tortilla</span>
+        <span className="text-lg font-light tracking-wider uppercase leading-tight">Rodeo</span>
       </motion.div>
     </div>
   );

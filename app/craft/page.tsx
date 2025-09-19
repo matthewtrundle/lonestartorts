@@ -62,7 +62,7 @@ export default function CraftPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              From masa preparation to the final press, every H-E-B tortilla is crafted with time-honored techniques passed down through generations
+              From masa preparation to the final press, every authentic Texas tortilla is crafted with time-honored techniques passed down through generations
             </p>
           </div>
         </section>

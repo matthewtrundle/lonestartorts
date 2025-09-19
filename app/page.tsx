@@ -98,10 +98,10 @@ export default function Home() {
                     <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-sunset-200/20 via-transparent to-transparent blur-3xl animate-pulse"></div>
                   </div>
                   <span className="block text-[140px] md:text-[280px] lg:text-[380px] font-black leading-[0.7] tracking-[-0.04em] mb-0 relative text-transparent bg-clip-text bg-gradient-to-b from-charcoal-950 via-charcoal-900 to-masa-700 drop-shadow-2xl">
-                    LONE STAR
+                    TORTILLA
                   </span>
                   <span className="block text-[90px] md:text-[160px] lg:text-[200px] font-extralight leading-[0.85] tracking-[0.12em] text-charcoal-800/90 mt-[-30px] md:mt-[-60px] lg:mt-[-80px] relative mix-blend-multiply">
-                    TORTILLA CO.
+                    RODEO CO.
                   </span>
                   {/* Artistic underline decoration */}
                   <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-[80%] h-[3px] bg-gradient-to-r from-transparent via-sunset-500 to-transparent opacity-60"></div>
@@ -306,7 +306,7 @@ export default function Home() {
               <div className="space-y-2 text-charcoal-700">
                 <p className="font-semibold text-lg">Maria Rodriguez</p>
                 <p className="text-sm tracking-mega uppercase">Founder & CEO</p>
-                <p className="text-sm italic">Lone Star Tortilla Co.</p>
+                <p className="text-sm italic">Tortilla Rodeo Co.</p>
               </div>
             </div>
           </div>
@@ -336,7 +336,7 @@ export default function Home() {
               <h2 className="text-5xl lg:text-7xl font-display font-black text-cream-50 mb-4 reveal-text relative z-30">
                 WHY CHOOSE
               </h2>
-              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">Lone Star Tortilla</p>
+              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">Tortilla Rodeo</p>
             </div>
 
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -577,7 +577,7 @@ export default function Home() {
 
             {/* Bottom Bar */}
             <div className="border-t border-masa-800/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-cream-500">© 2024 Lone Star Tortilla Co. All rights reserved.</p>
+              <p className="text-sm text-cream-500">© 2024 Tortilla Rodeo Co. All rights reserved.</p>
               <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
                 Independent Texas retailer • We source authentic tortillas • Not affiliated with or endorsed by H-E-B
               </p>

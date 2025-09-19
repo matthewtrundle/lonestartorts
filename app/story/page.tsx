@@ -62,7 +62,7 @@ export default function StoryPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              Born from a love of authentic Texas tortillas, we are bringing the Lone Star State's finest to tables nationwide.
+              Born from a love of authentic Texas tortillas, we are bringing the finest Texas products to tables nationwide.
             </p>
           </div>
         </section>
@@ -217,16 +217,16 @@ export default function StoryPage() {
                     Maria Rodriguez
                   </h3>
                   <p className="text-xl font-display italic mb-6 text-masa-400">
-                    Founder, Lone Star Tortilla Co.
+                    Founder, Tortilla Rodeo Co.
                   </p>
                   <p className="text-cream-300 mb-6">
                     "Growing up in San Antonio, authentic tortillas were at every family gathering.
                     When I moved to New York, I missed that Texas taste so much that I started
-                    Lone Star Tortilla to share these incredible products with everyone across America."
+                    Tortilla Rodeo Co. to share these incredible products with everyone across America."
                   </p>
                   <p className="text-cream-300">
                     "We are independent Texas retailers who source the best tortillas from
-                    the Lone Star State and deliver them fresh to your door, one order at a time."
+                    the great state of Texas and deliver them fresh to your door, one order at a time."
                   </p>
                 </div>
                 <div className="relative h-96 rounded-lg overflow-hidden">
