@@ -152,23 +152,23 @@ export default function Home() {
                   </div>
 
                   {/* TORTILLA - Main Hero Text with Premium Effects */}
-                  <span className="hero-text-main block text-[200px] md:text-[400px] lg:text-[600px] xl:text-[700px] font-black leading-[0.65] tracking-[-0.06em] mb-0 relative transform-gpu">
-                    <span className="text-layer text-layer-back absolute inset-0 text-charcoal-950/20 blur-[2px] transform translate-x-[4px] translate-y-[4px]">TORTILLA</span>
-                    <span className="text-layer text-layer-mid absolute inset-0 text-gradient-premium transform translate-x-[2px] translate-y-[2px]">TORTILLA</span>
-                    <span className="text-layer text-layer-front relative text-charcoal-950 text-stroke-premium">TORTILLA</span>
+                  <span className="hero-text-main block text-[200px] md:text-[400px] lg:text-[600px] xl:text-[700px] font-black leading-[0.65] tracking-[-0.06em] mb-0 relative transform-gpu whitespace-nowrap">
+                    <span className="text-layer text-layer-back absolute inset-0 text-charcoal-950/20 blur-[2px] transform translate-x-[4px] translate-y-[4px] whitespace-nowrap">TORTILLA</span>
+                    <span className="text-layer text-layer-mid absolute inset-0 text-gradient-premium transform translate-x-[2px] translate-y-[2px] whitespace-nowrap">TORTILLA</span>
+                    <span className="text-layer text-layer-front relative text-charcoal-950 text-stroke-premium whitespace-nowrap">TORTILLA</span>
                   </span>
 
                   {/* RODEO - Accent Text with Elegant Treatment */}
-                  <span className="hero-text-accent block text-[120px] md:text-[240px] lg:text-[350px] xl:text-[400px] font-thin leading-[0.75] tracking-[0.08em] mt-[-50px] md:mt-[-100px] lg:mt-[-150px] xl:mt-[-180px] relative transform-gpu">
-                    <span className="text-layer absolute inset-0 text-sunset-600/30 blur-[20px] transform scale-105">RODEO</span>
-                    <span className="text-layer absolute inset-0 text-gradient-sunset">RODEO</span>
-                    <span className="text-layer relative text-sunset-600 mix-blend-multiply">RODEO</span>
+                  <span className="hero-text-accent block text-[120px] md:text-[240px] lg:text-[350px] xl:text-[400px] font-thin leading-[0.75] tracking-[0.08em] mt-[-50px] md:mt-[-100px] lg:mt-[-150px] xl:mt-[-180px] relative transform-gpu whitespace-nowrap">
+                    <span className="text-layer absolute inset-0 text-sunset-600/30 blur-[20px] transform scale-105 whitespace-nowrap">RODEO</span>
+                    <span className="text-layer absolute inset-0 text-gradient-sunset whitespace-nowrap">RODEO</span>
+                    <span className="text-layer relative text-sunset-600 mix-blend-multiply whitespace-nowrap">RODEO</span>
                   </span>
 
                   {/* CO. - Bold Ending with Premium Shadow */}
-                  <span className="hero-text-suffix block text-[60px] md:text-[120px] lg:text-[180px] xl:text-[200px] font-black leading-[0.9] tracking-[0.3em] mt-[-20px] md:mt-[-40px] lg:mt-[-60px] xl:mt-[-70px] relative transform-gpu">
-                    <span className="text-layer absolute inset-0 text-charcoal-950/10 blur-[1px] transform translate-x-[2px] translate-y-[2px]">CO.</span>
-                    <span className="text-layer relative text-charcoal-950">CO.</span>
+                  <span className="hero-text-suffix block text-[60px] md:text-[120px] lg:text-[180px] xl:text-[200px] font-black leading-[0.9] tracking-[0.3em] mt-[-20px] md:mt-[-40px] lg:mt-[-60px] xl:mt-[-70px] relative transform-gpu whitespace-nowrap">
+                    <span className="text-layer absolute inset-0 text-charcoal-950/10 blur-[1px] transform translate-x-[2px] translate-y-[2px] whitespace-nowrap">CO.</span>
+                    <span className="text-layer relative text-charcoal-950 whitespace-nowrap">CO.</span>
                   </span>
 
                   {/* Premium decorative elements */}
