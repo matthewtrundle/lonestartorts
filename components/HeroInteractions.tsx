@@ -12,10 +12,11 @@ export function HeroInteractions() {
       const strength = parseFloat(element.getAttribute('data-magnetic-strength') || '10')
 
       if (magneticArea) {
-        const handleMouseMove = (e: MouseEvent) => {
+        const handleMouseMove = (e: Event) => {
+          const mouseEvent = e as MouseEvent
           const rect = magneticArea.getBoundingClientRect()
-          const x = e.clientX - rect.left - rect.width / 2
-          const y = e.clientY - rect.top - rect.height / 2
+          const x = mouseEvent.clientX - rect.left - rect.width / 2
+          const y = mouseEvent.clientY - rect.top - rect.height / 2
 
           const distance = Math.sqrt(x * x + y * y)
           const maxDistance = Math.max(rect.width, rect.height) / 2
@@ -62,9 +63,10 @@ export function HeroInteractions() {
     const spotlightElement = document.querySelector('.spotlight') as HTMLElement
 
     if (spotlightElement) {
-      const handleMouseMove = (e: MouseEvent) => {
-        const x = (e.clientX / window.innerWidth) * 100
-        const y = (e.clientY / window.innerHeight) * 100
+      const handleMouseMove = (e: Event) => {
+        const mouseEvent = e as MouseEvent
+        const x = (mouseEvent.clientX / window.innerWidth) * 100
+        const y = (mouseEvent.clientY / window.innerHeight) * 100
 
         spotlightElement.style.setProperty('--mouse-x', `${x}%`)
         spotlightElement.style.setProperty('--mouse-y', `${y}%`)
