@@ -80,6 +80,14 @@ export default function Home() {
 
           {/* Hero Content */}
           <div className="relative z-10 container mx-auto px-8 pt-32">
+            {/* Western Decorative Elements */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="absolute top-20 left-10 text-8xl text-sunset-200/10 rotate-[-15deg]">🌵</div>
+              <div className="absolute top-40 right-20 text-6xl text-masa-300/10 rotate-[20deg]">🏜️</div>
+              <div className="absolute bottom-20 left-1/4 text-7xl text-sunset-300/10 rotate-[10deg]">🌮</div>
+              <div className="absolute bottom-40 right-1/3 text-5xl text-masa-200/10 rotate-[-20deg]">🌶️</div>
+            </div>
+
             <div className="max-w-6xl mx-auto">
               {/* Small accent text */}
               <div className="flex items-center gap-4 mb-6 reveal-text">
@@ -87,14 +95,61 @@ export default function Home() {
                 <span className="text-sm font-medium tracking-wider uppercase text-sunset-600">The Great Texas Tortilla Airlift 🚁</span>
               </div>
 
-              {/* Main Title with Split Animation */}
-              <h1 className="mb-8">
-                <span className="block text-7xl md:text-8xl lg:text-9xl font-display font-black tracking-tight leading-none hero-title">
-                  LONE STAR
-                </span>
-                <span className="block text-5xl md:text-6xl lg:text-7xl font-display font-light italic text-gradient mt-6 hero-title">
-                  Tortilla Co.
-                </span>
+              {/* Main Title with Creative Texas Design */}
+              <h1 className="mb-8 relative">
+                {/* Animated Stars Background */}
+                <div className="absolute -inset-20 pointer-events-none">
+                  <span className="absolute top-0 left-10 text-6xl text-sunset-400/30 animate-pulse">★</span>
+                  <span className="absolute top-20 right-20 text-4xl text-masa-400/40 animate-pulse" style={{ animationDelay: '0.5s' }}>✦</span>
+                  <span className="absolute bottom-10 left-1/2 text-5xl text-sunset-500/30 animate-pulse" style={{ animationDelay: '1s' }}>★</span>
+                  <span className="absolute top-1/2 right-10 text-7xl text-masa-500/20 animate-pulse" style={{ animationDelay: '1.5s' }}>⭐</span>
+                </div>
+
+                {/* LONE with integrated star */}
+                <div className="relative hero-title">
+                  <span className="block text-7xl md:text-8xl lg:text-9xl font-display font-black tracking-tight leading-none">
+                    <span className="inline-block hover:scale-110 transition-transform duration-300">L</span>
+                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">O</span>
+                    <span className="inline-block hover:scale-110 transition-transform duration-300">N</span>
+                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">E</span>
+                    <span className="inline-block mx-4 text-sunset-500 animate-spin-slow">★</span>
+                    <span className="inline-block hover:scale-110 transition-transform duration-300">S</span>
+                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">T</span>
+                    <span className="inline-block hover:scale-110 transition-transform duration-300">A</span>
+                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">R</span>
+                  </span>
+                </div>
+
+                {/* Creative subtitle with lasso decoration */}
+                <div className="relative mt-6 hero-title">
+                  <span className="block text-5xl md:text-6xl lg:text-7xl font-display font-light italic text-gradient">
+                    <span className="inline-block">Tortilla</span>
+                    <span className="inline-block ml-3 text-3xl md:text-4xl lg:text-5xl">🤠</span>
+                    <span className="inline-block ml-3">Co.</span>
+                  </span>
+                  {/* Decorative lasso swoosh */}
+                  <svg className="absolute -bottom-4 left-0 w-full h-12 pointer-events-none" viewBox="0 0 400 40">
+                    <path
+                      d="M10,20 Q100,5 200,20 T390,20"
+                      stroke="url(#lasso-gradient)"
+                      strokeWidth="2"
+                      fill="none"
+                      className="animate-draw-line"
+                    />
+                    <defs>
+                      <linearGradient id="lasso-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#F15A0E" stopOpacity="0.5" />
+                        <stop offset="50%" stopColor="#B58650" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#F15A0E" stopOpacity="0.5" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+
+                {/* Texas Badge */}
+                <div className="absolute -right-10 top-0 rotate-12 bg-sunset-500 text-cream-50 px-4 py-2 rounded-full text-sm font-bold shadow-xl animate-bounce-slow">
+                  EST. TEXAS
+                </div>
               </h1>
 
               {/* Subtitle */}
