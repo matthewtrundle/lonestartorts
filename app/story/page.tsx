@@ -10,7 +10,7 @@ export default function StoryPage() {
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
-        <BackgroundMusic />
+        {/* <BackgroundMusic /> */}
 
         {/* Header */}
         <header className="shrink-header fixed top-8 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
@@ -29,10 +29,8 @@ export default function StoryPage() {
                 <Link href="/story" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase text-sunset-600">Story</span>
                 </Link>
-                <Link href="/order" className="magnetic-area">
-                  <span className="magnetic-content inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors">
-                    Order Now
-                  </span>
+                <Link href="/order" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors">
+                  Order Now
                 </Link>
               </nav>
             </div>
@@ -54,10 +52,10 @@ export default function StoryPage() {
 
           <div className="relative z-10 container mx-auto px-8 text-center text-cream-50">
             <h1 className="magazine-text">
-              <span className="block text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.8] hero-title">
+              <span className="block text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.8]">
                 OUR STORY
               </span>
-              <span className="block text-3xl md:text-4xl lg:text-5xl font-display font-light italic mt-4 hero-title text-masa-400">
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-display font-light italic mt-4 text-masa-400">
                 begins in Texas
               </span>
             </h1>
@@ -244,7 +242,7 @@ export default function StoryPage() {
 
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100 text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-8 split-text">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-8">
             BE PART OF OUR STORY
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto text-charcoal-700">

@@ -75,7 +75,7 @@ export default function OrderPage() {
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden min-h-screen">
         <DisclaimerBanner />
-        <BackgroundMusic />
+        {/* <BackgroundMusic /> */}
 
         {/* Header */}
         <header className="shrink-header fixed top-8 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
@@ -105,7 +105,7 @@ export default function OrderPage() {
         {/* Hero Section */}
         <section className="pt-32 pb-12">
           <div className="container mx-auto px-8 text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black mb-4 hero-title">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black mb-4">
               LASSO YOUR TORTILLAS
             </h1>
             <p className="text-xl text-charcoal-700 mb-2">

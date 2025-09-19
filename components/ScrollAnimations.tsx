@@ -348,48 +348,64 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
       )
     })
 
-    // Premium header transformation - simplified without scaling
-    const header = document.querySelector('.shrink-header')
-    if (header) {
+    // Premium header transformation with artistic floating nav
+    const mainHeader = document.getElementById('main-header')
+    const floatingNav = document.getElementById('floating-nav')
+    const floatingLogo = document.getElementById('floating-logo')
+
+    if (mainHeader && floatingNav && floatingLogo) {
       ScrollTrigger.create({
         start: 'top top',
         end: 99999,
         onUpdate: (self) => {
-          const scrolled = self.scroll() > 50
+          const scrolled = self.scroll() > 50  // Changed from 200 to 50 - triggers much sooner
+          const deepScrolled = self.scroll() > 100  // Changed from 400 to 100 - shows floating nav sooner
 
-          // Simple header state change
-          gsap.to(header, {
-            backgroundColor: scrolled ? 'rgba(250, 248, 245, 0.95)' : 'rgba(250, 248, 245, 0)',
-            backdropFilter: scrolled ? 'blur(20px)' : 'blur(0px)',
-            borderBottomColor: scrolled ? 'rgba(181, 134, 80, 0.2)' : 'transparent',
-            paddingTop: scrolled ? 8 : 24,
-            paddingBottom: scrolled ? 8 : 24,
-            duration: 0.3,
+          // Hide main header on scroll - faster animation
+          gsap.to(mainHeader, {
+            y: scrolled ? -150 : 0,
+            opacity: scrolled ? 0 : 1,
+            duration: 0.3,  // Faster from 0.6 to 0.3
             ease: 'power2.out',
           })
 
-          // Also shrink the logo and nav items
-          const logo = header.querySelector('.logo-wrapper')
-          const navItems = header.querySelectorAll('.nav-items')
+          // Show floating navigation
+          gsap.to(floatingNav, {
+            opacity: deepScrolled ? 1 : 0,
+            pointerEvents: deepScrolled ? 'auto' : 'none',
+            x: deepScrolled ? 0 : 50,
+            duration: 0.5,  // Faster from 0.8 to 0.5
+            ease: 'power2.out',
+            delay: deepScrolled ? 0.1 : 0,  // Less delay
+          })
 
-          if (logo) {
-            gsap.to(logo, {
-              scale: scrolled ? 0.85 : 1,
-              duration: 0.3,
-              ease: 'power2.out',
-            })
-          }
-
-          if (navItems) {
-            navItems.forEach((nav: any) => {
-              gsap.to(nav, {
-                scale: scrolled ? 0.95 : 1,
-                duration: 0.3,
-                ease: 'power2.out',
-              })
-            })
-          }
+          // Show floating logo
+          gsap.to(floatingLogo, {
+            opacity: deepScrolled ? 1 : 0,
+            pointerEvents: deepScrolled ? 'auto' : 'none',
+            y: deepScrolled ? 0 : -20,
+            duration: 0.4,  // Faster from 0.6 to 0.4
+            ease: 'power2.out',
+            delay: deepScrolled ? 0.05 : 0,  // Less delay
+          })
         },
+      })
+
+      // Add hover effects to floating nav items
+      const navDots = floatingNav?.querySelectorAll('.group')
+      navDots?.forEach((dot: any, index: number) => {
+        gsap.set(dot, { scale: 0 })
+        gsap.to(dot, {
+          scale: 1,
+          duration: 0.5,
+          delay: 0.8 + (index * 0.1),
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: document.body,
+            start: '400px top',
+            toggleActions: 'play none none reverse',
+          }
+        })
       })
     }
 

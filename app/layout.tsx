@@ -5,11 +5,11 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Tortilla Rodeo Co. - Texas Tortillas, Delivered Fresh',
+  title: 'Lonestar Tortillas - Texas Tortillas, Delivered Fresh',
   description: 'Authentic Mi Tienda-style tortillas, shipped anywhere the salsa flows. Independent reseller. Not affiliated with or endorsed by H-E-B®.',
   keywords: 'texas tortillas, mi tienda tortillas, corn tortillas, flour tortillas, tortilla delivery',
   openGraph: {
-    title: 'Tortilla Rodeo Co.',
+    title: 'Lonestar Tortillas',
     description: 'Texas tortillas, shipped anywhere the salsa flows.',
     type: 'website',
   },

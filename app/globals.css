@@ -445,6 +445,17 @@ body::before {
   .hero-title span:first-of-type {
     letter-spacing: -0.06em !important;
   }
+
+  /* Prevent text from breaking into vertical on mobile */
+  .hero-text-container {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+  }
+
+  .hero-text-container h1,
+  .hero-text-container div {
+    min-width: max-content !important;
+  }
 }
 
 /* When animations are ready, make elements visible for GSAP to animate */
@@ -758,6 +769,36 @@ input[type="range"].slider::-moz-range-thumb:hover {
   .backface-hidden {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+  }
+
+  /* Artistic floating nav animations */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.1);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  /* Floating nav dot hover effects */
+  .fixed-nav-artistic .group:hover {
+    transform: translateX(-5px);
+  }
+
+  /* Smooth transitions for header hide/show */
+  .shrink-header {
+    will-change: transform, opacity;
+  }
+
+  .fixed-nav-artistic, .fixed-logo {
+    will-change: opacity, transform;
   }
 }
 
@@ -1079,12 +1120,12 @@ h1 span {
   paint-order: stroke fill;
 }
 
-/* Hero Text Container */
-.hero-text-container {
-  text-align: center;
-  white-space: nowrap;
-  overflow: visible;
-  width: 100%;
+/* Hero Text - Prevent vertical stacking */
+#hero-section h1,
+#hero-section div {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
 }
 
 /* Hero Text Layered Effects */

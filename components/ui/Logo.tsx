@@ -47,7 +47,7 @@ export function Logo({ className = '', animated = false, size = 'md' }: LogoProp
         {/* Logo Mark - Stylized Star for Texas */}
         <div className="relative flex flex-col items-center justify-center">
           <span className={`font-display font-bold ${text} leading-none`}>★</span>
-          <span className={`${subtext} tracking-[0.2em] uppercase opacity-60 absolute -bottom-1`}>TR</span>
+          <span className={`${subtext} tracking-[0.2em] uppercase opacity-60 absolute -bottom-1`}>LS</span>
         </div>
       </div>
     </motion.div>
@@ -78,8 +78,8 @@ export function LogoFull({ className = '', animated = false }: { className?: str
         animate={animated ? 'animate' : undefined}
         className="flex flex-col"
       >
-        <span className="text-lg font-light tracking-wider uppercase leading-tight">Tortilla</span>
-        <span className="text-lg font-light tracking-wider uppercase leading-tight">Rodeo</span>
+        <span className="text-lg font-bold tracking-wider uppercase leading-tight">Lonestar</span>
+        <span className="text-lg font-light tracking-wider uppercase leading-tight">Tortillas</span>
       </motion.div>
     </div>
   );

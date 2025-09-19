@@ -15,8 +15,8 @@ export default function Home() {
         {/* Prominent Disclaimer Banner */}
         <DisclaimerBanner />
 
-        {/* Background Music Player */}
-        <BackgroundMusic />
+        {/* Background Music Player - Removed for now */}
+        {/* <BackgroundMusic /> */}
 
         {/* Hero Interactions Handler */}
         <HeroInteractions />
@@ -26,8 +26,8 @@ export default function Home() {
           <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-radial from-masa-400/20 to-transparent blur-3xl" />
         </div>
 
-        {/* Premium Header with Glass Effect */}
-        <header className="shrink-header fixed top-8 left-0 right-0 z-[100] transition-all duration-700">
+        {/* Premium Header with Glass Effect - Hides on scroll */}
+        <header className="shrink-header fixed top-8 left-0 right-0 z-[100] transition-all duration-700" id="main-header">
           {/* Glass morphism background */}
           <div className="absolute inset-0 bg-cream-50/70 backdrop-blur-md border-b border-charcoal-200/10" />
 
@@ -50,15 +50,68 @@ export default function Home() {
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
-                <Link href="/order" className="magnetic-area">
-                  <span className="magnetic-content inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors shadow-sunset">
-                    Order Now
-                  </span>
+                <Link href="/order" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors shadow-sunset">
+                  Order Now
                 </Link>
               </nav>
             </div>
           </div>
         </header>
+
+        {/* Artistic Floating Navigation - Shows on scroll */}
+        <div className="fixed-nav-artistic fixed right-8 top-1/2 -translate-y-1/2 z-[150] opacity-0 pointer-events-none transition-all duration-700" id="floating-nav">
+          {/* Vertical navigation dots */}
+          <div className="flex flex-col items-center gap-6">
+            {/* Decorative line */}
+            <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
+
+            {/* Navigation items */}
+            <Link href="/shop" className="group relative w-12 h-12 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
+              <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
+              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Shop</span>
+            </Link>
+
+            <Link href="/craft" className="group relative w-12 h-12 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
+              <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
+              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Craft</span>
+            </Link>
+
+            <Link href="/story" className="group relative w-12 h-12 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
+              <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
+              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Story</span>
+            </Link>
+
+            {/* Decorative line */}
+            <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
+
+            {/* Order button - emphasized */}
+            <Link href="/order" className="group relative">
+              <div className="relative">
+                {/* Pulsing background */}
+                <div className="absolute inset-0 rounded-full bg-sunset-500 animate-pulse-slow blur-xl opacity-40" />
+                {/* Main button */}
+                <div className="relative bg-gradient-to-br from-sunset-500 to-sunset-600 text-cream-50 px-5 py-3 rounded-full font-bold text-sm tracking-wider uppercase shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110">
+                  <span className="relative z-10">Order</span>
+                  {/* Rotating border effect */}
+                  <div className="absolute inset-0 rounded-full border-2 border-sunset-300/30 animate-spin-slow" />
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        {/* Floating Logo - Shows on scroll */}
+        <div className="fixed-logo fixed top-6 left-8 z-[140] opacity-0 pointer-events-none transition-all duration-700" id="floating-logo">
+          <Link href="/" className="group block">
+            <div className="relative">
+              <LogoFull className="text-charcoal-950 w-32 transition-all duration-500 group-hover:scale-110" />
+              <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sunset-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+            </div>
+          </Link>
+        </div>
 
         {/* Hero Section with Editorial Design */}
         <section className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden spotlight" id="hero-section">
@@ -144,28 +197,23 @@ export default function Home() {
                 </div>
 
                 {/* Main Title - MASSIVE ARTISTIC IMPACT */}
-                <h1 className="hero-title mb-8 relative magnetic-text" data-magnetic-strength="20">
+                <div className="mb-8 relative magnetic-text" data-magnetic-strength="20">
                   {/* Premium text background effects */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="absolute w-[200%] h-[200%] bg-gradient-radial from-sunset-200/20 via-transparent to-transparent blur-[150px] animate-glow-pulse"></div>
                     <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-masa-300/15 via-transparent to-transparent blur-[100px] animate-glow-pulse-delayed"></div>
                   </div>
 
-                  {/* Main Hero Text - MASSIVE but Responsive */}
-                  <div className="hero-text-container">
-                    {/* TORTILLA - Main Impact Text */}
-                    <h1 className="text-[80px] sm:text-[120px] md:text-[180px] lg:text-[250px] xl:text-[320px] font-black leading-[0.8] tracking-[-0.04em] text-charcoal-950">
-                      TORTILLA
+                  {/* Main Hero Text - Fixed to prevent vertical stacking */}
+                  <div className="w-full">
+                    {/* LONESTAR - Main Impact Text */}
+                    <h1 className="text-[60px] sm:text-[100px] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.8] tracking-[-0.02em] text-charcoal-950 whitespace-nowrap">
+                      LONESTAR
                     </h1>
 
-                    {/* RODEO - Secondary Text */}
-                    <div className="text-[50px] sm:text-[80px] md:text-[120px] lg:text-[160px] xl:text-[200px] font-light leading-[0.8] tracking-[0.05em] text-sunset-600 -mt-4 sm:-mt-8 md:-mt-12 lg:-mt-16 xl:-mt-20">
-                      RODEO
-                    </div>
-
-                    {/* CO. - Accent Text */}
-                    <div className="text-[30px] sm:text-[50px] md:text-[70px] lg:text-[90px] xl:text-[110px] font-black leading-[0.9] tracking-[0.2em] text-charcoal-950 -mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8">
-                      CO.
+                    {/* TORTILLAS - Secondary Text */}
+                    <div className="text-[40px] sm:text-[70px] md:text-[100px] lg:text-[130px] xl:text-[160px] font-light leading-[0.8] tracking-[0.03em] text-sunset-600 -mt-2 sm:-mt-4 md:-mt-8 lg:-mt-12 whitespace-nowrap">
+                      TORTILLAS
                     </div>
                   </div>
 
@@ -177,7 +225,7 @@ export default function Home() {
 
                   {/* Invisible interaction area for magnetic effect */}
                   <div className="absolute inset-0 magnetic-area pointer-events-auto" />
-                </h1>
+                </div>
 
                 {/* Divider with Badge */}
                 <div className="flex items-center justify-center gap-6 my-10">
@@ -295,7 +343,7 @@ export default function Home() {
         </section>
 
         {/* Product Showcase with Horizontal Scroll */}
-        <section className="horizontal-scroll min-h-screen relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10">
+        <section className="horizontal-scroll min-h-[80vh] relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10 pt-20">
           <div className="absolute inset-0 animated-gradient opacity-10" />
 
           <div className="horizontal-wrapper flex items-center">
@@ -315,7 +363,7 @@ export default function Home() {
                 img: '/images/fresh-ingredients.webp'
               },
               {
-                title: 'WHOLE WHEAT',
+                title: 'WHEAT',
                 subtitle: 'Healthy & Hearty',
                 desc: 'Whole Grain Tortillas',
                 color: 'from-cream-400 to-cream-600',
@@ -338,7 +386,7 @@ export default function Home() {
                     <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-sunset-300/20 to-transparent blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
 
                     {/* Main product image */}
-                    <div className="relative w-[350px] h-[350px] mx-auto">
+                    <div className="relative w-[280px] h-[280px] mx-auto">
                       <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-40 rounded-full blur-2xl scale-110 group-hover:scale-125 transition-transform duration-1000`} />
                       <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cream-200/10 shadow-2xl">
                         <Image
@@ -355,11 +403,11 @@ export default function Home() {
                   {/* Product Info - Enhanced Typography */}
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <h3 className="text-7xl md:text-8xl font-display font-black tracking-tighter leading-none">{product.title}</h3>
+                      <h3 className="text-6xl md:text-7xl font-display font-black tracking-tighter leading-none">{product.title}</h3>
                       <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-cream-200 to-transparent" />
                     </div>
-                    <p className="text-2xl font-light tracking-wide text-cream-100 uppercase">{product.subtitle}</p>
-                    <p className="text-lg text-cream-300 italic font-display opacity-80">{product.desc}</p>
+                    <p className="text-xl font-light tracking-wide text-cream-100 uppercase">{product.subtitle}</p>
+                    <p className="text-base text-cream-300 italic font-display opacity-80">{product.desc}</p>
 
                     {/* Decorative element instead of button */}
                     <div className="flex items-center justify-center gap-4 mt-8">
@@ -390,7 +438,7 @@ export default function Home() {
               <div className="space-y-2 text-charcoal-700">
                 <p className="font-semibold text-lg">Maria Rodriguez</p>
                 <p className="text-sm tracking-mega uppercase">Founder & CEO</p>
-                <p className="text-sm italic">Tortilla Rodeo Co.</p>
+                <p className="text-sm italic">Lonestar Tortillas</p>
               </div>
             </div>
           </div>
@@ -420,7 +468,7 @@ export default function Home() {
               <h2 className="text-5xl lg:text-7xl font-display font-black text-cream-50 mb-4 reveal-text relative z-30">
                 WHY CHOOSE
               </h2>
-              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">Tortilla Rodeo</p>
+              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">Lonestar Tortillas</p>
             </div>
 
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -661,7 +709,7 @@ export default function Home() {
 
             {/* Bottom Bar */}
             <div className="border-t border-masa-800/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-cream-500">© 2024 Tortilla Rodeo Co. All rights reserved.</p>
+              <p className="text-sm text-cream-500">© 2024 Lonestar Tortillas. All rights reserved.</p>
               <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
                 Independent Texas retailer • We source authentic tortillas • Not affiliated with or endorsed by H-E-B
               </p>
