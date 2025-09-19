@@ -23,9 +23,9 @@ export default function Home() {
         </div>
 
         {/* Premium Header with Glass Effect */}
-        <header className="shrink-header fixed top-12 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
+        <header className="shrink-header fixed top-8 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
           <div className="container mx-auto px-8">
-            <div className="flex justify-between items-center py-6">
+            <div className="flex justify-between items-center py-4">
               <div className="logo-wrapper">
                 <LogoFull className="text-charcoal-950" animated />
               </div>
@@ -79,7 +79,7 @@ export default function Home() {
           </div>
 
           {/* Hero Content */}
-          <div className="relative z-10 container mx-auto px-8 pt-32">
+          <div className="relative z-10 container mx-auto px-8 pt-20">
             {/* Western Decorative Elements */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
               <div className="absolute top-20 left-10 text-8xl text-sunset-200/10 rotate-[-15deg]">🌵</div>

@@ -78,9 +78,9 @@ export default function OrderPage() {
         <BackgroundMusic />
 
         {/* Header */}
-        <header className="shrink-header fixed top-12 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
+        <header className="shrink-header fixed top-8 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
           <div className="container mx-auto px-8">
-            <div className="flex justify-between items-center py-6">
+            <div className="flex justify-between items-center py-4">
               <Link href="/" className="logo-wrapper">
                 <LogoFull className="text-charcoal-950" animated />
               </Link>
@@ -103,7 +103,7 @@ export default function OrderPage() {
         </header>
 
         {/* Hero Section */}
-        <section className="pt-40 pb-12">
+        <section className="pt-32 pb-12">
           <div className="container mx-auto px-8 text-center">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black mb-4 hero-title">
               🤠 LASSO YOUR TORTILLAS 🤠

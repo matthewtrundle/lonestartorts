@@ -356,11 +356,33 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
             backgroundColor: scrolled ? 'rgba(250, 248, 245, 0.95)' : 'rgba(250, 248, 245, 0)',
             backdropFilter: scrolled ? 'blur(20px)' : 'blur(0px)',
             borderBottomColor: scrolled ? 'rgba(181, 134, 80, 0.2)' : 'transparent',
-            paddingTop: scrolled ? 16 : 32,
-            paddingBottom: scrolled ? 16 : 32,
+            paddingTop: scrolled ? 8 : 24,
+            paddingBottom: scrolled ? 8 : 24,
             duration: 0.3,
             ease: 'power2.out',
           })
+
+          // Also shrink the logo and nav items
+          const logo = header.querySelector('.logo-wrapper')
+          const navItems = header.querySelectorAll('.nav-items')
+
+          if (logo) {
+            gsap.to(logo, {
+              scale: scrolled ? 0.85 : 1,
+              duration: 0.3,
+              ease: 'power2.out',
+            })
+          }
+
+          if (navItems) {
+            navItems.forEach((nav: any) => {
+              gsap.to(nav, {
+                scale: scrolled ? 0.95 : 1,
+                duration: 0.3,
+                ease: 'power2.out',
+              })
+            })
+          }
         },
       })
     }

@@ -13,9 +13,9 @@ export default function StoryPage() {
         <BackgroundMusic />
 
         {/* Header */}
-        <header className="shrink-header fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
+        <header className="shrink-header fixed top-8 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
           <div className="container mx-auto px-8">
-            <div className="flex justify-between items-center py-6">
+            <div className="flex justify-between items-center py-4">
               <Link href="/" className="logo-wrapper">
                 <LogoFull className="text-charcoal-950" animated />
               </Link>
@@ -40,7 +40,7 @@ export default function StoryPage() {
         </header>
 
         {/* Hero Section */}
-        <section className="min-h-[80vh] relative flex items-center justify-center overflow-hidden pt-32">
+        <section className="min-h-[80vh] relative flex items-center justify-center overflow-hidden pt-24">
           <div className="absolute inset-0 parallax-img" data-speed="0.3">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-charcoal-950/50 to-charcoal-950" />
             <Image
