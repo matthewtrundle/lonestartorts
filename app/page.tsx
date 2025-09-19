@@ -82,51 +82,53 @@ export default function Home() {
           <div className="relative z-10 container mx-auto px-8 pt-20">
 
             <div className="max-w-6xl mx-auto">
-              {/* Small accent text */}
-              <div className="flex items-center gap-4 mb-6 reveal-text">
-                <span className="inline-block w-20 h-px bg-sunset-500" />
-                <span className="text-sm font-medium tracking-wider uppercase text-sunset-600">The Great Texas Tortilla Airlift</span>
+              {/* Main Hero Typography - MASSIVE IMPACT */}
+              <div className="text-center">
+                {/* Small Quality Badge */}
+                <div className="mb-8 reveal-text">
+                  <span className="text-xs font-bold tracking-[0.4em] uppercase text-masa-600">
+                    Premium • Quality • Authentic
+                  </span>
+                </div>
+
+                {/* Main Title - HUGE */}
+                <h1 className="hero-title mb-8">
+                  <span className="block text-[90px] md:text-[140px] lg:text-[200px] font-black leading-[0.75] tracking-[-0.02em] mb-0">
+                    LONE STAR
+                  </span>
+                  <span className="block text-[60px] md:text-[90px] lg:text-[130px] font-extralight leading-[0.9] tracking-[0.08em] text-charcoal-800 mt-[-10px] md:mt-[-20px]">
+                    TORTILLA CO.
+                  </span>
+                </h1>
+
+                {/* Divider with Badge */}
+                <div className="flex items-center justify-center gap-6 my-10">
+                  <span className="block w-20 h-px bg-charcoal-300"></span>
+                  <span className="text-[11px] font-semibold tracking-[0.35em] uppercase text-charcoal-500">
+                    Est. 2020 • Texas
+                  </span>
+                  <span className="block w-20 h-px bg-charcoal-300"></span>
+                </div>
+
+                {/* Tagline - Bold Statement */}
+                <div className="slide-left max-w-4xl mx-auto">
+                  <p className="text-2xl md:text-3xl lg:text-4xl font-black tracking-wide text-charcoal-950 mb-4 uppercase">
+                    Authentic Texas Tortillas
+                  </p>
+                  <p className="text-lg md:text-xl lg:text-2xl font-light tracking-wider text-masa-700 italic">
+                    only the best, delivered nationwide
+                  </p>
+                </div>
               </div>
 
-              {/* Main Title with Creative Texas Design */}
-              <h1 className="mb-8 relative">
-
-                {/* Main Title - Clean and Bold */}
-                <div className="relative hero-title mb-4">
-                  <h2 className="text-6xl md:text-7xl lg:text-8xl font-display font-black tracking-tighter leading-none">
-                    <span className="block">LONE STAR</span>
-                  </h2>
-                </div>
-
-                {/* Subtitle - Elegant */}
-                <div className="relative hero-title">
-                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-wide text-masa-700">
-                    <span className="inline-block">TORTILLA CO.</span>
-                  </h3>
-                  {/* Decorative Line */}
-                  <div className="w-32 h-1 bg-sunset-500 mx-auto mt-6 mb-8"></div>
-                </div>
-
-                {/* Established Badge */}
-                <div className="inline-block mb-8">
-                  <span className="text-sm font-bold tracking-widest text-masa-600 uppercase">Established 2020 • Texas</span>
-                </div>
-              </h1>
-
-              {/* Tagline */}
-              <p className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed max-w-4xl mb-12 slide-left text-charcoal-800">
-                Authentic Texas tortillas,
-                <span className="text-sunset-600 font-medium block mt-2">delivered nationwide</span>
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-6 scale-in">
-                <Link href="/shop" className="group relative overflow-hidden bg-charcoal-950 text-cream-50 px-10 py-5 text-lg font-medium tracking-wide uppercase hover-lift inline-block">
-                  <span className="relative z-10">🤠 Lasso Yours Now</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-sunset-500 to-sunset-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+              {/* CTA Buttons - Premium Minimal */}
+              <div className="flex flex-wrap gap-6 justify-center mt-16 scale-in">
+                <Link href="/order" className="group relative bg-charcoal-950 text-cream-50 px-14 py-5 text-xs font-bold tracking-[0.25em] uppercase transition-all hover:bg-charcoal-800">
+                  <span className="relative z-10">SHOP COLLECTION</span>
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-sunset-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
                 </Link>
-                <Link href="/story" className="border-2 border-charcoal-950 px-10 py-5 text-lg font-medium tracking-wide uppercase hover:bg-charcoal-950 hover:text-cream-50 transition-all duration-300 inline-block">
-                  🌵 Our Wild Story
+                <Link href="/story" className="group relative border border-charcoal-400 text-charcoal-950 px-14 py-5 text-xs font-bold tracking-[0.25em] uppercase transition-all hover:border-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50">
+                  OUR STORY
                 </Link>
               </div>
 

@@ -664,3 +664,22 @@ input[type="range"].slider::-moz-range-thumb:hover {
     font-size: 20px;
   }
 }
+
+/* Premium Typography Enhancements */
+.font-black {
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-extralight {
+  font-weight: 100;
+  letter-spacing: 0.05em;
+}
+
+/* Better rendering for massive fonts */
+h1 span {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
