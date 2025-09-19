@@ -6,6 +6,7 @@ import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
+import { HeroInteractions } from '@/components/HeroInteractions'
 
 export default function Home() {
   return (
@@ -16,6 +17,9 @@ export default function Home() {
 
         {/* Background Music Player */}
         <BackgroundMusic />
+
+        {/* Hero Interactions Handler */}
+        <HeroInteractions />
         {/* Artistic background gradients */}
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-radial from-sunset-300/20 to-transparent blur-3xl" />
@@ -23,11 +27,15 @@ export default function Home() {
         </div>
 
         {/* Premium Header with Glass Effect */}
-        <header className="shrink-header fixed top-8 left-0 right-0 z-[100] transition-all duration-500 border-b border-transparent">
-          <div className="container mx-auto px-8">
+        <header className="shrink-header fixed top-8 left-0 right-0 z-[100] transition-all duration-700">
+          {/* Glass morphism background */}
+          <div className="absolute inset-0 bg-cream-50/70 backdrop-blur-md border-b border-charcoal-200/10" />
+
+          <div className="container mx-auto px-8 relative">
             <div className="flex justify-between items-center py-4">
-              <div className="logo-wrapper">
-                <LogoFull className="text-charcoal-950" animated />
+              <div className="logo-wrapper group">
+                <LogoFull className="text-charcoal-950 transition-transform duration-500 group-hover:scale-105" animated />
+                <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sunset-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </div>
               <nav className="nav-items hidden md:flex items-center gap-8">
                 <Link href="/shop" className="group relative overflow-hidden">
@@ -53,29 +61,73 @@ export default function Home() {
         </header>
 
         {/* Hero Section with Editorial Design */}
-        <section className="min-h-screen relative flex items-center justify-center overflow-hidden spotlight">
-          {/* Parallax Background Layers */}
-          <div className="absolute inset-0 parallax-img" data-speed="0.3" data-rotation="2">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream-50/50 to-cream-50" />
-            <Image
-              src="/images/texas-field.webp"
-              alt="Texas Sunset"
-              fill
-              className="object-cover opacity-60 mix-blend-multiply"
-              priority
-            />
+        <section className="min-h-screen relative flex items-center justify-center overflow-hidden spotlight" id="hero-section">
+          {/* Multi-layer Parallax Background System */}
+          <div className="absolute inset-0 hero-background-system">
+            {/* Layer 1: Deep background with texture */}
+            <div className="absolute inset-0 parallax-layer" data-speed="0.1">
+              <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-100/80 to-masa-50" />
+              <div className="absolute inset-0 premium-grain-texture" />
+            </div>
+
+            {/* Layer 2: Atmospheric gradients */}
+            <div className="absolute inset-0 parallax-layer" data-speed="0.2">
+              <div className="absolute top-[-50%] left-[-25%] w-[150%] h-[150%] bg-gradient-radial from-sunset-200/30 via-sunset-100/10 to-transparent blur-[100px] animate-float-slow" />
+              <div className="absolute bottom-[-50%] right-[-25%] w-[150%] h-[150%] bg-gradient-radial from-masa-200/20 via-masa-100/10 to-transparent blur-[120px] animate-float-slow-reverse" />
+            </div>
+
+            {/* Layer 3: Main image with premium treatment */}
+            <div className="absolute inset-0 parallax-layer" data-speed="0.3" data-rotation="2">
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream-50/30 to-cream-50/90" />
+              <Image
+                src="/images/texas-field.webp"
+                alt="Texas Sunset"
+                fill
+                className="object-cover opacity-40 mix-blend-overlay saturate-150"
+                priority
+                quality={100}
+              />
+              <div className="absolute inset-0 backdrop-blur-[1px]" />
+            </div>
+
+            {/* Layer 4: Animated light rays */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="light-ray light-ray-1" />
+              <div className="light-ray light-ray-2" />
+              <div className="light-ray light-ray-3" />
+            </div>
           </div>
 
-          {/* Floating decorative elements */}
-          <div className="absolute top-20 left-10 float-element">
-            <svg width="80" height="80" viewBox="0 0 80 80" className="text-sunset-300/30">
-              <circle cx="40" cy="40" r="35" fill="currentColor" />
-            </svg>
-          </div>
-          <div className="absolute bottom-20 right-10 float-element" style={{ animationDelay: '1s' }}>
-            <svg width="120" height="120" viewBox="0 0 120 120" className="text-masa-300/20">
-              <rect x="20" y="20" width="80" height="80" fill="currentColor" transform="rotate(45 60 60)" />
-            </svg>
+          {/* Floating Premium Elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Floating particles */}
+            <div className="particle particle-1" />
+            <div className="particle particle-2" />
+            <div className="particle particle-3" />
+            <div className="particle particle-4" />
+            <div className="particle particle-5" />
+
+            {/* Geometric decorations with animation */}
+            <div className="absolute top-[15%] left-[10%] float-element opacity-20">
+              <svg width="100" height="100" viewBox="0 0 100 100" className="text-sunset-300 rotate-slow">
+                <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="0.5" />
+              </svg>
+            </div>
+            <div className="absolute top-[25%] right-[8%] float-element opacity-15" style={{ animationDelay: '2s' }}>
+              <svg width="80" height="80" viewBox="0 0 80 80" className="text-masa-400">
+                <circle cx="40" cy="40" r="38" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="5 10" />
+              </svg>
+            </div>
+            <div className="absolute bottom-[20%] left-[5%] float-element opacity-10" style={{ animationDelay: '1s' }}>
+              <svg width="120" height="120" viewBox="0 0 120 120" className="text-charcoal-300">
+                <rect x="30" y="30" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="0.5" transform="rotate(30 60 60)" />
+              </svg>
+            </div>
+            <div className="absolute bottom-[35%] right-[15%] float-element opacity-20" style={{ animationDelay: '3s' }}>
+              <svg width="60" height="60" viewBox="0 0 60 60" className="text-sunset-400">
+                <path d="M30 10 L50 30 L30 50 L10 30 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+              </svg>
+            </div>
           </div>
 
           {/* Hero Content */}
@@ -92,19 +144,41 @@ export default function Home() {
                 </div>
 
                 {/* Main Title - MASSIVE ARTISTIC IMPACT */}
-                <h1 className="hero-title mb-8 relative">
-                  {/* Artistic background effects for text */}
+                <h1 className="hero-title mb-8 relative magnetic-text" data-magnetic-strength="20">
+                  {/* Premium text background effects */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-sunset-200/20 via-transparent to-transparent blur-3xl animate-pulse"></div>
+                    <div className="absolute w-[200%] h-[200%] bg-gradient-radial from-sunset-200/20 via-transparent to-transparent blur-[150px] animate-glow-pulse"></div>
+                    <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-masa-300/15 via-transparent to-transparent blur-[100px] animate-glow-pulse-delayed"></div>
                   </div>
-                  <span className="block text-[140px] md:text-[280px] lg:text-[380px] font-black leading-[0.7] tracking-[-0.04em] mb-0 relative text-transparent bg-clip-text bg-gradient-to-b from-charcoal-950 via-charcoal-900 to-masa-700 drop-shadow-2xl">
-                    TORTILLA
+
+                  {/* TORTILLA - Main Hero Text with Premium Effects */}
+                  <span className="hero-text-main block text-[200px] md:text-[400px] lg:text-[600px] xl:text-[700px] font-black leading-[0.65] tracking-[-0.06em] mb-0 relative transform-gpu">
+                    <span className="text-layer text-layer-back absolute inset-0 text-charcoal-950/20 blur-[2px] transform translate-x-[4px] translate-y-[4px]">TORTILLA</span>
+                    <span className="text-layer text-layer-mid absolute inset-0 text-gradient-premium transform translate-x-[2px] translate-y-[2px]">TORTILLA</span>
+                    <span className="text-layer text-layer-front relative text-charcoal-950 text-stroke-premium">TORTILLA</span>
                   </span>
-                  <span className="block text-[90px] md:text-[160px] lg:text-[200px] font-extralight leading-[0.85] tracking-[0.12em] text-charcoal-800/90 mt-[-30px] md:mt-[-60px] lg:mt-[-80px] relative mix-blend-multiply">
-                    RODEO CO.
+
+                  {/* RODEO - Accent Text with Elegant Treatment */}
+                  <span className="hero-text-accent block text-[120px] md:text-[240px] lg:text-[350px] xl:text-[400px] font-thin leading-[0.75] tracking-[0.08em] mt-[-50px] md:mt-[-100px] lg:mt-[-150px] xl:mt-[-180px] relative transform-gpu">
+                    <span className="text-layer absolute inset-0 text-sunset-600/30 blur-[20px] transform scale-105">RODEO</span>
+                    <span className="text-layer absolute inset-0 text-gradient-sunset">RODEO</span>
+                    <span className="text-layer relative text-sunset-600 mix-blend-multiply">RODEO</span>
                   </span>
-                  {/* Artistic underline decoration */}
-                  <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-[80%] h-[3px] bg-gradient-to-r from-transparent via-sunset-500 to-transparent opacity-60"></div>
+
+                  {/* CO. - Bold Ending with Premium Shadow */}
+                  <span className="hero-text-suffix block text-[60px] md:text-[120px] lg:text-[180px] xl:text-[200px] font-black leading-[0.9] tracking-[0.3em] mt-[-20px] md:mt-[-40px] lg:mt-[-60px] xl:mt-[-70px] relative transform-gpu">
+                    <span className="text-layer absolute inset-0 text-charcoal-950/10 blur-[1px] transform translate-x-[2px] translate-y-[2px]">CO.</span>
+                    <span className="text-layer relative text-charcoal-950">CO.</span>
+                  </span>
+
+                  {/* Premium decorative elements */}
+                  <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[90%]">
+                    <div className="h-[2px] bg-gradient-to-r from-transparent via-sunset-500 to-transparent animate-shimmer-slow" />
+                    <div className="h-[1px] bg-gradient-to-r from-transparent via-masa-400 to-transparent mt-[4px] animate-shimmer-slow-reverse" />
+                  </div>
+
+                  {/* Invisible interaction area for magnetic effect */}
+                  <div className="absolute inset-0 magnetic-area pointer-events-auto" />
                 </h1>
 
                 {/* Divider with Badge */}
@@ -116,25 +190,50 @@ export default function Home() {
                   <span className="block w-20 h-px bg-charcoal-300"></span>
                 </div>
 
-                {/* Tagline - Bold Statement */}
-                <div className="slide-left max-w-4xl mx-auto">
-                  <p className="text-2xl md:text-3xl lg:text-4xl font-black tracking-wide text-charcoal-950 mb-4 uppercase">
-                    Authentic Texas Tortillas
+                {/* Tagline - Bold Statement with Premium Typography */}
+                <div className="slide-left max-w-5xl mx-auto relative">
+                  {/* Background accent */}
+                  <div className="absolute inset-0 -z-10">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[200%] bg-gradient-radial from-sunset-100/10 to-transparent blur-3xl" />
+                  </div>
+
+                  <p className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tight text-charcoal-950 mb-6 uppercase leading-[0.9] relative">
+                    <span className="inline-block hover-lift-text" data-text="AUTHENTIC">AUTHENTIC</span>{' '}
+                    <span className="inline-block hover-lift-text text-gradient-premium" data-text="TEXAS">TEXAS</span>{' '}
+                    <span className="inline-block hover-lift-text" data-text="TORTILLAS">TORTILLAS</span>
                   </p>
-                  <p className="text-lg md:text-xl lg:text-2xl font-light tracking-wider text-masa-700 italic">
-                    only the best, delivered nationwide
+                  <p className="text-xl md:text-3xl lg:text-4xl font-light tracking-widest text-masa-700 italic relative overflow-hidden">
+                    <span className="relative z-10">only the best, delivered nationwide</span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-masa-200/30 to-transparent -skew-x-12 transform translate-x-[-100%] animate-shine" />
                   </p>
                 </div>
               </div>
 
-              {/* CTA Buttons - Premium Minimal */}
-              <div className="flex flex-wrap gap-6 justify-center mt-16 scale-in">
-                <Link href="/order" className="group relative bg-charcoal-950 text-cream-50 px-14 py-5 text-xs font-bold tracking-[0.25em] uppercase transition-all hover:bg-charcoal-800">
-                  <span className="relative z-10">SHOP COLLECTION</span>
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-sunset-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
+              {/* CTA Buttons - Premium Minimal with Advanced Interactions */}
+              <div className="flex flex-wrap gap-8 justify-center mt-20 scale-in">
+                <Link href="/order" className="premium-button group relative overflow-hidden bg-charcoal-950 text-cream-50 px-20 py-8 text-lg font-bold tracking-[0.3em] uppercase transform-gpu">
+                  {/* Multi-layer button effects */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-sunset-500 to-sunset-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                  <span className="absolute inset-0 bg-charcoal-950 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out delay-100" />
+                  <span className="relative z-10 flex items-center gap-4">
+                    SHOP COLLECTION
+                    <svg className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-[-2px] bg-gradient-to-r from-sunset-400 via-sunset-500 to-sunset-400 blur-lg" />
+                  </div>
                 </Link>
-                <Link href="/story" className="group relative border border-charcoal-400 text-charcoal-950 px-14 py-5 text-xs font-bold tracking-[0.25em] uppercase transition-all hover:border-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50">
-                  OUR STORY
+
+                <Link href="/story" className="premium-button-outline group relative overflow-hidden border-2 border-charcoal-950 text-charcoal-950 px-20 py-8 text-lg font-bold tracking-[0.3em] uppercase transform-gpu">
+                  <span className="absolute inset-0 bg-charcoal-950 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                  <span className="relative z-10 group-hover:text-cream-50 transition-colors duration-500 delay-100">
+                    OUR STORY
+                  </span>
+                  {/* Magnetic corners */}
+                  <span className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-charcoal-950 transform -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
+                  <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-charcoal-950 transform translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
                 </Link>
               </div>
 
@@ -144,11 +243,24 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 reveal-text">
-              <p className="text-xs tracking-widest uppercase text-charcoal-600 opacity-60">Scroll to explore</p>
-              <div className="relative w-6 h-10 border-2 border-charcoal-400/30 rounded-full">
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-3 bg-charcoal-600 rounded-full animate-scroll-down" />
+            {/* Premium Scroll Indicator */}
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 reveal-text group cursor-pointer">
+              <p className="text-xs tracking-[0.4em] uppercase text-charcoal-600/70 font-medium group-hover:text-charcoal-800 transition-colors duration-300">
+                Scroll to explore
+              </p>
+              <div className="relative">
+                {/* Outer ring with animation */}
+                <div className="absolute inset-0 w-7 h-12 border border-charcoal-300/20 rounded-full group-hover:border-sunset-400/40 transition-colors duration-500" />
+                <div className="relative w-7 h-12 border border-charcoal-400/40 rounded-full overflow-hidden group-hover:border-sunset-500/60 transition-colors duration-500">
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-4 bg-gradient-to-b from-charcoal-600 to-transparent rounded-full animate-scroll-down" />
+                </div>
+                {/* Pulse effect on hover */}
+                <div className="absolute inset-0 w-7 h-12 border border-sunset-400/0 rounded-full group-hover:border-sunset-400/20 group-hover:scale-110 transition-all duration-700" />
+              </div>
+              <div className="flex gap-1 mt-1">
+                <div className="w-1 h-1 bg-charcoal-400/40 rounded-full animate-pulse" />
+                <div className="w-1 h-1 bg-charcoal-400/40 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+                <div className="w-1 h-1 bg-charcoal-400/40 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
               </div>
             </div>
           </div>
