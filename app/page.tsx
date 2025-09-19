@@ -154,8 +154,8 @@ export default function Home() {
 
               {/* Subtitle */}
               <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed max-w-3xl mb-8 slide-left">
-                We're wranglin' authentic Texas tortillas and
-                <span className="text-gradient-masa font-medium"> airliftin' 'em nationwide</span> partner!
+                We are wranglin authentic Texas tortillas and
+                <span className="text-gradient-masa font-medium"> airliftin em nationwide</span> partner!
               </p>
 
               {/* CTA Buttons */}
@@ -405,7 +405,7 @@ export default function Home() {
                 {
                   icon: '💯',
                   title: 'HAPPINESS GUARANTEE',
-                  desc: 'Love 'em or we'll make it right',
+                  desc: 'Love em or we will make it right',
                   gradient: 'from-charcoal-600 to-charcoal-400'
                 },
               ].map((feature, i) => (

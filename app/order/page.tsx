@@ -17,7 +17,7 @@ export default function OrderPage() {
     {
       sku: 'TTC-CORN-SS',
       name: '🌽 Corn Classics',
-      desc: 'Traditional corn tortillas that'll make your abuela jealous',
+      desc: 'Traditional corn tortillas that will make your abuela jealous',
       storage: '📦 SHELF-STABLE: Store in cool, dry place. No fridge needed!',
       price: 4.99,
       pack: '30 count bag',
@@ -196,7 +196,7 @@ export default function OrderPage() {
                   </div>
                   <div>
                     <p className="font-bold mb-1">💯 Happiness Guarantee</p>
-                    <p className="text-sm">Love 'em or we'll make it right. That's the Texas way!</p>
+                    <p className="text-sm">Love em or we will make it right. That is the Texas way!</p>
                   </div>
                 </div>
               </div>
@@ -234,7 +234,7 @@ export default function OrderPage() {
             <div className="space-y-6">
               <div>
                 <h3 className="font-bold text-lg mb-2">Are these really shelf-stable?</h3>
-                <p className="text-charcoal-700">You betcha! All our tortillas are shelf-stable and ship without refrigeration. Store 'em in your pantry just like bread!</p>
+                <p className="text-charcoal-700">You betcha! All our tortillas are shelf-stable and ship without refrigeration. Store them in your pantry just like bread!</p>
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-2">How long do they last?</h3>
@@ -242,11 +242,11 @@ export default function OrderPage() {
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-2">Where do you source these tortillas?</h3>
-                <p className="text-charcoal-700">We're independent Texas folks who source authentic tortillas from the best producers in the Lone Star State. We're not affiliated with any particular brand - just tortilla enthusiasts!</p>
+                <p className="text-charcoal-700">We are independent Texas folks who source authentic tortillas from the best producers in the Lone Star State. We are not affiliated with any particular brand - just tortilla enthusiasts!</p>
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-2">Do you ship to my state?</h3>
-                <p className="text-charcoal-700">If you're in the USA, we got you covered! All 50 states, from sea to shining sea! 🇺🇸</p>
+                <p className="text-charcoal-700">If you are in the USA, we got you covered! All 50 states, from sea to shining sea! 🇺🇸</p>
               </div>
             </div>
           </div>

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+const stripe = stripeKey ? new Stripe(stripeKey, {
   apiVersion: '2025-02-24.acacia',
-});
+}) : null;
 
 // Product catalog matching shared spec
 const productCatalog = {
@@ -21,6 +22,11 @@ const productCatalog = {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!stripe) {
+      console.warn('Stripe not configured - checkout disabled');
+      return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
+    }
+
     const { items } = await req.json();
 
     // Create line items for Stripe

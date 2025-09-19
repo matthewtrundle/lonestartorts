@@ -62,7 +62,7 @@ export default function StoryPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              Since 1905, H-E-B has been crafting tortillas that bring families together. Now, we're bringing that Texas tradition to tables nationwide.
+              Since 1905, H-E-B has been crafting tortillas that bring families together. Now, we are bringing that Texas tradition to tables nationwide.
             </p>
           </div>
         </section>
@@ -187,7 +187,7 @@ export default function StoryPage() {
               </p>
               <p className="text-lg text-charcoal-700 mb-12">
                 We believe everyone deserves access to the quality and tradition that H-E-B represents.
-                As independent retailers, we're proud to bridge the gap between Texas excellence and
+                As independent retailers, we are proud to bridge the gap between Texas excellence and
                 nationwide availability, ensuring that authentic H-E-B tortillas can be enjoyed from
                 coast to coast.
               </p>
@@ -223,11 +223,11 @@ export default function StoryPage() {
                   <p className="text-cream-300 mb-6">
                     "Growing up in San Antonio, H-E-B tortillas were at every family gathering.
                     When I moved to New York, I missed that authentic taste so much that I started
-                    Lone Star Tortilla to share these incredible products with everyone who can't
+                    Lone Star Tortilla to share these incredible products with everyone who cannot
                     shop at H-E-B."
                   </p>
                   <p className="text-cream-300">
-                    "We're not H-E-B, and we're proud to say that. We're Texans who love these
+                    "We are not H-E-B, and we are proud to say that. We are Texans who love these
                     products and want to share them with the world, one tortilla at a time."
                   </p>
                 </div>

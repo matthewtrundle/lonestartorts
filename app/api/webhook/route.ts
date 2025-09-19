@@ -2,17 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2025-02-24.acacia',
-});
-
+const stripeKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
+
+const stripe = stripeKey ? new Stripe(stripeKey, {
+  apiVersion: '2025-02-24.acacia',
+}) : null;
 
 // Simple in-memory order storage (replace with database in production)
 const orders = new Map();
 
 export async function POST(req: NextRequest) {
   try {
+    if (!stripe) {
+      console.warn('Stripe not configured - webhook disabled');
+      return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
+    }
+
     const body = await req.text();
     const signature = headers().get('stripe-signature');
 
