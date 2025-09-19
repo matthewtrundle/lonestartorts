@@ -132,11 +132,20 @@ body::before {
 /* Horizontal scroll container */
 .horizontal-scroll {
   overflow-x: hidden;
+  position: relative;
+  z-index: 10;
 }
 
 .horizontal-wrapper {
   display: flex;
   will-change: transform;
+  position: relative;
+  z-index: 10;
+}
+
+/* Ensure header stays on top */
+.shrink-header {
+  z-index: 50 !important;
 }
 
 /* Artistic hover effects */

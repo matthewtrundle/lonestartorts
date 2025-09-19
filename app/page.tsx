@@ -23,7 +23,7 @@ export default function Home() {
         </div>
 
         {/* Premium Header with Glass Effect */}
-        <header className="shrink-header fixed top-8 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
+        <header className="shrink-header fixed top-8 left-0 right-0 z-[100] transition-all duration-500 border-b border-transparent">
           <div className="container mx-auto px-8">
             <div className="flex justify-between items-center py-4">
               <div className="logo-wrapper">
@@ -205,7 +205,7 @@ export default function Home() {
         </section>
 
         {/* Product Showcase with Horizontal Scroll */}
-        <section className="horizontal-scroll min-h-screen relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50">
+        <section className="horizontal-scroll min-h-screen relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10">
           <div className="absolute inset-0 animated-gradient opacity-10" />
 
           <div className="horizontal-wrapper flex items-center">
