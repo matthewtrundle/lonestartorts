@@ -1,25 +1,38 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Volume2, VolumeX } from 'lucide-react'
+import { Volume2, VolumeX, Music } from 'lucide-react'
+
+// Romantic Mexican music playlist
+const MUSIC_PLAYLIST = [
+  {
+    name: 'Romance Mexicano',
+    description: 'Classical Guitar Romance',
+    // Note: In production, add your own licensed music files to /public/audio/
+    // Suggested tracks: "Besame Mucho", "La Paloma", "Sabor a Mi", "Solamente Una Vez"
+    src: 'https://www.fesliyanstudios.com/play-mp3/2861'
+  },
+  // Add more romantic Mexican tracks here as you acquire them:
+  // { name: 'Besame Mucho', src: '/audio/besame-mucho.mp3' },
+  // { name: 'Cielito Lindo', src: '/audio/cielito-lindo.mp3' },
+  // { name: 'La Bamba (Romantic)', src: '/audio/la-bamba-romantic.mp3' },
+]
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true) // Start muted for better UX
   const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState(0.3) // 30% volume by default
+  const [volume, setVolume] = useState(0.2) // 20% volume for romantic ambiance
+  const [currentTrack, setCurrentTrack] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     // Create audio element
     const audio = new Audio()
 
-    // Use a royalty-free western/Mexican guitar track
-    // You can replace this with your own audio file
-    // For now, using a free western ambient track from a CDN
-    audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3'
-
-    // Alternative free western/Mexican music sources:
-    // audio.src = '/audio/western-guitar.mp3' // Add your own file to public/audio/
+    // Set the current track from playlist
+    if (MUSIC_PLAYLIST[currentTrack]) {
+      audio.src = MUSIC_PLAYLIST[currentTrack].src
+    }
 
     audio.loop = true
     audio.volume = volume
@@ -83,35 +96,54 @@ export function BackgroundMusic() {
         )}
       </button>
 
-      {/* Volume Slider (appears on hover) */}
-      <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-charcoal-950/90 backdrop-blur-sm rounded-lg p-3 shadow-xl">
-        <div className="flex flex-col items-center space-y-2">
-          <span className="text-cream-50 text-xs font-medium tracking-wider uppercase">
-            {isMuted ? 'Muted' : `${Math.round(volume * 100)}%`}
-          </span>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={volume * 100}
-            onChange={(e) => setVolume(Number(e.target.value) / 100)}
-            className="w-24 h-1 bg-cream-200/20 rounded-lg appearance-none cursor-pointer slider"
-            style={{
-              background: `linear-gradient(to right, #F15A0E 0%, #F15A0E ${volume * 100}%, #E8CCA5 ${volume * 100}%, #E8CCA5 100%)`
-            }}
-          />
-          <span className="text-cream-400 text-xs">
-            🎵 Western Vibes
-          </span>
+      {/* Volume Slider and Track Info (appears on hover) */}
+      <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-charcoal-950/95 backdrop-blur-sm rounded-lg p-4 shadow-xl min-w-[200px]">
+        <div className="flex flex-col items-center space-y-3">
+          {/* Current track info */}
+          <div className="text-center">
+            <Music className="w-4 h-4 mx-auto mb-1 text-sunset-400" />
+            <p className="text-cream-50 text-xs font-semibold">
+              {MUSIC_PLAYLIST[currentTrack]?.name || 'Romance Mexicano'}
+            </p>
+            <p className="text-cream-400 text-xs opacity-75">
+              Música Romántica
+            </p>
+          </div>
+
+          {/* Volume control */}
+          <div className="w-full">
+            <span className="text-cream-50 text-xs font-medium tracking-wider uppercase block text-center mb-2">
+              {isMuted ? 'Silenciado' : `Volumen: ${Math.round(volume * 100)}%`}
+            </span>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={volume * 100}
+              onChange={(e) => setVolume(Number(e.target.value) / 100)}
+              className="w-full h-1 bg-cream-200/20 rounded-lg appearance-none cursor-pointer slider"
+              style={{
+                background: `linear-gradient(to right, #EF4444 0%, #EF4444 ${volume * 100}%, #E8CCA5 ${volume * 100}%, #E8CCA5 100%)`
+              }}
+            />
+          </div>
+
+          {/* Romantic message */}
+          <div className="flex items-center gap-1 text-red-400 text-xs">
+            <span>♥</span>
+            <span className="italic">Con Amor de México</span>
+            <span>♥</span>
+          </div>
         </div>
       </div>
 
-      {/* Animated Music Notes */}
+      {/* Animated Music Notes with Hearts for Romance */}
       {!isMuted && isPlaying && (
         <div className="absolute -top-2 -left-2 pointer-events-none">
           <span className="absolute animate-float-note-1 text-sunset-500 text-xl">♪</span>
-          <span className="absolute animate-float-note-2 text-masa-500 text-lg" style={{ animationDelay: '0.5s' }}>♫</span>
-          <span className="absolute animate-float-note-3 text-sunset-400 text-base" style={{ animationDelay: '1s' }}>♪</span>
+          <span className="absolute animate-float-note-2 text-red-500 text-lg" style={{ animationDelay: '0.5s' }}>♥</span>
+          <span className="absolute animate-float-note-3 text-masa-500 text-lg" style={{ animationDelay: '1s' }}>♫</span>
+          <span className="absolute animate-float-note-1 text-red-400 text-base" style={{ animationDelay: '1.5s', left: '10px' }}>♥</span>
         </div>
       )}
     </div>

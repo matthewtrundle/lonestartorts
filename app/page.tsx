@@ -91,14 +91,20 @@ export default function Home() {
                   </span>
                 </div>
 
-                {/* Main Title - HUGE */}
-                <h1 className="hero-title mb-8">
-                  <span className="block text-[90px] md:text-[140px] lg:text-[200px] font-black leading-[0.75] tracking-[-0.02em] mb-0">
+                {/* Main Title - MASSIVE ARTISTIC IMPACT */}
+                <h1 className="hero-title mb-8 relative">
+                  {/* Artistic background effects for text */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-sunset-200/20 via-transparent to-transparent blur-3xl animate-pulse"></div>
+                  </div>
+                  <span className="block text-[140px] md:text-[280px] lg:text-[380px] font-black leading-[0.7] tracking-[-0.04em] mb-0 relative text-transparent bg-clip-text bg-gradient-to-b from-charcoal-950 via-charcoal-900 to-masa-700 drop-shadow-2xl">
                     LONE STAR
                   </span>
-                  <span className="block text-[60px] md:text-[90px] lg:text-[130px] font-extralight leading-[0.9] tracking-[0.08em] text-charcoal-800 mt-[-10px] md:mt-[-20px]">
+                  <span className="block text-[90px] md:text-[160px] lg:text-[200px] font-extralight leading-[0.85] tracking-[0.12em] text-charcoal-800/90 mt-[-30px] md:mt-[-60px] lg:mt-[-80px] relative mix-blend-multiply">
                     TORTILLA CO.
                   </span>
+                  {/* Artistic underline decoration */}
+                  <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-[80%] h-[3px] bg-gradient-to-r from-transparent via-sunset-500 to-transparent opacity-60"></div>
                 </h1>
 
                 {/* Divider with Badge */}
