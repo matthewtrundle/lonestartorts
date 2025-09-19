@@ -4,11 +4,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
+import { BackgroundMusic } from '@/components/BackgroundMusic'
 
 export default function Home() {
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
+        {/* Background Music Player */}
+        <BackgroundMusic />
         {/* Artistic background gradients */}
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-radial from-sunset-300/20 to-transparent blur-3xl" />
