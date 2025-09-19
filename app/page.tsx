@@ -80,80 +80,43 @@ export default function Home() {
 
           {/* Hero Content */}
           <div className="relative z-10 container mx-auto px-8 pt-20">
-            {/* Western Decorative Elements */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              <div className="absolute top-20 left-10 text-8xl text-sunset-200/10 rotate-[-15deg]">🌵</div>
-              <div className="absolute top-40 right-20 text-6xl text-masa-300/10 rotate-[20deg]">🏜️</div>
-              <div className="absolute bottom-20 left-1/4 text-7xl text-sunset-300/10 rotate-[10deg]">🌮</div>
-              <div className="absolute bottom-40 right-1/3 text-5xl text-masa-200/10 rotate-[-20deg]">🌶️</div>
-            </div>
 
             <div className="max-w-6xl mx-auto">
               {/* Small accent text */}
               <div className="flex items-center gap-4 mb-6 reveal-text">
                 <span className="inline-block w-20 h-px bg-sunset-500" />
-                <span className="text-sm font-medium tracking-wider uppercase text-sunset-600">The Great Texas Tortilla Airlift 🚁</span>
+                <span className="text-sm font-medium tracking-wider uppercase text-sunset-600">The Great Texas Tortilla Airlift</span>
               </div>
 
               {/* Main Title with Creative Texas Design */}
               <h1 className="mb-8 relative">
-                {/* Animated Stars Background */}
-                <div className="absolute -inset-20 pointer-events-none">
-                  <span className="absolute top-0 left-10 text-6xl text-sunset-400/30 animate-pulse">★</span>
-                  <span className="absolute top-20 right-20 text-4xl text-masa-400/40 animate-pulse" style={{ animationDelay: '0.5s' }}>✦</span>
-                  <span className="absolute bottom-10 left-1/2 text-5xl text-sunset-500/30 animate-pulse" style={{ animationDelay: '1s' }}>★</span>
-                  <span className="absolute top-1/2 right-10 text-7xl text-masa-500/20 animate-pulse" style={{ animationDelay: '1.5s' }}>⭐</span>
+
+                {/* Main Title - Clean and Bold */}
+                <div className="relative hero-title mb-4">
+                  <h2 className="text-6xl md:text-7xl lg:text-8xl font-display font-black tracking-tighter leading-none">
+                    <span className="block">LONE STAR</span>
+                  </h2>
                 </div>
 
-                {/* LONE with integrated star */}
+                {/* Subtitle - Elegant */}
                 <div className="relative hero-title">
-                  <span className="block text-7xl md:text-8xl lg:text-9xl font-display font-black tracking-tight leading-none">
-                    <span className="inline-block hover:scale-110 transition-transform duration-300">L</span>
-                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">O</span>
-                    <span className="inline-block hover:scale-110 transition-transform duration-300">N</span>
-                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">E</span>
-                    <span className="inline-block mx-4 text-sunset-500 animate-spin-slow">★</span>
-                    <span className="inline-block hover:scale-110 transition-transform duration-300">S</span>
-                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">T</span>
-                    <span className="inline-block hover:scale-110 transition-transform duration-300">A</span>
-                    <span className="inline-block hover:scale-110 transition-transform duration-300 hover:text-sunset-500">R</span>
-                  </span>
+                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-wide text-masa-700">
+                    <span className="inline-block">TORTILLA CO.</span>
+                  </h3>
+                  {/* Decorative Line */}
+                  <div className="w-32 h-1 bg-sunset-500 mx-auto mt-6 mb-8"></div>
                 </div>
 
-                {/* Creative subtitle with lasso decoration */}
-                <div className="relative mt-6 hero-title">
-                  <span className="block text-5xl md:text-6xl lg:text-7xl font-display font-light italic text-gradient">
-                    <span className="inline-block">Tortilla Co.</span>
-                  </span>
-                  {/* Decorative lasso swoosh */}
-                  <svg className="absolute -bottom-4 left-0 w-full h-12 pointer-events-none" viewBox="0 0 400 40">
-                    <path
-                      d="M10,20 Q100,5 200,20 T390,20"
-                      stroke="url(#lasso-gradient)"
-                      strokeWidth="2"
-                      fill="none"
-                      className="animate-draw-line"
-                    />
-                    <defs>
-                      <linearGradient id="lasso-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#F15A0E" stopOpacity="0.5" />
-                        <stop offset="50%" stopColor="#B58650" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#F15A0E" stopOpacity="0.5" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-
-                {/* Texas Badge */}
-                <div className="absolute -right-10 top-0 rotate-12 bg-sunset-500 text-cream-50 px-4 py-2 rounded-full text-sm font-bold shadow-xl animate-bounce-slow">
-                  EST. TEXAS
+                {/* Established Badge */}
+                <div className="inline-block mb-8">
+                  <span className="text-sm font-bold tracking-widest text-masa-600 uppercase">Established 2020 • Texas</span>
                 </div>
               </h1>
 
-              {/* Subtitle */}
-              <p className="text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed max-w-3xl mb-8 slide-left text-charcoal-800">
-                We are wranglin authentic Texas tortillas and
-                <span className="text-sunset-600 font-bold"> airliftin em nationwide</span> partner!
+              {/* Tagline */}
+              <p className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed max-w-4xl mb-12 slide-left text-charcoal-800">
+                Authentic Texas tortillas,
+                <span className="text-sunset-600 font-medium block mt-2">delivered nationwide</span>
               </p>
 
               {/* CTA Buttons */}
@@ -283,7 +246,7 @@ export default function Home() {
                     <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-sunset-300/20 to-transparent blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
 
                     {/* Main product image */}
-                    <div className="relative w-[450px] h-[450px] mx-auto">
+                    <div className="relative w-[350px] h-[350px] mx-auto">
                       <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-40 rounded-full blur-2xl scale-110 group-hover:scale-125 transition-transform duration-1000`} />
                       <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cream-200/10 shadow-2xl">
                         <Image
@@ -371,37 +334,67 @@ export default function Home() {
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: '🤠',
-                  title: 'YEEHAW AUTHENTIC',
+                  icon: (
+                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                    </svg>
+                  ),
+                  title: 'AUTHENTIC',
                   desc: 'Real Texas tortillas, not some impostor nonsense',
                   gradient: 'from-sunset-400 to-sunset-600'
                 },
                 {
-                  icon: '🚀',
-                  title: 'TORTILLA EXPRESS',
+                  icon: (
+                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="1" y="3" width="15" height="13"/>
+                      <path d="M16 8h4l3 3v5h-7V8z"/>
+                      <circle cx="5.5" cy="18.5" r="2.5"/>
+                      <circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                  ),
+                  title: 'NATIONWIDE DELIVERY',
                   desc: 'Shelf-stable goodness shipped to all 50 states',
                   gradient: 'from-masa-400 to-masa-600'
                 },
                 {
-                  icon: '🌮',
+                  icon: (
+                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 11l3 3L22 4"/>
+                      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                    </svg>
+                  ),
                   title: 'CURATED SELECTION',
                   desc: 'Only the best tortillas make the cut, partner',
                   gradient: 'from-lime-500 to-lime-700'
                 },
                 {
-                  icon: '⭐',
-                  title: 'TEXAS-SIZED VALUE',
+                  icon: (
+                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  ),
+                  title: 'PREMIUM VALUE',
                   desc: 'Big flavor, fair prices, no bull',
                   gradient: 'from-sunset-500 to-masa-500'
                 },
                 {
-                  icon: '📦',
-                  title: 'SHELF-STABLE MAGIC',
+                  icon: (
+                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                      <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                  ),
+                  title: 'SHELF-STABLE',
                   desc: 'No refrigeration needed - pantry-ready!',
                   gradient: 'from-cream-400 to-cream-600'
                 },
                 {
-                  icon: '💯',
+                  icon: (
+                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                    </svg>
+                  ),
                   title: 'HAPPINESS GUARANTEE',
                   desc: 'Love em or we will make it right',
                   gradient: 'from-charcoal-600 to-charcoal-400'
@@ -437,7 +430,7 @@ export default function Home() {
               <h2 className="text-7xl lg:text-8xl font-display font-black text-charcoal-950 reveal-text">
                 OUR TREASURES
               </h2>
-              <p className="text-2xl text-charcoal-700 mt-4 slide-left">🌵 Shelf-stable Texas gold, ready for your pantry 🌵</p>
+              <p className="text-2xl text-charcoal-700 mt-4 slide-left">Shelf-stable Texas gold, ready for your pantry</p>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-12">
@@ -446,7 +439,7 @@ export default function Home() {
                   name: 'CORN CLASSICS',
                   type: 'Traditional Corn Tortillas',
                   style: 'Shelf-Stable • No Refrigeration',
-                  badge: '📦 Pantry Ready',
+                  badge: 'Pantry Ready',
                   gradient: 'bg-gradient-to-br from-sunset-100 to-sunset-200',
                   accent: 'text-sunset-600',
                   shadow: 'shadow-sunset'
@@ -455,7 +448,7 @@ export default function Home() {
                   name: 'FLOUR POWER',
                   type: 'Soft Flour Tortillas',
                   style: 'Shelf-Stable • 30-Day Fresh',
-                  badge: '🏆 Best Seller',
+                  badge: 'Best Seller',
                   gradient: 'bg-gradient-to-br from-masa-100 to-masa-200',
                   accent: 'text-masa-600',
                   shadow: 'shadow-masa'
@@ -464,7 +457,7 @@ export default function Home() {
                   name: 'WILD CARDS',
                   type: 'Specialty Varieties',
                   style: 'Shelf-Stable • Limited Edition',
-                  badge: '🔥 Coming Soon',
+                  badge: 'Coming Soon',
                   gradient: 'bg-gradient-to-br from-lime-100 to-lime-200',
                   accent: 'text-lime-700',
                   shadow: 'shadow-xl'
