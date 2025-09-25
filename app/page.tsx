@@ -263,26 +263,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Premium Scroll Indicator */}
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 reveal-text group cursor-pointer">
-              <p className="text-xs tracking-[0.4em] uppercase text-charcoal-600/70 font-medium group-hover:text-charcoal-800 transition-colors duration-300">
-                Scroll to explore
-              </p>
-              <div className="relative">
-                {/* Outer ring with animation */}
-                <div className="absolute inset-0 w-7 h-12 border border-charcoal-300/20 rounded-full group-hover:border-sunset-400/40 transition-colors duration-500" />
-                <div className="relative w-7 h-12 border border-charcoal-400/40 rounded-full overflow-hidden group-hover:border-sunset-500/60 transition-colors duration-500">
-                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-4 bg-gradient-to-b from-charcoal-600 to-transparent rounded-full animate-scroll-down" />
-                </div>
-                {/* Pulse effect on hover */}
-                <div className="absolute inset-0 w-7 h-12 border border-sunset-400/0 rounded-full group-hover:border-sunset-400/20 group-hover:scale-110 transition-all duration-700" />
-              </div>
-              <div className="flex gap-1 mt-1">
-                <div className="w-1 h-1 bg-charcoal-400/40 rounded-full animate-pulse" />
-                <div className="w-1 h-1 bg-charcoal-400/40 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-                <div className="w-1 h-1 bg-charcoal-400/40 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
-              </div>
-            </div>
           </div>
 
           {/* Decorative bottom wave */}

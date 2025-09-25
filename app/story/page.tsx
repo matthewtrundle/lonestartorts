@@ -213,7 +213,7 @@ export default function StoryPage() {
                     Maria Rodriguez
                   </h3>
                   <p className="text-xl font-display italic mb-6 text-masa-400">
-                    Founder, Tortilla Rodeo Co.
+                    Founder, Lonestar Tortillas
                   </p>
                   <p className="text-cream-300 mb-6">
                     "I moved to New York for a job. The job was fine. The tortillas? Absolute tragedy.
