@@ -57,8 +57,8 @@ export default function StoryPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              Born from a love of H-E-B® tortillas, we're the trusted independent source bringing
-              genuine H-E-B® products to connoisseurs nationwide.
+              What started as a desperate midnight Google search for "H-E-B® tortillas shipped to NYC"
+              became a mission to help fellow tortilla refugees nationwide.
             </p>
           </div>
         </section>
@@ -74,35 +74,35 @@ export default function StoryPage() {
               {[
                 {
                   year: '2020',
-                  title: 'The Discovery',
-                  desc: 'Former Texans realize H-E-B® tortillas are what everyone\'s been missing',
+                  title: 'The Great Tortilla Crisis',
+                  desc: 'Moved to Brooklyn. Tried local tortillas. Immediately regretted life choices.',
                   highlight: true,
                 },
                 {
                   year: '2021',
-                  title: 'Sourcing Excellence',
-                  desc: 'We establish relationships to source genuine H-E-B® products directly',
+                  title: 'The Pilgrimage',
+                  desc: 'Drove 1,800 miles to Texas just to stock up on H-E-B® tortillas. Worth it.',
                 },
                 {
                   year: '2022',
-                  title: 'Perfecting Logistics',
-                  desc: 'Mastering nationwide shipping to preserve H-E-B® quality and freshness',
+                  title: 'The Lightbulb Moment',
+                  desc: 'Wait... what if we just... buy them and ship them to people? Genius!',
                 },
                 {
                   year: '2023',
-                  title: 'Serving Connoisseurs',
-                  desc: 'Building a community of H-E-B® enthusiasts across America',
+                  title: 'The Underground Network',
+                  desc: 'Fellow tortilla enthusiasts start sliding into our DMs. "You got the goods?"',
                 },
                 {
                   year: '2024',
-                  title: 'Trusted Source',
-                  desc: 'Thousands trust us as their source for genuine H-E-B® products',
+                  title: 'Going Legit',
+                  desc: 'Turns out we\'re not the only ones with this problem. Who knew?',
                   highlight: true,
                 },
                 {
                   year: 'Today',
-                  title: 'For Those Who Know',
-                  desc: 'Your independent source for genuine H-E-B® tortillas nationwide',
+                  title: 'Living the Dream',
+                  desc: 'Helping tortilla-deprived Americans, one H-E-B® package at a time',
                   highlight: true,
                 },
               ].map((milestone, i) => (
@@ -146,19 +146,19 @@ export default function StoryPage() {
             <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
               {[
                 {
-                  value: 'AUTHENTICITY',
-                  desc: 'We source only genuine H-E-B® products, never substitutes',
-                  icon: '★',
+                  value: 'OBSESSION',
+                  desc: 'We\'re maybe a little too passionate about tortillas',
+                  icon: '🌮',
                 },
                 {
-                  value: 'EXPERTISE',
-                  desc: 'We know H-E-B® quality and how to deliver it perfectly',
-                  icon: '◆',
+                  value: 'DEDICATION',
+                  desc: 'We\'ll go to ridiculous lengths to get you the good stuff',
+                  icon: '🚗',
                 },
                 {
-                  value: 'TRUST',
-                  desc: 'Your reliable independent source for H-E-B® products',
-                  icon: '❤',
+                  value: 'HONESTY',
+                  desc: 'We\'re just people who really miss H-E-B® tortillas',
+                  icon: '💯',
                 },
               ].map((item, i) => (
                 <div key={i} className="text-center scale-in" style={{ animationDelay: `${i * 0.15}s` }}>
@@ -179,19 +179,19 @@ export default function StoryPage() {
                 OUR MISSION
               </h2>
               <p className="text-2xl md:text-3xl font-display italic text-masa-600 mb-8">
-                "To bring genuine H-E-B® tortillas to connoisseurs nationwide"
+                "To rescue tortilla-deprived Americans from mediocre wraps"
               </p>
               <p className="text-lg text-charcoal-700 mb-12">
-                We believe those who know quality deserve access to H-E-B® tortillas, no matter where they live.
-                As your trusted independent source, we're proud to deliver genuine H-E-B® products
-                nationwide with expert care and shelf-stable convenience.
+                Look, we get it. You moved away from Texas and suddenly realized that not all tortillas
+                are created equal. We\'re here because we had the same existential crisis. Now we\'re just
+                some folks who go to H-E-B®, buy tortillas, and ship them to people who understand the struggle.
               </p>
 
               <div className="grid md:grid-cols-3 gap-8 mt-16">
                 {[
-                  { number: '50', label: 'States Served' },
-                  { number: '100%', label: 'Genuine H-E-B® Products' },
-                  { number: '1000s', label: 'Satisfied Connoisseurs' },
+                  { number: '50', label: 'States Rescued' },
+                  { number: '100%', label: 'Real H-E-B® Tortillas' },
+                  { number: '247+', label: 'Fellow Tortilla Refugees' },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
                     <div className="text-5xl font-bold text-sunset-600 mb-2">{stat.number}</div>
@@ -216,13 +216,14 @@ export default function StoryPage() {
                     Founder, Tortilla Rodeo Co.
                   </p>
                   <p className="text-cream-300 mb-6">
-                    "Growing up in San Antonio, H-E-B® tortillas were the gold standard at every gathering.
-                    When I moved to New York, I couldn't find anything that compared. That's when I realized:
-                    those who know tortillas need access to H-E-B®, no matter where they live."
+                    "I moved to New York for a job. The job was fine. The tortillas? Absolute tragedy.
+                    I spent six months trying every brand, every bodega, every fancy grocery store.
+                    Nothing. Just sadness wrapped in disappointment."
                   </p>
                   <p className="text-cream-300">
-                    "We're your independent source for genuine H-E-B® products. We know what makes
-                    these tortillas special, and we deliver that Texas quality nationwide with care."
+                    "So now I'm that person who drives to Texas, fills a van with H-E-B® tortillas,
+                    and ships them to fellow refugees. Is it extra? Yes. Do I have regrets? Only that
+                    I didn't start sooner. We're not affiliated with H-E-B® - we're just superfans with a shipping account."
                   </p>
                 </div>
                 <div className="relative h-96 rounded-lg overflow-hidden">
