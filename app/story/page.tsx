@@ -4,14 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
-import { BackgroundMusic } from '@/components/BackgroundMusic'
 
 export default function StoryPage() {
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
-        {/* <BackgroundMusic /> */}
-
         {/* Header */}
         <header className="shrink-header fixed top-8 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent">
           <div className="container mx-auto px-8">
@@ -78,7 +75,7 @@ export default function StoryPage() {
                 {
                   year: '2020',
                   title: 'The Discovery',
-                  desc: 'Former Texans realize H-E-B® tortillas are what everyone's been missing',
+                  desc: 'Former Texans realize H-E-B® tortillas are what everyone\'s been missing',
                   highlight: true,
                 },
                 {
