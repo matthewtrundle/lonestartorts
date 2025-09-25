@@ -20,17 +20,17 @@ export default function StoryPage() {
                 <LogoFull className="text-charcoal-950" animated />
               </Link>
               <nav className="nav-items hidden md:flex items-center gap-8">
-                <Link href="/shop" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Shop</span>
+                <Link href="/pre-sale" className="group relative overflow-hidden">
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Pre-Sale</span>
                 </Link>
                 <Link href="/craft" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Craft</span>
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Source</span>
                 </Link>
                 <Link href="/story" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase text-sunset-600">Story</span>
                 </Link>
-                <Link href="/order" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors">
-                  Order Now
+                <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors">
+                  Join Pre-Sale
                 </Link>
               </nav>
             </div>
@@ -60,7 +60,8 @@ export default function StoryPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              Born from a love of authentic Texas tortillas, we are bringing the finest Texas products to tables nationwide.
+              Born from a love of H-E-B® tortillas, we're the trusted independent source bringing
+              genuine H-E-B® products to connoisseurs nationwide.
             </p>
           </div>
         </section>
@@ -76,35 +77,35 @@ export default function StoryPage() {
               {[
                 {
                   year: '2020',
-                  title: 'The Dream Begins',
-                  desc: 'Texans missing home start sharing authentic tortillas with friends nationwide',
+                  title: 'The Discovery',
+                  desc: 'Former Texans realize H-E-B® tortillas are what everyone's been missing',
                   highlight: true,
                 },
                 {
                   year: '2021',
-                  title: 'Finding Our Partners',
-                  desc: 'We connect with the best Texas tortilla makers who share our passion',
+                  title: 'Sourcing Excellence',
+                  desc: 'We establish relationships to source genuine H-E-B® products directly',
                 },
                 {
                   year: '2022',
-                  title: 'Shelf-Stable Innovation',
-                  desc: 'Perfecting packaging to deliver fresh Texas taste without refrigeration',
+                  title: 'Perfecting Logistics',
+                  desc: 'Mastering nationwide shipping to preserve H-E-B® quality and freshness',
                 },
                 {
                   year: '2023',
-                  title: 'National Expansion',
-                  desc: 'Launching nationwide shipping to bring Texas tortillas coast to coast',
+                  title: 'Serving Connoisseurs',
+                  desc: 'Building a community of H-E-B® enthusiasts across America',
                 },
                 {
                   year: '2024',
-                  title: 'Growing Family',
-                  desc: 'Thousands of families enjoying authentic Texas tortillas delivered fresh',
+                  title: 'Trusted Source',
+                  desc: 'Thousands trust us as their source for genuine H-E-B® products',
                   highlight: true,
                 },
                 {
                   year: 'Today',
-                  title: 'Your Table',
-                  desc: 'Authentic Texas tortillas delivered fresh to your door',
+                  title: 'For Those Who Know',
+                  desc: 'Your independent source for genuine H-E-B® tortillas nationwide',
                   highlight: true,
                 },
               ].map((milestone, i) => (
@@ -149,17 +150,17 @@ export default function StoryPage() {
               {[
                 {
                   value: 'AUTHENTICITY',
-                  desc: 'Every tortilla carries the genuine taste and tradition of Texas',
+                  desc: 'We source only genuine H-E-B® products, never substitutes',
                   icon: '★',
                 },
                 {
-                  value: 'QUALITY',
-                  desc: 'Only the finest ingredients and time-honored techniques',
+                  value: 'EXPERTISE',
+                  desc: 'We know H-E-B® quality and how to deliver it perfectly',
                   icon: '◆',
                 },
                 {
-                  value: 'COMMUNITY',
-                  desc: 'Bringing families together around the table with Texas tradition',
+                  value: 'TRUST',
+                  desc: 'Your reliable independent source for H-E-B® products',
                   icon: '❤',
                 },
               ].map((item, i) => (
@@ -181,19 +182,19 @@ export default function StoryPage() {
                 OUR MISSION
               </h2>
               <p className="text-2xl md:text-3xl font-display italic text-masa-600 mb-8">
-                "To share the authentic taste of Texas with every table in America"
+                "To bring genuine H-E-B® tortillas to connoisseurs nationwide"
               </p>
               <p className="text-lg text-charcoal-700 mb-12">
-                We believe everyone deserves access to authentic Texas tortillas.
-                As independent retailers, we are proud to source the finest tortillas from Texas
-                and deliver them nationwide with the convenience of shelf-stable shipping.
+                We believe those who know quality deserve access to H-E-B® tortillas, no matter where they live.
+                As your trusted independent source, we're proud to deliver genuine H-E-B® products
+                nationwide with expert care and shelf-stable convenience.
               </p>
 
               <div className="grid md:grid-cols-3 gap-8 mt-16">
                 {[
                   { number: '50', label: 'States Served' },
-                  { number: '100%', label: 'Authentic Products' },
-                  { number: '120+', label: 'Years of Tradition' },
+                  { number: '100%', label: 'Genuine H-E-B® Products' },
+                  { number: '1000s', label: 'Satisfied Connoisseurs' },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
                     <div className="text-5xl font-bold text-sunset-600 mb-2">{stat.number}</div>
@@ -218,13 +219,13 @@ export default function StoryPage() {
                     Founder, Tortilla Rodeo Co.
                   </p>
                   <p className="text-cream-300 mb-6">
-                    "Growing up in San Antonio, authentic tortillas were at every family gathering.
-                    When I moved to New York, I missed that Texas taste so much that I started
-                    Tortilla Rodeo Co. to share these incredible products with everyone across America."
+                    "Growing up in San Antonio, H-E-B® tortillas were the gold standard at every gathering.
+                    When I moved to New York, I couldn't find anything that compared. That's when I realized:
+                    those who know tortillas need access to H-E-B®, no matter where they live."
                   </p>
                   <p className="text-cream-300">
-                    "We are independent Texas retailers who source the best tortillas from
-                    the great state of Texas and deliver them fresh to your door, one order at a time."
+                    "We're your independent source for genuine H-E-B® products. We know what makes
+                    these tortillas special, and we deliver that Texas quality nationwide with care."
                   </p>
                 </div>
                 <div className="relative h-96 rounded-lg overflow-hidden">
@@ -249,15 +250,15 @@ export default function StoryPage() {
             Join thousands of families enjoying authentic Texas tortillas delivered nationwide
           </p>
           <div className="flex gap-6 justify-center">
-            <Link href="/shop" className="inline-block bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors hover-lift">
-              Shop Now
+            <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors hover-lift">
+              Join Pre-Sale
             </Link>
             <Link href="/craft" className="inline-block border-2 border-charcoal-950 text-charcoal-950 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-charcoal-950 hover:text-cream-50 transition-colors">
-              Learn Our Craft
+              Why H-E-B®?
             </Link>
           </div>
           <p className="text-sm text-charcoal-500 mt-8 tracking-wider uppercase">
-            Independent reseller • Not affiliated with or endorsed by H-E-B
+            Independent reseller • Not affiliated with or endorsed by H-E-B®
           </p>
         </section>
       </div>

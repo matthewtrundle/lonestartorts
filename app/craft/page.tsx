@@ -20,17 +20,17 @@ export default function CraftPage() {
                 <LogoFull className="text-charcoal-950" animated />
               </Link>
               <nav className="nav-items hidden md:flex items-center gap-8">
-                <Link href="/shop" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Shop</span>
+                <Link href="/pre-sale" className="group relative overflow-hidden">
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Pre-Sale</span>
                 </Link>
                 <Link href="/craft" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase text-sunset-600">Craft</span>
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase text-sunset-600">Source</span>
                 </Link>
                 <Link href="/story" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
                 </Link>
-                <Link href="/order" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors">
-                  Order Now
+                <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors">
+                  Join Pre-Sale
                 </Link>
               </nav>
             </div>
@@ -53,14 +53,15 @@ export default function CraftPage() {
           <div className="relative z-10 container mx-auto px-8 text-center">
             <h1 className="magazine-text">
               <span className="block text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.8] text-gradient">
-                THE CRAFT
+                THE SOURCE
               </span>
               <span className="block text-3xl md:text-4xl lg:text-5xl font-display font-light italic text-masa-600 mt-4">
-                of tradition
+                of excellence
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              From masa preparation to the final press, every authentic Texas tortilla is crafted with time-honored techniques passed down through generations
+              Those who know tortillas know H-E-B®. We're expert curators bringing genuine H-E-B® products
+              to connoisseurs nationwide who won't settle for anything less.
             </p>
           </div>
         </section>
@@ -69,40 +70,40 @@ export default function CraftPage() {
         <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              THE PROCESS
+              OUR EXPERTISE
             </h2>
 
             <div className="max-w-5xl mx-auto">
               {[
                 {
                   step: '01',
-                  title: 'MASA PREPARATION',
-                  desc: 'Premium corn is nixtamalized with limestone water, an ancient Mesoamerican technique that enhances flavor and nutrition',
-                  detail: 'This traditional process releases niacin and adds the distinctive taste',
+                  title: 'PRODUCT SELECTION',
+                  desc: 'We source only genuine H-E-B® tortillas, the gold standard that Texas locals trust for authentic quality',
+                  detail: 'Every product is verified authentic H-E-B® merchandise',
                 },
                 {
                   step: '02',
-                  title: 'GRINDING & MIXING',
-                  desc: 'The nixtamalized corn is ground into masa using volcanic stone mills, preserving texture and authenticity',
-                  detail: 'Temperature-controlled mixing ensures perfect consistency',
+                  title: 'QUALITY ASSURANCE',
+                  desc: 'Each batch is inspected to ensure it meets H-E-B® standards and our exacting requirements for freshness',
+                  detail: 'Only the freshest products make it to our inventory',
                 },
                 {
                   step: '03',
-                  title: 'HAND PRESSING',
-                  desc: 'Each tortilla is pressed to the ideal thickness, maintaining the perfect balance between flexibility and structure',
-                  detail: 'Master tortilleros check each batch for quality',
+                  title: 'EXPERT PACKAGING',
+                  desc: 'Products are carefully repackaged to maintain H-E-B® quality during nationwide shipping',
+                  detail: 'Shelf-stable packaging preserves authentic taste and texture',
                 },
                 {
                   step: '04',
-                  title: 'COMAL COOKING',
-                  desc: 'Tortillas are cooked on traditional comales at precise temperatures, developing the signature char and aroma',
-                  detail: 'The perfect puff indicates optimal moisture content',
+                  title: 'RAPID FULFILLMENT',
+                  desc: 'Orders are processed same-day and shipped via our optimized logistics network for maximum freshness',
+                  detail: '2-3 day delivery ensures you get H-E-B® quality at its peak',
                 },
                 {
                   step: '05',
-                  title: 'QUALITY CHECK',
-                  desc: 'Every batch is inspected for color, texture, and flexibility before packaging',
-                  detail: 'Only perfect tortillas make it to your table',
+                  title: 'CUSTOMER SATISFACTION',
+                  desc: 'We stand behind every H-E-B® product we ship with our satisfaction guarantee',
+                  detail: 'Your trust in our curation expertise is our top priority',
                 },
               ].map((process, i) => (
                 <div key={i} className="relative mb-16 last:mb-0 slide-left" style={{ animationDelay: `${i * 0.1}s` }}>
@@ -142,25 +143,25 @@ export default function CraftPage() {
         <section className="py-20 bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              PURE INGREDIENTS
+              WHY H-E-B®?
             </h2>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               {[
                 {
-                  ingredient: 'CORN',
-                  desc: 'Non-GMO whole kernel corn from Texas farms',
-                  icon: '🌽',
+                  ingredient: 'QUALITY',
+                  desc: 'H-E-B® sets the standard for tortilla excellence in Texas',
+                  icon: '★',
                 },
                 {
-                  ingredient: 'WATER',
-                  desc: 'Purified water for optimal masa hydration',
-                  icon: '💧',
+                  ingredient: 'TRUST',
+                  desc: 'The brand Texans have relied on for generations',
+                  icon: '🤝',
                 },
                 {
-                  ingredient: 'LIME',
-                  desc: 'Food-grade calcium hydroxide for nixtamalization',
-                  icon: '🍋',
+                  ingredient: 'EXPERTISE',
+                  desc: 'We know how to source and ship H-E-B® products perfectly',
+                  icon: '🎯',
                 },
               ].map((item, i) => (
                 <div key={i} className="text-center scale-in" style={{ animationDelay: `${i * 0.1}s` }}>
@@ -173,10 +174,10 @@ export default function CraftPage() {
 
             <div className="mt-16 text-center">
               <p className="text-2xl font-display italic text-masa-400">
-                "Nothing artificial. Nothing unnecessary."
+                "Those who know, know H-E-B® tortillas."
               </p>
               <p className="text-sm text-cream-400 mt-4 tracking-wider uppercase">
-                Just like abuela made them
+                The choice of tortilla connoisseurs
               </p>
             </div>
           </div>
@@ -186,15 +187,15 @@ export default function CraftPage() {
         <section className="py-20 bg-gradient-to-b from-cream-50 to-masa-50">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              ARTISAN VARIETIES
+              H-E-B® SELECTION
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {[
-                { name: 'Traditional Corn', color: 'from-sunset-400 to-sunset-600' },
-                { name: 'Butter Flour', color: 'from-masa-400 to-masa-600' },
-                { name: 'Wheat', color: 'from-cream-400 to-cream-600' },
-                { name: 'Spinach Herb', color: 'from-lime-500 to-lime-700' },
+                { name: 'H-E-B® Mi Tienda Corn', color: 'from-sunset-400 to-sunset-600' },
+                { name: 'H-E-B® Butter Tortillas', color: 'from-masa-400 to-masa-600' },
+                { name: 'H-E-B® Flour Tortillas', color: 'from-cream-400 to-cream-600' },
+                { name: 'H-E-B® Whole Wheat', color: 'from-lime-500 to-lime-700' },
               ].map((variety, i) => (
                 <div key={i} className="group hover-lift">
                   <div className={`h-64 bg-gradient-to-br ${variety.color} rounded-lg flex items-center justify-center relative overflow-hidden`}>
@@ -212,16 +213,16 @@ export default function CraftPage() {
         {/* CTA Section */}
         <section className="py-20 bg-charcoal-950 text-cream-50 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-8">
-            TASTE THE CRAFT
+            TASTE THE DIFFERENCE
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto">
-            Experience the difference that traditional methods and quality ingredients make
+            Experience why H-E-B® tortillas are the gold standard - now available nationwide
           </p>
-          <Link href="/shop" className="inline-block bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors hover-glow">
-            Shop Tortillas
+          <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors hover-glow">
+            Join Pre-Sale List
           </Link>
           <p className="text-sm text-cream-400 mt-8 tracking-wider uppercase">
-            Independent reseller • Not affiliated with or endorsed by H-E-B
+            Independent reseller • Not affiliated with or endorsed by H-E-B®
           </p>
         </section>
       </div>

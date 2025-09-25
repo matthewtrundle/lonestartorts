@@ -38,20 +38,20 @@ export default function Home() {
                 <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sunset-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </div>
               <nav className="nav-items hidden md:flex items-center gap-8">
-                <Link href="/shop" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Shop</span>
+                <Link href="/pre-sale" className="group relative overflow-hidden">
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Pre-Sale</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
                 <Link href="/craft" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Craft</span>
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Source</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
                 <Link href="/story" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
-                <Link href="/order" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors shadow-sunset">
-                  Order Now
+                <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors shadow-sunset">
+                  Join Pre-Sale
                 </Link>
               </nav>
             </div>
@@ -66,16 +66,16 @@ export default function Home() {
             <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
 
             {/* Navigation items */}
-            <Link href="/shop" className="group relative w-12 h-12 flex items-center justify-center">
+            <Link href="/pre-sale" className="group relative w-12 h-12 flex items-center justify-center">
               <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
               <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
-              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Shop</span>
+              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Pre-Sale</span>
             </Link>
 
             <Link href="/craft" className="group relative w-12 h-12 flex items-center justify-center">
               <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
               <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
-              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Craft</span>
+              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Source</span>
             </Link>
 
             <Link href="/story" className="group relative w-12 h-12 flex items-center justify-center">
@@ -87,14 +87,14 @@ export default function Home() {
             {/* Decorative line */}
             <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
 
-            {/* Order button - emphasized */}
-            <Link href="/order" className="group relative">
+            {/* Pre-Sale button - emphasized */}
+            <Link href="/pre-sale" className="group relative">
               <div className="relative">
                 {/* Pulsing background */}
                 <div className="absolute inset-0 rounded-full bg-sunset-500 animate-pulse-slow blur-xl opacity-40" />
                 {/* Main button */}
                 <div className="relative bg-gradient-to-br from-sunset-500 to-sunset-600 text-cream-50 px-5 py-3 rounded-full font-bold text-sm tracking-wider uppercase shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110">
-                  <span className="relative z-10">Order</span>
+                  <span className="relative z-10">Join</span>
                   {/* Rotating border effect */}
                   <div className="absolute inset-0 rounded-full border-2 border-sunset-300/30 animate-spin-slow" />
                 </div>
@@ -325,12 +325,12 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-lg leading-relaxed text-charcoal-700">
-                  From the heart of Texas comes a tradition of quality that spans generations.
-                  Each tortilla carries the authentic taste that has made Texas tortillas legendary.
+                  Those who know tortillas know H-E-B®. We're your trusted independent source
+                  for genuine H-E-B® products, delivering the tortillas Texas loves to connoisseurs nationwide.
                 </p>
                 <blockquote className="border-l-4 border-sunset-500 pl-6 py-2">
                   <p className="text-xl font-display italic text-charcoal-800">
-                    "Every bite tells a story of Texas pride and culinary heritage"
+                    "If you know tortillas, you know H-E-B®. We deliver."
                   </p>
                   <cite className="text-sm text-charcoal-600 mt-2 block">— Maria Rodriguez, Founder</cite>
                 </blockquote>
@@ -430,10 +430,10 @@ export default function Home() {
             <div className="relative z-10 slide-right">
               <span className="text-9xl font-display text-masa-300 leading-none">"</span>
               <h3 className="text-4xl lg:text-5xl font-display leading-tight mt-6 mb-8 text-charcoal-900">
-                The most<br />
-                <span className="text-gradient-masa">authentically</span><br />
-                pleasing<br />
-                <span className="font-black">Texas selection</span>
+                Those who<br />
+                <span className="text-gradient-masa">know quality</span><br />
+                choose<br />
+                <span className="font-black">H-E-B® Tortillas</span>
               </h3>
               <div className="space-y-2 text-charcoal-700">
                 <p className="font-semibold text-lg">Maria Rodriguez</p>
@@ -479,8 +479,8 @@ export default function Home() {
                       <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
                     </svg>
                   ),
-                  title: 'AUTHENTIC',
-                  desc: 'Real Texas tortillas, not some impostor nonsense',
+                  title: 'GENUINE H-E-B®',
+                  desc: 'The same products Texas trusts, sourced and delivered',
                   gradient: 'from-sunset-400 to-sunset-600'
                 },
                 {
@@ -503,8 +503,8 @@ export default function Home() {
                       <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                     </svg>
                   ),
-                  title: 'CURATED SELECTION',
-                  desc: 'Only the best tortillas make the cut, partner',
+                  title: 'EXPERT SOURCING',
+                  desc: 'We know H-E-B® quality and deliver it nationwide',
                   gradient: 'from-lime-500 to-lime-700'
                 },
                 {
@@ -650,12 +650,12 @@ export default function Home() {
               </h2>
 
               <p className="text-xl lg:text-2xl text-cream-200 font-light slide-left">
-                Order authentic Texas tortillas delivered fresh to your door
+                Coming Soon - Join the waitlist for genuine H-E-B® tortillas delivered nationwide
               </p>
 
               <div className="flex flex-wrap gap-6 justify-center mt-12 scale-in">
-                <Link href="/shop" className="group relative overflow-hidden bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover-glow">
-                  <span className="relative z-10">Shop Texas Selection</span>
+                <Link href="/pre-sale" className="group relative overflow-hidden bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover-glow">
+                  <span className="relative z-10">Join Pre-Sale List</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-sunset-600 to-sunset-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                 </Link>
 
@@ -665,7 +665,7 @@ export default function Home() {
               </div>
 
               <p className="text-sm text-cream-400 mt-12 tracking-wider uppercase">
-                Independent reseller • Not affiliated with or endorsed by H-E-B
+                Independent reseller • Not affiliated with or endorsed by H-E-B®
               </p>
             </div>
           </div>
@@ -681,7 +681,7 @@ export default function Home() {
               <div className="md:col-span-2">
                 <LogoFull className="text-cream-50 mb-6" />
                 <p className="text-cream-300 leading-relaxed">
-                  Bringing authentic tortillas from the heart of Texas to tables across America.
+                  Your trusted independent source for genuine H-E-B® tortillas, delivered nationwide.
                 </p>
               </div>
 
@@ -689,10 +689,9 @@ export default function Home() {
               <div>
                 <h4 className="text-cream-50 font-bold text-sm tracking-mega uppercase mb-4">Quick Links</h4>
                 <div className="space-y-3">
-                  <Link href="/shop" className="block text-cream-400 hover:text-sunset-400 transition-colors">Shop</Link>
-                  <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors">Our Craft</Link>
+                  <Link href="/pre-sale" className="block text-cream-400 hover:text-sunset-400 transition-colors">Pre-Sale</Link>
+                  <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors">Our Source</Link>
                   <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors">Our Story</Link>
-                  <Link href="/order" className="block text-cream-400 hover:text-sunset-400 transition-colors">Track Order</Link>
                 </div>
               </div>
 
@@ -711,7 +710,7 @@ export default function Home() {
             <div className="border-t border-masa-800/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-cream-500">© 2024 Lonestar Tortillas. All rights reserved.</p>
               <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
-                Independent Texas retailer • We source authentic tortillas • Not affiliated with or endorsed by H-E-B
+                Independent reseller • Not affiliated with or endorsed by H-E-B®
               </p>
             </div>
           </div>
