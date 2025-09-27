@@ -1,41 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import fs from 'fs/promises';
-import path from 'path';
+import { prisma } from '@/lib/prisma';
 
 // Initialize Resend with API key
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-
-// Simple file-based storage for waitlist (in production, use a database)
-const WAITLIST_FILE = path.join(process.cwd(), 'waitlist.json');
-
-interface WaitlistEntry {
-  email: string;
-  name?: string;
-  zipCode?: string;
-  interests?: {
-    corn: boolean;
-    butter: boolean;
-    flour: boolean;
-    variety: boolean;
-  };
-  expectedQuantity?: string;
-  timestamp: string;
-  id: string;
-}
-
-async function getWaitlist(): Promise<WaitlistEntry[]> {
-  try {
-    const data = await fs.readFile(WAITLIST_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
-
-async function saveWaitlist(waitlist: WaitlistEntry[]) {
-  await fs.writeFile(WAITLIST_FILE, JSON.stringify(waitlist, null, 2));
-}
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 export async function POST(req: NextRequest) {
   try {
@@ -48,64 +17,173 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if already on waitlist
-    const waitlist = await getWaitlist();
-    const existing = waitlist.find(entry => entry.email.toLowerCase() === email.toLowerCase());
+    const existing = await prisma.waitlistEntry.findUnique({
+      where: { email: email.toLowerCase() }
+    });
 
     if (existing) {
       return NextResponse.json({ error: 'You\'re already on the waitlist!' }, { status: 400 });
     }
 
-    // Create new entry
-    const newEntry: WaitlistEntry = {
-      id: `wl_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      email,
-      name,
-      zipCode,
-      interests,
-      expectedQuantity,
-      timestamp: new Date().toISOString(),
-    };
+    // Get UTM parameters and referrer from headers
+    const referer = req.headers.get('referer');
+    const url = new URL(req.url);
+    const source = url.searchParams.get('utm_source');
+    const medium = url.searchParams.get('utm_medium');
+    const campaign = url.searchParams.get('utm_campaign');
 
-    // Add to waitlist
-    waitlist.push(newEntry);
-    await saveWaitlist(waitlist);
+    // Create new entry in database
+    const newEntry = await prisma.waitlistEntry.create({
+      data: {
+        email: email.toLowerCase(),
+        name,
+        zipCode,
+        interestCorn: interests?.corn || false,
+        interestButter: interests?.butter || false,
+        interestFlour: interests?.flour || false,
+        interestVariety: interests?.variety || false,
+        expectedQuantity,
+        source,
+        medium,
+        campaign,
+        referrer: referer
+      }
+    });
 
-    // Send confirmation email if Resend is configured
+    // Get total count for response
+    const totalCount = await prisma.waitlistEntry.count();
+
+    // Send confirmation email to user if Resend is configured
     if (resend) {
       try {
-        await resend.emails.send({
-          from: 'Tortilla Rodeo Co. <noreply@lonestartortilla.com>',
+        const emailResult = await resend.emails.send({
+          from: 'Tortilla Rodeo Co. <noreply@lonestartortillas.com>',
           to: email,
           subject: 'You\'re on the H-E-B® Tortilla Waitlist! 🌮',
           html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-              <h1 style="color: #f97316;">Welcome to the Waitlist!</h1>
-              <p>Hi${name ? ` ${name}` : ''},</p>
-              <p>You're officially on the list! We'll notify you as soon as genuine H-E-B® tortillas are available for order.</p>
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <div style="text-align: center; margin-bottom: 30px;">
+                <h1 style="color: #f97316; margin-bottom: 10px;">Welcome to the Waitlist!</h1>
+                <p style="font-size: 18px; color: #333;">You're #${totalCount} in line</p>
+              </div>
 
-              <h2 style="color: #333;">What's Next?</h2>
-              <ul>
-                <li>📧 Watch your inbox for updates on our launch timeline</li>
-                <li>💰 You'll get exclusive early bird pricing as a founding member</li>
-                <li>🚀 First access when we go live (limited quantities!)</li>
-              </ul>
+              <p style="font-size: 16px; color: #555; line-height: 1.6;">Hi${name ? ` ${name}` : ''},</p>
 
-              <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
-                Tortilla Rodeo Co. is an independent reseller. Not affiliated with or endorsed by H-E-B®.
+              <p style="font-size: 16px; color: #555; line-height: 1.6;">
+                You're officially on the list! We'll notify you as soon as genuine H-E-B® tortillas
+                are available for nationwide delivery.
               </p>
+
+              <div style="background: #FEF3C7; border-left: 4px solid #F59E0B; padding: 15px; margin: 25px 0;">
+                <h3 style="margin-top: 0; color: #92400E;">What's Next?</h3>
+                <ul style="color: #78350F;">
+                  <li>📧 Watch your inbox for launch updates</li>
+                  <li>💰 Early bird pricing exclusive to waitlist members</li>
+                  <li>🚀 First access when we go live</li>
+                </ul>
+              </div>
+
+              ${interests && (interests.corn || interests.butter || interests.flour || interests.variety) ? `
+                <div style="margin: 25px 0;">
+                  <p style="font-weight: bold; color: #333;">Products you're interested in:</p>
+                  <ul style="color: #555;">
+                    ${interests.corn ? '<li>Mi Tienda Corn Tortillas</li>' : ''}
+                    ${interests.butter ? '<li>Butter Tortillas</li>' : ''}
+                    ${interests.flour ? '<li>Flour Tortillas</li>' : ''}
+                    ${interests.variety ? '<li>Variety Pack</li>' : ''}
+                  </ul>
+                </div>
+              ` : ''}
+
+              <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #E5E7EB;">
+                <p style="font-size: 12px; color: #9CA3AF; text-align: center;">
+                  Tortilla Rodeo Co. is an independent reseller.<br>
+                  Not affiliated with or endorsed by H-E-B®.
+                </p>
+              </div>
             </div>
           `,
         });
+
+        // Log email sent
+        await prisma.emailLog.create({
+          data: {
+            waitlistEntryId: newEntry.id,
+            type: 'WELCOME',
+            subject: 'You\'re on the H-E-B® Tortilla Waitlist! 🌮',
+            status: 'SENT',
+            sentAt: new Date()
+          }
+        });
       } catch (emailError) {
         console.error('Failed to send confirmation email:', emailError);
-        // Don't fail the signup if email fails
+        // Log email failure
+        await prisma.emailLog.create({
+          data: {
+            waitlistEntryId: newEntry.id,
+            type: 'WELCOME',
+            subject: 'You\'re on the H-E-B® Tortilla Waitlist! 🌮',
+            status: 'FAILED',
+            error: emailError instanceof Error ? emailError.message : 'Unknown error'
+          }
+        });
+      }
+
+      // Send notification to admin
+      if (ADMIN_EMAIL) {
+        try {
+          await resend.emails.send({
+            from: 'Tortilla Rodeo Co. <noreply@lonestartortillas.com>',
+            to: ADMIN_EMAIL,
+            subject: `New Waitlist Signup: ${email}`,
+            html: `
+              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2>New Waitlist Signup</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 8px; font-weight: bold;">Email:</td>
+                    <td style="padding: 8px;">${email}</td>
+                  </tr>
+                  ${name ? `
+                    <tr style="border-bottom: 1px solid #eee;">
+                      <td style="padding: 8px; font-weight: bold;">Name:</td>
+                      <td style="padding: 8px;">${name}</td>
+                    </tr>
+                  ` : ''}
+                  ${zipCode ? `
+                    <tr style="border-bottom: 1px solid #eee;">
+                      <td style="padding: 8px; font-weight: bold;">ZIP Code:</td>
+                      <td style="padding: 8px;">${zipCode}</td>
+                    </tr>
+                  ` : ''}
+                  <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 8px; font-weight: bold;">Expected Quantity:</td>
+                    <td style="padding: 8px;">${expectedQuantity || 'Not specified'}</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 8px; font-weight: bold;">Total Signups:</td>
+                    <td style="padding: 8px;">${totalCount}</td>
+                  </tr>
+                  ${source ? `
+                    <tr style="border-bottom: 1px solid #eee;">
+                      <td style="padding: 8px; font-weight: bold;">Source:</td>
+                      <td style="padding: 8px;">${source}${medium ? ` / ${medium}` : ''}${campaign ? ` / ${campaign}` : ''}</td>
+                    </tr>
+                  ` : ''}
+                </table>
+              </div>
+            `,
+          });
+        } catch (adminEmailError) {
+          console.error('Failed to send admin notification:', adminEmailError);
+        }
       }
     }
 
     return NextResponse.json({
       success: true,
       message: 'Successfully joined the waitlist!',
-      position: waitlist.length,
+      position: totalCount,
     });
 
   } catch (error) {
@@ -119,38 +197,105 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    // Simple stats endpoint (protect this in production)
-    const waitlist = await getWaitlist();
+    // Check for admin token
+    const authHeader = req.headers.get('authorization');
+    const token = authHeader?.replace('Bearer ', '');
 
-    // Calculate stats
-    const stats = {
-      total: waitlist.length,
-      byProduct: {
-        corn: waitlist.filter(e => e.interests?.corn).length,
-        butter: waitlist.filter(e => e.interests?.butter).length,
-        flour: waitlist.filter(e => e.interests?.flour).length,
-        variety: waitlist.filter(e => e.interests?.variety).length,
+    // Basic auth check (improve this with proper auth later)
+    if (token !== process.env.ADMIN_TOKEN && process.env.ADMIN_TOKEN) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Get statistics
+    const [total, entries] = await Promise.all([
+      prisma.waitlistEntry.count(),
+      prisma.waitlistEntry.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          zipCode: true,
+          interestCorn: true,
+          interestButter: true,
+          interestFlour: true,
+          interestVariety: true,
+          expectedQuantity: true,
+          createdAt: true,
+          source: true,
+          medium: true,
+          campaign: true
+        }
+      })
+    ]);
+
+    // Calculate product interest stats
+    const productStats = await prisma.waitlistEntry.aggregate({
+      _count: {
+        interestCorn: true,
+        interestButter: true,
+        interestFlour: true,
+        interestVariety: true
       },
-      byQuantity: waitlist.reduce((acc, entry) => {
-        const qty = entry.expectedQuantity || 'unknown';
-        acc[qty] = (acc[qty] || 0) + 1;
+      where: {
+        OR: [
+          { interestCorn: true },
+          { interestButter: true },
+          { interestFlour: true },
+          { interestVariety: true }
+        ]
+      }
+    });
+
+    // Get quantity distribution
+    const quantityStats = await prisma.waitlistEntry.groupBy({
+      by: ['expectedQuantity'],
+      _count: true
+    });
+
+    const stats = {
+      total,
+      recentSignups: entries,
+      productInterest: productStats._count,
+      quantityDistribution: quantityStats.reduce((acc, item) => {
+        const key = item.expectedQuantity || 'unspecified';
+        acc[key] = item._count;
         return acc;
       }, {} as Record<string, number>),
-      recentSignups: waitlist
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-        .slice(0, 5)
-        .map(e => ({
-          timestamp: e.timestamp,
-          hasName: !!e.name,
-          hasZip: !!e.zipCode,
-        })),
+      dailySignups: await getDailySignups()
     };
 
     return NextResponse.json(stats);
   } catch (error) {
+    console.error('Error fetching stats:', error);
     return NextResponse.json(
       { error: 'Failed to fetch stats' },
       { status: 500 }
     );
   }
+}
+
+async function getDailySignups() {
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+  const signups = await prisma.waitlistEntry.groupBy({
+    by: ['createdAt'],
+    where: {
+      createdAt: {
+        gte: sevenDaysAgo
+      }
+    },
+    _count: true
+  });
+
+  // Format by day
+  const dailyStats: Record<string, number> = {};
+  signups.forEach(signup => {
+    const day = signup.createdAt.toISOString().split('T')[0];
+    dailyStats[day] = (dailyStats[day] || 0) + signup._count;
+  });
+
+  return dailyStats;
 }

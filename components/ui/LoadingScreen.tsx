@@ -2,23 +2,31 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Ensure loading screen shows for at least 1.5 seconds
+    const minimumLoadTime = 1500;
+    const startTime = Date.now();
+
     // Simulate loading progress
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
+          const elapsed = Date.now() - startTime;
+          const remainingTime = Math.max(0, minimumLoadTime - elapsed);
+
           clearInterval(interval);
-          setTimeout(() => setIsLoading(false), 500);
+          setTimeout(() => setIsLoading(false), remainingTime + 200);
           return 100;
         }
-        return prev + Math.random() * 30;
+        return prev + Math.random() * 20;
       });
-    }, 300);
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
@@ -37,39 +45,46 @@ export function LoadingScreen() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="mb-12"
+            className="mb-8"
           >
             <div className="relative">
-              {/* Animated Logo Mark */}
+              {/* Animated glow effect */}
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-0 w-24 h-24 border-2 border-white/20 rounded-full"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute inset-0 blur-xl"
+              >
+                <Image
+                  src="/images/lonestar-logo.png"
+                  alt="Lonestar Tortillas"
+                  width={240}
+                  height={135}
+                  className="object-contain opacity-50"
+                  priority
+                />
+              </motion.div>
+
+              {/* Main Logo */}
+              <Image
+                src="/images/lonestar-logo.png"
+                alt="Lonestar Tortillas"
+                width={240}
+                height={135}
+                className="object-contain relative z-10"
+                priority
+                style={{ filter: 'brightness(0) invert(1)' }}
               />
-              <div className="w-24 h-24 flex items-center justify-center">
-                <span className="text-white text-4xl font-display font-light">T</span>
-              </div>
             </div>
           </motion.div>
 
-          {/* Brand Name */}
-          <motion.h1
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-white text-2xl font-light tracking-[0.3em] uppercase mb-2"
-          >
-            Tortilla Rodeo Co.
-          </motion.h1>
-
-          {/* Tagline */}
+          {/* Loading Text */}
           <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-white/60 text-sm tracking-widest uppercase mb-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="text-white/40 text-xs tracking-[0.3em] uppercase mb-12"
           >
-            Texas Tortillas
+            Authentic Texas Tortillas
           </motion.p>
 
           {/* Progress Bar */}

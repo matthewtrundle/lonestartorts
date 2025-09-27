@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
@@ -27,14 +28,14 @@ export default function Home() {
         </div>
 
         {/* Premium Header with Glass Effect - Hides on scroll */}
-        <header className="shrink-header fixed top-8 left-0 right-0 z-[100] transition-all duration-700" id="main-header">
+        <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-700" id="main-header">
           {/* Glass morphism background */}
-          <div className="absolute inset-0 bg-cream-50/70 backdrop-blur-md border-b border-charcoal-200/10" />
+          <div className="absolute inset-0 bg-cream-50/90 backdrop-blur-md border-b border-charcoal-200/10" />
 
           <div className="container mx-auto px-8 relative">
-            <div className="flex justify-between items-center py-4">
+            <div className="flex justify-between items-center py-8">
               <div className="logo-wrapper group">
-                <LogoFull className="text-charcoal-950 transition-transform duration-500 group-hover:scale-105" animated />
+                <LogoFull className="text-charcoal-950 transition-transform duration-500 group-hover:scale-105" animated size="md" />
                 <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sunset-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </div>
               <nav className="nav-items hidden md:flex items-center gap-8">
@@ -129,18 +130,23 @@ export default function Home() {
               <div className="absolute bottom-[-50%] right-[-25%] w-[150%] h-[150%] bg-gradient-radial from-masa-200/20 via-masa-100/10 to-transparent blur-[120px] animate-float-slow-reverse" />
             </div>
 
-            {/* Layer 3: Main image with premium treatment */}
+            {/* Layer 3: Background Video */}
             <div className="absolute inset-0 parallax-layer" data-speed="0.3" data-rotation="2">
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream-50/30 to-cream-50/90" />
-              <Image
-                src="/images/texas-field.webp"
-                alt="Texas Sunset"
-                fill
-                className="object-cover opacity-40 mix-blend-overlay saturate-150"
-                priority
-                quality={100}
-              />
-              <div className="absolute inset-0 backdrop-blur-[1px]" />
+              {/* Background Video */}
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover opacity-30"
+              >
+                <source src="/hero-background.mp4" type="video/mp4" />
+              </video>
+
+              {/* Overlay gradients for better text readability */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream-50/40 to-cream-50/95" />
+              <div className="absolute inset-0 bg-gradient-to-t from-cream-50/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 backdrop-blur-[0.5px]" />
             </div>
 
             {/* Layer 4: Animated light rays */}
@@ -184,7 +190,7 @@ export default function Home() {
           </div>
 
           {/* Hero Content */}
-          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-32">
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-40">
 
             <div className="w-full">
               {/* Main Hero Typography - MASSIVE IMPACT */}
@@ -273,9 +279,137 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Magazine Typography Section */}
-        <section className="relative py-20 bg-gradient-to-b from-cream-50 to-cream-100 overflow-hidden">
+        {/* Featured Video Section - Maria's Story */}
+        <section className="relative py-20 bg-gradient-to-b from-cream-50 to-masa-50 overflow-hidden">
           <div className="container mx-auto px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+
+              {/* Left Side - Text Content */}
+              <div className="space-y-8">
+                <div>
+                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">Meet Our Founder</span>
+                  <h2 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mt-3 mb-6">
+                    Maria Rodriguez
+                  </h2>
+                  <p className="text-2xl font-light text-charcoal-700 leading-relaxed">
+                    Third-generation Texan bringing authentic H-E-B® tortillas to families nationwide
+                  </p>
+                </div>
+
+                <blockquote className="relative">
+                  <span className="absolute -top-4 -left-4 text-8xl text-sunset-200 font-serif">"</span>
+                  <p className="relative text-xl italic text-charcoal-700 pl-8 leading-relaxed">
+                    Those who know tortillas, know H-E-B®. Growing up in San Antonio, these tortillas were on our table every single day. Now I'm proud to share that same authentic Texas taste with families across America.
+                  </p>
+                  <cite className="block mt-4 text-sm font-medium text-charcoal-600 pl-8">
+                    — Maria Rodriguez, Founder & CEO
+                  </cite>
+                </blockquote>
+
+                <div className="space-y-4">
+                  <button
+                    onClick={() => {
+                      const video = document.getElementById('maria-video') as HTMLVideoElement;
+                      if (video) {
+                        video.play();
+                        video.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }
+                    }}
+                    className="group flex items-center gap-4 bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <span className="font-bold text-lg">Watch Maria's Story</span>
+                  </button>
+
+                  <p className="text-xs text-charcoal-500 uppercase tracking-wider">
+                    Independent reseller • Not affiliated with or endorsed by H-E-B®
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Side - Portrait Video */}
+              <div className="relative flex justify-center lg:justify-end">
+                <div className="relative w-full max-w-[400px] lg:max-w-[450px]">
+                  {/* Phone Frame Effect */}
+                  <div className="relative rounded-[3rem] overflow-hidden bg-charcoal-950 p-2 shadow-2xl">
+                    <div className="relative rounded-[2.5rem] overflow-hidden bg-charcoal-900">
+                      {/* Video Container - Portrait Style */}
+                      <div className="relative aspect-[9/16] bg-charcoal-950">
+                        <video
+                          id="maria-video"
+                          className="absolute inset-0 w-full h-full object-cover"
+                          controls
+                          poster="/images/lonestar-logo.png"
+                          preload="metadata"
+                          playsInline
+                        >
+                          <source src="/Taste of Texas.mp4" type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+
+                        {/* Custom Play Button Overlay */}
+                        <div
+                          id="video-play-overlay"
+                          className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent cursor-pointer transition-opacity duration-300"
+                          onClick={() => {
+                            const video = document.getElementById('maria-video') as HTMLVideoElement;
+                            const overlay = document.getElementById('video-play-overlay');
+                            if (video && overlay) {
+                              video.play();
+                              overlay.style.opacity = '0';
+                              overlay.style.pointerEvents = 'none';
+                            }
+                          }}
+                        >
+                          <motion.div
+                            initial={{ scale: 0.9 }}
+                            animate={{ scale: [0.9, 1.05, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="bg-cream-50/90 backdrop-blur rounded-full p-6 shadow-2xl"
+                          >
+                            <svg className="w-12 h-12 text-charcoal-950 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
+                          </motion.div>
+
+                          {/* Video Title Overlay */}
+                          <div className="absolute bottom-0 left-0 right-0 p-6 text-cream-50">
+                            <p className="font-bold text-lg">A Taste of Texas</p>
+                            <p className="text-sm opacity-80">Maria Rodriguez, Founder</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Decorative Elements */}
+                  <div className="absolute -top-4 -right-4 w-32 h-32 bg-sunset-200 rounded-full blur-3xl opacity-30 animate-pulse" />
+                  <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-masa-300 rounded-full blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Magazine Typography Section */}
+        <section className="relative py-20 bg-gradient-to-b from-masa-50 to-cream-100 overflow-hidden">
+          {/* Background Video - Same as hero */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-20"
+          >
+            <source src="/hero-background.mp4" type="video/mp4" />
+          </video>
+
+          {/* Overlay for better readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-masa-50/80 to-cream-100/90" />
+
+          <div className="container mx-auto px-8 relative z-10">
             <div className="grid lg:grid-cols-12 gap-12 items-center min-h-[80vh]">
               {/* Left Column - Large Typography */}
               <div className="lg:col-span-7 space-y-4">
@@ -317,9 +451,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* Background texture */}
-          <div className="absolute inset-0 noise-subtle pointer-events-none" />
         </section>
 
         {/* Product Showcase with Horizontal Scroll */}
@@ -402,7 +533,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Split Screen Editorial */}
+        {/* Split Screen Editorial with Video */}
         <section className="min-h-screen flex flex-col lg:flex-row">
           {/* Left Side - Quote */}
           <div className="lg:w-1/2 bg-masa-100 flex items-center justify-center p-16 lg:p-24 relative overflow-hidden">
@@ -420,19 +551,69 @@ export default function Home() {
                 <p className="text-sm tracking-mega uppercase">Founder & CEO</p>
                 <p className="text-sm italic">Lonestar Tortillas</p>
               </div>
+
+              {/* Video Player Button */}
+              <div className="mt-8">
+                <button
+                  onClick={() => {
+                    const video = document.getElementById('founder-video') as HTMLVideoElement;
+                    if (video) {
+                      video.play();
+                      video.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                  }}
+                  className="group flex items-center gap-3 bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <span className="font-medium">Watch Maria's Story</span>
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Right Side - Image */}
-          <div className="lg:w-1/2 relative h-[500px] lg:h-auto overflow-hidden">
-            <div className="absolute inset-0 parallax-img" data-speed="0.2">
+          {/* Right Side - Video */}
+          <div className="lg:w-1/2 relative h-[500px] lg:h-auto overflow-hidden bg-charcoal-950">
+            <video
+              id="founder-video"
+              className="absolute inset-0 w-full h-full object-cover"
+              controls
+              poster="/images/artisan-hands.webp"
+              preload="none"
+            >
+              <source src="/Taste of Texas.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Fallback Image (shows initially) */}
+            <div className="absolute inset-0 parallax-img pointer-events-none" data-speed="0.2">
               <Image
                 src="/images/artisan-hands.webp"
                 alt="Artisan Craftsmanship"
                 fill
                 className="object-cover"
+                style={{ display: 'var(--video-fallback-display, block)' }}
               />
               <div className="absolute inset-0 bg-gradient-to-l from-transparent to-charcoal-950/20" />
+
+              {/* Play Button Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <button
+                  onClick={() => {
+                    const video = document.getElementById('founder-video') as HTMLVideoElement;
+                    if (video) {
+                      video.play();
+                      video.parentElement?.style.setProperty('--video-fallback-display', 'none');
+                    }
+                  }}
+                  className="group bg-cream-50/90 hover:bg-cream-50 rounded-full p-6 transition-all duration-300 shadow-2xl hover:scale-110"
+                >
+                  <svg className="w-12 h-12 text-charcoal-950 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </section>

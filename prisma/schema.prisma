@@ -1,0 +1,190 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Waitlist entry model
+model WaitlistEntry {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  name             String?
+  zipCode          String?
+
+  // Product interests
+  interestCorn     Boolean   @default(false)
+  interestButter   Boolean   @default(false)
+  interestFlour    Boolean   @default(false)
+  interestVariety  Boolean   @default(false)
+
+  expectedQuantity String?
+
+  // Tracking fields
+  source           String?   // utm_source
+  medium           String?   // utm_medium
+  campaign         String?   // utm_campaign
+  referrer         String?   // HTTP referrer
+
+  // Status
+  verified         Boolean   @default(false)
+  unsubscribed     Boolean   @default(false)
+
+  // Timestamps
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  // Relations
+  notes            Note[]
+  emailLogs        EmailLog[]
+
+  @@index([email])
+  @@index([createdAt])
+  @@index([zipCode])
+}
+
+// Admin user model for authentication
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?   // Hashed password
+  role          UserRole  @default(VIEWER)
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  sessions      Session[]
+  notes         Note[]
+
+  @@index([email])
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  VIEWER
+}
+
+// Session management for admin users
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Notes/comments on waitlist entries
+model Note {
+  id              String         @id @default(cuid())
+  content         String
+  waitlistEntryId String
+  userId          String
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  waitlistEntry   WaitlistEntry  @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
+  user            User           @relation(fields: [userId], references: [id])
+
+  @@index([waitlistEntryId])
+  @@index([userId])
+}
+
+// Email activity log
+model EmailLog {
+  id              String         @id @default(cuid())
+  waitlistEntryId String
+  type            EmailType
+  subject         String
+  status          EmailStatus    @default(PENDING)
+  sentAt          DateTime?
+  error           String?
+
+  createdAt       DateTime       @default(now())
+
+  waitlistEntry   WaitlistEntry  @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
+
+  @@index([waitlistEntryId])
+  @@index([type])
+  @@index([status])
+}
+
+enum EmailType {
+  WELCOME
+  UPDATE
+  LAUNCH
+  MARKETING
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+  BOUNCED
+}
+
+// Order tracking for when we launch
+model Order {
+  id               String    @id @default(cuid())
+  orderNumber      String    @unique
+  email            String
+
+  // Customer details
+  customerName     String
+  shippingAddress  Json
+  billingAddress   Json
+
+  // Order details
+  items            Json
+  subtotal         Int       // In cents
+  shipping         Int       // In cents
+  tax              Int       // In cents
+  total            Int       // In cents
+
+  // Payment
+  stripePaymentId  String?
+  paymentStatus    PaymentStatus @default(PENDING)
+
+  // Fulfillment
+  status           OrderStatus   @default(PENDING)
+  trackingNumber   String?
+  carrier          String?
+
+  // Timestamps
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  shippedAt        DateTime?
+  deliveredAt      DateTime?
+
+  @@index([email])
+  @@index([orderNumber])
+  @@index([status])
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
