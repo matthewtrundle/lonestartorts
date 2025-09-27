@@ -1,7 +1,14 @@
-# Tortilla Rodeo Co. - Project Architecture
+# Lonestar Tortillas - Project Architecture
 
 ## Project Overview
 **Trail Boss Orchestrator**: Master agent maintaining project integrity and compliance
+
+## Brand Update (2025-09-27)
+- **Previous Name**: Tortilla Rodeo Co.
+- **New Name**: Lonestar Tortillas
+- **Tagline**: "Premium Texas Tortillas"
+- **Logo**: Star with integrated wheat design
+- **Compliance Note**: All references to "Those who know tortillas" have been replaced with compliant messaging
 
 ## Agent Workflow
 

@@ -1,0 +1,79 @@
+brand_update:
+  date: "2025-09-27"
+  version: "2.0.0"
+
+previous_brand:
+  name: "Tortilla Rodeo Co."
+  tagline: "Texas tortillas, shipped anywhere the salsa flows."
+  logo: "Simple star with 'LS' text"
+
+new_brand:
+  name: "Lonestar Tortillas"
+  tagline: "Premium Texas Tortillas"
+  logo_design:
+    primary_element: "Five-pointed star"
+    secondary_element: "Integrated wheat stalk with grains"
+    style: "Clean, modern SVG-based design"
+    color_scheme: "Adaptive to background"
+
+logo_components:
+  Logo:
+    description: "Standalone star with wheat icon"
+    sizes: ["sm", "md", "lg"]
+    animation: "Optional rotation and scale entrance"
+
+  LogoFull:
+    description: "Icon with Lonestar Tortillas text"
+    features:
+      - "Responsive text sizing"
+      - "Optional tagline display"
+      - "Mandatory disclaimer when tagline shown"
+
+  LogoBadge:
+    description: "Logo with wood grain background"
+    aesthetic: "Premium badge style with texture"
+    use_cases: ["Hero sections", "Special features", "Marketing materials"]
+
+compliance:
+  mandatory_disclaimer: "Independent reseller. Not affiliated with or endorsed by H-E-B®."
+  placement_rules:
+    - "Must appear with any tagline usage"
+    - "Required on all customer-facing pages"
+    - "Minimum opacity: 50%"
+
+  forbidden_elements:
+    - "H-E-B logos or visual marks"
+    - "References implying affiliation"
+    - "Taglines suggesting endorsement"
+    - "'Those who know' phrasing"
+
+implementation_details:
+  technology:
+    - "Pure SVG for scalability"
+    - "Framer Motion for animations"
+    - "Tailwind CSS for styling"
+    - "TypeScript for type safety"
+
+  color_adaptability:
+    - "Works on light backgrounds (charcoal)"
+    - "Works on dark backgrounds (cream)"
+    - "Works on brand colors (white)"
+
+  responsive_behavior:
+    - "Three size presets: sm, md, lg"
+    - "Maintains proportions across breakpoints"
+    - "Text scales appropriately with icon"
+
+files_updated:
+  - path: "/components/ui/Logo.tsx"
+    changes: "Complete redesign with new branding"
+  - path: "/app/logo-demo/page.tsx"
+    changes: "Demo page showcasing all variants"
+  - path: "/CLAUDE.md"
+    changes: "Updated project documentation"
+
+deployment_notes:
+  - "All existing LogoFull imports will automatically use new design"
+  - "No breaking changes to component API"
+  - "Animation props remain backward compatible"
+  - "Additional showTagline prop added for compliance"
