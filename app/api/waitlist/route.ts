@@ -292,7 +292,7 @@ async function getDailySignups() {
 
   // Format by day
   const dailyStats: Record<string, number> = {};
-  signups.forEach(signup => {
+  signups.forEach((signup: any) => {
     const day = signup.createdAt.toISOString().split('T')[0];
     dailyStats[day] = (dailyStats[day] || 0) + signup._count;
   });
