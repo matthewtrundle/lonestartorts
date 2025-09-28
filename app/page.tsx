@@ -42,10 +42,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-cream-50/90 backdrop-blur-md border-b border-charcoal-200/10" />
 
           <div className="container mx-auto px-8 relative">
-            <div className="flex justify-between items-center py-8">
-              <div className="logo-wrapper group">
+            <div className="flex justify-between items-center py-6">
+              <div className="logo-wrapper group relative -ml-4">
                 <LogoFull className="text-charcoal-950 transition-transform duration-500 group-hover:scale-105" animated size="md" />
-                <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sunset-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </div>
               <nav className="nav-items hidden md:flex items-center gap-8">
                 <Link href="/pre-sale" className="group relative overflow-hidden">
@@ -117,8 +116,7 @@ export default function Home() {
         <div className="fixed-logo fixed top-6 left-8 z-[140] opacity-0 pointer-events-none transition-all duration-700" id="floating-logo">
           <Link href="/" className="group block">
             <div className="relative">
-              <LogoFull className="text-charcoal-950 w-32 transition-all duration-500 group-hover:scale-110" />
-              <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sunset-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+              <LogoFull className="text-charcoal-950 transition-all duration-500 group-hover:scale-110" size="sm" />
             </div>
           </Link>
         </div>

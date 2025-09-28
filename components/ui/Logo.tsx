@@ -64,12 +64,13 @@ export function LogoFull({
 }: {
   className?: string;
   animated?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }) {
   const sizes = {
-    sm: { width: 140, height: 70 },
-    md: { width: 200, height: 100 },
-    lg: { width: 280, height: 140 },
+    sm: { width: 180, height: 102 },
+    md: { width: 260, height: 147 },
+    lg: { width: 320, height: 181 },
+    xl: { width: 400, height: 226 },
   };
 
   const { width, height } = sizes[size];
@@ -91,7 +92,7 @@ export function LogoFull({
       variants={animated ? logoVariants : undefined}
       initial={animated ? 'initial' : undefined}
       animate={animated ? 'animate' : undefined}
-      className={`relative ${className}`}
+      className={`relative overflow-visible ${className}`}
       style={{ width, height }}
     >
       <Image
@@ -102,9 +103,8 @@ export function LogoFull({
         className="object-contain"
         priority
         style={{
-          // Crop to show just the logo and main text, not the tagline
-          objectPosition: 'center top',
-          clipPath: 'inset(0 0 30% 0)'
+          // Show the full logo including all text
+          objectPosition: 'center center',
         }}
       />
     </motion.div>
