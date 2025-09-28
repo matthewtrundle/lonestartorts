@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://lonestartortillas.com/</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://lonestartortillas.com/images/lonestar-logo.png</image:loc>
+      <image:title>Lonestar Tortillas Logo</image:title>
+      <image:caption>Premium Texas Tortillas Delivered Nationwide</image:caption>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://lonestartortillas.com/images/lonestar-logo.png</video:thumbnail_loc>
+      <video:title>Taste of Texas - Maria Rodriguez</video:title>
+      <video:description>Founder Maria Rodriguez shares the passion behind Lonestar Tortillas</video:description>
+      <video:content_loc>https://lonestartortillas.com/Taste%20of%20Texas.mp4</video:content_loc>
+      <video:duration>30</video:duration>
+    </video:video>
+  </url>
+
+  <!-- Pre-Sale Page -->
+  <url>
+    <loc>https://lonestartortillas.com/pre-sale</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Shop Page -->
+  <url>
+    <loc>https://lonestartortillas.com/shop</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Order Page -->
+  <url>
+    <loc>https://lonestartortillas.com/order</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Story/About Page -->
+  <url>
+    <loc>https://lonestartortillas.com/story</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Craft/Source Page -->
+  <url>
+    <loc>https://lonestartortillas.com/craft</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Track Order Page -->
+  <url>
+    <loc>https://lonestartortillas.com/track</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Product Categories (Virtual Pages for SEO) -->
+  <url>
+    <loc>https://lonestartortillas.com/products/corn-tortillas</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lonestartortillas.com/products/flour-tortillas</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lonestartortillas.com/products/butter-tortillas</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lonestartortillas.com/products/specialty-tortillas</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

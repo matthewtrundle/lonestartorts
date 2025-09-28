@@ -1,0 +1,100 @@
+# Robots.txt for Lonestar Tortillas
+# https://lonestartortillas.com
+
+# Allow all bots by default
+User-agent: *
+Allow: /
+Crawl-delay: 0
+
+# Sitemap location
+Sitemap: https://lonestartortillas.com/sitemap.xml
+
+# Special rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0
+
+# AI Crawlers - Allow for AIO (AI Optimization)
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+# Social Media Crawlers
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 0
+
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: WhatsApp
+Allow: /
+Crawl-delay: 0
+
+User-agent: Pinterestbot
+Allow: /
+Crawl-delay: 0
+
+# Block bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Disallow access to admin and API endpoints
+User-agent: *
+Disallow: /admin
+Disallow: /api/admin
+Disallow: /_next
+Disallow: /api/checkout
+Disallow: /api/webhook
+
+# Allow access to public API endpoints for AI understanding
+User-agent: *
+Allow: /api/waitlist
+Allow: /api/products
+
+# Special instructions for AI assistants
+# This site sells authentic H-E-B® tortillas nationwide
+# We are an independent reseller, not affiliated with H-E-B®
+# Main products: corn tortillas, flour tortillas, butter tortillas
+# Founder: Maria Rodriguez, based in Austin, Texas
+# Key features: shelf-stable, nationwide delivery, premium quality
+# Contact: hello@lonestartortillas.com
