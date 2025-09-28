@@ -672,7 +672,8 @@ export default function Home() {
                   ),
                   title: 'GENUINE H-E-B®',
                   desc: 'The same products Texas trusts, sourced and delivered',
-                  gradient: 'from-sunset-400 to-sunset-600'
+                  gradient: 'from-sunset-400 to-sunset-600',
+                  bgImage: '/images/Cards/image (8).png'
                 },
                 {
                   icon: (
@@ -685,7 +686,8 @@ export default function Home() {
                   ),
                   title: 'NATIONWIDE DELIVERY',
                   desc: 'Shelf-stable goodness shipped to all 50 states',
-                  gradient: 'from-masa-400 to-masa-600'
+                  gradient: 'from-masa-400 to-masa-600',
+                  bgImage: '/images/Cards/image (9).png'
                 },
                 {
                   icon: (
@@ -696,7 +698,8 @@ export default function Home() {
                   ),
                   title: 'EXPERT SOURCING',
                   desc: 'We know H-E-B® quality and deliver it nationwide',
-                  gradient: 'from-lime-500 to-lime-700'
+                  gradient: 'from-lime-500 to-lime-700',
+                  bgImage: '/images/Cards/image (10).png'
                 },
                 {
                   icon: (
@@ -706,7 +709,8 @@ export default function Home() {
                   ),
                   title: 'PREMIUM VALUE',
                   desc: 'Big flavor, fair prices, no bull',
-                  gradient: 'from-sunset-500 to-masa-500'
+                  gradient: 'from-sunset-500 to-masa-500',
+                  bgImage: '/images/Cards/image (11).png'
                 },
                 {
                   icon: (
@@ -718,7 +722,8 @@ export default function Home() {
                   ),
                   title: 'SHELF-STABLE',
                   desc: 'No refrigeration needed - pantry-ready!',
-                  gradient: 'from-cream-400 to-cream-600'
+                  gradient: 'from-cream-400 to-cream-600',
+                  bgImage: '/images/Cards/image (12).png'
                 },
                 {
                   icon: (
@@ -728,25 +733,40 @@ export default function Home() {
                   ),
                   title: 'HAPPINESS GUARANTEE',
                   desc: 'Love em or we will make it right',
-                  gradient: 'from-charcoal-600 to-charcoal-400'
+                  gradient: 'from-charcoal-600 to-charcoal-400',
+                  bgImage: '/images/Cards/image (13).png'
                 },
               ].map((feature, i) => (
                 <div key={i} className="stagger-item group">
-                  <div className="relative bg-charcoal-800/50 backdrop-blur-sm border border-cream-200/10 p-8 hover:bg-charcoal-800/70 transition-all duration-500 hover-lift">
-                    {/* Gradient accent */}
-                    <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${feature.gradient}`} />
+                  <div className="relative bg-charcoal-800/50 backdrop-blur-sm border border-cream-200/10 overflow-hidden hover:bg-charcoal-800/70 transition-all duration-500 hover-lift">
+                    {/* Background image - subtle and opaque */}
+                    <div
+                      className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-700"
+                      style={{
+                        backgroundImage: `url('${feature.bgImage}')`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        filter: 'blur(0.5px)'
+                      }}
+                    />
 
-                    {/* Icon */}
-                    <div className={`text-6xl mb-6 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
-                      {feature.icon}
+                    {/* Content Container with padding */}
+                    <div className="relative z-10 p-8">
+                      {/* Gradient accent */}
+                      <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${feature.gradient}`} />
+
+                      {/* Icon */}
+                      <div className={`text-6xl mb-6 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                        {feature.icon}
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-2xl font-bold text-cream-50 mb-3 tracking-wide">{feature.title}</h3>
+                      <p className="text-cream-300 leading-relaxed">{feature.desc}</p>
                     </div>
 
-                    {/* Content */}
-                    <h3 className="text-2xl font-bold text-cream-50 mb-3 tracking-wide">{feature.title}</h3>
-                    <p className="text-cream-300 leading-relaxed">{feature.desc}</p>
-
-                    {/* Hover gradient */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                    {/* Hover gradient overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none`} />
                   </div>
                 </div>
               ))}
