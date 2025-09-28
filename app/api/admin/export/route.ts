@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
       'Created At'
     ];
 
-    const rows = entries.map(entry => [
+    const rows = entries.map((entry: any) => [
       entry.email,
       entry.name || '',
       entry.zipCode || '',
