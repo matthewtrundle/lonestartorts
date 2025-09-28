@@ -69,9 +69,9 @@ export default function PreSalePage() {
         {/* Header */}
         <header className="fixed top-12 left-0 right-0 z-50 bg-cream-50/80 backdrop-blur-md border-b border-charcoal-200/10">
           <div className="container mx-auto px-8">
-            <div className="flex justify-between items-center py-4">
+            <div className="flex justify-between items-center py-3">
               <Link href="/">
-                <LogoFull className="text-charcoal-950" animated />
+                <LogoFull className="text-charcoal-950" animated size="sm" />
               </Link>
               <nav className="hidden md:flex items-center gap-8">
                 <Link href="/pre-sale" className="text-sm font-medium tracking-wider uppercase text-sunset-600">
@@ -89,7 +89,7 @@ export default function PreSalePage() {
         </header>
 
         {/* Hero Section */}
-        <section className="pt-32 pb-20 relative overflow-hidden">
+        <section className="pt-28 pb-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-sunset-200/30 to-transparent blur-3xl" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-radial from-masa-200/30 to-transparent blur-3xl" />
@@ -136,8 +136,13 @@ export default function PreSalePage() {
           <div className="container mx-auto px-8">
             <div className="max-w-2xl mx-auto">
               {submitted ? (
-                <div className="text-center p-12 bg-white rounded-2xl shadow-xl">
-                  <div className="text-6xl mb-6">🎉</div>
+                <div className="text-center p-12 bg-white rounded-2xl shadow-xl relative overflow-hidden">
+                  {/* Success checkmark icon */}
+                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-sunset-400 to-sunset-600 rounded-full flex items-center justify-center">
+                    <svg className="w-10 h-10 text-cream-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
                   <h2 className="text-3xl font-display font-bold mb-4">You're on the List!</h2>
                   <p className="text-lg text-charcoal-700 mb-8">
                     We'll email you as soon as H-E-B® tortillas are available for order.
@@ -292,29 +297,75 @@ export default function PreSalePage() {
           </div>
         </section>
 
+        {/* Decorative Divider */}
+        <div className="relative h-24 bg-gradient-to-b from-cream-100 to-charcoal-950 overflow-hidden">
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 100">
+            <path
+              d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z"
+              fill="rgb(14 14 14)"
+              opacity="0.1"
+            />
+            <path
+              d="M0,60 C360,90 1080,30 1440,60 L1440,100 L0,100 Z"
+              fill="rgb(14 14 14)"
+              opacity="0.3"
+            />
+            <path
+              d="M0,70 C360,85 1080,55 1440,70 L1440,100 L0,100 Z"
+              fill="rgb(14 14 14)"
+            />
+          </svg>
+        </div>
+
         {/* Value Props */}
-        <section className="py-20 bg-charcoal-950 text-cream-50">
-          <div className="container mx-auto px-8">
+        <section className="py-20 bg-charcoal-950 text-cream-50 relative overflow-hidden">
+          {/* Background texture */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, currentColor 35px, currentColor 70px)`,
+            }} />
+          </div>
+
+          <div className="container mx-auto px-8 relative z-10">
             <h2 className="text-4xl font-display font-bold text-center mb-12">
               Why Join the Pre-Sale?
             </h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-4xl mb-4">💰</div>
+              <div className="group text-center p-6 rounded-xl transition-all duration-300 hover:bg-charcoal-900/50 hover:shadow-xl">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-sunset-400 to-sunset-600 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  {/* Discount Tag Icon */}
+                  <svg className="w-8 h-8 text-cream-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                    <line x1="7" y1="7" x2="7.01" y2="7"/>
+                    <path d="M14 9l2 2m0-2l-2 2" strokeLinecap="round"/>
+                  </svg>
+                </div>
                 <h3 className="text-xl font-bold mb-2">Early Bird Pricing</h3>
                 <p className="text-cream-300">
                   Founding members get exclusive discounts on their first orders
                 </p>
               </div>
-              <div className="text-center">
-                <div className="text-4xl mb-4">🎯</div>
+              <div className="group text-center p-6 rounded-xl transition-all duration-300 hover:bg-charcoal-900/50 hover:shadow-xl">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-masa-400 to-masa-600 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  {/* VIP Star Icon */}
+                  <svg className="w-8 h-8 text-cream-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor"/>
+                  </svg>
+                </div>
                 <h3 className="text-xl font-bold mb-2">First Access</h3>
                 <p className="text-cream-300">
                   Limited first batch - waitlist members get priority ordering
                 </p>
               </div>
-              <div className="text-center">
-                <div className="text-4xl mb-4">📦</div>
+              <div className="group text-center p-6 rounded-xl transition-all duration-300 hover:bg-charcoal-900/50 hover:shadow-xl">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-charcoal-600 to-charcoal-800 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  {/* Shield Check Icon */}
+                  <svg className="w-8 h-8 text-cream-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 2l-9 4v7c0 5 4 8 9 9 5-1 9-4 9-9V5l-9-4z" fill="currentColor" opacity="0.2"/>
+                    <path d="M12 2l-9 4v7c0 5 4 8 9 9 5-1 9-4 9-9V5l-9-4z"/>
+                    <path d="M9 11l2 2 4-4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
                 <h3 className="text-xl font-bold mb-2">Guaranteed Stock</h3>
                 <p className="text-cream-300">
                   Reserve your spot for genuine H-E-B® products before they sell out
