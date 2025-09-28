@@ -148,21 +148,40 @@ export default function StoryPage() {
                 {
                   value: 'OBSESSION',
                   desc: 'We\'re maybe a little too passionate about tortillas',
-                  icon: '🌮',
+                  icon: (
+                    <svg className="w-16 h-16 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor" opacity="0.3"/>
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      <circle cx="12" cy="11" r="2" fill="currentColor"/>
+                    </svg>
+                  ),
                 },
                 {
                   value: 'DEDICATION',
                   desc: 'We\'ll go to ridiculous lengths to get you the good stuff',
-                  icon: '🚗',
+                  icon: (
+                    <svg className="w-16 h-16 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor" opacity="0.3"/>
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                  ),
                 },
                 {
                   value: 'HONESTY',
                   desc: 'We\'re just people who really miss H-E-B® tortillas',
-                  icon: '💯',
+                  icon: (
+                    <svg className="w-16 h-16 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="currentColor" opacity="0.3"/>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                      <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"/>
+                    </svg>
+                  ),
                 },
               ].map((item, i) => (
-                <div key={i} className="text-center scale-in" style={{ animationDelay: `${i * 0.15}s` }}>
-                  <div className="text-6xl mb-6 text-sunset-500">{item.icon}</div>
+                <div key={i} className="text-center scale-in group" style={{ animationDelay: `${i * 0.15}s` }}>
+                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-sunset-400 to-sunset-600 rounded-2xl flex items-center justify-center transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                    <div className="text-cream-50">{item.icon}</div>
+                  </div>
                   <h3 className="text-2xl font-bold mb-4 text-gradient">{item.value}</h3>
                   <p className="text-cream-300 text-lg">{item.desc}</p>
                 </div>
