@@ -553,30 +553,6 @@ export default function Home() {
                 choose<br />
                 <span className="font-black">H-E-B® Tortillas</span>
               </h3>
-              <div className="space-y-2 text-charcoal-700">
-                <p className="font-semibold text-lg">Maria Rodriguez</p>
-                <p className="text-sm tracking-mega uppercase">Founder & CEO</p>
-                <p className="text-sm italic">Lonestar Tortillas</p>
-              </div>
-
-              {/* Video Player Button */}
-              <div className="mt-8">
-                <button
-                  onClick={() => {
-                    const video = document.getElementById('founder-video') as HTMLVideoElement;
-                    if (video) {
-                      video.play();
-                      video.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                  }}
-                  className="group flex items-center gap-3 bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                  <span className="font-medium">Watch Maria's Story</span>
-                </button>
-              </div>
             </div>
           </div>
 
