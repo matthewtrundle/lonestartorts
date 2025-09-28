@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
@@ -10,6 +11,14 @@ import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { HeroInteractions } from '@/components/HeroInteractions'
 
 export default function Home() {
+  const [currentVideo, setCurrentVideo] = useState(0);
+
+  const videos = [
+    { src: '/tiks/Taste of Texas.mp4', title: 'Taste of Texas' },
+    { src: '/tiks/H-E-B Tortillas_ Ride With Us.mp4', title: 'Ride With Us' },
+    { src: '/tiks/Texan Tortilla Secret.mp4', title: 'Texan Secret' }
+  ];
+
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
@@ -573,46 +582,93 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Side - Video */}
-          <div className="lg:w-1/2 relative h-[500px] lg:h-auto overflow-hidden bg-charcoal-950">
-            <video
-              id="founder-video"
-              className="absolute inset-0 w-full h-full object-cover"
-              controls
-              poster="/images/artisan-hands.webp"
-              preload="none"
-            >
-              <source src="/Taste of Texas.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-
-            {/* Fallback Image (shows initially) */}
-            <div className="absolute inset-0 parallax-img pointer-events-none" data-speed="0.2">
-              <Image
-                src="/images/artisan-hands.webp"
-                alt="Artisan Craftsmanship"
-                fill
-                className="object-cover"
-                style={{ display: 'var(--video-fallback-display, block)' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-charcoal-950/20" />
-
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button
-                  onClick={() => {
-                    const video = document.getElementById('founder-video') as HTMLVideoElement;
-                    if (video) {
-                      video.play();
-                      video.parentElement?.style.setProperty('--video-fallback-display', 'none');
-                    }
-                  }}
-                  className="group bg-cream-50/90 hover:bg-cream-50 rounded-full p-6 transition-all duration-300 shadow-2xl hover:scale-110"
+          {/* Right Side - Video Carousel */}
+          <div className="lg:w-1/2 relative h-[600px] lg:h-auto bg-charcoal-950 flex items-center justify-center p-8">
+            <div className="relative w-full max-w-md mx-auto">
+              {/* Video Container */}
+              <div className="relative aspect-[9/16] bg-charcoal-900 rounded-2xl overflow-hidden shadow-2xl">
+                <video
+                  key={currentVideo}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
                 >
-                  <svg className="w-12 h-12 text-charcoal-950 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
+                  <source src={videos[currentVideo].src} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Video Title Overlay */}
+                <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-charcoal-950/80 to-transparent">
+                  <p className="text-cream-50 font-bold text-lg">{videos[currentVideo].title}</p>
+                  <p className="text-cream-200 text-sm opacity-80">@lonestartortillas</p>
+                </div>
+
+                {/* Video Navigation Dots */}
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                  {videos.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentVideo(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        currentVideo === index
+                          ? 'w-8 bg-cream-50'
+                          : 'bg-cream-50/50 hover:bg-cream-50/70'
+                      }`}
+                      aria-label={`Go to video ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Side Navigation Arrows */}
+                <button
+                  onClick={() => setCurrentVideo((prev) => (prev - 1 + videos.length) % videos.length)}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-cream-50/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-cream-50/30 transition-colors"
+                  aria-label="Previous video"
+                >
+                  <svg className="w-5 h-5 text-cream-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
+
+                <button
+                  onClick={() => setCurrentVideo((prev) => (prev + 1) % videos.length)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-cream-50/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-cream-50/30 transition-colors"
+                  aria-label="Next video"
+                >
+                  <svg className="w-5 h-5 text-cream-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Video Thumbnails Below */}
+              <div className="flex gap-4 mt-6 justify-center">
+                {videos.map((video, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentVideo(index)}
+                    className={`relative w-20 h-32 rounded-lg overflow-hidden transition-all duration-300 ${
+                      currentVideo === index
+                        ? 'ring-2 ring-sunset-500 scale-105'
+                        : 'opacity-60 hover:opacity-100'
+                    }`}
+                  >
+                    <video
+                      className="w-full h-full object-cover"
+                      muted
+                      playsInline
+                    >
+                      <source src={video.src} type="video/mp4" />
+                    </video>
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/60 to-transparent" />
+                    <p className="absolute bottom-1 left-0 right-0 text-[10px] text-cream-50 text-center px-1 truncate">
+                      {video.title}
+                    </p>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
