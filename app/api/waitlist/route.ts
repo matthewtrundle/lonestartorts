@@ -258,7 +258,7 @@ export async function GET(req: NextRequest) {
       total,
       recentSignups: entries,
       productInterest: productStats._count,
-      quantityDistribution: quantityStats.reduce((acc, item) => {
+      quantityDistribution: quantityStats.reduce((acc: Record<string, number>, item: any) => {
         const key = item.expectedQuantity || 'unspecified';
         acc[key] = item._count;
         return acc;
