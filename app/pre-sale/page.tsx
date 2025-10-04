@@ -172,21 +172,21 @@ export default function PreSalePage() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                  <h2 className="text-3xl font-display font-bold mb-8 text-center">
+                <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                  <h2 className="text-2xl font-display font-bold mb-4 text-center">
                     Join the Pre-Sale List
                   </h2>
 
                   {error && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
                       {error}
                     </div>
                   )}
 
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     {/* Email */}
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium mb-1">
                         Email Address *
                       </label>
                       <input
@@ -195,62 +195,59 @@ export default function PreSalePage() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
                         placeholder="you@example.com"
                       />
                     </div>
 
-                    {/* Name */}
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
-                        Name (Optional)
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
-                        placeholder="Your name"
-                      />
-                    </div>
-
-                    {/* ZIP Code */}
-                    <div>
-                      <label htmlFor="zip" className="block text-sm font-medium mb-2">
-                        ZIP Code (Optional)
-                      </label>
-                      <input
-                        type="text"
-                        id="zip"
-                        value={zipCode}
-                        onChange={(e) => setZipCode(e.target.value)}
-                        maxLength={5}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
-                        placeholder="12345"
-                      />
-                      <p className="text-xs text-charcoal-600 mt-1">
-                        Helps us plan shipping logistics
-                      </p>
+                    {/* Name and ZIP Code - Side by Side */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium mb-1">
+                          Name (Optional)
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                          placeholder="Your name"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="zip" className="block text-sm font-medium mb-1">
+                          ZIP Code (Optional)
+                        </label>
+                        <input
+                          type="text"
+                          id="zip"
+                          value={zipCode}
+                          onChange={(e) => setZipCode(e.target.value)}
+                          maxLength={5}
+                          className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                          placeholder="12345"
+                        />
+                      </div>
                     </div>
 
                     {/* Product Interest */}
                     <div>
-                      <label className="block text-sm font-medium mb-3">
-                        Which H-E-B® products interest you? (Optional)
+                      <label className="block text-sm font-medium mb-2">
+                        Products of Interest (Optional)
                       </label>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-2">
                         {[
-                          { key: 'corn', label: 'Mi Tienda Corn Tortillas' },
-                          { key: 'butter', label: 'Butter Tortillas' },
-                          { key: 'flour', label: 'Flour Tortillas' },
-                          { key: 'variety', label: 'Variety Pack' },
+                          { key: 'corn', label: 'Corn' },
+                          { key: 'butter', label: 'Butter' },
+                          { key: 'flour', label: 'Flour' },
+                          { key: 'variety', label: 'Variety' },
                         ].map((product) => (
                           <button
                             key={product.key}
                             type="button"
                             onClick={() => handleInterestToggle(product.key as keyof typeof interests)}
-                            className={`p-3 rounded-lg border-2 transition-all ${
+                            className={`p-2 text-sm rounded-lg border-2 transition-all ${
                               interests[product.key as keyof typeof interests]
                                 ? 'border-sunset-500 bg-sunset-50 text-sunset-700'
                                 : 'border-charcoal-200 hover:border-charcoal-400'
@@ -264,19 +261,19 @@ export default function PreSalePage() {
 
                     {/* Expected Quantity */}
                     <div>
-                      <label htmlFor="quantity" className="block text-sm font-medium mb-2">
+                      <label htmlFor="quantity" className="block text-sm font-medium mb-1">
                         Expected Monthly Orders (Optional)
                       </label>
                       <select
                         id="quantity"
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
-                        className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
                       >
-                        <option value="1-2">1-2 packs per month</option>
-                        <option value="3-5">3-5 packs per month</option>
-                        <option value="6-10">6-10 packs per month</option>
-                        <option value="10+">10+ packs per month</option>
+                        <option value="1-2">1-2 packs/month</option>
+                        <option value="3-5">3-5 packs/month</option>
+                        <option value="6-10">6-10 packs/month</option>
+                        <option value="10+">10+ packs/month</option>
                       </select>
                     </div>
 
@@ -284,13 +281,13 @@ export default function PreSalePage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-sunset-500 text-cream-50 py-4 rounded-lg font-bold text-lg tracking-wide uppercase hover:bg-sunset-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-sunset-500 text-cream-50 py-3 rounded-lg font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Joining...' : 'Join the Waitlist'}
                     </button>
 
                     <p className="text-xs text-center text-charcoal-600">
-                      No payment required. We'll email you when H-E-B® tortillas are available.
+                      No payment required. We'll email you when available.
                     </p>
                   </div>
                 </form>
