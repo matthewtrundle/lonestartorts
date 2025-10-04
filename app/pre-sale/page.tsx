@@ -49,6 +49,8 @@ export default function PreSalePage() {
 
       setSubmitted(true)
       setSignupCount(prev => prev + 1)
+      // Scroll to top to show success message
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to join waitlist')
     } finally {

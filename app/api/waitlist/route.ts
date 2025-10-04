@@ -57,35 +57,41 @@ export async function POST(req: NextRequest) {
     if (resend) {
       try {
         const emailResult = await resend.emails.send({
-          from: 'Tortilla Rodeo Co. <noreply@lonestartortillas.com>',
+          from: 'Lonestar Tortillas <noreply@lonestartortillas.com>',
           to: email,
-          subject: 'You\'re on the H-E-B® Tortilla Waitlist! 🌮',
+          subject: 'Welcome to Lonestar Tortillas! 🌮',
           html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <div style="text-align: center; margin-bottom: 30px;">
-                <h1 style="color: #f97316; margin-bottom: 10px;">Welcome to the Waitlist!</h1>
-                <p style="font-size: 18px; color: #333;">You're #${totalCount} in line</p>
+                <h1 style="color: #f97316; margin-bottom: 10px;">Thank You for Joining!</h1>
+                <p style="font-size: 18px; color: #333;">You're #${totalCount} on the waitlist</p>
               </div>
 
               <p style="font-size: 16px; color: #555; line-height: 1.6;">Hi${name ? ` ${name}` : ''},</p>
 
               <p style="font-size: 16px; color: #555; line-height: 1.6;">
-                You're officially on the list! We'll notify you as soon as genuine H-E-B® tortillas
-                are available for nationwide delivery.
+                We're so excited to have you on board! Thank you for signing up for H-E-B® tortillas delivered
+                nationwide. We can't wait to bring the authentic taste of Texas right to your door.
+              </p>
+
+              <p style="font-size: 16px; color: #555; line-height: 1.6;">
+                We'll keep you updated every step of the way as we prepare for launch. You'll be the first to
+                know when we're ready to take orders, and you'll get exclusive early-bird pricing as a founding member.
               </p>
 
               <div style="background: #FEF3C7; border-left: 4px solid #F59E0B; padding: 15px; margin: 25px 0;">
                 <h3 style="margin-top: 0; color: #92400E;">What's Next?</h3>
                 <ul style="color: #78350F;">
-                  <li>📧 Watch your inbox for launch updates</li>
-                  <li>💰 Early bird pricing exclusive to waitlist members</li>
-                  <li>🚀 First access when we go live</li>
+                  <li>📧 We'll send you updates as we get closer to launch</li>
+                  <li>💰 Exclusive early bird pricing just for waitlist members</li>
+                  <li>🚀 First access to place orders before anyone else</li>
+                  <li>🌟 Founding member status and special perks</li>
                 </ul>
               </div>
 
               ${interests && (interests.corn || interests.butter || interests.flour || interests.variety) ? `
                 <div style="margin: 25px 0;">
-                  <p style="font-weight: bold; color: #333;">Products you're interested in:</p>
+                  <p style="font-weight: bold; color: #333;">You're interested in:</p>
                   <ul style="color: #555;">
                     ${interests.corn ? '<li>Mi Tienda Corn Tortillas</li>' : ''}
                     ${interests.butter ? '<li>Butter Tortillas</li>' : ''}
@@ -97,7 +103,7 @@ export async function POST(req: NextRequest) {
 
               <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #E5E7EB;">
                 <p style="font-size: 12px; color: #9CA3AF; text-align: center;">
-                  Tortilla Rodeo Co. is an independent reseller.<br>
+                  Lonestar Tortillas is an independent reseller.<br>
                   Not affiliated with or endorsed by H-E-B®.
                 </p>
               </div>
@@ -110,7 +116,7 @@ export async function POST(req: NextRequest) {
           data: {
             waitlistEntryId: newEntry.id,
             type: 'WELCOME',
-            subject: 'You\'re on the H-E-B® Tortilla Waitlist! 🌮',
+            subject: 'Welcome to Lonestar Tortillas! 🌮',
             status: 'SENT',
             sentAt: new Date()
           }
@@ -122,7 +128,7 @@ export async function POST(req: NextRequest) {
           data: {
             waitlistEntryId: newEntry.id,
             type: 'WELCOME',
-            subject: 'You\'re on the H-E-B® Tortilla Waitlist! 🌮',
+            subject: 'Welcome to Lonestar Tortillas! 🌮',
             status: 'FAILED',
             error: emailError instanceof Error ? emailError.message : 'Unknown error'
           }
@@ -133,7 +139,7 @@ export async function POST(req: NextRequest) {
       if (ADMIN_EMAIL) {
         try {
           await resend.emails.send({
-            from: 'Tortilla Rodeo Co. <noreply@lonestartortillas.com>',
+            from: 'Lonestar Tortillas <noreply@lonestartortillas.com>',
             to: ADMIN_EMAIL,
             subject: `New Waitlist Signup: ${email}`,
             html: `
