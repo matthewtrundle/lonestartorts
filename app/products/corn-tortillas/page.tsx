@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Premium Corn Tortillas | Lonestar Tortillas',
     description: 'Authentic handcrafted corn tortillas made from traditional masa. Gluten-free and naturally delicious.',
-    type: 'product',
+    type: 'website',
   },
   colorScheme: 'light',
   themeColor: '#D97706',

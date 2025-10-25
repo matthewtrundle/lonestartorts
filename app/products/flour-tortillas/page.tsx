@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Premium Flour Tortillas | Lonestar Tortillas',
     description: 'Handcrafted flour tortillas made from scratch. Soft, pillowy, and perfect for burritos and quesadillas.',
-    type: 'product',
+    type: 'website',
   },
   colorScheme: 'light',
   themeColor: '#D97706',
