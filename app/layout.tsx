@@ -176,46 +176,6 @@ const jsonLd = {
   ]
 };
 
-// FAQ Schema for common questions
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Are you affiliated with H-E-B?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'No, we are an independent reseller. We are not affiliated with or endorsed by H-E-B®. We source and deliver authentic H-E-B® products to customers nationwide.'
-      }
-    },
-    {
-      '@type': 'Question',
-      name: 'Do you ship nationwide?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes! We ship shelf-stable H-E-B® tortillas to all 50 states. Our tortillas are specially packaged to maintain freshness without refrigeration.'
-      }
-    },
-    {
-      '@type': 'Question',
-      name: 'How long do the tortillas last?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Our shelf-stable tortillas last 30+ days without refrigeration. Once opened, we recommend consuming within 7-10 days for best quality.'
-      }
-    },
-    {
-      '@type': 'Question',
-      name: 'What types of tortillas do you offer?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'We offer corn tortillas, flour tortillas, butter tortillas, and specialty varieties including whole wheat and spinach herb tortillas.'
-      }
-    }
-  ]
-};
-
 // Product Schema for individual products
 const productSchema = {
   '@context': 'https://schema.org',
@@ -283,12 +243,6 @@ export default function RootLayout({
           id="json-ld-organization"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          strategy="afterInteractive"
-        />
-        <Script
-          id="json-ld-faq"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
           strategy="afterInteractive"
         />
         <Script
