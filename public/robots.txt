@@ -47,6 +47,18 @@ User-agent: Claude-Web
 Allow: /
 Crawl-delay: 1
 
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot-Extended
+Allow: /
+Crawl-delay: 1
+
 # Social Media Crawlers
 User-agent: facebookexternalhit
 Allow: /
