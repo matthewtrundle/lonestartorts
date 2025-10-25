@@ -23,7 +23,7 @@ export default function SEO({
   title = 'Lonestar Tortillas - Authentic H-E-B® Tortillas Delivered Nationwide',
   description = 'Get authentic H-E-B® tortillas delivered nationwide. Premium Texas tortillas including flour, corn, butter varieties. Independent reseller.',
   keywords = 'H-E-B tortillas, Texas tortillas delivery, authentic Mexican tortillas',
-  image = '/images/lonestar-logo.png',
+  image = '/images/lonestar-logo.webp',
   url = 'https://lonestartortillas.com',
   type = 'website',
   author = 'Lonestar Tortillas',
@@ -96,7 +96,7 @@ export default function SEO({
       'name': 'Lonestar Tortillas',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://lonestartortillas.com/images/lonestar-logo.png'
+        'url': 'https://lonestartortillas.com/images/lonestar-logo.webp'
       }
     },
     'datePublished': publishedTime,
@@ -185,8 +185,8 @@ export default function SEO({
       )}
 
       {/* Preload important resources */}
-      <link rel="preload" as="image" href="/images/lonestar-logo.png" />
-      <link rel="preload" as="video" href="/hero-background.mp4" />
+      <link rel="preload" as="image" href="/images/lonestar-logo.webp" />
+      <link rel="preload" as="video" href="/hero-background_compressed.mp4" />
 
       {/* DNS Prefetch for external resources */}
       <link rel="dns-prefetch" href="https://fonts.googleapis.com" />

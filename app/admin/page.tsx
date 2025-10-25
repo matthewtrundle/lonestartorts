@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
 
 interface WaitlistEntry {
@@ -171,9 +172,22 @@ export default function AdminDashboard() {
       <div className="bg-white border-b border-charcoal-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <LogoFull className="text-charcoal-950 mr-4" />
-              <h1 className="text-2xl font-bold text-charcoal-950">Admin Dashboard</h1>
+            <div className="flex items-center gap-6">
+              <LogoFull className="text-charcoal-950" />
+              <nav className="flex gap-4">
+                <Link
+                  href="/admin"
+                  className="text-charcoal-950 font-medium border-b-2 border-sunset-500"
+                >
+                  Waitlist
+                </Link>
+                <Link
+                  href="/admin/seo"
+                  className="text-charcoal-600 hover:text-charcoal-950 transition-colors"
+                >
+                  SEO Monitor
+                </Link>
+              </nav>
             </div>
             <button
               onClick={handleExport}

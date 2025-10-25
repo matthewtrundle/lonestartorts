@@ -41,7 +41,7 @@ export function Logo({ className = '', animated = false, size = 'md', showTaglin
       style={{ width, height }}
     >
       <Image
-        src="/images/lonestar-logo.png"
+        src="/images/lonestar-logo.webp"
         alt="Lonestar Tortillas"
         width={width}
         height={height}
@@ -96,7 +96,7 @@ export function LogoFull({
       style={{ width, height }}
     >
       <Image
-        src="/images/lonestar-logo.png"
+        src="/images/lonestar-logo.webp"
         alt="Lonestar Tortillas"
         width={width}
         height={height}
@@ -151,7 +151,7 @@ export function LogoWithTagline({
     >
       <div className="relative" style={{ width, height }}>
         <Image
-          src="/images/lonestar-logo.png"
+          src="/images/lonestar-logo.webp"
           alt="Lonestar Tortillas - Those who know tortillas, know H-E-B"
           width={width}
           height={height}
@@ -226,7 +226,7 @@ export function LogoBadge({
       {/* Logo Image */}
       <div className="relative z-10 flex items-center justify-center h-full">
         <Image
-          src="/images/lonestar-logo.png"
+          src="/images/lonestar-logo.webp"
           alt="Lonestar Tortillas"
           width={280}
           height={160}

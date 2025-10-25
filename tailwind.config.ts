@@ -80,10 +80,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'system-ui', 'sans-serif'],
-        display: ['Playfair Display', 'Georgia', 'serif'],
-        mono: ['JetBrains Mono', 'Courier', 'monospace'],
-        script: ['Dancing Script', 'cursive'],
+        sans: ['var(--font-inter)', '-apple-system', 'system-ui', 'sans-serif'],
+        display: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
       fontSize: {
         // Refined typography scale with fluid sizing

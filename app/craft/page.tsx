@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
+import { ResourcesDropdown } from '@/components/ResourcesDropdown'
 
 export default function CraftPage() {
   return (
@@ -26,6 +27,7 @@ export default function CraftPage() {
                 <Link href="/craft" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase text-sunset-600">Source</span>
                 </Link>
+                <ResourcesDropdown />
                 <Link href="/story" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
                 </Link>

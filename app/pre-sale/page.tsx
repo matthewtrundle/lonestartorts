@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
+import { ResourcesDropdown } from '@/components/ResourcesDropdown'
+import { trackFormSubmission, event } from '@/lib/analytics'
 
 export default function PreSalePage() {
   const [email, setEmail] = useState('')
@@ -49,6 +51,15 @@ export default function PreSalePage() {
 
       setSubmitted(true)
       setSignupCount(prev => prev + 1)
+
+      // Track the form submission in Google Analytics
+      trackFormSubmission('Waitlist Signup')
+      event({
+        action: 'waitlist_signup',
+        category: 'Lead Generation',
+        label: `Interests: ${Object.keys(interests).filter(k => interests[k as keyof typeof interests]).join(', ')}`,
+      })
+
       // Scroll to top to show success message
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
@@ -82,6 +93,7 @@ export default function PreSalePage() {
                 <Link href="/craft" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
                   Source
                 </Link>
+                <ResourcesDropdown />
                 <Link href="/story" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
                   Story
                 </Link>

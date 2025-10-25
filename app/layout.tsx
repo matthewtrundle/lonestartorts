@@ -1,9 +1,25 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
+import Analytics from '@/components/Analytics';
+import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
+import WebVitalsMonitor from '@/components/seo/WebVitalsMonitor';
 
-const inter = Inter({ subsets: ['latin'] });
+// Optimized font loading with Next.js
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-playfair',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lonestartortillas.com'),
@@ -11,7 +27,7 @@ export const metadata: Metadata = {
     default: 'Lonestar Tortillas - Authentic H-E-B® Tortillas Delivered Nationwide',
     template: '%s | Lonestar Tortillas'
   },
-  description: 'Get authentic H-E-B® tortillas delivered nationwide. Premium Texas tortillas including flour, corn, butter, and specialty varieties. Fresh, shelf-stable, and shipped directly to your door. Independent reseller bringing the taste of Texas to all 50 states.',
+  description: 'Buy authentic H-E-B® tortillas online - delivered nationwide! Premium Texas flour, corn & butter tortillas. Shelf-stable, ships fresh. Independent reseller serving all 50 states.',
   keywords: [
     'H-E-B tortillas',
     'Texas tortillas delivery',
@@ -49,7 +65,7 @@ export const metadata: Metadata = {
     siteName: 'Lonestar Tortillas',
     images: [
       {
-        url: '/images/lonestar-logo.png',
+        url: '/images/lonestar-logo.webp',
         width: 1200,
         height: 630,
         alt: 'Lonestar Tortillas - Premium Texas Tortillas',
@@ -63,7 +79,7 @@ export const metadata: Metadata = {
     title: 'Lonestar Tortillas - H-E-B® Tortillas Delivered',
     description: 'Authentic Texas tortillas delivered nationwide. Those who know, know H-E-B®.',
     creator: '@lonestartortillas',
-    images: ['/images/lonestar-logo.png'],
+    images: ['/images/lonestar-logo.webp'],
   },
   robots: {
     index: true,
@@ -87,7 +103,6 @@ export const metadata: Metadata = {
   viewport: {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
   },
 };
 
@@ -98,7 +113,7 @@ const jsonLd = {
   name: 'Lonestar Tortillas',
   description: 'Independent reseller of authentic H-E-B® tortillas, delivering Texas flavor nationwide',
   url: 'https://lonestartortillas.com',
-  logo: 'https://lonestartortillas.com/images/lonestar-logo.png',
+  logo: 'https://lonestartortillas.com/images/lonestar-logo.webp',
   founder: {
     '@type': 'Person',
     name: 'Maria Rodriguez',
@@ -251,11 +266,12 @@ export default function RootLayout({
 
         {/* Additional Open Graph Tags */}
         <meta property="og:locale:alternate" content="es_US" />
-        <meta property="og:video" content="https://lonestartortillas.com/Taste%20of%20Texas.mp4" />
+        <meta property="og:video" content="https://lonestartortillas.com/Taste%20of%20Texas_compressed.mp4" />
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
 
         {/* Favicon variations */}
         <link rel="icon" href="/favicon.ico" />
@@ -280,8 +296,39 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
           strategy="afterInteractive"
         />
+
+        {/* Google Analytics 4 */}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                    page_path: window.location.pathname,
+                    send_page_view: false
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
+
+        {/* Google Tag Manager */}
+        <GoogleTagManager />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans`}>
+        <GoogleTagManagerNoScript />
+        <Analytics />
+        <WebVitalsMonitor />
         <div className="min-h-screen flex flex-col">
           {children}
         </div>

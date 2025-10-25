@@ -55,7 +55,7 @@ export function LoadingScreen() {
                 className="absolute inset-0 blur-xl"
               >
                 <Image
-                  src="/images/lonestar-logo.png"
+                  src="/images/lonestar-logo.webp"
                   alt="Lonestar Tortillas"
                   width={240}
                   height={135}
@@ -66,7 +66,7 @@ export function LoadingScreen() {
 
               {/* Main Logo */}
               <Image
-                src="/images/lonestar-logo.png"
+                src="/images/lonestar-logo.webp"
                 alt="Lonestar Tortillas"
                 width={240}
                 height={135}

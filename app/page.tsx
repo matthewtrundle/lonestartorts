@@ -9,14 +9,15 @@ import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { HeroInteractions } from '@/components/HeroInteractions'
+import { ResourcesDropdown } from '@/components/ResourcesDropdown'
 
 export default function Home() {
   const [currentVideo, setCurrentVideo] = useState(0);
 
   const videos = [
-    { src: '/tiks/Taste of Texas.mp4', title: 'Taste of Texas' },
-    { src: '/tiks/H-E-B Tortillas_ Ride With Us.mp4', title: 'Ride With Us' },
-    { src: '/tiks/Texan Tortilla Secret.mp4', title: 'Texan Secret' }
+    { src: '/tiks/Taste of Texas_compressed.mp4', title: 'Taste of Texas' },
+    { src: '/tiks/H-E-B Tortillas_ Ride With Us_compressed.mp4', title: 'Ride With Us' },
+    { src: '/tiks/Texan Tortilla Secret_compressed.mp4', title: 'Texan Secret' }
   ];
 
   return (
@@ -55,6 +56,7 @@ export default function Home() {
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Source</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
+                <ResourcesDropdown />
                 <Link href="/story" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
@@ -147,7 +149,7 @@ export default function Home() {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover opacity-30"
               >
-                <source src="/hero-background.mp4" type="video/mp4" />
+                <source src="/hero-background_compressed.mp4" type="video/mp4" />
               </video>
 
               {/* Overlay gradients for better text readability */}
@@ -217,18 +219,21 @@ export default function Home() {
                     <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-masa-300/15 via-transparent to-transparent blur-[100px] animate-glow-pulse-delayed"></div>
                   </div>
 
-                  {/* Main Hero Text - Fixed to prevent vertical stacking */}
-                  <div className="w-full">
-                    {/* LONESTAR - Main Impact Text */}
-                    <h1 className="text-[60px] sm:text-[100px] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.8] tracking-[-0.02em] text-charcoal-950 whitespace-nowrap">
+                  {/* Main Hero Text - SEO-Optimized H1 (visually styled) */}
+                  <h1 className="w-full">
+                    {/* Visual "LONESTAR" - Part of H1 */}
+                    <span className="block text-[60px] sm:text-[100px] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.8] tracking-[-0.02em] text-charcoal-950 whitespace-nowrap">
                       LONESTAR
-                    </h1>
+                    </span>
 
-                    {/* TORTILLAS - Secondary Text */}
-                    <div className="text-[40px] sm:text-[70px] md:text-[100px] lg:text-[130px] xl:text-[160px] font-light leading-[0.8] tracking-[0.03em] text-sunset-600 -mt-2 sm:-mt-4 md:-mt-8 lg:-mt-12 whitespace-nowrap">
+                    {/* Visual "TORTILLAS" - Part of H1 */}
+                    <span className="block text-[40px] sm:text-[70px] md:text-[100px] lg:text-[130px] xl:text-[160px] font-light leading-[0.8] tracking-[0.03em] text-sunset-600 -mt-2 sm:-mt-4 md:-mt-8 lg:-mt-12 whitespace-nowrap">
                       TORTILLAS
-                    </div>
-                  </div>
+                    </span>
+
+                    {/* SEO Text - Hidden but read by search engines */}
+                    <span className="sr-only">- Authentic H-E-B® Tortillas Delivered Nationwide</span>
+                  </h1>
 
                   {/* Premium decorative elements */}
                   <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[90%]">
@@ -348,11 +353,11 @@ export default function Home() {
                           id="maria-video"
                           className="absolute inset-0 w-full h-full object-cover"
                           controls
-                          poster="/images/lonestar-logo.png"
+                          poster="/images/lonestar-logo.webp"
                           preload="metadata"
                           playsInline
                         >
-                          <source src="/Taste of Texas.mp4" type="video/mp4" />
+                          <source src="/Taste of Texas_compressed.mp4" type="video/mp4" />
                           Your browser does not support the video tag.
                         </video>
 
@@ -394,6 +399,106 @@ export default function Home() {
                   {/* Decorative Elements */}
                   <div className="absolute -top-4 -right-4 w-32 h-32 bg-sunset-200 rounded-full blur-3xl opacity-30 animate-pulse" />
                   <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-masa-300 rounded-full blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEO Content Section - About Our Service */}
+        <section className="relative py-20 bg-gradient-to-b from-cream-50 to-cream-100 overflow-hidden">
+          <div className="container mx-auto px-8 max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left Column - Main Content */}
+              <div className="space-y-6">
+                <div>
+                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">About Lonestar Tortillas</span>
+                  <h2 className="text-4xl lg:text-5xl font-display font-black text-charcoal-950 mt-3 mb-6">
+                    Bringing Authentic Texas Tortillas to Your Table
+                  </h2>
+                </div>
+
+                <div className="prose prose-lg max-w-none text-charcoal-800 space-y-4">
+                  <p className="leading-relaxed">
+                    At Lonestar Tortillas, we're proud to be your independent source for authentic <strong>H-E-B tortillas delivered nationwide</strong>. Those who know tortillas know H-E-B—and now families across all 50 states can enjoy the same premium Texas tortillas that Texans have trusted for generations.
+                  </p>
+
+                  <p className="leading-relaxed">
+                    Whether you're in <strong>Austin, Houston, Dallas, San Antonio</strong>, or anywhere else in America, you can now order genuine H-E-B tortillas online and have them shipped directly to your door. Our shelf-stable tortillas require no refrigeration, making them perfect for your pantry and easy to ship anywhere in the country.
+                  </p>
+
+                  <p className="leading-relaxed">
+                    We specialize in sourcing premium <strong>flour tortillas, corn tortillas, and butter tortillas</strong>—the same authentic products you'd find in H-E-B stores throughout Texas. Every order is carefully packed and shipped fresh, maintaining the quality and taste that H-E-B is known for.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Column - Key Benefits */}
+              <div className="space-y-6">
+                <div className="bg-white p-8 rounded-lg shadow-lg border-l-4 border-sunset-500">
+                  <h3 className="text-2xl font-bold text-charcoal-950 mb-4">Why Choose Lonestar?</h3>
+                  <ul className="space-y-3 text-charcoal-700">
+                    <li className="flex items-start gap-3">
+                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <span><strong>Genuine H-E-B Products:</strong> We source authentic H-E-B tortillas, the same products Texas families trust</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <span><strong>Nationwide Delivery:</strong> Serving all 50 states with reliable, fast shipping</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <span><strong>Shelf-Stable Quality:</strong> No refrigeration needed—our tortillas stay fresh in your pantry</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <span><strong>Texas Authentic:</strong> Real Texas taste, traditional recipes, premium ingredients</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-masa-50 p-6 rounded-lg">
+                  <p className="text-charcoal-700 leading-relaxed">
+                    Our mission is simple: make authentic Texas tortillas accessible to everyone, no matter where you live. From breakfast tacos in New York to fajita night in California, Lonestar brings the taste of Texas to your kitchen.
+                  </p>
+                </div>
+
+                <p className="text-xs text-charcoal-500 uppercase tracking-wider">
+                  Independent reseller • Not affiliated with or endorsed by H-E-B®
+                </p>
+              </div>
+            </div>
+
+            {/* Additional SEO Content - How It Works */}
+            <div className="mt-16 pt-16 border-t border-charcoal-200">
+              <h3 className="text-3xl font-bold text-charcoal-950 mb-8 text-center">How Lonestar Tortilla Delivery Works</h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-sunset-600">1</span>
+                  </div>
+                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">Order Online</h4>
+                  <p className="text-charcoal-700">
+                    Browse our selection of authentic H-E-B corn, flour, and butter tortillas. Choose your favorites and place your order.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-sunset-600">2</span>
+                  </div>
+                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">We Source & Pack</h4>
+                  <p className="text-charcoal-700">
+                    We carefully source your tortillas from H-E-B and pack them securely for shipping. All products are shelf-stable and ship fresh.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-sunset-600">3</span>
+                  </div>
+                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">Delivered to You</h4>
+                  <p className="text-charcoal-700">
+                    Your tortillas arrive at your door, ready for your pantry. No refrigeration needed—just authentic Texas taste whenever you want it.
+                  </p>
                 </div>
               </div>
             </div>
@@ -842,6 +947,200 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Guides & Tips Section */}
+        <section className="py-20 bg-gradient-to-b from-masa-50 to-cream-50 relative overflow-hidden">
+          <div className="container mx-auto px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-6xl lg:text-7xl font-display font-black text-charcoal-950 mb-6 reveal-text">
+                GUIDES & TIPS
+              </h2>
+              <p className="text-2xl text-charcoal-700 max-w-3xl mx-auto slide-left">
+                Master the art of tortillas with our expert guides
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="group bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+                <Link href="/guides/how-to-store-tortillas" className="block">
+                  <div className="p-8">
+                    <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-sunset-100 text-sunset-600 group-hover:bg-sunset-600 group-hover:text-white transition-all duration-300">
+                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-sunset-600 transition-colors">
+                      How to Store Tortillas
+                    </h3>
+                    <p className="text-charcoal-700 leading-relaxed mb-6">
+                      Keep your tortillas fresh for weeks with proper storage. Learn room temperature, refrigeration, and freezing methods.
+                    </p>
+                    <span className="text-sunset-600 font-semibold group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
+                      Read Guide
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="h-2 bg-gradient-to-r from-sunset-500 to-masa-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </Link>
+              </div>
+
+              <div className="group bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+                <Link href="/guides/how-to-reheat-tortillas" className="block">
+                  <div className="p-8">
+                    <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-masa-100 text-masa-600 group-hover:bg-masa-600 group-hover:text-white transition-all duration-300">
+                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-masa-600 transition-colors">
+                      How to Reheat Tortillas
+                    </h3>
+                    <p className="text-charcoal-700 leading-relaxed mb-6">
+                      Warm tortillas to perfection every time. Master stovetop, microwave, and oven techniques for soft, pliable results.
+                    </p>
+                    <span className="text-masa-600 font-semibold group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
+                      Read Guide
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="h-2 bg-gradient-to-r from-masa-500 to-rust-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </Link>
+              </div>
+
+              <div className="group bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+                <Link href="/guides/corn-vs-flour-tortillas" className="block">
+                  <div className="p-8">
+                    <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-rust-100 text-rust-600 group-hover:bg-rust-600 group-hover:text-white transition-all duration-300">
+                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-rust-600 transition-colors">
+                      Corn vs Flour Tortillas
+                    </h3>
+                    <p className="text-charcoal-700 leading-relaxed mb-6">
+                      Which tortilla is right for you? Compare taste, texture, nutrition, and best uses for each type.
+                    </p>
+                    <span className="text-rust-600 font-semibold group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
+                      Read Guide
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="h-2 bg-gradient-to-r from-rust-500 to-sunset-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Link
+                href="/guides"
+                className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-xl"
+              >
+                View All Guides
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Recipe Section */}
+        <section className="py-20 bg-gradient-to-b from-cream-50 to-sunset-50 relative overflow-hidden">
+          <div className="container mx-auto px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-6xl lg:text-7xl font-display font-black text-charcoal-950 mb-6 reveal-text">
+                FROM OUR KITCHEN
+              </h2>
+              <p className="text-2xl text-charcoal-700 max-w-3xl mx-auto slide-left">
+                Authentic Texas recipes that showcase quality tortillas
+              </p>
+            </div>
+
+            <div className="max-w-5xl mx-auto">
+              <Link href="/recipes/breakfast-tacos" className="group block">
+                <div className="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="grid md:grid-cols-2">
+                    {/* Image Side */}
+                    <div className="relative h-80 md:h-auto bg-gradient-to-br from-sunset-200 via-masa-200 to-rust-200">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center text-white/60">
+                          <svg className="w-32 h-32 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                          <p className="text-lg font-medium">Recipe Image</p>
+                        </div>
+                      </div>
+                      <div className="absolute top-6 right-6 bg-sunset-600 text-white px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wider shadow-lg">
+                        Featured Recipe
+                      </div>
+                    </div>
+
+                    {/* Content Side */}
+                    <div className="p-10 flex flex-col justify-center">
+                      <div className="mb-4">
+                        <span className="inline-block bg-sunrise-100 text-sunrise-700 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
+                          Breakfast
+                        </span>
+                      </div>
+
+                      <h3 className="text-4xl font-bold text-charcoal-950 mb-4 group-hover:text-sunset-600 transition-colors">
+                        Texas-Style Breakfast Tacos
+                      </h3>
+
+                      <p className="text-lg text-charcoal-700 leading-relaxed mb-6">
+                        Authentic Texas breakfast tacos with fluffy scrambled eggs, crispy bacon, melted cheese,
+                        and fresh tortillas. Ready in just 15 minutes!
+                      </p>
+
+                      <div className="flex flex-wrap gap-4 mb-8 text-charcoal-600">
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="font-medium">15 minutes</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
+                          <span className="font-medium">4 servings</span>
+                        </div>
+                        <div>
+                          <span className="inline-block bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full">
+                            Easy
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <span className="text-sunset-600 font-bold text-lg group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
+                          View Full Recipe
+                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="h-2 bg-gradient-to-r from-sunset-500 via-masa-500 to-rust-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                </div>
+              </Link>
+
+              <div className="text-center mt-12">
+                <Link
+                  href="/recipes"
+                  className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-xl"
+                >
+                  More Recipes Coming Soon
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-20 relative overflow-hidden bg-charcoal-950">
           <div className="absolute inset-0 parallax-img" data-speed="0.5">
@@ -887,32 +1186,67 @@ export default function Home() {
           <div className="absolute inset-0 noise-subtle opacity-20" />
 
           <div className="container mx-auto px-8 relative z-10">
-            <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div className="grid md:grid-cols-5 gap-8 mb-12">
               {/* Logo and Description */}
               <div className="md:col-span-2">
                 <LogoFull className="text-cream-50 mb-6" />
-                <p className="text-cream-300 leading-relaxed">
+                <p className="text-cream-300 leading-relaxed mb-4">
                   Your trusted independent source for genuine H-E-B® tortillas, delivered nationwide.
                 </p>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-mega uppercase mb-4">Quick Links</h4>
-                <div className="space-y-3">
-                  <Link href="/pre-sale" className="block text-cream-400 hover:text-sunset-400 transition-colors">Pre-Sale</Link>
-                  <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors">Our Source</Link>
-                  <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors">Our Story</Link>
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-mega uppercase mb-4">Contact</h4>
-                <div className="space-y-3 text-cream-400">
+                <div className="space-y-2 text-cream-400 text-sm">
                   <p>hello@lonestartortilla.com</p>
                   <p>1-800-TORTILLA</p>
                   <p>Austin, Texas</p>
+                </div>
+              </div>
+
+              {/* Products */}
+              <div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Products</h4>
+                <div className="space-y-2">
+                  <Link href="/products/corn-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Corn Tortillas</Link>
+                  <Link href="/products/flour-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Flour Tortillas</Link>
+                  <Link href="/products/butter-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Butter Tortillas</Link>
+                  <Link href="/products/specialty-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Specialty Varieties</Link>
+                </div>
+              </div>
+
+              {/* Guides */}
+              <div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Guides & Tips</h4>
+                <div className="space-y-2">
+                  <Link href="/guides" className="block text-cream-300 hover:text-sunset-400 transition-colors text-sm font-semibold">All Guides →</Link>
+                  <Link href="/guides/how-to-store-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">How to Store</Link>
+                  <Link href="/guides/how-to-reheat-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">How to Reheat</Link>
+                  <Link href="/guides/corn-vs-flour-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Corn vs Flour</Link>
+                </div>
+              </div>
+
+              {/* Recipes & More */}
+              <div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Recipes & More</h4>
+                <div className="space-y-2">
+                  <Link href="/recipes" className="block text-cream-300 hover:text-sunset-400 transition-colors text-sm font-semibold">All Recipes →</Link>
+                  <Link href="/recipes/breakfast-tacos" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Breakfast Tacos</Link>
+                  <Link href="/faq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">FAQ</Link>
+                  <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
+                </div>
+              </div>
+
+              {/* Cities & About */}
+              <div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Locations & More</h4>
+                <div className="space-y-2 mb-4">
+                  <Link href="/new-york" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">New York</Link>
+                  <Link href="/los-angeles" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Los Angeles</Link>
+                  <Link href="/chicago" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Chicago</Link>
+                  <Link href="/denver" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Denver</Link>
+                  <Link href="/seattle" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Seattle</Link>
+                </div>
+                <div className="space-y-2 pt-4 border-t border-cream-700/20">
+                  <Link href="/pre-sale" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Join Pre-Sale</Link>
+                  <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Source</Link>
+                  <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
                 </div>
               </div>
             </div>
