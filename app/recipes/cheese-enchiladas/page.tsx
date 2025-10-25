@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Classic Cheese Enchiladas Recipe | Easy Red Sauce | Lonestar Tortillas',
@@ -146,7 +147,7 @@ export default function CheeseEnchiladasRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 45 minutes</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Medium</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Medium</span>
               <span className="bg-sunset-600 px-4 py-2 rounded-full">🍽️ 6 servings</span>
             </div>
           </div>
@@ -191,39 +192,39 @@ export default function CheeseEnchiladasRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Enchilada Sauce</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons vegetable oil</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons all-purpose flour</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 tablespoons chili powder (use good quality!)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon garlic powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 teaspoon dried oregano</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 teaspoon salt (more to taste)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 cups chicken broth or vegetable broth</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 can (8 oz) tomato sauce</span>
                   </li>
                 </ul>
@@ -232,19 +233,19 @@ export default function CheeseEnchiladasRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Enchiladas</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>12 <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline font-medium">corn tortillas</Link> (6-inch)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 cups shredded cheese, divided (Mexican blend, cheddar, or Monterey Jack)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 small onion, finely diced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Cooking spray or oil for the baking dish</span>
                   </li>
                 </ul>
@@ -252,27 +253,27 @@ export default function CheeseEnchiladasRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mt-6 mb-3">Optional Toppings</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sour cream or Mexican crema</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro, chopped</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Diced white onion</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sliced jalapeños</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sliced avocado</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Crumbled cotija cheese</span>
                   </li>
                 </ul>
@@ -407,25 +408,25 @@ export default function CheeseEnchiladasRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Day-old tortillas work better—they're sturdier and less likely to tear</li>
-                  <li>• Roll enchiladas tightly and place seam-side down to prevent unrolling</li>
-                  <li>• Don't oversoak tortillas in sauce—just warm them enough to be pliable</li>
-                  <li>• Pack enchiladas close together in the pan for mutual support</li>
-                  <li>• Make sauce ahead—it keeps for 5 days in the fridge or 3 months frozen</li>
-                  <li>• Use good quality chili powder—it makes a huge difference</li>
-                  <li>• Let enchiladas rest 5 minutes before serving for easier cutting</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Day-old tortillas work better—they're sturdier and less likely to tear</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Roll enchiladas tightly and place seam-side down to prevent unrolling</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't oversoak tortillas in sauce—just warm them enough to be pliable</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Pack enchiladas close together in the pan for mutual support</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Make sauce ahead—it keeps for 5 days in the fridge or 3 months frozen</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use good quality chili powder—it makes a huge difference</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Let enchiladas rest 5 minutes before serving for easier cutting</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Filling Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Chicken:</strong> Add shredded rotisserie chicken with the cheese</li>
-                  <li>• <strong>Beef:</strong> Use seasoned ground beef or shredded beef</li>
-                  <li>• <strong>Bean:</strong> Refried beans or black beans for vegetarian</li>
-                  <li>• <strong>Spinach:</strong> Sautéed spinach with cheese</li>
-                  <li>• <strong>Mixed:</strong> Combine cheese with chicken, beans, or vegetables</li>
-                  <li>• <strong>Enchiladas Verdes:</strong> Use green salsa instead of red sauce</li>
-                  <li>• <strong>Sour Cream:</strong> Mix sour cream into cheese filling for creaminess</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Chicken:</strong> Add shredded rotisserie chicken with the cheese</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Beef:</strong> Use seasoned ground beef or shredded beef</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Bean:</strong> Refried beans or black beans for vegetarian</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Spinach:</strong> Sautéed spinach with cheese</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Mixed:</strong> Combine cheese with chicken, beans, or vegetables</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Enchiladas Verdes:</strong> Use green salsa instead of red sauce</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Sour Cream:</strong> Mix sour cream into cheese filling for creaminess</li>
                 </ul>
               </div>
             </div>

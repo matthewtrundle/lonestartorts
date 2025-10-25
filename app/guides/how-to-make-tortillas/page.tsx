@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'How to Make Fresh Tortillas at Home | Complete Guide | Lonestar Tortillas',
@@ -82,6 +83,20 @@ export default function HowToMakeTortillasPage() {
             </p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-how-to-make-tortillas.webp"
+              alt="Hands making fresh tortillas with traditional press"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">

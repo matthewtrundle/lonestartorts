@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import { TacoIcon, BurritoIcon, CheeseIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Tortilla Size Guide | Which Size for Tacos, Burritos & More | Lonestar Tortillas',
@@ -70,12 +72,26 @@ export default function TortillaSizesPage() {
             <p className="text-cream-300 mt-4 text-lg">Choose the perfect tortilla size for every dish</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-tortilla-sizes.webp"
+              alt="Various sizes of tortillas from small to large"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
             <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Reference</h2>
             <p className="text-lg text-charcoal-800">
-              <strong>Tacos:</strong> 6-inch • <strong>Soft tacos/Wraps:</strong> 8-inch • <strong>Quesadillas:</strong> 8-10 inch • <strong>Burritos:</strong> 10-12 inch • <strong>Fajitas:</strong> 8-inch • <strong>Enchiladas:</strong> 6-8 inch
+              <strong>Tacos:</strong> 6-inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Soft tacos/Wraps:</strong> 8-inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Quesadillas:</strong> 8-10 inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Burritos:</strong> 10-12 inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Fajitas:</strong> 8-inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Enchiladas:</strong> 6-8 inch
             </p>
           </div>
 
@@ -92,10 +108,10 @@ export default function TortillaSizesPage() {
                 <div className="bg-charcoal-50 p-4 rounded">
                   <p className="font-semibold text-charcoal-950 mb-2">Best for:</p>
                   <ul className="text-charcoal-800 space-y-1 text-sm">
-                    <li>• Mini tacos and sliders</li>
-                    <li>• Appetizer portions</li>
-                    <li>• Kids' meals</li>
-                    <li>• Taco party platters</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Mini tacos and sliders</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Appetizer portions</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Kids' meals</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Taco party platters</li>
                   </ul>
                 </div>
               </div>
@@ -109,11 +125,11 @@ export default function TortillaSizesPage() {
                 <div className="bg-charcoal-50 p-4 rounded">
                   <p className="font-semibold text-charcoal-950 mb-2">Best for:</p>
                   <ul className="text-charcoal-800 space-y-1 text-sm">
-                    <li>• <strong>Street tacos</strong> (double up for authentic style)</li>
-                    <li>• <strong>Corn tortilla tacos</strong> - traditional size</li>
-                    <li>• Small soft tacos</li>
-                    <li>• Enchiladas</li>
-                    <li>• Taquitos (rolled and fried)</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Street tacos</strong> (double up for authentic style)</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Corn tortilla tacos</strong> - traditional size</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Small soft tacos</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Enchiladas</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Taquitos (rolled and fried)</li>
                   </ul>
                 </div>
                 <p className="text-sm text-charcoal-600 mt-3 italic">💡 Pro tip: Use two 6-inch tortillas per taco for structural integrity, just like authentic taquerías.</p>
@@ -128,12 +144,12 @@ export default function TortillaSizesPage() {
                 <div className="bg-charcoal-50 p-4 rounded">
                   <p className="font-semibold text-charcoal-950 mb-2">Best for:</p>
                   <ul className="text-charcoal-800 space-y-1 text-sm">
-                    <li>• <strong>Classic tacos</strong> - American style with more filling</li>
-                    <li>• <strong>Quesadillas</strong> - perfect size for folding in half</li>
-                    <li>• <strong>Fajitas</strong> - traditional fajita size</li>
-                    <li>• Soft tacos</li>
-                    <li>• Personal pizzas</li>
-                    <li>• Enchiladas (larger version)</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Classic tacos</strong> - American style with more filling</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Quesadillas</strong> - perfect size for folding in half</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Fajitas</strong> - traditional fajita size</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Soft tacos</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Personal pizzas</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Enchiladas (larger version)</li>
                   </ul>
                 </div>
               </div>
@@ -147,11 +163,11 @@ export default function TortillaSizesPage() {
                 <div className="bg-charcoal-50 p-4 rounded">
                   <p className="font-semibold text-charcoal-950 mb-2">Best for:</p>
                   <ul className="text-charcoal-800 space-y-1 text-sm">
-                    <li>• <strong>Burritos</strong> - standard burrito size</li>
-                    <li>• <strong>Large quesadillas</strong> - meal-sized portions</li>
-                    <li>• Wraps and roll-ups</li>
-                    <li>• Chimichangas</li>
-                    <li>• Breakfast burritos</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Burritos</strong> - standard burrito size</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Large quesadillas</strong> - meal-sized portions</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Wraps and roll-ups</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Chimichangas</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Breakfast burritos</li>
                   </ul>
                 </div>
                 <p className="text-sm text-charcoal-600 mt-3 italic">💡 This size is often labeled "burrito size" or "large" at the store.</p>
@@ -166,10 +182,10 @@ export default function TortillaSizesPage() {
                 <div className="bg-charcoal-50 p-4 rounded">
                   <p className="font-semibold text-charcoal-950 mb-2">Best for:</p>
                   <ul className="text-charcoal-800 space-y-1 text-sm">
-                    <li>• <strong>Fully loaded burritos</strong> - California-style with everything</li>
-                    <li>• Mission-style burritos</li>
-                    <li>• Large wraps and roll-ups</li>
-                    <li>• Party-size quesadillas (cut into wedges)</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Fully loaded burritos</strong> - California-style with everything</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Mission-style burritos</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Large wraps and roll-ups</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Party-size quesadillas (cut into wedges)</li>
                   </ul>
                 </div>
                 <p className="text-sm text-charcoal-600 mt-3 italic">⚠️ Warning: These are huge! Make sure you're hungry.</p>
@@ -181,24 +197,24 @@ export default function TortillaSizesPage() {
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Size Selection by Dish</h2>
             <div className="space-y-4">
               <div className="flex items-start gap-4 pb-4 border-b border-charcoal-100">
-                <span className="text-3xl">🌮</span>
+                <span className="text-3xl"><TacoIcon className="inline-block text-sunset-600" size={20} /></span>
                 <div className="flex-1">
                   <h3 className="font-bold text-charcoal-950 mb-1">Tacos</h3>
-                  <p className="text-charcoal-800 text-sm"><strong>6-inch corn</strong> for authentic street tacos (use 2 per taco) • <strong>8-inch flour</strong> for American-style tacos</p>
+                  <p className="text-charcoal-800 text-sm"><strong>6-inch corn</strong> for authentic street tacos (use 2 per taco) <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>8-inch flour</strong> for American-style tacos</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 pb-4 border-b border-charcoal-100">
-                <span className="text-3xl">🌯</span>
+                <span className="text-3xl"><BurritoIcon className="inline-block text-masa-600" size={20} /></span>
                 <div className="flex-1">
                   <h3 className="font-bold text-charcoal-950 mb-1">Burritos</h3>
-                  <p className="text-charcoal-800 text-sm"><strong>10-inch</strong> for standard burritos • <strong>12-inch</strong> for loaded/California-style burritos</p>
+                  <p className="text-charcoal-800 text-sm"><strong>10-inch</strong> for standard burritos <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>12-inch</strong> for loaded/California-style burritos</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 pb-4 border-b border-charcoal-100">
-                <span className="text-3xl">🧀</span>
+                <span className="text-3xl"><CheeseIcon className="inline-block text-yellow-500" size={18} /></span>
                 <div className="flex-1">
                   <h3 className="font-bold text-charcoal-950 mb-1">Quesadillas</h3>
-                  <p className="text-charcoal-800 text-sm"><strong>8-inch</strong> for standard • <strong>10-inch</strong> for meal-sized • Both flour tortillas</p>
+                  <p className="text-charcoal-800 text-sm"><strong>8-inch</strong> for standard <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>10-inch</strong> for meal-sized <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Both flour tortillas</p>
                 </div>
               </div>
               <div className="flex items-start gap-4 pb-4 border-b border-charcoal-100">
@@ -212,7 +228,7 @@ export default function TortillaSizesPage() {
                 <span className="text-3xl">🫔</span>
                 <div className="flex-1">
                   <h3 className="font-bold text-charcoal-950 mb-1">Enchiladas</h3>
-                  <p className="text-charcoal-800 text-sm"><strong>6-inch corn</strong> for traditional • <strong>8-inch</strong> for larger enchiladas</p>
+                  <p className="text-charcoal-800 text-sm"><strong>6-inch corn</strong> for traditional <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>8-inch</strong> for larger enchiladas</p>
                 </div>
               </div>
             </div>

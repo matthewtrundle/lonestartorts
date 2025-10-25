@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Texas-Style Breakfast Tacos Recipe | Easy & Authentic | Lonestar Tortillas',
@@ -113,7 +114,7 @@ export default function BreakfastTacosRecipe() {
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 15 minutes</span>
               <span className="bg-masa-600 px-4 py-2 rounded-full">🍳 Easy</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 4 servings</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 4 servings</span>
             </div>
           </div>
         </section>
@@ -152,27 +153,27 @@ export default function BreakfastTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Main Ingredients</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>8 <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline font-medium">flour tortillas</Link> (or <Link href="/products/butter-tortillas" className="text-rust-600 hover:underline font-medium">butter tortillas</Link>)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>8 large eggs</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>8 strips bacon (or chorizo for authentic Tex-Mex)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 cup shredded cheddar or Mexican blend cheese</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons butter</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salt and pepper to taste</span>
                   </li>
                 </ul>
@@ -181,27 +182,27 @@ export default function BreakfastTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Optional Toppings</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh salsa or pico de gallo</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sliced avocado or guacamole</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sour cream</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Hot sauce (Cholula or Valentina)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Refried beans (for breakfast tacos con todo)</span>
                   </li>
                 </ul>
@@ -294,21 +295,21 @@ export default function BreakfastTacosRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Don't overcook the eggs—they should be soft and creamy</li>
-                  <li>• Warm tortillas are essential—cold tortillas will crack</li>
-                  <li>• Use <Link href="/products/butter-tortillas" className="text-rust-600 hover:underline">butter tortillas</Link> for extra richness</li>
-                  <li>• Make extra bacon—it disappears fast</li>
-                  <li>• Prep toppings the night before for quick assembly</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't overcook the eggs—they should be soft and creamy</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Warm tortillas are essential—cold tortillas will crack</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use <Link href="/products/butter-tortillas" className="text-rust-600 hover:underline">butter tortillas</Link> for extra richness</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Make extra bacon—it disappears fast</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Prep toppings the night before for quick assembly</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Chorizo & Egg:</strong> Swap bacon for Mexican chorizo</li>
-                  <li>• <strong>Potato & Egg:</strong> Add crispy diced potatoes</li>
-                  <li>• <strong>Bean & Cheese:</strong> Add refried beans for heartiness</li>
-                  <li>• <strong>Migas:</strong> Mix crushed tortilla chips into the eggs</li>
-                  <li>• <strong>Veggie:</strong> Add bell peppers, onions, spinach</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Chorizo & Egg:</strong> Swap bacon for Mexican chorizo</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Potato & Egg:</strong> Add crispy diced potatoes</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Bean & Cheese:</strong> Add refried beans for heartiness</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Migas:</strong> Mix crushed tortilla chips into the eggs</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Veggie:</strong> Add bell peppers, onions, spinach</li>
                 </ul>
               </div>
             </div>

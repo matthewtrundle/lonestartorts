@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Tortilla Nutrition Guide | Calories, Carbs & Health Facts | Lonestar Tortillas',
@@ -70,6 +71,20 @@ export default function TortillaNutritionPage() {
             <p className="text-cream-300 mt-4 text-lg">Complete nutritional facts for corn and flour tortillas</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-tortilla-nutrition.webp"
+              alt="Healthy tortillas with fresh vegetables and ingredients"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">

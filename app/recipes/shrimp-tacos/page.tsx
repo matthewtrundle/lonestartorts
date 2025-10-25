@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Spicy Shrimp Tacos Recipe | Easy Grilled Shrimp | Lonestar Tortillas',
@@ -149,8 +150,8 @@ export default function ShrimpTacosRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 20 minutes</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Easy</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 4 servings</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Easy</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 4 servings</span>
             </div>
           </div>
         </section>
@@ -194,43 +195,43 @@ export default function ShrimpTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Shrimp</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1.5 lbs large shrimp, peeled and deveined</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons olive oil</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 garlic cloves, minced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon chili powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon smoked paprika</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon cayenne pepper (adjust for heat)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon black pepper</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Juice of 1 lime</span>
                   </li>
                 </ul>
@@ -239,47 +240,47 @@ export default function ShrimpTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For Slaw & Toppings</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 cups shredded cabbage</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup fresh cilantro, chopped</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons lime juice</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Pinch of salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 cup sour cream or Greek yogurt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons mayonnaise</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon lime juice</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 garlic clove, minced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup fresh cilantro</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>12-16 <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline font-medium">corn tortillas</Link> (6-inch)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: avocado slices, pico de gallo, hot sauce, cotija cheese, lime wedges</span>
                   </li>
                 </ul>
@@ -400,25 +401,25 @@ export default function ShrimpTacosRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Pat shrimp completely dry before seasoning for better searing</li>
-                  <li>• Use large or extra-large shrimp—they're easier to not overcook</li>
-                  <li>• Don't marinate longer than 30 minutes or shrimp will get mushy</li>
-                  <li>• Cook shrimp over high heat for quick cooking and char</li>
-                  <li>• Pull shrimp when they form a "C" shape, not an "O"</li>
-                  <li>• Make the crema and slaw ahead to save time</li>
-                  <li>• Double-stack tortillas to prevent falling apart</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Pat shrimp completely dry before seasoning for better searing</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use large or extra-large shrimp—they're easier to not overcook</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't marinate longer than 30 minutes or shrimp will get mushy</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Cook shrimp over high heat for quick cooking and char</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Pull shrimp when they form a "C" shape, not an "O"</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Make the crema and slaw ahead to save time</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Double-stack tortillas to prevent falling apart</li>
               </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Blackened:</strong> Use Cajun seasoning for Louisiana-style heat</li>
-                  <li>• <strong>Coconut:</strong> Add coconut milk to crema, top with toasted coconut</li>
-                  <li>• <strong>Mango Salsa:</strong> Top with fresh mango pico de gallo</li>
-                  <li>• <strong>Garlic Butter:</strong> Toss cooked shrimp in garlic butter</li>
-                  <li>• <strong>Asian Fusion:</strong> Use sriracha mayo and pickled veggies</li>
-                  <li>• <strong>Grilled Pineapple:</strong> Add grilled pineapple chunks</li>
-                  <li>• <strong>Taco Bowl:</strong> Serve over rice and beans instead of tortillas</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Blackened:</strong> Use Cajun seasoning for Louisiana-style heat</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Coconut:</strong> Add coconut milk to crema, top with toasted coconut</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Mango Salsa:</strong> Top with fresh mango pico de gallo</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Garlic Butter:</strong> Toss cooked shrimp in garlic butter</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Asian Fusion:</strong> Use sriracha mayo and pickled veggies</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Grilled Pineapple:</strong> Add grilled pineapple chunks</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Taco Bowl:</strong> Serve over rice and beans instead of tortillas</li>
                 </ul>
               </div>
             </div>

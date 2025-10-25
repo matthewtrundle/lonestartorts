@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CheeseIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Classic Cheese Quesadillas Recipe | Easy & Quick | Lonestar Tortillas',
@@ -132,7 +133,7 @@ export default function CheeseQuesadillasRecipe() {
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 10 minutes</span>
               <span className="bg-masa-600 px-4 py-2 rounded-full">😊 Easy</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🧀 4 servings</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><CheeseIcon className="inline-block text-yellow-500" size={18} /> 4 servings</span>
             </div>
           </div>
         </section>
@@ -176,15 +177,15 @@ export default function CheeseQuesadillasRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Main Ingredients</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>8 <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline font-medium">flour tortillas</Link> (8-inch size)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 cups shredded cheese (Mexican blend, cheddar, or Monterey Jack)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons butter or vegetable oil</span>
                   </li>
                 </ul>
@@ -193,23 +194,23 @@ export default function CheeseQuesadillasRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For Serving</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sour cream</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salsa or pico de gallo</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Guacamole</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro (optional)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Pickled jalapeños (optional)</span>
                   </li>
                 </ul>
@@ -316,23 +317,23 @@ export default function CheeseQuesadillasRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Use freshly shredded cheese for better melting</li>
-                  <li>• Don't overfill—less is more with quesadillas</li>
-                  <li>• Medium heat is crucial for crispy tortillas without burning</li>
-                  <li>• Let quesadillas rest 30 seconds before cutting</li>
-                  <li>• Use a pizza cutter for clean, easy slicing</li>
-                  <li>• <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">Fresh tortillas</Link> make all the difference</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use freshly shredded cheese for better melting</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't overfill—less is more with quesadillas</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Medium heat is crucial for crispy tortillas without burning</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Let quesadillas rest 30 seconds before cutting</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use a pizza cutter for clean, easy slicing</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">Fresh tortillas</Link> make all the difference</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Delicious Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Chicken Quesadilla:</strong> Add shredded rotisserie chicken</li>
-                  <li>• <strong>Veggie Quesadilla:</strong> Sautéed peppers, onions, mushrooms</li>
-                  <li>• <strong>Black Bean:</strong> Add seasoned black beans and corn</li>
-                  <li>• <strong>Jalapeño Popper:</strong> Cream cheese, cheddar, jalapeños</li>
-                  <li>• <strong>Breakfast Quesadilla:</strong> Scrambled eggs and bacon</li>
-                  <li>• <strong>Pizza Quesadilla:</strong> Mozzarella, pepperoni, marinara for dipping</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Chicken Quesadilla:</strong> Add shredded rotisserie chicken</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Veggie Quesadilla:</strong> Sautéed peppers, onions, mushrooms</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Black Bean:</strong> Add seasoned black beans and corn</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Jalapeño Popper:</strong> Cream cheese, cheddar, jalapeños</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Breakfast Quesadilla:</strong> Scrambled eggs and bacon</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Pizza Quesadilla:</strong> Mozzarella, pepperoni, marinara for dipping</li>
                 </ul>
               </div>
             </div>

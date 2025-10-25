@@ -29,7 +29,7 @@ export interface GeneratedImage {
 /**
  * Generate a detailed prompt for food photography following best practices
  */
-function buildFoodPhotographyPrompt(
+export function buildFoodPhotographyPrompt(
   subject: string,
   style: 'photorealistic' | 'editorial' | 'rustic' | 'modern' = 'photorealistic'
 ): string {

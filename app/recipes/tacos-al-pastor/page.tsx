@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Tacos Al Pastor Recipe | Authentic Mexican Street Tacos | Lonestar Tortillas',
@@ -147,8 +148,8 @@ export default function TacosAlPastorRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 45 minutes</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Medium</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 12 tacos</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Medium</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 12 tacos</span>
             </div>
           </div>
         </section>
@@ -192,47 +193,47 @@ export default function TacosAlPastorRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Marinade</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 dried guajillo chiles</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 dried ancho chiles</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 cup pineapple juice</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup white vinegar or apple cider vinegar</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>4 garlic cloves</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon achiote paste (available at Mexican markets)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon dried Mexican oregano</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon ground cinnamon</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon black pepper</span>
                   </li>
                 </ul>
@@ -241,35 +242,35 @@ export default function TacosAlPastorRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Tacos</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 lbs pork shoulder, thinly sliced (1/4-inch thick)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 small fresh pineapple, peeled and sliced into rounds</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 medium white onion, finely diced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 cup fresh cilantro, roughly chopped</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2-3 limes, cut into wedges</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>12-16 small <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline font-medium">corn tortillas</Link> (6-inch)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salsa verde or salsa roja for serving</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: sliced radishes, pickled jalapeños</span>
                   </li>
                 </ul>
@@ -390,23 +391,23 @@ export default function TacosAlPastorRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Partially freeze pork for 30 minutes for easier thin slicing</li>
-                  <li>• Don't skip toasting the dried chiles—it deepens the flavor</li>
-                  <li>• Marinate overnight for maximum flavor and tenderness</li>
-                  <li>• Cook pork over screaming high heat for proper char</li>
-                  <li>• Double up tortillas for authentic street-style serving</li>
-                  <li>• Keep toppings simple—let the pork be the star</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Partially freeze pork for 30 minutes for easier thin slicing</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't skip toasting the dried chiles—it deepens the flavor</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Marinate overnight for maximum flavor and tenderness</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Cook pork over screaming high heat for proper char</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Double up tortillas for authentic street-style serving</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Keep toppings simple—let the pork be the star</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Variations & Serving Ideas</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Chicken Al Pastor:</strong> Use boneless chicken thighs instead of pork</li>
-                  <li>• <strong>Spicier Version:</strong> Add chipotle peppers or more guajillo chiles</li>
-                  <li>• <strong>Al Pastor Bowl:</strong> Serve over rice with black beans</li>
-                  <li>• <strong>Grilled Version:</strong> Thread marinated pork on skewers and grill</li>
-                  <li>• <strong>Al Pastor Quesadillas:</strong> Use leftovers in <Link href="/recipes/cheese-quesadillas" className="text-rust-600 hover:underline">quesadillas</Link></li>
-                  <li>• <strong>Torta Al Pastor:</strong> Make a Mexican sandwich on telera roll</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Chicken Al Pastor:</strong> Use boneless chicken thighs instead of pork</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Spicier Version:</strong> Add chipotle peppers or more guajillo chiles</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Al Pastor Bowl:</strong> Serve over rice with black beans</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Grilled Version:</strong> Thread marinated pork on skewers and grill</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Al Pastor Quesadillas:</strong> Use leftovers in <Link href="/recipes/cheese-quesadillas" className="text-rust-600 hover:underline">quesadillas</Link></li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Torta Al Pastor:</strong> Make a Mexican sandwich on telera roll</li>
                 </ul>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Authentic Carne Asada Tacos Recipe | Grilled Steak Tacos | Lonestar Tortillas',
@@ -153,8 +154,8 @@ export default function CarneAsadaTacosRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 2.5 hours (mostly marinating)</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Easy</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 6 servings</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Easy</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 6 servings</span>
             </div>
           </div>
         </section>
@@ -198,59 +199,59 @@ export default function CarneAsadaTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Marinade & Steak</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 lbs flank steak or skirt steak</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>4 garlic cloves, minced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup fresh lime juice (2-3 limes)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup fresh orange juice (1 orange)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/3 cup olive oil</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup soy sauce</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 teaspoons ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon chili powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon smoked paprika</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon dried oregano</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon black pepper</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon cayenne (optional)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup fresh cilantro, chopped</span>
                   </li>
                 </ul>
@@ -259,39 +260,39 @@ export default function CarneAsadaTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For Serving</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>12-18 small <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline font-medium">corn tortillas</Link> (6-inch)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>White onion, finely diced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro, chopped</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Lime wedges</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salsa verde or pico de gallo</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: sliced radishes</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: grilled jalapeños</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: guacamole</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: crumbled cotija cheese</span>
                   </li>
                 </ul>
@@ -426,25 +427,25 @@ export default function CarneAsadaTacosRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Always slice against the grain for maximum tenderness</li>
-                  <li>• Pat the meat dry before grilling for better searing</li>
-                  <li>• Don't overcook—flank/skirt steak is best at medium-rare to medium</li>
-                  <li>• Let the meat rest for 10 minutes before slicing</li>
-                  <li>• Use fresh citrus juice, not bottled, for best flavor</li>
-                  <li>• Marinate for 4-6 hours for deepest flavor penetration</li>
-                  <li>• Double-stack your corn tortillas street-style</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Always slice against the grain for maximum tenderness</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Pat the meat dry before grilling for better searing</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't overcook—flank/skirt steak is best at medium-rare to medium</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Let the meat rest for 10 minutes before slicing</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use fresh citrus juice, not bottled, for best flavor</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Marinate for 4-6 hours for deepest flavor penetration</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Double-stack your corn tortillas street-style</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Serving Ideas</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Classic Tacos:</strong> Simple with onion, cilantro, lime</li>
-                  <li>• <strong>Loaded Style:</strong> Add guacamole, salsa, cheese, crema</li>
-                  <li>• <strong>Burrito Bowl:</strong> Over rice with beans and toppings</li>
-                  <li>• <strong>Quesadillas:</strong> With cheese in <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link></li>
-                  <li>• <strong>Fajita Style:</strong> With grilled peppers and onions</li>
-                  <li>• <strong>Carne Asada Fries:</strong> Over crispy fries with cheese and toppings</li>
-                  <li>• <strong>Torta:</strong> Mexican sandwich on crusty roll</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Classic Tacos:</strong> Simple with onion, cilantro, lime</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Loaded Style:</strong> Add guacamole, salsa, cheese, crema</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Burrito Bowl:</strong> Over rice with beans and toppings</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Quesadillas:</strong> With cheese in <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link></li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Fajita Style:</strong> With grilled peppers and onions</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Carne Asada Fries:</strong> Over crispy fries with cheese and toppings</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Torta:</strong> Mexican sandwich on crusty roll</li>
                 </ul>
               </div>
             </div>

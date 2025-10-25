@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
+import { StarIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'How to Reheat Tortillas: 5 Best Methods Compared | Lonestar Tortillas',
@@ -52,6 +54,20 @@ export default function HowToReheatTortillasPage() {
             </p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-how-to-reheat-tortillas.webp"
+              alt="Warming tortillas on a stovetop comal"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
@@ -83,11 +99,11 @@ export default function HowToReheatTortillasPage() {
           <nav className="bg-masa-50 p-6 rounded-lg mb-12 border border-masa-200">
             <h2 className="text-xl font-bold text-charcoal-950 mb-4">5 Methods Covered:</h2>
             <ul className="space-y-2 text-charcoal-700">
-              <li>• <a href="#stovetop" className="text-sunset-600 hover:underline">Stovetop/Comal (Best Overall)</a></li>
-              <li>• <a href="#microwave" className="text-sunset-600 hover:underline">Microwave (Fastest)</a></li>
-              <li>• <a href="#oven" className="text-sunset-600 hover:underline">Oven (Large Batches)</a></li>
-              <li>• <a href="#airfryer" className="text-sunset-600 hover:underline">Air Fryer (Crispy Tacos)</a></li>
-              <li>• <a href="#steaming" className="text-sunset-600 hover:underline">Steaming (Most Gentle)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#stovetop" className="text-sunset-600 hover:underline">Stovetop/Comal (Best Overall)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#microwave" className="text-sunset-600 hover:underline">Microwave (Fastest)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#oven" className="text-sunset-600 hover:underline">Oven (Large Batches)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#airfryer" className="text-sunset-600 hover:underline">Air Fryer (Crispy Tacos)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#steaming" className="text-sunset-600 hover:underline">Steaming (Most Gentle)</a></li>
             </ul>
           </nav>
 
@@ -95,7 +111,7 @@ export default function HowToReheatTortillasPage() {
           <section id="stovetop" className="mb-12 scroll-mt-8">
             <div className="bg-sunset-600 text-white py-4 px-6 rounded-t-lg">
               <h2 className="text-3xl font-bold">Method #1: Stovetop (Best Overall) 🏆</h2>
-              <p className="mt-2 text-sunset-100">⭐⭐⭐⭐⭐ - Most authentic, perfect texture</p>
+              <p className="mt-2 text-sunset-100"><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /> - Most authentic, perfect texture</p>
             </div>
             <div className="bg-white p-6 rounded-b-lg shadow-lg border-2 border-sunset-600">
               <p className="text-lg text-charcoal-700 mb-6">
@@ -117,10 +133,10 @@ export default function HowToReheatTortillasPage() {
               <div className="bg-masa-100 p-5 rounded-lg mb-4">
                 <h4 className="font-bold text-charcoal-950 mb-2">✅ Best For:</h4>
                 <ul className="text-charcoal-700 space-y-1">
-                  <li>• Corn tortillas (gets that authentic charred flavor)</li>
-                  <li>• When making tacos for immediate serving</li>
-                  <li>• Small batches (1-6 tortillas)</li>
-                  <li>• When you want restaurant-quality results</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Corn tortillas (gets that authentic charred flavor)</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> When making tacos for immediate serving</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Small batches (1-6 tortillas)</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> When you want restaurant-quality results</li>
                 </ul>
               </div>
 
@@ -128,18 +144,18 @@ export default function HowToReheatTortillasPage() {
                 <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                   <h4 className="font-bold text-green-900 mb-2">Pros:</h4>
                   <ul className="text-sm text-green-800 space-y-1">
-                    <li>• Best texture and flavor</li>
-                    <li>• Develops authentic char marks</li>
-                    <li>• No equipment needed</li>
-                    <li>• Quick for small batches</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Best texture and flavor</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Develops authentic char marks</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> No equipment needed</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Quick for small batches</li>
                   </ul>
                 </div>
                 <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
                   <h4 className="font-bold text-red-900 mb-2">Cons:</h4>
                   <ul className="text-sm text-red-800 space-y-1">
-                    <li>• Time-consuming for large batches</li>
-                    <li>• Requires attention (can burn)</li>
-                    <li>• Must do one at a time</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Time-consuming for large batches</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Requires attention (can burn)</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Must do one at a time</li>
                   </ul>
                 </div>
               </div>
@@ -150,7 +166,7 @@ export default function HowToReheatTortillasPage() {
           <section id="microwave" className="mb-12 scroll-mt-8">
             <div className="bg-masa-600 text-white py-4 px-6 rounded-t-lg">
               <h2 className="text-3xl font-bold">Method #2: Microwave (Fastest)</h2>
-              <p className="mt-2 text-masa-100">⭐⭐⭐⭐ - Quick and convenient</p>
+              <p className="mt-2 text-masa-100"><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /> - Quick and convenient</p>
             </div>
             <div className="bg-white p-6 rounded-b-lg shadow-lg border-2 border-masa-600">
               <p className="text-lg text-charcoal-700 mb-6">
@@ -178,17 +194,17 @@ export default function HowToReheatTortillasPage() {
                 <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                   <h4 className="font-bold text-green-900 mb-2">Pros:</h4>
                   <ul className="text-sm text-green-800 space-y-1">
-                    <li>• Fastest method (30 seconds)</li>
-                    <li>• Multiple tortillas at once</li>
-                    <li>• Very convenient</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Fastest method (30 seconds)</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Multiple tortillas at once</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Very convenient</li>
                   </ul>
                 </div>
                 <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
                   <h4 className="font-bold text-red-900 mb-2">Cons:</h4>
                   <ul className="text-sm text-red-800 space-y-1">
-                    <li>• Can make tortillas rubbery</li>
-                    <li>• No char or authentic flavor</li>
-                    <li>• They dry out quickly</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Can make tortillas rubbery</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> No char or authentic flavor</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> They dry out quickly</li>
                   </ul>
                 </div>
               </div>
@@ -199,7 +215,7 @@ export default function HowToReheatTortillasPage() {
           <section id="oven" className="mb-12 scroll-mt-8">
             <div className="bg-charcoal-700 text-white py-4 px-6 rounded-t-lg">
               <h2 className="text-3xl font-bold">Method #3: Oven (Best for Large Batches)</h2>
-              <p className="mt-2 text-cream-200">⭐⭐⭐⭐ - Perfect for parties</p>
+              <p className="mt-2 text-cream-200"><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /> - Perfect for parties</p>
             </div>
             <div className="bg-white p-6 rounded-b-lg shadow-lg border-2 border-charcoal-700">
               <p className="text-lg text-charcoal-700 mb-6">
@@ -219,17 +235,17 @@ export default function HowToReheatTortillasPage() {
                 <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                   <h4 className="font-bold text-green-900 mb-2">Pros:</h4>
                   <ul className="text-sm text-green-800 space-y-1">
-                    <li>• Handles large batches easily</li>
-                    <li>• Even, consistent heating</li>
-                    <li>• Set and forget</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Handles large batches easily</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Even, consistent heating</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Set and forget</li>
                   </ul>
                 </div>
                 <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
                   <h4 className="font-bold text-red-900 mb-2">Cons:</h4>
                   <ul className="text-sm text-red-800 space-y-1">
-                    <li>• Takes 10-15 minutes</li>
-                    <li>• Uses oven energy</li>
-                    <li>• No char marks</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Takes 10-15 minutes</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Uses oven energy</li>
+                    <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> No char marks</li>
                   </ul>
                 </div>
               </div>
@@ -253,19 +269,19 @@ export default function HowToReheatTortillasPage() {
                   <tr className="hover:bg-cream-50">
                     <td className="border px-4 py-3 font-bold">Stovetop</td>
                     <td className="border px-4 py-3">1 min each</td>
-                    <td className="border px-4 py-3">⭐⭐⭐⭐⭐</td>
+                    <td className="border px-4 py-3"><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /></td>
                     <td className="border px-4 py-3">Authentic flavor</td>
                   </tr>
                   <tr className="hover:bg-cream-50">
                     <td className="border px-4 py-3 font-bold">Microwave</td>
                     <td className="border px-4 py-3">30 sec</td>
-                    <td className="border px-4 py-3">⭐⭐⭐⭐</td>
+                    <td className="border px-4 py-3"><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /></td>
                     <td className="border px-4 py-3">Speed</td>
                   </tr>
                   <tr className="hover:bg-cream-50">
                     <td className="border px-4 py-3 font-bold">Oven</td>
                     <td className="border px-4 py-3">10-15 min</td>
-                    <td className="border px-4 py-3">⭐⭐⭐⭐</td>
+                    <td className="border px-4 py-3"><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /></td>
                     <td className="border px-4 py-3">Large batches</td>
                   </tr>
                 </tbody>

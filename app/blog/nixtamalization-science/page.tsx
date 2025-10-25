@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
@@ -53,6 +54,20 @@ export default function NixtamalizationSciencePage() {
             <p className="text-cream-300 mt-4 text-lg">How an ancient Mesoamerican innovation transformed corn from a simple grain into a nutritional powerhouse</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/blog-nixtamalization-science.webp"
+              alt="Corn kernels and masa in the nixtamalization process"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-3xl">
           <div className="prose prose-lg max-w-none">

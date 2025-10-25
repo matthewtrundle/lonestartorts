@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Slow-Cooked Carnitas Tacos Recipe | Authentic Mexican | Lonestar Tortillas',
@@ -148,8 +149,8 @@ export default function CarnitasTacosRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 4 hours</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Medium</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 8 servings</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Medium</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 8 servings</span>
             </div>
           </div>
         </section>
@@ -193,55 +194,55 @@ export default function CarnitasTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Carnitas</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3-4 lbs pork shoulder (pork butt), cut into 2-inch chunks</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 large onion, quartered</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>6 garlic cloves, smashed</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 oranges (juice and zest)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 lime (juice)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 bay leaves</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon dried oregano (Mexican oregano if possible)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon ground cinnamon</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 teaspoons salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon black pepper</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup lard (traditional) or vegetable oil</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 cups chicken or pork stock</span>
                   </li>
                 </ul>
@@ -250,31 +251,31 @@ export default function CarnitasTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For Serving</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>16-24 small <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline font-medium">corn tortillas</Link> (6-inch)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro, roughly chopped</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>White onion, finely diced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Lime wedges</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salsa verde or salsa roja</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: sliced radishes, pickled jalapeños</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: crumbled queso fresco</span>
                   </li>
                 </ul>
@@ -395,23 +396,23 @@ export default function CarnitasTacosRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Don't trim the fat from the pork—it renders during cooking and adds flavor</li>
-                  <li>• Brown the meat in batches for best caramelization</li>
-                  <li>• The pork is done when it shreds easily with a fork</li>
-                  <li>• Always finish by crisping in a hot skillet—this is non-negotiable!</li>
-                  <li>• Save leftover cooking liquid for reheating or making rice</li>
-                  <li>• Use a cast-iron skillet for the crispiest edges</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't trim the fat from the pork—it renders during cooking and adds flavor</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Brown the meat in batches for best caramelization</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> The pork is done when it shreds easily with a fork</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Always finish by crisping in a hot skillet—this is non-negotiable!</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Save leftover cooking liquid for reheating or making rice</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use a cast-iron skillet for the crispiest edges</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Serving Ideas</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Classic Tacos:</strong> Corn tortillas with cilantro, onion, lime</li>
-                  <li>• <strong>Burrito Bowl:</strong> Rice, beans, carnitas, all the toppings</li>
-                  <li>• <strong>Tortas:</strong> Mexican sandwich on crusty bolillo roll</li>
-                  <li>• <strong>Nachos:</strong> Loaded nachos with carnitas and cheese</li>
-                  <li>• <strong>Breakfast Hash:</strong> Carnitas with crispy potatoes and eggs</li>
-                  <li>• <strong>Quesadillas:</strong> Carnitas and cheese between <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link></li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Classic Tacos:</strong> Corn tortillas with cilantro, onion, lime</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Burrito Bowl:</strong> Rice, beans, carnitas, all the toppings</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Tortas:</strong> Mexican sandwich on crusty bolillo roll</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Nachos:</strong> Loaded nachos with carnitas and cheese</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Breakfast Hash:</strong> Carnitas with crispy potatoes and eggs</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Quesadillas:</strong> Carnitas and cheese between <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link></li>
                 </ul>
               </div>
             </div>

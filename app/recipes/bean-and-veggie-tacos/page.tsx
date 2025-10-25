@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Vegetarian Bean & Veggie Tacos Recipe | Easy Meatless Tacos | Lonestar Tortillas',
@@ -151,8 +152,8 @@ export default function BeanVeggieTacosRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 30 minutes</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Easy</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 4 servings</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Easy</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 4 servings</span>
               <span className="bg-lime-600 px-4 py-2 rounded-full">🌱 Vegetarian</span>
             </div>
           </div>
@@ -197,51 +198,51 @@ export default function BeanVeggieTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Seasoned Beans</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 cans (15 oz each) black beans, drained and rinsed</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon olive oil</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 small onion, finely diced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 garlic cloves, minced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon chili powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon smoked paprika</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon dried oregano</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon black pepper</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 cup vegetable broth or water</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon lime juice</span>
                   </li>
                 </ul>
@@ -250,35 +251,35 @@ export default function BeanVeggieTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Roasted Vegetables</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 red bell pepper, cut into strips</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 yellow or orange bell pepper, cut into strips</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 medium zucchini, sliced into half-moons</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 red onion, sliced into wedges</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons olive oil</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon chili powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salt and pepper to taste</span>
                   </li>
                 </ul>
@@ -286,31 +287,31 @@ export default function BeanVeggieTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mt-6 mb-3">For Serving</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>12-16 <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline font-medium">corn tortillas</Link> (6-inch)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Avocado slices or guacamole</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Pico de gallo or salsa</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro, chopped</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Lime wedges</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sour cream or Mexican crema</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: crumbled cotija or feta cheese, shredded lettuce, pickled jalapeños</span>
                   </li>
                 </ul>
@@ -431,25 +432,25 @@ export default function BeanVeggieTacosRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Mash only half the beans for best texture contrast</li>
-                  <li>• Don't overcrowd the roasting pan—gives better caramelization</li>
-                  <li>• Season beans boldly—they need more flavor than meat</li>
-                  <li>• Fresh lime juice at the end is essential for brightness</li>
-                  <li>• Make beans ahead—they're even better the next day</li>
-                  <li>• Double-stack tortillas to prevent breaking</li>
-                  <li>• Roast vegetables until charred for maximum flavor</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Mash only half the beans for best texture contrast</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't overcrowd the roasting pan—gives better caramelization</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Season beans boldly—they need more flavor than meat</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Fresh lime juice at the end is essential for brightness</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Make beans ahead—they're even better the next day</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Double-stack tortillas to prevent breaking</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Roast vegetables until charred for maximum flavor</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Different Beans:</strong> Try pinto, kidney, or chickpeas</li>
-                  <li>• <strong>Sweet Potato:</strong> Add roasted sweet potato cubes</li>
-                  <li>• <strong>Corn:</strong> Toss in fresh or frozen corn kernels with veggies</li>
-                  <li>• <strong>Spicy:</strong> Add jalapeños or chipotle in adobo to beans</li>
-                  <li>• <strong>Mushrooms:</strong> Add sliced mushrooms for meatier texture</li>
-                  <li>• <strong>Fajita Style:</strong> Use <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link> and skip mashing beans</li>
-                  <li>• <strong>Vegan:</strong> Skip cheese, use cashew cream instead of sour cream</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Different Beans:</strong> Try pinto, kidney, or chickpeas</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Sweet Potato:</strong> Add roasted sweet potato cubes</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Corn:</strong> Toss in fresh or frozen corn kernels with veggies</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Spicy:</strong> Add jalapeños or chipotle in adobo to beans</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Mushrooms:</strong> Add sliced mushrooms for meatier texture</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Fajita Style:</strong> Use <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link> and skip mashing beans</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Vegan:</strong> Skip cheese, use cashew cream instead of sour cream</li>
                 </ul>
               </div>
             </div>

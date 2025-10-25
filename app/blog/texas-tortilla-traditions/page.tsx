@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Texas Tortilla Traditions | Where Mexican Heritage Meets Lone Star Culture | Blog',
@@ -44,15 +46,29 @@ export default function TexasTortillaTraditionsPage() {
             />
             <div className="flex items-center gap-2 text-sunset-400 text-sm mb-3 mt-4">
               <span className="px-3 py-1 bg-sunset-900/20 rounded-full">Culture</span>
-              <span>•</span>
+              <span><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
               <span>October 24, 2025</span>
-              <span>•</span>
+              <span><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
               <span>9 min read</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mt-2">Texas Tortilla Traditions</h1>
             <p className="text-cream-300 mt-4 text-lg">Where Mexican heritage meets Lone Star culture: the unique story of tortillas in Texas</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/blog-texas-tortilla-traditions.webp"
+              alt="Traditional Texas-Mexican cooking with tortillas on comal"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-3xl">
           <div className="prose prose-lg max-w-none">
@@ -145,7 +161,7 @@ export default function TexasTortillaTraditionsPage() {
 
                 <div className="space-y-4 my-6">
                   <div className="bg-masa-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-charcoal-950 mb-2">🌮 San Antonio (South Texas)</h4>
+                    <h4 className="font-bold text-charcoal-950 mb-2"><TacoIcon className="inline-block text-sunset-600" size={20} /> San Antonio (South Texas)</h4>
                     <p className="text-sm">The undisputed Tex-Mex capital. Famous for puffy tacos, breakfast tacos at gas stations, and family-run tortilla factories. Flour tortillas dominate, made fresh daily.</p>
                   </div>
 
@@ -211,9 +227,9 @@ export default function TexasTortillaTraditionsPage() {
             <div className="bg-charcoal-950 text-cream-50 p-6 rounded-lg mt-12">
               <h3 className="text-xl font-bold mb-3">Explore More Texas Traditions</h3>
               <ul className="space-y-2 text-sm text-cream-100">
-                <li>• Guide: <Link href="/guides/best-tortillas-for-every-dish" className="text-sunset-400 hover:underline">Best Tortillas for Every Dish</Link></li>
-                <li>• Recipe: <Link href="/recipes/breakfast-burritos" className="text-sunset-400 hover:underline">Texas-Style Breakfast Burritos</Link></li>
-                <li>• Story: <Link href="/blog/marias-story" className="text-sunset-400 hover:underline">Maria&apos;s Journey to Texas</Link></li>
+                <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Guide: <Link href="/guides/best-tortillas-for-every-dish" className="text-sunset-400 hover:underline">Best Tortillas for Every Dish</Link></li>
+                <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Recipe: <Link href="/recipes/breakfast-burritos" className="text-sunset-400 hover:underline">Texas-Style Breakfast Burritos</Link></li>
+                <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Story: <Link href="/blog/marias-story" className="text-sunset-400 hover:underline">Maria&apos;s Journey to Texas</Link></li>
               </ul>
             </div>
           </div>

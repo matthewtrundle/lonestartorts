@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Grilled Chicken Fajitas Recipe | Easy Tex-Mex | Lonestar Tortillas',
@@ -139,8 +140,8 @@ export default function ChickenFajitasRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 30 minutes</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Easy</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 4 servings</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Easy</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 4 servings</span>
             </div>
           </div>
         </section>
@@ -184,55 +185,55 @@ export default function ChickenFajitasRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Fajitas</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1.5 lbs boneless, skinless chicken breast</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 bell peppers (mix of red, yellow, and green), sliced into strips</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 large onion, sliced into strips</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 tablespoons olive oil (divided)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 limes (juice)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>3 garlic cloves, minced</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 teaspoons chili powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1.5 teaspoons ground cumin</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon paprika (smoked paprika is great!)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon dried oregano</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon black pepper</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>8-10 <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline font-medium">flour tortillas</Link> (8-inch)</span>
                   </li>
                 </ul>
@@ -241,31 +242,31 @@ export default function ChickenFajitasRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For Serving</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sour cream</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Guacamole or sliced avocado</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salsa or pico de gallo</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Shredded cheese (cheddar or Mexican blend)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Lime wedges</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: pickled jalapeños, black beans, Mexican rice</span>
                   </li>
                 </ul>
@@ -372,23 +373,23 @@ export default function ChickenFajitasRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Slice chicken against the grain for maximum tenderness</li>
-                  <li>• Don't skip the marinade—even 15 minutes makes a difference</li>
-                  <li>• Use a screaming hot skillet for proper char</li>
-                  <li>• Don't overcrowd the pan or vegetables will steam instead of char</li>
-                  <li>• Let chicken rest for a few minutes after cooking</li>
-                  <li>• Warm tortillas are essential—never serve cold!</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Slice chicken against the grain for maximum tenderness</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't skip the marinade—even 15 minutes makes a difference</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Use a screaming hot skillet for proper char</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't overcrowd the pan or vegetables will steam instead of char</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Let chicken rest for a few minutes after cooking</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Warm tortillas are essential—never serve cold!</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Delicious Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Steak Fajitas:</strong> Use skirt or flank steak instead of chicken</li>
-                  <li>• <strong>Shrimp Fajitas:</strong> Swap for shrimp (cook just 2-3 min per side)</li>
-                  <li>• <strong>Veggie Fajitas:</strong> Add mushrooms, zucchini, corn</li>
-                  <li>• <strong>Spicy Fajitas:</strong> Add sliced jalapeños or cayenne to marinade</li>
-                  <li>• <strong>Fajita Bowl:</strong> Serve over rice instead of in tortillas</li>
-                  <li>• <strong>Mix It Up:</strong> Combine chicken and steak for surf & turf</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Steak Fajitas:</strong> Use skirt or flank steak instead of chicken</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Shrimp Fajitas:</strong> Swap for shrimp (cook just 2-3 min per side)</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Veggie Fajitas:</strong> Add mushrooms, zucchini, corn</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Spicy Fajitas:</strong> Add sliced jalapeños or cayenne to marinade</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Fajita Bowl:</strong> Serve over rice instead of in tortillas</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Mix It Up:</strong> Combine chicken and steak for surf & turf</li>
                 </ul>
               </div>
             </div>

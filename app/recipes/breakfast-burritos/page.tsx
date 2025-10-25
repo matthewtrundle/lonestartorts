@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Bean & Cheese Breakfast Burritos Recipe | Easy & Filling | Lonestar Tortillas',
@@ -134,7 +135,7 @@ export default function BreakfastBurritosRecipe() {
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 20 minutes</span>
               <span className="bg-masa-600 px-4 py-2 rounded-full">😊 Easy</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌯 4 servings</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><BurritoIcon className="inline-block text-masa-600" size={20} /> 4 servings</span>
             </div>
           </div>
         </section>
@@ -178,31 +179,31 @@ export default function BreakfastBurritosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Main Ingredients</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>4 large <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline font-medium">flour tortillas</Link> (10-inch burrito size)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>8 large eggs</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 can (16 oz) refried beans (pinto or black beans)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1.5 cups shredded cheese (cheddar, Monterey Jack, or Mexican blend)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons butter</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 cup salsa (your favorite kind)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Salt and pepper to taste</span>
                   </li>
                 </ul>
@@ -211,35 +212,35 @@ export default function BreakfastBurritosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Optional Add-Ins & Toppings</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Cooked bacon or breakfast sausage</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Crispy hash browns or diced potatoes</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sautéed peppers and onions</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sliced avocado or guacamole</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Sour cream</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Hot sauce (Cholula, Tabasco, or Valentina)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Fresh cilantro</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Pickled jalapeños</span>
                   </li>
                 </ul>
@@ -346,23 +347,23 @@ export default function BreakfastBurritosRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Always warm tortillas before assembling—cold ones crack!</li>
-                  <li>• Don't overfill—less is more for easy rolling</li>
-                  <li>• Keep scrambled eggs slightly undercooked—they finish cooking in the burrito</li>
-                  <li>• Thin the refried beans slightly for easier spreading</li>
-                  <li>• Place seam-side down while eating to prevent unrolling</li>
-                  <li>• Perfect for meal prep—freeze up to 3 months!</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Always warm tortillas before assembling—cold ones crack!</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't overfill—less is more for easy rolling</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Keep scrambled eggs slightly undercooked—they finish cooking in the burrito</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Thin the refried beans slightly for easier spreading</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Place seam-side down while eating to prevent unrolling</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Perfect for meal prep—freeze up to 3 months!</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Delicious Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Meat Lover's:</strong> Add bacon, sausage, or chorizo</li>
-                  <li>• <strong>Potato & Egg:</strong> Add crispy hash browns or home fries</li>
-                  <li>• <strong>Veggie Loaded:</strong> Sautéed peppers, onions, spinach</li>
-                  <li>• <strong>Spicy:</strong> Add jalapeños, hot sauce, or pepper jack cheese</li>
-                  <li>• <strong>California Style:</strong> Add avocado, tomatoes, sour cream</li>
-                  <li>• <strong>Denver Burrito:</strong> Ham, peppers, onions, cheese</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Meat Lover's:</strong> Add bacon, sausage, or chorizo</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Potato & Egg:</strong> Add crispy hash browns or home fries</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Veggie Loaded:</strong> Sautéed peppers, onions, spinach</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Spicy:</strong> Add jalapeños, hot sauce, or pepper jack cheese</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>California Style:</strong> Add avocado, tomatoes, sour cream</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Denver Burrito:</strong> Ham, peppers, onions, cheese</li>
                 </ul>
               </div>
             </div>

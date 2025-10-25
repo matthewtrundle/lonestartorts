@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Corn vs Flour Tortillas: Complete Comparison Guide | Lonestar Tortillas',
@@ -43,6 +44,20 @@ export default function CornVsFlourPage() {
             <p className="text-cream-300 mt-4 text-lg">Everything you need to know to choose the right tortilla</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-corn-vs-flour-tortillas.webp"
+              alt="Side by side comparison of corn and flour tortillas"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           {/* Quick Answer */}

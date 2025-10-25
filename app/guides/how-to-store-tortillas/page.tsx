@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { TacoIcon, BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'How to Store Tortillas: Complete Storage Guide | Lonestar Tortillas',
@@ -86,6 +87,20 @@ export default function HowToStoreTortillasPage() {
             </p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-how-to-store-tortillas.webp"
+              alt="Properly stored tortillas in airtight containers"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         {/* Main Content */}
         <article className="container mx-auto px-6 py-12 max-w-4xl">
@@ -117,13 +132,13 @@ export default function HowToStoreTortillasPage() {
           <nav className="bg-masa-50 p-6 rounded-lg mb-12 border border-masa-200">
             <h2 className="text-xl font-bold text-charcoal-950 mb-4">In This Guide:</h2>
             <ul className="space-y-2 text-charcoal-700">
-              <li>• <a href="#unopened" className="text-sunset-600 hover:underline">Storing Unopened Tortillas</a></li>
-              <li>• <a href="#opened" className="text-sunset-600 hover:underline">Storing Opened Tortillas</a></li>
-              <li>• <a href="#refrigerator" className="text-sunset-600 hover:underline">Refrigeration Method</a></li>
-              <li>• <a href="#freezer" className="text-sunset-600 hover:underline">Freezing Tortillas</a></li>
-              <li>• <a href="#shelf-life" className="text-sunset-600 hover:underline">Shelf Life Guide</a></li>
-              <li>• <a href="#signs-bad" className="text-sunset-600 hover:underline">How to Tell If Tortillas Are Bad</a></li>
-              <li>• <a href="#tips" className="text-sunset-600 hover:underline">Pro Storage Tips</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#unopened" className="text-sunset-600 hover:underline">Storing Unopened Tortillas</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#opened" className="text-sunset-600 hover:underline">Storing Opened Tortillas</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#refrigerator" className="text-sunset-600 hover:underline">Refrigeration Method</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#freezer" className="text-sunset-600 hover:underline">Freezing Tortillas</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#shelf-life" className="text-sunset-600 hover:underline">Shelf Life Guide</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#signs-bad" className="text-sunset-600 hover:underline">How to Tell If Tortillas Are Bad</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#tips" className="text-sunset-600 hover:underline">Pro Storage Tips</a></li>
             </ul>
           </nav>
 
@@ -220,10 +235,10 @@ export default function HowToStoreTortillasPage() {
 
             <h3 className="text-xl font-bold text-charcoal-950 mb-3">When to Refrigerate:</h3>
             <ul className="space-y-2 text-charcoal-700 mb-6 ml-6">
-              <li>• After opening the package (optional but recommended)</li>
-              <li>• If you won't use them within 7-10 days</li>
-              <li>• In hot weather or humid environments</li>
-              <li>• For homemade tortillas with no preservatives</li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> After opening the package (optional but recommended)</li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> If you won't use them within 7-10 days</li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> In hot weather or humid environments</li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> For homemade tortillas with no preservatives</li>
             </ul>
 
             <div className="bg-cream-100 p-6 rounded-lg mb-6">
@@ -401,10 +416,10 @@ export default function HowToStoreTortillasPage() {
             <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
               <h3 className="font-bold text-green-900 mb-3">✓ Still Good If You See:</h3>
               <ul className="space-y-2 text-green-900">
-                <li>• Slight stiffness (can be remedied by warming)</li>
-                <li>• A few days past "best by" date (if properly stored)</li>
-                <li>• Minor drying around edges (trim and use the rest)</li>
-                <li>• Normal grain smell and appearance</li>
+                <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Slight stiffness (can be remedied by warming)</li>
+                <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> A few days past "best by" date (if properly stored)</li>
+                <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Minor drying around edges (trim and use the rest)</li>
+                <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Normal grain smell and appearance</li>
               </ul>
             </div>
           </section>
@@ -417,22 +432,22 @@ export default function HowToStoreTortillasPage() {
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="bg-sunset-50 p-6 rounded-lg">
-                <h3 className="font-bold text-charcoal-950 mb-3 text-lg">🌮 For Corn Tortillas</h3>
+                <h3 className="font-bold text-charcoal-950 mb-3 text-lg"><TacoIcon className="inline-block text-sunset-600" size={20} /> For Corn Tortillas</h3>
                 <ul className="space-y-2 text-charcoal-700 text-sm">
-                  <li>• More delicate than flour - handle gently</li>
-                  <li>• Benefit more from refrigeration in humid climates</li>
-                  <li>• Wrap in a damp towel when warming to prevent cracking</li>
-                  <li>• Freeze especially well with parchment separation</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> More delicate than flour - handle gently</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Benefit more from refrigeration in humid climates</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Wrap in a damp towel when warming to prevent cracking</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Freeze especially well with parchment separation</li>
                 </ul>
               </div>
 
               <div className="bg-masa-100 p-6 rounded-lg">
-                <h3 className="font-bold text-charcoal-950 mb-3 text-lg">🌯 For Flour Tortillas</h3>
+                <h3 className="font-bold text-charcoal-950 mb-3 text-lg"><BurritoIcon className="inline-block text-masa-600" size={20} /> For Flour Tortillas</h3>
                 <ul className="space-y-2 text-charcoal-700 text-sm">
-                  <li>• More durable and forgiving than corn</li>
-                  <li>• Can tolerate room temperature storage longer</li>
-                  <li>• Stack well without sticking together</li>
-                  <li>• Excellent candidates for batch freezing</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> More durable and forgiving than corn</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Can tolerate room temperature storage longer</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Stack well without sticking together</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Excellent candidates for batch freezing</li>
                 </ul>
               </div>
             </div>

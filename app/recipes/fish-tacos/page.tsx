@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Baja Fish Tacos Recipe | Crispy Beer-Battered Fish | Lonestar Tortillas',
@@ -152,8 +153,8 @@ export default function FishTacosRecipe() {
             </p>
             <div className="flex flex-wrap gap-4 mt-6 text-sm">
               <span className="bg-rust-600 px-4 py-2 rounded-full">⏱ 35 minutes</span>
-              <span className="bg-masa-600 px-4 py-2 rounded-full">👨‍🍳 Medium</span>
-              <span className="bg-sunset-600 px-4 py-2 rounded-full">🌮 4 servings</span>
+              <span className="bg-masa-600 px-4 py-2 rounded-full"><ChefIcon className="inline-block text-charcoal-700" size={20} /> Medium</span>
+              <span className="bg-sunset-600 px-4 py-2 rounded-full"><TacoIcon className="inline-block text-sunset-600" size={20} /> 4 servings</span>
             </div>
           </div>
         </section>
@@ -197,43 +198,43 @@ export default function FishTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Fish & Batter</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1.5 lbs white fish (cod, mahi-mahi, or tilapia)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 cup all-purpose flour</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 cup cornstarch</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon baking powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 teaspoon black pepper</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon garlic powder</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon paprika</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 cup cold beer (lager or pilsner)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Vegetable oil for frying (about 4 cups)</span>
                   </li>
                 </ul>
@@ -242,47 +243,47 @@ export default function FishTacosRecipe() {
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For the Slaw & Toppings</h3>
                 <ul className="space-y-2 text-charcoal-800">
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 cups shredded cabbage (green or mix of green/purple)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/4 cup fresh cilantro, chopped</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon lime juice</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Pinch of salt</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1/2 cup sour cream or Mexican crema</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>2 tablespoons mayonnaise</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 tablespoon lime juice</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>1 teaspoon hot sauce (adjust to taste)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>12-16 small <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline font-medium">corn tortillas</Link> (6-inch)</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Lime wedges for serving</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-rust-600">•</span>
+                    <span className="text-rust-600"><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /></span>
                     <span>Optional: pico de gallo, sliced avocado, hot sauce</span>
                   </li>
                 </ul>
@@ -417,25 +418,25 @@ export default function FishTacosRecipe() {
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Pro Tips</h3>
                 <ul className="space-y-2">
-                  <li>• Pat fish completely dry before battering—moisture prevents crisping</li>
-                  <li>• Keep beer and batter cold for lightest, crispiest coating</li>
-                  <li>• Maintain oil temperature at 375°F—use a thermometer!</li>
-                  <li>• Don't overcrowd the pot—fry in small batches</li>
-                  <li>• Let oil return to temperature between batches</li>
-                  <li>• Serve immediately—fried fish doesn't stay crispy long</li>
-                  <li>• Double-stack tortillas to prevent falling apart</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Pat fish completely dry before battering—moisture prevents crisping</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Keep beer and batter cold for lightest, crispiest coating</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Maintain oil temperature at 375°F—use a thermometer!</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Don't overcrowd the pot—fry in small batches</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Let oil return to temperature between batches</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Serve immediately—fried fish doesn't stay crispy long</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Double-stack tortillas to prevent falling apart</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">Variations</h3>
                 <ul className="space-y-2">
-                  <li>• <strong>Grilled Version:</strong> Skip batter, season and grill fish instead</li>
-                  <li>• <strong>Blackened:</strong> Coat in Cajun spices and sear in cast iron</li>
-                  <li>• <strong>Extra Spicy:</strong> Add cayenne to batter, use spicy crema</li>
-                  <li>• <strong>Tropical:</strong> Top with mango salsa and cilantro</li>
-                  <li>• <strong>Asian Fusion:</strong> Use sriracha mayo and pickled vegetables</li>
-                  <li>• <strong>Baja Bowl:</strong> Serve over rice with beans instead of tortillas</li>
-                  <li>• <strong>Gluten-Free:</strong> Use gluten-free flour blend or cornmeal</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Grilled Version:</strong> Skip batter, season and grill fish instead</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Blackened:</strong> Coat in Cajun spices and sear in cast iron</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Extra Spicy:</strong> Add cayenne to batter, use spicy crema</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Tropical:</strong> Top with mango salsa and cilantro</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Asian Fusion:</strong> Use sriracha mayo and pickled vegetables</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Baja Bowl:</strong> Serve over rice with beans instead of tortillas</li>
+                  <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Gluten-Free:</strong> Use gluten-free flour blend or cornmeal</li>
                 </ul>
               </div>
             </div>

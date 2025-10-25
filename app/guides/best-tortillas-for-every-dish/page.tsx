@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import { TacoIcon, BurritoIcon, CheeseIcon, FlameIcon, PepperIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Best Tortillas for Every Dish | Corn vs Flour Guide | Lonestar Tortillas',
@@ -70,6 +72,20 @@ export default function BestTortillasPage() {
             <p className="text-cream-300 mt-4 text-lg">The ultimate guide to choosing corn vs flour for any recipe</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-best-tortillas-for-every-dish.webp"
+              alt="Variety of tortilla dishes including tacos, burritos, and quesadillas"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
@@ -85,7 +101,7 @@ export default function BestTortillasPage() {
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl">🌮</span>
+                  <span className="text-4xl"><TacoIcon className="inline-block text-sunset-600" size={20} /></span>
                   <h3 className="text-2xl font-bold text-charcoal-950">Tacos</h3>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
@@ -103,7 +119,7 @@ export default function BestTortillasPage() {
 
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl">🌯</span>
+                  <span className="text-4xl"><BurritoIcon className="inline-block text-masa-600" size={20} /></span>
                   <h3 className="text-2xl font-bold text-charcoal-950">Burritos</h3>
                 </div>
                 <div className="bg-sunset-50 p-4 rounded">
@@ -117,7 +133,7 @@ export default function BestTortillasPage() {
 
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl">🧀</span>
+                  <span className="text-4xl"><CheeseIcon className="inline-block text-yellow-500" size={18} /></span>
                   <h3 className="text-2xl font-bold text-charcoal-950">Quesadillas</h3>
                 </div>
                 <div className="bg-sunset-50 p-4 rounded">
@@ -177,7 +193,7 @@ export default function BestTortillasPage() {
 
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl">🌮</span>
+                  <span className="text-4xl"><TacoIcon className="inline-block text-sunset-600" size={20} /></span>
                   <h3 className="text-2xl font-bold text-charcoal-950">Tostadas</h3>
                 </div>
                 <div className="bg-masa-50 p-4 rounded">
@@ -190,7 +206,7 @@ export default function BestTortillasPage() {
 
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl">🌮</span>
+                  <span className="text-4xl"><TacoIcon className="inline-block text-sunset-600" size={20} /></span>
                   <h3 className="text-2xl font-bold text-charcoal-950">Taquitos / Flautas</h3>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
@@ -207,7 +223,7 @@ export default function BestTortillasPage() {
 
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl">🌶️</span>
+                  <span className="text-4xl"><PepperIcon className="inline-block text-red-600" size={18} /></span>
                   <h3 className="text-2xl font-bold text-charcoal-950">Chimichangas</h3>
                 </div>
                 <div className="bg-sunset-50 p-4 rounded">
@@ -245,7 +261,7 @@ export default function BestTortillasPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-2xl flex-shrink-0">🔥</span>
+                <span className="text-2xl flex-shrink-0"><FlameIcon className="inline-block text-orange-500" size={18} /></span>
                 <div>
                   <p className="font-bold text-charcoal-950">Grilled/charred flavor → Corn Tortillas</p>
                   <p className="text-sm text-charcoal-800">Corn tortillas develop amazing char and toasted flavor.</p>

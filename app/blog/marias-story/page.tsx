@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
@@ -53,6 +54,20 @@ export default function MariasStoryPage() {
             <p className="text-cream-300 mt-4 text-lg">How one woman&apos;s passion for tradition transforms flour, corn, and love into the perfect tortilla</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/blog-marias-story.webp"
+              alt="Grandmother hands making traditional tortillas in Mexican kitchen"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-3xl">
           <div className="prose prose-lg max-w-none">

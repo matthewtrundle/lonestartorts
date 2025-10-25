@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import { PanIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
   title: 'Gluten-Free Tortillas Guide | Corn, Alternatives & Tips | Lonestar Tortillas',
@@ -70,6 +72,20 @@ export default function GlutenFreeTortillasPage() {
             <p className="text-cream-300 mt-4 text-lg">Everything you need to know about safe, delicious gluten-free tortillas</p>
           </div>
         </header>
+        {/* Hero Image */}
+        <section className="max-w-6xl mx-auto px-6 py-8">
+          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/generated/guide-gluten-free-tortillas.webp"
+              alt="Stack of gluten-free corn tortillas with fresh corn"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </section>
+
+
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
@@ -187,7 +203,7 @@ export default function GlutenFreeTortillasPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl">🥘</span>
+                  <span className="text-2xl"><PanIcon className="inline-block text-charcoal-600" size={18} /></span>
                   <div>
                     <p className="font-bold text-charcoal-950">Watch for Hidden Gluten:</p>
                     <p className="text-sm text-charcoal-800">Sauces, seasonings, and marinades may contain gluten. Ask about ingredients.</p>
