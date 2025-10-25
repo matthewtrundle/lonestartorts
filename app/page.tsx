@@ -9,7 +9,6 @@ import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { HeroInteractions } from '@/components/HeroInteractions'
-import { ResourcesDropdown } from '@/components/ResourcesDropdown'
 
 export default function Home() {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -56,7 +55,18 @@ export default function Home() {
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Source</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
-                <ResourcesDropdown />
+                <Link href="/guides" className="group relative overflow-hidden">
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Guides & Tips</span>
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                </Link>
+                <Link href="/recipes" className="group relative overflow-hidden">
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Recipes</span>
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                </Link>
+                <Link href="/blog" className="group relative overflow-hidden">
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Blog & Stories</span>
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                </Link>
                 <Link href="/story" className="group relative overflow-hidden">
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />

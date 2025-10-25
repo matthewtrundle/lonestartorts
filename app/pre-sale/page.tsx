@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
-import { ResourcesDropdown } from '@/components/ResourcesDropdown'
 import { trackFormSubmission, event } from '@/lib/analytics'
 
 export default function PreSalePage() {
@@ -93,7 +92,15 @@ export default function PreSalePage() {
                 <Link href="/craft" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
                   Source
                 </Link>
-                <ResourcesDropdown />
+                <Link href="/guides" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
+                  Guides & Tips
+                </Link>
+                <Link href="/recipes" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
+                  Recipes
+                </Link>
+                <Link href="/blog" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
+                  Blog & Stories
+                </Link>
                 <Link href="/story" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
                   Story
                 </Link>
