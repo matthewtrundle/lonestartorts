@@ -84,7 +84,12 @@ export default function BlogPage() {
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <header className="bg-charcoal-950 text-cream-50 py-12">
           <div className="container mx-auto px-6">
-            <Breadcrumbs />
+            <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Blog' },
+            ]}
+            />
             <h1 className="text-4xl md:text-5xl font-bold mt-4">Tortilla Stories & Traditions</h1>
             <p className="text-cream-300 mt-4 text-lg max-w-2xl">
               Dive into the rich history, science, and culture that make tortillas more than just food—they're a living tradition.

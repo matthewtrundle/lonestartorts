@@ -66,7 +66,13 @@ export default function HowToFreezeTortillasPage() {
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <header className="bg-charcoal-950 text-cream-50 py-8">
           <div className="container mx-auto px-6">
-            <Breadcrumbs />
+            <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Guides', href: '/guides' },
+              { label: 'How to Freeze Tortillas' },
+            ]}
+            />
             <h1 className="text-4xl md:text-5xl font-bold mt-4">How to Freeze Tortillas</h1>
             <p className="text-cream-300 mt-4 text-lg">Extend shelf life to 6-8 months with proper freezing and thawing techniques</p>
           </div>

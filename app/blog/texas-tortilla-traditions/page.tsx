@@ -35,7 +35,13 @@ export default function TexasTortillaTraditionsPage() {
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <header className="bg-charcoal-950 text-cream-50 py-12">
           <div className="container mx-auto px-6">
-            <Breadcrumbs />
+            <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Blog', href: '/blog' },
+              { label: 'Texas Tortilla Traditions' },
+            ]}
+            />
             <div className="flex items-center gap-2 text-sunset-400 text-sm mb-3 mt-4">
               <span className="px-3 py-1 bg-sunset-900/20 rounded-full">Culture</span>
               <span>•</span>
