@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
   title: 'Homemade vs Store-Bought Tortillas | Which is Better?',

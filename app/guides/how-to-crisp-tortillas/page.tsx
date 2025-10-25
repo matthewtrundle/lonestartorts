@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
   title: 'How to Crisp & Toast Tortillas | Complete Guide | Lonestar Tortillas',
@@ -54,7 +55,7 @@ const articleSchema = {
     name: 'Lonestar Tortillas',
   },
   datePublished: '2025-10-24',
-  dateModified: '2025-10-24',
+  dateModified: '2025-10-25',
 };
 
 export default function HowToCrispTortillasPage() {
@@ -87,6 +88,8 @@ export default function HowToCrispTortillasPage() {
 
 
         <article className="container mx-auto px-6 py-12 max-w-4xl">
+          <LastUpdated date="2025-10-25" />
+
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
             <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
             <p className="text-lg text-charcoal-800">

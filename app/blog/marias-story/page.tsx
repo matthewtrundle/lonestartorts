@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
   title: 'Maria\'s Story: The Heart of Lonestar Tortillas | Blog',
@@ -24,7 +25,7 @@ const articleSchema = {
     name: 'Lonestar Tortillas',
   },
   datePublished: '2025-10-24',
-  dateModified: '2025-10-24',
+  dateModified: '2025-10-25',
   articleSection: 'People & Stories',
 };
 
@@ -70,6 +71,8 @@ export default function MariasStoryPage() {
 
 
         <article className="container mx-auto px-6 py-12 max-w-3xl">
+          <LastUpdated date="2025-10-25" />
+
           <div className="prose prose-lg max-w-none">
             <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
               <p className="text-lg text-charcoal-800 italic">

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
+import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
   title: 'Texas Tortilla Traditions | Where Mexican Heritage Meets Lone Star Culture | Blog',
@@ -25,7 +26,7 @@ const articleSchema = {
     name: 'Lonestar Tortillas',
   },
   datePublished: '2025-10-24',
-  dateModified: '2025-10-24',
+  dateModified: '2025-10-25',
   articleSection: 'Culture & History',
 };
 
@@ -71,6 +72,8 @@ export default function TexasTortillaTraditionsPage() {
 
 
         <article className="container mx-auto px-6 py-12 max-w-3xl">
+          <LastUpdated date="2025-10-25" />
+
           <div className="prose prose-lg max-w-none">
             <div className="bg-rust-50 border-l-4 border-rust-500 p-6 mb-8 rounded-r-lg">
               <p className="text-lg text-charcoal-800 italic">
