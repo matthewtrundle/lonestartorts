@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
+import { Suspense } from 'react';
 import Script from 'next/script';
 import './globals.css';
 import Analytics from '@/components/Analytics';
@@ -327,7 +328,9 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         <GoogleTagManagerNoScript />
-        <Analytics />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         <WebVitalsMonitor />
         <div className="min-h-screen flex flex-col">
           {children}

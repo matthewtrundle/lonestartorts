@@ -107,11 +107,11 @@ export function calculateAverageVitals(
 ): Partial<WebVitals> {
   if (history.length === 0) return {};
 
-  const sum = history.reduce(
+  const sum = history.reduce<{ lcp: number; fid: number; cls: number }>(
     (acc, item) => ({
-      lcp: (acc.lcp || 0) + (item.lcp || 0),
-      fid: (acc.fid || 0) + (item.fid || 0),
-      cls: (acc.cls || 0) + (item.cls || 0),
+      lcp: acc.lcp + (item.lcp || 0),
+      fid: acc.fid + (item.fid || 0),
+      cls: acc.cls + (item.cls || 0),
     }),
     { lcp: 0, fid: 0, cls: 0 }
   );

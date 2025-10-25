@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { trackPurchase } from '@/lib/analytics';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default function SuccessPage() {
   const searchParams = useSearchParams();
   const sessionId = searchParams?.get('session_id');
