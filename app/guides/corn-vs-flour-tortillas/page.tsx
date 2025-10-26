@@ -4,9 +4,12 @@ import Image from 'next/image'
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Corn vs Flour Tortillas: Complete Comparison Guide | Lonestar Tortillas',
+  title: 'Corn vs Flour Tortillas: Complete Comparison Guide',
   description: 'Corn or flour tortillas? Compare taste, texture, nutrition, and best uses. Learn which tortilla is right for your tacos, burritos, and quesadillas. Complete guide with expert tips.',
   keywords: 'corn vs flour tortillas, difference between corn and flour tortillas, corn or flour tortillas, which tortilla is better, tortilla comparison, corn tortilla vs flour',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/corn-vs-flour-tortillas',
+  },
 }
 
 const faqSchema = {

@@ -5,9 +5,12 @@ import { StarIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Reheat Tortillas: 5 Best Methods Compared | Lonestar Tortillas',
+  title: 'How to Reheat Tortillas: 5 Best Methods Compared',
   description: 'Learn the best ways to reheat tortillas for perfect texture. Microwave, stovetop, oven, air fryer, and steaming methods compared. Get warm, soft tortillas every time!',
   keywords: 'how to reheat tortillas, how to warm tortillas, heat tortillas, warm corn tortillas, reheat flour tortillas, tortilla warming methods',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/how-to-reheat-tortillas',
+  },
 }
 
 const faqSchema = {

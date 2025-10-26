@@ -5,9 +5,12 @@ import { TacoIcon, BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Store Tortillas: Complete Storage Guide | Lonestar Tortillas',
+  title: 'How to Store Tortillas: Complete Storage Guide',
   description: 'Learn the best ways to store tortillas for maximum freshness. Room temperature, refrigeration, freezing methods, and shelf life explained. Keep your H-E-B® tortillas fresh for weeks!',
   keywords: 'how to store tortillas, storing tortillas, can you freeze tortillas, tortilla shelf life, how long do tortillas last, keep tortillas fresh, tortilla storage tips',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/how-to-store-tortillas',
+  },
   openGraph: {
     title: 'How to Store Tortillas: Complete Storage Guide',
     description: 'Expert tips for storing corn and flour tortillas. Learn the best methods to keep your tortillas fresh for weeks.',
@@ -58,7 +61,7 @@ const articleSchema = {
     name: 'Lonestar Tortillas',
   },
   datePublished: '2025-10-17',
-  dateModified: '2025-10-17',
+  dateModified: '2025-10-25',
 }
 
 export default function HowToStoreTortillasPage() {

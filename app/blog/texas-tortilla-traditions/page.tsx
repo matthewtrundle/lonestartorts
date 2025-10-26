@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'Texas Tortilla Traditions | Where Mexican Heritage Meets Lone Star Culture | Blog',
   description: 'From San Antonio to El Paso, explore how Texas shaped its own tortilla identity. The story of flour tortillas, breakfast tacos, and Tex-Mex innovation.',
   keywords: 'Texas tortillas, Tex-Mex food, flour tortillas history, breakfast tacos, San Antonio food culture, Texas Mexican food',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/blog/texas-tortilla-traditions',
+  },
   openGraph: {
     title: 'Texas Tortilla Traditions: Where Mexican Heritage Meets Lone Star Culture',
     description: 'The fascinating story of how Texas developed its own unique tortilla culture and Tex-Mex identity.',

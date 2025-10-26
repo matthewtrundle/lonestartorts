@@ -5,9 +5,12 @@ import { TacoIcon, BurritoIcon, CheeseIcon, BulletIcon } from '@/components/ui/I
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Tortilla Size Guide | Which Size for Tacos, Burritos & More | Lonestar Tortillas',
+  title: 'Tortilla Size Guide | Which Size for Tacos, Burritos & More',
   description: 'Complete guide to tortilla sizes. Learn which size tortilla to use for tacos, burritos, quesadillas, and more. 6-inch, 8-inch, 10-inch, and 12-inch explained.',
   keywords: 'tortilla sizes, tortilla size guide, taco size tortilla, burrito size tortilla, quesadilla tortilla size, 6 inch tortilla, 8 inch tortilla',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/tortilla-sizes',
+  },
   openGraph: {
     title: 'Tortilla Size Guide | Complete Guide',
     description: 'Never wonder which tortilla size to use again. Complete guide for every dish.',

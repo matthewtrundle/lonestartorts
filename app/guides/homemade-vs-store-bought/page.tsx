@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'Homemade vs Store-Bought Tortillas | Which is Better?',
   description: 'Complete comparison of homemade and store-bought tortillas covering cost, time, quality, and taste. Expert guide to help you decide which option is right for you.',
   keywords: [
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/homemade-vs-store-bought',
+  },
     'homemade tortillas',
     'store bought tortillas',
     'homemade vs store bought',
@@ -45,7 +48,7 @@ export default function HomemadeVsStoreBoughtPage() {
       },
     },
     datePublished: '2025-01-15',
-    dateModified: '2025-01-15',
+    dateModified: '2025-10-25',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': 'https://lonestartortillas.com/guides/homemade-vs-store-bought',

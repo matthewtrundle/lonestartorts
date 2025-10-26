@@ -5,9 +5,12 @@ import { PanIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Gluten-Free Tortillas Guide | Corn, Alternatives & Tips | Lonestar Tortillas',
+  title: 'Gluten-Free Tortillas Guide | Corn, Alternatives & Tips',
   description: 'Complete guide to gluten-free tortillas. Learn about corn tortillas, gluten-free flour options, cross-contamination, and celiac-safe choices.',
   keywords: 'gluten free tortillas, are corn tortillas gluten free, celiac safe tortillas, gluten free flour tortillas, corn tortillas gluten, wheat free tortillas',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/gluten-free-tortillas',
+  },
   openGraph: {
     title: 'Gluten-Free Tortillas Guide | Complete Guide',
     description: 'Everything you need to know about gluten-free tortillas for celiac and gluten sensitivity.',

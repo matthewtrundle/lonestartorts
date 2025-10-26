@@ -5,9 +5,12 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Freeze Tortillas | Complete Freezing & Thawing Guide | Lonestar Tortillas',
+  title: 'How to Freeze Tortillas | Complete Freezing & Thawing Guide',
   description: 'Learn how to properly freeze tortillas for long-term storage. Step-by-step guide for freezing corn and flour tortillas, plus thawing methods and storage tips.',
   keywords: 'how to freeze tortillas, can you freeze tortillas, freezing corn tortillas, freezing flour tortillas, how long do frozen tortillas last, thawing tortillas',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/how-to-freeze-tortillas',
+  },
   openGraph: {
     title: 'How to Freeze Tortillas | Complete Guide',
     description: 'Extend tortilla shelf life to 6-8 months with proper freezing techniques. Complete guide with thawing tips.',

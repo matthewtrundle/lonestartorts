@@ -238,6 +238,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+        {/* Google Tag Manager */}
+        <GoogleTagManager />
+      </head>
+      <body className={`${inter.variable} ${playfair.variable} font-sans`}>
+        <GoogleTagManagerNoScript />
+
         {/* JSON-LD Structured Data */}
         <Script
           id="json-ld-organization"
@@ -276,12 +282,6 @@ export default function RootLayout({
             />
           </>
         )}
-
-        {/* Google Tag Manager */}
-        <GoogleTagManager />
-      </head>
-      <body className={`${inter.variable} ${playfair.variable} font-sans`}>
-        <GoogleTagManagerNoScript />
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Maria\'s Story: The Heart of Lonestar Tortillas | Blog',
   description: 'Meet Maria, whose passion for authentic tortilla-making transforms simple ingredients into culinary tradition. A journey from her grandmother\'s kitchen in Monterrey to Texas.',
   keywords: 'tortilla maker story, authentic tortillas, Mexican food culture, family recipes, traditional cooking, Maria tortilla maker',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/blog/marias-story',
+  },
   openGraph: {
     title: 'Maria\'s Story: The Heart of Lonestar Tortillas',
     description: 'The inspiring story of a passionate tortilla maker keeping family traditions alive.',
