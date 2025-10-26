@@ -242,21 +242,19 @@ export default function RootLayout({
         <GoogleTagManager />
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
-        <GoogleTagManagerNoScript />
-
         {/* JSON-LD Structured Data */}
-        <Script
+        <script
           id="json-ld-organization"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          strategy="afterInteractive"
         />
-        <Script
+        <script
           id="json-ld-product"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-          strategy="afterInteractive"
         />
+
+        <GoogleTagManagerNoScript />
 
         {/* Google Analytics 4 */}
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' && (
