@@ -125,11 +125,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <span className="text-xl font-light block">
               {formatPrice(price)}
             </span>
-            {savingsPercent && (
-              <span className="text-xs text-green-600 font-medium">
-                Save {savingsPercent}%
-              </span>
-            )}
           </div>
         </div>
 

@@ -12,9 +12,8 @@ export function CartSidebar() {
 
   const handleClose = () => setIsOpen(false);
 
-  // Calculate shipping (flat rate)
-  const shipping = itemCount > 0 ? 1299 : 0; // $12.99 in cents
-  const total = subtotal + shipping;
+  // No shipping charge - included in price
+  const total = subtotal;
 
   return (
     <>
@@ -143,14 +142,17 @@ export function CartSidebar() {
                     <span className="text-gray-dark">Subtotal</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-dark">Shipping</span>
-                    <span className="font-medium">{formatPrice(shipping)}</span>
+                  <div className="flex justify-between text-sm text-green-600">
+                    <span className="font-medium">Free Shipping</span>
+                    <span className="font-medium">$0.00</span>
                   </div>
                   <div className="flex justify-between text-base font-medium pt-2 border-t border-gray-300">
                     <span>Total</span>
                     <span>{formatPrice(total)}</span>
                   </div>
+                  <p className="text-xs text-gray-600 mt-2">
+                    First pack $15, additional packs $10 each
+                  </p>
                 </div>
 
                 {/* Checkout Button */}

@@ -1,110 +1,86 @@
 // Product catalog - centralized source of truth
 // Each package contains 20 tortillas
+// Pricing: $15 for first pack, $10 for each additional pack (applied in cart)
 export const products = [
-  // CORN TORTILLAS
   {
-    sku: 'CORN-1PK',
-    name: 'Corn Tortillas - Single Pack',
-    price: 999, // $9.99
-    description: 'Authentic Texas corn tortillas. 20 tortillas per pack.',
-    image: '/images/products/corn-tortillas.jpg',
+    sku: 'HEB-BUTTER-FLOUR',
+    name: 'H-E-B Bakery Butter Flour Tortillas',
+    price: 1500, // $15 base price (tiered pricing applied in cart)
+    description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer. 20 tortillas per pack.',
+    image: '/images/products/butter-flour-tortillas.jpg',
     storage: 'shelf_stable' as const,
-    category: 'corn',
-    packSize: 1,
+    category: 'flour',
     tortillaCount: 20,
-    pricePerTortilla: 50, // cents
   },
   {
-    sku: 'CORN-2PK',
-    name: 'Corn Tortillas - 2 Pack Bundle',
-    price: 1899, // $18.99 (5% savings vs buying 2 singles)
-    description: 'Stock up and save! 40 tortillas total (2 packs of 20).',
-    image: '/images/products/corn-tortillas.jpg',
-    storage: 'shelf_stable' as const,
-    category: 'corn',
-    packSize: 2,
-    tortillaCount: 40,
-    pricePerTortilla: 47, // cents
-    savingsPercent: 5,
-  },
-  {
-    sku: 'CORN-4PK',
-    name: 'Corn Tortillas - 4 Pack Bundle',
-    price: 3599, // $35.99 (10% savings)
-    description: 'Great value! 80 tortillas total (4 packs of 20).',
-    image: '/images/products/corn-tortillas.jpg',
-    storage: 'shelf_stable' as const,
-    category: 'corn',
-    packSize: 4,
-    tortillaCount: 80,
-    pricePerTortilla: 45, // cents
-    savingsPercent: 10,
-  },
-  {
-    sku: 'CORN-10PK',
-    name: 'Corn Tortillas - 10 Pack Bulk',
-    price: 8499, // $84.99 (15% savings)
-    description: 'Best value! 200 tortillas total (10 packs of 20).',
-    image: '/images/products/corn-tortillas.jpg',
-    storage: 'shelf_stable' as const,
-    category: 'corn',
-    packSize: 10,
-    tortillaCount: 200,
-    pricePerTortilla: 42, // cents
-    savingsPercent: 15,
-  },
-
-  // FLOUR TORTILLAS
-  {
-    sku: 'FLOUR-1PK',
-    name: 'Flour Tortillas - Single Pack',
-    price: 1299, // $12.99
-    description: 'Soft, buttery flour tortillas. 20 tortillas per pack.',
-    image: '/images/products/butter-tortillas.jpg',
+    sku: 'HEB-BAKERY-FLOUR',
+    name: 'H-E-B Bakery Flour Tortillas',
+    price: 1500,
+    description: 'Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile. 20 tortillas per pack.',
+    image: '/images/products/bakery-flour-tortillas.jpg',
     storage: 'shelf_stable' as const,
     category: 'flour',
-    packSize: 1,
     tortillaCount: 20,
-    pricePerTortilla: 65, // cents
   },
   {
-    sku: 'FLOUR-2PK',
-    name: 'Flour Tortillas - 2 Pack Bundle',
-    price: 2499, // $24.99 (4% savings)
-    description: 'Stock up and save! 40 tortillas total (2 packs of 20).',
-    image: '/images/products/butter-tortillas.jpg',
+    sku: 'HEB-HOMESTYLE-FLOUR',
+    name: 'H-E-B Homestyle Flour Tortillas',
+    price: 1500,
+    description: 'A flour version labeled "homestyle" (7-inch diameter) for tacos and fajitas with a soft, fluffy texture. 20 tortillas per pack.',
+    image: '/images/products/homestyle-flour-tortillas.jpg',
     storage: 'shelf_stable' as const,
     category: 'flour',
-    packSize: 2,
-    tortillaCount: 40,
-    pricePerTortilla: 62, // cents
-    savingsPercent: 4,
+    tortillaCount: 20,
   },
   {
-    sku: 'FLOUR-4PK',
-    name: 'Flour Tortillas - 4 Pack Bundle',
-    price: 4799, // $47.99 (8% savings)
-    description: 'Great value! 80 tortillas total (4 packs of 20).',
-    image: '/images/products/butter-tortillas.jpg',
+    sku: 'HEB-YELLOW-CORN',
+    name: 'H-E-B Yellow Corn Tortillas',
+    price: 1500,
+    description: 'Traditional corn tortillas (yellow corn) made for street-taco style. Smaller diameter and corn-based. 20 tortillas per pack.',
+    image: '/images/products/yellow-corn-tortillas.jpg',
     storage: 'shelf_stable' as const,
-    category: 'flour',
-    packSize: 4,
-    tortillaCount: 80,
-    pricePerTortilla: 60, // cents
-    savingsPercent: 8,
+    category: 'corn',
+    tortillaCount: 20,
   },
   {
-    sku: 'FLOUR-10PK',
-    name: 'Flour Tortillas - 10 Pack Bulk',
-    price: 10999, // $109.99 (15% savings)
-    description: 'Best value! 200 tortillas total (10 packs of 20).',
-    image: '/images/products/butter-tortillas.jpg',
+    sku: 'HEB-MIXLA-BLEND',
+    name: 'H-E-B Mixla Corn & Flour Blend Tortillas',
+    price: 1500,
+    description: 'A blend of corn and flour (50/50 mix). Good compromise if you like some corn flavor with flour flexibility. 20 tortillas per pack.',
+    image: '/images/products/mixla-blend-tortillas.jpg',
+    storage: 'shelf_stable' as const,
+    category: 'blend',
+    tortillaCount: 20,
+  },
+  {
+    sku: 'HEB-WHEAT',
+    name: 'H-E-B Fresh Wheat Tortillas',
+    price: 1500,
+    description: 'Wheat flour version for when you want something a little more whole-grain with a different texture. 20 tortillas per pack.',
+    image: '/images/products/wheat-tortillas.jpg',
+    storage: 'shelf_stable' as const,
+    category: 'wheat',
+    tortillaCount: 20,
+  },
+  {
+    sku: 'HEB-CARB-SENSE',
+    name: 'H-E-B Carb Sense Flour Tortillas',
+    price: 1500,
+    description: 'A low-carb flour tortilla alternative with only 4g net carbs each. Good if you\'re watching carbs. 20 tortillas per pack.',
+    image: '/images/products/carb-sense-tortillas.jpg',
+    storage: 'shelf_stable' as const,
+    category: 'low-carb',
+    tortillaCount: 20,
+  },
+  {
+    sku: 'HEB-SOUTHWESTERN',
+    name: 'H-E-B Bakery Southwestern Flour Tortillas',
+    price: 1500,
+    description: 'A flavored variant of flour tortilla with Southwestern seasoning for something with a twist. 20 tortillas per pack.',
+    image: '/images/products/southwestern-tortillas.jpg',
     storage: 'shelf_stable' as const,
     category: 'flour',
-    packSize: 10,
-    tortillaCount: 200,
-    pricePerTortilla: 55, // cents
-    savingsPercent: 15,
+    tortillaCount: 20,
   },
 ];
 

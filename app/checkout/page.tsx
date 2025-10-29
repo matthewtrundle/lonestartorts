@@ -16,10 +16,8 @@ export default function CheckoutPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Calculate totals
-  const shipping = items.length > 0 ? 1299 : 0; // $12.99 flat rate shipping in cents
-  const tax = Math.round(subtotal * 0.0825); // 8.25% Texas sales tax
-  const total = subtotal + shipping + tax;
+  // Calculate totals (shipping included in price, no tax on prepared food in Texas)
+  const total = subtotal;
 
   // Redirect if cart is empty (wait for hydration to avoid race condition)
   React.useEffect(() => {
@@ -142,13 +140,9 @@ export default function CheckoutPage() {
                     <span className="text-gray-600">Subtotal</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className="font-medium">{formatPrice(shipping)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Tax (est.)</span>
-                    <span className="font-medium">{formatPrice(tax)}</span>
+                  <div className="flex justify-between text-sm text-green-600">
+                    <span className="font-medium">Free Shipping</span>
+                    <span className="font-medium">$0.00</span>
                   </div>
                   <div className="border-t border-gray-300 pt-3">
                     <div className="flex justify-between">
@@ -158,6 +152,9 @@ export default function CheckoutPage() {
                       </span>
                     </div>
                   </div>
+                  <p className="text-xs text-gray-600 mt-2">
+                    First pack $15, additional packs $10 each. Tax included.
+                  </p>
                 </div>
 
                 {/* Checkout Button */}
