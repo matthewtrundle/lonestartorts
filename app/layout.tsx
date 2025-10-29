@@ -101,12 +101,14 @@ export const metadata: Metadata = {
   category: 'food',
   classification: 'Food & Beverage',
   referrer: 'origin-when-cross-origin',
+};
+
+// Separate viewport export (Next.js 14+ requirement)
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
   colorScheme: 'light',
   themeColor: '#f97316', // sunset-500
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-  },
 };
 
 // JSON-LD Structured Data for SEO and AIO
