@@ -1,24 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { getProductBySku } from '@/lib/products';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
 const stripe = stripeKey ? new Stripe(stripeKey, {
   apiVersion: '2025-02-24.acacia',
 }) : null;
-
-// Product catalog matching shared spec
-const productCatalog = {
-  'TTC-MT-CORN-SS': {
-    name: 'Mi Tienda-style Corn Tortillas (Shelf-Stable)',
-    price: 499, // Price in cents
-    description: 'Authentic Texas corn tortillas with that perfect texture',
-  },
-  'TTC-BUTTER-FLOUR': {
-    name: 'Butter Flour Tortillas (Family Pack)',
-    price: 599, // Price in cents
-    description: 'Soft, buttery flour tortillas perfect for the whole family',
-  },
-};
 
 export async function POST(req: NextRequest) {
   try {
@@ -29,11 +16,20 @@ export async function POST(req: NextRequest) {
 
     const { items } = await req.json();
 
-    // Create line items for Stripe
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
+    }
+
+    // Create line items for Stripe with server-side validation
     const lineItems = items.map((item: { sku: string; quantity: number }) => {
-      const product = productCatalog[item.sku as keyof typeof productCatalog];
+      const product = getProductBySku(item.sku);
       if (!product) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
+      }
+
+      // Validate quantity
+      if (!item.quantity || item.quantity < 1 || item.quantity > 99) {
+        throw new Error(`Invalid quantity for ${item.sku}`);
       }
 
       return {
@@ -59,6 +55,9 @@ export async function POST(req: NextRequest) {
         product_data: {
           name: 'Standard Shipping (2-3 days)',
           description: 'Fast shipping to anywhere in the US',
+          metadata: {
+            sku: 'SHIPPING',
+          },
         },
         unit_amount: 799, // $7.99 shipping
       },

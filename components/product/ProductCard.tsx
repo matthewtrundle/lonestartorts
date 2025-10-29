@@ -1,6 +1,10 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { formatPrice } from '@/lib/utils';
+import { useCart } from '@/lib/cart-context';
+import { trackAddToCart } from '@/lib/analytics';
 
 interface ProductCardProps {
   sku: string;
@@ -9,7 +13,7 @@ interface ProductCardProps {
   image: string;
   description: string;
   storage: 'shelf_stable' | 'refrigerated';
-  onAddToOrder: (sku: string) => void;
+  onAddToOrder?: (sku: string) => void; // Make optional since we're using cart directly
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -21,9 +25,40 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   storage,
   onAddToOrder,
 }) => {
+  const { addItem, setIsOpen } = useCart();
+  const [showToast, setShowToast] = useState(false);
+
   const storageLabel = storage === 'shelf_stable'
     ? 'Shelf Stable'
     : 'Keep Refrigerated';
+
+  const handleAddToCart = () => {
+    // Add item to cart
+    addItem({
+      sku,
+      name,
+      price,
+      description,
+      image,
+    });
+
+    // Track analytics
+    trackAddToCart({
+      id: sku,
+      name,
+      price: price / 100,
+      quantity: 1,
+    });
+
+    // Show toast notification
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+
+    // Call legacy callback if provided
+    if (onAddToOrder) {
+      onAddToOrder(sku);
+    }
+  };
 
   return (
     <div className="group relative bg-white">
@@ -40,12 +75,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
           <button
-            onClick={() => onAddToOrder(sku)}
+            onClick={handleAddToCart}
             className="px-8 py-3 border-2 border-white text-white text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
           >
-            Add to Order
+            Add to Cart
           </button>
         </div>
+
+        {/* Toast Notification */}
+        {showToast && (
+          <div className="absolute top-4 left-4 right-4 bg-green-600 text-white px-4 py-3 rounded shadow-lg flex items-center justify-between z-10 animate-fade-in">
+            <span className="text-sm font-medium">Added to cart!</span>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="text-xs underline hover:no-underline"
+            >
+              View Cart
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Product Details */}

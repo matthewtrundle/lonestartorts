@@ -47,8 +47,8 @@ export default function Home() {
                 <LogoFull className="text-charcoal-950 transition-transform duration-500 group-hover:scale-105" animated size="md" />
               </div>
               <nav className="nav-items hidden md:flex items-center gap-8">
-                <Link href="/pre-sale" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Pre-Sale</span>
+                <Link href="/shop" className="group relative overflow-hidden">
+                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Shop</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
                 <Link href="/craft" className="group relative overflow-hidden">
@@ -71,8 +71,8 @@ export default function Home() {
                   <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
-                <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors shadow-sunset">
-                  Join Pre-Sale
+                <Link href="/shop" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors shadow-sunset">
+                  Shop Now
                 </Link>
               </nav>
             </div>
@@ -87,10 +87,10 @@ export default function Home() {
             <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
 
             {/* Navigation items */}
-            <Link href="/pre-sale" className="group relative w-12 h-12 flex items-center justify-center">
+            <Link href="/shop" className="group relative w-12 h-12 flex items-center justify-center">
               <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
               <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
-              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Pre-Sale</span>
+              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Shop</span>
             </Link>
 
             <Link href="/craft" className="group relative w-12 h-12 flex items-center justify-center">
@@ -108,14 +108,14 @@ export default function Home() {
             {/* Decorative line */}
             <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
 
-            {/* Pre-Sale button - emphasized */}
-            <Link href="/pre-sale" className="group relative">
+            {/* Shop button - emphasized */}
+            <Link href="/shop" className="group relative">
               <div className="relative">
                 {/* Pulsing background */}
                 <div className="absolute inset-0 rounded-full bg-sunset-500 animate-pulse-slow blur-xl opacity-40" />
                 {/* Main button */}
                 <div className="relative bg-gradient-to-br from-sunset-500 to-sunset-600 text-cream-50 px-5 py-3 rounded-full font-bold text-sm tracking-wider uppercase shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110">
-                  <span className="relative z-10">Join</span>
+                  <span className="relative z-10">Shop</span>
                   {/* Rotating border effect */}
                   <div className="absolute inset-0 rounded-full border-2 border-sunset-300/30 animate-spin-slow" />
                 </div>
@@ -277,8 +277,8 @@ export default function Home() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-6 justify-center mt-16">
-                <Link href="/order" className="bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl">
-                  SHOP COLLECTION
+                <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl">
+                  SHOP NOW
                 </Link>
                 <Link href="/story" className="border-2 border-charcoal-950 text-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors">
                   OUR STORY
@@ -1170,12 +1170,12 @@ export default function Home() {
               </h2>
 
               <p className="text-xl lg:text-2xl text-cream-200 font-light slide-left">
-                Coming Soon - Join the waitlist for genuine H-E-B® tortillas delivered nationwide
+                Genuine H-E-B® tortillas delivered nationwide - now available!
               </p>
 
               <div className="flex flex-wrap gap-6 justify-center mt-12 scale-in">
-                <Link href="/pre-sale" className="group relative overflow-hidden bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover-glow">
-                  <span className="relative z-10">Join Pre-Sale List</span>
+                <Link href="/shop" className="group relative overflow-hidden bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover-glow">
+                  <span className="relative z-10">Shop Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-sunset-600 to-sunset-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                 </Link>
 
@@ -1254,7 +1254,7 @@ export default function Home() {
                   <Link href="/seattle" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Seattle</Link>
                 </div>
                 <div className="space-y-2 pt-4 border-t border-cream-700/20">
-                  <Link href="/pre-sale" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Join Pre-Sale</Link>
+                  <Link href="/shop" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Shop</Link>
                   <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Source</Link>
                   <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
                 </div>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
+import { prisma } from '@/lib/prisma';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
@@ -8,9 +9,6 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 const stripe = stripeKey ? new Stripe(stripeKey, {
   apiVersion: '2025-02-24.acacia',
 }) : null;
-
-// Simple in-memory order storage (replace with database in production)
-const orders = new Map();
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,27 +38,58 @@ export async function POST(req: NextRequest) {
       case 'checkout.session.completed':
         const session = event.data.object as Stripe.Checkout.Session;
 
-        // Create order record
-        const order = {
-          id: session.id,
-          customerEmail: session.customer_details?.email,
-          customerName: session.customer_details?.name,
-          shippingAddress: session.shipping_details?.address,
-          amountTotal: session.amount_total,
-          status: 'confirmed',
-          createdAt: new Date().toISOString(),
-        };
+        try {
+          // Retrieve full session details with line items
+          const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
+            expand: ['line_items'],
+          });
 
-        // Store order (in production, save to database)
-        orders.set(session.id, order);
+          // Generate unique order number
+          const orderNumber = `LST-${Date.now()}-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
 
-        // Send confirmation email (implement with Resend/Nodemailer)
-        console.log('Order confirmed:', order);
+          // Extract line items
+          const items = fullSession.line_items?.data.map((item) => ({
+            sku: item.price?.metadata?.sku || '',
+            name: item.description || '',
+            quantity: item.quantity || 0,
+            price: item.price?.unit_amount || 0,
+          })) || [];
 
-        // You would typically:
-        // 1. Save order to database
-        // 2. Send confirmation email
-        // 3. Trigger fulfillment process
+          // Calculate totals (amounts in cents)
+          const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+          const shipping = 799; // $7.99 flat rate
+          const tax = Math.round(subtotal * 0.0825); // 8.25% Texas sales tax
+          const total = session.amount_total || (subtotal + shipping + tax);
+
+          // Save order to Prisma database
+          const order = await prisma.order.create({
+            data: {
+              orderNumber,
+              email: session.customer_details?.email || '',
+              customerName: session.customer_details?.name || 'Guest',
+              shippingAddress: session.shipping_details?.address as any || {},
+              billingAddress: (session.customer_details?.address || session.shipping_details?.address) as any || {},
+              items: items as any,
+              subtotal,
+              shipping,
+              tax,
+              total,
+              stripePaymentId: session.payment_intent as string || session.id,
+              paymentStatus: 'SUCCEEDED',
+              status: 'PROCESSING',
+            },
+          });
+
+          console.log('Order saved to database:', order.id, order.orderNumber);
+
+          // TODO: Send confirmation email via Resend
+          // TODO: Trigger fulfillment process
+
+        } catch (dbError) {
+          console.error('Failed to save order to database:', dbError);
+          // Still return 200 to Stripe to avoid retries
+          // Log error for manual review
+        }
 
         break;
 
@@ -84,20 +113,62 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Export the orders for tracking (in production, use database)
+// Get order by order number or email
 export async function GET(req: NextRequest) {
-  const url = new URL(req.url);
-  const orderId = url.searchParams.get('id');
+  try {
+    const url = new URL(req.url);
+    const orderNumber = url.searchParams.get('orderNumber');
+    const email = url.searchParams.get('email');
 
-  if (!orderId) {
-    return NextResponse.json({ error: 'Order ID required' }, { status: 400 });
+    if (!orderNumber && !email) {
+      return NextResponse.json(
+        { error: 'Order number or email required' },
+        { status: 400 }
+      );
+    }
+
+    let order;
+
+    if (orderNumber) {
+      order = await prisma.order.findUnique({
+        where: { orderNumber },
+      });
+    } else if (email) {
+      // Return most recent order for email
+      order = await prisma.order.findFirst({
+        where: { email },
+        orderBy: { createdAt: 'desc' },
+      });
+    }
+
+    if (!order) {
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      order: {
+        orderNumber: order.orderNumber,
+        email: order.email,
+        customerName: order.customerName,
+        items: order.items,
+        subtotal: order.subtotal,
+        shipping: order.shipping,
+        tax: order.tax,
+        total: order.total,
+        status: order.status,
+        trackingNumber: order.trackingNumber,
+        carrier: order.carrier,
+        createdAt: order.createdAt,
+        shippedAt: order.shippedAt,
+        deliveredAt: order.deliveredAt,
+      },
+    });
+  } catch (error) {
+    console.error('Order tracking error:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve order' },
+      { status: 500 }
+    );
   }
-
-  const order = orders.get(orderId);
-
-  if (!order) {
-    return NextResponse.json({ error: 'Order not found' }, { status: 404 });
-  }
-
-  return NextResponse.json(order);
 }

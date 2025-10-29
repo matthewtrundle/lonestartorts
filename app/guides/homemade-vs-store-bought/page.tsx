@@ -7,9 +7,6 @@ export const metadata: Metadata = {
   title: 'Homemade vs Store-Bought Tortillas | Which is Better?',
   description: 'Complete comparison of homemade and store-bought tortillas covering cost, time, quality, and taste. Expert guide to help you decide which option is right for you.',
   keywords: [
-  alternates: {
-    canonical: 'https://lonestartortillas.com/guides/homemade-vs-store-bought',
-  },
     'homemade tortillas',
     'store bought tortillas',
     'homemade vs store bought',
@@ -20,6 +17,9 @@ export const metadata: Metadata = {
     'fresh tortillas',
     'authentic tortillas',
   ],
+  alternates: {
+    canonical: 'https://lonestartortillas.com/guides/homemade-vs-store-bought',
+  },
   openGraph: {
     title: 'Homemade vs Store-Bought Tortillas | Complete Comparison Guide',
     description: 'Detailed comparison of homemade and store-bought tortillas. Learn about cost, quality, taste, and convenience to make the right choice.',

@@ -6,6 +6,8 @@ import './globals.css';
 import Analytics from '@/components/Analytics';
 import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
 import WebVitalsMonitor from '@/components/seo/WebVitalsMonitor';
+import { CartProvider } from '@/lib/cart-context';
+import { CartSidebar } from '@/components/cart/CartSidebar';
 
 // Optimized font loading with Next.js
 const inter = Inter({
@@ -284,9 +286,12 @@ export default function RootLayout({
           <Analytics />
         </Suspense>
         <WebVitalsMonitor />
-        <div className="min-h-screen flex flex-col">
-          {children}
-        </div>
+        <CartProvider>
+          <CartSidebar />
+          <div className="min-h-screen flex flex-col">
+            {children}
+          </div>
+        </CartProvider>
       </body>
     </html>
   );
