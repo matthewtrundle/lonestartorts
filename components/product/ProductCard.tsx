@@ -14,6 +14,9 @@ interface ProductCardProps {
   description: string;
   storage: 'shelf_stable' | 'refrigerated';
   onAddToOrder?: (sku: string) => void; // Make optional since we're using cart directly
+  packSize?: number;
+  tortillaCount?: number;
+  savingsPercent?: number;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -24,6 +27,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   description,
   storage,
   onAddToOrder,
+  packSize,
+  tortillaCount,
+  savingsPercent,
 }) => {
   const { addItem, setIsOpen } = useCart();
   const [showToast, setShowToast] = useState(false);
@@ -99,15 +105,32 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Product Details */}
       <div className="pt-6 pb-2">
         <div className="flex justify-between items-start mb-3">
-          <div>
+          <div className="flex-1">
             <h3 className="text-lg font-medium leading-snug mb-1">{name}</h3>
-            <p className="text-xs font-light tracking-widest uppercase text-gray-dark">
-              {storageLabel}
-            </p>
+            <div className="flex items-center gap-2 flex-wrap">
+              <p className="text-xs font-light tracking-widest uppercase text-gray-dark">
+                {storageLabel}
+              </p>
+              {tortillaCount && (
+                <>
+                  <span className="text-gray-400">•</span>
+                  <p className="text-xs font-light tracking-wide text-gray-dark">
+                    {tortillaCount} tortillas
+                  </p>
+                </>
+              )}
+            </div>
           </div>
-          <span className="text-xl font-light">
-            {formatPrice(price)}
-          </span>
+          <div className="text-right ml-4">
+            <span className="text-xl font-light block">
+              {formatPrice(price)}
+            </span>
+            {savingsPercent && (
+              <span className="text-xs text-green-600 font-medium">
+                Save {savingsPercent}%
+              </span>
+            )}
+          </div>
         </div>
 
         <p className="text-sm font-light text-gray-dark leading-relaxed">

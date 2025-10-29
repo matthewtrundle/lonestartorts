@@ -13,6 +13,10 @@ interface Product {
   image: string;
   storage: string;
   category: string;
+  packSize?: number;
+  tortillaCount?: number;
+  pricePerTortilla?: number;
+  savingsPercent?: number;
 }
 
 export default function ShopPage() {
@@ -76,7 +80,7 @@ export default function ShopPage() {
 
           {/* Products Grid */}
           {!loading && !error && products.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {products.map((product) => (
                 <ProductCard
                   key={product.sku}
@@ -86,6 +90,9 @@ export default function ShopPage() {
                   description={product.description}
                   image={product.image}
                   storage={product.storage as 'shelf_stable' | 'refrigerated'}
+                  packSize={product.packSize}
+                  tortillaCount={product.tortillaCount}
+                  savingsPercent={product.savingsPercent}
                 />
               ))}
             </div>
@@ -106,21 +113,18 @@ export default function ShopPage() {
               </h2>
               <div className="grid md:grid-cols-3 gap-8 mt-8">
                 <div>
-                  <div className="text-4xl mb-3">🌟</div>
                   <h3 className="font-semibold text-lg mb-2">Premium Quality</h3>
                   <p className="text-gray-600">
                     Authentic Texas-style tortillas made with quality ingredients
                   </p>
                 </div>
                 <div>
-                  <div className="text-4xl mb-3">📦</div>
                   <h3 className="font-semibold text-lg mb-2">Fast Shipping</h3>
                   <p className="text-gray-600">
                     2-3 day delivery anywhere in the US
                   </p>
                 </div>
                 <div>
-                  <div className="text-4xl mb-3">✅</div>
                   <h3 className="font-semibold text-lg mb-2">Shelf Stable</h3>
                   <p className="text-gray-600">
                     Long-lasting freshness without refrigeration
