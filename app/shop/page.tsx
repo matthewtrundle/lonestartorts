@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ProductCard } from '@/components/product/ProductCard';
