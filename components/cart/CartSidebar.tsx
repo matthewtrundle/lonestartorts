@@ -8,12 +8,9 @@ import { formatPrice } from '@/lib/utils';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 
 export function CartSidebar() {
-  const { items, itemCount, subtotal, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
+  const { items, itemCount, subtotal, shipping, total, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
 
   const handleClose = () => setIsOpen(false);
-
-  // No shipping charge - included in price
-  const total = subtotal;
 
   return (
     <>
@@ -142,9 +139,11 @@ export function CartSidebar() {
                     <span className="text-gray-dark">Subtotal</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-green-600">
-                    <span className="font-medium">Free Shipping</span>
-                    <span className="font-medium">$0.00</span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-dark">
+                      Shipping ({itemCount} {itemCount === 1 ? 'pack' : 'packs'})
+                    </span>
+                    <span className="font-medium">{formatPrice(shipping)}</span>
                   </div>
                   <div className="flex justify-between text-base font-medium pt-2 border-t border-gray-300">
                     <span>Total</span>

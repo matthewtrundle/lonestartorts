@@ -12,12 +12,9 @@ import { Header } from '@/components/layout/Header';
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, subtotal, clearCart, isHydrated } = useCart();
+  const { items, itemCount, subtotal, shipping, total, clearCart, isHydrated } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Calculate totals (shipping included in price, no tax on prepared food in Texas)
-  const total = subtotal;
 
   // Redirect if cart is empty (wait for hydration to avoid race condition)
   React.useEffect(() => {
@@ -140,9 +137,11 @@ export default function CheckoutPage() {
                     <span className="text-gray-600">Subtotal</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-green-600">
-                    <span className="font-medium">Free Shipping</span>
-                    <span className="font-medium">$0.00</span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">
+                      Shipping ({itemCount} {itemCount === 1 ? 'pack' : 'packs'})
+                    </span>
+                    <span className="font-medium">{formatPrice(shipping)}</span>
                   </div>
                   <div className="border-t border-gray-300 pt-3">
                     <div className="flex justify-between">

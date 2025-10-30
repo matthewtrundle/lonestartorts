@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { calculateShipping } from '@/lib/products';
 
 // Cart item structure matching the product catalog
 export interface CartItem {
@@ -16,6 +17,8 @@ interface CartContextType {
   items: CartItem[];
   itemCount: number;
   subtotal: number;
+  shipping: number;
+  total: number;
   addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
   removeItem: (sku: string) => void;
   updateQuantity: (sku: string, quantity: number) => void;
@@ -98,15 +101,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
   };
 
-  // Calculate totals (simple price × quantity)
-  // Pricing: 1-pack = $20, 2-pack = $32
+  // Calculate totals with smart shipping
+  // Pricing: $20 per pack
+  // Shipping: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const shipping = calculateShipping(itemCount);
+  const total = subtotal + shipping;
 
   const value: CartContextType = {
     items,
     itemCount,
     subtotal,
+    shipping,
+    total,
     addItem,
     removeItem,
     updateQuantity,
