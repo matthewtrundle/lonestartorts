@@ -1,90 +1,153 @@
 // Product catalog - centralized source of truth
-// Each package contains 20 tortillas
-// Pricing: $15 for first pack, $10 for each additional pack (applied in cart)
-export const products = [
+// Pack sizes: 1-pack (20 tortillas) = $20, 2-pack (40 tortillas) = $32
+// Users select pack size, then adjust quantity in cart
+
+export interface PackSize {
+  size: 1 | 2;
+  price: number; // Price in cents
+  tortillaCount: number;
+  sku: string; // Unique SKU for this pack size variant
+}
+
+export interface Product {
+  baseId: string; // Base product identifier
+  name: string;
+  description: string;
+  image: string;
+  storage: 'shelf_stable' | 'refrigerated';
+  category: string;
+  packSizes: PackSize[];
+}
+
+export const products: Product[] = [
   {
-    sku: 'HEB-BUTTER-FLOUR',
+    baseId: 'HEB-BUTTER-FLOUR',
     name: 'H-E-B Bakery Butter Flour Tortillas',
-    price: 1500, // $15 base price (tiered pricing applied in cart)
-    description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer. 20 tortillas per pack.',
+    description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer.',
     image: '/images/products/butter-flour-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'flour',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-BUTTER-FLOUR-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-BUTTER-FLOUR-2PK' },
+    ],
   },
   {
-    sku: 'HEB-BAKERY-FLOUR',
+    baseId: 'HEB-BAKERY-FLOUR',
     name: 'H-E-B Bakery Flour Tortillas',
-    price: 1500,
-    description: 'Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile. 20 tortillas per pack.',
+    description: 'Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile.',
     image: '/images/products/bakery-flour-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'flour',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-BAKERY-FLOUR-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-BAKERY-FLOUR-2PK' },
+    ],
   },
   {
-    sku: 'HEB-HOMESTYLE-FLOUR',
+    baseId: 'HEB-HOMESTYLE-FLOUR',
     name: 'H-E-B Homestyle Flour Tortillas',
-    price: 1500,
-    description: 'A flour version labeled "homestyle" (7-inch diameter) for tacos and fajitas with a soft, fluffy texture. 20 tortillas per pack.',
+    description: 'A flour version labeled "homestyle" (7-inch diameter) for tacos and fajitas with a soft, fluffy texture.',
     image: '/images/products/homestyle-flour-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'flour',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-HOMESTYLE-FLOUR-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-HOMESTYLE-FLOUR-2PK' },
+    ],
   },
   {
-    sku: 'HEB-YELLOW-CORN',
+    baseId: 'HEB-YELLOW-CORN',
     name: 'H-E-B Yellow Corn Tortillas',
-    price: 1500,
-    description: 'Traditional corn tortillas (yellow corn) made for street-taco style. Smaller diameter and corn-based. 20 tortillas per pack.',
+    description: 'Traditional corn tortillas (yellow corn) made for street-taco style. Smaller diameter and corn-based.',
     image: '/images/products/yellow-corn-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'corn',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-YELLOW-CORN-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-YELLOW-CORN-2PK' },
+    ],
   },
   {
-    sku: 'HEB-MIXLA-BLEND',
+    baseId: 'HEB-MIXLA-BLEND',
     name: 'H-E-B Mixla Corn & Flour Blend Tortillas',
-    price: 1500,
-    description: 'A blend of corn and flour (50/50 mix). Good compromise if you like some corn flavor with flour flexibility. 20 tortillas per pack.',
+    description: 'A blend of corn and flour (50/50 mix). Good compromise if you like some corn flavor with flour flexibility.',
     image: '/images/products/mixla-blend-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'blend',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-MIXLA-BLEND-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-MIXLA-BLEND-2PK' },
+    ],
   },
   {
-    sku: 'HEB-WHEAT',
+    baseId: 'HEB-WHEAT',
     name: 'H-E-B Fresh Wheat Tortillas',
-    price: 1500,
-    description: 'Wheat flour version for when you want something a little more whole-grain with a different texture. 20 tortillas per pack.',
+    description: 'Wheat flour version for when you want something a little more whole-grain with a different texture.',
     image: '/images/products/wheat-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'wheat',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-WHEAT-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-WHEAT-2PK' },
+    ],
   },
   {
-    sku: 'HEB-CARB-SENSE',
+    baseId: 'HEB-CARB-SENSE',
     name: 'H-E-B Carb Sense Flour Tortillas',
-    price: 1500,
-    description: 'A low-carb flour tortilla alternative with only 4g net carbs each. Good if you\'re watching carbs. 20 tortillas per pack.',
+    description: 'A low-carb flour tortilla alternative with only 4g net carbs each. Good if you\'re watching carbs.',
     image: '/images/products/carb-sense-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'low-carb',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-CARB-SENSE-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-CARB-SENSE-2PK' },
+    ],
   },
   {
-    sku: 'HEB-SOUTHWESTERN',
+    baseId: 'HEB-SOUTHWESTERN',
     name: 'H-E-B Bakery Southwestern Flour Tortillas',
-    price: 1500,
-    description: 'A flavored variant of flour tortilla with Southwestern seasoning for something with a twist. 20 tortillas per pack.',
+    description: 'A flavored variant of flour tortilla with Southwestern seasoning for something with a twist.',
     image: '/images/products/southwestern-tortillas.jpg',
-    storage: 'shelf_stable' as const,
+    storage: 'shelf_stable',
     category: 'flour',
-    tortillaCount: 20,
+    packSizes: [
+      { size: 1, price: 2000, tortillaCount: 20, sku: 'HEB-SOUTHWESTERN-1PK' },
+      { size: 2, price: 3200, tortillaCount: 40, sku: 'HEB-SOUTHWESTERN-2PK' },
+    ],
   },
 ];
 
 // Helper function to get product by SKU (for server-side use)
 export function getProductBySku(sku: string) {
-  return products.find((p) => p.sku === sku);
+  for (const product of products) {
+    const packSize = product.packSizes.find((ps) => ps.sku === sku);
+    if (packSize) {
+      return {
+        ...product,
+        selectedPackSize: packSize,
+        sku: packSize.sku,
+        price: packSize.price,
+        tortillaCount: packSize.tortillaCount,
+      };
+    }
+  }
+  return undefined;
+}
+
+// Helper to get all product variants (for APIs that need flat list)
+export function getAllProductVariants() {
+  return products.flatMap((product) =>
+    product.packSizes.map((packSize) => ({
+      sku: packSize.sku,
+      name: `${product.name} (${packSize.size}-Pack)`,
+      price: packSize.price,
+      description: product.description,
+      image: product.image,
+      storage: product.storage,
+      category: product.category,
+      packSize: packSize.size,
+      tortillaCount: packSize.tortillaCount,
+    }))
+  );
 }

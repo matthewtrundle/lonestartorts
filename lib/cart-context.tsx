@@ -98,12 +98,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
   };
 
-  // Calculate totals with tiered pricing
-  // Pricing: $15 for first pack, $10 for each additional pack
+  // Calculate totals (simple price × quantity)
+  // Pricing: 1-pack = $20, 2-pack = $32
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
-  const subtotal = itemCount > 0
-    ? 1500 + (itemCount - 1) * 1000 // First pack $15, additional packs $10 each
-    : 0;
+  const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
 
   const value: CartContextType = {
     items,

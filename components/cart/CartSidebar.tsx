@@ -150,9 +150,6 @@ export function CartSidebar() {
                     <span>Total</span>
                     <span>{formatPrice(total)}</span>
                   </div>
-                  <p className="text-xs text-gray-600 mt-2">
-                    First pack $15, additional packs $10 each
-                  </p>
                 </div>
 
                 {/* Checkout Button */}

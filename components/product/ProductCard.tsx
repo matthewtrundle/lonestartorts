@@ -5,54 +5,50 @@ import Image from 'next/image';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
 import { trackAddToCart } from '@/lib/analytics';
+import type { PackSize } from '@/lib/products';
 
 interface ProductCardProps {
-  sku: string;
+  baseId: string;
   name: string;
-  price: number;
   image: string;
   description: string;
   storage: 'shelf_stable' | 'refrigerated';
-  onAddToOrder?: (sku: string) => void; // Make optional since we're using cart directly
-  packSize?: number;
-  tortillaCount?: number;
-  savingsPercent?: number;
+  packSizes: PackSize[];
+  onAddToOrder?: (sku: string) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
-  sku,
+  baseId,
   name,
-  price,
   image,
   description,
   storage,
+  packSizes,
   onAddToOrder,
-  packSize,
-  tortillaCount,
-  savingsPercent,
 }) => {
   const { addItem, setIsOpen } = useCart();
   const [showToast, setShowToast] = useState(false);
+  const [selectedPackSize, setSelectedPackSize] = useState<PackSize>(packSizes[0]);
 
   const storageLabel = storage === 'shelf_stable'
     ? 'Shelf Stable'
     : 'Keep Refrigerated';
 
   const handleAddToCart = () => {
-    // Add item to cart
+    // Add item to cart with selected pack size
     addItem({
-      sku,
-      name,
-      price,
+      sku: selectedPackSize.sku,
+      name: `${name} (${selectedPackSize.size}-Pack)`,
+      price: selectedPackSize.price,
       description,
       image,
     });
 
     // Track analytics
     trackAddToCart({
-      id: sku,
-      name,
-      price: price / 100,
+      id: selectedPackSize.sku,
+      name: `${name} (${selectedPackSize.size}-Pack)`,
+      price: selectedPackSize.price / 100,
       quantity: 1,
     });
 
@@ -62,7 +58,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
     // Call legacy callback if provided
     if (onAddToOrder) {
-      onAddToOrder(sku);
+      onAddToOrder(selectedPackSize.sku);
     }
   };
 
@@ -104,36 +100,50 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       {/* Product Details */}
       <div className="pt-6 pb-2">
-        <div className="flex justify-between items-start mb-3">
-          <div className="flex-1">
-            <h3 className="text-lg font-medium leading-snug mb-1">{name}</h3>
-            <div className="flex items-center gap-2 flex-wrap">
-              <p className="text-xs font-light tracking-widest uppercase text-gray-dark">
-                {storageLabel}
-              </p>
-              {tortillaCount && (
-                <>
-                  <span className="text-gray-400">•</span>
-                  <p className="text-xs font-light tracking-wide text-gray-dark">
-                    {tortillaCount} tortillas
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
-          <div className="text-right ml-4">
-            <span className="text-xl font-light block">
-              {formatPrice(price)}
-            </span>
+        <div className="mb-3">
+          <h3 className="text-lg font-medium leading-snug mb-1">{name}</h3>
+          <div className="flex items-center gap-2 flex-wrap">
+            <p className="text-xs font-light tracking-widest uppercase text-gray-dark">
+              {storageLabel}
+            </p>
+            <span className="text-gray-400">•</span>
+            <p className="text-xs font-light tracking-wide text-gray-dark">
+              {selectedPackSize.tortillaCount} tortillas
+            </p>
           </div>
         </div>
 
-        <p className="text-sm font-light text-gray-dark leading-relaxed">
+        <p className="text-sm font-light text-gray-dark leading-relaxed mb-4">
           {description}
         </p>
 
+        {/* Pack Size Selector */}
+        <div className="mb-4">
+          <label className="text-xs font-medium text-gray-700 mb-2 block">
+            Select Pack Size:
+          </label>
+          <div className="flex gap-2">
+            {packSizes.map((pack) => (
+              <button
+                key={pack.sku}
+                onClick={() => setSelectedPackSize(pack)}
+                className={`flex-1 py-3 px-4 border-2 rounded transition-all ${
+                  selectedPackSize.sku === pack.sku
+                    ? 'border-sunset-500 bg-sunset-50 text-sunset-700'
+                    : 'border-gray-300 hover:border-gray-400'
+                }`}
+              >
+                <div className="text-sm font-medium">{pack.size}-Pack</div>
+                <div className="text-xs text-gray-600 mt-1">
+                  {formatPrice(pack.price)}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {storage === 'shelf_stable' && (
-          <p className="text-xs font-light text-gray-dark mt-4 tracking-wide">
+          <p className="text-xs font-light text-gray-dark tracking-wide">
             Store in a cool, dry place
           </p>
         )}

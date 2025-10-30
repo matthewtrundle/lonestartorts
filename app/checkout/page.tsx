@@ -152,9 +152,6 @@ export default function CheckoutPage() {
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-600 mt-2">
-                    First pack $15, additional packs $10 each. Tax included.
-                  </p>
                 </div>
 
                 {/* Checkout Button */}

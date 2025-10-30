@@ -5,19 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ProductCard } from '@/components/product/ProductCard';
 
-interface Product {
-  sku: string;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-  storage: string;
-  category: string;
-  packSize?: number;
-  tortillaCount?: number;
-  pricePerTortilla?: number;
-  savingsPercent?: number;
-}
+import type { Product } from '@/lib/products';
 
 export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -83,16 +71,13 @@ export default function ShopPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {products.map((product) => (
                 <ProductCard
-                  key={product.sku}
-                  sku={product.sku}
+                  key={product.baseId}
+                  baseId={product.baseId}
                   name={product.name}
-                  price={product.price}
                   description={product.description}
                   image={product.image}
-                  storage={product.storage as 'shelf_stable' | 'refrigerated'}
-                  packSize={product.packSize}
-                  tortillaCount={product.tortillaCount}
-                  savingsPercent={product.savingsPercent}
+                  storage={product.storage}
+                  packSizes={product.packSizes}
                 />
               ))}
             </div>
