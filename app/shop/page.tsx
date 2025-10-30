@@ -37,6 +37,21 @@ export default function ShopPage() {
       <Header />
 
       <main className="min-h-screen bg-cream-50">
+        {/* Hero Image Section */}
+        <div className="w-full mb-12">
+          <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
+            <Image
+              src="/images/shop/texas-tortillas-hero.png"
+              alt="H-E-B Tortillas with Texas Flag - Butter, Southwest Style, Flour, and Corn Tortillas"
+              fill
+              className="object-cover object-center"
+              priority
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+          </div>
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Hero Section */}
           <div className="text-center mb-16">
