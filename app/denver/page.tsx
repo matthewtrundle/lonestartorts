@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'H-E-B Tortillas Delivered to Denver | Lonestar Tortillas',
+  title: 'H-E-B Tortillas Delivered to Denver',
   description: 'Mountain living meets Texas flavor! Get authentic H-E-B® tortillas delivered to Denver & Colorado. Corn, flour & butter tortillas shipped fresh. Order today!',
   keywords: 'H-E-B tortillas Denver, tortillas Colorado delivery, Texas tortillas Denver, H-E-B Colorado, authentic tortillas Denver, tortilla delivery Front Range',
   openGraph: {

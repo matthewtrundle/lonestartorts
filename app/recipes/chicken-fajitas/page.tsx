@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Grilled Chicken Fajitas Recipe | Easy Tex-Mex | Lonestar Tortillas',
+  title: 'Grilled Chicken Fajitas Recipe',
   description: 'Restaurant-quality chicken fajitas at home! Marinated grilled chicken with sizzling peppers and onions. Learn how to make authentic fajitas in 30 minutes.',
   keywords: 'chicken fajitas recipe, grilled chicken fajitas, how to make fajitas, tex-mex fajitas, easy fajita recipe, homemade fajitas',
   openGraph: {

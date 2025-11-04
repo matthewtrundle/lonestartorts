@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { CheeseIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Classic Cheese Quesadillas Recipe | Easy & Quick | Lonestar Tortillas',
+  title: 'Classic Cheese Quesadillas Recipe',
   description: 'Learn how to make perfect cheese quesadillas with our easy recipe. Crispy outside, melted cheese inside. Ready in just 10 minutes with simple ingredients!',
   keywords: 'cheese quesadillas recipe, how to make quesadillas, easy quesadilla recipe, quick lunch recipe, quesadilla variations, melted cheese tortilla',
   openGraph: {

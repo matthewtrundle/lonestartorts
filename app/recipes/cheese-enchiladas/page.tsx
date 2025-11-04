@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Classic Cheese Enchiladas Recipe | Easy Red Sauce | Lonestar Tortillas',
+  title: 'Classic Cheese Enchiladas Recipe',
   description: 'Learn how to make authentic cheese enchiladas with homemade red sauce. Easy step-by-step recipe for classic Mexican enchiladas rojas ready in 45 minutes.',
   keywords: 'cheese enchiladas recipe, enchiladas rojas, red sauce enchiladas, how to make enchiladas, easy enchiladas, mexican enchiladas',
   openGraph: {

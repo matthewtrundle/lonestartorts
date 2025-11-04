@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Make Fresh Tortillas at Home | Complete Guide',
+  title: 'How to Make Fresh Tortillas',
   description: 'Learn how to make fresh flour and corn tortillas from scratch. Step-by-step instructions, ingredients, techniques, and tips for homemade tortillas.',
   keywords: 'how to make tortillas, homemade tortillas, make tortillas from scratch, tortilla recipe, fresh tortillas, corn tortillas recipe, flour tortillas recipe',
   alternates: {
     canonical: 'https://lonestartortillas.com/guides/how-to-make-tortillas',
   },
   openGraph: {
-    title: 'How to Make Fresh Tortillas at Home | Complete Guide',
+    title: 'How to Make Fresh Tortillas',
     description: 'Master the art of making fresh tortillas from scratch with our comprehensive guide.',
     type: 'article',
   },

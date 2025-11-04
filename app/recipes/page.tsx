@@ -4,7 +4,7 @@ import { RecipeCard } from '@/components/RecipeCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Tortilla Recipes | Breakfast Tacos, Quesadillas & More | Lonestar Tortillas',
+  title: 'Tortilla Recipes | Tacos, Quesadillas & More',
   description: 'Discover authentic Texas tortilla recipes. From breakfast tacos to quesadillas, learn how to make delicious meals with H-E-B® tortillas. Easy, quick, and family-friendly.',
   keywords: 'tortilla recipes, breakfast taco recipe, texas recipes, quesadilla recipe, authentic mexican recipes, H-E-B tortilla recipes, easy tortilla meals, taco recipes',
   openGraph: {
@@ -162,7 +162,7 @@ export default function RecipesPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-5xl md:text-6xl font-bold mb-4 font-display">
-              Tortilla Recipes
+              Authentic Texas Tortilla Recipes & Cooking Guides
             </h1>
             <p className="text-xl text-cream-100 max-w-3xl">
               Discover authentic Texas recipes that showcase the versatility of quality tortillas.

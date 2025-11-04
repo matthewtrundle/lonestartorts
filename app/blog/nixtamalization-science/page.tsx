@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'The Science of Nixtamalization | Ancient Process, Modern Benefits | Blog',
+  title: 'Science of Nixtamalization',
   description: 'Discover the 3,500-year-old process that transforms corn into masa. How lime treatment unlocks nutrition, flavor, and the perfect tortilla texture.',
   keywords: 'nixtamalization, masa harina, corn processing, traditional tortillas, calcium hydroxide, tortilla science, ancient food science',
   alternates: {

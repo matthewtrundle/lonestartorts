@@ -5,7 +5,7 @@ import { StarIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Reheat Tortillas: 5 Best Methods Compared',
+  title: 'How to Reheat Tortillas: 5 Methods',
   description: 'Learn the best ways to reheat tortillas for perfect texture. Microwave, stovetop, oven, air fryer, and steaming methods compared. Get warm, soft tortillas every time!',
   keywords: 'how to reheat tortillas, how to warm tortillas, heat tortillas, warm corn tortillas, reheat flour tortillas, tortilla warming methods',
   alternates: {
@@ -103,13 +103,11 @@ export default function HowToReheatTortillasPage() {
 
           {/* TOC */}
           <nav className="bg-masa-50 p-6 rounded-lg mb-12 border border-masa-200">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-4">5 Methods Covered:</h2>
+            <h2 className="text-xl font-bold text-charcoal-950 mb-4">3 Methods Covered:</h2>
             <ul className="space-y-2 text-charcoal-700">
               <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#stovetop" className="text-sunset-600 hover:underline">Stovetop/Comal (Best Overall)</a></li>
               <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#microwave" className="text-sunset-600 hover:underline">Microwave (Fastest)</a></li>
               <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#oven" className="text-sunset-600 hover:underline">Oven (Large Batches)</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#airfryer" className="text-sunset-600 hover:underline">Air Fryer (Crispy Tacos)</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#steaming" className="text-sunset-600 hover:underline">Steaming (Most Gentle)</a></li>
             </ul>
           </nav>
 
@@ -324,6 +322,25 @@ export default function HowToReheatTortillasPage() {
               <Link href="/guides/corn-vs-flour-tortillas" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow">
                 <h3 className="font-bold text-charcoal-950 mb-2">Corn vs Flour →</h3>
                 <p className="text-charcoal-700 text-sm">Complete comparison guide</p>
+              </Link>
+            </div>
+          </section>
+
+          {/* Related Recipes */}
+          <section className="mt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Try These Recipes</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Link href="/recipes/breakfast-tacos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Texas Breakfast Tacos →</h3>
+                <p className="text-charcoal-700 text-sm">Quick and delicious, ready in 15 minutes</p>
+              </Link>
+              <Link href="/recipes/cheese-quesadillas" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Classic Quesadillas →</h3>
+                <p className="text-charcoal-700 text-sm">Crispy, golden, perfectly melted cheese</p>
+              </Link>
+              <Link href="/recipes/carne-asada-tacos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Carne Asada Tacos →</h3>
+                <p className="text-charcoal-700 text-sm">Perfectly grilled marinated steak tacos</p>
               </Link>
             </div>
           </section>

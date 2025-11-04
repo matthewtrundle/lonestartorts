@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Vegetarian Bean & Veggie Tacos Recipe | Easy Meatless Tacos | Lonestar Tortillas',
+  title: 'Vegetarian Bean & Veggie Tacos Recipe',
   description: 'Delicious vegetarian tacos with seasoned black beans and roasted vegetables. Easy, healthy, and packed with flavor. Perfect meatless Mexican meal in 30 minutes.',
   keywords: 'vegetarian tacos, bean tacos, veggie tacos, meatless tacos, black bean tacos recipe, vegetarian mexican food, easy vegetarian dinner',
   openGraph: {

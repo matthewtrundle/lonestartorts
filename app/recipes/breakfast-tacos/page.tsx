@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Texas-Style Breakfast Tacos Recipe | Easy & Authentic | Lonestar Tortillas',
+  title: 'Texas-Style Breakfast Tacos Recipe',
   description: 'Learn how to make authentic Texas breakfast tacos with our easy recipe. Perfect scrambled eggs, bacon, cheese, and fresh tortillas. Ready in 15 minutes!',
   keywords: 'breakfast tacos recipe, texas breakfast tacos, how to make breakfast tacos, easy breakfast taco recipe, authentic breakfast tacos, texas style breakfast',
   openGraph: {

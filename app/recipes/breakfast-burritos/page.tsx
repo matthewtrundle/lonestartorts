@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Bean & Cheese Breakfast Burritos Recipe | Easy & Filling | Lonestar Tortillas',
+  title: 'Bean & Cheese Breakfast Burritos',
   description: 'Hearty bean and cheese breakfast burritos with scrambled eggs, refried beans, and melted cheese. Learn how to make the perfect breakfast burrito in 20 minutes!',
   keywords: 'breakfast burrito recipe, bean and cheese burrito, easy breakfast burrito, refried beans breakfast, how to make breakfast burritos',
   openGraph: {

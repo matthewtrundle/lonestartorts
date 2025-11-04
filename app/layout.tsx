@@ -27,7 +27,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL('https://lonestartortillas.com'),
   title: {
-    default: 'Lonestar Tortillas - Authentic H-E-B® Tortillas Delivered Nationwide',
+    default: 'H-E-B® Tortillas Delivered Nationwide',
     template: '%s | Lonestar Tortillas'
   },
   description: 'Buy authentic H-E-B® tortillas online - delivered nationwide! Premium Texas flour, corn & butter tortillas. Shelf-stable, ships fresh. Independent reseller serving all 50 states.',
@@ -94,9 +94,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  alternates: {
-    canonical: 'https://lonestartortillas.com',
   },
   category: 'food',
   classification: 'Food & Beverage',

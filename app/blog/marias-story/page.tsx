@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Maria\'s Story: The Heart of Lonestar Tortillas | Blog',
+  title: 'Maria\'s Story: Heart of Our Tortillas',
   description: 'Meet Maria, whose passion for authentic tortilla-making transforms simple ingredients into culinary tradition. A journey from her grandmother\'s kitchen in Monterrey to Texas.',
   keywords: 'tortilla maker story, authentic tortillas, Mexican food culture, family recipes, traditional cooking, Maria tortilla maker',
   alternates: {

@@ -5,7 +5,7 @@ import { TacoIcon, BurritoIcon, CheeseIcon, FlameIcon, PepperIcon } from '@/comp
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Best Tortillas for Every Dish | Corn vs Flour Guide',
+  title: 'Best Tortillas for Every Dish',
   description: 'Learn which tortilla type to use for tacos, burritos, enchiladas, quesadillas, and more. Complete guide to choosing corn vs flour tortillas for any dish.',
   keywords: 'best tortillas for tacos, corn vs flour tortillas, tortilla for enchiladas, tortilla for quesadillas, which tortilla to use',
   alternates: {

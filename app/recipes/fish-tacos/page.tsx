@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Baja Fish Tacos Recipe | Crispy Beer-Battered Fish | Lonestar Tortillas',
+  title: 'Baja Fish Tacos Recipe',
   description: 'Authentic Baja-style fish tacos with crispy beer-battered fish, cabbage slaw, and creamy sauce. Learn how to make restaurant-quality fish tacos at home.',
   keywords: 'fish tacos recipe, baja fish tacos, beer battered fish tacos, crispy fish tacos, how to make fish tacos, authentic fish tacos',
   openGraph: {

@@ -5,7 +5,7 @@ import { TacoIcon, BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Store Tortillas: Complete Storage Guide',
+  title: 'How to Store Tortillas',
   description: 'Learn the best ways to store tortillas for maximum freshness. Room temperature, refrigeration, freezing methods, and shelf life explained. Keep your H-E-B® tortillas fresh for weeks!',
   keywords: 'how to store tortillas, storing tortillas, can you freeze tortillas, tortilla shelf life, how long do tortillas last, keep tortillas fresh, tortilla storage tips',
   alternates: {
@@ -568,6 +568,25 @@ export default function HowToStoreTortillasPage() {
                 <p className="text-charcoal-700 text-sm">
                   Complete comparison guide to help you choose the right tortilla
                 </p>
+              </Link>
+            </div>
+          </section>
+
+          {/* Related Recipes */}
+          <section className="mt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Try These Recipes</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Link href="/recipes/breakfast-tacos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Texas Breakfast Tacos →</h3>
+                <p className="text-charcoal-700 text-sm">Quick and delicious morning favorite</p>
+              </Link>
+              <Link href="/recipes/chicken-fajitas" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Chicken Fajitas →</h3>
+                <p className="text-charcoal-700 text-sm">Sizzling restaurant-quality fajitas</p>
+              </Link>
+              <Link href="/recipes/cheese-enchiladas" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Cheese Enchiladas →</h3>
+                <p className="text-charcoal-700 text-sm">Authentic enchiladas rojas with homemade sauce</p>
               </Link>
             </div>
           </section>

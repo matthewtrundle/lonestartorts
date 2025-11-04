@@ -1,0 +1,269 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
+
+export const metadata: Metadata = {
+  title: 'H-E-B Tortillas Nationwide Delivery',
+  description: 'Get authentic H-E-B® tortillas delivered anywhere in the United States. Fast shipping to NYC, LA, Chicago, Seattle, Denver, and all major cities. Order Texas tortillas online today!',
+  keywords: 'H-E-B tortillas nationwide, tortilla delivery USA, H-E-B tortillas shipping, Texas tortillas delivered, buy H-E-B tortillas online, tortilla shipping nationwide',
+  openGraph: {
+    title: 'H-E-B® Tortillas Delivered Nationwide',
+    description: 'Authentic Texas tortillas shipped to your door, anywhere in America.',
+    type: 'website',
+  },
+};
+
+const cities = [
+  {
+    name: 'New York City',
+    slug: 'new-york',
+    state: 'New York',
+    description: 'Manhattan, Brooklyn, Queens, Bronx, Staten Island',
+    deliveryTime: '2-3 days',
+    highlight: 'All 5 boroughs',
+    icon: '🗽',
+  },
+  {
+    name: 'Los Angeles',
+    slug: 'los-angeles',
+    state: 'California',
+    description: 'LA County, Orange County, Inland Empire',
+    deliveryTime: '2-3 days',
+    highlight: 'SoCal coverage',
+    icon: '🌴',
+  },
+  {
+    name: 'Chicago',
+    slug: 'chicago',
+    state: 'Illinois',
+    description: 'City of Chicago and Chicagoland suburbs',
+    deliveryTime: '2-3 days',
+    highlight: 'Midwest hub',
+    icon: '🌆',
+  },
+  {
+    name: 'Seattle',
+    slug: 'seattle',
+    state: 'Washington',
+    description: 'Seattle metro, Tacoma, Bellevue, Eastside',
+    deliveryTime: '3-4 days',
+    highlight: 'Pacific Northwest',
+    icon: '🌲',
+  },
+  {
+    name: 'Denver',
+    slug: 'denver',
+    state: 'Colorado',
+    description: 'Denver metro, Boulder, Colorado Springs area',
+    deliveryTime: '2-3 days',
+    highlight: 'Mountain West',
+    icon: '🏔️',
+  },
+];
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'H-E-B Tortillas Delivery Locations',
+  description: 'Nationwide delivery of authentic H-E-B tortillas to major US cities.',
+  url: 'https://lonestartortillas.com/locations',
+};
+
+export default function LocationsPage() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+
+      <div className="min-h-screen bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50">
+        {/* Header */}
+        <header className="bg-charcoal-950 text-cream-50 py-12 md:py-16">
+          <div className="container mx-auto px-6 max-w-6xl">
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Locations' },
+              ]}
+              className="mb-6 text-cream-300"
+            />
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 font-display">
+              H-E-B® Tortillas Delivered Nationwide
+            </h1>
+            <p className="text-xl text-cream-100 max-w-3xl">
+              Authentic Texas tortillas shipped to your door, anywhere in the United States.
+              Fast, reliable delivery with free shipping on orders over $45.
+            </p>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main className="container mx-auto px-6 py-12 md:py-16 max-w-6xl">
+          {/* Introduction */}
+          <section className="mb-12">
+            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg">
+              <h2 className="text-2xl font-bold text-charcoal-950 mb-3">
+                Bringing Texas to You
+              </h2>
+              <p className="text-lg text-charcoal-800 leading-relaxed">
+                Missing authentic H-E-B® tortillas? We ship premium{' '}
+                <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  corn tortillas
+                </Link>
+                ,{' '}
+                <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  flour tortillas
+                </Link>
+                , and{' '}
+                <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  butter tortillas
+                </Link>
+                {' '}to all 50 states. Our shelf-stable tortillas arrive fresh and ready to enjoy.
+              </p>
+            </div>
+          </section>
+
+          {/* Featured Cities */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
+              Popular Delivery Cities
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cities.map((city) => (
+                <Link
+                  key={city.slug}
+                  href={`/${city.slug}`}
+                  className="group block bg-white rounded-xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-sunset-400"
+                >
+                  <div className="text-5xl mb-4">{city.icon}</div>
+                  <h3 className="text-2xl font-bold text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
+                    {city.name} →
+                  </h3>
+                  <p className="text-charcoal-600 text-sm mb-3">{city.state}</p>
+                  <p className="text-charcoal-700 mb-4">{city.description}</p>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="bg-masa-100 text-masa-700 px-3 py-1 rounded-full font-semibold">
+                      {city.deliveryTime}
+                    </span>
+                    <span className="text-sunset-600 font-medium">{city.highlight}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Nationwide Coverage */}
+          <section className="mb-16 bg-gradient-to-r from-masa-100 to-sunset-100 p-8 rounded-lg">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-charcoal-950 mb-6 text-center">
+                We Ship to All 50 States
+              </h2>
+              <p className="text-lg text-charcoal-800 leading-relaxed text-center mb-6">
+                Don't see your city listed? No problem! We deliver authentic H-E-B® tortillas anywhere in the continental United States, Alaska, and Hawaii. Our shelf-stable tortillas are specially designed for safe, fresh delivery nationwide.
+              </p>
+              <div className="grid md:grid-cols-3 gap-6 mt-8">
+                <div className="bg-white p-6 rounded-lg text-center">
+                  <div className="text-3xl mb-3">📦</div>
+                  <h3 className="font-bold text-charcoal-950 mb-2">Fast Shipping</h3>
+                  <p className="text-charcoal-700 text-sm">2-4 day delivery via USPS Priority Mail</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg text-center">
+                  <div className="text-3xl mb-3">🌡️</div>
+                  <h3 className="font-bold text-charcoal-950 mb-2">Shelf-Stable</h3>
+                  <p className="text-charcoal-700 text-sm">No refrigeration needed during shipping</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg text-center">
+                  <div className="text-3xl mb-3">✅</div>
+                  <h3 className="font-bold text-charcoal-950 mb-2">Fresh Guarantee</h3>
+                  <p className="text-charcoal-700 text-sm">30+ day shelf life upon arrival</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Shipping Info */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
+              Shipping Information
+            </h2>
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-4">Delivery Times</h3>
+                  <ul className="space-y-3 text-charcoal-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>West Coast:</strong> 2-3 business days</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>Midwest:</strong> 2-3 business days</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>East Coast:</strong> 2-3 business days</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>Mountain West:</strong> 2-3 business days</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>Alaska/Hawaii:</strong> 4-7 business days</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-4">Shipping Rates</h3>
+                  <ul className="space-y-3 text-charcoal-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>Free Shipping:</strong> Orders over $45</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>Standard Shipping:</strong> $12.99 flat rate</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>Method:</strong> USPS Priority Mail</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sunset-500 mt-1">•</span>
+                      <span><strong>Tracking:</strong> Included with every order</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Order?
+            </h2>
+            <p className="text-xl mb-8 text-cream-100 max-w-2xl mx-auto">
+              Get authentic H-E-B® tortillas delivered to your door. Shop our full selection of corn, flour, and butter tortillas.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                href="/shop"
+                className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+              >
+                Shop All Tortillas
+              </Link>
+              <Link
+                href="/pre-sale"
+                className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-8 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Join Waitlist
+              </Link>
+            </div>
+          </section>
+        </main>
+      </div>
+    </>
+  );
+}

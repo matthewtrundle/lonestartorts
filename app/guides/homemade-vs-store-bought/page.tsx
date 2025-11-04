@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Homemade vs Store-Bought Tortillas | Which is Better?',
+  title: 'Homemade vs Store-Bought Tortillas',
   description: 'Complete comparison of homemade and store-bought tortillas covering cost, time, quality, and taste. Expert guide to help you decide which option is right for you.',
   keywords: [
     'homemade tortillas',

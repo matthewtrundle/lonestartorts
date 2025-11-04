@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Spicy Shrimp Tacos Recipe | Easy Grilled Shrimp | Lonestar Tortillas',
+  title: 'Spicy Shrimp Tacos Recipe',
   description: 'Quick and easy spicy shrimp tacos recipe with cilantro lime slaw. Learn how to make flavorful grilled shrimp tacos in just 20 minutes.',
   keywords: 'shrimp tacos recipe, grilled shrimp tacos, spicy shrimp tacos, easy shrimp tacos, how to make shrimp tacos, cilantro lime shrimp',
   openGraph: {

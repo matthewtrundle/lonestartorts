@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Crisp & Toast Tortillas | Complete Guide',
+  title: 'How to Crisp & Toast Tortillas',
   description: 'Learn the best methods to crisp and toast tortillas for tostadas, tortilla chips, and crunchy tacos. Oven, stovetop, and air fryer methods explained.',
   keywords: 'how to crisp tortillas, how to toast tortillas, crispy tortillas, tostadas, tortilla chips, crunchy taco shells, fried tortillas',
   alternates: {
     canonical: 'https://lonestartortillas.com/guides/how-to-crisp-tortillas',
   },
   openGraph: {
-    title: 'How to Crisp & Toast Tortillas | Complete Guide',
+    title: 'How to Crisp & Toast Tortillas',
     description: 'Master every method for crisping and toasting tortillas. From tostadas to chips, learn the best techniques.',
     type: 'article',
   },

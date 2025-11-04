@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'H-E-B® Specialty Tortillas | Whole Wheat & Flavored Tortillas',
+  title: 'H-E-B® Specialty Tortillas',
   description: 'Discover H-E-B® specialty tortillas including whole wheat, spinach-herb, and tomato-basil varieties. Healthy, flavorful options delivered nationwide!',
   keywords: 'H-E-B specialty tortillas, whole wheat tortillas, spinach herb tortillas, flavored tortillas, healthy tortillas online',
 };
@@ -50,7 +50,7 @@ export default function SpecialtyTortillasPage() {
             <div className="space-y-8">
               <div>
                 <span className="inline-block px-4 py-2 bg-lime-600 text-cream-50 text-sm font-bold tracking-wider uppercase rounded-full mb-4">Specialty H-E-B®</span>
-                <h1 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mb-4">Specialty Tortillas</h1>
+                <h1 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mb-4">H-E-B Specialty & Whole Wheat Tortillas</h1>
                 <p className="text-2xl text-masa-600 font-light italic">Unique • Healthy • Flavorful</p>
               </div>
 

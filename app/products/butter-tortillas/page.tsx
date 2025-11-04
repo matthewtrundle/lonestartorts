@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'H-E-B® Butter Flour Tortillas | Premium Tortillas Online',
+  title: 'H-E-B® Butter Flour Tortillas',
   description: 'Buy premium H-E-B® butter flour tortillas online. Rich, buttery flavor with soft texture. Perfect for quesadillas and wraps. Delivered nationwide!',
   keywords: 'H-E-B butter tortillas, butter flour tortillas, premium tortillas, buy butter tortillas online, Texas butter tortillas',
 };
@@ -50,7 +50,7 @@ export default function ButterTortillasPage() {
             <div className="space-y-8">
               <div>
                 <span className="inline-block px-4 py-2 bg-sunset-500 text-cream-50 text-sm font-bold tracking-wider uppercase rounded-full mb-4">Premium H-E-B®</span>
-                <h1 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mb-4">Butter Tortillas</h1>
+                <h1 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mb-4">Premium H-E-B Butter Flour Tortillas</h1>
                 <p className="text-2xl text-masa-600 font-light italic">Rich • Buttery • Premium</p>
               </div>
 

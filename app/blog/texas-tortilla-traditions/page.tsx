@@ -6,7 +6,7 @@ import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Texas Tortilla Traditions | Where Mexican Heritage Meets Lone Star Culture | Blog',
+  title: 'Texas Tortilla Traditions',
   description: 'From San Antonio to El Paso, explore how Texas shaped its own tortilla identity. The story of flour tortillas, breakfast tacos, and Tex-Mex innovation.',
   keywords: 'Texas tortillas, Tex-Mex food, flour tortillas history, breakfast tacos, San Antonio food culture, Texas Mexican food',
   alternates: {

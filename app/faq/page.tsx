@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'FAQ - Frequently Asked Questions | Lonestar Tortillas',
+  title: 'FAQ - Frequently Asked Questions',
   description: 'Find answers about ordering H-E-B® tortillas online, shipping, storage, and more. Get authentic Texas tortillas delivered nationwide.',
   keywords: 'H-E-B tortillas FAQ, tortilla shipping questions, how to order H-E-B tortillas, tortilla storage, H-E-B delivery questions',
 };

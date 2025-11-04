@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Corn vs Flour Tortillas: Complete Comparison Guide',
+  title: 'Corn vs Flour Tortillas Guide',
   description: 'Corn or flour tortillas? Compare taste, texture, nutrition, and best uses. Learn which tortilla is right for your tacos, burritos, and quesadillas. Complete guide with expert tips.',
   keywords: 'corn vs flour tortillas, difference between corn and flour tortillas, corn or flour tortillas, which tortilla is better, tortilla comparison, corn tortilla vs flour',
   alternates: {
@@ -397,6 +397,28 @@ export default function CornVsFlourPage() {
               <Link href="/products/flour-tortillas" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border-2 border-masa-400">
                 <h3 className="font-bold text-charcoal-950 mb-2 text-lg">Shop Flour Tortillas →</h3>
                 <p className="text-charcoal-700 text-sm">Soft & pliable, perfect for burritos and wraps</p>
+              </Link>
+            </div>
+          </section>
+
+          {/* Related Recipes */}
+          <section className="mt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Try These Recipes</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Link href="/recipes/carne-asada-tacos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <span className="inline-block px-2 py-1 bg-masa-100 text-masa-700 text-xs font-semibold rounded mb-2">CORN</span>
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Carne Asada Tacos →</h3>
+                <p className="text-charcoal-700 text-sm">Classic street-style with corn tortillas</p>
+              </Link>
+              <Link href="/recipes/breakfast-burritos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <span className="inline-block px-2 py-1 bg-sunset-100 text-sunset-700 text-xs font-semibold rounded mb-2">FLOUR</span>
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Breakfast Burritos →</h3>
+                <p className="text-charcoal-700 text-sm">Hearty flour tortilla breakfast wraps</p>
+              </Link>
+              <Link href="/recipes/fish-tacos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <span className="inline-block px-2 py-1 bg-masa-100 text-masa-700 text-xs font-semibold rounded mb-2">CORN</span>
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Baja Fish Tacos →</h3>
+                <p className="text-charcoal-700 text-sm">Crispy fish with corn tortillas</p>
               </Link>
             </div>
           </section>

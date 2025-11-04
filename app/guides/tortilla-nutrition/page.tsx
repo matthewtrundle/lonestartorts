@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Tortilla Nutrition Guide | Calories, Carbs & Health Facts',
+  title: 'Tortilla Nutrition Guide',
   description: 'Complete nutritional breakdown of corn and flour tortillas. Calories, carbs, protein, fiber, and health benefits explained. Make informed choices.',
   keywords: 'tortilla nutrition, tortilla calories, corn tortilla nutrition, flour tortilla nutrition, tortilla carbs, healthy tortillas, tortilla health benefits',
   alternates: {

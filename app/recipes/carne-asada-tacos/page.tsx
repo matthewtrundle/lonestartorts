@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Authentic Carne Asada Tacos Recipe | Grilled Steak Tacos | Lonestar Tortillas',
+  title: 'Authentic Carne Asada Tacos Recipe',
   description: 'Learn to make authentic Mexican carne asada tacos with marinated grilled steak. Simple marinade, quick grilling, and served street-style on corn tortillas.',
   keywords: 'carne asada recipe, grilled steak tacos, authentic carne asada, mexican steak tacos, how to make carne asada, carne asada marinade',
   openGraph: {

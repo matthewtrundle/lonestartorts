@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Tortilla Stories & Traditions | Blog | Lonestar Tortillas',
+  title: 'Tortilla Stories & Traditions',
   description: 'Explore the rich history, science, and culture of tortillas. Stories from our kitchen, traditional techniques, and the art of authentic tortilla-making.',
   keywords: 'tortilla blog, tortilla history, nixtamalization, tortilla culture, Texas tortillas, Mexican food traditions',
   openGraph: {

@@ -5,7 +5,7 @@ import { PanIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Gluten-Free Tortillas Guide | Corn, Alternatives & Tips',
+  title: 'Gluten-Free Tortillas Guide',
   description: 'Complete guide to gluten-free tortillas. Learn about corn tortillas, gluten-free flour options, cross-contamination, and celiac-safe choices.',
   keywords: 'gluten free tortillas, are corn tortillas gluten free, celiac safe tortillas, gluten free flour tortillas, corn tortillas gluten, wheat free tortillas',
   alternates: {

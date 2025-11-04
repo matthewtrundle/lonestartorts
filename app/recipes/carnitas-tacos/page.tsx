@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Slow-Cooked Carnitas Tacos Recipe | Authentic Mexican | Lonestar Tortillas',
+  title: 'Slow-Cooked Carnitas Tacos Recipe',
   description: 'Authentic Mexican carnitas recipe with tender, slow-cooked pork. Learn how to make restaurant-quality carnitas tacos at home with simple ingredients and traditional techniques.',
   keywords: 'carnitas recipe, authentic carnitas, slow cooked pork tacos, mexican carnitas, pork tacos recipe, how to make carnitas',
   openGraph: {

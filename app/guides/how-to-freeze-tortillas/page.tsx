@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Freeze Tortillas | Complete Freezing & Thawing Guide',
+  title: 'How to Freeze Tortillas',
   description: 'Learn how to properly freeze tortillas for long-term storage. Step-by-step guide for freezing corn and flour tortillas, plus thawing methods and storage tips.',
   keywords: 'how to freeze tortillas, can you freeze tortillas, freezing corn tortillas, freezing flour tortillas, how long do frozen tortillas last, thawing tortillas',
   alternates: {
@@ -309,6 +309,25 @@ export default function HowToFreezeTortillasPage() {
             <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
               Shop Tortillas
             </Link>
+          </section>
+
+          {/* Related Recipes */}
+          <section className="mt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Try These Recipes</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Link href="/recipes/breakfast-tacos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Texas Breakfast Tacos →</h3>
+                <p className="text-charcoal-700 text-sm">Quick weekday breakfast from frozen</p>
+              </Link>
+              <Link href="/recipes/cheese-quesadillas" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Classic Quesadillas →</h3>
+                <p className="text-charcoal-700 text-sm">Perfect for meal prep and freezing</p>
+              </Link>
+              <Link href="/recipes/carnitas-tacos" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border border-charcoal-100">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600 mb-2">Carnitas Tacos →</h3>
+                <p className="text-charcoal-700 text-sm">Freeze extra tortillas for taco night</p>
+              </Link>
+            </div>
           </section>
         </article>
       </div>

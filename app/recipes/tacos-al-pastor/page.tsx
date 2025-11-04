@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Tacos Al Pastor Recipe | Authentic Mexican Street Tacos | Lonestar Tortillas',
+  title: 'Tacos Al Pastor | Authentic Street Tacos',
   description: 'Authentic Mexican tacos al pastor with marinated pork and pineapple. Learn how to make restaurant-quality street tacos at home in 45 minutes!',
   keywords: 'tacos al pastor recipe, mexican street tacos, al pastor pork, pineapple pork tacos, authentic mexican tacos, how to make al pastor',
   openGraph: {

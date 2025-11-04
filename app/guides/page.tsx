@@ -4,7 +4,7 @@ import { GuideCard } from '@/components/GuideCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Tortilla Guides & Tips | Storage, Reheating & More | Lonestar Tortillas',
+  title: 'Tortilla Guides & Tips',
   description: 'Expert guides on storing, reheating, and choosing tortillas. Learn how to keep your H-E-B® tortillas fresh, compare corn vs flour, and master authentic Texas techniques.',
   keywords: 'tortilla storage guide, how to reheat tortillas, corn vs flour tortillas, tortilla tips, H-E-B tortilla guide, keeping tortillas fresh, tortilla techniques',
   openGraph: {
