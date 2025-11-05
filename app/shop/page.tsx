@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ProductCard } from '@/components/product/ProductCard';
+import { Truck, Shield, Star, Clock } from 'lucide-react';
 
 import type { Product } from '@/lib/products';
 
@@ -40,7 +41,7 @@ export default function ShopPage() {
       <main className="min-h-screen bg-cream-50">
         {/* Hero Image Section */}
         <div className="w-full mb-12">
-          <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
+          <div className="relative w-full h-[300px] md:h-[450px] overflow-hidden">
             <Image
               src="/images/shop/texas-tortillas-hero.png"
               alt="H-E-B Tortillas with Texas Flag - Butter, Southwest Style, Flour, and Corn Tortillas"
@@ -49,7 +50,7 @@ export default function ShopPage() {
               priority
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/5" />
           </div>
         </div>
 
@@ -59,10 +60,43 @@ export default function ShopPage() {
             <h1 className="text-5xl md:text-6xl font-display font-bold text-texas-brown mb-6">
               Shop Our Tortillas
             </h1>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
               Premium Texas tortillas, shipped directly to your door.
               Fresh from the Lone Star State.
             </p>
+
+            {/* Trust Signals Bar */}
+            <div className="max-w-4xl mx-auto mt-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg shadow-sm">
+                  <Truck className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">Free Shipping</p>
+                  <p className="text-xs text-charcoal-600">on orders 3+ packs</p>
+                </div>
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg shadow-sm">
+                  <Clock className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">Same-Day Ship</p>
+                  <p className="text-xs text-charcoal-600">orders before 2pm CT</p>
+                </div>
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg shadow-sm">
+                  <Shield className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">100% Secure</p>
+                  <p className="text-xs text-charcoal-600">encrypted checkout</p>
+                </div>
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg shadow-sm">
+                  <Star className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">4.8/5 Stars</p>
+                  <p className="text-xs text-charcoal-600">from 500+ reviews</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Urgency Message */}
+            <div className="mt-6 inline-block bg-sunset-50 border-2 border-sunset-200 rounded-full px-6 py-2">
+              <p className="text-sm font-semibold text-sunset-700">
+                🔥 Order today, ships tomorrow • Limited stock available
+              </p>
+            </div>
           </div>
 
           {/* Loading State */}
@@ -84,7 +118,7 @@ export default function ShopPage() {
 
           {/* Products Grid */}
           {!loading && !error && products.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {products.map((product) => (
                 <ProductCard
                   key={product.sku}

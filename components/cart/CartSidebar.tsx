@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw } from 'lucide-react';
 
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, total, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
@@ -151,11 +151,30 @@ export function CartSidebar() {
                   </div>
                 </div>
 
+                {/* Trust Badges */}
+                <div className="mb-4 grid grid-cols-3 gap-2 p-4 bg-white rounded-lg border border-gray-200">
+                  <div className="flex flex-col items-center gap-1 text-center">
+                    <Shield className="w-5 h-5 text-green-600" />
+                    <p className="text-xs font-semibold text-charcoal-950">Secure</p>
+                    <p className="text-[10px] text-charcoal-600 leading-tight">SSL Encrypted</p>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 text-center">
+                    <Truck className="w-5 h-5 text-blue-600" />
+                    <p className="text-xs font-semibold text-charcoal-950">Fast Ship</p>
+                    <p className="text-[10px] text-charcoal-600 leading-tight">2-3 Day Delivery</p>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 text-center">
+                    <RefreshCw className="w-5 h-5 text-orange-600" />
+                    <p className="text-xs font-semibold text-charcoal-950">Guarantee</p>
+                    <p className="text-[10px] text-charcoal-600 leading-tight">100% Satisfaction</p>
+                  </div>
+                </div>
+
                 {/* Checkout Button */}
                 <Link
                   href="/checkout"
                   onClick={handleClose}
-                  className="block w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors"
+                  className="block w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg"
                 >
                   Proceed to Checkout
                 </Link>
