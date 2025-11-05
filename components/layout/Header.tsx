@@ -10,9 +10,7 @@ export function Header() {
   const { itemCount, setIsOpen } = useCart();
 
   return (
-    <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-500" id="main-header">
-      {/* Glass morphism background */}
-      <div className="absolute inset-0 bg-cream-50/90 backdrop-blur-md border-b border-charcoal-200/10" />
+    <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-500 bg-white shadow-md" id="main-header">
 
       <div className="container mx-auto px-8 relative">
         <div className="header-content flex justify-between items-center py-6 transition-all duration-500">

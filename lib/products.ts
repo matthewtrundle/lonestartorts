@@ -11,6 +11,9 @@ export interface Product {
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
   category: string;
+  tortillaType?: string; // "Flour", "Corn", "Wheat", etc.
+  isBestSeller?: boolean; // Show "Best Seller" badge
+  savingsPercent?: number; // Show savings percentage (e.g., 15 for "15% OFF")
 }
 
 export const products: Product[] = [
@@ -23,6 +26,8 @@ export const products: Product[] = [
     tortillaCount: 20,
     storage: 'shelf_stable',
     category: 'flour',
+    tortillaType: 'Flour',
+    isBestSeller: true,
   },
   {
     sku: 'HEB-BUTTER',
@@ -33,6 +38,7 @@ export const products: Product[] = [
     tortillaCount: 20,
     storage: 'shelf_stable',
     category: 'flour',
+    tortillaType: 'Flour',
   },
   {
     sku: 'HEB-WHEAT',
@@ -43,6 +49,7 @@ export const products: Product[] = [
     tortillaCount: 20,
     storage: 'shelf_stable',
     category: 'wheat',
+    tortillaType: 'Wheat',
   },
 ];
 

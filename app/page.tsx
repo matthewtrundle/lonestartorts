@@ -36,10 +36,8 @@ export default function Home() {
           <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-radial from-masa-400/20 to-transparent blur-3xl" />
         </div>
 
-        {/* Premium Header with Glass Effect - Hides on scroll */}
-        <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-700" id="main-header">
-          {/* Glass morphism background */}
-          <div className="absolute inset-0 bg-cream-50/90 backdrop-blur-md border-b border-charcoal-200/10" />
+        {/* Premium Header with solid background and drop shadow */}
+        <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-700 bg-white shadow-md" id="main-header">
 
           <div className="container mx-auto px-8 relative">
             <div className="flex justify-between items-center py-6">
@@ -124,14 +122,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Floating Logo - Shows on scroll */}
-        <div className="fixed-logo fixed top-6 left-8 z-[140] opacity-0 pointer-events-none transition-all duration-700" id="floating-logo">
-          <Link href="/" className="group block">
-            <div className="relative">
-              <LogoFull className="text-charcoal-950 transition-all duration-500 group-hover:scale-110" size="sm" />
-            </div>
-          </Link>
-        </div>
+        {/* Floating Logo removed - main header logo now scales on scroll instead */}
 
         {/* Hero Section with Editorial Design */}
         <section className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden spotlight" id="hero-section">

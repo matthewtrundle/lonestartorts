@@ -131,6 +131,9 @@ const config: Config = {
         '84': '21rem',
         '96': '24rem',
       },
+      scale: {
+        '102': '1.02',
+      },
       animation: {
         // Sophisticated animations
         'fade-in': 'fadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1)',

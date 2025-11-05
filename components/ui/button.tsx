@@ -12,11 +12,15 @@ const buttonVariants = cva(
         secondary: 'bg-white text-primary border border-primary hover:bg-gray-50',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         destructive: 'bg-red-600 text-white hover:bg-red-700',
+        cart: 'bg-sunset-600 text-white font-semibold tracking-wide hover:bg-sunset-700 active:bg-sunset-800 shadow-sm hover:shadow-md transition-all',
+        cartOutline: 'border-2 border-sunset-600 text-sunset-600 hover:bg-sunset-50 active:bg-sunset-100',
+        cartMasa: 'bg-masa-600 text-white font-semibold tracking-wide hover:bg-masa-700 active:bg-masa-800 shadow-sm',
       },
       size: {
-        sm: 'h-9 px-3',
-        default: 'h-10 px-4 py-2',
-        lg: 'h-11 px-8',
+        sm: 'h-9 px-3 text-xs',
+        default: 'h-11 px-5 text-sm',
+        lg: 'h-12 px-6 text-base',
+        xl: 'h-14 px-8 text-base',
       },
     },
     defaultVariants: {

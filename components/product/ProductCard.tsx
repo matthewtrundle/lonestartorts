@@ -6,6 +6,7 @@ import { Plus, Minus, ShoppingBag } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
 import { trackAddToCart } from '@/lib/analytics';
+import { Button } from '@/components/ui/button';
 
 interface ProductCardProps {
   sku: string;
@@ -15,6 +16,9 @@ interface ProductCardProps {
   price: number;
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
+  tortillaType?: string;
+  isBestSeller?: boolean;
+  savingsPercent?: number;
   onAddToOrder?: (sku: string) => void;
 }
 
@@ -26,6 +30,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   price,
   tortillaCount,
   storage,
+  tortillaType,
+  isBestSeller,
+  savingsPercent,
   onAddToOrder,
 }) => {
   const { addItem, setIsOpen } = useCart();
@@ -94,9 +101,36 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           src={image}
           alt={name}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 group-hover:scale-102"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
+
+        {/* Best Seller Badge - Top Left */}
+        {isBestSeller && (
+          <div className="absolute top-3 left-3 z-10">
+            <span className="inline-block px-3 py-1 text-xs font-bold tracking-wide uppercase bg-sunset-600 text-white rounded-full shadow-md">
+              Best Seller
+            </span>
+          </div>
+        )}
+
+        {/* Savings Badge - Top Right */}
+        {savingsPercent && (
+          <div className="absolute top-3 right-3 z-10">
+            <span className="inline-block px-3 py-1 text-xs font-bold tracking-wide uppercase bg-green-600 text-white rounded-full shadow-md">
+              {savingsPercent}% OFF
+            </span>
+          </div>
+        )}
+
+        {/* Storage Badge - Bottom Right (if no savings badge) */}
+        {!savingsPercent && (
+          <div className="absolute bottom-3 right-3 z-10">
+            <span className="px-3 py-1 text-xs font-medium tracking-wide bg-white/90 backdrop-blur-sm rounded-full text-charcoal-700 shadow-sm">
+              {storageLabel}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Product Details */}
@@ -107,17 +141,29 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {name}
             </h3>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="text-xs font-medium tracking-wide uppercase text-charcoal-600">
-                {storageLabel}
-              </p>
-              <span className="text-charcoal-300">•</span>
+              {tortillaType && (
+                <>
+                  <p className="text-xs font-medium tracking-wide text-charcoal-600">
+                    {tortillaType}
+                  </p>
+                  <span className="text-charcoal-300">•</span>
+                </>
+              )}
               <p className="text-xs font-medium tracking-wide text-charcoal-600">
                 {tortillaCount} tortillas
               </p>
+              {savingsPercent && (
+                <>
+                  <span className="text-charcoal-300">•</span>
+                  <p className="text-xs font-medium tracking-wide uppercase text-charcoal-600">
+                    {storageLabel}
+                  </p>
+                </>
+              )}
             </div>
           </div>
           <div className="text-right ml-4">
-            <span className="text-2xl font-bold text-charcoal-950 block">
+            <span className="text-2xl font-bold text-sunset-600 block">
               {formatPrice(price)}
             </span>
             <span className="text-xs text-charcoal-500">per pack</span>
@@ -164,13 +210,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         )}
 
         {/* Always-Visible CTA Button */}
-        <button
+        <Button
+          variant="cart"
+          size="lg"
           onClick={handleAddToCart}
-          className="w-full bg-charcoal-950 text-white py-4 px-6 rounded-full font-semibold text-sm tracking-wide uppercase hover:bg-sunset-600 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+          className="w-full rounded-full uppercase flex items-center justify-center gap-2"
+          aria-label={`Add ${quantity > 1 ? `${quantity} packs of ` : ''}${name} to cart`}
         >
           <ShoppingBag className="w-4 h-4" />
           Add {quantity > 1 ? `${quantity} Packs` : ''} to Cart
-        </button>
+        </Button>
 
         {/* Bundle Pricing Hint */}
         <div className="mt-3 text-center">
