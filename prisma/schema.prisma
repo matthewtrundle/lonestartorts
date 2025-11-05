@@ -134,11 +134,80 @@ enum EmailStatus {
   BOUNCED
 }
 
+// Customer model - synced from Clerk
+model Customer {
+  id            String    @id @default(cuid())
+  clerkUserId   String    @unique  // Links to Clerk user ID
+  email         String    @unique
+  firstName     String?
+  lastName      String?
+
+  // User tracking fields
+  lastLoginAt   DateTime?
+  signupSource  String?   // utm_source for tracking
+
+  // Metadata from Clerk
+  publicMetadata  Json?
+  privateMetadata Json?
+
+  // Timestamps
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  orders        Order[]
+  addresses     Address[]
+
+  @@index([clerkUserId])
+  @@index([email])
+}
+
+// Shipping/billing addresses for customers
+model Address {
+  id          String   @id @default(cuid())
+  customerId  String
+
+  // Address fields
+  firstName   String
+  lastName    String
+  street      String
+  street2     String?
+  city        String
+  state       String
+  zip         String
+  country     String   @default("US")
+  phone       String?
+
+  // Address type
+  isDefault   Boolean  @default(false)
+  type        AddressType @default(BOTH)
+
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([customerId])
+  @@index([isDefault])
+}
+
+enum AddressType {
+  SHIPPING
+  BILLING
+  BOTH
+}
+
 // Order tracking for when we launch
 model Order {
   id               String    @id @default(cuid())
   orderNumber      String    @unique
   email            String
+
+  // Customer link (optional for guest checkouts)
+  customerId       String?
+  customer         Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
 
   // Customer details
   customerName     String
@@ -170,6 +239,7 @@ model Order {
   @@index([email])
   @@index([orderNumber])
   @@index([status])
+  @@index([customerId])
 }
 
 enum PaymentStatus {

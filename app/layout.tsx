@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { Suspense } from 'react';
 import Script from 'next/script';
+import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import Analytics from '@/components/Analytics';
 import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
@@ -288,16 +289,18 @@ export default function RootLayout({
             />
           </>
         )}
-        <Suspense fallback={null}>
-          <Analytics />
-        </Suspense>
-        <WebVitalsMonitor />
-        <CartProvider>
-          <CartSidebar />
-          <div className="min-h-screen flex flex-col">
-            {children}
-          </div>
-        </CartProvider>
+        <ClerkProvider>
+          <Suspense fallback={null}>
+            <Analytics />
+          </Suspense>
+          <WebVitalsMonitor />
+          <CartProvider>
+            <CartSidebar />
+            <div className="min-h-screen flex flex-col">
+              {children}
+            </div>
+          </CartProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

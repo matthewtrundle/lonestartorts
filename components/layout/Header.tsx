@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, User } from 'lucide-react';
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
@@ -60,6 +61,38 @@ export function Header() {
               </span>
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </Link>
+
+            {/* User Authentication */}
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="p-2 hover:bg-charcoal-100/50 rounded-full transition-colors" aria-label="Sign in">
+                  <User className="w-5 h-5 text-charcoal-950" />
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: 'w-9 h-9',
+                  },
+                }}
+                afterSignOutUrl="/"
+              >
+                <UserButton.MenuItems>
+                  <UserButton.Link
+                    label="My Orders"
+                    labelIcon={<ShoppingBag className="w-4 h-4" />}
+                    href="/account/orders"
+                  />
+                  <UserButton.Link
+                    label="Addresses"
+                    labelIcon={<User className="w-4 h-4" />}
+                    href="/account/addresses"
+                  />
+                </UserButton.MenuItems>
+              </UserButton>
+            </SignedIn>
 
             {/* Cart Icon */}
             <button
