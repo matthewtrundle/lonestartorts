@@ -18,7 +18,7 @@ export const products: Product[] = [
     sku: 'HEB-FLOUR',
     name: 'H-E-B Bakery Flour Tortillas',
     description: 'Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile.',
-    image: '/images/products/bakery-flour-tortillas.jpg',
+    image: '/images/products/flour-tortillas-heb.png',
     price: 2000, // $20 per pack
     tortillaCount: 20,
     storage: 'shelf_stable',
@@ -28,21 +28,21 @@ export const products: Product[] = [
     sku: 'HEB-BUTTER',
     name: 'H-E-B Bakery Butter Flour Tortillas',
     description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer.',
-    image: '/images/products/butter-flour-tortillas.jpg',
+    image: '/images/products/butter-tortillas-heb.png',
     price: 2000, // $20 per pack
     tortillaCount: 20,
     storage: 'shelf_stable',
     category: 'flour',
   },
   {
-    sku: 'HEB-SOUTHWEST',
-    name: 'H-E-B Bakery Southwestern Flour Tortillas',
-    description: 'A flavored variant of flour tortilla with Southwestern seasoning for something with a twist.',
-    image: '/images/products/southwestern-tortillas.jpg',
+    sku: 'HEB-WHEAT',
+    name: 'H-E-B Bakery Wheat Tortillas',
+    description: 'Whole wheat tortillas with wholesome grain flavor. Perfect for health-conscious meals without sacrificing taste.',
+    image: '/images/products/wheat-tortillas-heb.png',
     price: 2000, // $20 per pack
     tortillaCount: 20,
     storage: 'shelf_stable',
-    category: 'flour',
+    category: 'wheat',
   },
 ];
 

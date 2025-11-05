@@ -1,0 +1,41 @@
+{
+  "name": "Lonestar Tortillas - H-E-B® Tortillas Delivered Nationwide",
+  "short_name": "Lonestar Tortillas",
+  "description": "Buy authentic H-E-B® tortillas online - delivered nationwide! Premium Texas flour, corn & butter tortillas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "shopping"],
+  "shortcuts": [
+    {
+      "name": "Shop Tortillas",
+      "short_name": "Shop",
+      "description": "Browse our tortilla selection",
+      "url": "/shop",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Recipes",
+      "short_name": "Recipes",
+      "description": "View authentic Mexican recipes",
+      "url": "/recipes",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
