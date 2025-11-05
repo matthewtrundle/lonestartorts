@@ -34,6 +34,60 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    title: 'The Ultimate Guide to Leftover Brisket: 7 Days of Meals',
+    slug: 'leftover-brisket-guide',
+    excerpt: 'Transform leftover brisket into a week of incredible meals using H-E-B® tortillas. Complete storage tips, reheating methods, and creative recipes.',
+    category: 'Recipes & Culture',
+    readTime: '16 min read',
+    date: 'November 4, 2025',
+    image: '/images/blog/leftover-brisket-hero.webp',
+  },
+  {
+    title: 'Why Texas Pitmasters Refuse to Use Store-Bought Tortillas',
+    slug: 'why-pitmasters-refuse-store-tortillas',
+    excerpt: 'Real pitmasters reveal expensive lessons learned from using cheap tortillas. Financial breakdowns, customer complaints, and why they switched to H-E-B® for good.',
+    category: 'Business & Culture',
+    readTime: '14 min read',
+    date: 'November 4, 2025',
+    image: '/images/blog/pitmaster-interview-hero.webp',
+  },
+  {
+    title: 'The Secret to Championship BBQ Tacos',
+    slug: 'championship-bbq-tacos',
+    excerpt: 'Competition BBQ champions reveal why H-E-B® tortillas are essential for winning. Judging standards, champion interviews, and competition day protocols.',
+    category: 'Texas Cuisine',
+    readTime: '12 min read',
+    date: 'November 4, 2025',
+    image: '/images/blog/championship-bbq-hero.webp',
+  },
+  {
+    title: 'When Texas BBQ Meets H-E-B® Tortillas: The Perfect Fusion',
+    slug: 'bbq-meets-tortillas',
+    excerpt: 'Discover why authentic H-E-B® tortillas are essential for Texas BBQ culture. From brisket tacos to pulled pork wraps, explore the marriage of two iconic Texas traditions.',
+    category: 'Texas Cuisine',
+    readTime: '8 min read',
+    date: 'November 4, 2025',
+    image: '/images/blog/bbq-fusion-hero.webp',
+  },
+  {
+    title: 'The Ultimate Brisket Breakfast Burrito with H-E-B® Tortillas',
+    slug: 'brisket-breakfast-burrito',
+    excerpt: 'Master the art of the brisket breakfast burrito with authentic H-E-B® tortillas. From overnight brisket to the perfect scramble, learn why this Texas breakfast requires real tortillas.',
+    category: 'Recipes & Culture',
+    readTime: '10 min read',
+    date: 'November 4, 2025',
+    image: '/images/blog/brisket-burrito-hero.webp',
+  },
+  {
+    title: 'BBQ Success Stories: How H-E-B® Tortillas Transformed Texas Restaurants',
+    slug: 'bbq-success-stories',
+    excerpt: 'Real stories from Texas BBQ joints and restaurants that elevated their business with authentic H-E-B® tortillas. Learn how the right tortillas can transform your food business.',
+    category: 'Business & Culture',
+    readTime: '12 min read',
+    date: 'November 4, 2025',
+    image: '/images/blog/success-stories-hero.webp',
+  },
+  {
     title: 'Maria\'s Story: The Heart of Lonestar Tortillas',
     slug: 'marias-story',
     excerpt: 'Meet Maria, whose passion for authentic tortilla-making transforms simple corn and flour into culinary tradition. A journey from her grandmother\'s kitchen to yours.',
@@ -64,6 +118,9 @@ const blogPosts: BlogPost[] = [
 
 const CategoryBadge = ({ category }: { category: string }) => {
   const colors: { [key: string]: string } = {
+    'Texas Cuisine': 'bg-sunset-100 text-sunset-700',
+    'Recipes & Culture': 'bg-masa-100 text-masa-700',
+    'Business & Culture': 'bg-rust-100 text-rust-700',
     People: 'bg-sunset-100 text-sunset-700',
     Science: 'bg-masa-100 text-masa-700',
     Culture: 'bg-rust-100 text-rust-700',

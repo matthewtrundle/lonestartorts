@@ -9,15 +9,15 @@ export function Header() {
   const { itemCount, setIsOpen } = useCart();
 
   return (
-    <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-700" id="main-header">
+    <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-500" id="main-header">
       {/* Glass morphism background */}
       <div className="absolute inset-0 bg-cream-50/90 backdrop-blur-md border-b border-charcoal-200/10" />
 
       <div className="container mx-auto px-8 relative">
-        <div className="flex justify-between items-center py-6">
-          <Link href="/" className="logo-wrapper group relative -ml-4">
+        <div className="header-content flex justify-between items-center py-6 transition-all duration-500">
+          <Link href="/" className="logo-wrapper group relative -ml-4 transition-all duration-500">
             <LogoFull
-              className="text-charcoal-950 transition-transform duration-500 group-hover:scale-105"
+              className="text-charcoal-950 transition-all duration-500 group-hover:scale-105"
               animated
               size="md"
             />

@@ -361,13 +361,12 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
           const scrolled = self.scroll() > 50  // Changed from 200 to 50 - triggers much sooner
           const deepScrolled = self.scroll() > 100  // Changed from 400 to 100 - shows floating nav sooner
 
-          // Hide main header on scroll - faster animation
-          gsap.to(mainHeader, {
-            y: scrolled ? -150 : 0,
-            opacity: scrolled ? 0 : 1,
-            duration: 0.3,  // Faster from 0.6 to 0.3
-            ease: 'power2.out',
-          })
+          // Shrink main header on scroll - stays visible but compact
+          if (scrolled) {
+            mainHeader.classList.add('scrolled')
+          } else {
+            mainHeader.classList.remove('scrolled')
+          }
 
           // Show floating navigation
           gsap.to(floatingNav, {

@@ -158,6 +158,16 @@ body::before {
   z-index: 50 !important;
 }
 
+/* Header shrinking on scroll */
+.shrink-header.scrolled .header-content {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+.shrink-header.scrolled .logo-wrapper {
+  transform: scale(0.85);
+}
+
 /* Artistic hover effects */
 .hover-lift {
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
