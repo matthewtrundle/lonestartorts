@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { ShoppingBag, User } from 'lucide-react';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
@@ -80,10 +80,15 @@ export function Header() {
             {/* User Authentication */}
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="p-2 hover:bg-charcoal-100/50 rounded-full transition-colors" aria-label="Sign in">
-                  <User className="w-5 h-5 text-charcoal-950" />
+                <button className="text-sm font-medium tracking-wider uppercase text-charcoal-950 hover:text-sunset-600 transition-colors" aria-label="Sign in">
+                  Sign In
                 </button>
               </SignInButton>
+              <SignUpButton mode="modal">
+                <button className="bg-charcoal-950 text-white px-5 py-2.5 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-charcoal-800 transition-colors shadow-md" aria-label="Create account">
+                  Sign Up
+                </button>
+              </SignUpButton>
             </SignedOut>
             <SignedIn>
               <UserButton
