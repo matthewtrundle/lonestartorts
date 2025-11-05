@@ -8,6 +8,7 @@ import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
+import { Header } from '@/components/layout/Header'
 import { HeroInteractions } from '@/components/HeroInteractions'
 
 export default function Home() {
@@ -36,46 +37,8 @@ export default function Home() {
           <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-radial from-masa-400/20 to-transparent blur-3xl" />
         </div>
 
-        {/* Premium Header with solid background and drop shadow */}
-        <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-700 bg-white shadow-md" id="main-header">
-
-          <div className="container mx-auto px-8 relative">
-            <div className="flex justify-between items-center py-6">
-              <div className="logo-wrapper group relative -ml-4">
-                <LogoFull className="text-charcoal-950 transition-transform duration-500 group-hover:scale-105" animated size="md" />
-              </div>
-              <nav className="nav-items hidden md:flex items-center gap-8">
-                <Link href="/shop" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Shop</span>
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </Link>
-                <Link href="/craft" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Source</span>
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </Link>
-                <Link href="/guides" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Guides & Tips</span>
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </Link>
-                <Link href="/recipes" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Recipes</span>
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </Link>
-                <Link href="/blog" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Blog & Stories</span>
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </Link>
-                <Link href="/story" className="group relative overflow-hidden">
-                  <span className="relative z-10 text-sm font-medium tracking-wider uppercase transition-colors group-hover:text-sunset-600">Story</span>
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </Link>
-                <Link href="/shop" className="inline-block bg-sunset-500 text-cream-50 px-6 py-3 rounded-full font-medium text-sm tracking-wider uppercase hover:bg-sunset-600 transition-colors shadow-sunset">
-                  Shop Now
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
+        {/* Shared Header with Clerk integration */}
+        <Header />
 
         {/* Artistic Floating Navigation - Shows on scroll */}
         <div className="fixed-nav-artistic fixed right-8 top-1/2 -translate-y-1/2 z-[150] opacity-0 pointer-events-none transition-all duration-700" id="floating-nav">

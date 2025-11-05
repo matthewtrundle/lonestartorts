@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
@@ -8,6 +9,22 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.getElementById('main-header');
+      if (header) {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-500 bg-white shadow-md" id="main-header">
