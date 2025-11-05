@@ -34,6 +34,33 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    title: 'Pacific Northwest BBQ: How Washington Restaurants Found Perfection with H-E-B® Tortillas',
+    slug: 'washington-bbq-elevation',
+    excerpt: 'From Seattle to Spokane, Washington BBQ joints discover that the best Pacific Northwest BBQ starts with authentic Texas tortillas. Real success stories from Evergreen Smoke, Tacoma Smokehouse, and Inland Northwest Smoke.',
+    category: 'Business & Culture',
+    readTime: '12 min read',
+    date: 'November 5, 2025',
+    image: '/images/blog/washington-bbq-hero.webp',
+  },
+  {
+    title: 'California BBQ Revolution: How H-E-B® Tortillas Won Over the Golden State',
+    slug: 'california-bbq-revolution',
+    excerpt: 'From Oakland to San Diego, California BBQ restaurants discover the Texas tortilla advantage. Success stories from Smoke & Seoul, Venice Beach Smoke Co., and North Park Smoke.',
+    category: 'Business & Culture',
+    readTime: '13 min read',
+    date: 'November 5, 2025',
+    image: '/images/blog/california-bbq-hero.webp',
+  },
+  {
+    title: 'How Colorado BBQ Restaurants Found Their Edge with H-E-B® Tortillas',
+    slug: 'colorado-bbq-transformation',
+    excerpt: 'From Denver to Boulder to Breckenridge, Colorado BBQ joints discover what Texas pitmasters have known for years: authentic H-E-B® tortillas make all the difference. Real stories from Mile High Smoke, Boulder Creek, and Summit Smoke.',
+    category: 'Business & Culture',
+    readTime: '11 min read',
+    date: 'November 5, 2025',
+    image: '/images/blog/colorado-bbq-hero.webp',
+  },
+  {
     title: 'The Ultimate Guide to Leftover Brisket: 7 Days of Meals',
     slug: 'leftover-brisket-guide',
     excerpt: 'Transform leftover brisket into a week of incredible meals using H-E-B® tortillas. Complete storage tips, reheating methods, and creative recipes.',
