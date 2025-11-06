@@ -31,14 +31,14 @@ export const products: Product[] = [
   },
   {
     sku: 'HEB-BUTTER',
-    name: 'H-E-B Bakery Butter Flour Tortillas',
+    name: 'H-E-B Bakery Butter Tortillas',
     description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer.',
     image: '/images/products/butter-tortillas-heb.png',
     price: 2000, // $20 per pack
     tortillaCount: 20,
     storage: 'shelf_stable',
     category: 'flour',
-    tortillaType: 'Flour',
+    tortillaType: 'Butter',
   },
   {
     sku: 'HEB-WHEAT',

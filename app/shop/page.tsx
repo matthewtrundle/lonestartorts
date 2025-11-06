@@ -58,10 +58,10 @@ export default function ShopPage() {
           {/* Hero Section - Premium hierarchy */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-charcoal-950 mb-4 tracking-tight">
-              Shop Our Tortillas
+              Shop Our H-E-B Tortillas
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              Premium Texas tortillas, shipped directly to your door.
+              Premium Texas tortillas from H-E-B, shipped directly to your door.
             </p>
 
             {/* Trust Signals Bar - Premium layout */}

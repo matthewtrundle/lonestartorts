@@ -82,45 +82,48 @@ export function Header() {
             </button>
           </div>
 
-          {/* Desktop Navigation - Compact */}
-          <nav className="nav-items hidden md:flex items-center gap-4">
-            <Link href="/shop" className="group relative overflow-hidden">
-              <span className="relative z-10 text-xs font-medium tracking-wide uppercase transition-colors group-hover:text-sunset-600">
+          {/* Desktop Navigation - Premium styling */}
+          <nav className="nav-items hidden md:flex items-center gap-6">
+            <Link href="/shop" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 Shop
               </span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link href="/craft" className="group relative overflow-hidden">
-              <span className="relative z-10 text-xs font-medium tracking-wide uppercase transition-colors group-hover:text-sunset-600">
+            <Link href="/craft" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 Source
               </span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link href="/guides" className="group relative overflow-hidden">
-              <span className="relative z-10 text-xs font-medium tracking-wide uppercase transition-colors group-hover:text-sunset-600">
+            <Link href="/guides" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 Guides
               </span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link href="/recipes" className="group relative overflow-hidden">
-              <span className="relative z-10 text-xs font-medium tracking-wide uppercase transition-colors group-hover:text-sunset-600">
+            <Link href="/recipes" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 Recipes
               </span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link href="/blog" className="group relative overflow-hidden">
-              <span className="relative z-10 text-xs font-medium tracking-wide uppercase transition-colors group-hover:text-sunset-600">
+            <Link href="/blog" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 Blog
               </span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-sunset-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
+
+            {/* Divider */}
+            <div className="h-6 w-px bg-gray-300" />
 
             {/* User Authentication - Combined Button */}
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase text-charcoal-950 hover:text-sunset-600 transition-colors" aria-label="Sign in or sign up">
-                  <User className="w-4 h-4" />
-                  Account
+                <button className="flex items-center gap-2 text-sm font-medium tracking-wide text-charcoal-950 hover:text-sunset-600 transition-colors" aria-label="Sign in or sign up">
+                  <User className="w-5 h-5" />
+                  <span>Account</span>
                 </button>
               </SignInButton>
             </SignedOut>
@@ -128,7 +131,7 @@ export function Header() {
               <UserButton
                 appearance={{
                   elements: {
-                    avatarBox: 'w-8 h-8',
+                    avatarBox: 'w-9 h-9',
                   },
                 }}
                 afterSignOutUrl="/"
@@ -151,12 +154,12 @@ export function Header() {
             {/* Cart Icon */}
             <button
               onClick={() => setIsOpen(true)}
-              className="relative p-1.5 hover:bg-charcoal-100/50 rounded-full transition-colors"
+              className="relative p-2 hover:bg-sunset-50 rounded-lg transition-colors"
               aria-label="Open cart"
             >
               <ShoppingBag className="w-5 h-5 text-charcoal-950" />
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-600 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-md">
                   {itemCount}
                 </span>
               )}
@@ -164,7 +167,7 @@ export function Header() {
 
             <Link
               href="/shop"
-              className="inline-block bg-sunset-500 text-cream-50 px-4 py-2 rounded-full font-medium text-xs tracking-wide uppercase hover:bg-sunset-600 transition-colors shadow-sunset"
+              className="inline-flex items-center gap-2 bg-sunset-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm tracking-wide hover:bg-sunset-700 hover:shadow-md transition-all"
             >
               Shop Now
             </Link>
