@@ -34,6 +34,15 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    title: 'Planning the Ultimate Texas Event: From Brisket Tacos to Bar Service',
+    slug: 'texas-event-planning-guide',
+    excerpt: 'Complete guide to planning authentic Texas events with H-E-B® tortillas, BBQ catering, and professional bar service. Expert tips for taco bars, alcohol delivery, and creating unforgettable Austin celebrations.',
+    category: 'Business & Culture',
+    readTime: '12 min read',
+    date: 'November 6, 2025',
+    image: '/images/blog/texas-event-hero.webp',
+  },
+  {
     title: 'Pacific Northwest BBQ: How Washington Restaurants Found Perfection with H-E-B® Tortillas',
     slug: 'washington-bbq-elevation',
     excerpt: 'From Seattle to Spokane, Washington BBQ joints discover that the best Pacific Northwest BBQ starts with authentic Texas tortillas. Real success stories from Evergreen Smoke, Tacoma Smokehouse, and Inland Northwest Smoke.',
