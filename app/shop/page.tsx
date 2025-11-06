@@ -54,46 +54,47 @@ export default function ShopPage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {/* Hero Section - Compact */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-display font-bold text-texas-brown mb-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Hero Section - Premium hierarchy */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-charcoal-950 mb-4 tracking-tight">
               Shop Our Tortillas
             </h1>
-            <p className="text-base text-gray-700 max-w-2xl mx-auto mb-4">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
               Premium Texas tortillas, shipped directly to your door.
             </p>
 
-            {/* Trust Signals Bar - Compact */}
-            <div className="max-w-3xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div className="flex flex-col items-center gap-1 p-3 bg-white rounded-lg shadow-sm">
-                  <Truck className="w-5 h-5 text-sunset-600" />
-                  <p className="text-xs font-semibold text-charcoal-950">Free Shipping</p>
-                  <p className="text-[10px] text-charcoal-600">orders 3+ packs</p>
+            {/* Trust Signals Bar - Premium layout */}
+            <div className="max-w-4xl mx-auto mb-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
+                  <Truck className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">Free Shipping</p>
+                  <p className="text-xs text-gray-600">orders 3+ packs</p>
                 </div>
-                <div className="flex flex-col items-center gap-1 p-3 bg-white rounded-lg shadow-sm">
-                  <Clock className="w-5 h-5 text-sunset-600" />
-                  <p className="text-xs font-semibold text-charcoal-950">Same-Day Ship</p>
-                  <p className="text-[10px] text-charcoal-600">before 2pm CT</p>
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
+                  <Clock className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">Same-Day Ship</p>
+                  <p className="text-xs text-gray-600">before 2pm CT</p>
                 </div>
-                <div className="flex flex-col items-center gap-1 p-3 bg-white rounded-lg shadow-sm">
-                  <Shield className="w-5 h-5 text-sunset-600" />
-                  <p className="text-xs font-semibold text-charcoal-950">100% Secure</p>
-                  <p className="text-[10px] text-charcoal-600">encrypted</p>
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
+                  <Shield className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">100% Secure</p>
+                  <p className="text-xs text-gray-600">encrypted</p>
                 </div>
-                <div className="flex flex-col items-center gap-1 p-3 bg-white rounded-lg shadow-sm">
-                  <Star className="w-5 h-5 text-sunset-600" />
-                  <p className="text-xs font-semibold text-charcoal-950">4.8/5 Stars</p>
-                  <p className="text-[10px] text-charcoal-600">500+ reviews</p>
+                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
+                  <Star className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">4.8/5 Stars</p>
+                  <p className="text-xs text-gray-600">500+ reviews</p>
                 </div>
               </div>
             </div>
 
-            {/* Urgency Message - Compact */}
-            <div className="mt-4 inline-block bg-sunset-50 border-2 border-sunset-200 rounded-full px-4 py-1.5">
-              <p className="text-xs font-semibold text-sunset-700">
-                🔥 Order today, ships tomorrow • Limited stock
+            {/* Urgency Message - Subtle */}
+            <div className="inline-flex items-center gap-2 bg-sunset-50 border border-sunset-200 rounded-md px-4 py-2">
+              <span className="text-sunset-600 text-lg">🔥</span>
+              <p className="text-sm font-medium text-sunset-700">
+                Order today, ships tomorrow • Limited stock
               </p>
             </div>
           </div>
@@ -115,9 +116,9 @@ export default function ShopPage() {
             </div>
           )}
 
-          {/* Products Grid - Tighter spacing */}
+          {/* Products Grid - Premium spacing */}
           {!loading && !error && products.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
               {products.map((product) => (
                 <ProductCard
                   key={product.sku}
