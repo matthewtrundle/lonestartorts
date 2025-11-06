@@ -95,20 +95,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-      {/* Premium Image Container */}
-      <div className="aspect-[4/5] relative overflow-hidden bg-light-gray">
+      {/* Premium Image Container - Smaller aspect ratio */}
+      <div className="aspect-[3/2] relative overflow-hidden bg-light-gray">
         <Image
           src={image}
           alt={name}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-102"
+          className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
 
         {/* Best Seller Badge - Top Left */}
         {isBestSeller && (
-          <div className="absolute top-3 left-3 z-10">
-            <span className="inline-block px-3 py-1 text-xs font-bold tracking-wide uppercase bg-sunset-600 text-white rounded-full shadow-md">
+          <div className="absolute top-2 left-2 z-10">
+            <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase bg-sunset-600 text-white rounded-full shadow-md">
               Best Seller
             </span>
           </div>
@@ -116,8 +116,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Savings Badge - Top Right */}
         {savingsPercent && (
-          <div className="absolute top-3 right-3 z-10">
-            <span className="inline-block px-3 py-1 text-xs font-bold tracking-wide uppercase bg-green-600 text-white rounded-full shadow-md">
+          <div className="absolute top-2 right-2 z-10">
+            <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase bg-green-600 text-white rounded-full shadow-md">
               {savingsPercent}% OFF
             </span>
           </div>
@@ -125,105 +125,105 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Storage Badge - Bottom Right (if no savings badge) */}
         {!savingsPercent && (
-          <div className="absolute bottom-3 right-3 z-10">
-            <span className="px-3 py-1 text-xs font-medium tracking-wide bg-white/90 backdrop-blur-sm rounded-full text-charcoal-700 shadow-sm">
+          <div className="absolute bottom-2 right-2 z-10">
+            <span className="px-2 py-0.5 text-[10px] font-medium tracking-wide bg-white/90 backdrop-blur-sm rounded-full text-charcoal-700 shadow-sm">
               {storageLabel}
             </span>
           </div>
         )}
       </div>
 
-      {/* Product Details */}
-      <div className="p-5">
-        <div className="flex justify-between items-start mb-3">
+      {/* Product Details - More compact */}
+      <div className="p-3">
+        <div className="flex justify-between items-start mb-2">
           <div className="flex-1">
-            <h3 className="text-lg font-semibold leading-snug mb-1 text-charcoal-950">
+            <h3 className="text-base font-semibold leading-tight mb-1 text-charcoal-950">
               {name}
             </h3>
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-1.5 flex-wrap">
               {tortillaType && (
                 <>
-                  <p className="text-xs font-medium tracking-wide text-charcoal-600">
+                  <p className="text-[10px] font-medium tracking-wide text-charcoal-600">
                     {tortillaType}
                   </p>
-                  <span className="text-charcoal-300">•</span>
+                  <span className="text-charcoal-300 text-xs">•</span>
                 </>
               )}
-              <p className="text-xs font-medium tracking-wide text-charcoal-600">
+              <p className="text-[10px] font-medium tracking-wide text-charcoal-600">
                 {tortillaCount} tortillas
               </p>
               {savingsPercent && (
                 <>
-                  <span className="text-charcoal-300">•</span>
-                  <p className="text-xs font-medium tracking-wide uppercase text-charcoal-600">
+                  <span className="text-charcoal-300 text-xs">•</span>
+                  <p className="text-[10px] font-medium tracking-wide uppercase text-charcoal-600">
                     {storageLabel}
                   </p>
                 </>
               )}
             </div>
           </div>
-          <div className="text-right ml-4">
-            <span className="text-2xl font-bold text-sunset-600 block">
+          <div className="text-right ml-3">
+            <span className="text-xl font-bold text-sunset-600 block">
               {formatPrice(price)}
             </span>
-            <span className="text-xs text-charcoal-500">per pack</span>
+            <span className="text-[10px] text-charcoal-500">per pack</span>
           </div>
         </div>
 
-        <p className="text-sm text-charcoal-700 leading-relaxed mb-4">
+        <p className="text-xs text-charcoal-700 leading-snug mb-3">
           {description}
         </p>
 
-        {/* Quantity Selector */}
-        <div className="flex items-center justify-between mb-3 bg-cream-50 rounded-lg p-3">
-          <span className="text-sm font-semibold text-charcoal-950">Quantity</span>
-          <div className="flex items-center gap-3">
+        {/* Quantity Selector - Compact */}
+        <div className="flex items-center justify-between mb-2 bg-cream-50 rounded-lg p-2">
+          <span className="text-xs font-semibold text-charcoal-950">Quantity</span>
+          <div className="flex items-center gap-2">
             <button
               onClick={() => handleQuantityChange(-1)}
               disabled={quantity <= 1}
-              className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-charcoal-300 hover:border-charcoal-950 hover:bg-charcoal-950 hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-charcoal-300 disabled:hover:bg-transparent disabled:hover:text-charcoal-950"
+              className="w-7 h-7 flex items-center justify-center rounded-full border-2 border-charcoal-300 hover:border-charcoal-950 hover:bg-charcoal-950 hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-charcoal-300 disabled:hover:bg-transparent disabled:hover:text-charcoal-950"
               aria-label="Decrease quantity"
             >
-              <Minus className="w-4 h-4" />
+              <Minus className="w-3 h-3" />
             </button>
-            <span className="text-lg font-bold text-charcoal-950 min-w-[2ch] text-center">
+            <span className="text-base font-bold text-charcoal-950 min-w-[2ch] text-center">
               {quantity}
             </span>
             <button
               onClick={() => handleQuantityChange(1)}
               disabled={quantity >= 10}
-              className="w-8 h-8 flex items-center justify-center rounded-full border-2 border-charcoal-300 hover:border-charcoal-950 hover:bg-charcoal-950 hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-charcoal-300 disabled:hover:bg-transparent disabled:hover:text-charcoal-950"
+              className="w-7 h-7 flex items-center justify-center rounded-full border-2 border-charcoal-300 hover:border-charcoal-950 hover:bg-charcoal-950 hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-charcoal-300 disabled:hover:bg-transparent disabled:hover:text-charcoal-950"
               aria-label="Increase quantity"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3 h-3" />
             </button>
           </div>
         </div>
 
-        {/* Shipping Savings Message */}
+        {/* Shipping Savings Message - Compact */}
         {getShippingMessage() && (
-          <div className="mb-3 text-center">
-            <p className="text-xs font-semibold text-sunset-600 bg-sunset-50 px-3 py-2 rounded-full">
+          <div className="mb-2 text-center">
+            <p className="text-[10px] font-semibold text-sunset-600 bg-sunset-50 px-2 py-1 rounded-full">
               {getShippingMessage()}
             </p>
           </div>
         )}
 
-        {/* Always-Visible CTA Button */}
+        {/* Always-Visible CTA Button - Compact */}
         <Button
           variant="cart"
-          size="lg"
+          size="default"
           onClick={handleAddToCart}
-          className="w-full rounded-full uppercase flex items-center justify-center gap-2"
+          className="w-full rounded-full uppercase flex items-center justify-center gap-1.5 text-xs py-2"
           aria-label={`Add ${quantity > 1 ? `${quantity} packs of ` : ''}${name} to cart`}
         >
-          <ShoppingBag className="w-4 h-4" />
+          <ShoppingBag className="w-3.5 h-3.5" />
           Add {quantity > 1 ? `${quantity} Packs` : ''} to Cart
         </Button>
 
-        {/* Bundle Pricing Hint */}
-        <div className="mt-3 text-center">
-          <p className="text-xs text-charcoal-600">
+        {/* Bundle Pricing Hint - Compact */}
+        <div className="mt-2 text-center">
+          <p className="text-[10px] text-charcoal-600">
             {quantity >= 3 ? (
               <span className="font-semibold text-green-700">
                 ✓ Bulk order discount applied
@@ -237,7 +237,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {storage === 'shelf_stable' && (
-          <p className="text-xs text-charcoal-500 mt-4 text-center italic">
+          <p className="text-[10px] text-charcoal-500 mt-2 text-center italic">
             Store in a cool, dry place
           </p>
         )}
