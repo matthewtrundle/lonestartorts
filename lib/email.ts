@@ -74,103 +74,120 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Confirmation</title>
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 0; background-color: #f9fafb;">
 
-  <!-- Header -->
-  <div style="text-align: center; padding: 20px 0; border-bottom: 2px solid #f97316;">
-    <h1 style="margin: 0; font-size: 28px; color: #1a1a1a;">Lonestar Tortillas</h1>
-    <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Premium Texas Tortillas</p>
+  <!-- Hero Header -->
+  <div style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 40px 20px; text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 8px;">⭐</div>
+    <h1 style="margin: 0; font-size: 32px; color: #ffffff; font-weight: 700; letter-spacing: -0.5px;">Howdy, Partner!</h1>
+    <p style="margin: 8px 0 0 0; color: #fed7aa; font-size: 16px;">Your tortillas are heading your way</p>
   </div>
 
-  <!-- Success Message -->
-  <div style="background-color: #f0fdf4; border: 1px solid: #86efac; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center;">
-    <h2 style="margin: 0 0 10px 0; color: #16a34a; font-size: 24px;">Order Confirmed!</h2>
-    <p style="margin: 0; color: #166534; font-size: 16px;">Thank you for your order, ${customerName}!</p>
-  </div>
+  <!-- Main Content -->
+  <div style="background-color: #ffffff; padding: 40px 20px;">
 
-  <!-- Order Details -->
-  <div style="margin: 30px 0;">
-    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #1a1a1a;">Order Details</h3>
-    <p style="margin: 0 0 10px 0; color: #666;">
-      <strong>Order Number:</strong> ${orderNumber}<br>
-      <strong>Order Date:</strong> ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-    </p>
-  </div>
+    <!-- Success Badge -->
+    <div style="background-color: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin-bottom: 32px; text-align: center;">
+      <div style="font-size: 40px; margin-bottom: 8px;">🎉</div>
+      <h2 style="margin: 0 0 8px 0; color: #16a34a; font-size: 24px; font-weight: 700;">Order Confirmed!</h2>
+      <p style="margin: 0; color: #15803d; font-size: 16px;">Thanks for riding with us, ${customerName}</p>
+    </div>
 
-  <!-- Items -->
-  <div style="margin: 30px 0;">
-    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #1a1a1a;">Order Items</h3>
-    <table style="width: 100%; border-collapse: collapse;">
-      <thead>
-        <tr style="border-bottom: 2px solid #e5e7eb;">
-          <th style="text-align: left; padding: 10px 0; color: #666; font-weight: 600; font-size: 14px;">Item</th>
-          <th style="text-align: center; padding: 10px 0; color: #666; font-weight: 600; font-size: 14px;">Qty</th>
-          <th style="text-align: right; padding: 10px 0; color: #666; font-weight: 600; font-size: 14px;">Price</th>
+    <!-- Order Details -->
+    <div style="background-color: #f9fafb; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+        <div>
+          <div style="color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Order Number</div>
+          <div style="color: #1a1a1a; font-size: 16px; font-weight: 600; font-family: 'Courier New', monospace;">${orderNumber}</div>
+        </div>
+      </div>
+      <div style="color: #6b7280; font-size: 14px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+        <strong>Ordered:</strong> ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+      </div>
+    </div>
+
+    <!-- Items -->
+    <div style="margin-bottom: 32px;">
+      <h3 style="margin: 0 0 16px 0; font-size: 18px; color: #1a1a1a; font-weight: 700;">Your Haul 🌮</h3>
+      <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background-color: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+              <th style="text-align: left; padding: 12px 16px; color: #6b7280; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Item</th>
+              <th style="text-align: center; padding: 12px 16px; color: #6b7280; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Qty</th>
+              <th style="text-align: right; padding: 12px 16px; color: #6b7280; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${items.map((item, index) => `
+            <tr style="${index < items.length - 1 ? 'border-bottom: 1px solid #f3f4f6;' : ''}">
+              <td style="padding: 16px; color: #1a1a1a; font-size: 15px;">${item.name}</td>
+              <td style="padding: 16px; text-align: center; color: #6b7280; font-size: 15px;">${item.quantity}</td>
+              <td style="padding: 16px; text-align: right; color: #1a1a1a; font-size: 15px; font-weight: 600;">$${((item.price * item.quantity) / 100).toFixed(2)}</td>
+            </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Totals -->
+    <div style="background-color: #f9fafb; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+      <table style="width: 100%;">
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-size: 15px;">Subtotal</td>
+          <td style="padding: 8px 0; text-align: right; color: #1a1a1a; font-size: 15px;">$${(subtotal / 100).toFixed(2)}</td>
         </tr>
-      </thead>
-      <tbody>
-        ${items.map((item) => `
-        <tr style="border-bottom: 1px solid #f3f4f6;">
-          <td style="padding: 12px 0; color: #1a1a1a;">${item.name}</td>
-          <td style="padding: 12px 0; text-align: center; color: #666;">${item.quantity}</td>
-          <td style="padding: 12px 0; text-align: right; color: #1a1a1a;">$${((item.price * item.quantity) / 100).toFixed(2)}</td>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-size: 15px;">Shipping</td>
+          <td style="padding: 8px 0; text-align: right; color: #1a1a1a; font-size: 15px;">$${(shipping / 100).toFixed(2)}</td>
         </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  </div>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-size: 15px;">Tax</td>
+          <td style="padding: 8px 0; text-align: right; color: #1a1a1a; font-size: 15px;">$${(tax / 100).toFixed(2)}</td>
+        </tr>
+        <tr style="border-top: 2px solid #e5e7eb;">
+          <td style="padding: 16px 0 0 0; color: #1a1a1a; font-weight: 700; font-size: 20px;">Total</td>
+          <td style="padding: 16px 0 0 0; text-align: right; color: #f97316; font-weight: 700; font-size: 24px;">$${(total / 100).toFixed(2)}</td>
+        </tr>
+      </table>
+    </div>
 
-  <!-- Totals -->
-  <div style="margin: 30px 0; padding: 20px; background-color: #f9fafb; border-radius: 8px;">
-    <table style="width: 100%;">
-      <tr>
-        <td style="padding: 5px 0; color: #666;">Subtotal:</td>
-        <td style="padding: 5px 0; text-align: right; color: #1a1a1a;">$${(subtotal / 100).toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td style="padding: 5px 0; color: #666;">Shipping:</td>
-        <td style="padding: 5px 0; text-align: right; color: #1a1a1a;">$${(shipping / 100).toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td style="padding: 5px 0; color: #666;">Tax:</td>
-        <td style="padding: 5px 0; text-align: right; color: #1a1a1a;">$${(tax / 100).toFixed(2)}</td>
-      </tr>
-      <tr style="border-top: 2px solid #e5e7eb;">
-        <td style="padding: 10px 0 0 0; color: #1a1a1a; font-weight: 700; font-size: 18px;">Total:</td>
-        <td style="padding: 10px 0 0 0; text-align: right; color: #f97316; font-weight: 700; font-size: 18px;">$${(total / 100).toFixed(2)}</td>
-      </tr>
-    </table>
-  </div>
+    <!-- Shipping Address -->
+    <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+      <h3 style="margin: 0 0 16px 0; font-size: 16px; color: #1a1a1a; font-weight: 700;">Delivery Destination 📦</h3>
+      <div style="color: #6b7280; font-size: 15px; line-height: 1.8;">
+        ${customerName}<br>
+        ${shippingAddress.street || ''}<br>
+        ${shippingAddress.city || ''}, ${shippingAddress.state || ''} ${shippingAddress.zip || ''}<br>
+        ${shippingAddress.country || 'United States'}
+      </div>
+    </div>
 
-  <!-- Shipping Address -->
-  <div style="margin: 30px 0;">
-    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #1a1a1a;">Shipping Address</h3>
-    <p style="margin: 0; color: #666; line-height: 1.8;">
-      ${customerName}<br>
-      ${shippingAddress.street || ''}<br>
-      ${shippingAddress.city || ''}, ${shippingAddress.state || ''} ${shippingAddress.zip || ''}<br>
-      ${shippingAddress.country || 'United States'}
-    </p>
-  </div>
+    <!-- What's Next -->
+    <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+      <h3 style="margin: 0 0 12px 0; font-size: 18px; color: #92400e; font-weight: 700;">What's Next, Partner? 🤠</h3>
+      <div style="color: #78350f; font-size: 15px; line-height: 1.8;">
+        ✓ Shipping confirmation within 24-48 hours<br>
+        ✓ Tortillas arrive in 2-3 business days<br>
+        ✓ Track your package via email<br>
+        ✓ Taco Tuesday secured 🌮
+      </div>
+    </div>
 
-  <!-- What's Next -->
-  <div style="margin: 30px 0; padding: 20px; background-color: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px;">
-    <h3 style="margin: 0 0 10px 0; font-size: 16px; color: #92400e;">What's Next?</h3>
-    <p style="margin: 0; color: #78350f; font-size: 14px; line-height: 1.6;">
-      • You'll receive a shipping confirmation within 24-48 hours<br>
-      • Estimated delivery: 2-3 business days after shipping<br>
-      • Track your order using the link in your shipping email
-    </p>
   </div>
 
   <!-- Footer -->
-  <div style="margin: 40px 0 20px 0; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #666; font-size: 12px;">
-    <p style="margin: 0 0 10px 0;">
-      Questions? Email us at <a href="mailto:orders@lonestartortillas.com" style="color: #f97316; text-decoration: none;">orders@lonestartortillas.com</a>
-    </p>
-    <p style="margin: 10px 0; font-size: 11px; color: #999;">
-      Independent reseller. Not affiliated with or endorsed by H-E-B®.
-    </p>
+  <div style="background-color: #1a1a1a; padding: 32px 20px; text-align: center;">
+    <div style="color: #ffffff; font-size: 20px; font-weight: 700; margin-bottom: 8px;">Lonestar Tortillas</div>
+    <div style="color: #9ca3af; font-size: 14px; margin-bottom: 16px;">Premium Texas Tortillas • Silicon Valley Vibes</div>
+    <div style="margin-bottom: 16px;">
+      <a href="mailto:orders@lonestartortillas.com" style="color: #f97316; text-decoration: none; font-size: 14px; font-weight: 600;">orders@lonestartortillas.com</a>
+    </div>
+    <div style="color: #6b7280; font-size: 12px; line-height: 1.6;">
+      Independent reseller. Not affiliated with or endorsed by H-E-B®.<br>
+      Made with ❤️ in Texas
+    </div>
   </div>
 
 </body>
