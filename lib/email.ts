@@ -14,7 +14,7 @@ function getResendClient(): Resend {
   return resendClient;
 }
 
-const fromEmail = process.env.RESEND_FROM_EMAIL || 'orders@lonestartortillas.com';
+const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
 
 interface OrderItem {
   name: string;
