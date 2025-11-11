@@ -1,46 +1,50 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { trackPurchase } from '@/lib/analytics';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams?.get('session_id');
   const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!sessionId) return;
+    if (!sessionId) {
+      setLoading(false);
+      return;
+    }
 
-    // Fetch order details from webhook/order endpoint
-    fetch(`/api/webhook?id=${sessionId}`)
+    // Fetch order details using session ID
+    fetch(`/api/success?session_id=${sessionId}`)
       .then(res => res.json())
-      .then(order => {
-        setOrderDetails(order);
+      .then(data => {
+        if (data.success && data.order) {
+          setOrderDetails(data.order);
 
-        // Track conversion in Google Analytics
-        if (order && order.amountTotal) {
+          // Track conversion in Google Analytics
           trackPurchase({
-            transaction_id: order.id,
-            value: order.amountTotal / 100, // Convert cents to dollars
+            transaction_id: data.order.orderNumber,
+            value: data.order.total / 100, // Convert cents to dollars
             currency: 'USD',
-            items: [
-              // Parse items from order (you'll need to store this in webhook)
-              {
-                item_id: 'tortilla-order',
-                item_name: 'Lonestar Tortillas Order',
-                quantity: 1,
-                price: order.amountTotal / 100,
-              }
-            ]
+            items: data.order.items.map((item: any) => ({
+              item_id: item.sku,
+              item_name: item.name,
+              quantity: item.quantity,
+              price: item.price / 100,
+            }))
           });
         }
       })
       .catch(error => {
         console.error('Error fetching order:', error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [sessionId]);
 
@@ -71,21 +75,35 @@ export default function SuccessPage() {
           Thank you for your order! Your authentic H-E-B® tortillas are on their way.
         </p>
 
-        {orderDetails && (
+        {loading ? (
+          <div className="bg-cream-50 rounded-lg p-6 mb-6">
+            <div className="animate-pulse space-y-2">
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            </div>
+          </div>
+        ) : orderDetails ? (
           <div className="bg-cream-50 rounded-lg p-6 mb-6 text-left">
             <h2 className="text-xl font-semibold mb-4">Order Details</h2>
             <div className="space-y-2">
-              <p><strong>Order ID:</strong> {orderDetails.id}</p>
-              {orderDetails.customerEmail && (
-                <p><strong>Email:</strong> {orderDetails.customerEmail}</p>
+              <p><strong>Order ID:</strong> {orderDetails.orderNumber}</p>
+              {orderDetails.email && (
+                <p><strong>Email:</strong> {orderDetails.email}</p>
               )}
-              {orderDetails.amountTotal && (
-                <p><strong>Total:</strong> ${(orderDetails.amountTotal / 100).toFixed(2)}</p>
+              {orderDetails.total && (
+                <p><strong>Total:</strong> ${(orderDetails.total / 100).toFixed(2)}</p>
               )}
-              <p className="text-sm text-charcoal-600 mt-4">
-                A confirmation email has been sent to your inbox with tracking information.
-              </p>
             </div>
+            <p className="text-sm text-charcoal-600 mt-4">
+              A confirmation email has been sent to your inbox with tracking information.
+            </p>
+          </div>
+        ) : (
+          <div className="bg-cream-50 rounded-lg p-6 mb-6 text-left">
+            <h2 className="text-xl font-semibold mb-4">Order Details</h2>
+            <p className="text-sm text-charcoal-600">
+              A confirmation email has been sent to your inbox with tracking information.
+            </p>
           </div>
         )}
 
@@ -122,5 +140,24 @@ export default function SuccessPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-cream-50 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8 text-center">
+          <div className="animate-pulse">
+            <div className="w-20 h-20 mx-auto bg-gray-200 rounded-full mb-6"></div>
+            <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+            <div className="h-4 bg-gray-200 rounded w-5/6 mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    }>
+      <SuccessContent />
+    </Suspense>
   );
 }

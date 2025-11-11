@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
+import { calculateShipping, getProductBySku } from '@/lib/products';
+import { sendOrderConfirmationEmail } from '@/lib/email';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
@@ -47,17 +49,32 @@ export async function POST(req: NextRequest) {
           // Generate unique order number
           const orderNumber = `LST-${Date.now()}-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
 
-          // Extract line items
-          const items = fullSession.line_items?.data.map((item) => ({
+          // Extract line items (filter out shipping item)
+          const allItems = fullSession.line_items?.data.map((item) => ({
             sku: item.price?.metadata?.sku || '',
             name: item.description || '',
             quantity: item.quantity || 0,
             price: item.price?.unit_amount || 0,
           })) || [];
 
+          // Separate product items from shipping
+          const items = allItems.filter((item) => item.sku !== 'SHIPPING');
+
           // Calculate totals (amounts in cents)
           const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-          const shipping = 799; // $7.99 flat rate
+
+          // Build full items array with productType for shipping calculation
+          const fullItems = items.map((item) => {
+            const product = getProductBySku(item.sku);
+            return {
+              quantity: item.quantity,
+              productType: product?.productType || 'tortilla',
+            };
+          });
+
+          // Calculate smart shipping based on items
+          const shipping = calculateShipping(fullItems);
+
           const tax = Math.round(subtotal * 0.0825); // 8.25% Texas sales tax
           const total = session.amount_total || (subtotal + shipping + tax);
 
@@ -82,8 +99,24 @@ export async function POST(req: NextRequest) {
 
           console.log('Order saved to database:', order.id, order.orderNumber);
 
-          // TODO: Send confirmation email via Resend
-          // TODO: Trigger fulfillment process
+          // Send order confirmation email
+          try {
+            await sendOrderConfirmationEmail({
+              to: order.email,
+              orderNumber: order.orderNumber,
+              customerName: order.customerName,
+              items: items,
+              subtotal: order.subtotal,
+              shipping: order.shipping,
+              tax: order.tax,
+              total: order.total,
+              shippingAddress: order.shippingAddress as any,
+            });
+            console.log('Order confirmation email sent:', order.orderNumber);
+          } catch (emailError) {
+            console.error('Failed to send confirmation email:', emailError);
+            // Don't fail the webhook - log for manual follow-up
+          }
 
         } catch (dbError) {
           console.error('Failed to save order to database:', dbError);

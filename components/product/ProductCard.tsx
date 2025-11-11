@@ -16,6 +16,7 @@ interface ProductCardProps {
   price: number;
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
+  productType?: 'tortilla' | 'sauce';
   tortillaType?: string;
   isBestSeller?: boolean;
   savingsPercent?: number;
@@ -30,6 +31,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   price,
   tortillaCount,
   storage,
+  productType,
   tortillaType,
   isBestSeller,
   savingsPercent,
@@ -68,6 +70,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         sku,
         name,
         price,
+        productType,
         description,
         image,
       });
@@ -138,12 +141,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   <span className="text-gray-300">•</span>
                 </>
               )}
-              <span className="font-medium">{tortillaCount} tortillas</span>
+              {tortillaCount > 0 && (
+                <span className="font-medium">{tortillaCount} tortillas</span>
+              )}
+              {tortillaCount > 0 && savingsPercent && (
+                <span className="text-gray-300">•</span>
+              )}
               {savingsPercent && (
-                <>
-                  <span className="text-gray-300">•</span>
-                  <span className="uppercase tracking-wide">{storageLabel}</span>
-                </>
+                <span className="uppercase tracking-wide">{storageLabel}</span>
               )}
             </div>
           </div>
@@ -151,7 +156,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <span className="text-2xl font-bold text-sunset-600 block">
               {formatPrice(price)}
             </span>
-            <span className="text-xs text-gray-500">per pack</span>
+            <span className="text-xs text-gray-500">
+              {productType === 'sauce' ? 'per bottle' : 'per pack'}
+            </span>
           </div>
         </div>
 
@@ -185,11 +192,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Shipping Savings Message - Only show if significant */}
-        {quantity >= 3 && (
+        {/* Shipping Savings Message - Only show for tortillas */}
+        {productType === 'tortilla' && quantity >= 3 && (
           <div className="mb-3 text-center">
             <p className="text-xs font-medium text-green-700 bg-green-50 px-3 py-2 rounded-md border border-green-200">
-              ✓ Free shipping unlocked
+              ✓ Optimized Shipping Unlocked
+            </p>
+          </div>
+        )}
+
+        {/* Sauce shipping message */}
+        {productType === 'sauce' && (
+          <div className="mb-3 text-center">
+            <p className="text-xs font-medium text-blue-700 bg-blue-50 px-3 py-2 rounded-md border border-blue-200">
+              Ships free with tortillas • $9.99 flat rate alone
             </p>
           </div>
         )}
@@ -200,10 +216,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           size="lg"
           onClick={handleAddToCart}
           className="w-full uppercase flex items-center justify-center gap-2 text-sm font-semibold py-3 shadow-md hover:shadow-lg transition-all"
-          aria-label={`Add ${quantity > 1 ? `${quantity} packs of ` : ''}${name} to cart`}
+          aria-label={`Add ${quantity > 1 ? `${quantity} ${productType === 'sauce' ? 'bottles' : 'packs'} of ` : ''}${name} to cart`}
         >
           <ShoppingBag className="w-4 h-4" />
-          Add {quantity > 1 ? `${quantity} Packs` : ''} to Cart
+          Add {quantity > 1 ? `${quantity} ${productType === 'sauce' ? 'Bottles' : 'Packs'}` : ''} to Cart
         </Button>
       </div>
     </div>

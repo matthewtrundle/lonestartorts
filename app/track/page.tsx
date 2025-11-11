@@ -79,14 +79,14 @@ export default function TrackOrderPage() {
       <DisclaimerBanner />
       <Header />
 
-      <main className="min-h-screen bg-cream-50 pt-32 pb-16">
+      <main className="min-h-screen bg-cream-50 pt-40 pb-16">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Page Header */}
           <div className="mb-8">
-            <h1 className="text-4xl font-playfair font-bold text-charcoal-950 mb-2">
+            <h1 className="text-4xl md:text-5xl font-playfair font-bold text-charcoal-950 mb-3">
               Track Your Order
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-lg">
               Enter your order number or email to view your order status
             </p>
           </div>

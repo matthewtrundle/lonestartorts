@@ -9,6 +9,7 @@ export interface CartItem {
   name: string;
   price: number; // Price in cents
   quantity: number;
+  productType?: 'tortilla' | 'sauce'; // Product type for shipping calculation
   description?: string;
   image?: string;
 }
@@ -102,11 +103,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   // Calculate totals with smart shipping
-  // Pricing: $20 per pack
-  // Shipping: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
+  // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
+  // Shipping:
+  //   - Tortilla tiers: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
+  //   - Sauce-only: $9.99 flat rate
+  //   - Sauce + tortillas: Sauce ships free with tortillas
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const shipping = calculateShipping(itemCount);
+  const shipping = calculateShipping(items);
   const total = subtotal + shipping;
 
   const value: CartContextType = {

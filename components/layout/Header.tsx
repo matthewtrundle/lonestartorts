@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
-import { ShoppingBag, User, Menu, X } from 'lucide-react';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
@@ -115,42 +114,6 @@ export function Header() {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
 
-            {/* Divider */}
-            <div className="h-6 w-px bg-gray-300" />
-
-            {/* User Authentication - Combined Button */}
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="flex items-center gap-2 text-sm font-medium tracking-wide text-charcoal-950 hover:text-sunset-600 transition-colors" aria-label="Sign in or sign up">
-                  <User className="w-5 h-5" />
-                  <span>Account</span>
-                </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton
-                appearance={{
-                  elements: {
-                    avatarBox: 'w-9 h-9',
-                  },
-                }}
-                afterSignOutUrl="/"
-              >
-                <UserButton.MenuItems>
-                  <UserButton.Link
-                    label="My Orders"
-                    labelIcon={<ShoppingBag className="w-4 h-4" />}
-                    href="/account/orders"
-                  />
-                  <UserButton.Link
-                    label="Addresses"
-                    labelIcon={<User className="w-4 h-4" />}
-                    href="/account/addresses"
-                  />
-                </UserButton.MenuItems>
-              </UserButton>
-            </SignedIn>
-
             {/* Cart Icon */}
             <button
               onClick={() => setIsOpen(true)}
@@ -254,47 +217,6 @@ export function Header() {
             >
               Story
             </Link>
-
-            {/* Divider */}
-            <div className="border-t border-cream-200 my-4" />
-
-            {/* Auth Button - Combined */}
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button
-                  className="w-full px-4 py-3 bg-charcoal-950 text-white font-semibold rounded-lg hover:bg-charcoal-800 transition-colors flex items-center justify-center gap-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <User className="w-4 h-4" />
-                  Sign In / Sign Up
-                </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <div className="px-4 py-3">
-                <UserButton
-                  appearance={{
-                    elements: {
-                      avatarBox: 'w-10 h-10',
-                    },
-                  }}
-                  afterSignOutUrl="/"
-                >
-                  <UserButton.MenuItems>
-                    <UserButton.Link
-                      label="My Orders"
-                      labelIcon={<ShoppingBag className="w-4 h-4" />}
-                      href="/account/orders"
-                    />
-                    <UserButton.Link
-                      label="Addresses"
-                      labelIcon={<User className="w-4 h-4" />}
-                      href="/account/addresses"
-                    />
-                  </UserButton.MenuItems>
-                </UserButton>
-              </div>
-            </SignedIn>
           </nav>
         </div>
       </div>

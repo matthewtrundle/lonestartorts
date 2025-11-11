@@ -1,16 +1,78 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw } from 'lucide-react';
+import { trackBeginCheckout } from '@/lib/analytics';
+import { getStripe } from '@/lib/stripe';
+import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock } from 'lucide-react';
 
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, total, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleClose = () => setIsOpen(false);
+
+  const handleCheckout = async () => {
+    setIsProcessing(true);
+    setError(null);
+
+    try {
+      // Track begin checkout event
+      trackBeginCheckout(
+        total / 100,
+        items.map((item) => ({
+          item_id: item.sku,
+          item_name: item.name,
+          quantity: item.quantity,
+          price: item.price / 100,
+        }))
+      );
+
+      // Create Stripe checkout session
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            sku: item.sku,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      // Redirect to Stripe Checkout
+      const stripe = await getStripe();
+
+      if (!stripe) {
+        throw new Error('Failed to load Stripe');
+      }
+
+      const { error: stripeError } = await stripe.redirectToCheckout({
+        sessionId: data.sessionId,
+      });
+
+      if (stripeError) {
+        throw new Error(stripeError.message);
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setError(err instanceof Error ? err.message : 'An error occurred during checkout');
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <>
@@ -22,7 +84,7 @@ export function CartSidebar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/50 z-40"
+            className="fixed inset-0 bg-black/50 z-[110]"
             onClick={handleClose}
           />
         )}
@@ -36,7 +98,7 @@ export function CartSidebar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col"
+            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-[120] flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -74,8 +136,22 @@ export function CartSidebar() {
                 <div className="space-y-6">
                   {items.map((item) => (
                     <div key={item.sku} className="flex gap-4">
-                      {/* Item Image Placeholder */}
-                      <div className="w-24 h-24 bg-gray-200 rounded flex-shrink-0" />
+                      {/* Item Image */}
+                      <div className="w-24 h-24 bg-cream-100 rounded-lg flex-shrink-0 overflow-hidden relative">
+                        {item.image ? (
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-cover"
+                            sizes="96px"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-charcoal-400">
+                            <span className="text-xs">No image</span>
+                          </div>
+                        )}
+                      </div>
 
                       {/* Item Details */}
                       <div className="flex-1">
@@ -171,13 +247,21 @@ export function CartSidebar() {
                 </div>
 
                 {/* Checkout Button */}
-                <Link
-                  href="/checkout"
-                  onClick={handleClose}
-                  className="block w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg"
+                <button
+                  onClick={handleCheckout}
+                  disabled={isProcessing}
+                  className="flex items-center justify-center gap-2 w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
-                  Proceed to Checkout
-                </Link>
+                  <Lock className="w-4 h-4" />
+                  {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
+                </button>
+
+                {/* Error Message */}
+                {error && (
+                  <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-800">
+                    {error}
+                  </div>
+                )}
 
                 {/* Continue Shopping */}
                 <button

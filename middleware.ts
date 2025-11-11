@@ -1,9 +1,9 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 // Define routes that require authentication
+// Note: /admin routes have their own custom auth system (see lib/auth.ts)
 const isProtectedRoute = createRouteMatcher([
   '/account(.*)',
-  '/admin(.*)',
 ]);
 
 export default clerkMiddleware(async (auth, req) => {

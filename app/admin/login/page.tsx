@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
             <LogoFull className="text-charcoal-950 mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-charcoal-950">Admin Login</h1>
             <p className="text-sm text-charcoal-600 mt-2">
-              Access the waitlist dashboard
+              Access the order management dashboard
             </p>
           </div>
 
@@ -100,7 +100,7 @@ export default function AdminLoginPage() {
 
           <div className="mt-6 pt-6 border-t border-charcoal-200">
             <p className="text-xs text-center text-charcoal-500">
-              Tortilla Rodeo Co. Admin Panel
+              Lonestar Tortillas Admin Panel
             </p>
           </div>
         </div>

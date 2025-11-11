@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout } from '@/lib/analytics';
+import { getStripe } from '@/lib/stripe';
 import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,21 @@ export default function CheckoutPage() {
   const { items, itemCount, subtotal, shipping, total, clearCart, isHydrated } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Calculate shipping breakdown for better display
+  const tortillaPacks = items.filter(item => item.productType !== 'sauce').reduce((sum, item) => sum + item.quantity, 0);
+  const sauceBottles = items.filter(item => item.productType === 'sauce').reduce((sum, item) => sum + item.quantity, 0);
+
+  const getShippingLabel = () => {
+    if (tortillaPacks > 0 && sauceBottles > 0) {
+      return `Shipping (${tortillaPacks} tortilla ${tortillaPacks === 1 ? 'pack' : 'packs'} + ${sauceBottles} sauce)`;
+    } else if (tortillaPacks > 0) {
+      return `Shipping (${tortillaPacks} ${tortillaPacks === 1 ? 'pack' : 'packs'})`;
+    } else if (sauceBottles > 0) {
+      return `Shipping (sauce)`;
+    }
+    return 'Shipping';
+  };
 
   // Redirect if cart is empty (wait for hydration to avoid race condition)
   React.useEffect(() => {
@@ -62,7 +78,12 @@ export default function CheckoutPage() {
       }
 
       // Redirect to Stripe Checkout
-      const stripe = (window as any).Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+      const stripe = await getStripe();
+
+      if (!stripe) {
+        throw new Error('Failed to load Stripe');
+      }
+
       const { error: stripeError } = await stripe.redirectToCheckout({
         sessionId: data.sessionId,
       });
@@ -171,7 +192,7 @@ export default function CheckoutPage() {
                     <div className="flex items-center gap-2">
                       <Truck className="w-4 h-4 text-sunset-600" />
                       <span className="text-charcoal-600">
-                        Shipping ({itemCount} {itemCount === 1 ? 'pack' : 'packs'})
+                        {getShippingLabel()}
                       </span>
                     </div>
                     <span className="font-semibold text-charcoal-950">{formatPrice(shipping)}</span>
@@ -237,9 +258,6 @@ export default function CheckoutPage() {
           </div>
         </div>
       </main>
-
-      {/* Load Stripe.js */}
-      <script src="https://js.stripe.com/v3/" async />
     </>
   );
 }
