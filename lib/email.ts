@@ -1,6 +1,19 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy-load Resend client to avoid build-time initialization
+let resendClient: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!resendClient) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+    resendClient = new Resend(apiKey);
+  }
+  return resendClient;
+}
+
 const fromEmail = process.env.RESEND_FROM_EMAIL || 'orders@lonestartortillas.com';
 
 interface OrderItem {
@@ -164,6 +177,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
 </html>
     `;
 
+    const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to,
@@ -277,6 +291,7 @@ export async function sendOrderShippedEmail(props: OrderShippedEmailProps) {
 </html>
     `;
 
+    const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to,
