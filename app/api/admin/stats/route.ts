@@ -42,6 +42,9 @@ export async function GET(req: NextRequest) {
         where: {
           createdAt: { gte: last30Days },
         },
+        include: {
+          orderItems: true,
+        },
       }),
       // Previous 30 days (for comparison)
       prisma.order.findMany({
@@ -65,6 +68,9 @@ export async function GET(req: NextRequest) {
         where: {
           paymentStatus: 'SUCCEEDED',
         },
+        include: {
+          orderItems: true,
+        },
       }),
     ]);
 
@@ -86,7 +92,7 @@ export async function GET(req: NextRequest) {
     // Get top product from all orders
     const productCounts: Record<string, { count: number; name: string }> = {};
     allOrders.forEach((order) => {
-      const items = order.items as any[];
+      const items = order.orderItems;
       items.forEach((item: any) => {
         if (item.sku && item.sku !== 'SHIPPING') {
           if (!productCounts[item.sku]) {
@@ -101,13 +107,13 @@ export async function GET(req: NextRequest) {
       .sort((a, b) => b[1].count - a[1].count)[0];
 
     // Get recent orders (last 10)
-    const recentOrders = await prisma.order.findMany({
+    const rawRecentOrders = await prisma.order.findMany({
       orderBy: { createdAt: 'desc' },
       take: 10,
       select: {
         id: true,
         orderNumber: true,
-        customerName: true,
+        shippingName: true,
         email: true,
         total: true,
         status: true,
@@ -115,6 +121,12 @@ export async function GET(req: NextRequest) {
         createdAt: true,
       },
     });
+
+    // Transform orders to include customerName for backward compatibility
+    const recentOrders = rawRecentOrders.map((order) => ({
+      ...order,
+      customerName: order.shippingName,
+    }));
 
     return NextResponse.json({
       metrics: {

@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
       where.OR = [
         { orderNumber: { contains: search, mode: 'insensitive' } },
         { email: { contains: search, mode: 'insensitive' } },
-        { customerName: { contains: search, mode: 'insensitive' } },
+        { shippingName: { contains: search, mode: 'insensitive' } },
       ];
     }
 
@@ -44,15 +44,33 @@ export async function GET(req: NextRequest) {
     }
 
     // Get orders with pagination
-    const [orders, total] = await Promise.all([
+    const [rawOrders, total] = await Promise.all([
       prisma.order.findMany({
         where,
+        include: {
+          orderItems: true,
+        },
         orderBy: { createdAt: 'desc' },
         take: perPage,
         skip: (page - 1) * perPage,
       }),
       prisma.order.count({ where }),
     ]);
+
+    // Transform orders to include customerName and shippingAddress for backward compatibility
+    const orders = rawOrders.map((order) => ({
+      ...order,
+      customerName: order.shippingName,
+      items: order.orderItems,
+      shippingAddress: {
+        line1: order.shippingAddress1,
+        line2: order.shippingAddress2,
+        city: order.shippingCity,
+        state: order.shippingState,
+        postal_code: order.shippingZip,
+        country: order.shippingCountry,
+      },
+    }));
 
     return NextResponse.json({
       orders,

@@ -21,6 +21,9 @@ export default async function OrdersPage() {
     where: { clerkUserId: user.id },
     include: {
       orders: {
+        include: {
+          orderItems: true,
+        },
         orderBy: { createdAt: 'desc' },
       },
     },
@@ -83,7 +86,7 @@ export default async function OrdersPage() {
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="divide-y divide-charcoal-200">
               {customer.orders.map((order) => {
-                const items = order.items as any[];
+                const items = order.orderItems;
                 return (
                   <div key={order.id} className="p-6">
                     <div className="flex items-start justify-between mb-4">

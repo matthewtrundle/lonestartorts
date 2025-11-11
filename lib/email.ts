@@ -180,10 +180,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
   <!-- Footer -->
   <div style="background-color: #1a1a1a; padding: 32px 20px; text-align: center;">
     <div style="color: #ffffff; font-size: 20px; font-weight: 700; margin-bottom: 8px;">Lonestar Tortillas</div>
-    <div style="color: #9ca3af; font-size: 14px; margin-bottom: 16px;">Premium Texas Tortillas • Silicon Valley Vibes</div>
-    <div style="margin-bottom: 16px;">
-      <a href="mailto:orders@lonestartortillas.com" style="color: #f97316; text-decoration: none; font-size: 14px; font-weight: 600;">orders@lonestartortillas.com</a>
-    </div>
+    <div style="color: #9ca3af; font-size: 14px; margin-bottom: 16px;">Premium Texas Tortillas</div>
     <div style="color: #6b7280; font-size: 12px; line-height: 1.6;">
       Independent reseller. Not affiliated with or endorsed by H-E-B®.<br>
       Made with ❤️ in Texas
@@ -296,11 +293,9 @@ export async function sendOrderShippedEmail(props: OrderShippedEmailProps) {
 
   <!-- Footer -->
   <div style="margin: 40px 0 20px 0; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #666; font-size: 12px;">
-    <p style="margin: 0 0 10px 0;">
-      Questions? Email us at <a href="mailto:orders@lonestartortillas.com" style="color: #f97316; text-decoration: none;">orders@lonestartortillas.com</a>
-    </p>
     <p style="margin: 10px 0; font-size: 11px; color: #999;">
-      Independent reseller. Not affiliated with or endorsed by H-E-B®.
+      Independent reseller. Not affiliated with or endorsed by H-E-B®.<br>
+      Made with ❤️ in Texas
     </p>
   </div>
 

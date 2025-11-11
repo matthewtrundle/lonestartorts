@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { trackPurchase } from '@/lib/analytics';
+import { useCart } from '@/lib/cart-context';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -12,12 +13,16 @@ function SuccessContent() {
   const sessionId = searchParams?.get('session_id');
   const [orderDetails, setOrderDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const { clearCart } = useCart();
 
   useEffect(() => {
     if (!sessionId) {
       setLoading(false);
       return;
     }
+
+    // Clear the cart immediately on successful order
+    clearCart();
 
     // Fetch order details using session ID
     fetch(`/api/success?session_id=${sessionId}`)
@@ -46,7 +51,7 @@ function SuccessContent() {
       .finally(() => {
         setLoading(false);
       });
-  }, [sessionId]);
+  }, [sessionId, clearCart]);
 
   return (
     <div className="min-h-screen bg-cream-50 flex items-center justify-center p-4">

@@ -12,36 +12,36 @@ datasource db {
 
 // Waitlist entry model
 model WaitlistEntry {
-  id               String    @id @default(cuid())
-  email            String    @unique
-  name             String?
-  zipCode          String?
+  id      String  @id @default(cuid())
+  email   String  @unique
+  name    String?
+  zipCode String?
 
   // Product interests
-  interestCorn     Boolean   @default(false)
-  interestButter   Boolean   @default(false)
-  interestFlour    Boolean   @default(false)
-  interestVariety  Boolean   @default(false)
+  interestCorn    Boolean @default(false)
+  interestButter  Boolean @default(false)
+  interestFlour   Boolean @default(false)
+  interestVariety Boolean @default(false)
 
   expectedQuantity String?
 
   // Tracking fields
-  source           String?   // utm_source
-  medium           String?   // utm_medium
-  campaign         String?   // utm_campaign
-  referrer         String?   // HTTP referrer
+  source   String? // utm_source
+  medium   String? // utm_medium
+  campaign String? // utm_campaign
+  referrer String? // HTTP referrer
 
   // Status
-  verified         Boolean   @default(false)
-  unsubscribed     Boolean   @default(false)
+  verified     Boolean @default(false)
+  unsubscribed Boolean @default(false)
 
   // Timestamps
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-  notes            Note[]
-  emailLogs        EmailLog[]
+  notes     Note[]
+  emailLogs EmailLog[]
 
   @@index([email])
   @@index([createdAt])
@@ -50,18 +50,18 @@ model WaitlistEntry {
 
 // Admin user model for authentication
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String?
-  password      String?   // Hashed password
-  role          UserRole  @default(VIEWER)
+  id       String   @id @default(cuid())
+  email    String   @unique
+  name     String?
+  password String? // Hashed password
+  role     UserRole @default(VIEWER)
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-  sessions      Session[]
-  notes         Note[]
+  sessions Session[]
+  notes    Note[]
 
   @@index([email])
 }
@@ -79,23 +79,23 @@ model Session {
   userId       String
   expires      DateTime
 
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 // Notes/comments on waitlist entries
 model Note {
-  id              String         @id @default(cuid())
+  id              String @id @default(cuid())
   content         String
   waitlistEntryId String
   userId          String
 
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  waitlistEntry   WaitlistEntry  @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
-  user            User           @relation(fields: [userId], references: [id])
+  waitlistEntry WaitlistEntry @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
+  user          User          @relation(fields: [userId], references: [id])
 
   @@index([waitlistEntryId])
   @@index([userId])
@@ -103,17 +103,17 @@ model Note {
 
 // Email activity log
 model EmailLog {
-  id              String         @id @default(cuid())
+  id              String      @id @default(cuid())
   waitlistEntryId String
   type            EmailType
   subject         String
-  status          EmailStatus    @default(PENDING)
+  status          EmailStatus @default(PENDING)
   sentAt          DateTime?
   error           String?
 
-  createdAt       DateTime       @default(now())
+  createdAt DateTime @default(now())
 
-  waitlistEntry   WaitlistEntry  @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
+  waitlistEntry WaitlistEntry @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
 
   @@index([waitlistEntryId])
   @@index([type])
@@ -136,27 +136,27 @@ enum EmailStatus {
 
 // Customer model - synced from Clerk
 model Customer {
-  id            String    @id @default(cuid())
-  clerkUserId   String    @unique  // Links to Clerk user ID
-  email         String    @unique
-  firstName     String?
-  lastName      String?
+  id          String  @id @default(cuid())
+  clerkUserId String  @unique // Links to Clerk user ID
+  email       String  @unique
+  firstName   String?
+  lastName    String?
 
   // User tracking fields
-  lastLoginAt   DateTime?
-  signupSource  String?   // utm_source for tracking
+  lastLoginAt  DateTime?
+  signupSource String? // utm_source for tracking
 
   // Metadata from Clerk
   publicMetadata  Json?
   privateMetadata Json?
 
   // Timestamps
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-  orders        Order[]
-  addresses     Address[]
+  orders    Order[]
+  addresses Address[]
 
   @@index([clerkUserId])
   @@index([email])
@@ -164,30 +164,30 @@ model Customer {
 
 // Shipping/billing addresses for customers
 model Address {
-  id          String   @id @default(cuid())
-  customerId  String
+  id         String @id @default(cuid())
+  customerId String
 
   // Address fields
-  firstName   String
-  lastName    String
-  street      String
-  street2     String?
-  city        String
-  state       String
-  zip         String
-  country     String   @default("US")
-  phone       String?
+  firstName String
+  lastName  String
+  street    String
+  street2   String?
+  city      String
+  state     String
+  zip       String
+  country   String  @default("US")
+  phone     String?
 
   // Address type
-  isDefault   Boolean  @default(false)
-  type        AddressType @default(BOTH)
+  isDefault Boolean     @default(false)
+  type      AddressType @default(BOTH)
 
   // Timestamps
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
   @@index([customerId])
   @@index([isDefault])
@@ -201,45 +201,72 @@ enum AddressType {
 
 // Order tracking for when we launch
 model Order {
-  id               String    @id @default(cuid())
-  orderNumber      String    @unique
-  email            String
+  id          String @id @default(cuid())
+  orderNumber String @unique
+  email       String
 
   // Customer link (optional for guest checkouts)
-  customerId       String?
-  customer         Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
 
-  // Customer details
-  customerName     String
-  shippingAddress  Json
-  billingAddress   Json
+  // Shipping details (new structure)
+  shippingName     String
+  shippingAddress1 String
+  shippingAddress2 String?
+  shippingCity     String
+  shippingState    String
+  shippingZip      String
+  shippingCountry  String  @default("US")
+  shippingPhone    String?
+
+  // Order items relation (new structure)
+  orderItems OrderItem[]
 
   // Order details
-  items            Json
-  subtotal         Int       // In cents
-  shipping         Int       // In cents
-  tax              Int       // In cents
-  total            Int       // In cents
+  subtotal Int // In cents
+  shipping Int // In cents
+  tax      Int // In cents
+  total    Int // In cents
 
   // Payment
-  stripePaymentId  String?
-  paymentStatus    PaymentStatus @default(PENDING)
+  stripePaymentId String?
+  paymentStatus   PaymentStatus @default(PENDING)
 
   // Fulfillment
-  status           OrderStatus   @default(PENDING)
-  trackingNumber   String?
-  carrier          String?
+  status         OrderStatus @default(PENDING)
+  trackingNumber String?
+  carrier        String?
+  labelUrl       String? // EasyPost shipping label URL
 
   // Timestamps
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  shippedAt        DateTime?
-  deliveredAt      DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  shippedAt   DateTime?
+  deliveredAt DateTime?
 
   @@index([email])
   @@index([orderNumber])
   @@index([status])
   @@index([customerId])
+}
+
+// Order line items
+model OrderItem {
+  id       String @id @default(cuid())
+  orderId  String
+  order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  // Product details
+  sku      String?
+  name     String
+  price    Int // In cents
+  quantity Int
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orderId])
 }
 
 enum PaymentStatus {

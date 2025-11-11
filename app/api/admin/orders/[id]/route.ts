@@ -20,16 +20,32 @@ export async function GET(
       );
     }
 
-    const order = await prisma.order.findUnique({
+    const rawOrder = await prisma.order.findUnique({
       where: { id: params.id },
       include: {
         customer: true,
+        orderItems: true,
       },
     });
 
-    if (!order) {
+    if (!rawOrder) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 });
     }
+
+    // Transform order to include customerName and shippingAddress for backward compatibility
+    const order = {
+      ...rawOrder,
+      customerName: rawOrder.shippingName,
+      items: rawOrder.orderItems,
+      shippingAddress: {
+        line1: rawOrder.shippingAddress1,
+        line2: rawOrder.shippingAddress2,
+        city: rawOrder.shippingCity,
+        state: rawOrder.shippingState,
+        postal_code: rawOrder.shippingZip,
+        country: rawOrder.shippingCountry,
+      },
+    };
 
     return NextResponse.json({ order });
   } catch (error) {
@@ -103,6 +119,7 @@ export async function PATCH(
     const updatedOrder = await prisma.order.update({
       where: { id: params.id },
       data: updateData,
+      include: { orderItems: true },
     });
 
     // Send shipping notification email if status changed to SHIPPED
@@ -112,14 +129,13 @@ export async function PATCH(
       trackingNumber &&
       carrier
     ) {
-      const items = updatedOrder.items as any[];
       await sendOrderShippedEmail({
         to: updatedOrder.email,
         orderNumber: updatedOrder.orderNumber,
-        customerName: updatedOrder.customerName,
+        customerName: updatedOrder.shippingName,
         trackingNumber,
         carrier,
-        items: items.filter((item) => item.sku !== 'SHIPPING'),
+        items: updatedOrder.orderItems.filter((item) => item.sku !== 'SHIPPING'),
       });
     }
 

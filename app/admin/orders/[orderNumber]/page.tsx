@@ -35,6 +35,7 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
   const [updating, setUpdating] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState('');
   const [carrier, setCarrier] = useState('USPS');
+  const [generatingLabel, setGeneratingLabel] = useState(false);
 
   useEffect(() => {
     fetchOrder();
@@ -111,6 +112,42 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
       alert('Failed to mark order as shipped');
     } finally {
       setUpdating(false);
+    }
+  };
+
+  const generateShippingLabel = async () => {
+    if (!order) return;
+
+    if (!confirm('Generate shipping label via EasyPost? This will charge your EasyPost account.')) {
+      return;
+    }
+
+    setGeneratingLabel(true);
+    try {
+      const response = await fetch(`/api/admin/orders/${order.id}/label`, {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to generate label');
+      }
+
+      const data = await response.json();
+
+      // Open label in new tab
+      if (data.shipment?.labelUrl) {
+        window.open(data.shipment.labelUrl, '_blank');
+      }
+
+      await fetchOrder();
+      alert(
+        `Shipping label generated!\nTracking: ${data.shipment.trackingNumber}\nCarrier: ${data.shipment.carrier}\nRate: $${data.shipment.rate.rate} ${data.shipment.rate.currency.toUpperCase()}`
+      );
+    } catch (err: any) {
+      alert(err.message || 'Failed to generate shipping label');
+    } finally {
+      setGeneratingLabel(false);
     }
   };
 
@@ -392,14 +429,28 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
                 />
               </div>
 
-              <button
-                onClick={markAsShipped}
-                disabled={updating || !trackingNumber.trim()}
-                className="w-full px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-2"
-              >
-                <Truck className="w-5 h-5" />
-                {updating ? 'Updating...' : 'Mark as Shipped & Send Email'}
-              </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={generateShippingLabel}
+                  disabled={generatingLabel || updating}
+                  className="flex-1 px-4 py-3 bg-sunset-600 text-white rounded-lg hover:bg-sunset-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-2"
+                >
+                  <Package className="w-5 h-5" />
+                  {generatingLabel ? 'Generating Label...' : 'Generate Shipping Label (EasyPost)'}
+                </button>
+              </div>
+
+              <div className="mt-3 pt-3 border-t border-charcoal-200">
+                <p className="text-xs text-charcoal-600 mb-3">Or manually enter tracking:</p>
+                <button
+                  onClick={markAsShipped}
+                  disabled={updating || !trackingNumber.trim()}
+                  className="w-full px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-2"
+                >
+                  <Truck className="w-5 h-5" />
+                  {updating ? 'Updating...' : 'Mark as Shipped & Send Email'}
+                </button>
+              </div>
             </div>
           )}
         </div>

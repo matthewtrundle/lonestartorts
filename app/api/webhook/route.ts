@@ -46,8 +46,11 @@ export async function POST(req: NextRequest) {
             expand: ['line_items'],
           });
 
-          // Generate unique order number
-          const orderNumber = `LST-${Date.now()}-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
+          // Generate simple order number: LST-{6-digit-counter}
+          // Use last 6 digits of timestamp + 2 random chars for uniqueness
+          const timestamp = Date.now().toString().slice(-6);
+          const random = Math.random().toString(36).substring(2, 4).toUpperCase();
+          const orderNumber = `LST-${timestamp}${random}`;
 
           // Extract line items (filter out shipping item)
           const allItems = fullSession.line_items?.data.map((item) => ({
@@ -78,22 +81,44 @@ export async function POST(req: NextRequest) {
           const tax = Math.round(subtotal * 0.0825); // 8.25% Texas sales tax
           const total = session.amount_total || (subtotal + shipping + tax);
 
+          // Extract shipping address
+          const shippingAddr = session.shipping_details?.address;
+
           // Save order to Prisma database
           const order = await prisma.order.create({
             data: {
               orderNumber,
               email: session.customer_details?.email || '',
-              customerName: session.customer_details?.name || 'Guest',
-              shippingAddress: session.shipping_details?.address as any || {},
-              billingAddress: (session.customer_details?.address || session.shipping_details?.address) as any || {},
-              items: items as any,
+              status: 'PROCESSING',
+
+              // Shipping address fields
+              shippingName: session.customer_details?.name || session.shipping_details?.name || 'Guest',
+              shippingAddress1: shippingAddr?.line1 || '',
+              shippingAddress2: shippingAddr?.line2 || null,
+              shippingCity: shippingAddr?.city || '',
+              shippingState: shippingAddr?.state || '',
+              shippingZip: shippingAddr?.postal_code || '',
+              shippingCountry: shippingAddr?.country || 'US',
+              shippingPhone: session.customer_details?.phone || null,
+
+              // Order totals
               subtotal,
               shipping,
               tax,
               total,
-              stripePaymentId: session.payment_intent as string || session.id,
-              paymentStatus: 'SUCCEEDED',
-              status: 'PROCESSING',
+
+              // Payment
+              stripePaymentId: session.payment_intent as string || null,
+
+              // Create order items
+              orderItems: {
+                create: items.map((item) => ({
+                  sku: item.sku,
+                  name: item.name,
+                  price: item.price,
+                  quantity: item.quantity,
+                })),
+              },
             },
           });
 
@@ -104,13 +129,19 @@ export async function POST(req: NextRequest) {
             await sendOrderConfirmationEmail({
               to: order.email,
               orderNumber: order.orderNumber,
-              customerName: order.customerName,
+              customerName: order.shippingName,
               items: items,
               subtotal: order.subtotal,
               shipping: order.shipping,
               tax: order.tax,
               total: order.total,
-              shippingAddress: order.shippingAddress as any,
+              shippingAddress: {
+                street: order.shippingAddress1,
+                city: order.shippingCity,
+                state: order.shippingState,
+                zip: order.shippingZip,
+                country: order.shippingCountry,
+              },
             });
             console.log('Order confirmation email sent:', order.orderNumber);
           } catch (emailError) {
@@ -165,11 +196,13 @@ export async function GET(req: NextRequest) {
     if (orderNumber) {
       order = await prisma.order.findUnique({
         where: { orderNumber },
+        include: { orderItems: true },
       });
     } else if (email) {
       // Return most recent order for email
       order = await prisma.order.findFirst({
         where: { email },
+        include: { orderItems: true },
         orderBy: { createdAt: 'desc' },
       });
     }
@@ -183,8 +216,8 @@ export async function GET(req: NextRequest) {
       order: {
         orderNumber: order.orderNumber,
         email: order.email,
-        customerName: order.customerName,
-        items: order.items,
+        customerName: order.shippingName,
+        items: order.orderItems,
         subtotal: order.subtotal,
         shipping: order.shipping,
         tax: order.tax,
