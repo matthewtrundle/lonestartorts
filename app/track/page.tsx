@@ -189,7 +189,7 @@ export default function TrackOrderPage() {
                         <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
                       </div>
                       <p className="font-medium">
-                        {formatPrice((item.price * item.quantity) / 100)}
+                        {formatPrice(item.price * item.quantity)}
                       </p>
                     </div>
                   ))}
@@ -200,19 +200,19 @@ export default function TrackOrderPage() {
               <div className="space-y-2 pt-4 border-t border-gray-200">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Subtotal</span>
-                  <span>{formatPrice(order.subtotal / 100)}</span>
+                  <span>{formatPrice(order.subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Shipping</span>
-                  <span>{formatPrice(order.shipping / 100)}</span>
+                  <span>{formatPrice(order.shipping)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Tax</span>
-                  <span>{formatPrice(order.tax / 100)}</span>
+                  <span>{formatPrice(order.tax)}</span>
                 </div>
                 <div className="flex justify-between font-semibold text-lg pt-2">
                   <span>Total</span>
-                  <span className="text-sunset-600">{formatPrice(order.total / 100)}</span>
+                  <span className="text-sunset-600">{formatPrice(order.total)}</span>
                 </div>
               </div>
             </div>

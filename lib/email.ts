@@ -74,7 +74,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Confirmation - Lonestar Tortillas</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bitter:wght@700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap');
   </style>
 </head>
 <body style="margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(180deg, #1a1410 0%, #2c2418 100%);">
@@ -104,7 +104,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
                       <text x="50" y="56" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#FFD700" text-anchor="middle">★</text>
                     </svg>
 
-                    <h1 style="margin: 0 0 12px 0; font-family: 'Bitter', Georgia, serif; font-size: 48px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3); line-height: 1;">SADDLE UP!</h1>
+                    <h1 style="margin: 0 0 12px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 48px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(255,215,0,0.3); line-height: 1;">SADDLE UP!</h1>
                     <p style="margin: 0 0 8px 0; font-size: 20px; color: #FFD7AA; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Your Order's Ready to Ride</p>
                     <p style="margin: 0; font-size: 16px; color: #FFDEAD; font-weight: 500; font-style: italic;">Howdy, ${customerName}!</p>
                   </td>
@@ -122,12 +122,12 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr>
                   <td style="padding: 36px 40px; border-top: 3px dashed #FFD700; border-bottom: 3px dashed #FFD700;">
-                    <div style="font-family: 'Bitter', Georgia, serif; font-size: 18px; color: #FFDEAD; line-height: 1.7; font-style: italic; text-align: center;">
+                    <div style="font-family: 'Poppins', Arial, sans-serif; font-size: 18px; color: #FFDEAD; line-height: 1.7; font-style: italic; text-align: center;">
                       <p style="margin: 0 0 20px 0; font-size: 14px; color: #FFD700; text-transform: uppercase; letter-spacing: 0.15em; font-style: normal; font-weight: 700;">✦ A Personal Note ✦</p>
                       <p style="margin: 0 0 16px 0; font-size: 18px;">"${customerName}, thank you for choosing us! Every tortilla we send is made with the same love and tradition my abuela taught me. You're not just getting tortillas – you're getting a piece of authentic Texas heritage."</p>
                       <p style="margin: 0; font-size: 16px; color: #FFD7AA;">
                         <span style="font-weight: 700; color: #FFD700;">— Maria Rodriguez</span><br>
-                        <span style="font-size: 13px; color: #D4A574;">Founder, Lonestar Tortillas</span>
+                        <span style="font-size: 13px; color: #D4A574;">Chief Abuela, Lonestar Tortillas</span>
                       </p>
                     </div>
                   </td>
@@ -154,7 +154,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
           <!-- Order Items Section -->
           <tr>
             <td style="padding: 44px 40px 36px 40px; background-color: #FFFEF5;">
-              <h2 style="margin: 0 0 28px 0; font-family: 'Bitter', Georgia, serif; font-size: 28px; font-weight: 900; color: #8B4513; text-transform: uppercase; letter-spacing: 0.03em; text-align: center; text-shadow: 1px 1px 0px rgba(0,0,0,0.05);">🌟 Your Texas Haul 🌟</h2>
+              <h2 style="margin: 0 0 28px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 28px; font-weight: 900; color: #8B4513; text-transform: uppercase; letter-spacing: 0.03em; text-align: center; text-shadow: 1px 1px 0px rgba(0,0,0,0.05);">🌟 Your Texas Haul 🌟</h2>
 
               <!-- Items Table -->
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border: 4px solid #8B4513; background-color: #FFFFFF; box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);">
@@ -208,11 +208,11 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border: 4px solid #8B4513; padding: 28px; background: linear-gradient(135deg, #FFFFFF 0%, #FFF8DC 100%); box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);">
                 <tr>
                   <td>
-                    <h3 style="margin: 0 0 20px 0; font-family: 'Bitter', Georgia, serif; font-size: 22px; font-weight: 900; color: #8B4513; text-transform: uppercase; letter-spacing: 0.05em;">📦 Delivery Destination</h3>
+                    <h3 style="margin: 0 0 20px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 22px; font-weight: 900; color: #8B4513; text-transform: uppercase; letter-spacing: 0.05em;">📦 Delivery Destination</h3>
                     <p style="margin: 0; font-size: 17px; color: #6B3410; line-height: 1.9; font-weight: 600;">
                       ${customerName}<br>
-                      ${shippingAddress.street || ''}<br>
-                      ${shippingAddress.city || ''}, ${shippingAddress.state || ''} ${shippingAddress.zip || ''}<br>
+                      ${shippingAddress.street || shippingAddress.address1 || ''}<br>
+                      ${shippingAddress.address2 ? shippingAddress.address2 + '<br>' : ''}${shippingAddress.city || ''}, ${shippingAddress.state || ''} ${shippingAddress.zip || ''}<br>
                       ${shippingAddress.country || 'United States'}
                     </p>
                   </td>
@@ -227,7 +227,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); border: 4px solid #FFD700; padding: 32px; box-shadow: 0 8px 20px rgba(139, 69, 19, 0.4);">
                 <tr>
                   <td>
-                    <h3 style="margin: 0 0 24px 0; font-family: 'Bitter', Georgia, serif; font-size: 26px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">⚡ What Happens Next ⚡</h3>
+                    <h3 style="margin: 0 0 24px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 26px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">⚡ What Happens Next ⚡</h3>
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                       <tr>
                         <td style="padding: 12px 0; vertical-align: top; width: 32px;">
@@ -274,7 +274,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
                       <path d="M50 15L60.3 40.8L88 45.1L69 63.5L73.6 91.2L50 77.8L26.4 91.2L31 63.5L12 45.1L39.7 40.8L50 15Z" fill="#FFD700"/>
                     </svg>
 
-                    <h3 style="margin: 0 0 8px 0; font-family: 'Bitter', Georgia, serif; font-size: 32px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.08em; text-shadow: 3px 3px 6px rgba(0,0,0,0.5);">Lonestar Tortillas</h3>
+                    <h3 style="margin: 0 0 8px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 32px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.08em; text-shadow: 3px 3px 6px rgba(0,0,0,0.5);">Lonestar Tortillas</h3>
                     <p style="margin: 0 0 28px 0; font-size: 16px; color: #D4A574; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">Premium Texas Tortillas</p>
 
                     <!-- Divider -->

@@ -48,6 +48,15 @@ export async function GET(req: NextRequest) {
         total: order.total,
         status: order.status,
         createdAt: order.createdAt,
+        shippingAddress: {
+          name: order.shippingName,
+          address1: order.shippingAddress1,
+          address2: order.shippingAddress2,
+          city: order.shippingCity,
+          state: order.shippingState,
+          zip: order.shippingZip,
+          country: order.shippingCountry,
+        },
       },
     });
   } catch (error) {
