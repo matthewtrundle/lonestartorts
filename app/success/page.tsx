@@ -51,7 +51,8 @@ function SuccessContent() {
       .finally(() => {
         setLoading(false);
       });
-  }, [sessionId, clearCart]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId]);
 
   return (
     <div className="min-h-screen bg-cream-50 flex items-center justify-center p-4">
