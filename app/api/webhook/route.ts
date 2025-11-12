@@ -107,8 +107,8 @@ export async function POST(req: NextRequest) {
               tax,
               total,
 
-              // Payment
-              stripePaymentId: session.payment_intent as string || null,
+              // Payment - Store session ID so we can look up order on success page
+              stripePaymentId: session.id || null,
 
               // Create order items
               orderItems: {
