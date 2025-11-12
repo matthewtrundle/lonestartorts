@@ -205,7 +205,7 @@ function SuccessContent() {
             </svg>
             <span className="text-lg font-semibold text-stone-900">Lonestar Tortillas</span>
           </div>
-          <p className="text-sm text-stone-600 mb-3">Premium Texas Tortillas</p>
+          <p className="text-sm text-stone-600 mb-3">Premium Texas Tortillas • Handcrafted in Texas</p>
           <p className="text-xs text-stone-500">
             Independent reseller • Not affiliated with or endorsed by H-E-B®
           </p>

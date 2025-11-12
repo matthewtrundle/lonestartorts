@@ -214,7 +214,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
                 </svg>
               </div>
               <h3 style="margin: 0 0 4px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
-              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas • Handcrafted in Texas</p>
               <p style="margin: 0; font-size: 12px; color: #78716c;">
                 Independent reseller • Not affiliated with or endorsed by H-E-B®
               </p>
@@ -286,14 +286,14 @@ export async function sendOrderShippedEmail(props: OrderShippedEmailProps) {
           <!-- Header -->
           <tr>
             <td style="padding: 40px 32px; text-align: center; background-color: #ffffff; border-bottom: 1px solid #e7e5e4;">
-              <div style="width: 48px; height: 48px; background-color: #10b981; border-radius: 50%; display: inline-flex; align-items: center; justify-center; margin-bottom: 16px;">
+              <div style="width: 48px; height: 48px; background-color: #d97706; border-radius: 50%; display: inline-flex; align-items: center; justify-center; margin-bottom: 16px;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                   <polyline points="9 11 12 14 22 4"></polyline>
                   <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
                 </svg>
               </div>
               <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #1c1917; line-height: 1.2;">Order Shipped</h1>
-              <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.5;">Your order is on the way, ${customerName}!</p>
+              <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.5;">Your premium Texas tortillas are on the way, ${customerName}!</p>
             </td>
           </tr>
 
@@ -360,7 +360,7 @@ export async function sendOrderShippedEmail(props: OrderShippedEmailProps) {
                 </svg>
               </div>
               <h3 style="margin: 0 0 4px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
-              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas • Handcrafted in Texas</p>
               <p style="margin: 0; font-size: 12px; color: #78716c;">
                 Independent reseller • Not affiliated with or endorsed by H-E-B®
               </p>

@@ -57,12 +57,12 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Problem Statement -->
           <tr>
             <td style="padding: 40px 32px; background-color: #fef3c7; border-bottom: 4px solid #d97706;">
-              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">Let's Be Honest...</h2>
+              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">Your Brisket's Only Weakness</h2>
               <p style="margin: 0 0 12px 0; font-size: 16px; color: #78350f; line-height: 1.6; text-align: center;">
                 You spend 14 hours perfecting that brisket. Your rub is a family secret. Your smoke ring is legendary.
               </p>
               <p style="margin: 0; font-size: 18px; font-weight: 700; color: #92400e; line-height: 1.6; text-align: center;">
-                Then you serve it on a grocery store tortilla?
+                Then it hits a flimsy tortilla that tears before your customer's second bite.
               </p>
             </td>
           </tr>
@@ -161,7 +161,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                 </svg>
               </div>
               <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
-              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas • Handcrafted in Texas</p>
               <p style="margin: 0 0 4px 0;">
                 <a href="${WEBSITE_URL}" style="color: #d97706; text-decoration: none; font-size: 14px;">lonestartortillas.com</a>
               </p>
@@ -199,16 +199,16 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
       <td style="padding: 32px 16px;">
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
 
-          <!-- Header with Mexican-inspired colors -->
+          <!-- Header -->
           <tr>
-            <td style="padding: 40px 32px; background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+            <td style="padding: 40px 32px; background: linear-gradient(135deg, #1c1917 0%, #44403c 100%);">
               <div style="text-align: center; margin-bottom: 24px;">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="#fef3c7" style="display: inline-block;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="#d97706" style="display: inline-block;">
                   <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
                 </svg>
               </div>
               <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; text-align: center; line-height: 1.2;">Real Nixtamalization, Real Flavor</h1>
-              <p style="margin: 0; font-size: 18px; color: #f0fdf4; text-align: center; line-height: 1.6;">Traditional Mexican tortillas made the way your abuela would approve</p>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; text-align: center; line-height: 1.6;">Traditional tortillas made the way your abuela would approve. Handcrafted in Texas.</p>
             </td>
           </tr>
 
@@ -228,16 +228,16 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                 </p>
               </div>
 
-              <div style="margin-bottom: 24px; padding: 24px; background-color: #dcfce7; border-radius: 8px;">
-                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #166534;">Authentic Texture & Aroma</h3>
-                <p style="margin: 0; font-size: 15px; color: #14532d; line-height: 1.6;">
+              <div style="margin-bottom: 24px; padding: 24px; background-color: #fff7ed; border-radius: 8px; border-left: 4px solid #d97706;">
+                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917;">Authentic Texture & Aroma</h3>
+                <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">
                   That distinctive corn aroma your customers remember from Mexico. Pliable enough to fold without cracking, sturdy enough for street tacos.
                 </p>
               </div>
 
-              <div style="margin-bottom: 0; padding: 24px; background-color: #fef2f2; border-radius: 8px;">
-                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #991b1b;">Family Recipe Standards</h3>
-                <p style="margin: 0; font-size: 15px; color: #7f1d1d; line-height: 1.6;">
+              <div style="margin-bottom: 0; padding: 24px; background-color: #fafaf9; border-radius: 8px; border-left: 4px solid #d97706;">
+                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917;">Family Recipe Standards</h3>
+                <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">
                   Made fresh, never frozen. Delivered within 48 hours of production. This is the quality your authentic menu deserves.
                 </p>
               </div>
@@ -247,7 +247,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Testimonial -->
           <tr>
             <td style="padding: 32px; background-color: #f5f5f4;">
-              <div style="padding: 24px; background-color: #ffffff; border-left: 4px solid #059669; border-radius: 4px;">
+              <div style="padding: 24px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
                 <p style="margin: 0 0 12px 0; font-size: 16px; color: #44403c; line-height: 1.7; font-style: italic;">
                   "Mi abuela would be proud. These are the first tortillas I've found in Texas that remind me of home in Guadalajara. Our regulars noticed the difference immediately."
                 </p>
@@ -265,7 +265,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
               <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Watch Our Process</h2>
               <div style="text-align: center; margin-bottom: 24px;">
                 <a href="${WEBSITE_URL}" style="display: inline-block; text-decoration: none;">
-                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #059669;">
+                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #d97706;">
                     <img src="${WEBSITE_URL}/tiks/Taste%20of%20Texas_compressed.mp4" style="width: 100%; max-width: 400px; height: auto; display: block;" alt="Traditional process">
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                       <div style="width: 0; height: 0; border-left: 20px solid #ffffff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px;"></div>
@@ -274,20 +274,20 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                 </a>
               </div>
               <div style="text-align: center;">
-                <a href="${WEBSITE_URL}" style="display: inline-block; background-color: #059669; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Request Sample Pack</a>
+                <a href="${WEBSITE_URL}" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Request Sample Pack</a>
               </div>
             </td>
           </tr>
 
           <!-- Pricing Info -->
           <tr>
-            <td style="padding: 32px; background-color: #dcfce7;">
-              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #166534; text-align: center;">Wholesale Pricing for Authentic Restaurants</h3>
-              <p style="margin: 0 0 20px 0; font-size: 15px; color: #14532d; text-align: center; line-height: 1.6;">
+            <td style="padding: 32px; background-color: #f5f5f4;">
+              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing for Authentic Restaurants</h3>
+              <p style="margin: 0 0 20px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
                 Competitive wholesale rates. Flexible ordering. Reliable delivery schedule.
               </p>
               <div style="text-align: center;">
-                <a href="mailto:wholesale@lonestartortillas.com" style="display: inline-block; color: #059669; text-decoration: none; font-weight: 600; font-size: 15px;">Contact for Pricing →</a>
+                <a href="mailto:wholesale@lonestartortillas.com" style="display: inline-block; color: #d97706; text-decoration: none; font-weight: 600; font-size: 15px;">Contact for Pricing →</a>
               </div>
             </td>
           </tr>
@@ -296,17 +296,17 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <tr>
             <td style="padding: 32px; text-align: center; background-color: #1c1917;">
               <div style="margin-bottom: 16px;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="#fef3c7" style="display: inline-block;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#d97706" style="display: inline-block;">
                   <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
                 </svg>
               </div>
               <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
-              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas • Handcrafted in Texas</p>
               <p style="margin: 0 0 4px 0;">
-                <a href="${WEBSITE_URL}" style="color: #fef3c7; text-decoration: none; font-size: 14px;">lonestartortillas.com</a>
+                <a href="${WEBSITE_URL}" style="color: #d97706; text-decoration: none; font-size: 14px;">lonestartortillas.com</a>
               </p>
               <p style="margin: 0;">
-                <a href="mailto:wholesale@lonestartortillas.com" style="color: #fef3c7; text-decoration: none; font-size: 14px;">wholesale@lonestartortillas.com</a>
+                <a href="mailto:wholesale@lonestartortillas.com" style="color: #d97706; text-decoration: none; font-size: 14px;">wholesale@lonestartortillas.com</a>
               </p>
             </td>
           </tr>
