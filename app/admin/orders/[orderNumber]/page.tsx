@@ -176,305 +176,248 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
   const productItems = order.items.filter((item) => item.sku !== 'SHIPPING');
 
   return (
-    <div className="space-y-6">
-      {/* Back Button */}
-      <Link
-        href="/admin/orders"
-        className="inline-flex items-center gap-2 text-sm text-charcoal-600 hover:text-charcoal-950 transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Orders
-      </Link>
+    <div className="space-y-4">
+      {/* Compact Header with Back Button */}
+      <div className="flex justify-between items-center">
+        <Link
+          href="/admin/orders"
+          className="inline-flex items-center gap-2 text-sm text-charcoal-600 hover:text-charcoal-950 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </Link>
+        <div className="flex gap-2">
+          <StatusBadge status={order.status as any} />
+          <StatusBadge status={order.paymentStatus as any} type="payment" />
+        </div>
+      </div>
 
-      {/* Order Header */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex justify-between items-start">
+      {/* Compact Order Header */}
+      <div className="bg-white rounded-lg shadow p-4">
+        <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-charcoal-950 mb-2">
-              Order {order.orderNumber}
+            <h1 className="text-2xl font-bold text-charcoal-950">
+              {order.orderNumber}
             </h1>
-            <p className="text-charcoal-600">
-              Placed on {new Date(order.createdAt).toLocaleString()}
+            <p className="text-sm text-charcoal-600">
+              {new Date(order.createdAt).toLocaleString()}
             </p>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <StatusBadge status={order.status as any} />
-            <StatusBadge status={order.paymentStatus as any} type="payment" />
+          <div className="text-right">
+            <div className="text-sm text-charcoal-600">Total</div>
+            <div className="text-2xl font-bold text-sunset-600">{formatPrice(order.total)}</div>
           </div>
         </div>
       </div>
 
-      {/* Order Timeline */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-charcoal-950 mb-4">Order Status</h2>
-        <div className="space-y-4">
-          <div className="flex items-start gap-3">
-            <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
-            <div>
-              <p className="font-medium text-charcoal-950">Order Received</p>
-              <p className="text-sm text-charcoal-600">
-                {new Date(order.createdAt).toLocaleString()}
-              </p>
-            </div>
-          </div>
+      {/* Quick Ship Section - Top Priority */}
+      {(order.status === 'PROCESSING' || order.status === 'SHIPPED') && (
+        <div className={`rounded-lg shadow p-4 ${order.status === 'SHIPPED' ? 'bg-green-50 border-2 border-green-200' : 'bg-blue-50 border-2 border-blue-300'}`}>
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-1">
+              <h2 className="text-lg font-bold text-charcoal-950 mb-2 flex items-center gap-2">
+                {order.status === 'SHIPPED' ? (
+                  <>
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    Shipped
+                  </>
+                ) : (
+                  <>
+                    <Truck className="w-5 h-5 text-blue-600" />
+                    Ready to Ship
+                  </>
+                )}
+              </h2>
 
-          <div className="flex items-start gap-3">
+              {order.status === 'SHIPPED' && order.trackingNumber ? (
+                <div className="space-y-1">
+                  <p className="text-sm">
+                    <span className="font-medium">Carrier:</span> {order.carrier}
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-medium">Tracking:</span>{' '}
+                    <code className="bg-white px-2 py-0.5 rounded border">{order.trackingNumber}</code>
+                  </p>
+                  {order.carrier?.toLowerCase().includes('usps') && (
+                    <a
+                      href={`https://tools.usps.com/go/TrackConfirmAction?tLabels=${order.trackingNumber}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-sm text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Track Package →
+                    </a>
+                  )}
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-medium text-charcoal-700 mb-1">
+                      Carrier
+                    </label>
+                    <select
+                      value={carrier}
+                      onChange={(e) => setCarrier(e.target.value)}
+                      className="w-full px-3 py-1.5 text-sm border border-charcoal-300 rounded focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="USPS">USPS</option>
+                      <option value="USPS Priority Mail">USPS Priority</option>
+                      <option value="USPS First Class">USPS First Class</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-medium text-charcoal-700 mb-1">
+                      Tracking Number
+                    </label>
+                    <input
+                      type="text"
+                      value={trackingNumber}
+                      onChange={(e) => setTrackingNumber(e.target.value)}
+                      placeholder="123456789"
+                      className="w-full px-3 py-1.5 text-sm border border-charcoal-300 rounded focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {order.status === 'PROCESSING' && (
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={markAsShipped}
+                  disabled={updating || !trackingNumber.trim()}
+                  className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-bold flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <Truck className="w-5 h-5" />
+                  {updating ? 'Shipping...' : 'Ship Now'}
+                </button>
+                <button
+                  onClick={generateShippingLabel}
+                  disabled={generatingLabel || updating}
+                  className="px-6 py-2 bg-sunset-600 text-white text-sm rounded-lg hover:bg-sunset-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                >
+                  {generatingLabel ? 'Generating...' : 'Generate Label'}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Order Timeline - Collapsed */}
+      <div className="bg-white rounded-lg shadow p-4">
+        <h2 className="text-base font-semibold text-charcoal-950 mb-3">Status</h2>
+        <div className="flex gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="w-4 h-4 text-green-600" />
+            <span className="text-charcoal-600">Received</span>
+          </div>
+          <div className="flex items-center gap-2">
             {order.status === 'PENDING' ? (
-              <Circle className="w-5 h-5 text-charcoal-300 mt-0.5" />
+              <Circle className="w-4 h-4 text-charcoal-300" />
             ) : (
-              <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
+              <CheckCircle className="w-4 h-4 text-green-600" />
             )}
-            <div>
-              <p className="font-medium text-charcoal-950">Processing</p>
-              {order.status !== 'PENDING' && (
-                <p className="text-sm text-charcoal-600">Order is being prepared</p>
-              )}
-            </div>
+            <span className="text-charcoal-600">Processing</span>
           </div>
-
-          <div className="flex items-start gap-3">
+          <div className="flex items-center gap-2">
             {order.status === 'SHIPPED' || order.status === 'DELIVERED' ? (
-              <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
+              <CheckCircle className="w-4 h-4 text-green-600" />
             ) : (
-              <Circle className="w-5 h-5 text-charcoal-300 mt-0.5" />
+              <Circle className="w-4 h-4 text-charcoal-300" />
             )}
-            <div>
-              <p className="font-medium text-charcoal-950">Shipped</p>
-              {order.shippedAt && (
-                <p className="text-sm text-charcoal-600">
-                  {new Date(order.shippedAt).toLocaleString()}
-                </p>
-              )}
-            </div>
+            <span className="text-charcoal-600">Shipped</span>
           </div>
-
-          <div className="flex items-start gap-3">
+          <div className="flex items-center gap-2">
             {order.status === 'DELIVERED' ? (
-              <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
+              <CheckCircle className="w-4 h-4 text-green-600" />
             ) : (
-              <Circle className="w-5 h-5 text-charcoal-300 mt-0.5" />
+              <Circle className="w-4 h-4 text-charcoal-300" />
             )}
-            <div>
-              <p className="font-medium text-charcoal-950">Delivered</p>
-              {order.deliveredAt && (
-                <p className="text-sm text-charcoal-600">
-                  {new Date(order.deliveredAt).toLocaleString()}
-                </p>
-              )}
-            </div>
+            <span className="text-charcoal-600">Delivered</span>
           </div>
         </div>
 
-        {/* Status Actions */}
-        <div className="mt-6 pt-6 border-t border-charcoal-200 flex gap-3">
-          {order.status === 'PENDING' && (
+        {/* Quick Status Actions */}
+        {order.status === 'PENDING' && (
+          <div className="mt-3 pt-3 border-t border-charcoal-200">
             <button
               onClick={() => updateOrderStatus('PROCESSING')}
               disabled={updating}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50"
             >
-              Mark as Processing
+              Start Processing
             </button>
-          )}
-          {order.status === 'SHIPPED' && (
+          </div>
+        )}
+        {order.status === 'SHIPPED' && (
+          <div className="mt-3 pt-3 border-t border-charcoal-200">
             <button
               onClick={() => updateOrderStatus('DELIVERED')}
               disabled={updating}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50"
+              className="px-4 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 disabled:opacity-50"
             >
-              Mark as Delivered
+              Mark Delivered
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
-      {/* Customer & Shipping Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-charcoal-950 mb-4">Customer Details</h2>
-          <div className="space-y-2">
-            <p className="text-sm">
-              <span className="font-medium text-charcoal-700">Name:</span> {order.customerName}
-            </p>
-            <p className="text-sm">
-              <span className="font-medium text-charcoal-700">Email:</span> {order.email}
-            </p>
+      {/* Compact Customer & Shipping Info */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white rounded-lg shadow p-4">
+          <h2 className="text-base font-semibold text-charcoal-950 mb-2">Customer</h2>
+          <div className="text-sm space-y-1">
+            <p className="font-medium text-charcoal-900">{order.customerName}</p>
+            <p className="text-charcoal-600">{order.email}</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-charcoal-950 mb-4">Shipping Address</h2>
-          <div className="text-sm text-charcoal-700 space-y-1">
-            <p>{order.customerName}</p>
+        <div className="bg-white rounded-lg shadow p-4">
+          <h2 className="text-base font-semibold text-charcoal-950 mb-2">Shipping To</h2>
+          <div className="text-sm text-charcoal-700 space-y-0.5">
             <p>{order.shippingAddress.line1}</p>
             {order.shippingAddress.line2 && <p>{order.shippingAddress.line2}</p>}
             <p>
               {order.shippingAddress.city}, {order.shippingAddress.state}{' '}
               {order.shippingAddress.postal_code}
             </p>
-            <p>{order.shippingAddress.country || 'United States'}</p>
           </div>
         </div>
       </div>
 
-      {/* Order Items */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-charcoal-950 mb-4">Order Items</h2>
-        <table className="w-full">
-          <thead className="border-b border-charcoal-200">
-            <tr>
-              <th className="text-left py-2 text-sm font-medium text-charcoal-600">Product</th>
-              <th className="text-center py-2 text-sm font-medium text-charcoal-600">Qty</th>
-              <th className="text-right py-2 text-sm font-medium text-charcoal-600">Price</th>
-              <th className="text-right py-2 text-sm font-medium text-charcoal-600">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productItems.map((item, index) => (
-              <tr key={index} className="border-b border-charcoal-100">
-                <td className="py-3 text-sm text-charcoal-900">{item.name}</td>
-                <td className="py-3 text-sm text-center text-charcoal-600">{item.quantity}</td>
-                <td className="py-3 text-sm text-right text-charcoal-900">
-                  {formatPrice(item.price)}
-                </td>
-                <td className="py-3 text-sm text-right text-charcoal-900">
-                  {formatPrice(item.price * item.quantity)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={3} className="pt-4 text-right text-sm text-charcoal-600">
-                Subtotal:
-              </td>
-              <td className="pt-4 text-right text-sm font-medium">{formatPrice(order.subtotal)}</td>
-            </tr>
-            <tr>
-              <td colSpan={3} className="pt-2 text-right text-sm text-charcoal-600">
-                Shipping:
-              </td>
-              <td className="pt-2 text-right text-sm font-medium">{formatPrice(order.shipping)}</td>
-            </tr>
-            <tr>
-              <td colSpan={3} className="pt-2 text-right text-sm text-charcoal-600">
-                Tax:
-              </td>
-              <td className="pt-2 text-right text-sm font-medium">{formatPrice(order.tax)}</td>
-            </tr>
-            <tr className="border-t border-charcoal-200">
-              <td colSpan={3} className="pt-4 text-right text-lg font-semibold text-charcoal-950">
-                Total:
-              </td>
-              <td className="pt-4 text-right text-lg font-bold text-sunset-600">
-                {formatPrice(order.total)}
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-      {/* Tracking Information */}
-      {(order.status === 'PROCESSING' || order.status === 'SHIPPED') && (
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-charcoal-950 mb-4">Shipping & Tracking</h2>
-
-          {order.status === 'SHIPPED' && order.trackingNumber ? (
-            <div className="space-y-2">
-              <p className="text-sm">
-                <span className="font-medium text-charcoal-700">Carrier:</span> {order.carrier}
-              </p>
-              <p className="text-sm">
-                <span className="font-medium text-charcoal-700">Tracking Number:</span>{' '}
-                <code className="bg-charcoal-100 px-2 py-1 rounded">{order.trackingNumber}</code>
-              </p>
-              {order.carrier?.toLowerCase().includes('usps') && (
-                <a
-                  href={`https://tools.usps.com/go/TrackConfirmAction?tLabels=${order.trackingNumber}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-2 text-sm text-sunset-600 hover:text-sunset-700"
-                >
-                  Track Package →
-                </a>
-              )}
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-charcoal-700 mb-2">
-                  Carrier
-                </label>
-                <select
-                  value={carrier}
-                  onChange={(e) => setCarrier(e.target.value)}
-                  className="w-full px-4 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500"
-                >
-                  <option value="USPS">USPS</option>
-                  <option value="USPS Priority Mail">USPS Priority Mail</option>
-                  <option value="USPS First Class">USPS First Class</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-charcoal-700 mb-2">
-                  Tracking Number
-                </label>
-                <input
-                  type="text"
-                  value={trackingNumber}
-                  onChange={(e) => setTrackingNumber(e.target.value)}
-                  placeholder="Enter tracking number"
-                  className="w-full px-4 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500"
-                />
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={generateShippingLabel}
-                  disabled={generatingLabel || updating}
-                  className="flex-1 px-4 py-3 bg-sunset-600 text-white rounded-lg hover:bg-sunset-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-2"
-                >
-                  <Package className="w-5 h-5" />
-                  {generatingLabel ? 'Generating Label...' : 'Generate Shipping Label (EasyPost)'}
-                </button>
-              </div>
-
-              <div className="mt-3 pt-3 border-t border-charcoal-200">
-                <p className="text-xs text-charcoal-600 mb-3">Or manually enter tracking:</p>
-                <button
-                  onClick={markAsShipped}
-                  disabled={updating || !trackingNumber.trim()}
-                  className="w-full px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium flex items-center justify-center gap-2"
-                >
-                  <Truck className="w-5 h-5" />
-                  {updating ? 'Updating...' : 'Mark as Shipped & Send Email'}
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Payment Info */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-charcoal-950 mb-4">Payment Information</h2>
+      {/* Compact Order Items */}
+      <div className="bg-white rounded-lg shadow p-4">
+        <h2 className="text-base font-semibold text-charcoal-950 mb-3">Items</h2>
         <div className="space-y-2">
-          <p className="text-sm">
-            <span className="font-medium text-charcoal-700">Method:</span> Stripe
-          </p>
-          <p className="text-sm">
-            <span className="font-medium text-charcoal-700">Status:</span>{' '}
-            <StatusBadge status={order.paymentStatus as any} type="payment" />
-          </p>
-          {order.stripePaymentId && (
-            <p className="text-sm">
-              <span className="font-medium text-charcoal-700">Transaction ID:</span>{' '}
-              <code className="bg-charcoal-100 px-2 py-1 rounded text-xs">
-                {order.stripePaymentId}
-              </code>
-            </p>
-          )}
+          {productItems.map((item, index) => (
+            <div key={index} className="flex justify-between items-center text-sm border-b border-charcoal-100 pb-2 last:border-0">
+              <div className="flex-1">
+                <span className="font-medium text-charcoal-900">{item.name}</span>
+                <span className="text-charcoal-500 ml-2">× {item.quantity}</span>
+              </div>
+              <span className="font-medium text-charcoal-900">{formatPrice(item.price * item.quantity)}</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 pt-3 border-t border-charcoal-200 space-y-1 text-sm">
+          <div className="flex justify-between text-charcoal-600">
+            <span>Subtotal:</span>
+            <span>{formatPrice(order.subtotal)}</span>
+          </div>
+          <div className="flex justify-between text-charcoal-600">
+            <span>Shipping:</span>
+            <span>{formatPrice(order.shipping)}</span>
+          </div>
+          <div className="flex justify-between text-charcoal-600">
+            <span>Tax:</span>
+            <span>{formatPrice(order.tax)}</span>
+          </div>
+          <div className="flex justify-between font-bold text-base pt-2 border-t border-charcoal-200">
+            <span>Total:</span>
+            <span className="text-sunset-600">{formatPrice(order.total)}</span>
+          </div>
         </div>
       </div>
     </div>

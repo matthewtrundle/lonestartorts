@@ -100,57 +100,55 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
-      {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-charcoal-950 mb-2">Dashboard</h1>
-        <p className="text-charcoal-600">Overview of your store performance</p>
+    <div className="space-y-4">
+      {/* Compact Header */}
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-charcoal-950">Dashboard</h1>
+        <div className="flex gap-2">
+          <Link
+            href="/admin/orders?status=PROCESSING"
+            className="px-4 py-2 bg-sunset-600 text-white text-sm font-medium rounded-lg hover:bg-sunset-700"
+          >
+            Ship Orders ({stats.metrics.ordersToShip.value})
+          </Link>
+        </div>
       </div>
 
-      {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <MetricCard
-          title="Today's Revenue"
-          value={stats.metrics.todayRevenue.formatted}
-          icon={<DollarSign className="w-6 h-6" />}
-        />
-        <MetricCard
-          title="Pending Orders"
-          value={stats.metrics.pendingOrders.value}
-          subtitle="Need attention"
-          icon={<Package className="w-6 h-6" />}
-        />
-        <MetricCard
-          title="Orders to Ship"
-          value={stats.metrics.ordersToShip.value}
-          subtitle="Ready for fulfillment"
-          icon={<Truck className="w-6 h-6" />}
-        />
-        <MetricCard
-          title="Total Orders (30d)"
-          value={stats.metrics.totalOrders.value}
-          trend={stats.metrics.totalOrders.trend}
-          icon={<ShoppingCart className="w-6 h-6" />}
-        />
-        <MetricCard
-          title="Avg Order Value"
-          value={stats.metrics.avgOrderValue.formatted}
-          icon={<TrendingUp className="w-6 h-6" />}
-        />
+      {/* Compact Metrics Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="bg-white rounded-lg shadow px-4 py-3">
+          <div className="text-xs text-charcoal-600 mb-1">Today</div>
+          <div className="text-xl font-bold text-charcoal-950">{stats.metrics.todayRevenue.formatted}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow px-4 py-3">
+          <div className="text-xs text-charcoal-600 mb-1">Pending</div>
+          <div className="text-xl font-bold text-amber-600">{stats.metrics.pendingOrders.value}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow px-4 py-3">
+          <div className="text-xs text-charcoal-600 mb-1">To Ship</div>
+          <div className="text-xl font-bold text-blue-600">{stats.metrics.ordersToShip.value}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow px-4 py-3">
+          <div className="text-xs text-charcoal-600 mb-1">Total (30d)</div>
+          <div className="text-xl font-bold text-charcoal-950">{stats.metrics.totalOrders.value}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow px-4 py-3">
+          <div className="text-xs text-charcoal-600 mb-1">Avg Value</div>
+          <div className="text-xl font-bold text-green-600">{stats.metrics.avgOrderValue.formatted}</div>
+        </div>
         {stats.metrics.topProduct && (
-          <MetricCard
-            title="Top Product"
-            value={stats.metrics.topProduct.name}
-            subtitle={`${stats.metrics.topProduct.count} sold`}
-            icon={<Award className="w-6 h-6" />}
-          />
+          <div className="bg-white rounded-lg shadow px-4 py-3">
+            <div className="text-xs text-charcoal-600 mb-1">Top Product</div>
+            <div className="text-sm font-bold text-charcoal-950 truncate">{stats.metrics.topProduct.name}</div>
+            <div className="text-xs text-charcoal-500">{stats.metrics.topProduct.count} sold</div>
+          </div>
         )}
       </div>
 
-      {/* Recent Orders */}
+      {/* Compact Recent Orders */}
       <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-charcoal-200 flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-charcoal-950">Recent Orders</h2>
+        <div className="px-4 py-3 border-b border-charcoal-200 flex justify-between items-center">
+          <h2 className="text-lg font-semibold text-charcoal-950">Recent Orders</h2>
           <Link
             href="/admin/orders"
             className="text-sm text-sunset-600 hover:text-sunset-700 font-medium"
@@ -163,34 +161,37 @@ export default function DashboardPage() {
           <table className="min-w-full divide-y divide-charcoal-200">
             <thead className="bg-charcoal-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-charcoal-500 uppercase tracking-wider">
+                <th className="px-4 py-2 text-left text-xs font-medium text-charcoal-500 uppercase">
                   Order
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-charcoal-500 uppercase tracking-wider">
+                <th className="px-4 py-2 text-left text-xs font-medium text-charcoal-500 uppercase">
                   Customer
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-charcoal-500 uppercase tracking-wider">
+                <th className="px-4 py-2 text-right text-xs font-medium text-charcoal-500 uppercase">
                   Total
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-charcoal-500 uppercase tracking-wider">
+                <th className="px-4 py-2 text-left text-xs font-medium text-charcoal-500 uppercase">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-charcoal-500 uppercase tracking-wider">
+                <th className="px-4 py-2 text-right text-xs font-medium text-charcoal-500 uppercase">
                   Time
+                </th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-charcoal-500 uppercase">
+                  Actions
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-charcoal-200">
               {stats.recentOrders.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-charcoal-500">
+                  <td colSpan={6} className="px-4 py-6 text-center text-charcoal-500 text-sm">
                     No orders yet
                   </td>
                 </tr>
               ) : (
                 stats.recentOrders.map((order) => (
                   <tr key={order.id} className="hover:bg-charcoal-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-4 py-2.5 whitespace-nowrap">
                       <Link
                         href={`/admin/orders/${order.orderNumber}`}
                         className="text-sm font-medium text-sunset-600 hover:text-sunset-700"
@@ -198,18 +199,36 @@ export default function DashboardPage() {
                         {order.orderNumber}
                       </Link>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-4 py-2.5 whitespace-nowrap">
                       <div className="text-sm text-charcoal-900">{order.customerName}</div>
-                      <div className="text-xs text-charcoal-500">{order.email}</div>
+                      <div className="text-xs text-charcoal-500 truncate max-w-[150px]">{order.email}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-charcoal-900">
+                    <td className="px-4 py-2.5 whitespace-nowrap text-sm text-right font-medium text-charcoal-900">
                       {formatPrice(order.total)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-4 py-2.5 whitespace-nowrap">
                       <StatusBadge status={order.status as any} />
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-charcoal-500">
+                    <td className="px-4 py-2.5 whitespace-nowrap text-sm text-right text-charcoal-500">
                       {formatRelativeTime(order.createdAt)}
+                    </td>
+                    <td className="px-4 py-2.5 whitespace-nowrap text-right">
+                      {order.status === 'PROCESSING' ? (
+                        <Link
+                          href={`/admin/orders/${order.orderNumber}`}
+                          className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
+                        >
+                          <Truck className="w-3 h-3" />
+                          Ship
+                        </Link>
+                      ) : (
+                        <Link
+                          href={`/admin/orders/${order.orderNumber}`}
+                          className="text-sm text-charcoal-500 hover:text-sunset-600"
+                        >
+                          View →
+                        </Link>
+                      )}
                     </td>
                   </tr>
                 ))
@@ -217,28 +236,6 @@ export default function DashboardPage() {
             </tbody>
           </table>
         </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Link
-          href="/admin/orders?status=PENDING"
-          className="block p-6 bg-amber-50 border border-amber-200 rounded-lg hover:bg-amber-100 transition-colors"
-        >
-          <h3 className="text-lg font-semibold text-charcoal-950 mb-2">Process New Orders</h3>
-          <p className="text-sm text-charcoal-600">
-            Review and process {stats.metrics.pendingOrders.value} pending orders
-          </p>
-        </Link>
-        <Link
-          href="/admin/orders?status=PROCESSING"
-          className="block p-6 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
-        >
-          <h3 className="text-lg font-semibold text-charcoal-950 mb-2">Ship Orders</h3>
-          <p className="text-sm text-charcoal-600">
-            Add tracking for {stats.metrics.ordersToShip.value} orders ready to ship
-          </p>
-        </Link>
       </div>
     </div>
   );
