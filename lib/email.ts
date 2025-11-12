@@ -351,68 +351,188 @@ export async function sendOrderShippedEmail(props: OrderShippedEmailProps) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Shipped</title>
+  <title>Order Shipped - Lonestar Tortillas</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap');
+  </style>
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+<body style="margin: 0; padding: 0; background: linear-gradient(135deg, #1a1410 0%, #2c2418 100%); font-family: 'Inter', Arial, sans-serif;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background: linear-gradient(135deg, #1a1410 0%, #2c2418 100%);">
+    <tr>
+      <td style="padding: 40px 20px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background: #FFF8DC; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6);">
 
-  <!-- Header -->
-  <div style="text-align: center; padding: 20px 0; border-bottom: 2px solid #f97316;">
-    <h1 style="margin: 0; font-size: 28px; color: #1a1a1a;">Lonestar Tortillas</h1>
-    <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Premium Texas Tortillas</p>
-  </div>
+          <!-- Epic Texas Header with Gold Star -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); padding: 0; border-bottom: 8px solid #FFD700;">
+              <!-- Top Texas Flag Accent -->
+              <div style="height: 8px; background: linear-gradient(90deg, #004080 0%, #FFFFFF 33%, #CC0000 66%, #FFFFFF 100%);"></div>
 
-  <!-- Shipped Message -->
-  <div style="background-color: #dbeafe; border: 1px solid #93c5fd; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center;">
-    <h2 style="margin: 0 0 10px 0; color: #1e40af; font-size: 24px;">Your Order Has Shipped!</h2>
-    <p style="margin: 0; color: #1e3a8a; font-size: 16px;">Your tortillas are on their way, ${customerName}!</p>
-  </div>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 48px 40px; text-align: center;">
+                    <!-- Giant Gold Texas Star -->
+                    <svg width="90" height="90" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 24px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));">
+                      <path d="M50 10L61.8 38.2L92 43.1L71 63.2L76.4 93.8L50 78.5L23.6 93.8L29 63.2L8 43.1L38.2 38.2L50 10Z" fill="#FFD700" opacity="0.3"/>
+                      <path d="M50 15L60.3 40.8L88 45.1L69 63.5L73.6 91.2L50 77.8L26.4 91.2L31 63.5L12 45.1L39.7 40.8L50 15Z" fill="#FFD700" stroke="#FFFFFF" stroke-width="3"/>
+                      <circle cx="50" cy="50" r="12" fill="#8B4513" stroke="#FFD700" stroke-width="2"/>
+                    </svg>
 
-  <!-- Tracking Info -->
-  <div style="margin: 30px 0; padding: 20px; background-color: #f9fafb; border-radius: 8px;">
-    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #1a1a1a;">Tracking Information</h3>
-    <p style="margin: 0 0 10px 0; color: #666;">
-      <strong>Order Number:</strong> ${orderNumber}<br>
-      <strong>Carrier:</strong> ${carrier}<br>
-      <strong>Tracking Number:</strong> <code style="background-color: #fff; padding: 2px 6px; border-radius: 4px; font-family: monospace;">${trackingNumber}</code>
-    </p>
-    ${trackingUrl ? `
-    <div style="margin-top: 20px; text-align: center;">
-      <a href="${trackingUrl}" style="display: inline-block; background-color: #f97316; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">
-        Track Your Package
-      </a>
-    </div>
-    ` : ''}
-  </div>
+                    <h1 style="margin: 0 0 16px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 48px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 4px 4px 8px rgba(0,0,0,0.6); line-height: 1.1;">
+                      RIDE 'EM OUT!
+                    </h1>
+                    <p style="margin: 0 0 12px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 24px; font-weight: 700; color: #FFDEAD; text-transform: uppercase; letter-spacing: 0.08em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                      Your Order Has Shipped
+                    </p>
+                    <p style="margin: 0; font-size: 18px; color: #FFF8DC; font-style: italic; font-weight: 600;">
+                      Your tortillas are headed your way, ${customerName}!
+                    </p>
+                  </td>
+                </tr>
+              </table>
 
-  <!-- Items Shipped -->
-  <div style="margin: 30px 0;">
-    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #1a1a1a;">Items Shipped</h3>
-    <ul style="margin: 0; padding: 0; list-style: none;">
-      ${items.map((item) => `
-      <li style="padding: 10px 0; border-bottom: 1px solid #f3f4f6; color: #666;">
-        ${item.quantity}x ${item.name}
-      </li>
-      `).join('')}
-    </ul>
-  </div>
+              <!-- Bottom Gold Border -->
+              <div style="height: 6px; background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);"></div>
+            </td>
+          </tr>
 
-  <!-- Delivery Info -->
-  <div style="margin: 30px 0; padding: 20px; background-color: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px;">
-    <h3 style="margin: 0 0 10px 0; font-size: 16px; color: #92400e;">Estimated Delivery</h3>
-    <p style="margin: 0; color: #78350f; font-size: 14px; line-height: 1.6;">
-      Your order should arrive within <strong>2-3 business days</strong>.<br>
-      You can track your package using the tracking number above.
-    </p>
-  </div>
+          <!-- Main Content -->
+          <tr>
+            <td style="padding: 0;">
 
-  <!-- Footer -->
-  <div style="margin: 40px 0 20px 0; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #666; font-size: 12px;">
-    <p style="margin: 10px 0; font-size: 11px; color: #999;">
-      Independent reseller. Not affiliated with or endorsed by H-E-B®.<br>
-      Made with ❤️ in Texas
-    </p>
-  </div>
+              <!-- Tracking Information Card -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 40px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #FFFFFF; border: 4px solid #8B4513; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                      <tr>
+                        <td style="padding: 32px;">
+                          <h2 style="margin: 0 0 24px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 26px; font-weight: 800; color: #8B4513; text-transform: uppercase; letter-spacing: 0.05em; text-align: center;">
+                            🎯 Tracking Information
+                          </h2>
 
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
+                            <tr style="border-bottom: 2px dashed #D4A574;">
+                              <td style="padding: 14px 0; font-size: 16px; font-weight: 700; color: #8B4513;">Order Number:</td>
+                              <td style="padding: 14px 0; font-size: 16px; font-weight: 800; color: #6B3410; text-align: right; font-family: monospace;">${orderNumber}</td>
+                            </tr>
+                            <tr style="border-bottom: 2px dashed #D4A574;">
+                              <td style="padding: 14px 0; font-size: 16px; font-weight: 700; color: #8B4513;">Carrier:</td>
+                              <td style="padding: 14px 0; font-size: 16px; font-weight: 800; color: #6B3410; text-align: right;">${carrier}</td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 14px 0; font-size: 16px; font-weight: 700; color: #8B4513;">Tracking Number:</td>
+                              <td style="padding: 14px 0; text-align: right;">
+                                <code style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); padding: 8px 14px; border-radius: 6px; font-family: monospace; font-size: 15px; font-weight: 800; color: #6B3410; border: 2px solid #8B4513; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">${trackingNumber}</code>
+                              </td>
+                            </tr>
+                          </table>
+
+                          ${trackingUrl ? `
+                          <div style="margin-top: 28px; text-align: center;">
+                            <a href="${trackingUrl}" style="display: inline-block; background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); color: #FFD700; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-family: 'Poppins', Arial, sans-serif; font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.05em; border: 3px solid #FFD700; box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-shadow: 2px 2px 4px rgba(0,0,0,0.4);">
+                              🔍 Track Your Package
+                            </a>
+                          </div>
+                          ` : ''}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Items Shipped Section -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 0 40px 40px 40px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #FFFFFF; border: 4px solid #8B4513; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                      <tr>
+                        <td style="padding: 32px;">
+                          <h2 style="margin: 0 0 24px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 26px; font-weight: 800; color: #8B4513; text-transform: uppercase; letter-spacing: 0.05em; text-align: center;">
+                            📦 Items Shipped
+                          </h2>
+
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
+                            ${items.map((item, index) => `
+                            <tr style="border-bottom: ${index === items.length - 1 ? 'none' : '2px dashed #D4A574'};">
+                              <td style="padding: 14px 0; font-size: 17px; font-weight: 700; color: #6B3410; line-height: 1.6;">
+                                <span style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #6B3410; font-weight: 900; font-size: 15px; padding: 4px 10px; border-radius: 6px; margin-right: 10px; border: 2px solid #8B4513;">${item.quantity}x</span>
+                                ${item.name}
+                              </td>
+                            </tr>
+                            `).join('')}
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Delivery Estimate Section -->
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 0 40px 40px 40px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); border: 4px solid #FFD700; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.3);">
+                      <tr>
+                        <td style="padding: 32px; text-align: center;">
+                          <h3 style="margin: 0 0 16px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 24px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.08em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                            ⚡ Estimated Delivery
+                          </h3>
+                          <p style="margin: 0; font-size: 18px; color: #FFDEAD; line-height: 1.7; font-weight: 700;">
+                            Your order should arrive within <span style="color: #FFD700; font-weight: 900; font-size: 20px;">2-3 business days</span>.<br>
+                            Track your package using the tracking number above!
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Epic Texas Footer -->
+          <tr>
+            <td style="background: linear-gradient(180deg, #1a1410 0%, #2c2418 100%); padding: 0;">
+              <!-- Top border -->
+              <div style="height: 8px; background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);"></div>
+
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 48px 40px; text-align: center;">
+                    <!-- Texas Star -->
+                    <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 20px;">
+                      <path d="M50 15L60.3 40.8L88 45.1L69 63.5L73.6 91.2L50 77.8L26.4 91.2L31 63.5L12 45.1L39.7 40.8L50 15Z" fill="#FFD700"/>
+                    </svg>
+
+                    <h3 style="margin: 0 0 8px 0; font-family: 'Poppins', Arial, sans-serif; font-size: 32px; font-weight: 900; color: #FFD700; text-transform: uppercase; letter-spacing: 0.08em; text-shadow: 3px 3px 6px rgba(0,0,0,0.5);">Lonestar Tortillas</h3>
+                    <p style="margin: 0 0 28px 0; font-size: 16px; color: #D4A574; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">Premium Texas Tortillas</p>
+
+                    <!-- Divider -->
+                    <div style="width: 120px; height: 3px; background: linear-gradient(90deg, transparent 0%, #FFD700 50%, transparent 100%); margin: 0 auto 28px auto;"></div>
+
+                    <p style="margin: 0 0 16px 0; font-size: 13px; color: #A0522D; line-height: 1.8; font-weight: 600;">
+                      Independent reseller. Not affiliated with or endorsed by H-E-B®.
+                    </p>
+                    <p style="margin: 0; font-size: 16px; color: #D4A574; font-weight: 700; font-style: italic;">
+                      Made with Texas Pride 🤠
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Bottom Texas Flag Border -->
+              <div style="height: 12px; background: linear-gradient(90deg, #004080 0%, #FFFFFF 33%, #CC0000 66%, #FFFFFF 100%);"></div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
     `;
