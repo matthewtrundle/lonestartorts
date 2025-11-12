@@ -377,12 +377,19 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-base font-semibold text-charcoal-950 mb-2">Shipping To</h2>
           <div className="text-sm text-charcoal-700 space-y-0.5">
-            <p>{order.shippingAddress.line1}</p>
-            {order.shippingAddress.line2 && <p>{order.shippingAddress.line2}</p>}
-            <p>
-              {order.shippingAddress.city}, {order.shippingAddress.state}{' '}
-              {order.shippingAddress.postal_code}
-            </p>
+            {order.shippingAddress?.line1 ? (
+              <>
+                <p>{order.shippingAddress.line1}</p>
+                {order.shippingAddress.line2 && <p>{order.shippingAddress.line2}</p>}
+                <p>
+                  {order.shippingAddress.city}, {order.shippingAddress.state}{' '}
+                  {order.shippingAddress.postal_code}
+                </p>
+                <p>{order.shippingAddress.country || 'United States'}</p>
+              </>
+            ) : (
+              <p className="text-charcoal-500 italic">No shipping address available</p>
+            )}
           </div>
         </div>
       </div>
