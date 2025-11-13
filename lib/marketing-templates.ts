@@ -82,6 +82,13 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
+          <!-- Primary CTA -->
+          <tr>
+            <td style="padding: 32px; background-color: #ffffff; text-align: center;">
+              <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 18px 48px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 18px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);">Shop H-E-B® Tortillas Now →</a>
+            </td>
+          </tr>
+
           <!-- The Solution -->
           <tr>
             <td style="padding: 40px 32px;">
@@ -134,25 +141,42 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
-          <!-- Video CTA -->
+          <!-- BBQ Resources -->
           <tr>
-            <td style="padding: 40px 32px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Why We Sell H-E-B® Tortillas Nationwide</h2>
-              <div style="text-align: center; margin-bottom: 24px;">
-                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
-                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #d97706;">
-                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(217, 119, 6, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
-                      <div style="width: 0; height: 0; border-left: 24px solid #ffffff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
-                    </div>
-                  </div>
-                </a>
+            <td style="padding: 40px 32px; background-color: #fafaf9;">
+              <h2 style="margin: 0 0 24px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Learn From Texas BBQ Experts</h2>
+
+              <!-- Blog Card 1 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/blog/bbq-meets-tortillas" style="color: #1c1917; text-decoration: none;">When Texas BBQ Meets H-E-B® Tortillas</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Discover why authentic H-E-B® tortillas are essential for Texas BBQ culture. From brisket tacos to pulled pork wraps.
+                </p>
+                <a href="${WEBSITE_URL}/blog/bbq-meets-tortillas" style="font-size: 14px; color: #d97706; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
-              <p style="margin: 0 0 24px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
-                We source authentic H-E-B® tortillas directly from Texas and deliver nationwide to restaurants like yours. No middlemen, just real Texas quality.
-              </p>
-              <div style="text-align: center;">
-                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 18px 40px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);">Shop H-E-B® Tortillas Now →</a>
+
+              <!-- Blog Card 2 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/blog/why-pitmasters-refuse-store-tortillas" style="color: #1c1917; text-decoration: none;">Why Pitmasters Refuse Store-Bought Tortillas</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Real stories of business losses and customer complaints—and the day they switched to H-E-B® tortillas.
+                </p>
+                <a href="${WEBSITE_URL}/blog/why-pitmasters-refuse-store-tortillas" style="font-size: 14px; color: #d97706; text-decoration: none; font-weight: 600;">Read More →</a>
+              </div>
+
+              <!-- Blog Card 3 -->
+              <div style="padding: 20px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/bbq-tortillas-guide" style="color: #1c1917; text-decoration: none;">The Complete BBQ & Tortillas Guide</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Master the art of pairing Texas BBQ with authentic H-E-B® tortillas. From brisket tacos to pulled pork wraps.
+                </p>
+                <a href="${WEBSITE_URL}/guides/bbq-tortillas-guide" style="font-size: 14px; color: #d97706; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
             </td>
           </tr>
@@ -247,6 +271,13 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
+          <!-- Primary CTA -->
+          <tr>
+            <td style="padding: 32px; background-color: #ffffff; text-align: center;">
+              <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 18px 48px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 18px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);">Shop H-E-B® Tortillas Now →</a>
+            </td>
+          </tr>
+
           <!-- The Solution -->
           <tr>
             <td style="padding: 40px 32px;">
@@ -299,25 +330,42 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
-          <!-- Video CTA -->
+          <!-- Authenticity Resources -->
           <tr>
-            <td style="padding: 40px 32px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">We Deliver Authentic H-E-B® Tortillas to Your Restaurant</h2>
-              <div style="text-align: center; margin-bottom: 24px;">
-                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
-                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #d97706;">
-                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(217, 119, 6, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
-                      <div style="width: 0; height: 0; border-left: 24px solid #ffffff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
-                    </div>
-                  </div>
-                </a>
+            <td style="padding: 40px 32px; background-color: #fafaf9;">
+              <h2 style="margin: 0 0 24px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Learn About Authentic Tortilla Traditions</h2>
+
+              <!-- Blog Card 1 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/blog/texas-tortilla-traditions" style="color: #1c1917; text-decoration: none;">Texas Tortilla Traditions</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  From San Antonio to El Paso, explore how Texas shaped its own tortilla identity through Mexican heritage and Tex-Mex innovation.
+                </p>
+                <a href="${WEBSITE_URL}/blog/texas-tortilla-traditions" style="font-size: 14px; color: #d97706; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
-              <p style="margin: 0 0 24px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
-                Founded by Maria Rodriguez, we specialize in bringing authentic Texas H-E-B® tortillas to Mexican restaurants nationwide. Real quality, real taste.
-              </p>
-              <div style="text-align: center;">
-                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 18px 40px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);">Shop H-E-B® Tortillas Now →</a>
+
+              <!-- Blog Card 2 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/blog/nixtamalization-science" style="color: #1c1917; text-decoration: none;">The Science of Nixtamalization</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Discover the 3,500-year-old process that transforms corn into masa. How lime treatment unlocks nutrition and authentic flavor.
+                </p>
+                <a href="${WEBSITE_URL}/blog/nixtamalization-science" style="font-size: 14px; color: #d97706; text-decoration: none; font-weight: 600;">Read More →</a>
+              </div>
+
+              <!-- Blog Card 3 -->
+              <div style="padding: 20px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/corn-vs-flour-tortillas" style="color: #1c1917; text-decoration: none;">Corn vs Flour Tortillas: Complete Guide</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Compare taste, texture, nutrition, and best uses. Learn which tortilla is right for tacos, burritos, and quesadillas.
+                </p>
+                <a href="${WEBSITE_URL}/guides/corn-vs-flour-tortillas" style="font-size: 14px; color: #d97706; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
             </td>
           </tr>
@@ -412,6 +460,13 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
+          <!-- Primary CTA -->
+          <tr>
+            <td style="padding: 32px; background-color: #ffffff; text-align: center;">
+              <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #2563eb; color: #ffffff; padding: 18px 48px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 18px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);">Shop H-E-B® Tortillas Now →</a>
+            </td>
+          </tr>
+
           <!-- The Solution -->
           <tr>
             <td style="padding: 40px 32px;">
@@ -464,25 +519,42 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
-          <!-- Video CTA -->
+          <!-- Restaurant Resources -->
           <tr>
-            <td style="padding: 40px 32px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Delivering Authentic Texas H-E-B® Tortillas Nationwide</h2>
-              <div style="text-align: center; margin-bottom: 24px;">
-                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
-                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #2563eb;">
-                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(37, 99, 235, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
-                      <div style="width: 0; height: 0; border-left: 24px solid #ffffff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
-                    </div>
-                  </div>
-                </a>
+            <td style="padding: 40px 32px; background-color: #fafaf9;">
+              <h2 style="margin: 0 0 24px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Essential Guides for Your Restaurant</h2>
+
+              <!-- Blog Card 1 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #2563eb; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/best-tortillas-for-every-dish" style="color: #1c1917; text-decoration: none;">Best Tortillas for Every Dish</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Learn which tortilla type to use for tacos, burritos, enchiladas, quesadillas, and more. Complete guide for every menu item.
+                </p>
+                <a href="${WEBSITE_URL}/guides/best-tortillas-for-every-dish" style="font-size: 14px; color: #2563eb; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
-              <p style="margin: 0 0 24px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
-                We source premium H-E-B® tortillas from Texas and deliver them to restaurants across the country. Quality you can trust, delivered where you need it.
-              </p>
-              <div style="text-align: center;">
-                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #2563eb; color: #ffffff; padding: 18px 40px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);">Shop H-E-B® Tortillas Now →</a>
+
+              <!-- Blog Card 2 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #2563eb; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/how-to-store-tortillas" style="color: #1c1917; text-decoration: none;">How to Store Tortillas Properly</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Master proper storage techniques to keep tortillas fresh for weeks. Essential tips for restaurant operations.
+                </p>
+                <a href="${WEBSITE_URL}/guides/how-to-store-tortillas" style="font-size: 14px; color: #2563eb; text-decoration: none; font-weight: 600;">Read More →</a>
+              </div>
+
+              <!-- Blog Card 3 -->
+              <div style="padding: 20px; background-color: #ffffff; border-left: 4px solid #2563eb; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/how-to-reheat-tortillas" style="color: #1c1917; text-decoration: none;">How to Reheat Tortillas for Service</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Professional techniques for warming tortillas perfectly during service. Keep them pliable and delicious all shift long.
+                </p>
+                <a href="${WEBSITE_URL}/guides/how-to-reheat-tortillas" style="font-size: 14px; color: #2563eb; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
             </td>
           </tr>
@@ -577,6 +649,13 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
+          <!-- Primary CTA -->
+          <tr>
+            <td style="padding: 32px; background-color: #ffffff; text-align: center;">
+              <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #7c3aed; color: #ffffff; padding: 18px 48px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 18px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);">Shop H-E-B® Tortillas Now →</a>
+            </td>
+          </tr>
+
           <!-- The Solution -->
           <tr>
             <td style="padding: 40px 32px;">
@@ -629,25 +708,42 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             </td>
           </tr>
 
-          <!-- Video CTA -->
+          <!-- Mobile Kitchen Resources -->
           <tr>
-            <td style="padding: 40px 32px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Texas H-E-B® Tortillas, Delivered Nationwide</h2>
-              <div style="text-align: center; margin-bottom: 24px;">
-                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
-                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #7c3aed;">
-                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(124, 58, 237, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
-                      <div style="width: 0; height: 0; border-left: 24px solid #ffffff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
-                    </div>
-                  </div>
-                </a>
+            <td style="padding: 40px 32px; background-color: #fafaf9;">
+              <h2 style="margin: 0 0 24px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Essential Tips for Mobile Kitchens</h2>
+
+              <!-- Blog Card 1 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #7c3aed; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/how-to-store-tortillas" style="color: #1c1917; text-decoration: none;">How to Store Tortillas in Tight Spaces</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Master proper storage techniques for limited food truck space. Keep tortillas fresh for weeks without taking up precious room.
+                </p>
+                <a href="${WEBSITE_URL}/guides/how-to-store-tortillas" style="font-size: 14px; color: #7c3aed; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
-              <p style="margin: 0 0 24px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
-                We source authentic H-E-B® tortillas from Texas and ship them to food trucks across America. Quality that travels as well as you do.
-              </p>
-              <div style="text-align: center;">
-                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #7c3aed; color: #ffffff; padding: 18px 40px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);">Shop H-E-B® Tortillas Now →</a>
+
+              <!-- Blog Card 2 -->
+              <div style="margin-bottom: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #7c3aed; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/how-to-reheat-tortillas" style="color: #1c1917; text-decoration: none;">Quick Reheating for Rush Hour</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Professional techniques for warming tortillas perfectly during busy service. Keep them pliable when speed matters most.
+                </p>
+                <a href="${WEBSITE_URL}/guides/how-to-reheat-tortillas" style="font-size: 14px; color: #7c3aed; text-decoration: none; font-weight: 600;">Read More →</a>
+              </div>
+
+              <!-- Blog Card 3 -->
+              <div style="padding: 20px; background-color: #ffffff; border-left: 4px solid #7c3aed; border-radius: 4px;">
+                <h3 style="margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #1c1917;">
+                  <a href="${WEBSITE_URL}/guides/best-tortillas-for-every-dish" style="color: #1c1917; text-decoration: none;">Best Tortillas for Your Menu</a>
+                </h3>
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #57534e; line-height: 1.5;">
+                  Learn which tortilla type works best for your signature dishes. Optimize your menu with the right tortilla choices.
+                </p>
+                <a href="${WEBSITE_URL}/guides/best-tortillas-for-every-dish" style="font-size: 14px; color: #7c3aed; text-decoration: none; font-weight: 600;">Read More →</a>
               </div>
             </td>
           </tr>
