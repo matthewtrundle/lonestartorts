@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,121 +7,208 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Waitlist entry model
-model WaitlistEntry {
-  id      String  @id @default(cuid())
-  email   String  @unique
-  name    String?
-  zipCode String?
+model Address {
+  id         String      @id
+  customerId String
+  firstName  String
+  lastName   String
+  city       String
+  state      String
+  country    String      @default("US")
+  phone      String?
+  isDefault  Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime
+  street     String
+  street2    String?
+  type       AddressType @default(BOTH)
+  zip        String
+  Customer   Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
-  // Product interests
-  interestCorn    Boolean @default(false)
-  interestButter  Boolean @default(false)
-  interestFlour   Boolean @default(false)
-  interestVariety Boolean @default(false)
-
-  expectedQuantity String?
-
-  // Tracking fields
-  source   String? // utm_source
-  medium   String? // utm_medium
-  campaign String? // utm_campaign
-  referrer String? // HTTP referrer
-
-  // Status
-  verified     Boolean @default(false)
-  unsubscribed Boolean @default(false)
-
-  // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  notes     Note[]
-  emailLogs EmailLog[]
-
-  @@index([email])
-  @@index([createdAt])
-  @@index([zipCode])
+  @@index([customerId])
+  @@index([isDefault])
 }
 
-// Admin user model for authentication
-model User {
-  id       String   @id @default(cuid())
-  email    String   @unique
-  name     String?
-  password String? // Hashed password
-  role     UserRole @default(VIEWER)
+model Customer {
+  id              String    @id
+  clerkUserId     String    @unique
+  email           String    @unique
+  firstName       String?
+  lastName        String?
+  lastLoginAt     DateTime?
+  signupSource    String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime
+  privateMetadata Json?
+  publicMetadata  Json?
+  Address         Address[]
+  Order           Order[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  sessions Session[]
-  notes    Note[]
-
+  @@index([clerkUserId])
   @@index([email])
 }
 
-enum UserRole {
-  SUPER_ADMIN
-  ADMIN
-  VIEWER
-}
-
-// Session management for admin users
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-}
-
-// Notes/comments on waitlist entries
-model Note {
-  id              String @id @default(cuid())
-  content         String
-  waitlistEntryId String
-  userId          String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  waitlistEntry WaitlistEntry @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
-  user          User          @relation(fields: [userId], references: [id])
-
-  @@index([waitlistEntryId])
-  @@index([userId])
-}
-
-// Email activity log
 model EmailLog {
-  id              String      @id @default(cuid())
+  id              String        @id
   waitlistEntryId String
   type            EmailType
   subject         String
-  status          EmailStatus @default(PENDING)
+  status          EmailStatus   @default(PENDING)
   sentAt          DateTime?
   error           String?
+  createdAt       DateTime      @default(now())
+  WaitlistEntry   WaitlistEntry @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-
-  waitlistEntry WaitlistEntry @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
-
-  @@index([waitlistEntryId])
+  @@index([status])
   @@index([type])
+  @@index([waitlistEntryId])
+}
+
+model Note {
+  id              String        @id
+  content         String
+  waitlistEntryId String
+  userId          String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime
+  User            User          @relation(fields: [userId], references: [id])
+  WaitlistEntry   WaitlistEntry @relation(fields: [waitlistEntryId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([waitlistEntryId])
+}
+
+model Order {
+  id               String        @id
+  orderNumber      String        @unique
+  customerId       String?
+  email            String
+  subtotal         Int
+  shipping         Int
+  tax              Int
+  total            Int
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime
+  shippedAt        DateTime?
+  deliveredAt      DateTime?
+  carrier          String?
+  paymentStatus    PaymentStatus @default(PENDING)
+  stripePaymentId  String?
+  trackingNumber   String?
+  status           OrderStatus   @default(PENDING)
+  shippingName     String?
+  shippingAddress1 String?
+  shippingAddress2 String?
+  shippingCity     String?
+  shippingState    String?
+  shippingZip      String?
+  shippingCountry  String?
+  shippingPhone    String?
+  labelUrl         String?
+  Customer         Customer?     @relation(fields: [customerId], references: [id])
+  OrderItem        OrderItem[]
+
+  @@index([customerId])
+  @@index([email])
+  @@index([orderNumber])
   @@index([status])
 }
 
-enum EmailType {
-  WELCOME
-  UPDATE
-  LAUNCH
-  MARKETING
+model OrderItem {
+  id        String   @id
+  orderId   String
+  sku       String?
+  name      String
+  price     Int
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  Order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Order_backup_1762893219972 {
+  id              String?
+  orderNumber     String?
+  customerId      String?
+  email           String?
+  subtotal        Int?
+  shipping        Int?
+  tax             Int?
+  total           Int?
+  createdAt       DateTime?
+  updatedAt       DateTime?
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+  billingAddress  Json?
+  carrier         String?
+  customerName    String?
+  items           Json?
+  paymentStatus   PaymentStatus?
+  shippingAddress Json?
+  stripePaymentId String?
+  trackingNumber  String?
+  status          OrderStatus?
+
+  @@ignore
+}
+
+model Session {
+  id           String   @id
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model User {
+  id        String    @id
+  email     String    @unique
+  name      String?
+  password  String?
+  role      UserRole  @default(VIEWER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  Note      Note[]
+  Session   Session[]
+
+  @@index([email])
+}
+
+model WaitlistEntry {
+  id               String     @id
+  email            String     @unique
+  name             String?
+  zipCode          String?
+  interestCorn     Boolean    @default(false)
+  interestButter   Boolean    @default(false)
+  interestFlour    Boolean    @default(false)
+  interestVariety  Boolean    @default(false)
+  expectedQuantity String?
+  source           String?
+  medium           String?
+  campaign         String?
+  referrer         String?
+  verified         Boolean    @default(false)
+  unsubscribed     Boolean    @default(false)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime
+  EmailLog         EmailLog[]
+  Note             Note[]
+
+  @@index([createdAt])
+  @@index([email])
+  @@index([zipCode])
+}
+
+enum AddressType {
+  SHIPPING
+  BILLING
+  BOTH
 }
 
 enum EmailStatus {
@@ -134,139 +218,20 @@ enum EmailStatus {
   BOUNCED
 }
 
-// Customer model - synced from Clerk
-model Customer {
-  id          String  @id @default(cuid())
-  clerkUserId String  @unique // Links to Clerk user ID
-  email       String  @unique
-  firstName   String?
-  lastName    String?
-
-  // User tracking fields
-  lastLoginAt  DateTime?
-  signupSource String? // utm_source for tracking
-
-  // Metadata from Clerk
-  publicMetadata  Json?
-  privateMetadata Json?
-
-  // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  orders    Order[]
-  addresses Address[]
-
-  @@index([clerkUserId])
-  @@index([email])
+enum EmailType {
+  WELCOME
+  UPDATE
+  LAUNCH
+  MARKETING
 }
 
-// Shipping/billing addresses for customers
-model Address {
-  id         String @id @default(cuid())
-  customerId String
-
-  // Address fields
-  firstName String
-  lastName  String
-  street    String
-  street2   String?
-  city      String
-  state     String
-  zip       String
-  country   String  @default("US")
-  phone     String?
-
-  // Address type
-  isDefault Boolean     @default(false)
-  type      AddressType @default(BOTH)
-
-  // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
-
-  @@index([customerId])
-  @@index([isDefault])
-}
-
-enum AddressType {
-  SHIPPING
-  BILLING
-  BOTH
-}
-
-// Order tracking for when we launch
-model Order {
-  id          String @id @default(cuid())
-  orderNumber String @unique
-  email       String
-
-  // Customer link (optional for guest checkouts)
-  customerId String?
-  customer   Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
-
-  // Shipping details (new structure)
-  shippingName     String
-  shippingAddress1 String
-  shippingAddress2 String?
-  shippingCity     String
-  shippingState    String
-  shippingZip      String
-  shippingCountry  String  @default("US")
-  shippingPhone    String?
-
-  // Order items relation (new structure)
-  orderItems OrderItem[]
-
-  // Order details
-  subtotal Int // In cents
-  shipping Int // In cents
-  tax      Int // In cents
-  total    Int // In cents
-
-  // Payment
-  stripePaymentId String?
-  paymentStatus   PaymentStatus @default(PENDING)
-
-  // Fulfillment
-  status         OrderStatus @default(PENDING)
-  trackingNumber String?
-  carrier        String?
-  labelUrl       String? // EasyPost shipping label URL
-
-  // Timestamps
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  shippedAt   DateTime?
-  deliveredAt DateTime?
-
-  @@index([email])
-  @@index([orderNumber])
-  @@index([status])
-  @@index([customerId])
-}
-
-// Order line items
-model OrderItem {
-  id       String @id @default(cuid())
-  orderId  String
-  order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  // Product details
-  sku      String?
-  name     String
-  price    Int // In cents
-  quantity Int
-
-  // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([orderId])
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
 }
 
 enum PaymentStatus {
@@ -277,11 +242,8 @@ enum PaymentStatus {
   REFUNDED
 }
 
-enum OrderStatus {
-  PENDING
-  PROCESSING
-  SHIPPED
-  DELIVERED
-  CANCELLED
-  REFUNDED
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  VIEWER
 }
