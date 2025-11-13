@@ -82,10 +82,10 @@ export async function POST(req: NextRequest) {
           const tax = Math.round(subtotal * 0.0825); // 8.25% Texas sales tax
           const total = session.amount_total || (subtotal + shipping + tax);
 
-          // Extract shipping address
-          const shippingAddr = session.shipping_details?.address;
-          const customerEmail = session.customer_details?.email || '';
-          const customerName = session.customer_details?.name || session.shipping_details?.name || 'Guest';
+          // Extract shipping address from fullSession (not the basic event object)
+          const shippingAddr = fullSession.shipping_details?.address;
+          const customerEmail = fullSession.customer_details?.email || '';
+          const customerName = fullSession.customer_details?.name || fullSession.shipping_details?.name || 'Guest';
           const [firstName, ...lastNameParts] = customerName.split(' ');
           const lastName = lastNameParts.join(' ') || '';
 
@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
                   state: shippingAddr.state || '',
                   zip: shippingAddr.postal_code || '',
                   country: shippingAddr.country || 'US',
-                  phone: session.customer_details?.phone || null,
+                  phone: fullSession.customer_details?.phone || null,
                   isDefault: true,
                   type: 'BOTH',
                   updatedAt: new Date()
@@ -165,7 +165,7 @@ export async function POST(req: NextRequest) {
               shippingState: shippingAddr?.state || '',
               shippingZip: shippingAddr?.postal_code || '',
               shippingCountry: shippingAddr?.country || 'US',
-              shippingPhone: session.customer_details?.phone || null,
+              shippingPhone: fullSession.customer_details?.phone || null,
 
               // Order totals
               subtotal,
