@@ -65,111 +65,104 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="${WEBSITE_URL}/images/Cards/image (13).png" alt="Texas family dinner with tortillas" style="width: 100%; height: auto; display: block;" />
+              <img src="https://lonestartortillas.com/images/Cards/image%20(13).png" alt="Texas family dinner with tortillas" style="width: 100%; height: auto; display: block;" />
             </td>
           </tr>
 
-          <!-- Greeting & Welcome -->
+          <!-- Problem Statement -->
           <tr>
-            <td style="padding: 48px 40px 32px 40px; background-color: #ffffff;">
-              <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 1px;">GREETINGS, PARTNER!</p>
-              <h1 style="margin: 0 0 20px 0; font-size: 42px; font-weight: 700; color: #1c1917; line-height: 1.1;">
-                Welcome to<br><span style="color: #d97706;">Lonestar</span>
-              </h1>
-              <p style="margin: 0 0 24px 0; font-size: 16px; color: #57534e; line-height: 1.7;">
-                Your BBQ deserves better than grocery store tortillas. We're bringing you the same premium H-E-B® tortillas that generations of Texas families have trusted—now available for your smokehouse, wherever you are.
+            <td style="padding: 40px 32px; background-color: #fef3c7; border-bottom: 4px solid #d97706;">
+              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">Let's Talk Straight, Y'all</h2>
+              <p style="margin: 0 0 12px 0; font-size: 16px; color: #78350f; line-height: 1.6; text-align: center;">
+                You spend 14 hours perfecting that brisket. Your rub is a family secret passed down three generations. Your smoke ring is legendary across three counties.
               </p>
-              <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 15px;">
-                Start Your Free Consultation →
-              </a>
+              <p style="margin: 0; font-size: 18px; font-weight: 700; color: #92400e; line-height: 1.6; text-align: center;">
+                Then you serve it on a flimsy grocery store tortilla? That just won't do.
+              </p>
             </td>
           </tr>
 
-          <!-- What We Offer -->
+          <!-- The Solution -->
           <tr>
-            <td style="padding: 32px 40px; background-color: #fafaf9;">
-              <p style="margin: 0 0 20px 0; font-size: 12px; font-weight: 700; color: #78716c; text-transform: uppercase; letter-spacing: 1px;">LONESTAR OFFERS:</p>
+            <td style="padding: 40px 32px;">
+              <h2 style="margin: 0 0 24px 0; font-size: 22px; font-weight: 700; color: #1c1917;">Why Texas Pitmasters Choose Us</h2>
 
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr>
-                  <td style="padding-bottom: 16px;">
-                    <span style="font-size: 20px; margin-right: 12px;">①</span>
-                    <span style="font-size: 15px; color: #1c1917; font-weight: 500;">Restaurant-Grade Tortillas That Hold Up</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-bottom: 16px;">
-                    <span style="font-size: 20px; margin-right: 12px;">②</span>
-                    <span style="font-size: 15px; color: #1c1917; font-weight: 500;">Nationwide Delivery from Texas to Your Door</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span style="font-size: 20px; margin-right: 12px;">③</span>
-                    <span style="font-size: 15px; color: #1c1917; font-weight: 500;">Texas-Tested, Pitmaster-Approved Quality</span>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- What's Coming -->
-          <tr>
-            <td style="padding: 40px 40px 32px 40px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 24px 0; font-size: 28px; font-weight: 700; color: #1c1917; line-height: 1.2;">
-                Over the next week, we'll be <span style="background: linear-gradient(90deg, #fbbf24 0%, #d97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">sending you advice on:</span>
-              </h2>
-
-              <ul style="margin: 0; padding: 0; list-style: none;">
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> Why Texas pitmasters choose H-E-B® tortillas
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> How to pair tortillas with your signature smoked meats
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> Cost-per-serving calculations that make sense
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> What to expect from your first wholesale order
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> Answers to your most common questions
-                </li>
-              </ul>
-            </td>
-          </tr>
-
-          <!-- Testimonials -->
-          <tr>
-            <td style="padding: 48px 40px; background-color: #fafaf9;">
-              <h2 style="margin: 0 0 8px 0; font-size: 32px; font-weight: 700; color: #1c1917; line-height: 1.2;">
-                Real pitmasters,
-              </h2>
-              <h2 style="margin: 0 0 32px 0; font-size: 32px; font-weight: 700; line-height: 1.2;">
-                <span style="color: #d97706;">real transformations</span>
-              </h2>
-
-              <!-- Testimonial 1 -->
-              <div style="background-color: #ffffff; padding: 24px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #e7e5e4;">
-                <p style="margin: 0 0 16px 0; font-size: 15px; color: #44403c; line-height: 1.7; font-style: italic;">
-                  "We tested 6 different suppliers. Lonestar's are the only ones that don't tear under a half-pound of brisket. Our Google reviews mention the tortillas now—that's when you know you've got something special."
-                </p>
-                <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #1c1917;">— MIKE RODRIGUEZ, AUSTIN, TX</p>
-                <div style="margin: 0;">
-                  <span style="color: #d97706; font-size: 16px;">★★★★★</span>
+              <div style="margin-bottom: 24px;">
+                <div style="display: inline-block; width: 40px; height: 40px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 40px; margin-right: 12px; vertical-align: top;">
+                  <span style="color: #ffffff; font-weight: 700; font-size: 18px;">1</span>
+                </div>
+                <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Holds Up to Texas-Sized Portions</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">Restaurant-grade thickness that holds up to generous portions and sauce without tearing. Because when you load on a half-pound of brisket, that tortilla better not quit on you.</p>
                 </div>
               </div>
 
-              <!-- Testimonial 2 -->
-              <div style="background-color: #ffffff; padding: 24px; border-radius: 8px; border: 1px solid #e7e5e4;">
-                <p style="margin: 0 0 16px 0; font-size: 15px; color: #44403c; line-height: 1.7; font-style: italic;">
-                  "I've been smoking meat for 20 years. Finding a tortilla that can handle my brisket and not fall apart? Game changer. These stay pliable even after sitting on the warmer for hours during Saturday rush."
-                </p>
-                <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #1c1917;">— JAMES PETERSON, DALLAS, TX</p>
-                <div style="margin: 0;">
-                  <span style="color: #d97706; font-size: 16px;">★★★★★</span>
+              <div style="margin-bottom: 24px;">
+                <div style="display: inline-block; width: 40px; height: 40px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 40px; margin-right: 12px; vertical-align: top;">
+                  <span style="color: #ffffff; font-weight: 700; font-size: 18px;">2</span>
                 </div>
+                <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Authentic Texas Flavor Profile</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">Subtle corn sweetness that complements smoke flavor, not competes with it. Made using traditional nixtamalization process.</p>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 0;">
+                <div style="display: inline-block; width: 40px; height: 40px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 40px; margin-right: 12px; vertical-align: top;">
+                  <span style="color: #ffffff; font-weight: 700; font-size: 18px;">3</span>
+                </div>
+                <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Stays Pliable on the Warmer (Even During Rush)</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">No cracking after 2 hours in your warmer. Tested in real Texas kitchens during the Saturday lunch rush.</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Social Proof -->
+          <tr>
+            <td style="padding: 32px; background-color: #fafaf9;">
+              <div style="padding: 24px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <p style="margin: 0 0 12px 0; font-size: 16px; color: #44403c; line-height: 1.7; font-style: italic;">
+                  "We tested 6 different suppliers. Lonestar's are the only ones that don't tear under a half-pound of brisket. Our Google reviews mention the tortillas now."
+                </p>
+                <p style="margin: 0; font-size: 14px; color: #78716c;">
+                  <strong style="color: #1c1917;">Mike Rodriguez</strong><br>
+                  Pitmaster, Smokin' Oak BBQ - Austin, TX
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Video CTA -->
+          <tr>
+            <td style="padding: 40px 32px; background-color: #ffffff;">
+              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">See The Difference</h2>
+              <div style="text-align: center; margin-bottom: 24px;">
+                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
+                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #d97706;">
+                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(217, 119, 6, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                      <div style="width: 0; height: 0; border-left: 24px solid #ffffff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div style="text-align: center;">
+                <a href="${WEBSITE_URL}" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Request Samples</a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Simple Pricing -->
+          <tr>
+            <td style="padding: 32px; background-color: #f5f5f4;">
+              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing That Makes Sense</h3>
+              <p style="margin: 0 0 20px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
+                Volume discounts available. No long-term contracts. We keep it simple, Texas-style.
+              </p>
+              <div style="text-align: center;">
+                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">View Wholesale Pricing</a>
               </div>
             </td>
           </tr>
@@ -234,111 +227,104 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="${WEBSITE_URL}/images/Cards/image (10).png" alt="Authentic Mexican food spread" style="width: 100%; height: auto; display: block;" />
+              <img src="https://lonestartortillas.com/images/Cards/image%20(10).png" alt="Authentic Mexican food spread" style="width: 100%; height: auto; display: block;" />
             </td>
           </tr>
 
-          <!-- Greeting & Welcome -->
+          <!-- Problem Statement -->
           <tr>
-            <td style="padding: 48px 40px 32px 40px; background-color: #ffffff;">
-              <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 1px;">GREETINGS, AMIGO!</p>
-              <h1 style="margin: 0 0 20px 0; font-size: 42px; font-weight: 700; color: #1c1917; line-height: 1.1;">
-                Welcome to<br><span style="color: #d97706;">Lonestar</span>
-              </h1>
-              <p style="margin: 0 0 24px 0; font-size: 16px; color: #57534e; line-height: 1.7;">
-                Your customers know authentic when they taste it. Give them the same premium H-E-B® tortillas that Texas families have trusted for generations—the foundation of every great Mexican meal.
+            <td style="padding: 40px 32px; background-color: #fef3c7; border-bottom: 4px solid #d97706;">
+              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">The Real Deal</h2>
+              <p style="margin: 0 0 12px 0; font-size: 16px; color: #78350f; line-height: 1.6; text-align: center;">
+                Your customers can tell the difference between authentic and mass-produced. They grew up with real tortillas—the kind their abuelas made, the kind that tastes like home.
               </p>
-              <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 15px;">
-                Start Your Free Consultation →
-              </a>
+              <p style="margin: 0; font-size: 18px; font-weight: 700; color: #92400e; line-height: 1.6; text-align: center;">
+                Don't let your tacos down with anything less than authentic Texas quality.
+              </p>
             </td>
           </tr>
 
-          <!-- What We Offer -->
+          <!-- The Solution -->
           <tr>
-            <td style="padding: 32px 40px; background-color: #fafaf9;">
-              <p style="margin: 0 0 20px 0; font-size: 12px; font-weight: 700; color: #78716c; text-transform: uppercase; letter-spacing: 1px;">LONESTAR OFFERS:</p>
+            <td style="padding: 40px 32px;">
+              <h2 style="margin: 0 0 24px 0; font-size: 22px; font-weight: 700; color: #1c1917;">Why Mexican Restaurants Choose Us</h2>
 
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr>
-                  <td style="padding-bottom: 16px;">
-                    <span style="font-size: 20px; margin-right: 12px;">①</span>
-                    <span style="font-size: 15px; color: #1c1917; font-weight: 500;">Traditional Nixtamalization Process</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-bottom: 16px;">
-                    <span style="font-size: 20px; margin-right: 12px;">②</span>
-                    <span style="font-size: 15px; color: #1c1917; font-weight: 500;">Authentic Flavor Your Customers Recognize</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span style="font-size: 20px; margin-right: 12px;">③</span>
-                    <span style="font-size: 15px; color: #1c1917; font-weight: 500;">Trusted by Texas Families for Generations</span>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- What's Coming -->
-          <tr>
-            <td style="padding: 40px 40px 32px 40px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 24px 0; font-size: 28px; font-weight: 700; color: #1c1917; line-height: 1.2;">
-                Over the next week, we'll be <span style="background: linear-gradient(90deg, #fbbf24 0%, #d97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">sending you advice on:</span>
-              </h2>
-
-              <ul style="margin: 0; padding: 0; list-style: none;">
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> What makes H-E-B® tortillas authentic
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> How to choose between corn and flour for your menu
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> Storage tips for maintaining freshness
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> Wholesale pricing that works for your restaurant
-                </li>
-                <li style="padding: 8px 0; font-size: 15px; color: #44403c; line-height: 1.6;">
-                  <span style="color: #d97706; margin-right: 8px;">·</span> Answers to your questions about delivery and ordering
-                </li>
-              </ul>
-            </td>
-          </tr>
-
-          <!-- Testimonials -->
-          <tr>
-            <td style="padding: 48px 40px; background-color: #fafaf9;">
-              <h2 style="margin: 0 0 8px 0; font-size: 32px; font-weight: 700; color: #1c1917; line-height: 1.2;">
-                Real restaurants,
-              </h2>
-              <h2 style="margin: 0 0 32px 0; font-size: 32px; font-weight: 700; line-height: 1.2;">
-                <span style="color: #d97706;">real results</span>
-              </h2>
-
-              <!-- Testimonial 1 -->
-              <div style="background-color: #ffffff; padding: 24px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #e7e5e4;">
-                <p style="margin: 0 0 16px 0; font-size: 15px; color: #44403c; line-height: 1.7; font-style: italic;">
-                  "My abuela would approve. These taste just like the tortillas from back home in San Antonio. Customers notice the difference immediately—we've had people ask where we get them."
-                </p>
-                <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #1c1917;">— MARIA GONZALEZ, PHOENIX, AZ</p>
-                <div style="margin: 0;">
-                  <span style="color: #d97706; font-size: 16px;">★★★★★</span>
+              <div style="margin-bottom: 24px;">
+                <div style="display: inline-block; width: 40px; height: 40px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 40px; margin-right: 12px; vertical-align: top;">
+                  <span style="color: #ffffff; font-weight: 700; font-size: 18px;">1</span>
+                </div>
+                <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Traditional Nixtamalization Process</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">Made the authentic way—soaking corn in lime water to unlock nutrients and develop that distinctive flavor your customers expect. Not shortcuts, not mass production. The real thing.</p>
                 </div>
               </div>
 
-              <!-- Testimonial 2 -->
-              <div style="background-color: #ffffff; padding: 24px; border-radius: 8px; border: 1px solid #e7e5e4;">
-                <p style="margin: 0 0 16px 0; font-size: 15px; color: #44403c; line-height: 1.7; font-style: italic;">
-                  "We tried three different suppliers before finding Lonestar. The authentic flavor and consistent quality have been game-changing for our taqueria. Worth every penny."
-                </p>
-                <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #1c1917;">— CARLOS MENDEZ, DENVER, CO</p>
-                <div style="margin: 0;">
-                  <span style="color: #d97706; font-size: 16px;">★★★★★</span>
+              <div style="margin-bottom: 24px;">
+                <div style="display: inline-block; width: 40px; height: 40px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 40px; margin-right: 12px; vertical-align: top;">
+                  <span style="color: #ffffff; font-weight: 700; font-size: 18px;">2</span>
                 </div>
+                <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Authentic Flavor Your Customers Recognize</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">That unmistakable taste of real Mexican tortillas. The kind that makes your customers say "Just like home." Because it is.</p>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 0;">
+                <div style="display: inline-block; width: 40px; height: 40px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 40px; margin-right: 12px; vertical-align: top;">
+                  <span style="color: #ffffff; font-weight: 700; font-size: 18px;">3</span>
+                </div>
+                <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Trusted by Texas Families for Generations</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">These are the same H-E-B® tortillas that Texas families have counted on for decades. Now available for your restaurant, wherever you are.</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Social Proof -->
+          <tr>
+            <td style="padding: 32px; background-color: #fafaf9;">
+              <div style="padding: 24px; background-color: #ffffff; border-left: 4px solid #d97706; border-radius: 4px;">
+                <p style="margin: 0 0 12px 0; font-size: 16px; color: #44403c; line-height: 1.7; font-style: italic;">
+                  "My abuela would approve. These taste just like the tortillas from back home in San Antonio. Customers notice the difference immediately—we've had people ask where we get them."
+                </p>
+                <p style="margin: 0; font-size: 14px; color: #78716c;">
+                  <strong style="color: #1c1917;">Maria Gonzalez</strong><br>
+                  Owner, Casa Gonzalez - Phoenix, AZ
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Video CTA -->
+          <tr>
+            <td style="padding: 40px 32px; background-color: #ffffff;">
+              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Meet Maria Rodriguez, Our Founder</h2>
+              <div style="text-align: center; margin-bottom: 24px;">
+                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
+                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #d97706;">
+                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(217, 119, 6, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                      <div style="width: 0; height: 0; border-left: 24px solid #ffffff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div style="text-align: center;">
+                <a href="${WEBSITE_URL}" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Request Samples</a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Simple Pricing -->
+          <tr>
+            <td style="padding: 32px; background-color: #f5f5f4;">
+              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing for Authentic Quality</h3>
+              <p style="margin: 0 0 20px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
+                Volume discounts available. Flexible ordering. Texas delivery nationwide.
+              </p>
+              <div style="text-align: center;">
+                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">View Wholesale Pricing</a>
               </div>
             </td>
           </tr>
