@@ -88,8 +88,8 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
                   <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
                 </svg>
               </div>
-              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Order Confirmed!</h1>
-              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Thank you, ${customerName}. Your premium Texas tortillas are on the way.</p>
+              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Howdy, ${customerName}! Order Confirmed!</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Your premium Texas tortillas are headed your way. Get ready for some seriously good eats.</p>
             </td>
           </tr>
 
@@ -172,24 +172,24 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
                   <td style="width: 4%;"></td>
                   <td style="width: 48%; vertical-align: top;">
                     <div style="padding: 24px; background-color: #fff7ed; border-radius: 8px; border-left: 4px solid #ea580c;">
-                      <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #111827;">What's Next</h3>
+                      <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #111827;">What Happens Next</h3>
                       <div style="margin-bottom: 12px;">
                         <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
                           <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
                         </div>
-                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Shipping email within 24-48h</span>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Shipping update within 24-48 hours</span>
                       </div>
                       <div style="margin-bottom: 12px;">
                         <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
                           <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
                         </div>
-                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Delivery in 2-3 business days</span>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Arrives in 2-3 business days</span>
                       </div>
                       <div>
                         <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
                           <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
                         </div>
-                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Track your package via email</span>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Track every step of the way</span>
                       </div>
                     </div>
                   </td>
@@ -256,8 +256,8 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
                   <path d="M1 1l6 6M17 1l6 6M17 23l6-6M1 23l6-6"/>
                 </svg>
               </div>
-              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Your Order Has Shipped!</h1>
-              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Great news, ${customerName}! Your tortillas are on their way to you.</p>
+              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Yeehaw! Your Order Has Shipped!</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Great news, ${customerName}! Your tortillas are riding their way to you right now.</p>
             </td>
           </tr>
 
@@ -334,9 +334,9 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
           <tr>
             <td style="padding: 0 32px 32px 32px;">
               <div style="padding: 24px; background-color: #fff7ed; border-radius: 8px; border-left: 4px solid #ea580c;">
-                <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">Estimated Delivery</h3>
+                <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">When Will It Arrive?</h3>
                 <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.7;">
-                  Your order should arrive within <strong style="color: #1c1917;">2-3 business days</strong>. You can track your package anytime using the tracking number above.
+                  Your tortillas should arrive within <strong style="color: #1c1917;">2-3 business days</strong>. Track your package anytime using the tracking number above — we'll get 'em to you safe and sound.
                 </p>
               </div>
             </td>

@@ -58,12 +58,12 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Problem Statement -->
           <tr>
             <td style="padding: 40px 32px; background-color: #fef3c7; border-bottom: 4px solid #d97706;">
-              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">Let's Be Honest...</h2>
+              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">Let's Talk Straight, Y'all</h2>
               <p style="margin: 0 0 12px 0; font-size: 16px; color: #78350f; line-height: 1.6; text-align: center;">
-                You spend 14 hours perfecting that brisket. Your rub is a family secret. Your smoke ring is legendary.
+                You spend 14 hours perfecting that brisket. Your rub is a family secret passed down three generations. Your smoke ring is legendary across three counties.
               </p>
               <p style="margin: 0; font-size: 18px; font-weight: 700; color: #92400e; line-height: 1.6; text-align: center;">
-                Then you serve it on a grocery store tortilla?
+                Then you serve it on a flimsy grocery store tortilla? That just won't do.
               </p>
             </td>
           </tr>
@@ -71,15 +71,15 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- The Solution -->
           <tr>
             <td style="padding: 40px 32px;">
-              <h2 style="margin: 0 0 24px 0; font-size: 22px; font-weight: 700; color: #1c1917;">Why Pitmasters Choose Us</h2>
+              <h2 style="margin: 0 0 24px 0; font-size: 22px; font-weight: 700; color: #1c1917;">Why Texas Pitmasters Choose Us</h2>
 
               <div style="margin-bottom: 24px;">
                 <div style="display: inline-block; width: 40px; height: 40px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 40px; margin-right: 12px; vertical-align: top;">
                   <span style="color: #ffffff; font-weight: 700; font-size: 18px;">1</span>
                 </div>
                 <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
-                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Won't Fall Apart Under Brisket Weight</h3>
-                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">Restaurant-grade thickness that holds up to generous portions and sauce without tearing. Your customers won't need three tortillas per taco.</p>
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Holds Up to Texas-Sized Portions</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">Restaurant-grade thickness that holds up to generous portions and sauce without tearing. Because when you load on a half-pound of brisket, that tortilla better not quit on you.</p>
                 </div>
               </div>
 
@@ -98,8 +98,8 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                   <span style="color: #ffffff; font-weight: 700; font-size: 18px;">3</span>
                 </div>
                 <div style="display: inline-block; width: calc(100% - 60px); vertical-align: top;">
-                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Stays Pliable on the Warmer</h3>
-                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">No cracking after 2 hours in your warmer. Professional kitchen tested for busy service periods.</p>
+                  <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Stays Pliable on the Warmer (Even During Rush)</h3>
+                  <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.6;">No cracking after 2 hours in your warmer. Tested in real Texas kitchens during the Saturday lunch rush.</p>
                 </div>
               </div>
             </td>
@@ -143,9 +143,9 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Simple Pricing -->
           <tr>
             <td style="padding: 32px; background-color: #f5f5f4;">
-              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing</h3>
+              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing That Makes Sense</h3>
               <p style="margin: 0 0 20px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
-                Volume discounts available. No contracts. Cancel anytime.
+                Volume discounts available. No long-term contracts. We keep it simple, Texas-style.
               </p>
               <div style="text-align: center;">
                 <a href="mailto:wholesale@lonestartortillas.com" style="display: inline-block; color: #d97706; text-decoration: none; font-weight: 600; font-size: 15px;">wholesale@lonestartortillas.com →</a>
@@ -218,21 +218,21 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             <td style="padding: 40px 32px;">
               <h2 style="margin: 0 0 24px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">¿Por Qué Somos Diferentes?</h2>
               <p style="margin: 0 0 32px 0; font-size: 16px; color: #57534e; line-height: 1.7; text-align: center;">
-                We use traditional nixtamalization — not shortcuts. Your customers will taste the difference.
+                We use traditional nixtamalization — not shortcuts, not masa harina powder. Your customers will taste the difference, and they'll be back for more.
               </p>
 
               <!-- Features Grid -->
               <div style="margin-bottom: 24px; padding: 24px; background-color: #fef3c7; border-radius: 8px;">
-                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #78350f;">Traditional Nixtamalization Process</h3>
+                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #78350f;">Traditional Nixtamalization (The Real Deal)</h3>
                 <p style="margin: 0; font-size: 15px; color: #92400e; line-height: 1.6;">
-                  Corn soaked in lime water (cal), ground fresh daily, pressed by hand. No masa harina powder shortcuts. This is how it's been done for 3,500 years.
+                  Corn soaked in lime water (cal), ground fresh daily, pressed by hand. No masa harina powder shortcuts. This is how it's been done for 3,500 years — and how it's still done right in Texas.
                 </p>
               </div>
 
               <div style="margin-bottom: 24px; padding: 24px; background-color: #dcfce7; border-radius: 8px;">
-                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #166534;">Authentic Texture & Aroma</h3>
+                <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #166534;">Authentic Texture & Aroma (Just Like Home)</h3>
                 <p style="margin: 0; font-size: 15px; color: #14532d; line-height: 1.6;">
-                  That distinctive corn aroma your customers remember from Mexico. Pliable enough to fold without cracking, sturdy enough for street tacos.
+                  That distinctive corn aroma your customers remember from abuela's kitchen. Pliable enough to fold without cracking, sturdy enough for loaded street tacos.
                 </p>
               </div>
 
@@ -250,7 +250,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             <td style="padding: 32px; background-color: #f5f5f4;">
               <div style="padding: 24px; background-color: #ffffff; border-left: 4px solid #059669; border-radius: 4px;">
                 <p style="margin: 0 0 12px 0; font-size: 16px; color: #44403c; line-height: 1.7; font-style: italic;">
-                  "Mi abuela would be proud. These are the first tortillas I've found in Texas that remind me of home in Guadalajara. Our regulars noticed the difference immediately."
+                  "Mi abuela would be proud. These are the first tortillas I've found in Texas that remind me of home in Guadalajara. Our regulars noticed the difference immediately — and now they bring their friends."
                 </p>
                 <p style="margin: 0; font-size: 14px; color: #78716c;">
                   <strong style="color: #1c1917;">Carmen Flores</strong><br>
@@ -285,7 +285,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
             <td style="padding: 32px; background-color: #dcfce7;">
               <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #166534; text-align: center;">Wholesale Pricing for Authentic Restaurants</h3>
               <p style="margin: 0 0 20px 0; font-size: 15px; color: #14532d; text-align: center; line-height: 1.6;">
-                Competitive wholesale rates. Flexible ordering. Reliable delivery schedule.
+                Competitive wholesale rates. Flexible ordering. Reliable Texas delivery.
               </p>
               <div style="text-align: center;">
                 <a href="mailto:wholesale@lonestartortillas.com" style="display: inline-block; color: #059669; text-decoration: none; font-weight: 600; font-size: 15px;">Contact for Pricing →</a>
@@ -361,8 +361,8 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                   <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
                 </svg>
               </div>
-              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Order Confirmed!</h1>
-              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Thank you, John. Your premium Texas tortillas are on the way.</p>
+              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Howdy, John! Order Confirmed!</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Your premium Texas tortillas are headed your way. Get ready for some seriously good eats.</p>
             </td>
           </tr>
           <tr>
@@ -522,8 +522,8 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                   <circle cx="18.5" cy="18.5" r="2.5"></circle>
                 </svg>
               </div>
-              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Your Order Has Shipped!</h1>
-              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Great news, John! Your tortillas are on their way to you.</p>
+              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Yeehaw! Your Order Has Shipped!</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Great news, John! Your tortillas are riding their way to you right now.</p>
             </td>
           </tr>
           <tr>
