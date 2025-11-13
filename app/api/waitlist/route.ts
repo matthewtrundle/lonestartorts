@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { prisma } from '@/lib/prisma';
+import { randomUUID } from 'crypto';
 
 // Initialize Resend with API key
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -35,6 +36,7 @@ export async function POST(req: NextRequest) {
     // Create new entry in database
     const newEntry = await prisma.waitlistEntry.create({
       data: {
+        id: randomUUID(),
         email: email.toLowerCase(),
         name,
         zipCode,
@@ -46,7 +48,8 @@ export async function POST(req: NextRequest) {
         source,
         medium,
         campaign,
-        referrer: referer
+        referrer: referer,
+        updatedAt: new Date()
       }
     });
 
@@ -114,6 +117,7 @@ export async function POST(req: NextRequest) {
         // Log email sent
         await prisma.emailLog.create({
           data: {
+            id: randomUUID(),
             waitlistEntryId: newEntry.id,
             type: 'WELCOME',
             subject: 'Welcome to Lonestar Tortillas! 🌮',
@@ -126,6 +130,7 @@ export async function POST(req: NextRequest) {
         // Log email failure
         await prisma.emailLog.create({
           data: {
+            id: randomUUID(),
             waitlistEntryId: newEntry.id,
             type: 'WELCOME',
             subject: 'Welcome to Lonestar Tortillas! 🌮',

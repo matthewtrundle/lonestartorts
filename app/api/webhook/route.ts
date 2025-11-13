@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { calculateShipping, getProductBySku } from '@/lib/products';
 import { sendOrderConfirmationEmail } from '@/lib/email';
+import { randomUUID } from 'crypto';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
@@ -91,7 +92,7 @@ export async function POST(req: NextRequest) {
           // Try to find or create customer (for guest checkouts without Clerk)
           let customerId: string | null = null;
 
-          if (customerEmail && !session.customer_details?.metadata?.clerkUserId) {
+          if (customerEmail) {
             // Check if customer already exists
             let customer = await prisma.customer.findUnique({
               where: { email: customerEmail },
@@ -101,11 +102,13 @@ export async function POST(req: NextRequest) {
               // Create new guest customer
               customer = await prisma.customer.create({
                 data: {
+                  id: randomUUID(),
                   clerkUserId: `guest_${Date.now()}_${Math.random().toString(36).substring(7)}`,
                   email: customerEmail,
                   firstName: firstName || null,
                   lastName: lastName || null,
                   signupSource: 'checkout',
+                  updatedAt: new Date()
                 },
               });
               console.log('Created guest customer:', customer.id);
@@ -125,6 +128,7 @@ export async function POST(req: NextRequest) {
             if (!existingAddress && shippingAddr) {
               await prisma.address.create({
                 data: {
+                  id: randomUUID(),
                   customerId: customer.id,
                   firstName: firstName || 'Guest',
                   lastName: lastName || '',
@@ -137,6 +141,7 @@ export async function POST(req: NextRequest) {
                   phone: session.customer_details?.phone || null,
                   isDefault: true,
                   type: 'BOTH',
+                  updatedAt: new Date()
                 },
               });
               console.log('Created shipping address for customer:', customer.id);
@@ -146,6 +151,7 @@ export async function POST(req: NextRequest) {
           // Save order to Prisma database
           const order = await prisma.order.create({
             data: {
+              id: randomUUID(),
               orderNumber,
               email: customerEmail,
               status: 'PROCESSING',
@@ -170,13 +176,17 @@ export async function POST(req: NextRequest) {
               // Payment - Store session ID so we can look up order on success page
               stripePaymentId: session.id || null,
 
+              updatedAt: new Date(),
+
               // Create order items
               OrderItem: {
                 create: items.map((item) => ({
+                  id: randomUUID(),
                   sku: item.sku,
                   name: item.name,
                   price: item.price,
                   quantity: item.quantity,
+                  updatedAt: new Date()
                 })),
               },
             },
@@ -189,18 +199,18 @@ export async function POST(req: NextRequest) {
             await sendOrderConfirmationEmail({
               to: order.email,
               orderNumber: order.orderNumber,
-              customerName: order.shippingName,
+              customerName: order.shippingName || 'Guest',
               items: items,
               subtotal: order.subtotal,
               shipping: order.shipping,
               tax: order.tax,
               total: order.total,
               shippingAddress: {
-                street: order.shippingAddress1,
-                city: order.shippingCity,
-                state: order.shippingState,
-                zip: order.shippingZip,
-                country: order.shippingCountry,
+                street: order.shippingAddress1 || undefined,
+                city: order.shippingCity || undefined,
+                state: order.shippingState || undefined,
+                zip: order.shippingZip || undefined,
+                country: order.shippingCountry || undefined,
               },
             });
             console.log('Order confirmation email sent:', order.orderNumber);

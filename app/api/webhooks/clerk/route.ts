@@ -2,6 +2,7 @@ import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 import { prisma } from '@/lib/prisma';
+import { randomUUID } from 'crypto';
 
 export async function POST(req: Request) {
   // Get the Svix headers for verification
@@ -50,11 +51,13 @@ export async function POST(req: Request) {
       // Create customer in database
       await prisma.customer.create({
         data: {
+          id: randomUUID(),
           clerkUserId: id,
           email: email_addresses[0]?.email_address || '',
           firstName: first_name || null,
           lastName: last_name || null,
           lastLoginAt: new Date(),
+          updatedAt: new Date()
         },
       });
 
