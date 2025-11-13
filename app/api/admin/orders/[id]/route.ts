@@ -132,7 +132,7 @@ export async function PATCH(
       await sendOrderShippedEmail({
         to: updatedOrder.email,
         orderNumber: updatedOrder.orderNumber,
-        customerName: updatedOrder.shippingName,
+        customerName: updatedOrder.shippingName || 'Customer',
         trackingNumber,
         carrier,
         items: updatedOrder.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
