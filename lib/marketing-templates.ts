@@ -326,7 +326,143 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
     subject: 'Elevate Your Menu with Premium Tortillas',
     category: 'restaurant',
     description: 'Versatile template for any restaurant type, emphasizing quality and customer satisfaction',
-    html: `[TEMPLATE HTML - Similar structure to above, focused on general quality]`
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Tortillas for Your Restaurant</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #fafaf9;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #fafaf9;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 32px; background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+              <div style="text-align: center; margin-bottom: 24px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="#fbbf24" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; text-align: center; line-height: 1.2;">Your Guests Deserve Better</h1>
+              <p style="margin: 0; font-size: 18px; color: #dbeafe; text-align: center; line-height: 1.6;">Premium Texas tortillas that elevate every dish on your menu</p>
+            </td>
+          </tr>
+
+          <!-- Value Proposition -->
+          <tr>
+            <td style="padding: 40px 32px; background-color: #eff6ff; border-bottom: 4px solid #3b82f6;">
+              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #1c1917; text-align: center;">What Sets Your Restaurant Apart?</h2>
+              <p style="margin: 0; font-size: 16px; color: #1e40af; line-height: 1.6; text-align: center;">
+                Great restaurants know that quality matters in every detail. Your guests notice when you serve something exceptional — and they come back for it.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Benefits -->
+          <tr>
+            <td style="padding: 40px 32px;">
+              <h2 style="margin: 0 0 24px 0; font-size: 22px; font-weight: 700; color: #1c1917;">Why Leading Restaurants Choose Us</h2>
+
+              <div style="margin-bottom: 24px; padding: 24px; background-color: #eff6ff; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: #1c1917;">Guests Notice the Difference</h3>
+                <p style="margin: 0; font-size: 15px; color: #475569; line-height: 1.6;">
+                  Premium taste and texture that customers rave about in reviews. When your tortillas are this good, people talk about it — on Google, Yelp, and to their friends.
+                </p>
+              </div>
+
+              <div style="margin-bottom: 24px; padding: 24px; background-color: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: #1c1917;">Consistent Quality, Every Order</h3>
+                <p style="margin: 0; font-size: 15px; color: #78350f; line-height: 1.6;">
+                  No more disappointing batches or torn tortillas during service. Professional-grade consistency you can count on, order after order.
+                </p>
+              </div>
+
+              <div style="margin-bottom: 0; padding: 24px; background-color: #f0fdf4; border-radius: 8px; border-left: 4px solid #10b981;">
+                <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: #1c1917;">Competitive Advantage</h3>
+                <p style="margin: 0; font-size: 15px; color: #166534; line-height: 1.6;">
+                  Stand out from competitors serving generic grocery store tortillas. Quality ingredients attract quality-minded customers willing to pay premium prices.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Social Proof -->
+          <tr>
+            <td style="padding: 32px; background-color: #fafaf9;">
+              <div style="padding: 24px; background-color: #ffffff; border-left: 4px solid #3b82f6; border-radius: 4px;">
+                <p style="margin: 0 0 12px 0; font-size: 16px; color: #44403c; line-height: 1.7; font-style: italic;">
+                  "We switched to Lonestar six months ago and our online reviews specifically mention how good our tacos are now. The tortillas made that much difference. Our food costs went up slightly, but our average ticket went up more."
+                </p>
+                <p style="margin: 0; font-size: 14px; color: #78716c;">
+                  <strong style="color: #1c1917;">James Chen</strong><br>
+                  Owner, Meridian Kitchen - Denver, CO
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Video CTA -->
+          <tr>
+            <td style="padding: 40px 32px; background-color: #ffffff;">
+              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Meet Our Founder</h2>
+              <div style="text-align: center; margin-bottom: 24px;">
+                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
+                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #3b82f6;">
+                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(59, 130, 246, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                      <div style="width: 0; height: 0; border-left: 24px solid #ffffff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div style="text-align: center;">
+                <a href="${WEBSITE_URL}" style="display: inline-block; background-color: #1e40af; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Request Sample Pack</a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Pricing -->
+          <tr>
+            <td style="padding: 32px; background-color: #eff6ff;">
+              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing for Quality-Focused Restaurants</h3>
+              <p style="margin: 0 0 20px 0; font-size: 15px; color: #1e40af; text-align: center; line-height: 1.6;">
+                Competitive rates. Flexible delivery schedule. No long-term contracts required.
+              </p>
+              <div style="text-align: center;">
+                <a href="mailto:wholesale@lonestartortillas.com" style="display: inline-block; color: #1e40af; text-decoration: none; font-weight: 600; font-size: 15px;">wholesale@lonestartortillas.com →</a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px; text-align: center; background-color: #1c1917;">
+              <div style="margin-bottom: 16px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#fbbf24" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <p style="margin: 0 0 4px 0;">
+                <a href="${WEBSITE_URL}" style="color: #fbbf24; text-decoration: none; font-size: 14px;">lonestartortillas.com</a>
+              </p>
+              <p style="margin: 0;">
+                <a href="mailto:wholesale@lonestartortillas.com" style="color: #fbbf24; text-decoration: none; font-size: 14px;">wholesale@lonestartortillas.com</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`
   },
   {
     id: 'foodtruck-mobile',
@@ -334,7 +470,177 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
     subject: 'Tortillas Built for the Road',
     category: 'foodtruck',
     description: 'Targeted at food trucks, emphasizing durability, portability, and consistent quality',
-    html: `[TEMPLATE HTML - Similar structure to above, focused on food truck needs]`
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tortillas Built for the Road - Lonestar Tortillas</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);">
+
+          <!-- Purple Gradient Header -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center; background: linear-gradient(135deg, #7e22ce 0%, #581c87 100%);">
+              <div style="margin-bottom: 24px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Tortillas Built for the Road, Partner</h1>
+              <p style="margin: 0; font-size: 18px; color: #f3e8ff; line-height: 1.6;">When you're slinging tacos from a truck, you need tortillas that can handle the heat. Literally.</p>
+            </td>
+          </tr>
+
+          <!-- Hero Section -->
+          <tr>
+            <td style="padding: 32px 32px 24px 32px;">
+              <h2 style="margin: 0 0 16px 0; font-size: 24px; font-weight: 700; color: #111827; line-height: 1.3;">Food Trucks Operate on Speed & Durability</h2>
+              <p style="margin: 0 0 16px 0; font-size: 16px; color: #44403c; line-height: 1.6;">Y'all know the deal—limited space, no time for reprep, and tortillas that need to hold up under heat lamps during the lunch rush. Our H-E-B® tortillas are built Texas-tough, staying flexible and flavorful even when things get hectic.</p>
+              <p style="margin: 0; font-size: 16px; color: #44403c; line-height: 1.6;"><strong>These aren't grocery store afterthoughts.</strong> They're the same premium tortillas that Texas families have trusted for generations—now available for your mobile kitchen, wherever the road takes you.</p>
+            </td>
+          </tr>
+
+          <!-- Benefits Grid -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="width: 50%; padding-right: 8px; vertical-align: top;">
+                    <div style="background-color: #faf5ff; border-left: 4px solid #7e22ce; padding: 20px; margin-bottom: 16px; border-radius: 6px;">
+                      <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">Won't Crack Under Pressure</h3>
+                      <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.5;">Stays pliable even after sitting under heat lamps. No mid-service cracking when you're slammed with orders.</p>
+                    </div>
+                  </td>
+                  <td style="width: 50%; padding-left: 8px; vertical-align: top;">
+                    <div style="background-color: #faf5ff; border-left: 4px solid #7e22ce; padding: 20px; margin-bottom: 16px; border-radius: 6px;">
+                      <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">Handles the Heat</h3>
+                      <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.5;">Consistent performance on your flat-top, in your steamer, or straight out of the warmer. Texas-tested, road-proven.</p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 50%; padding-right: 8px; vertical-align: top;">
+                    <div style="background-color: #faf5ff; border-left: 4px solid #7e22ce; padding: 20px; border-radius: 6px;">
+                      <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">Fast Service, Zero Drama</h3>
+                      <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.5;">Customers notice when their taco holds together. These tortillas deliver the quality your reputation rides on.</p>
+                    </div>
+                  </td>
+                  <td style="width: 50%; padding-left: 8px; vertical-align: top;">
+                    <div style="background-color: #faf5ff; border-left: 4px solid #7e22ce; padding: 20px; border-radius: 6px;">
+                      <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">Portion Consistency</h3>
+                      <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.5;">Same size, same thickness, every single time. Makes portioning and cost control dead simple.</p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Testimonial -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <div style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); padding: 24px; border-radius: 8px; border: 2px solid #7e22ce;">
+                <p style="margin: 0 0 16px 0; font-size: 16px; font-style: italic; color: #1c1917; line-height: 1.6;">"Switched to Lonestar Tortillas six months ago and haven't looked back. They hold up through our Friday night rushes without breaking a sweat. Customers keep asking what we changed—that's how noticeable the quality jump is."</p>
+                <p style="margin: 0; font-size: 14px; font-weight: 600; color: #44403c;">— Marcus Lopez, Owner, Taco Fury Food Truck - Portland, OR</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Video Section -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <h2 style="margin: 0 0 20px 0; font-size: 22px; font-weight: 700; color: #111827; text-align: center;">Meet Maria Rodriguez, Our Founder</h2>
+              <div style="text-align: center;">
+                <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
+                  <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #7e22ce;">
+                    <img src="${VIDEO_THUMBNAIL_URL}" style="width: 100%; max-width: 500px; height: auto; display: block;" alt="Watch Maria's story">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(126, 34, 206, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                      <div style="width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid #ffffff; margin-left: 4px;"></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <p style="margin: 16px 0 0 0; font-size: 14px; color: #57534e; text-align: center; line-height: 1.5;">Watch Maria share why she started Lonestar Tortillas and what makes these tortillas special.</p>
+            </td>
+          </tr>
+
+          <!-- Why Food Trucks Choose Us -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <h2 style="margin: 0 0 20px 0; font-size: 22px; font-weight: 700; color: #111827;">Why Mobile Operators Choose Lonestar</h2>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding-bottom: 16px;">
+                    <div style="display: flex; align-items: flex-start;">
+                      <div style="background-color: #7e22ce; color: #ffffff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">1</div>
+                      <div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #111827;">Direct to Your Location</h3>
+                        <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.5;">We ship anywhere in the continental U.S. Whether you're parked in Portland or Phoenix, we've got you covered.</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 16px;">
+                    <div style="display: flex; align-items: flex-start;">
+                      <div style="background-color: #7e22ce; color: #ffffff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">2</div>
+                      <div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #111827;">Flexible Order Quantities</h3>
+                        <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.5;">Buy what you need, when you need it. No massive minimums, no vendor pressure. Just real Texas quality on your terms.</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: flex-start;">
+                      <div style="background-color: #7e22ce; color: #ffffff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">3</div>
+                      <div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #111827;">Proven Road Warriors</h3>
+                        <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.5;">These are the same H-E-B® tortillas that Texas families have trusted for generations. Now you can bring that authentic Texas taste to your customers, wherever you roll.</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CTA Button -->
+          <tr>
+            <td style="padding: 0 32px 40px 32px; text-align: center;">
+              <a href="${WEBSITE_URL}/shop" style="display: inline-block; background: linear-gradient(135deg, #7e22ce 0%, #581c87 100%); color: #ffffff; font-size: 16px; font-weight: 700; text-decoration: none; padding: 16px 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(126, 34, 206, 0.3);">
+                Get Started Today
+              </a>
+              <p style="margin: 16px 0 0 0; font-size: 14px; color: #78716c; line-height: 1.5;">Questions? Email us at <a href="mailto:wholesale@lonestartortillas.com" style="color: #7e22ce; text-decoration: underline;">wholesale@lonestartortillas.com</a></p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px; text-align: center; background-color: #fafaf9; border-top: 1px solid #e7e5e4;">
+              <p style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917;">Lonestar Tortillas</p>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <p style="margin: 0 0 4px 0;">
+                <a href="${WEBSITE_URL}" style="color: #7e22ce; text-decoration: none; font-size: 14px;">lonestartortillas.com</a>
+              </p>
+              <p style="margin: 0;">
+                <a href="mailto:wholesale@lonestartortillas.com" style="color: #7e22ce; text-decoration: none; font-size: 14px;">wholesale@lonestartortillas.com</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`
   },
   {
     id: 'order-confirmation',
