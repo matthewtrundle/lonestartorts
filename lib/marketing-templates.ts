@@ -137,7 +137,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Video CTA -->
           <tr>
             <td style="padding: 40px 32px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">See The Difference</h2>
+              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Why We Sell H-E-B® Tortillas Nationwide</h2>
               <div style="text-align: center; margin-bottom: 24px;">
                 <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
                   <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #d97706;">
@@ -148,8 +148,11 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                   </div>
                 </a>
               </div>
+              <p style="margin: 0 0 24px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
+                We source authentic H-E-B® tortillas directly from Texas and deliver nationwide to restaurants like yours. No middlemen, just real Texas quality.
+              </p>
               <div style="text-align: center;">
-                <a href="${WEBSITE_URL}" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Request Samples</a>
+                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 18px 40px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);">Shop H-E-B® Tortillas Now →</a>
               </div>
             </td>
           </tr>
@@ -157,12 +160,12 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Simple Pricing -->
           <tr>
             <td style="padding: 32px; background-color: #f5f5f4;">
-              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing That Makes Sense</h3>
+              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing for Your Restaurant</h3>
               <p style="margin: 0 0 20px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
-                Volume discounts available. No long-term contracts. We keep it simple, Texas-style.
+                <strong>Buy authentic H-E-B® tortillas in bulk.</strong> Volume discounts available. Fast nationwide shipping. Order today.
               </p>
               <div style="text-align: center;">
-                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">View Wholesale Pricing</a>
+                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">Order Wholesale Now</a>
               </div>
             </td>
           </tr>
@@ -299,7 +302,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Video CTA -->
           <tr>
             <td style="padding: 40px 32px; background-color: #ffffff;">
-              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">Meet Maria Rodriguez, Our Founder</h2>
+              <h2 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #1c1917; text-align: center;">We Deliver Authentic H-E-B® Tortillas to Your Restaurant</h2>
               <div style="text-align: center; margin-bottom: 24px;">
                 <a href="${VIDEO_PAGE_URL}" style="display: inline-block; text-decoration: none;">
                   <div style="position: relative; display: inline-block; border-radius: 8px; overflow: hidden; border: 2px solid #d97706;">
@@ -310,8 +313,11 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                   </div>
                 </a>
               </div>
+              <p style="margin: 0 0 24px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
+                Founded by Maria Rodriguez, we specialize in bringing authentic Texas H-E-B® tortillas to Mexican restaurants nationwide. Real quality, real taste.
+              </p>
               <div style="text-align: center;">
-                <a href="${WEBSITE_URL}" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Request Samples</a>
+                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 18px 40px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 17px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);">Shop H-E-B® Tortillas Now →</a>
               </div>
             </td>
           </tr>
@@ -319,12 +325,12 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Simple Pricing -->
           <tr>
             <td style="padding: 32px; background-color: #f5f5f4;">
-              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Wholesale Pricing for Authentic Quality</h3>
+              <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917; text-align: center;">Buy H-E-B® Tortillas in Bulk for Your Restaurant</h3>
               <p style="margin: 0 0 20px 0; font-size: 15px; color: #57534e; text-align: center; line-height: 1.6;">
-                Volume discounts available. Flexible ordering. Texas delivery nationwide.
+                <strong>Order authentic H-E-B® tortillas today.</strong> Wholesale pricing with volume discounts. Nationwide delivery from Texas.
               </p>
               <div style="text-align: center;">
-                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">View Wholesale Pricing</a>
+                <a href="${WEBSITE_URL}/shop" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">Order Wholesale Now</a>
               </div>
             </td>
           </tr>
