@@ -24,14 +24,15 @@ export default function MarketingTemplatesPage() {
     { id: 'mexican', name: 'Mexican Restaurants', color: 'bg-green-100 text-green-800' },
     { id: 'restaurant', name: 'Generic Restaurant', color: 'bg-blue-100 text-blue-800' },
     { id: 'foodtruck', name: 'Food Trucks', color: 'bg-purple-100 text-purple-800' },
+    { id: 'transactional', name: 'Transactional', color: 'bg-slate-100 text-slate-800' },
   ];
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-charcoal-950 mb-2">Marketing Email Templates</h1>
-        <p className="text-charcoal-600">Professional B2B outreach templates for wholesale partnerships</p>
+        <h1 className="text-3xl font-bold text-charcoal-950 mb-2">Email Templates</h1>
+        <p className="text-charcoal-600">Professional B2B outreach templates and transactional emails for your business</p>
       </div>
 
       {/* Template Grid */}

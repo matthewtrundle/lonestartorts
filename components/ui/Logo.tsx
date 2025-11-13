@@ -111,7 +111,7 @@ export function LogoFull({
   );
 }
 
-// Logo with Tagline - Premium Texas Tortillas
+// Logo with Tagline (shows the full image including "Those who know tortillas...")
 export function LogoWithTagline({
   className = '',
   animated = false,
@@ -152,7 +152,7 @@ export function LogoWithTagline({
       <div className="relative" style={{ width, height }}>
         <Image
           src="/images/lonestar-logo.webp"
-          alt="Lonestar Tortillas - Premium Texas Tortillas"
+          alt="Lonestar Tortillas - Those who know tortillas, know H-E-B"
           width={width}
           height={height}
           className="object-contain"
