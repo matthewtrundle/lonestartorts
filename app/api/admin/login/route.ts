@@ -4,24 +4,35 @@ import { validateCredentials, setAuthCookie } from '@/lib/auth';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { username, password } = body;
+    const { username, password } = body; // Username is actually email
 
     if (!username || !password) {
       return NextResponse.json(
-        { error: 'Username and password are required' },
+        { error: 'Email and password are required' },
         { status: 400 }
       );
     }
 
-    if (!validateCredentials(username, password)) {
+    // Validate against database
+    const result = await validateCredentials(username, password);
+
+    if (!result) {
       return NextResponse.json(
-        { error: 'Invalid credentials' },
+        { error: 'Invalid credentials or insufficient permissions' },
         { status: 401 }
       );
     }
 
-    const response = NextResponse.json({ success: true });
-    setAuthCookie(response);
+    // Create response with auth cookie
+    const response = NextResponse.json({
+      success: true,
+      user: {
+        id: result.userId,
+        role: result.role,
+      }
+    });
+
+    setAuthCookie(response, result.userId, result.role);
 
     return response;
   } catch (error) {

@@ -59,17 +59,17 @@ export default function AdminLoginPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-charcoal-700 mb-2">
-                Username
+                Email
               </label>
               <input
-                type="text"
+                type="email"
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                autoComplete="username"
+                autoComplete="email"
                 className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
-                placeholder="Enter username"
+                placeholder="admin@lonestartortillas.com"
               />
             </div>
 

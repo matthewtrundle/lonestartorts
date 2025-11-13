@@ -1,52 +1,108 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { compare } from 'bcryptjs';
+import { prisma } from '@/lib/prisma';
 
-// Hardcoded credentials (in production, use proper auth)
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'tortilla2024'; // Change this!
 const AUTH_COOKIE_NAME = 'admin_auth';
-const AUTH_SECRET = 'super-secret-key-change-me'; // Change this!
 
-export function createAuthToken(): string {
-  // Simple token creation (in production, use JWT)
+// Create auth token with user ID and role
+export function createAuthToken(userId: string, role: string): string {
   const timestamp = Date.now();
-  const data = `${ADMIN_USERNAME}:${timestamp}`;
+  const data = JSON.stringify({ userId, role, timestamp });
   return Buffer.from(data).toString('base64');
 }
 
-export function validateAuthToken(token: string): boolean {
+// Validate auth token
+export function validateAuthToken(token: string): { userId: string; role: string } | null {
   try {
     const decoded = Buffer.from(token, 'base64').toString();
-    const [username, timestamp] = decoded.split(':');
-
-    // Check if username matches
-    if (username !== ADMIN_USERNAME) return false;
+    const { userId, role, timestamp } = JSON.parse(decoded);
 
     // Check if token is not older than 24 hours
     const tokenAge = Date.now() - parseInt(timestamp);
     const maxAge = 24 * 60 * 60 * 1000; // 24 hours
 
-    return tokenAge < maxAge;
+    if (tokenAge >= maxAge) return null;
+
+    return { userId, role };
   } catch {
-    return false;
+    return null;
   }
 }
 
+// Check if user is authenticated
 export async function isAuthenticated(): Promise<boolean> {
   const cookieStore = await cookies();
   const token = cookieStore.get(AUTH_COOKIE_NAME);
 
   if (!token) return false;
 
-  return validateAuthToken(token.value);
+  return validateAuthToken(token.value) !== null;
 }
 
-export function validateCredentials(username: string, password: string): boolean {
-  return username === ADMIN_USERNAME && password === ADMIN_PASSWORD;
+// Get current authenticated user
+export async function getCurrentUser() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(AUTH_COOKIE_NAME);
+
+  if (!token) return null;
+
+  const tokenData = validateAuthToken(token.value);
+  if (!tokenData) return null;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: tokenData.userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+      }
+    });
+
+    return user;
+  } catch {
+    return null;
+  }
 }
 
-export function setAuthCookie(response: NextResponse): void {
-  const token = createAuthToken();
+// Validate credentials against database
+export async function validateCredentials(email: string, password: string): Promise<{ userId: string; role: string } | null> {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() },
+    });
+
+    if (!user || !user.password) {
+      return null;
+    }
+
+    // Compare password with hashed password
+    const isValid = await compare(password, user.password);
+
+    if (!isValid) {
+      return null;
+    }
+
+    // Check if user has admin privileges
+    if (user.role !== 'SUPER_ADMIN' && user.role !== 'ADMIN') {
+      return null;
+    }
+
+    return {
+      userId: user.id,
+      role: user.role,
+    };
+  } catch (error) {
+    console.error('Error validating credentials:', error);
+    return null;
+  }
+}
+
+// Set auth cookie
+export function setAuthCookie(response: NextResponse, userId: string, role: string): void {
+  const token = createAuthToken(userId, role);
   response.cookies.set(AUTH_COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
@@ -56,6 +112,21 @@ export function setAuthCookie(response: NextResponse): void {
   });
 }
 
+// Clear auth cookie
 export function clearAuthCookie(response: NextResponse): void {
   response.cookies.delete(AUTH_COOKIE_NAME);
+}
+
+// Check if user has required role
+export async function hasRole(requiredRole: 'SUPER_ADMIN' | 'ADMIN' | 'VIEWER'): Promise<boolean> {
+  const user = await getCurrentUser();
+  if (!user) return false;
+
+  const roleHierarchy = {
+    'SUPER_ADMIN': 3,
+    'ADMIN': 2,
+    'VIEWER': 1,
+  };
+
+  return roleHierarchy[user.role] >= roleHierarchy[requiredRole];
 }
