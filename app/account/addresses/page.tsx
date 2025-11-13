@@ -20,7 +20,7 @@ export default async function AddressesPage() {
   const customer = await prisma.customer.findUnique({
     where: { clerkUserId: user.id },
     include: {
-      addresses: {
+      Address: {
         orderBy: { isDefault: 'desc' },
       },
     },
@@ -44,7 +44,7 @@ export default async function AddressesPage() {
           </button>
         </div>
 
-        {!customer || customer.addresses.length === 0 ? (
+        {!customer || customer.Address.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
             <MapPin className="w-16 h-16 mx-auto mb-4 text-charcoal-400" />
             <h2 className="text-2xl font-bold text-charcoal-950 mb-2">
@@ -56,7 +56,7 @@ export default async function AddressesPage() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
-            {customer.addresses.map((address) => (
+            {customer.Address.map((address) => (
               <div
                 key={address.id}
                 className="bg-white rounded-lg shadow-md p-6 relative"

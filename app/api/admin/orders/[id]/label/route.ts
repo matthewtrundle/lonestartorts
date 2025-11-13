@@ -29,7 +29,7 @@ export async function POST(
     const order = await prisma.order.findUnique({
       where: { id: params.id },
       include: {
-        orderItems: true,
+        OrderItem: true,
       },
     });
 
@@ -38,7 +38,7 @@ export async function POST(
     }
 
     // Calculate package weight (rough estimate: 1 lb per pack)
-    const items = order.orderItems;
+    const items = order.OrderItem;
     const totalPacks = items
       .filter((item) => item.sku !== 'SHIPPING')
       .reduce((sum, item) => sum + item.quantity, 0);

@@ -23,8 +23,8 @@ export async function GET(
     const rawOrder = await prisma.order.findUnique({
       where: { id: params.id },
       include: {
-        customer: true,
-        orderItems: true,
+        Customer: true,
+        OrderItem: true,
       },
     });
 
@@ -36,7 +36,7 @@ export async function GET(
     const order = {
       ...rawOrder,
       customerName: rawOrder.shippingName,
-      items: rawOrder.orderItems,
+      items: rawOrder.OrderItem,
       shippingAddress: {
         line1: rawOrder.shippingAddress1,
         line2: rawOrder.shippingAddress2,
@@ -119,7 +119,7 @@ export async function PATCH(
     const updatedOrder = await prisma.order.update({
       where: { id: params.id },
       data: updateData,
-      include: { orderItems: true },
+      include: { OrderItem: true },
     });
 
     // Send shipping notification email if status changed to SHIPPED
@@ -135,7 +135,7 @@ export async function PATCH(
         customerName: updatedOrder.shippingName,
         trackingNumber,
         carrier,
-        items: updatedOrder.orderItems.filter((item) => item.sku !== 'SHIPPING'),
+        items: updatedOrder.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
       });
     }
 

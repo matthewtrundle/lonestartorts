@@ -20,9 +20,9 @@ export default async function OrdersPage() {
   const customer = await prisma.customer.findUnique({
     where: { clerkUserId: user.id },
     include: {
-      orders: {
+      Order: {
         include: {
-          orderItems: true,
+          OrderItem: true,
         },
         orderBy: { createdAt: 'desc' },
       },
@@ -66,7 +66,7 @@ export default async function OrdersPage() {
           My Orders
         </h1>
 
-        {customer.orders.length === 0 ? (
+        {customer.Order.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
             <Package className="w-16 h-16 mx-auto mb-4 text-charcoal-400" />
             <h2 className="text-2xl font-bold text-charcoal-950 mb-2">
@@ -85,8 +85,8 @@ export default async function OrdersPage() {
         ) : (
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="divide-y divide-charcoal-200">
-              {customer.orders.map((order) => {
-                const items = order.orderItems;
+              {customer.Order.map((order) => {
+                const items = order.OrderItem;
                 return (
                   <div key={order.id} className="p-6">
                     <div className="flex items-start justify-between mb-4">

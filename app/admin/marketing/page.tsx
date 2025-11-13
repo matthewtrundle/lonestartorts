@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { MARKETING_TEMPLATES, type EmailTemplate } from '@/lib/marketing-templates';
 import { COLD_EMAIL_TEMPLATES, type ColdEmailTemplate } from '@/lib/cold-emails';
-import { TEXAS_ORDER_CONFIRMATION, TEXAS_ORDER_SHIPPED } from '@/lib/transactional-emails-texas';
+import { REFINED_ORDER_CONFIRMATION, REFINED_ORDER_SHIPPED } from '@/lib/transactional-emails-refined';
 import { Copy, Eye, Mail, Check, FileText } from 'lucide-react';
 
 const TEXAS_EMAILS = [
-  { id: 'texas-confirmation', name: 'Order Confirmation (Texas Style)', subject: 'Yee-Haw! Order Confirmed', html: TEXAS_ORDER_CONFIRMATION },
-  { id: 'texas-shipped', name: 'Order Shipped (Texas Style)', subject: 'Ride \'Em Cowboy! Order Shipped', html: TEXAS_ORDER_SHIPPED }
+  { id: 'refined-confirmation', name: 'Order Confirmation', subject: 'Order Confirmed - Lonestar Tortillas', html: REFINED_ORDER_CONFIRMATION },
+  { id: 'refined-shipped', name: 'Order Shipped', subject: 'Your Order Has Shipped', html: REFINED_ORDER_SHIPPED }
 ];
 
 export default function MarketingTemplatesPage() {

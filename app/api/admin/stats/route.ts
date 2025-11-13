@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
           createdAt: { gte: last30Days },
         },
         include: {
-          orderItems: true,
+          OrderItem: true,
         },
       }),
       // Previous 30 days (for comparison)
@@ -69,7 +69,7 @@ export async function GET(req: NextRequest) {
           paymentStatus: 'SUCCEEDED',
         },
         include: {
-          orderItems: true,
+          OrderItem: true,
         },
       }),
     ]);
@@ -92,7 +92,7 @@ export async function GET(req: NextRequest) {
     // Get top product from all orders
     const productCounts: Record<string, { count: number; name: string }> = {};
     allOrders.forEach((order) => {
-      const items = order.orderItems;
+      const items = order.OrderItem;
       items.forEach((item: any) => {
         if (item.sku && item.sku !== 'SHIPPING') {
           if (!productCounts[item.sku]) {

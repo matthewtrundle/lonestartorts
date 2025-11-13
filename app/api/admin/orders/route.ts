@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
       prisma.order.findMany({
         where,
         include: {
-          orderItems: true,
+          OrderItem: true,
         },
         orderBy: { createdAt: 'desc' },
         take: perPage,
@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
     const orders = rawOrders.map((order) => ({
       ...order,
       customerName: order.shippingName,
-      items: order.orderItems,
+      items: order.OrderItem,
       shippingAddress: {
         line1: order.shippingAddress1,
         line2: order.shippingAddress2,

@@ -83,16 +83,76 @@ export async function POST(req: NextRequest) {
 
           // Extract shipping address
           const shippingAddr = session.shipping_details?.address;
+          const customerEmail = session.customer_details?.email || '';
+          const customerName = session.customer_details?.name || session.shipping_details?.name || 'Guest';
+          const [firstName, ...lastNameParts] = customerName.split(' ');
+          const lastName = lastNameParts.join(' ') || '';
+
+          // Try to find or create customer (for guest checkouts without Clerk)
+          let customerId: string | null = null;
+
+          if (customerEmail && !session.customer_details?.metadata?.clerkUserId) {
+            // Check if customer already exists
+            let customer = await prisma.customer.findUnique({
+              where: { email: customerEmail },
+            });
+
+            if (!customer) {
+              // Create new guest customer
+              customer = await prisma.customer.create({
+                data: {
+                  clerkUserId: `guest_${Date.now()}_${Math.random().toString(36).substring(7)}`,
+                  email: customerEmail,
+                  firstName: firstName || null,
+                  lastName: lastName || null,
+                  signupSource: 'checkout',
+                },
+              });
+              console.log('Created guest customer:', customer.id);
+            }
+
+            customerId = customer.id;
+
+            // Create or update shipping address
+            const existingAddress = await prisma.address.findFirst({
+              where: {
+                customerId: customer.id,
+                street: shippingAddr?.line1 || '',
+                zip: shippingAddr?.postal_code || '',
+              },
+            });
+
+            if (!existingAddress && shippingAddr) {
+              await prisma.address.create({
+                data: {
+                  customerId: customer.id,
+                  firstName: firstName || 'Guest',
+                  lastName: lastName || '',
+                  street: shippingAddr.line1 || '',
+                  street2: shippingAddr.line2 || null,
+                  city: shippingAddr.city || '',
+                  state: shippingAddr.state || '',
+                  zip: shippingAddr.postal_code || '',
+                  country: shippingAddr.country || 'US',
+                  phone: session.customer_details?.phone || null,
+                  isDefault: true,
+                  type: 'BOTH',
+                },
+              });
+              console.log('Created shipping address for customer:', customer.id);
+            }
+          }
 
           // Save order to Prisma database
           const order = await prisma.order.create({
             data: {
               orderNumber,
-              email: session.customer_details?.email || '',
+              email: customerEmail,
               status: 'PROCESSING',
+              customerId,
 
               // Shipping address fields
-              shippingName: session.customer_details?.name || session.shipping_details?.name || 'Guest',
+              shippingName: customerName,
               shippingAddress1: shippingAddr?.line1 || '',
               shippingAddress2: shippingAddr?.line2 || null,
               shippingCity: shippingAddr?.city || '',
@@ -111,7 +171,7 @@ export async function POST(req: NextRequest) {
               stripePaymentId: session.id || null,
 
               // Create order items
-              orderItems: {
+              OrderItem: {
                 create: items.map((item) => ({
                   sku: item.sku,
                   name: item.name,
@@ -196,13 +256,13 @@ export async function GET(req: NextRequest) {
     if (orderNumber) {
       order = await prisma.order.findUnique({
         where: { orderNumber },
-        include: { orderItems: true },
+        include: { OrderItem: true },
       });
     } else if (email) {
       // Return most recent order for email
       order = await prisma.order.findFirst({
         where: { email },
-        include: { orderItems: true },
+        include: { OrderItem: true },
         orderBy: { createdAt: 'desc' },
       });
     }
@@ -217,7 +277,7 @@ export async function GET(req: NextRequest) {
         orderNumber: order.orderNumber,
         email: order.email,
         customerName: order.shippingName,
-        items: order.orderItems,
+        items: order.OrderItem,
         subtotal: order.subtotal,
         shipping: order.shipping,
         tax: order.tax,

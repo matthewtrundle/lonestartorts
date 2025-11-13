@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
         stripePaymentId: sessionId,
       },
       include: {
-        orderItems: true,
+        OrderItem: true,
       },
       orderBy: { createdAt: 'desc' },
     });
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
         orderNumber: order.orderNumber,
         email: order.email,
         customerName: order.shippingName,
-        items: order.orderItems,
+        items: order.OrderItem,
         subtotal: order.subtotal,
         shipping: order.shipping,
         tax: order.tax,

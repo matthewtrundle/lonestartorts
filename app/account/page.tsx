@@ -20,11 +20,11 @@ export default async function AccountPage() {
   const customer = await prisma.customer.findUnique({
     where: { clerkUserId: user.id },
     include: {
-      orders: {
+      Order: {
         orderBy: { createdAt: 'desc' },
         take: 5,
       },
-      addresses: {
+      Address: {
         where: { isDefault: true },
         take: 1,
       },
@@ -79,7 +79,7 @@ export default async function AccountPage() {
                 <MapPin className="w-6 h-6 text-masa-600" />
               </div>
               <span className="text-3xl font-bold text-charcoal-950">
-                {customer?.addresses.length || 0}
+                {customer?.Address.length || 0}
               </span>
             </div>
             <h2 className="text-lg font-semibold text-charcoal-950 mb-1">
@@ -110,14 +110,14 @@ export default async function AccountPage() {
         </div>
 
         {/* Recent Orders */}
-        {customer && customer.orders.length > 0 && (
+        {customer && customer.Order.length > 0 && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold text-charcoal-950 mb-6">
               Recent Orders
             </h2>
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <div className="divide-y divide-charcoal-200">
-                {customer.orders.map((order) => (
+                {customer.Order.map((order) => (
                   <Link
                     key={order.id}
                     href={`/account/orders/${order.orderNumber}`}
