@@ -5,15 +5,15 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'BBQ Success Stories: How H-E-B® Tortillas Transformed Texas Restaurants',
-  description: 'Real stories from Texas BBQ joints and restaurants that elevated their business with authentic H-E-B® tortillas. Learn how the right tortillas can transform your food business.',
-  keywords: 'BBQ restaurant success, H-E-B tortillas restaurant, Texas BBQ business, restaurant growth stories, authentic tortillas restaurant supply',
+  title: 'BBQ Success Stories: How H-E-B® Tortillas Transform Restaurants Nationwide',
+  description: 'Real stories from BBQ joints and restaurants that elevated their business with authentic H-E-B® tortillas. Learn how the right tortillas can transform your food business.',
+  keywords: 'BBQ restaurant success, H-E-B tortillas restaurant, BBQ business growth, restaurant growth stories, authentic tortillas restaurant supply',
   alternates: {
     canonical: 'https://lonestartortillas.com/blog/bbq-success-stories',
   },
   openGraph: {
-    title: 'BBQ Success Stories: How H-E-B® Tortillas Transformed Texas Restaurants',
-    description: 'Real stories from Texas restaurants that transformed their business with authentic H-E-B® tortillas.',
+    title: 'BBQ Success Stories: How H-E-B® Tortillas Transform Restaurants Nationwide',
+    description: 'Real stories from restaurants nationwide that transformed their business with authentic H-E-B® tortillas.',
     type: 'article',
   },
 };
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'BBQ Success Stories: How H-E-B® Tortillas Transformed Texas Restaurants',
-  description: 'Real stories from Texas BBQ joints and restaurants that elevated their business with authentic H-E-B® tortillas.',
+  headline: 'BBQ Success Stories: How H-E-B® Tortillas Transform Restaurants Nationwide',
+  description: 'Real stories from BBQ joints and restaurants nationwide that elevated their business with authentic H-E-B® tortillas.',
   author: {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
@@ -55,7 +55,7 @@ export default function BBQSuccessStoriesPage() {
               <span>12 min read</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mt-2">From Good to Great: BBQ Restaurants Transformed by H-E-B® Tortillas</h1>
-            <p className="text-cream-300 mt-4 text-lg">Real success stories from Texas food businesses that elevated their BBQ game with authentic tortillas</p>
+            <p className="text-cream-300 mt-4 text-lg">Real success stories from food businesses nationwide that elevated their BBQ game with authentic tortillas</p>
           </div>
         </header>
 
@@ -82,10 +82,10 @@ export default function BBQSuccessStoriesPage() {
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4">The Tortilla That Changed Everything</h2>
               <div className="text-charcoal-800 space-y-4">
                 <p>
-                  In the competitive world of Texas BBQ, every detail matters. You can have the best brisket in town, but if you&apos;re serving it on subpar tortillas, you&apos;re leaving money—and reputation—on the table.
+                  In the competitive world of BBQ, every detail matters. You can have the best brisket in town, but if you&apos;re serving it on subpar tortillas, you&apos;re leaving money—and reputation—on the table.
                 </p>
                 <p>
-                  We&apos;ve talked to dozens of BBQ restaurant owners, food truck operators, and catering businesses across Texas. They all have one thing in common: switching to authentic{' '}
+                  We&apos;ve talked to dozens of BBQ restaurant owners, food truck operators, and catering businesses nationwide. They all have one thing in common: switching to authentic{' '}
                   <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
                     H-E-B® tortillas
                   </Link>
@@ -576,7 +576,7 @@ export default function BBQSuccessStoriesPage() {
               <div className="bg-charcoal-950 text-cream-50 p-8 rounded-lg">
                 <h3 className="text-2xl font-bold mb-4">Ready to Transform Your BBQ Business?</h3>
                 <p className="text-cream-200 mb-6">
-                  Get authentic H-E-B® tortillas delivered to your restaurant. Join the growing number of Texas BBQ businesses that refuse to compromise on quality.
+                  Get authentic H-E-B® tortillas delivered to your restaurant. Join the growing number of BBQ businesses that refuse to compromise on quality.
                 </p>
                 <div className="flex gap-4">
                   <Link

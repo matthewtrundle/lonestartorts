@@ -123,7 +123,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
               Restaurant-Grade H-E-B Tortillas
             </h2>
             <p className="text-lg text-charcoal-800 max-w-2xl mx-auto">
-              Choose from our premium selection. Free shipping on 4+ packs.
+              Choose from our premium selection with Smart Shipping nationwide.
             </p>
           </div>
 

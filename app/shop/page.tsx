@@ -68,11 +68,6 @@ export default function ShopPage() {
             <div className="max-w-4xl mx-auto mb-6">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
-                  <Truck className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">Free Shipping</p>
-                  <p className="text-xs text-gray-600">orders 3+ packs</p>
-                </div>
-                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
                   <Clock className="w-6 h-6 text-sunset-600" />
                   <p className="text-sm font-semibold text-charcoal-950">Same-Day Ship</p>
                   <p className="text-xs text-gray-600">before 2pm CT</p>
@@ -83,9 +78,9 @@ export default function ShopPage() {
                   <p className="text-xs text-gray-600">encrypted</p>
                 </div>
                 <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
-                  <Star className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">4.8/5 Stars</p>
-                  <p className="text-xs text-gray-600">500+ reviews</p>
+                  <Truck className="w-6 h-6 text-sunset-600" />
+                  <p className="text-sm font-semibold text-charcoal-950">Smart Shipping</p>
+                  <p className="text-xs text-gray-600">nationwide delivery</p>
                 </div>
               </div>
             </div>
