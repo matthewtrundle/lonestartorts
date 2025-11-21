@@ -85,7 +85,7 @@ export default function ChampionshipBBQTacosPage() {
             </div>
 
             <p className="text-charcoal-800 leading-relaxed mb-4">
-              When you're competing for a grand championship in Texas BBQ—where the prize money can exceed $50,000 and the bragging rights last a lifetime—every single detail matters. Your brisket might be perfect. Your rub might be championship-caliber. But if your tortilla tears, gets soggy, or looks unprofessional on the judges' tray? You just lost.
+              When you're competing for a grand championship in BBQ—where the prize money can exceed $50,000 and the bragging rights last a lifetime—every single detail matters. Your brisket might be perfect. Your rub might be championship-caliber. But if your tortilla tears, gets soggy, or looks unprofessional on the judges' tray? You just lost.
             </p>
 
             <p className="text-charcoal-800 leading-relaxed mb-4">

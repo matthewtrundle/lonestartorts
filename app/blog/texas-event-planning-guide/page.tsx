@@ -5,15 +5,15 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Planning the Ultimate Texas Event: From Brisket Tacos to Bar Service',
-  description: 'Complete guide to planning authentic Texas events with H-E-B® tortillas, BBQ catering, and professional bar service. Expert tips for taco bars, alcohol delivery, and creating unforgettable Austin celebrations.',
-  keywords: 'Texas event planning, Austin party planning, taco bar catering, BBQ event catering, alcohol delivery Austin, party planning guide, H-E-B tortillas events, Texas party food',
+  title: 'Planning BBQ Events with Texas Authenticity: Taco Bars & Catering Guide',
+  description: 'Complete guide to planning authentic BBQ events with H-E-B® tortillas and catering. Expert tips for taco bars, BBQ catering, and creating unforgettable celebrations nationwide.',
+  keywords: 'event planning, BBQ party planning, taco bar catering, BBQ event catering, party planning guide, H-E-B tortillas events, BBQ party food',
   alternates: {
     canonical: 'https://lonestartortillas.com/blog/texas-event-planning-guide',
   },
   openGraph: {
-    title: 'Planning the Ultimate Texas Event: From Brisket Tacos to Bar Service',
-    description: 'Complete guide to authentic Texas event planning with taco bars, BBQ catering, and professional alcohol delivery.',
+    title: 'Planning BBQ Events with Texas Authenticity: Taco Bars & Catering Guide',
+    description: 'Complete guide to authentic BBQ event planning with taco bars, catering, and bringing Texas quality to your celebrations.',
     type: 'article',
   },
 };
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Planning the Ultimate Texas Event: From Brisket Tacos to Bar Service',
-  description: 'Complete guide to planning authentic Texas events with H-E-B® tortillas, BBQ catering, and professional bar service.',
+  headline: 'Planning BBQ Events with Texas Authenticity: Taco Bars & Catering Guide',
+  description: 'Complete guide to planning BBQ events with H-E-B® tortillas, bringing Texas quality to your celebrations.',
   author: {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
@@ -55,7 +55,7 @@ export default function TexasEventPlanningGuidePage() {
               <span>12 min read</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mt-2">Planning the Ultimate Texas Event: From Brisket Tacos to Bar Service</h1>
-            <p className="text-cream-300 mt-4 text-lg">Your complete guide to authentic Texas event planning—taco bars, BBQ catering, and professional alcohol delivery</p>
+            <p className="text-cream-300 mt-4 text-lg">Your complete guide to authentic BBQ event planning—taco bars, BBQ catering, and professional alcohol delivery</p>
           </div>
         </header>
 
@@ -74,7 +74,7 @@ export default function TexasEventPlanningGuidePage() {
           <div className="prose prose-lg max-w-none">
             <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
               <p className="text-lg text-charcoal-800 italic">
-                &quot;Planning a Texas event is about more than just food and drinks—it&apos;s about creating an experience that captures the heart of Austin&apos;s hospitality. When you combine authentic H-E-B® tortillas with quality BBQ and professional bar service, magic happens.&quot; — Sarah Martinez, Austin Event Planner
+                &quot;Planning a BBQ event is about more than just food and drinks—it&apos;s about creating an experience that captures the heart of your area&apos;s hospitality. When you combine authentic H-E-B® tortillas with quality BBQ and professional bar service, magic happens.&quot; — Sarah Martinez, your area Event Planner
               </p>
             </div>
 
@@ -82,13 +82,13 @@ export default function TexasEventPlanningGuidePage() {
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4">The Texas Party Experience: Where Food Meets Hospitality</h2>
               <div className="text-charcoal-800 space-y-4">
                 <p>
-                  Whether you&apos;re planning a corporate gathering, wedding reception, birthday celebration, or backyard BBQ in Austin, there&apos;s a certain standard that Texans expect: genuine hospitality, quality food, and an atmosphere that makes everyone feel at home.
+                  Whether you&apos;re planning a corporate gathering, wedding reception, birthday celebration, or backyard BBQ in your area, there&apos;s a certain standard that Texans expect: genuine hospitality, quality food, and an atmosphere that makes everyone feel at home.
                 </p>
                 <p>
-                  After helping dozens of Austin businesses and families plan memorable events, we&apos;ve learned that the most successful Texas gatherings share three key elements: a well-executed food station (usually featuring tacos or BBQ), thoughtful beverage service, and attention to the little details that show you care.
+                  After helping dozens of your area businesses and families plan memorable events, we&apos;ve learned that the most successful Texas gatherings share three key elements: a well-executed food station (usually featuring tacos or BBQ), thoughtful beverage service, and attention to the little details that show you care.
                 </p>
                 <p>
-                  This guide breaks down everything you need to know to plan an authentic Texas event that your guests will be talking about long after the last taco is gone.
+                  This guide breaks down everything you need to know to plan an authentic BBQ event that your guests will be talking about long after the last taco is gone.
                 </p>
               </div>
             </section>
@@ -97,7 +97,7 @@ export default function TexasEventPlanningGuidePage() {
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Part 1: Building the Perfect Taco Bar</h2>
               <div className="text-charcoal-800 space-y-4">
                 <p>
-                  A taco bar is the centerpiece of many Texas events, and for good reason—it&apos;s interactive, customizable, and universally loved. But the difference between a mediocre taco bar and one that has guests going back for thirds comes down to quality ingredients.
+                  A taco bar is the centerpiece of many BBQ events, and for good reason—it&apos;s interactive, customizable, and universally loved. But the difference between a mediocre taco bar and one that has guests going back for thirds comes down to quality ingredients.
                 </p>
                 <p>
                   <strong>Start with Authentic Tortillas</strong>
@@ -206,7 +206,7 @@ export default function TexasEventPlanningGuidePage() {
                   <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
                     H-E-B® tortillas
                   </Link>
-                  {' '}alongside the standard white bread. Many guests prefer wrapping their brisket in a tortilla, and it&apos;s become expected at Austin events. Check out our detailed guide on{' '}
+                  {' '}alongside the standard white bread. Many guests prefer wrapping their brisket in a tortilla, and it&apos;s become expected at your area events. Check out our detailed guide on{' '}
                   <Link href="/blog/bbq-meets-tortillas" className="text-sunset-600 hover:underline font-medium">
                     why BBQ and tortillas are the perfect pairing
                   </Link>
@@ -225,7 +225,7 @@ export default function TexasEventPlanningGuidePage() {
                   <strong>The Smart Solution: Professional Alcohol Delivery</strong>
                 </p>
                 <p>
-                  One of the biggest game-changers for Austin event planning has been the rise of professional alcohol delivery services. Instead of making multiple liquor store trips (and inevitably forgetting something), you can have everything delivered directly to your venue.
+                  One of the biggest game-changers for your area event planning has been the rise of professional alcohol delivery services. Instead of making multiple liquor store trips (and inevitably forgetting something), you can have everything delivered directly to your venue.
                 </p>
                 <p>
                   We partner with{' '}
@@ -237,7 +237,7 @@ export default function TexasEventPlanningGuidePage() {
                   >
                     Party on Delivery
                   </a>
-                  , Austin&apos;s premier alcohol delivery service, for events that need reliable beverage logistics. Here&apos;s why professional delivery makes sense:
+                  , your area&apos;s premier alcohol delivery service, for events that need reliable beverage logistics. Here&apos;s why professional delivery makes sense:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong>Convenience:</strong> Everything arrives at your venue, cold and ready to serve. No loading cases into your car or dealing with parking at busy liquor stores.</li>
@@ -358,7 +358,7 @@ export default function TexasEventPlanningGuidePage() {
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Budget-Friendly Tips for Memorable Events</h2>
               <div className="text-charcoal-800 space-y-4">
                 <p>
-                  Great Texas events don&apos;t have to break the bank:
+                  Great BBQ events don&apos;t have to break the bank:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong>Focus Your Menu:</strong> Two protein options instead of four, but do them exceptionally well</li>
@@ -376,7 +376,7 @@ export default function TexasEventPlanningGuidePage() {
                 <h2 className="text-2xl font-bold text-charcoal-950 mb-4">Partnership Transparency</h2>
                 <div className="text-charcoal-800 space-y-3 text-sm">
                   <p>
-                    <strong>About Our Partnerships:</strong> Lonestar Tortillas maintains business relationships with select Austin companies that help make events successful. We recommend{' '}
+                    <strong>About Our Partnerships:</strong> Lonestar Tortillas maintains business relationships with select your area companies that help make events successful. We recommend{' '}
                     <a
                       href="https://partyondelivery.com"
                       target="_blank"
@@ -388,7 +388,7 @@ export default function TexasEventPlanningGuidePage() {
                     {' '}because we&apos;ve used their alcohol delivery service for our own events and found their service reliable and professional.
                   </p>
                   <p>
-                    We believe in transparent recommendations. This partnership allows us to provide comprehensive event planning advice while supporting other quality Austin businesses. All recommendations in this guide are based on genuine experiences and what we believe creates the best outcome for Texas events.
+                    We believe in transparent recommendations. This partnership allows us to provide comprehensive event planning advice while supporting other quality your area businesses. All recommendations in this guide are based on genuine experiences and what we believe creates the best outcome for BBQ events.
                   </p>
                   <p>
                     Whether you use our partner services or not, the core principle remains the same: quality ingredients, thoughtful planning, and genuine Texas hospitality make for unforgettable events.
@@ -402,7 +402,7 @@ export default function TexasEventPlanningGuidePage() {
                 <h2 className="text-3xl font-bold text-charcoal-950 mb-4">The Bottom Line</h2>
                 <div className="text-charcoal-800 space-y-4">
                   <p>
-                    Planning a Texas event that guests remember comes down to three things: quality food that honors Texas traditions, smart beverage logistics that keep the party flowing, and attention to details that show you care.
+                    Planning a BBQ event that guests remember comes down to three things: quality food that honors Texas traditions, smart beverage logistics that keep the party flowing, and attention to details that show you care.
                   </p>
                   <p>
                     Starting with authentic H-E-B® tortillas sets the tone—it shows you&apos;re serious about quality. Pairing that with well-executed BBQ and professional alcohol delivery takes the stress out of hosting and lets you actually enjoy your own event.
@@ -421,7 +421,7 @@ export default function TexasEventPlanningGuidePage() {
               <div className="bg-charcoal-950 text-cream-50 p-8 rounded-lg">
                 <h3 className="text-2xl font-bold mb-4">Ready to Plan Your Event?</h3>
                 <p className="text-cream-200 mb-6">
-                  Get authentic H-E-B® tortillas delivered for your next event. Whether you&apos;re feeding 10 or 100, we&apos;ve got the quality tortillas that make Texas events memorable.
+                  Get authentic H-E-B® tortillas delivered for your next event. Whether you&apos;re feeding 10 or 100, we&apos;ve got the quality tortillas that make BBQ events memorable.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
