@@ -15,49 +15,76 @@ export const metadata: Metadata = {
 
 const cities = [
   {
-    name: 'New York City',
-    slug: 'new-york',
-    state: 'New York',
-    description: 'Manhattan, Brooklyn, Queens, Bronx, Staten Island',
-    deliveryTime: '2-3 days',
-    highlight: 'All 5 boroughs',
-    icon: '🗽',
-  },
-  {
     name: 'Los Angeles',
-    slug: 'los-angeles',
+    slug: 'california/los-angeles',
     state: 'California',
     description: 'LA County, Orange County, Inland Empire',
     deliveryTime: '2-3 days',
     highlight: 'SoCal coverage',
-    icon: '🌴',
   },
   {
-    name: 'Chicago',
-    slug: 'chicago',
-    state: 'Illinois',
-    description: 'City of Chicago and Chicagoland suburbs',
+    name: 'San Diego',
+    slug: 'california/san-diego',
+    state: 'California',
+    description: 'San Diego County and surrounding areas',
     deliveryTime: '2-3 days',
-    highlight: 'Midwest hub',
-    icon: '🌆',
+    highlight: 'Border region',
   },
   {
-    name: 'Seattle',
-    slug: 'seattle',
-    state: 'Washington',
-    description: 'Seattle metro, Tacoma, Bellevue, Eastside',
-    deliveryTime: '3-4 days',
-    highlight: 'Pacific Northwest',
-    icon: '🌲',
+    name: 'San Francisco',
+    slug: 'california/san-francisco',
+    state: 'California',
+    description: 'SF Bay Area, Oakland, San Jose',
+    deliveryTime: '2-3 days',
+    highlight: 'Bay Area',
+  },
+  {
+    name: 'Phoenix',
+    slug: 'arizona/phoenix',
+    state: 'Arizona',
+    description: 'Phoenix metro, Scottsdale, Mesa, Tempe',
+    deliveryTime: '2-3 days',
+    highlight: 'Desert Southwest',
   },
   {
     name: 'Denver',
-    slug: 'denver',
+    slug: 'colorado/denver',
     state: 'Colorado',
     description: 'Denver metro, Boulder, Colorado Springs area',
     deliveryTime: '2-3 days',
     highlight: 'Mountain West',
-    icon: '🏔️',
+  },
+  {
+    name: 'Las Vegas',
+    slug: 'nevada/las-vegas',
+    state: 'Nevada',
+    description: 'Las Vegas Valley, Henderson, North Las Vegas',
+    deliveryTime: '2-3 days',
+    highlight: 'Nevada hub',
+  },
+  {
+    name: 'Seattle',
+    slug: 'washington/seattle',
+    state: 'Washington',
+    description: 'Seattle metro, Tacoma, Bellevue, Eastside',
+    deliveryTime: '3-4 days',
+    highlight: 'Pacific Northwest',
+  },
+  {
+    name: 'Chicago',
+    slug: 'illinois/chicago',
+    state: 'Illinois',
+    description: 'City of Chicago and Chicagoland suburbs',
+    deliveryTime: '2-3 days',
+    highlight: 'Midwest hub',
+  },
+  {
+    name: 'New York City',
+    slug: 'new-york/new-york-city',
+    state: 'New York',
+    description: 'Manhattan, Brooklyn, Queens, Bronx, Staten Island',
+    deliveryTime: '2-3 days',
+    highlight: 'All 5 boroughs',
   },
 ];
 
@@ -133,10 +160,10 @@ export default function LocationsPage() {
               {cities.map((city) => (
                 <Link
                   key={city.slug}
-                  href={`/${city.slug}`}
+                  href={`/locations/${city.slug}`}
                   className="group block bg-white rounded-xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-sunset-400"
                 >
-                  <div className="text-5xl mb-4">{city.icon}</div>
+                  <div className="text-sm text-sunset-600 font-semibold mb-2">{city.state}</div>
                   <h3 className="text-2xl font-bold text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
                     {city.name} →
                   </h3>

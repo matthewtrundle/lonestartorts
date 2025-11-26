@@ -147,6 +147,66 @@ const guides = [
       </svg>
     ),
   },
+  {
+    title: 'Best Tortillas for Street Tacos',
+    description: 'Discover the perfect tortillas for street tacos. Learn why small corn tortillas are essential for authentic taqueria-style tacos, plus warming tips.',
+    href: '/guides/street-tacos-tortillas',
+    readTime: '6 min read',
+    category: 'Choosing',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Sonoran Style Tortillas',
+    description: 'Learn what makes Sonoran style flour tortillas unique. The thin, stretchy texture, lard-based recipe, and cooking techniques from Northern Mexico.',
+    href: '/guides/sonoran-style-tortillas',
+    readTime: '7 min read',
+    category: 'Regional',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Blue Corn Tortillas Guide',
+    description: 'Learn about blue corn tortillas - their unique nutrition benefits, earthy flavor, and best uses. Why blue corn tortillas are gaining popularity.',
+    href: '/guides/blue-corn-tortillas',
+    readTime: '6 min read',
+    category: 'Nutrition',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Tortilla Ingredients Guide',
+    description: 'Learn what ingredients make authentic corn and flour tortillas. Understand masa, nixtamalization, lard vs oil, and quality ingredient standards.',
+    href: '/guides/tortilla-ingredients',
+    readTime: '7 min read',
+    category: 'Education',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Best Tortillas for Burritos',
+    description: 'Find the best tortillas for burritos. Learn about sizes, flour vs corn, and techniques for perfect burrito rolling every time.',
+    href: '/guides/best-tortillas-for-burritos',
+    readTime: '6 min read',
+    category: 'Choosing',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+      </svg>
+    ),
+  },
 ];
 
 const collectionSchema = {
