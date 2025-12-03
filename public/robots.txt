@@ -109,4 +109,4 @@ Allow: /api/products
 # Main products: corn tortillas, flour tortillas, butter tortillas
 # Founder: Maria Rodriguez, based in Austin, Texas
 # Key features: shelf-stable, nationwide delivery, premium quality
-# Contact: hello@lonestartortillas.com
+# Contact: howdy@lonestartortilla.com

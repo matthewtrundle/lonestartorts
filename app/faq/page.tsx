@@ -269,7 +269,7 @@ const faqs = [
       },
       {
         q: 'Do you offer bulk or wholesale pricing?',
-        a: 'For bulk orders or wholesale inquiries, please contact us at hello@lonestartortilla.com. We\'re happy to discuss volume pricing for restaurants, food trucks, or large families who go through tortillas quickly!'
+        a: 'For bulk orders or wholesale inquiries, please contact us at howdy@lonestartortilla.com. We\'re happy to discuss volume pricing for restaurants, food trucks, or large families who go through tortillas quickly!'
       }
     ]
   },
@@ -282,11 +282,11 @@ const faqs = [
       },
       {
         q: 'What is your return policy?',
-        a: 'Your satisfaction is our top priority! If you\'re not completely satisfied with your tortillas, contact us within 7 days of delivery at hello@lonestartortilla.com. We offer full refunds or replacements for any damaged, defective, or unsatisfactory products. We want you to love your authentic Texas tortillas!'
+        a: 'Your satisfaction is our top priority! If you\'re not completely satisfied with your tortillas, contact us within 7 days of delivery at howdy@lonestartortilla.com. We offer full refunds or replacements for any damaged, defective, or unsatisfactory products. We want you to love your authentic Texas tortillas!'
       },
       {
         q: 'What if my order arrives damaged?',
-        a: 'While we package carefully, shipping damage can occasionally happen. If your tortillas arrive damaged, please contact us immediately at hello@lonestartortilla.com with photos of the damage. We\'ll send a replacement order right away at no additional cost, or provide a full refund if you prefer.'
+        a: 'While we package carefully, shipping damage can occasionally happen. If your tortillas arrive damaged, please contact us immediately at howdy@lonestartortilla.com with photos of the damage. We\'ll send a replacement order right away at no additional cost, or provide a full refund if you prefer.'
       }
     ]
   },
@@ -457,16 +457,10 @@ export default function FAQPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="mailto:hello@lonestartortilla.com"
+                  href="mailto:howdy@lonestartortilla.com"
                   className="inline-block bg-cream-50 text-sunset-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors shadow-lg"
                 >
                   Email Us
-                </a>
-                <a
-                  href="tel:1-800-TORTILLA"
-                  className="inline-block bg-charcoal-950 text-cream-50 px-8 py-4 rounded-full font-bold text-lg hover:bg-charcoal-900 transition-colors shadow-lg"
-                >
-                  Call 1-800-TORTILLA
                 </a>
               </div>
             </div>

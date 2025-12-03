@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { calculateShipping, getProductBySku } from '@/lib/products';
-import { sendOrderConfirmationEmail } from '@/lib/email';
+import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
 import { randomUUID } from 'crypto';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -194,28 +194,39 @@ export async function POST(req: NextRequest) {
 
           console.log('Order saved to database:', order.id, order.orderNumber);
 
-          // Send order confirmation email
+          // Send order confirmation email to customer
+          const emailData = {
+            to: order.email,
+            orderNumber: order.orderNumber,
+            customerName: order.shippingName || 'Guest',
+            items: items,
+            subtotal: order.subtotal,
+            shipping: order.shipping,
+            tax: order.tax,
+            total: order.total,
+            shippingAddress: {
+              street: order.shippingAddress1 || undefined,
+              city: order.shippingCity || undefined,
+              state: order.shippingState || undefined,
+              zip: order.shippingZip || undefined,
+              country: order.shippingCountry || undefined,
+            },
+          };
+
           try {
-            await sendOrderConfirmationEmail({
-              to: order.email,
-              orderNumber: order.orderNumber,
-              customerName: order.shippingName || 'Guest',
-              items: items,
-              subtotal: order.subtotal,
-              shipping: order.shipping,
-              tax: order.tax,
-              total: order.total,
-              shippingAddress: {
-                street: order.shippingAddress1 || undefined,
-                city: order.shippingCity || undefined,
-                state: order.shippingState || undefined,
-                zip: order.shippingZip || undefined,
-                country: order.shippingCountry || undefined,
-              },
-            });
+            await sendOrderConfirmationEmail(emailData);
             console.log('Order confirmation email sent:', order.orderNumber);
           } catch (emailError) {
             console.error('Failed to send confirmation email:', emailError);
+            // Don't fail the webhook - log for manual follow-up
+          }
+
+          // Send admin notification email
+          try {
+            await sendAdminOrderNotification(emailData);
+            console.log('Admin notification email sent:', order.orderNumber);
+          } catch (adminEmailError) {
+            console.error('Failed to send admin notification:', adminEmailError);
             // Don't fail the webhook - log for manual follow-up
           }
 

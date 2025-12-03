@@ -10,6 +10,7 @@ import { BackgroundMusic } from '@/components/BackgroundMusic'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { Header } from '@/components/layout/Header'
 import { HeroInteractions } from '@/components/HeroInteractions'
+import { ContactForm } from '@/components/ContactForm'
 
 export default function Home() {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -1150,17 +1151,28 @@ export default function Home() {
           <div className="absolute inset-0 noise-subtle opacity-20" />
 
           <div className="container mx-auto px-8 relative z-10">
-            <div className="grid md:grid-cols-5 gap-8 mb-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
               {/* Logo and Description */}
-              <div className="md:col-span-2">
+              <div>
                 <LogoFull className="text-cream-50 mb-6" />
                 <p className="text-cream-300 leading-relaxed mb-4">
                   Your trusted independent source for genuine H-E-B® tortillas, delivered nationwide.
                 </p>
                 <div className="space-y-2 text-cream-400 text-sm">
-                  <p>hello@lonestartortilla.com</p>
-                  <p>1-800-TORTILLA</p>
+                  <p>howdy@lonestartortilla.com</p>
                   <p>Austin, Texas</p>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Quick Links</h4>
+                <div className="space-y-2">
+                  <Link href="/shop" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Shop All Products</Link>
+                  <Link href="/guides" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Guides & Tips</Link>
+                  <Link href="/recipes" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Recipes</Link>
+                  <Link href="/faq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">FAQ</Link>
+                  <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
                 </div>
               </div>
 
@@ -1175,49 +1187,16 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Guides */}
+              {/* Contact Form */}
               <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Guides & Tips</h4>
-                <div className="space-y-2">
-                  <Link href="/guides" className="block text-cream-300 hover:text-sunset-400 transition-colors text-sm font-semibold">All Guides →</Link>
-                  <Link href="/guides/how-to-store-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">How to Store</Link>
-                  <Link href="/guides/how-to-reheat-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">How to Reheat</Link>
-                  <Link href="/guides/corn-vs-flour-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Corn vs Flour</Link>
-                </div>
-              </div>
-
-              {/* Recipes & More */}
-              <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Recipes & More</h4>
-                <div className="space-y-2">
-                  <Link href="/recipes" className="block text-cream-300 hover:text-sunset-400 transition-colors text-sm font-semibold">All Recipes →</Link>
-                  <Link href="/recipes/breakfast-tacos" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Breakfast Tacos</Link>
-                  <Link href="/faq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">FAQ</Link>
-                  <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
-                </div>
-              </div>
-
-              {/* Cities & About */}
-              <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Locations & More</h4>
-                <div className="space-y-2 mb-4">
-                  <Link href="/new-york" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">New York</Link>
-                  <Link href="/los-angeles" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Los Angeles</Link>
-                  <Link href="/chicago" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Chicago</Link>
-                  <Link href="/denver" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Denver</Link>
-                  <Link href="/seattle" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Seattle</Link>
-                </div>
-                <div className="space-y-2 pt-4 border-t border-cream-700/20">
-                  <Link href="/shop" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Shop</Link>
-                  <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Source</Link>
-                  <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
-                </div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Contact Us</h4>
+                <ContactForm />
               </div>
             </div>
 
             {/* Bottom Bar */}
             <div className="border-t border-masa-800/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-cream-500">© 2024 Lonestar Tortillas. All rights reserved.</p>
+              <p className="text-sm text-cream-500">© 2025 Lonestar Tortillas. All rights reserved.</p>
               <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
                 Independent reseller • Not affiliated with or endorsed by H-E-B®
               </p>

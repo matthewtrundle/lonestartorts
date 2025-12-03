@@ -1,6 +1,9 @@
 import { Resend } from 'resend';
 import { generateOrderConfirmationEmail, generateOrderShippedEmail } from './email-templates';
 
+// Admin email for order notifications
+const ADMIN_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL || 'howdy@lonestartortilla.com';
+
 // Lazy-load Resend client to avoid build-time initialization
 let resendClient: Resend | null = null;
 
@@ -416,6 +419,295 @@ export async function sendOrderShippedEmail(props: OrderShippedEmailProps) {
     return { success: true, data };
   } catch (error) {
     console.error('Error sending order shipped email:', error);
+    return { success: false, error };
+  }
+}
+
+/**
+ * Send admin notification when a new order is placed
+ */
+export async function sendAdminOrderNotification(props: OrderConfirmationEmailProps) {
+  const {
+    to: customerEmail,
+    orderNumber,
+    customerName,
+    items,
+    subtotal,
+    shipping,
+    tax,
+    total,
+    shippingAddress,
+  } = props;
+
+  try {
+    const itemsList = items.map(item =>
+      `• ${item.name} x${item.quantity} - $${((item.price * item.quantity) / 100).toFixed(2)}`
+    ).join('\n');
+
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Order - ${orderNumber}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #22c55e; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">🎉 New Order Received!</h1>
+            </td>
+          </tr>
+
+          <!-- Order Details -->
+          <tr>
+            <td style="padding: 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding-bottom: 24px;">
+                    <h2 style="margin: 0 0 8px 0; font-size: 20px; color: #1c1917;">Order #${orderNumber}</h2>
+                    <p style="margin: 0; font-size: 14px; color: #78716c;">${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}</p>
+                  </td>
+                </tr>
+
+                <!-- Customer Info -->
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px; margin-bottom: 16px;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #1c1917; text-transform: uppercase; letter-spacing: 0.5px;">Customer</h3>
+                    <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #1c1917;">${customerName}</p>
+                    <p style="margin: 0; font-size: 14px; color: #57534e;">${customerEmail}</p>
+                  </td>
+                </tr>
+
+                <!-- Shipping Address -->
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px; margin: 16px 0;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #1c1917; text-transform: uppercase; letter-spacing: 0.5px;">Ship To</h3>
+                    <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.6;">
+                      ${customerName}<br>
+                      ${shippingAddress.street || shippingAddress.address1 || ''}<br>
+                      ${shippingAddress.address2 ? shippingAddress.address2 + '<br>' : ''}
+                      ${shippingAddress.city || ''}, ${shippingAddress.state || ''} ${shippingAddress.zip || ''}<br>
+                      ${shippingAddress.country || 'US'}
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- Items -->
+                <tr>
+                  <td style="padding-top: 24px;">
+                    <h3 style="margin: 0 0 16px 0; font-size: 14px; font-weight: 600; color: #1c1917; text-transform: uppercase; letter-spacing: 0.5px;">Items Ordered</h3>
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      ${items.map((item, index) => `
+                      <tr>
+                        <td style="padding: 12px 0; ${index < items.length - 1 ? 'border-bottom: 1px solid #e7e5e4;' : ''}">
+                          <span style="font-size: 14px; color: #1c1917; font-weight: 500;">${item.name}</span>
+                          <span style="font-size: 14px; color: #78716c;"> × ${item.quantity}</span>
+                        </td>
+                        <td style="padding: 12px 0; text-align: right; ${index < items.length - 1 ? 'border-bottom: 1px solid #e7e5e4;' : ''}">
+                          <span style="font-size: 14px; font-weight: 600; color: #1c1917;">$${((item.price * item.quantity) / 100).toFixed(2)}</span>
+                        </td>
+                      </tr>
+                      `).join('')}
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Totals -->
+                <tr>
+                  <td style="padding-top: 16px; border-top: 2px solid #e7e5e4; margin-top: 16px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 14px; color: #78716c;">Subtotal</td>
+                        <td style="padding: 8px 0; text-align: right; font-size: 14px; color: #1c1917;">$${(subtotal / 100).toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 14px; color: #78716c;">Shipping</td>
+                        <td style="padding: 8px 0; text-align: right; font-size: 14px; color: #1c1917;">$${(shipping / 100).toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 14px; color: #78716c;">Tax</td>
+                        <td style="padding: 8px 0; text-align: right; font-size: 14px; color: #1c1917;">$${(tax / 100).toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 16px 0 0 0; font-size: 18px; font-weight: 700; color: #1c1917;">Total</td>
+                        <td style="padding: 16px 0 0 0; text-align: right; font-size: 24px; font-weight: 700; color: #22c55e;">$${(total / 100).toFixed(2)}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Action Button -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://lonestartortillas.com'}/admin/orders"
+                 style="display: block; text-align: center; background-color: #1c1917; color: #ffffff; padding: 16px 24px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+                View Order in Admin
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #fafaf9; text-align: center; border-top: 1px solid #e7e5e4;">
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Lonestar Tortillas Order Notification
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `;
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: ADMIN_EMAIL,
+      subject: `💰 New Order #${orderNumber} - $${(total / 100).toFixed(2)} from ${customerName}`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send admin notification email:', error);
+      return { success: false, error };
+    }
+
+    console.log('Admin notification email sent:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending admin notification email:', error);
+    return { success: false, error };
+  }
+}
+
+/**
+ * Send contact form submission to admin
+ */
+export async function sendContactFormEmail(props: {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}) {
+  const { name, email, subject, message } = props;
+
+  try {
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form Submission</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #d97706; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">📬 New Contact Form Submission</h1>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding: 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+
+                <!-- From -->
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px; margin-bottom: 16px;">
+                    <h3 style="margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">From</h3>
+                    <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #1c1917;">${name}</p>
+                    <p style="margin: 0; font-size: 14px; color: #57534e;">
+                      <a href="mailto:${email}" style="color: #d97706; text-decoration: none;">${email}</a>
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- Subject -->
+                <tr>
+                  <td style="padding: 16px 0;">
+                    <h3 style="margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Subject</h3>
+                    <p style="margin: 0; font-size: 16px; font-weight: 500; color: #1c1917;">${subject}</p>
+                  </td>
+                </tr>
+
+                <!-- Message -->
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px; border-left: 4px solid #d97706;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Message</h3>
+                    <p style="margin: 0; font-size: 14px; color: #1c1917; line-height: 1.6; white-space: pre-wrap;">${message}</p>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- Reply Button -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <a href="mailto:${email}?subject=Re: ${encodeURIComponent(subject)}"
+                 style="display: block; text-align: center; background-color: #1c1917; color: #ffffff; padding: 16px 24px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+                Reply to ${name}
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #fafaf9; text-align: center; border-top: 1px solid #e7e5e4;">
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Lonestar Tortillas Contact Form
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `;
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: ADMIN_EMAIL,
+      replyTo: email,
+      subject: `Contact Form: ${subject} - from ${name}`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send contact form email:', error);
+      return { success: false, error };
+    }
+
+    console.log('Contact form email sent:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending contact form email:', error);
     return { success: false, error };
   }
 }
