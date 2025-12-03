@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'California BBQ Revolution: How H-E-B® Tortillas Won Over the Golden State',
+  title: 'California BBQ Revolution with Texas Tortillas',
   description: 'From Oakland to San Diego, California BBQ restaurants are discovering that authentic Texas tortillas are the secret ingredient their fusion tacos have been missing.',
   keywords: 'California BBQ, Los Angeles BBQ, San Francisco BBQ, Oakland BBQ, San Diego BBQ, H-E-B tortillas California, California restaurant success',
   alternates: {

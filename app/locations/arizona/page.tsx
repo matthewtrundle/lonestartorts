@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Texas Tortillas Delivered to Arizona | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to Arizona',
   description: 'Get authentic H-E-B Texas tortillas shipped to Arizona. We deliver to Phoenix, Tucson, Mesa, Scottsdale, and all AZ cities. Fast 2-3 day shipping.',
   keywords: 'tortillas Arizona, Texas tortillas AZ, H-E-B tortillas delivery Arizona, authentic tortillas Phoenix, Tucson tortilla delivery',
   alternates: { canonical: 'https://lonestartortillas.com/locations/arizona' },

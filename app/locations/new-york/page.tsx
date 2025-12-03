@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Texas Tortillas Delivered to New York | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to New York',
   description: 'Get authentic H-E-B Texas tortillas shipped to New York. We deliver to NYC, Buffalo, Rochester, Syracuse, Albany, and all NY cities. Fast 2-3 day shipping.',
   keywords: 'tortillas New York, Texas tortillas NY, H-E-B tortillas delivery New York, authentic tortillas NYC, Buffalo tortilla delivery',
   alternates: {

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Texas Tortillas Delivered to Michigan | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to Michigan',
   description: 'Get authentic H-E-B Texas tortillas shipped anywhere in Michigan. Fast delivery to Detroit, Grand Rapids, Ann Arbor & more.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/michigan' },
 }

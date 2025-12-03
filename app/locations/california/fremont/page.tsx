@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Authentic Texas Tortillas Delivered to Fremont | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to Fremont',
   description: 'Get authentic H-E-B Texas tortillas shipped directly to Fremont, California. Fresh flour & corn tortillas for tacos, burritos & more. Fast 2-3 day shipping to the Bay Area.',
   keywords: 'tortillas Fremont, Texas tortillas Bay Area, H-E-B tortillas delivery California, authentic Mexican tortillas Fremont, fresh tortillas shipped East Bay',
   alternates: {

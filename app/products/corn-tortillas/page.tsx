@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Premium Corn Tortillas',
-  description: 'Handcrafted corn tortillas made from authentic masa. Gluten-free, non-GMO, and naturally delicious. Perfect for tacos, enchiladas, and authentic Mexican cuisine. Order from Lonestar Tortillas.',
+  description: 'Handcrafted corn tortillas from authentic masa. Gluten-free, non-GMO. Perfect for tacos, enchiladas, and authentic Mexican cuisine.',
   keywords: ['corn tortillas', 'masa tortillas', 'gluten-free tortillas', 'authentic corn tortillas', 'Texas tortillas', 'Mexican corn tortillas', 'fresh corn tortillas', 'handmade tortillas', 'non-GMO tortillas'],
   openGraph: {
     title: 'Premium Corn Tortillas | Lonestar Tortillas',

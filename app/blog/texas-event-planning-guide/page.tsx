@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Planning BBQ Events with Texas Authenticity: Taco Bars & Catering Guide',
+  title: 'BBQ Event Planning: Taco Bars & Catering',
   description: 'Complete guide to planning authentic BBQ events with H-E-B® tortillas and catering. Expert tips for taco bars, BBQ catering, and creating unforgettable celebrations nationwide.',
   keywords: 'event planning, BBQ party planning, taco bar catering, BBQ event catering, party planning guide, H-E-B tortillas events, BBQ party food',
   alternates: {

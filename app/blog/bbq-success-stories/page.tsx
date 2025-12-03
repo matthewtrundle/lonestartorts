@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'BBQ Success Stories: How H-E-B® Tortillas Transform Restaurants Nationwide',
+  title: 'BBQ Restaurant Success Stories',
   description: 'Real stories from BBQ joints and restaurants that elevated their business with authentic H-E-B® tortillas. Learn how the right tortillas can transform your food business.',
   keywords: 'BBQ restaurant success, H-E-B tortillas restaurant, BBQ business growth, restaurant growth stories, authentic tortillas restaurant supply',
   alternates: {

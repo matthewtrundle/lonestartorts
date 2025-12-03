@@ -56,16 +56,6 @@ const recipes = [
     category: 'Breakfast',
   },
   {
-    title: 'Classic Cheese Quesadillas',
-    description: 'Crispy, golden quesadillas filled with melted cheese. Simple, quick, and endlessly customizable with your favorite toppings.',
-    href: '/recipes/cheese-quesadillas',
-    image: '/images/recipes/cheese-quesadillas.webp',
-    totalTime: '10 min',
-    difficulty: 'Easy' as const,
-    servings: '4 servings',
-    category: 'Lunch',
-  },
-  {
     title: 'Crispy Brisket Quesadillas',
     description: 'Quick quesadillas loaded with tender smoked brisket and melted cheese. The best use for leftover brisket, ready in 25 minutes.',
     href: '/recipes/brisket-quesadillas',

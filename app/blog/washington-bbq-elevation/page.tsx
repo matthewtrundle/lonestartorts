@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Pacific Northwest BBQ: How Washington Restaurants Found Perfection with H-E-B® Tortillas',
+  title: 'Pacific Northwest BBQ Meets Texas Tortillas',
   description: 'From Seattle to Spokane, Washington BBQ joints are discovering that the best Pacific Northwest BBQ starts with authentic Texas tortillas.',
   keywords: 'Washington BBQ, Seattle BBQ, Tacoma BBQ, Spokane BBQ, Pacific Northwest BBQ, H-E-B tortillas Washington, PNW restaurant success',
   alternates: {

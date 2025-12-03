@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Premium Flour Tortillas',
-  description: 'Handcrafted flour tortillas made from scratch. Soft, pillowy, and perfect for burritos, quesadillas, and wraps. Made with premium ingredients in Texas. Order from Lonestar Tortillas.',
+  description: 'Handcrafted flour tortillas from scratch. Soft, pillowy, perfect for burritos and quesadillas. Made with premium Texas ingredients.',
   keywords: ['flour tortillas', 'soft tortillas', 'burrito tortillas', 'Texas flour tortillas', 'handmade flour tortillas', 'fresh flour tortillas', 'authentic tortillas', 'premium tortillas'],
   openGraph: {
     title: 'Premium Flour Tortillas | Lonestar Tortillas',

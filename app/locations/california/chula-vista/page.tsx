@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Authentic Texas Tortillas Delivered to Chula Vista | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to Chula Vista',
   description: 'Get authentic H-E-B Texas tortillas shipped directly to Chula Vista, California. Fresh flour & corn tortillas for tacos, burritos & more. Fast shipping, premium quality.',
   keywords: 'tortillas Chula Vista, Texas tortillas California, H-E-B tortillas delivery, authentic Mexican tortillas Chula Vista, fresh tortillas shipped',
   alternates: {

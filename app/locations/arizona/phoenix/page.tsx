@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Authentic Texas Tortillas Delivered to Phoenix | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to Phoenix',
   description: 'Get authentic H-E-B Texas tortillas shipped directly to Phoenix, Arizona. Fresh flour & corn tortillas. Fast 2-3 day shipping to the Valley.',
   keywords: 'tortillas Phoenix, Texas tortillas Arizona, H-E-B tortillas delivery Phoenix, authentic Mexican tortillas Phoenix AZ',
   alternates: { canonical: 'https://lonestartortillas.com/locations/arizona/phoenix' },
@@ -60,6 +60,7 @@ export default function PhoenixPage() {
             </Link>
           </div>
         </section>
+        <section className="my-12 grid md:grid-cols-3 gap-6"><Link href="/guides/how-to-store-tortillas" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Storage Guide</h3><p className="text-sm text-charcoal-600">Keep tortillas fresh</p></Link><Link href="/guides/best-tortillas-for-tacos" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Taco Guide</h3><p className="text-sm text-charcoal-600">Choose the right tortilla</p></Link><Link href="/recipes" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Recipes</h3><p className="text-sm text-charcoal-600">Tortilla inspiration</p></Link></section>
         <p className="text-sm text-charcoal-500 italic mt-8">Independent reseller. Not affiliated with or endorsed by H-E-B.</p>
         <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mt-12 text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Phoenix?</h2>

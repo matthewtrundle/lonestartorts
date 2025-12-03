@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Authentic Texas Tortillas Delivered to Modesto | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to Modesto',
   description: 'Get authentic H-E-B Texas tortillas shipped directly to Modesto, California. Fresh flour & corn tortillas for tacos, burritos & more. Fast 2-3 day shipping to the Central Valley.',
   keywords: 'tortillas Modesto, Texas tortillas Central Valley, H-E-B tortillas delivery California, authentic Mexican tortillas Modesto, fresh tortillas shipped Stanislaus County',
   alternates: {

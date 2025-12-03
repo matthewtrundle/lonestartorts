@@ -6,7 +6,7 @@ import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
   title: 'Tortilla Ingredients | What Goes Into Authentic Tortillas | Guide',
-  description: 'Learn what ingredients make authentic corn and flour tortillas. Understand masa, nixtamalization, lard vs oil, and what to look for in quality tortilla ingredients.',
+  description: 'What makes authentic corn and flour tortillas. Learn about masa, nixtamalization, lard vs oil, and quality ingredients.',
   keywords: 'tortilla ingredients, what is in tortillas, masa harina, nixtamalization, tortilla recipe ingredients, corn tortilla ingredients, flour tortilla ingredients',
   alternates: {
     canonical: 'https://lonestartortillas.com/guides/tortilla-ingredients',

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Authentic Texas Tortillas Delivered to Sacramento | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to Sacramento',
   description: 'Get authentic H-E-B Texas tortillas shipped directly to Sacramento, California. Fresh flour & corn tortillas for tacos, burritos & more. Fast shipping, premium quality.',
   keywords: 'tortillas Sacramento, Texas tortillas California, H-E-B tortillas delivery, authentic Mexican tortillas Sacramento, fresh tortillas shipped',
   alternates: {

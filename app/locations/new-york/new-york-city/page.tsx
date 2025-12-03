@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Authentic Texas Tortillas Delivered to NYC | Lonestar Tortillas',
+  title: 'H-E-B Tortillas to NYC',
   description: 'Get authentic H-E-B Texas tortillas shipped directly to New York City. Fresh flour & corn tortillas delivered to Manhattan, Brooklyn, Queens, Bronx & Staten Island. Fast 2-3 day shipping.',
   keywords: 'tortillas NYC, Texas tortillas New York City, H-E-B tortillas delivery Manhattan, authentic Mexican tortillas Brooklyn, fresh tortillas shipped Queens',
   alternates: {

@@ -192,8 +192,43 @@ export default function CraftPage() {
           </div>
         </section>
 
+        {/* Freshness Guarantee Section */}
+        <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100">
+          <div className="container mx-auto px-8 max-w-4xl">
+            <h2 className="text-4xl md:text-5xl font-display font-black text-center mb-12 text-charcoal-950">
+              Our Freshness Promise
+            </h2>
+
+            <div className="prose prose-lg max-w-none text-charcoal-700">
+              <p className="text-xl leading-relaxed mb-6">
+                At Lonestar Tortillas, we understand that freshness is everything when it comes to tortillas. That's why we've developed a sourcing and shipping process that ensures every package arrives at your door with the same quality you'd find on H-E-B® shelves in Texas.
+              </p>
+
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Direct-from-Store Sourcing</h3>
+              <p className="mb-6">
+                We source our H-E-B® tortillas directly from stores in Texas, selecting only products with optimal freshness dates. Our team regularly rotates inventory to ensure you receive tortillas with maximum shelf life remaining. We never sell products that are close to expiration.
+              </p>
+
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Shelf-Stable Packaging</h3>
+              <p className="mb-6">
+                H-E-B® tortillas are already designed for extended shelf life at room temperature. This means no refrigeration is required during shipping, and your tortillas arrive ready to use. Most products have a 30-45 day shelf life, giving you plenty of time to enjoy them.
+              </p>
+
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Fast, Protected Shipping</h3>
+              <p className="mb-6">
+                Orders are shipped within 24 hours via USPS Priority or UPS Ground, arriving in 2-3 business days. Each package is carefully padded to prevent damage during transit. During extreme weather, we monitor conditions and may delay shipments to protect product quality.
+              </p>
+
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Satisfaction Guaranteed</h3>
+              <p className="mb-6">
+                If you receive damaged tortillas or are unsatisfied for any reason, contact us within 7 days for a full replacement or refund. We stand behind every H-E-B® product we ship.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Varieties Grid */}
-        <section className="py-20 bg-gradient-to-b from-cream-50 to-masa-50">
+        <section className="py-20 bg-gradient-to-b from-cream-100 to-masa-50">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
               H-E-B® SELECTION

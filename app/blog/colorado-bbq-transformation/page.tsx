@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How Colorado BBQ Restaurants Found Their Edge with H-E-B® Tortillas',
+  title: 'Colorado BBQ Meets Texas Tortillas',
   description: 'From Denver to Boulder, Colorado BBQ joints are discovering the secret weapon Texas pitmasters have known for years: authentic H-E-B® tortillas make all the difference.',
   keywords: 'Colorado BBQ restaurants, Denver BBQ, Boulder BBQ, H-E-B tortillas Colorado, Rocky Mountain BBQ, Colorado restaurant success',
   alternates: {

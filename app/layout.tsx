@@ -189,31 +189,20 @@ const jsonLd = {
   ]
 };
 
-// Product Schema for individual products
-const productSchema = {
+// Website Schema for SEO - Product schemas are on individual product pages
+const websiteSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'H-E-B® Tortilla Collection',
-  description: 'Authentic Texas tortillas from H-E-B®, delivered nationwide',
-  brand: {
-    '@type': 'Brand',
-    name: 'H-E-B'
-  },
-  offers: {
-    '@type': 'AggregateOffer',
-    priceCurrency: 'USD',
-    lowPrice: '12.99',
-    highPrice: '89.99',
-    availability: 'https://schema.org/PreOrder',
-    seller: {
-      '@type': 'Organization',
-      name: 'Lonestar Tortillas'
-    }
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.8',
-    reviewCount: '127'
+  '@type': 'WebSite',
+  name: 'Lonestar Tortillas',
+  url: 'https://lonestartortillas.com',
+  description: 'Authentic H-E-B tortillas delivered nationwide',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://lonestartortillas.com/search?q={search_term_string}'
+    },
+    'query-input': 'required name=search_term_string'
   }
 };
 
@@ -258,9 +247,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <script
-          id="json-ld-product"
+          id="json-ld-website"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
 
         <GoogleTagManagerNoScript />
