@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { LocationFAQ } from '@/components/location/LocationFAQ'
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Scranton',
@@ -25,6 +26,8 @@ export default function ScrantonPage() {
         <section className="prose prose-lg max-w-none mb-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Scranton Loves Texas Tortillas</h2>
           <p className="text-charcoal-700 leading-relaxed">Scranton's revitalizing downtown and growing population includes residents from all over—including Texas. For those who've relocated to NEPA and miss H-E-B, authentic Texas tortillas are now available delivered to your door. We serve Scranton, Wilkes-Barre, and all of Northeast Pennsylvania.</p>
+          <p className="text-charcoal-700 leading-relaxed mt-4">Whether you're hosting a family taco night, preparing breakfast tacos for the weekend, or simply craving authentic Tex-Mex flavors, our tortillas deliver that unmistakable Texas taste. Each tortilla is made with quality ingredients and traditional methods that have made H-E-B a household name across Texas.</p>
+          <p className="text-charcoal-700 leading-relaxed mt-4">Our customers in Scranton tell us they love the convenience of having authentic Texas tortillas delivered right to their door. No more settling for grocery store alternatives when you can enjoy the real thing.</p>
         </section>
         <section className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg mb-12">
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Scranton Shipping Details</h2>
@@ -39,6 +42,8 @@ export default function ScrantonPage() {
           </div>
         </section>
         <section className="my-12 grid md:grid-cols-3 gap-6"><Link href="/guides/how-to-store-tortillas" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Storage Guide</h3><p className="text-sm text-charcoal-600">Keep tortillas fresh</p></Link><Link href="/guides/best-tortillas-for-every-dish" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Taco Guide</h3><p className="text-sm text-charcoal-600">Choose the right tortilla</p></Link><Link href="/recipes" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Recipes</h3><p className="text-sm text-charcoal-600">Tortilla inspiration</p></Link></section>
+        
+        <LocationFAQ city="Scranton" state="Pennsylvania" />
         <p className="text-sm text-charcoal-500 italic mt-8">Independent reseller. Not affiliated with or endorsed by H-E-B.</p>
         <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mt-12 text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Scranton?</h2>

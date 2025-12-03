@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { LocationFAQ } from '@/components/location/LocationFAQ'
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Scottsdale',
@@ -26,6 +27,8 @@ export default function ScottsdalePage() {
         <section className="prose prose-lg max-w-none mb-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Scottsdale Loves Texas Tortillas</h2>
           <p className="text-charcoal-700 leading-relaxed">Scottsdale's culinary scene attracts food lovers who demand quality. H-E-B tortillas bring authentic Texas flavor to elevate home cooking in this upscale community.</p>
+          <p className="text-charcoal-700 leading-relaxed mt-4">Whether you're hosting a family taco night, preparing breakfast tacos for the weekend, or simply craving authentic Tex-Mex flavors, our tortillas deliver that unmistakable Texas taste. Each tortilla is made with quality ingredients and traditional methods that have made H-E-B a household name across Texas.</p>
+          <p className="text-charcoal-700 leading-relaxed mt-4">Our customers in Scottsdale tell us they love the convenience of having authentic Texas tortillas delivered right to their door. No more settling for grocery store alternatives when you can enjoy the real thing.</p>
         </section>
         <section className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg mb-12">
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Scottsdale Shipping Details</h2>
@@ -40,6 +43,8 @@ export default function ScottsdalePage() {
           </div>
         </section>
         <section className="my-12 grid md:grid-cols-3 gap-6"><Link href="/guides/how-to-store-tortillas" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Storage Guide</h3><p className="text-sm text-charcoal-600">Keep tortillas fresh</p></Link><Link href="/guides/best-tortillas-for-every-dish" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Taco Guide</h3><p className="text-sm text-charcoal-600">Choose the right tortilla</p></Link><Link href="/recipes" className="bg-cream-100 p-6 rounded-lg hover:bg-cream-200 transition-colors"><h3 className="font-bold text-charcoal-950 mb-1">Recipes</h3><p className="text-sm text-charcoal-600">Tortilla inspiration</p></Link></section>
+        
+        <LocationFAQ city="Scottsdale" state="Arizona" />
         <p className="text-sm text-charcoal-500 italic mt-8">Independent reseller. Not affiliated with or endorsed by H-E-B.</p>
         <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mt-12 text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Scottsdale?</h2>
