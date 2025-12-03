@@ -64,23 +64,6 @@ const faqSchema = {
   ],
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - Los Angeles Delivery',
-  description: 'Authentic Texas tortillas delivered to Los Angeles, California',
-  areaServed: {
-    '@type': 'City',
-    name: 'Los Angeles',
-    containedInPlace: {
-      '@type': 'State',
-      name: 'California',
-    },
-  },
-  url: 'https://lonestartortillas.com/locations/california/los-angeles',
-  priceRange: '$$',
-}
-
 const nearbyCities = [
   { name: 'San Diego', href: '/locations/california/san-diego' },
   { name: 'Long Beach', href: '/locations/california/long-beach' },
@@ -95,7 +78,6 @@ export default function LosAngelesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Header */}

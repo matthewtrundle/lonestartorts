@@ -7,13 +7,19 @@ module.exports = {
   priority: 0.7,
   sitemapSize: 5000,
 
-  // Exclude admin and API routes from sitemap
+  // Exclude admin, API, and private routes from sitemap
   exclude: [
     '/admin',
     '/admin/*',
     '/api/*',
     '/page-backup',
     '/page-previous',
+    '/checkout',
+    '/success',
+    '/chicago',  // redirects to /locations/illinois/chicago
+    '/denver',   // redirects to /locations/colorado/denver
+    '/maria-story', // redirects to /blog/marias-story
+    '/order',    // redirects to /track
   ],
 
   // Custom transform for specific page priorities and frequencies
@@ -29,7 +35,7 @@ module.exports = {
     }
 
     // Pre-sale and Shop - high priority
-    if (path === '/pre-sale' || path === '/shop' || path === '/order') {
+    if (path === '/pre-sale' || path === '/shop') {
       return {
         loc: path,
         changefreq: 'daily',
@@ -68,12 +74,12 @@ module.exports = {
       };
     }
 
-    // City landing pages - high priority (expat/nationwide targeting)
-    if (path === '/new-york' || path === '/los-angeles' || path === '/chicago' || path === '/denver' || path === '/seattle') {
+    // Location pages - medium-high priority (local SEO)
+    if (path.startsWith('/locations/')) {
       return {
         loc: path,
         changefreq: 'monthly',
-        priority: 0.8,
+        priority: 0.7,
         lastmod: new Date().toISOString(),
       };
     }

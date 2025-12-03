@@ -64,29 +64,10 @@ const faqSchema = {
   ],
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - Oakland Delivery',
-  description: 'Authentic Texas tortillas delivered to Oakland, California',
-  areaServed: {
-    '@type': 'City',
-    name: 'Oakland',
-    containedInPlace: {
-      '@type': 'State',
-      name: 'California',
-    },
-  },
-  url: 'https://lonestartortillas.com/locations/california/oakland',
-  telephone: '+1-512-TORTILLA',
-  priceRange: '$$',
-}
-
 export default function OaklandPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Header */}

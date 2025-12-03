@@ -15,6 +15,33 @@ const nextConfig = {
   env: {
     ALLOW_REFRIGERATED: process.env.ALLOW_REFRIGERATED || 'false',
   },
+  async redirects() {
+    return [
+      // Legacy location pages -> new structure
+      {
+        source: '/chicago',
+        destination: '/locations/illinois/chicago',
+        permanent: true,
+      },
+      {
+        source: '/denver',
+        destination: '/locations/colorado/denver',
+        permanent: true,
+      },
+      // Legacy maria story -> blog post
+      {
+        source: '/maria-story',
+        destination: '/blog/marias-story',
+        permanent: true,
+      },
+      // Legacy order page -> track page
+      {
+        source: '/order',
+        destination: '/track',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

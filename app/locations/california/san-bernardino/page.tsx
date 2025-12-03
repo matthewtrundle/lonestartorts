@@ -48,28 +48,10 @@ const faqSchema = {
   ],
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - San Bernardino Delivery',
-  description: 'Authentic Texas tortillas delivered to San Bernardino and the Inland Empire',
-  areaServed: {
-    '@type': 'City',
-    name: 'San Bernardino',
-    containedInPlace: {
-      '@type': 'State',
-      name: 'California',
-    },
-  },
-  url: 'https://lonestartortillas.com/locations/california/san-bernardino',
-  priceRange: '$$',
-}
-
 export default function SanBernardinoPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Header */}

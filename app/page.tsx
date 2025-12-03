@@ -1169,8 +1169,10 @@ export default function Home() {
                 <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Quick Links</h4>
                 <div className="space-y-2">
                   <Link href="/shop" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Shop All Products</Link>
+                  <Link href="/locations" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Delivery Locations</Link>
                   <Link href="/guides" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Guides & Tips</Link>
                   <Link href="/recipes" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Recipes</Link>
+                  <Link href="/track" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Track Order</Link>
                   <Link href="/faq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">FAQ</Link>
                   <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
                 </div>

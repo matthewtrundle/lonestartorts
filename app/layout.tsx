@@ -124,69 +124,48 @@ export const viewport = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': 'https://lonestartortillas.com/#organization',
   name: 'Lonestar Tortillas',
+  legalName: 'Lonestar Tortillas LLC',
   description: 'Independent reseller of authentic H-E-B® tortillas, delivering Texas flavor nationwide',
   url: 'https://lonestartortillas.com',
-  logo: 'https://lonestartortillas.com/images/lonestar-logo.webp',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://lonestartortillas.com/images/lonestar-logo.webp',
+    width: 512,
+    height: 512
+  },
+  image: 'https://lonestartortillas.com/images/lonestar-logo.webp',
+  email: 'howdy@lonestartortilla.com',
+  foundingDate: '2020',
   founder: {
     '@type': 'Person',
     name: 'Maria Rodriguez',
-    jobTitle: 'Founder & CEO'
+    jobTitle: 'Founder'
   },
-  foundingDate: '2020',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Austin',
     addressRegion: 'TX',
+    postalCode: '78701',
     addressCountry: 'US'
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    email: 'howdy@lonestartortilla.com',
+    availableLanguage: ['English', 'Spanish']
   },
   sameAs: [
     'https://twitter.com/lonestartortillas',
     'https://instagram.com/lonestartortillas',
     'https://facebook.com/lonestartortillas'
   ],
-  offers: {
-    '@type': 'AggregateOffer',
-    priceCurrency: 'USD',
-    lowPrice: '3.99',
-    highPrice: '89.99',
-    offerCount: '12',
-    offers: [
-      {
-        '@type': 'Offer',
-        name: 'Corn Tortillas Pack',
-        description: 'Traditional corn tortillas, shelf-stable',
-        priceCurrency: 'USD',
-        price: '12.99',
-        availability: 'https://schema.org/PreOrder'
-      },
-      {
-        '@type': 'Offer',
-        name: 'Flour Tortillas Pack',
-        description: 'Soft flour tortillas, 30-day fresh',
-        priceCurrency: 'USD',
-        price: '14.99',
-        availability: 'https://schema.org/PreOrder'
-      },
-      {
-        '@type': 'Offer',
-        name: 'Variety Pack',
-        description: 'Mix of corn, flour, and specialty tortillas',
-        priceCurrency: 'USD',
-        price: '39.99',
-        availability: 'https://schema.org/PreOrder'
-      }
-    ]
-  },
   areaServed: {
     '@type': 'Country',
     name: 'United States'
   },
-  priceRange: '$$',
-  acceptedPaymentMethod: [
-    'https://schema.org/CreditCard',
-    'https://schema.org/PaymentMethod'
-  ]
+  knowsAbout: ['Tortillas', 'Mexican Food', 'Texas Cuisine', 'H-E-B Products']
 };
 
 // Website Schema for SEO - Product schemas are on individual product pages

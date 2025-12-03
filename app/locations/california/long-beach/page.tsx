@@ -64,29 +64,10 @@ const faqSchema = {
   ],
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - Long Beach Delivery',
-  description: 'Authentic Texas tortillas delivered to Long Beach, California',
-  areaServed: {
-    '@type': 'City',
-    name: 'Long Beach',
-    containedInPlace: {
-      '@type': 'State',
-      name: 'California',
-    },
-  },
-  url: 'https://lonestartortillas.com/locations/california/long-beach',
-  telephone: '+1-512-TORTILLA',
-  priceRange: '$$',
-}
-
 export default function LongBeachPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Header */}

@@ -48,28 +48,10 @@ const faqSchema = {
   ],
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - NYC Delivery',
-  description: 'Authentic Texas tortillas delivered to New York City and all five boroughs',
-  areaServed: {
-    '@type': 'City',
-    name: 'New York City',
-    containedInPlace: {
-      '@type': 'State',
-      name: 'New York',
-    },
-  },
-  url: 'https://lonestartortillas.com/locations/new-york/new-york-city',
-  priceRange: '$$',
-}
-
 export default function NYCPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Header */}

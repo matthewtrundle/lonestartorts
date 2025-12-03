@@ -12,20 +12,9 @@ export const metadata: Metadata = {
   },
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - Buffalo Delivery',
-  description: 'Authentic Texas tortillas delivered to Buffalo and Western New York',
-  areaServed: { '@type': 'City', name: 'Buffalo', containedInPlace: { '@type': 'State', name: 'New York' } },
-  url: 'https://lonestartortillas.com/locations/new-york/buffalo',
-  priceRange: '$$',
-}
-
 export default function BuffaloPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <header className="bg-charcoal-950 text-cream-50 py-12">
           <div className="container mx-auto px-6 max-w-6xl">

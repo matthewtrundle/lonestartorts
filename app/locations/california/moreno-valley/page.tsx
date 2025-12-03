@@ -40,28 +40,10 @@ const faqSchema = {
   ],
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - Moreno Valley Delivery',
-  description: 'Authentic Texas tortillas delivered to Moreno Valley and the Inland Empire',
-  areaServed: {
-    '@type': 'City',
-    name: 'Moreno Valley',
-    containedInPlace: {
-      '@type': 'State',
-      name: 'California',
-    },
-  },
-  url: 'https://lonestartortillas.com/locations/california/moreno-valley',
-  priceRange: '$$',
-}
-
 export default function MorenoValleyPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Header */}
