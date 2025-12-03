@@ -1,7 +1,3 @@
-'use client'
-
-import { useState } from 'react'
-
 interface FAQItem {
   question: string
   answer: string
@@ -14,8 +10,6 @@ interface LocationFAQProps {
 }
 
 export function LocationFAQ({ city, state, faqs }: LocationFAQProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
-
   const defaultFAQs: FAQItem[] = [
     {
       question: `How long does shipping to ${city} take?`,
@@ -46,31 +40,26 @@ export function LocationFAQ({ city, state, faqs }: LocationFAQProps) {
       <h2 className="text-3xl font-bold text-charcoal-950 mb-8">{city} Tortilla Delivery FAQs</h2>
       <div className="space-y-4">
         {faqItems.map((faq, index) => (
-          <div
+          <details
             key={index}
-            className="border border-charcoal-200 rounded-lg overflow-hidden"
+            className="border border-charcoal-200 rounded-lg overflow-hidden group"
+            open={index === 0}
           >
-            <button
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-cream-50 transition-colors"
-              aria-expanded={openIndex === index}
-            >
+            <summary className="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-cream-50 transition-colors cursor-pointer list-none [&::-webkit-details-marker]:hidden">
               <span className="font-semibold text-charcoal-950 pr-4">{faq.question}</span>
               <svg
-                className={`w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform ${openIndex === index ? 'rotate-180' : ''}`}
+                className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
-            {openIndex === index && (
-              <div className="p-4 bg-cream-50 border-t border-charcoal-200">
-                <p className="text-charcoal-700 leading-relaxed">{faq.answer}</p>
-              </div>
-            )}
-          </div>
+            </summary>
+            <div className="p-4 bg-cream-50 border-t border-charcoal-200">
+              <p className="text-charcoal-700 leading-relaxed">{faq.answer}</p>
+            </div>
+          </details>
         ))}
       </div>
 
