@@ -5,7 +5,7 @@ import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Best Tortillas for Street Tacos | Authentic Taqueria Guide',
+  title: 'Best Tortillas for Street Tacos',
   description: 'Discover the perfect tortillas for street tacos. Learn why small corn tortillas are essential for authentic taqueria-style tacos, plus tips for warming and serving.',
   keywords: 'street tacos tortillas, street taco tortillas, small corn tortillas for tacos, taqueria style tortillas, authentic taco tortillas, best tortillas for street tacos',
   alternates: {

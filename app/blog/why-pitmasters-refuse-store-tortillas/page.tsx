@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Why Texas Pitmasters Refuse to Use Store-Bought Tortillas | The Truth',
+  title: 'Why Pitmasters Refuse Store-Bought Tortillas',
   description: 'Texas pitmasters reveal why they refuse to use cheap store-bought tortillas. Real stories of business losses, customer complaints, and the day they switched to H-E-B® tortillas.',
   keywords: 'Texas pitmasters tortillas, H-E-B tortillas restaurant, BBQ restaurant tortillas, pitmaster interviews, authentic tortillas, professional BBQ, restaurant quality tortillas',
   openGraph: {

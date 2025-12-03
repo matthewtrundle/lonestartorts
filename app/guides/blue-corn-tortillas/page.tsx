@@ -5,7 +5,7 @@ import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Blue Corn Tortillas | Nutrition, Flavor & Uses | Complete Guide',
+  title: 'Blue Corn Tortillas: Complete Guide',
   description: 'Learn about blue corn tortillas - their unique nutrition benefits, earthy flavor, and best uses. Discover why blue corn tortillas are gaining popularity.',
   keywords: 'blue corn tortillas, blue tortillas, blue corn nutrition, heirloom corn tortillas, purple corn tortillas, blue corn vs yellow corn',
   alternates: {

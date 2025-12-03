@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
-  title: 'Texas Smoked Brisket Tacos Recipe with H-E-B® Tortillas',
+  title: 'Texas Smoked Brisket Tacos Recipe',
   description: 'Learn to make authentic Texas BBQ brisket tacos with H-E-B® flour tortillas. Perfect for using leftover brisket or fresh-smoked meat. Quick, easy, and packed with flavor.',
   keywords: 'brisket tacos recipe, Texas BBQ tacos, smoked brisket tacos, H-E-B tortillas brisket, leftover brisket recipe, BBQ tacos',
   openGraph: {

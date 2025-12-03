@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'When Texas BBQ Meets H-E-B® Tortillas: The Perfect Fusion',
+  title: 'Texas BBQ Meets H-E-B Tortillas',
   description: 'Discover why authentic H-E-B® tortillas are essential for Texas BBQ culture. From brisket tacos to pulled pork wraps, explore the marriage of two iconic Texas traditions.',
   keywords: 'Texas BBQ tortillas, H-E-B tortillas BBQ, brisket tacos, BBQ fusion food, Texas food culture, authentic tortillas, BBQ wraps',
   alternates: {

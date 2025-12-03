@@ -5,7 +5,7 @@ import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Best Tortillas for Burritos | Size, Flexibility & Wrapping Guide',
+  title: 'Best Tortillas for Burritos Guide',
   description: 'Find the best tortillas for burritos. Learn about burrito tortilla sizes, flour vs corn, and the techniques for perfect burrito rolling every time.',
   keywords: 'best tortillas for burritos, burrito tortillas, large flour tortillas, burrito size tortillas, how to wrap a burrito, burrito wrapping technique',
   alternates: {

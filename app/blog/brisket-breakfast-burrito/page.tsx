@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'The Ultimate Brisket Breakfast Burrito with H-E-B® Tortillas',
+  title: 'Brisket Breakfast Burrito Recipe',
   description: 'Master the art of the brisket breakfast burrito with authentic H-E-B® tortillas. From overnight brisket to the perfect scramble, learn why this Texas breakfast requires real tortillas.',
   keywords: 'brisket breakfast burrito, Texas breakfast, H-E-B tortillas breakfast, smoked brisket burrito, authentic breakfast burrito, BBQ breakfast',
   alternates: {

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'The Complete Guide to Texas BBQ & H-E-B® Tortillas | Lonestar Tortillas',
+  title: 'Texas BBQ & Tortillas Guide',
   description: 'Master the art of pairing Texas BBQ with authentic H-E-B® tortillas. From brisket tacos to pulled pork wraps, learn why real tortillas are essential for BBQ perfection.',
   keywords: 'Texas BBQ tortillas, H-E-B tortillas BBQ, brisket tacos, BBQ wraps, Texas BBQ guide, authentic tortillas, smoked meats tortillas, pitmaster guide, BBQ tortilla pairing',
   openGraph: {

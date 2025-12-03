@@ -5,7 +5,7 @@ import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Sonoran Style Tortillas | What Makes Them Different | Guide',
+  title: 'Sonoran Style Tortillas Guide',
   description: 'Learn what makes Sonoran style flour tortillas unique. Discover the thin, stretchy texture, lard-based recipe, and cooking techniques that define Northern Mexican tortillas.',
   keywords: 'sonoran style tortillas, sonoran flour tortillas, sobaqueras tortillas, northern mexico tortillas, thin flour tortillas, large flour tortillas',
   alternates: {

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'The Secret to Championship BBQ Tacos: Why Winners Use H-E-B® Tortillas',
+  title: 'Championship BBQ Tacos Secrets',
   description: 'Competition BBQ champions reveal why authentic H-E-B® tortillas are essential for winning. Learn the techniques, standards, and presentation secrets that earn perfect scores.',
   keywords: 'competition BBQ tacos, championship BBQ, H-E-B tortillas competition, BBQ judging, winning brisket tacos, competition pitmaster tips, BBQ taco presentation',
   openGraph: {
