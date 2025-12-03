@@ -20,6 +20,7 @@ export default function BrisketTacosRecipe() {
     '@type': 'Recipe',
     name: 'Texas Smoked Brisket Tacos',
     description: 'Authentic Texas BBQ brisket tacos served on warm H-E-B® flour tortillas with pickled onions and cilantro',
+    image: 'https://lonestartortillas.com/images/recipes/brisket-tacos.webp',
     prepTime: 'PT15M',
     cookTime: 'PT10M',
     totalTime: 'PT25M',

@@ -20,6 +20,7 @@ export default function BeanVeggieTacosRecipe() {
     '@type': 'Recipe',
     name: 'Bean & Veggie Tacos',
     description: 'Hearty vegetarian tacos with seasoned black beans, roasted vegetables, and fresh toppings',
+    image: 'https://lonestartortillas.com/images/recipes/bean-veggie-tacos.webp',
     prepTime: 'PT15M',
     cookTime: 'PT15M',
     totalTime: 'PT30M',

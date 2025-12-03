@@ -20,6 +20,7 @@ export default function BreakfastBurritosRecipe() {
     '@type': 'Recipe',
     name: 'Bean & Cheese Breakfast Burritos',
     description: 'Hearty breakfast burritos filled with scrambled eggs, refried beans, melted cheese, and salsa wrapped in warm flour tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/breakfast-burritos.webp',
     prepTime: 'PT10M',
     cookTime: 'PT10M',
     totalTime: 'PT20M',

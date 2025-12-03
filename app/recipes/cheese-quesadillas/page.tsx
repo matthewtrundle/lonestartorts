@@ -20,6 +20,7 @@ export default function CheeseQuesadillasRecipe() {
     '@type': 'Recipe',
     name: 'Classic Cheese Quesadillas',
     description: 'Simple cheese quesadillas with crispy tortillas and perfectly melted cheese',
+    image: 'https://lonestartortillas.com/images/recipes/cheese-quesadillas.webp',
     prepTime: 'PT5M',
     cookTime: 'PT5M',
     totalTime: 'PT10M',

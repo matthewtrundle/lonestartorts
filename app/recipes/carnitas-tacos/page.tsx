@@ -20,6 +20,7 @@ export default function CarnitasTacosRecipe() {
     '@type': 'Recipe',
     name: 'Slow-Cooked Carnitas Tacos',
     description: 'Authentic Mexican carnitas with tender, juicy pork and crispy edges, served in warm corn tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/carnitas-tacos.webp',
     prepTime: 'PT15M',
     cookTime: 'PT4H',
     totalTime: 'PT4H15M',

@@ -163,13 +163,14 @@ const collectionSchema = {
   name: 'Tortilla Recipes',
   description: 'Authentic Texas tortilla recipes for breakfast, lunch, and dinner.',
   url: 'https://lonestartortillas.com/recipes',
-  hasPart: recipes.map(recipe => ({
-    '@type': 'Recipe',
-    name: recipe.title,
-    description: recipe.description,
-    url: `https://lonestartortillas.com${recipe.href}`,
-    prepTime: recipe.totalTime,
-  })),
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: recipes.map((recipe, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `https://lonestartortillas.com${recipe.href}`,
+    })),
+  },
 };
 
 export default function RecipesPage() {

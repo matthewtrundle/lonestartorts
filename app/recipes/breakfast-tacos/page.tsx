@@ -20,6 +20,7 @@ export default function BreakfastTacosRecipe() {
     '@type': 'Recipe',
     name: 'Texas-Style Breakfast Tacos',
     description: 'Authentic Texas breakfast tacos with scrambled eggs, bacon, cheese, and fresh tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/breakfast-tacos.webp',
     prepTime: 'PT5M',
     cookTime: 'PT10M',
     totalTime: 'PT15M',

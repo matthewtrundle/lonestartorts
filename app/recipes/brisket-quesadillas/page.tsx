@@ -20,6 +20,7 @@ export default function BrisketQuesadillasRecipe() {
     '@type': 'Recipe',
     name: 'Brisket Quesadillas',
     description: 'Crispy quesadillas loaded with smoked brisket and melted cheese, made with authentic H-E-B® flour tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/brisket-quesadillas.webp',
     prepTime: 'PT10M',
     cookTime: 'PT15M',
     totalTime: 'PT25M',

@@ -20,6 +20,7 @@ export default function CheeseEnchiladasRecipe() {
     '@type': 'Recipe',
     name: 'Classic Cheese Enchiladas',
     description: 'Traditional Mexican cheese enchiladas with homemade red sauce, rolled in corn tortillas and baked until bubbly',
+    image: 'https://lonestartortillas.com/images/recipes/cheese-enchiladas.webp',
     prepTime: 'PT20M',
     cookTime: 'PT25M',
     totalTime: 'PT45M',

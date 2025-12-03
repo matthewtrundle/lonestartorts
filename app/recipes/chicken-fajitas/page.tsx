@@ -20,6 +20,7 @@ export default function ChickenFajitasRecipe() {
     '@type': 'Recipe',
     name: 'Grilled Chicken Fajitas',
     description: 'Marinated chicken breast grilled to perfection with sautéed peppers and onions, served in warm flour tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/chicken-fajitas.webp',
     prepTime: 'PT15M',
     cookTime: 'PT15M',
     totalTime: 'PT30M',

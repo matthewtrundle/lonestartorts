@@ -20,6 +20,7 @@ export default function ShrimpTacosRecipe() {
     '@type': 'Recipe',
     name: 'Spicy Grilled Shrimp Tacos',
     description: 'Quick and flavorful grilled shrimp tacos with spicy seasoning and creamy cilantro lime slaw',
+    image: 'https://lonestartortillas.com/images/recipes/shrimp-tacos.webp',
     prepTime: 'PT10M',
     cookTime: 'PT10M',
     totalTime: 'PT20M',

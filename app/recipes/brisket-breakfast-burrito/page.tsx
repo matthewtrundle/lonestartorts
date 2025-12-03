@@ -20,6 +20,7 @@ export default function BrisketBreakfastBurritoRecipe() {
     '@type': 'Recipe',
     name: 'Brisket Breakfast Burrito',
     description: 'Texas-style breakfast burrito loaded with smoked brisket, scrambled eggs, cheese, crispy potatoes, and salsa, wrapped in H-E-B® flour tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/brisket-breakfast-burrito.webp',
     prepTime: 'PT15M',
     cookTime: 'PT20M',
     totalTime: 'PT35M',

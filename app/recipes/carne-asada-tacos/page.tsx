@@ -20,6 +20,7 @@ export default function CarneAsadaTacosRecipe() {
     '@type': 'Recipe',
     name: 'Carne Asada Tacos',
     description: 'Authentic Mexican grilled steak tacos with citrus marinade, served street-style on warm corn tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/carne-asada-tacos.webp',
     prepTime: 'PT2H15M',
     cookTime: 'PT10M',
     totalTime: 'PT2H25M',

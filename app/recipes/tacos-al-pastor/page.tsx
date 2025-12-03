@@ -20,6 +20,7 @@ export default function TacosAlPastorRecipe() {
     '@type': 'Recipe',
     name: 'Street-Style Tacos Al Pastor',
     description: 'Authentic Mexican tacos al pastor with chile-marinated pork, grilled pineapple, and fresh toppings on small corn tortillas',
+    image: 'https://lonestartortillas.com/images/recipes/tacos-al-pastor.webp',
     prepTime: 'PT20M',
     cookTime: 'PT25M',
     totalTime: 'PT45M',

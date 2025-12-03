@@ -20,6 +20,7 @@ export default function FishTacosRecipe() {
     '@type': 'Recipe',
     name: 'Baja Fish Tacos',
     description: 'Crispy beer-battered fish tacos with cabbage slaw and creamy sauce, Baja California-style',
+    image: 'https://lonestartortillas.com/images/recipes/fish-tacos.webp',
     prepTime: 'PT20M',
     cookTime: 'PT15M',
     totalTime: 'PT35M',
