@@ -44,6 +44,16 @@ export default function KentPage() {
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Kent?</h2>
           <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
         </section>
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-charcoal-950 mb-6">We Also Deliver To</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/locations/washington/seattle" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Seattle</Link>
+            <Link href="/locations/washington/tacoma" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Tacoma</Link>
+            <Link href="/locations/washington/bellevue" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Bellevue</Link>
+            <Link href="/locations/washington/spokane" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Spokane</Link>
+            <Link href="/locations/washington/vancouver" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Vancouver</Link>
+          </div>
+        </section>
       </article>
     </div>
   )

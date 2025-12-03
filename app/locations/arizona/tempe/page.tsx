@@ -44,6 +44,18 @@ export default function TempePage() {
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Tempe?</h2>
           <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
         </section>
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-charcoal-950 mb-6">We Also Deliver To</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/locations/arizona/phoenix" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Phoenix</Link>
+            <Link href="/locations/arizona/scottsdale" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Scottsdale</Link>
+            <Link href="/locations/arizona/mesa" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Mesa</Link>
+            <Link href="/locations/arizona/chandler" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Chandler</Link>
+            <Link href="/locations/arizona/gilbert" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Gilbert</Link>
+            <Link href="/locations/arizona/glendale" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Glendale</Link>
+            <Link href="/locations/arizona/tucson" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Tucson</Link>
+          </div>
+        </section>
       </article>
     </div>
   )

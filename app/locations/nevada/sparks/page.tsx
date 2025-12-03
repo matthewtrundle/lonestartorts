@@ -44,6 +44,16 @@ export default function SparksPage() {
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Sparks?</h2>
           <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
         </section>
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-charcoal-950 mb-6">We Also Deliver To</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/locations/nevada/las-vegas" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Las Vegas</Link>
+            <Link href="/locations/nevada/reno" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Reno</Link>
+            <Link href="/locations/nevada/carson-city" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Carson City</Link>
+            <Link href="/locations/nevada/henderson" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Henderson</Link>
+            <Link href="/locations/nevada/north-las-vegas" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">North Las Vegas</Link>
+          </div>
+        </section>
       </article>
     </div>
   )

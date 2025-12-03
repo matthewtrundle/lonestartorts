@@ -44,6 +44,16 @@ export default function AuroraPage() {
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Aurora?</h2>
           <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
         </section>
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-charcoal-950 mb-6">We Also Deliver To</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/locations/colorado/denver" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Denver</Link>
+            <Link href="/locations/colorado/lakewood" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Lakewood</Link>
+            <Link href="/locations/colorado/thornton" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Thornton</Link>
+            <Link href="/locations/colorado/colorado-springs" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Colorado Springs</Link>
+            <Link href="/locations/colorado/fort-collins" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Fort Collins</Link>
+          </div>
+        </section>
       </article>
     </div>
   )
