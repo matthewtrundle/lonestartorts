@@ -161,11 +161,11 @@ export default function ChulaVistaPage() {
               <Link href="/locations/california/san-diego" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
                 San Diego
               </Link>
-              <Link href="/locations/california/national-city" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
-                National City
+              <Link href="/locations/california/long-beach" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
+                Long Beach
               </Link>
-              <Link href="/locations/california/tijuana" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
-                Tijuana
+              <Link href="/locations/california/irvine" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
+                Irvine
               </Link>
             </div>
           </section>

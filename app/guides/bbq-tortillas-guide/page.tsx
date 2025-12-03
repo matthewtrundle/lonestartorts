@@ -636,7 +636,7 @@ export default function BBQTortillasGuidePage() {
                 <p className="text-charcoal-800 text-sm">Master the techniques for warming tortillas in commercial and home kitchens.</p>
               </Link>
 
-              <Link href="/guides/storage-and-handling" className="bg-gradient-to-r from-masa-100 to-cream-100 p-6 rounded-lg hover:shadow-lg transition-shadow">
+              <Link href="/guides/how-to-store-tortillas" className="bg-gradient-to-r from-masa-100 to-cream-100 p-6 rounded-lg hover:shadow-lg transition-shadow">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-2">Tortilla Storage & Handling Guide</h3>
                 <p className="text-charcoal-800 text-sm">Professional food safety and storage practices for food service operations.</p>
               </Link>

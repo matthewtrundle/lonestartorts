@@ -164,8 +164,8 @@ export default function BakersfieldPage() {
               <Link href="/locations/california/los-angeles" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
                 Los Angeles
               </Link>
-              <Link href="/locations/california/lancaster" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
-                Lancaster
+              <Link href="/locations/california/modesto" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
+                Modesto
               </Link>
             </div>
           </section>
