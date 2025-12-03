@@ -830,14 +830,14 @@ export default function HomemadeVsStoreBoughtPage() {
                 </p>
               </Link>
               <Link
-                href="/guides/tortilla-warmers"
+                href="/guides/how-to-reheat-tortillas"
                 className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100 hover:border-sunset-300 hover:shadow-md transition"
               >
                 <h3 className="font-semibold text-sunset-600 mb-2">
-                  Best Tortilla Warmers
+                  How to Reheat Tortillas
                 </h3>
                 <p className="text-sm text-charcoal-600">
-                  Keep your tortillas warm and soft with the right warming method
+                  5 methods to perfectly warm your tortillas every time
                 </p>
               </Link>
               <Link

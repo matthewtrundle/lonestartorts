@@ -44,19 +44,19 @@ const faqSchema = {
   ],
 }
 
-// LocalBusiness Schema
-const localBusinessSchema = {
+// Organization Schema (online business, not LocalBusiness)
+const organizationSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Lonestar Tortillas - New York Delivery',
-  description: 'Authentic H-E-B® tortillas delivered to New York City',
+  '@type': 'Organization',
+  name: 'Lonestar Tortillas',
+  description: 'Authentic H-E-B® tortillas delivered nationwide',
+  url: 'https://lonestartortillas.com',
+  logo: 'https://lonestartortillas.com/images/lonestar-logo.webp',
   areaServed: {
-    '@type': 'City',
-    name: 'New York',
-    '@id': 'https://en.wikipedia.org/wiki/New_York_City',
+    '@type': 'Country',
+    name: 'United States',
   },
-  image: 'https://lonestartortillas.com/images/lonestar-logo.webp',
-  url: 'https://lonestartortillas.com/new-york',
+  sameAs: [],
 }
 
 // Breadcrumb Schema
@@ -88,7 +88,7 @@ export default function NewYorkPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <script
         type="application/ld+json"
@@ -397,11 +397,11 @@ export default function NewYorkPage() {
                 Los Angeles
               </Link>
               <span className="text-charcoal-400">•</span>
-              <Link href="/chicago" className="text-sunset-600 hover:text-sunset-700 font-medium underline">
+              <Link href="/locations/illinois/chicago" className="text-sunset-600 hover:text-sunset-700 font-medium underline">
                 Chicago
               </Link>
               <span className="text-charcoal-400">•</span>
-              <Link href="/denver" className="text-sunset-600 hover:text-sunset-700 font-medium underline">
+              <Link href="/locations/colorado/denver" className="text-sunset-600 hover:text-sunset-700 font-medium underline">
                 Denver
               </Link>
               <span className="text-charcoal-400">•</span>
