@@ -1172,9 +1172,17 @@ export default function Home() {
                   <Link href="/locations" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Delivery Locations</Link>
                   <Link href="/guides" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Guides & Tips</Link>
                   <Link href="/recipes" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Recipes</Link>
+                  <Link href="/blog" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Blog</Link>
                   <Link href="/track" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Track Order</Link>
                   <Link href="/faq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">FAQ</Link>
                   <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
+                  <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Source</Link>
+                </div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">Popular Cities</h4>
+                <div className="space-y-2">
+                  <Link href="/los-angeles" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Los Angeles</Link>
+                  <Link href="/new-york" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">New York</Link>
+                  <Link href="/seattle" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Seattle</Link>
                 </div>
               </div>
 
@@ -1186,6 +1194,16 @@ export default function Home() {
                   <Link href="/products/flour-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Flour Tortillas</Link>
                   <Link href="/products/butter-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Butter Tortillas</Link>
                   <Link href="/products/specialty-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Specialty Varieties</Link>
+                </div>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">For Restaurants</h4>
+                <div className="space-y-2">
+                  <Link href="/restaurants/food-trucks" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Food Trucks</Link>
+                  <Link href="/restaurants/bbq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">BBQ Restaurants</Link>
+                  <Link href="/restaurants/mexican" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Mexican Restaurants</Link>
+                  <Link href="/restaurants/tex-mex" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Tex-Mex</Link>
+                  <Link href="/restaurants/taco-shops" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Taco Shops</Link>
+                  <Link href="/restaurants/catering" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Catering</Link>
+                  <Link href="/restaurants/breakfast" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Breakfast &amp; Brunch</Link>
                 </div>
               </div>
 

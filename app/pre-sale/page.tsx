@@ -395,12 +395,32 @@ export default function PreSalePage() {
 
         {/* Footer */}
         <footer className="bg-charcoal-900 py-12 text-cream-50">
-          <div className="container mx-auto px-8 text-center">
-            <LogoFull className="text-cream-50 mb-6 mx-auto" />
-            <p className="text-sm text-cream-400 mb-4">
-              Your trusted independent source for genuine H-E-B® tortillas
-            </p>
-            <p className="text-xs text-cream-600 tracking-wider uppercase">
+          <div className="container mx-auto px-8">
+            <div className="text-center mb-8">
+              <LogoFull className="text-cream-50 mb-6 mx-auto" />
+              <p className="text-sm text-cream-400 mb-4">
+                Your trusted independent source for genuine H-E-B® tortillas
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+              <Link href="/shop" className="text-cream-400 hover:text-sunset-400 transition-colors">Shop</Link>
+              <Link href="/locations" className="text-cream-400 hover:text-sunset-400 transition-colors">Locations</Link>
+              <Link href="/guides" className="text-cream-400 hover:text-sunset-400 transition-colors">Guides</Link>
+              <Link href="/recipes" className="text-cream-400 hover:text-sunset-400 transition-colors">Recipes</Link>
+              <Link href="/blog" className="text-cream-400 hover:text-sunset-400 transition-colors">Blog</Link>
+              <Link href="/faq" className="text-cream-400 hover:text-sunset-400 transition-colors">FAQ</Link>
+              <Link href="/story" className="text-cream-400 hover:text-sunset-400 transition-colors">Our Story</Link>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 mb-8 text-xs">
+              <Link href="/restaurants/food-trucks" className="text-cream-500 hover:text-sunset-400 transition-colors">Food Trucks</Link>
+              <Link href="/restaurants/bbq" className="text-cream-500 hover:text-sunset-400 transition-colors">BBQ</Link>
+              <Link href="/restaurants/mexican" className="text-cream-500 hover:text-sunset-400 transition-colors">Mexican</Link>
+              <Link href="/restaurants/tex-mex" className="text-cream-500 hover:text-sunset-400 transition-colors">Tex-Mex</Link>
+              <Link href="/restaurants/taco-shops" className="text-cream-500 hover:text-sunset-400 transition-colors">Taco Shops</Link>
+              <Link href="/restaurants/catering" className="text-cream-500 hover:text-sunset-400 transition-colors">Catering</Link>
+              <Link href="/restaurants/breakfast" className="text-cream-500 hover:text-sunset-400 transition-colors">Breakfast</Link>
+            </div>
+            <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
               Independent reseller • Not affiliated with or endorsed by H-E-B®
             </p>
           </div>
