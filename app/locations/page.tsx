@@ -88,6 +88,276 @@ const cities = [
   },
 ];
 
+// All states with their cities
+const stateData = [
+  {
+    name: 'Arizona',
+    slug: 'arizona',
+    cities: [
+      { name: 'Phoenix', slug: 'phoenix' },
+      { name: 'Scottsdale', slug: 'scottsdale' },
+      { name: 'Tempe', slug: 'tempe' },
+      { name: 'Mesa', slug: 'mesa' },
+      { name: 'Chandler', slug: 'chandler' },
+      { name: 'Gilbert', slug: 'gilbert' },
+      { name: 'Glendale', slug: 'glendale' },
+      { name: 'Tucson', slug: 'tucson' },
+    ],
+  },
+  {
+    name: 'California',
+    slug: 'california',
+    cities: [
+      { name: 'Los Angeles', slug: 'los-angeles' },
+      { name: 'San Diego', slug: 'san-diego' },
+      { name: 'San Francisco', slug: 'san-francisco' },
+      { name: 'San Jose', slug: 'san-jose' },
+      { name: 'Sacramento', slug: 'sacramento' },
+      { name: 'Oakland', slug: 'oakland' },
+      { name: 'Fresno', slug: 'fresno' },
+      { name: 'Long Beach', slug: 'long-beach' },
+      { name: 'Bakersfield', slug: 'bakersfield' },
+      { name: 'Anaheim', slug: 'anaheim' },
+      { name: 'Santa Ana', slug: 'santa-ana' },
+      { name: 'Riverside', slug: 'riverside' },
+      { name: 'Stockton', slug: 'stockton' },
+      { name: 'Irvine', slug: 'irvine' },
+      { name: 'Chula Vista', slug: 'chula-vista' },
+      { name: 'Fremont', slug: 'fremont' },
+      { name: 'San Bernardino', slug: 'san-bernardino' },
+      { name: 'Modesto', slug: 'modesto' },
+      { name: 'Fontana', slug: 'fontana' },
+      { name: 'Moreno Valley', slug: 'moreno-valley' },
+    ],
+  },
+  {
+    name: 'Colorado',
+    slug: 'colorado',
+    cities: [
+      { name: 'Denver', slug: 'denver' },
+      { name: 'Colorado Springs', slug: 'colorado-springs' },
+      { name: 'Aurora', slug: 'aurora' },
+      { name: 'Fort Collins', slug: 'fort-collins' },
+      { name: 'Lakewood', slug: 'lakewood' },
+      { name: 'Thornton', slug: 'thornton' },
+    ],
+  },
+  {
+    name: 'Florida',
+    slug: 'florida',
+    cities: [
+      { name: 'Miami', slug: 'miami' },
+      { name: 'Jacksonville', slug: 'jacksonville' },
+      { name: 'Tampa', slug: 'tampa' },
+      { name: 'Orlando', slug: 'orlando' },
+      { name: 'St. Petersburg', slug: 'st-petersburg' },
+      { name: 'Hialeah', slug: 'hialeah' },
+      { name: 'Tallahassee', slug: 'tallahassee' },
+      { name: 'Fort Lauderdale', slug: 'fort-lauderdale' },
+      { name: 'Cape Coral', slug: 'cape-coral' },
+      { name: 'Pembroke Pines', slug: 'pembroke-pines' },
+    ],
+  },
+  {
+    name: 'Georgia',
+    slug: 'georgia',
+    cities: [
+      { name: 'Atlanta', slug: 'atlanta' },
+      { name: 'Augusta', slug: 'augusta' },
+      { name: 'Columbus', slug: 'columbus' },
+      { name: 'Savannah', slug: 'savannah' },
+      { name: 'Athens', slug: 'athens' },
+      { name: 'Macon', slug: 'macon' },
+    ],
+  },
+  {
+    name: 'Illinois',
+    slug: 'illinois',
+    cities: [
+      { name: 'Chicago', slug: 'chicago' },
+      { name: 'Aurora', slug: 'aurora' },
+      { name: 'Naperville', slug: 'naperville' },
+      { name: 'Joliet', slug: 'joliet' },
+      { name: 'Rockford', slug: 'rockford' },
+      { name: 'Elgin', slug: 'elgin' },
+      { name: 'Springfield', slug: 'springfield' },
+      { name: 'Peoria', slug: 'peoria' },
+    ],
+  },
+  {
+    name: 'Maryland',
+    slug: 'maryland',
+    cities: [
+      { name: 'Baltimore', slug: 'baltimore' },
+      { name: 'Frederick', slug: 'frederick' },
+      { name: 'Rockville', slug: 'rockville' },
+      { name: 'Gaithersburg', slug: 'gaithersburg' },
+      { name: 'Bowie', slug: 'bowie' },
+      { name: 'Silver Spring', slug: 'silver-spring' },
+    ],
+  },
+  {
+    name: 'Massachusetts',
+    slug: 'massachusetts',
+    cities: [
+      { name: 'Boston', slug: 'boston' },
+      { name: 'Worcester', slug: 'worcester' },
+      { name: 'Springfield', slug: 'springfield' },
+      { name: 'Cambridge', slug: 'cambridge' },
+      { name: 'Lowell', slug: 'lowell' },
+      { name: 'Quincy', slug: 'quincy' },
+    ],
+  },
+  {
+    name: 'Michigan',
+    slug: 'michigan',
+    cities: [
+      { name: 'Detroit', slug: 'detroit' },
+      { name: 'Grand Rapids', slug: 'grand-rapids' },
+      { name: 'Warren', slug: 'warren' },
+      { name: 'Sterling Heights', slug: 'sterling-heights' },
+      { name: 'Ann Arbor', slug: 'ann-arbor' },
+      { name: 'Lansing', slug: 'lansing' },
+    ],
+  },
+  {
+    name: 'Minnesota',
+    slug: 'minnesota',
+    cities: [
+      { name: 'Minneapolis', slug: 'minneapolis' },
+      { name: 'Saint Paul', slug: 'saint-paul' },
+      { name: 'Rochester', slug: 'rochester' },
+      { name: 'Duluth', slug: 'duluth' },
+      { name: 'Bloomington', slug: 'bloomington' },
+      { name: 'Brooklyn Park', slug: 'brooklyn-park' },
+    ],
+  },
+  {
+    name: 'Nevada',
+    slug: 'nevada',
+    cities: [
+      { name: 'Las Vegas', slug: 'las-vegas' },
+      { name: 'Henderson', slug: 'henderson' },
+      { name: 'Reno', slug: 'reno' },
+      { name: 'North Las Vegas', slug: 'north-las-vegas' },
+      { name: 'Sparks', slug: 'sparks' },
+      { name: 'Carson City', slug: 'carson-city' },
+    ],
+  },
+  {
+    name: 'New Jersey',
+    slug: 'new-jersey',
+    cities: [
+      { name: 'Newark', slug: 'newark' },
+      { name: 'Jersey City', slug: 'jersey-city' },
+      { name: 'Paterson', slug: 'paterson' },
+      { name: 'Elizabeth', slug: 'elizabeth' },
+      { name: 'Trenton', slug: 'trenton' },
+      { name: 'Clifton', slug: 'clifton' },
+    ],
+  },
+  {
+    name: 'New York',
+    slug: 'new-york',
+    cities: [
+      { name: 'New York City', slug: 'new-york-city' },
+      { name: 'Buffalo', slug: 'buffalo' },
+      { name: 'Rochester', slug: 'rochester' },
+      { name: 'Yonkers', slug: 'yonkers' },
+      { name: 'Syracuse', slug: 'syracuse' },
+      { name: 'Albany', slug: 'albany' },
+      { name: 'New Rochelle', slug: 'new-rochelle' },
+      { name: 'Mount Vernon', slug: 'mount-vernon' },
+      { name: 'Schenectady', slug: 'schenectady' },
+      { name: 'Utica', slug: 'utica' },
+    ],
+  },
+  {
+    name: 'North Carolina',
+    slug: 'north-carolina',
+    cities: [
+      { name: 'Charlotte', slug: 'charlotte' },
+      { name: 'Raleigh', slug: 'raleigh' },
+      { name: 'Greensboro', slug: 'greensboro' },
+      { name: 'Durham', slug: 'durham' },
+      { name: 'Winston-Salem', slug: 'winston-salem' },
+      { name: 'Fayetteville', slug: 'fayetteville' },
+    ],
+  },
+  {
+    name: 'Ohio',
+    slug: 'ohio',
+    cities: [
+      { name: 'Columbus', slug: 'columbus' },
+      { name: 'Cleveland', slug: 'cleveland' },
+      { name: 'Cincinnati', slug: 'cincinnati' },
+      { name: 'Toledo', slug: 'toledo' },
+      { name: 'Akron', slug: 'akron' },
+      { name: 'Dayton', slug: 'dayton' },
+    ],
+  },
+  {
+    name: 'Oregon',
+    slug: 'oregon',
+    cities: [
+      { name: 'Portland', slug: 'portland' },
+      { name: 'Salem', slug: 'salem' },
+      { name: 'Eugene', slug: 'eugene' },
+      { name: 'Gresham', slug: 'gresham' },
+      { name: 'Hillsboro', slug: 'hillsboro' },
+      { name: 'Bend', slug: 'bend' },
+    ],
+  },
+  {
+    name: 'Pennsylvania',
+    slug: 'pennsylvania',
+    cities: [
+      { name: 'Philadelphia', slug: 'philadelphia' },
+      { name: 'Pittsburgh', slug: 'pittsburgh' },
+      { name: 'Allentown', slug: 'allentown' },
+      { name: 'Erie', slug: 'erie' },
+      { name: 'Reading', slug: 'reading' },
+      { name: 'Scranton', slug: 'scranton' },
+    ],
+  },
+  {
+    name: 'Tennessee',
+    slug: 'tennessee',
+    cities: [
+      { name: 'Nashville', slug: 'nashville' },
+      { name: 'Memphis', slug: 'memphis' },
+      { name: 'Knoxville', slug: 'knoxville' },
+      { name: 'Chattanooga', slug: 'chattanooga' },
+      { name: 'Clarksville', slug: 'clarksville' },
+      { name: 'Murfreesboro', slug: 'murfreesboro' },
+    ],
+  },
+  {
+    name: 'Virginia',
+    slug: 'virginia',
+    cities: [
+      { name: 'Virginia Beach', slug: 'virginia-beach' },
+      { name: 'Norfolk', slug: 'norfolk' },
+      { name: 'Chesapeake', slug: 'chesapeake' },
+      { name: 'Richmond', slug: 'richmond' },
+      { name: 'Arlington', slug: 'arlington' },
+      { name: 'Alexandria', slug: 'alexandria' },
+    ],
+  },
+  {
+    name: 'Washington',
+    slug: 'washington',
+    cities: [
+      { name: 'Seattle', slug: 'seattle' },
+      { name: 'Spokane', slug: 'spokane' },
+      { name: 'Tacoma', slug: 'tacoma' },
+      { name: 'Vancouver', slug: 'vancouver' },
+      { name: 'Bellevue', slug: 'bellevue' },
+      { name: 'Kent', slug: 'kent' },
+    ],
+  },
+];
+
 const collectionSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -176,6 +446,36 @@ export default function LocationsPage() {
                     <span className="text-sunset-600 font-medium">{city.highlight}</span>
                   </div>
                 </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Browse by State */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
+              Browse by State
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {stateData.map((state) => (
+                <div key={state.slug} className="bg-white rounded-lg p-6 shadow-md">
+                  <Link
+                    href={`/locations/${state.slug}`}
+                    className="text-xl font-bold text-charcoal-950 hover:text-sunset-600 transition-colors"
+                  >
+                    {state.name} →
+                  </Link>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {state.cities.map((city) => (
+                      <Link
+                        key={city.slug}
+                        href={`/locations/${state.slug}/${city.slug}`}
+                        className="text-sm text-charcoal-600 hover:text-sunset-600 transition-colors"
+                      >
+                        {city.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </section>
