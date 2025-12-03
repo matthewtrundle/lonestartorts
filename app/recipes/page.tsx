@@ -311,8 +311,12 @@ export default function RecipesPage() {
                   💡
                 </div>
                 <div>
-                  <h3 className="font-bold mb-1">Use Quality Tortillas</h3>
-                  <p className="text-sm">The foundation of great recipes is quality ingredients. Start with authentic H-E-B® tortillas.</p>
+                  <h3 className="font-bold mb-1">Crisp for Texture</h3>
+                  <p className="text-sm">Add crunch to your dishes! Learn our{' '}
+                    <Link href="/guides/how-to-crisp-tortillas" className="text-sunset-600 hover:underline">
+                      crisping and toasting techniques
+                    </Link>.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -320,8 +324,12 @@ export default function RecipesPage() {
                   💡
                 </div>
                 <div>
-                  <h3 className="font-bold mb-1">Don't Overfill</h3>
-                  <p className="text-sm">Less is more! Overfilled tacos and burritos are messy and harder to eat.</p>
+                  <h3 className="font-bold mb-1">Choose the Right Size</h3>
+                  <p className="text-sm">Size matters! Check our{' '}
+                    <Link href="/guides/tortilla-sizes" className="text-sunset-600 hover:underline">
+                      tortilla size guide
+                    </Link>{' '}for perfect portions.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">

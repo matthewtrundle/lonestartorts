@@ -491,6 +491,18 @@ export default function TacosAlPastorRecipe() {
                 </p>
               </div>
             </Link>
+            <Link href="/guides/street-tacos-tortillas" className="group block">
+              <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
+                <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
+                  Best Tortillas for Street Tacos
+                </h3>
+                <p className="text-charcoal-700 text-sm">
+                  Why small corn tortillas are essential for authentic tacos
+                </p>
+              </div>
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 mt-6">
             <Link href="/guides/corn-vs-flour-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
@@ -498,6 +510,16 @@ export default function TacosAlPastorRecipe() {
                 </h3>
                 <p className="text-charcoal-700 text-sm">
                   Learn when to use each type of tortilla
+                </p>
+              </div>
+            </Link>
+            <Link href="/faq" className="group block">
+              <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
+                <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
+                  Frequently Asked Questions
+                </h3>
+                <p className="text-charcoal-700 text-sm">
+                  Get answers about shipping, storage, and more
                 </p>
               </div>
             </Link>

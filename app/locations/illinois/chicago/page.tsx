@@ -44,6 +44,18 @@ export default function ChicagoPage() {
           <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Chicago?</h2>
           <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
         </section>
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-charcoal-950 mb-6">We Also Deliver To</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/locations/illinois/aurora" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Aurora</Link>
+            <Link href="/locations/illinois/elgin" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Elgin</Link>
+            <Link href="/locations/illinois/joliet" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Joliet</Link>
+            <Link href="/locations/illinois/naperville" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Naperville</Link>
+            <Link href="/locations/illinois/peoria" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Peoria</Link>
+            <Link href="/locations/illinois/rockford" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Rockford</Link>
+            <Link href="/locations/illinois/springfield" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Springfield</Link>
+          </div>
+        </section>
       </article>
     </div>
   )

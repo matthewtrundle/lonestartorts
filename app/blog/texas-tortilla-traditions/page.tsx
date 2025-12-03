@@ -240,6 +240,23 @@ export default function TexasTortillaTraditionsPage() {
             </div>
           </div>
 
+          
+          {/* Related Articles */}
+          <section className="mt-12 border-t border-charcoal-200 pt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Related Articles</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <Link href="/blog/nixtamalization-science" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">Science of Nixtamalization</h3>
+              </Link>
+              <Link href="/blog/why-pitmasters-refuse-store-tortillas" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">Why Pitmasters Refuse Store-Bought Tortillas</h3>
+              </Link>
+              <Link href="/blog/marias-story" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">Maria's Story</h3>
+              </Link>
+            </div>
+          </section>
+
           <div className="mt-12 pt-8 border-t border-charcoal-200">
             <div className="flex items-center justify-between">
               <Link href="/blog" className="text-sunset-600 hover:text-sunset-700 font-semibold">

@@ -167,7 +167,8 @@ export default function SanJosePage() {
               <Link href="/locations/california/fremont" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors text-sm">
                 Fremont
               </Link>
-            </div>
+            
+            <Link href="/locations/california/chula-vista" className="px-4 py-2 bg-white border border-charcoal-200 rounded-lg text-charcoal-700 hover:border-sunset-500 hover:text-sunset-600 transition-colors">Chula Vista</Link></div>
           </section>
         </article>
       </div>

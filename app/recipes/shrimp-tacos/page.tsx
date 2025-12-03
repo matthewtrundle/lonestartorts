@@ -514,6 +514,28 @@ export default function ShrimpTacosRecipe() {
               </div>
             </Link>
           </div>
+          <div className="grid md:grid-cols-2 gap-6 mt-6">
+            <Link href="/recipes/tacos-al-pastor" className="group block">
+              <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
+                <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
+                  Tacos Al Pastor
+                </h3>
+                <p className="text-charcoal-700 text-sm">
+                  Authentic Mexican street tacos with pineapple-marinated pork
+                </p>
+              </div>
+            </Link>
+            <Link href="/faq" className="group block">
+              <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
+                <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
+                  Frequently Asked Questions
+                </h3>
+                <p className="text-charcoal-700 text-sm">
+                  Get answers about shipping, storage, and more
+                </p>
+              </div>
+            </Link>
+          </div>
         </section>
 
         {/* Call to Action */}

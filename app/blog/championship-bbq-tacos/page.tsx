@@ -596,6 +596,23 @@ export default function ChampionshipBBQTacosPage() {
             </div>
           </section>
 
+          
+          {/* Related Articles */}
+          <section className="mt-12 border-t border-charcoal-200 pt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Related Articles</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <Link href="/blog/why-pitmasters-refuse-store-tortillas" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">Why Pitmasters Refuse Store-Bought Tortillas</h3>
+              </Link>
+              <Link href="/blog/california-bbq-revolution" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">California BBQ Revolution</h3>
+              </Link>
+              <Link href="/blog/texas-tortilla-traditions" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">Texas Tortilla Traditions</h3>
+              </Link>
+            </div>
+          </section>
+
           {/* CTA */}
           <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Win Your First Championship?</h2>

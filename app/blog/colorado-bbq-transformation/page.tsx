@@ -318,6 +318,23 @@ export default function ColoradoBBQTransformationPage() {
             </section>
           </div>
 
+          
+          {/* Related Articles */}
+          <section className="mt-12 border-t border-charcoal-200 pt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Related Articles</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <Link href="/blog/california-bbq-revolution" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">California BBQ Revolution</h3>
+              </Link>
+              <Link href="/blog/washington-bbq-elevation" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">Pacific Northwest BBQ Success Stories</h3>
+              </Link>
+              <Link href="/blog/championship-bbq-tacos" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">The Secret to Championship BBQ Tacos</h3>
+              </Link>
+            </div>
+          </section>
+
           {/* CTA Section */}
           <section className="mt-16 bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Start Your Colorado BBQ Success Story</h2>

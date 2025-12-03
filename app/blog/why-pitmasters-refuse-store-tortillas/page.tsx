@@ -519,6 +519,23 @@ export default function PitmastersRefuseStoreTortillasPage() {
             </div>
           </section>
 
+          
+          {/* Related Articles */}
+          <section className="mt-12 border-t border-charcoal-200 pt-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Related Articles</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <Link href="/blog/championship-bbq-tacos" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">The Secret to Championship BBQ Tacos</h3>
+              </Link>
+              <Link href="/blog/texas-tortilla-traditions" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">Texas Tortilla Traditions</h3>
+              </Link>
+              <Link href="/blog/bbq-success-stories" className="block p-4 bg-white rounded-lg border border-charcoal-100 hover:border-sunset-500 hover:shadow-md transition-all">
+                <h3 className="font-bold text-charcoal-950 hover:text-sunset-600">BBQ Success Stories</h3>
+              </Link>
+            </div>
+          </section>
+
           {/* CTA */}
           <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Don't Learn This Lesson the Expensive Way</h2>
