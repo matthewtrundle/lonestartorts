@@ -49,6 +49,58 @@ export default function MarylandPage() {
           <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 2-3 business days</li><li><strong>Free Shipping:</strong> On orders over $45</li><li><strong>Coverage:</strong> All Maryland zip codes</li></ul>
         </div>
       </section>
+      <section className="max-w-4xl mx-auto px-6 py-12">
+        <div className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Maryland Tortilla Delivery FAQs</h2>
+          <div className="space-y-4">
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden" open>
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">How long does shipping to Maryland take?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">Orders to Maryland typically arrive within 2-3 business days via USPS Priority Mail. We ship Monday through Friday, and orders placed before 2 PM CT ship the same day.</p>
+              </div>
+            </details>
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden">
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">Are the tortillas fresh when they arrive?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">Yes! Our H-E-B tortillas are shelf-stable with a 60-day shelf life. They don&apos;t require refrigeration and arrive soft, pliable, and ready to use.</p>
+              </div>
+            </details>
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden">
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">Do you offer free shipping to Maryland?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders over $45 to Maryland and all other US states. Flat-rate shipping is $12.99 for smaller orders.</p>
+              </div>
+            </details>
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden">
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">What types of tortillas do you offer?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">We ship corn tortillas, flour tortillas, and butter flour tortillas - the full H-E-B range. All varieties are authentic Texas-style and ship fresh to Maryland.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
       <article className="max-w-4xl mx-auto px-6 py-12 prose prose-lg">
         <h2>Why Maryland Loves Texas Tortillas</h2>
         <p>Maryland's DC suburbs in Montgomery and Prince George's counties attract professionals from across the country—including thousands of Texans. From federal workers in Silver Spring to tech employees in Rockville, Marylanders with Texas ties know authentic tortillas. We deliver that Lone Star taste to the Free State.</p>

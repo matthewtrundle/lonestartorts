@@ -151,6 +151,87 @@ export default function TrackOrderPage() {
             )}
           </div>
 
+          {/* Tracking Information */}
+          {!order && (
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-xl font-bold text-charcoal-950 mb-4">Shipping Timeline</h2>
+                <div className="space-y-4 text-charcoal-700">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-sunset-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-sunset-600 font-bold text-sm">1</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Order Confirmed</h3>
+                      <p className="text-sm">Your order is received and payment is processed. You&apos;ll receive an email confirmation with your order details.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-sunset-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-sunset-600 font-bold text-sm">2</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Processing</h3>
+                      <p className="text-sm">Orders placed before 2 PM CT Monday-Friday are packed the same day. Weekend orders ship Monday.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-sunset-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-sunset-600 font-bold text-sm">3</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Shipped</h3>
+                      <p className="text-sm">Your tortillas ship via USPS Priority Mail. You&apos;ll receive tracking information via email.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-sunset-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-sunset-600 font-bold text-sm">4</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Delivered</h3>
+                      <p className="text-sm">Most orders arrive in 2-3 business days. Alaska and Hawaii may take 4-7 days.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-xl font-bold text-charcoal-950 mb-4">Frequently Asked Questions</h2>
+                <div className="space-y-4">
+                  <details className="group" open>
+                    <summary className="font-semibold cursor-pointer list-none flex justify-between items-center">
+                      Where is my tracking number?
+                      <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                    </summary>
+                    <p className="text-sm text-charcoal-700 mt-2">Your tracking number is emailed once your order ships, typically within 1 business day. Check your spam folder if you don&apos;t see it.</p>
+                  </details>
+                  <details className="group">
+                    <summary className="font-semibold cursor-pointer list-none flex justify-between items-center">
+                      Do tortillas need refrigeration during shipping?
+                      <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                    </summary>
+                    <p className="text-sm text-charcoal-700 mt-2">No! H-E-B tortillas are shelf-stable and don&apos;t require refrigeration. They stay fresh at room temperature for 3-4 weeks unopened.</p>
+                  </details>
+                  <details className="group">
+                    <summary className="font-semibold cursor-pointer list-none flex justify-between items-center">
+                      My order is delayed. What should I do?
+                      <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                    </summary>
+                    <p className="text-sm text-charcoal-700 mt-2">USPS occasionally experiences delays. If your package hasn&apos;t arrived within 5 business days, please contact us with your order number.</p>
+                  </details>
+                  <details className="group">
+                    <summary className="font-semibold cursor-pointer list-none flex justify-between items-center">
+                      Can I change my shipping address?
+                      <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                    </summary>
+                    <p className="text-sm text-charcoal-700 mt-2">Contact us immediately if you need to change your address. Once an order ships, we cannot modify the destination.</p>
+                  </details>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Order Details */}
           {order && (
             <div className="bg-white rounded-lg shadow-md p-6">

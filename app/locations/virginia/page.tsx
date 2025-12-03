@@ -49,6 +49,58 @@ export default function VirginiaPage() {
           <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 2-3 business days</li><li><strong>Free Shipping:</strong> On orders over $45</li><li><strong>Coverage:</strong> All Virginia zip codes</li></ul>
         </div>
       </section>
+      <section className="max-w-4xl mx-auto px-6 py-12">
+        <div className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Virginia Tortilla Delivery FAQs</h2>
+          <div className="space-y-4">
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden" open>
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">How long does shipping to Virginia take?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">Orders to Virginia typically arrive within 2-3 business days via USPS Priority Mail. We ship Monday through Friday, and orders placed before 2 PM CT ship the same day.</p>
+              </div>
+            </details>
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden">
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">Are the tortillas fresh when they arrive?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">Yes! Our H-E-B tortillas are shelf-stable with a 60-day shelf life. They don&apos;t require refrigeration and arrive soft, pliable, and ready to use.</p>
+              </div>
+            </details>
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden">
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">Do you offer free shipping to Virginia?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders over $45 to Virginia and all other US states. Flat-rate shipping is $12.99 for smaller orders.</p>
+              </div>
+            </details>
+            <details className="group border border-charcoal-200 rounded-lg overflow-hidden">
+              <summary className="w-full flex items-center justify-between p-4 text-left bg-cream-50 hover:bg-cream-100 transition-colors cursor-pointer list-none">
+                <span className="font-semibold text-charcoal-950 pr-4">What types of tortillas do you offer?</span>
+                <svg className="w-5 h-5 text-charcoal-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 bg-white border-t border-charcoal-200">
+                <p className="text-charcoal-700 leading-relaxed">We ship corn tortillas, flour tortillas, and butter flour tortillas - the full H-E-B range. All varieties are authentic Texas-style and ship fresh to Virginia.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
       <article className="max-w-4xl mx-auto px-6 py-12 prose prose-lg">
         <h2>Why Virginia Loves Texas Tortillas</h2>
         <p>Northern Virginia's tech corridor and proximity to DC have attracted Texas transplants working in government, defense, and technology. From the Pentagon to Amazon's HQ2, Virginians with Texas roots know real tortillas. We deliver that authentic Texas taste to the Old Dominion.</p>

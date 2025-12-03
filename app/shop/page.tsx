@@ -168,6 +168,74 @@ export default function ShopPage() {
               </div>
             </div>
           </div>
+
+          {/* Product Details Section */}
+          <div className="mt-12 bg-gradient-to-r from-masa-50 to-sunset-50 rounded-xl p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">About Our Tortillas</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Corn Tortillas</h3>
+                <p className="text-charcoal-700 mb-4">Our corn tortillas are made with authentic nixtamalized masa, giving them that distinctive flavor that Texans love. Perfect for tacos, enchiladas, tostadas, and chilaquiles. Naturally gluten-free and packed with traditional Mexican flavor. Each tortilla is soft, pliable, and holds up beautifully whether you&apos;re frying them crisp or warming them soft.</p>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Flour Tortillas</h3>
+                <p className="text-charcoal-700">Our premium flour tortillas are soft, stretchy, and perfect for burritos, quesadillas, and wraps. Made with simple ingredients, these tortillas stay soft and pliable, even after refrigeration. The larger size makes them ideal for loading up with your favorite fillings without worrying about tears or breaks.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Butter Tortillas</h3>
+                <p className="text-charcoal-700 mb-4">The crown jewel of Texas tortillas. Our butter flour tortillas have a rich, indulgent taste that elevates any dish. The buttery flavor makes them perfect for breakfast tacos, and they&apos;re incredible simply warmed and eaten on their own. These are the tortillas that Texans crave when they move away from the Lone Star State.</p>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Freshness Guaranteed</h3>
+                <p className="text-charcoal-700">All our tortillas are shelf-stable, meaning they don&apos;t require refrigeration and arrive fresh at your door. Each package has a 60-day shelf life from production. Once opened, store in an airtight container or resealable bag for best results. Warm before serving for the ultimate tortilla experience.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Shopping FAQ Section */}
+          <div className="mt-12 bg-white rounded-xl shadow-sm p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Shopping FAQs</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <details className="group border-b border-gray-200 pb-4" open>
+                <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
+                  How much does shipping cost?
+                  <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </summary>
+                <p className="text-charcoal-700 mt-3">Shipping is a flat rate of $12.99 for all orders. We offer free shipping on orders over $45. All orders ship via USPS Priority Mail for fast, reliable delivery.</p>
+              </details>
+              <details className="group border-b border-gray-200 pb-4">
+                <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
+                  When will my order arrive?
+                  <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </summary>
+                <p className="text-charcoal-700 mt-3">Most orders arrive within 2-3 business days. Orders to Alaska and Hawaii may take 4-7 business days. We ship Monday through Friday, and orders placed before 2 PM CT ship the same day.</p>
+              </details>
+              <details className="group border-b border-gray-200 pb-4">
+                <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
+                  Do I need to refrigerate the tortillas?
+                  <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </summary>
+                <p className="text-charcoal-700 mt-3">No! Our H-E-B tortillas are shelf-stable and don&apos;t require refrigeration. They maintain freshness at room temperature for 3-4 weeks unopened. After opening, you can refrigerate to extend freshness or freeze for longer storage.</p>
+              </details>
+              <details className="group border-b border-gray-200 pb-4">
+                <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
+                  What payment methods do you accept?
+                  <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </summary>
+                <p className="text-charcoal-700 mt-3">We accept all major credit cards (Visa, Mastercard, American Express, Discover) as well as Apple Pay and Google Pay. All transactions are secured with industry-standard encryption.</p>
+              </details>
+              <details className="group border-b border-gray-200 pb-4">
+                <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
+                  Can I buy in bulk for restaurants or events?
+                  <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </summary>
+                <p className="text-charcoal-700 mt-3">Yes! We offer quantity discounts for bulk orders. Our multi-pack options provide savings of 5-15% depending on quantity. For very large orders or restaurant accounts, please contact us directly.</p>
+              </details>
+              <details className="group border-b border-gray-200 pb-4">
+                <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
+                  What if my tortillas arrive damaged?
+                  <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </summary>
+                <p className="text-charcoal-700 mt-3">We stand behind our products. If your tortillas arrive damaged or aren&apos;t up to our quality standards, contact us within 48 hours of delivery and we&apos;ll make it right with a replacement or refund.</p>
+              </details>
+            </div>
+          </div>
         </div>
       </main>
     </>
