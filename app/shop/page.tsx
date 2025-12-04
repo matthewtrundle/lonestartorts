@@ -140,6 +140,24 @@ export default function ShopPage() {
             </div>
           )}
 
+          {/* Wholesale CTA */}
+          <div className="mt-16 bg-gradient-to-r from-charcoal-900 to-charcoal-950 rounded-xl p-6 md:p-8 text-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">Ordering for a Restaurant or Business?</h2>
+                <p className="text-cream-200">
+                  Get volume discounts, priority fulfillment, and dedicated support for your food service needs.
+                </p>
+              </div>
+              <a
+                href="/wholesale"
+                className="shrink-0 inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-6 py-3 rounded-lg font-bold transition-colors"
+              >
+                View Wholesale Options
+              </a>
+            </div>
+          </div>
+
           {/* Additional Info Section - Moved closer */}
           <div className="mt-16 bg-white rounded-xl shadow-sm p-6 md:p-8">
             <div className="max-w-3xl mx-auto text-center">

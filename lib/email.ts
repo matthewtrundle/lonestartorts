@@ -595,6 +595,132 @@ export async function sendAdminOrderNotification(props: OrderConfirmationEmailPr
 }
 
 /**
+ * Send wholesale inquiry to admin
+ */
+export async function sendWholesaleInquiryEmail(props: {
+  businessName: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  businessType: string;
+  estimatedVolume: string;
+  message: string;
+}) {
+  const { businessName, contactName, email, phone, businessType, estimatedVolume, message } = props;
+
+  try {
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wholesale Inquiry</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #7c3aed; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">🏢 New Wholesale Inquiry</h1>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding: 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+
+                <!-- Business Info -->
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px; margin-bottom: 16px;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Business Information</h3>
+                    <p style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1c1917;">${businessName}</p>
+                    <p style="margin: 0 0 4px 0; font-size: 14px; color: #57534e;"><strong>Type:</strong> ${businessType}</p>
+                    <p style="margin: 0; font-size: 14px; color: #57534e;"><strong>Est. Volume:</strong> ${estimatedVolume}</p>
+                  </td>
+                </tr>
+
+                <!-- Contact Info -->
+                <tr>
+                  <td style="padding: 16px 0;">
+                    <h3 style="margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Contact Person</h3>
+                    <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 500; color: #1c1917;">${contactName}</p>
+                    <p style="margin: 0 0 4px 0; font-size: 14px; color: #57534e;">
+                      <a href="mailto:${email}" style="color: #7c3aed; text-decoration: none;">${email}</a>
+                    </p>
+                    ${phone ? `<p style="margin: 0; font-size: 14px; color: #57534e;">${phone}</p>` : ''}
+                  </td>
+                </tr>
+
+                <!-- Message -->
+                ${message ? `
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px; border-left: 4px solid #7c3aed;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Additional Details</h3>
+                    <p style="margin: 0; font-size: 14px; color: #1c1917; line-height: 1.6; white-space: pre-wrap;">${message}</p>
+                  </td>
+                </tr>
+                ` : ''}
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- Reply Button -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <a href="mailto:${email}?subject=Lonestar Tortillas Wholesale Pricing for ${encodeURIComponent(businessName)}"
+                 style="display: block; text-align: center; background-color: #1c1917; color: #ffffff; padding: 16px 24px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+                Reply to ${contactName}
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #fafaf9; text-align: center; border-top: 1px solid #e7e5e4;">
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Lonestar Tortillas Wholesale Inquiry
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `;
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: ADMIN_EMAIL,
+      replyTo: email,
+      subject: `🏢 Wholesale Inquiry: ${businessName} (${businessType}) - ${estimatedVolume}`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send wholesale inquiry email:', error);
+      return { success: false, error };
+    }
+
+    console.log('Wholesale inquiry email sent:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending wholesale inquiry email:', error);
+    return { success: false, error };
+  }
+}
+
+/**
  * Send contact form submission to admin
  */
 export async function sendContactFormEmail(props: {

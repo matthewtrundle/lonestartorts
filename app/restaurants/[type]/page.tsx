@@ -283,11 +283,27 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
                 <p className="text-charcoal-700 leading-relaxed">
                   Yes! Our multi-pack pricing provides built-in bulk discounts. The more you order,
                   the more you save per pack. We also offer free shipping on orders over $45. For
-                  high-volume restaurant accounts with recurring needs, contact us to discuss custom
-                  pricing arrangements.
+                  high-volume restaurant accounts with recurring needs, <a href="/wholesale" className="text-sunset-600 font-semibold hover:text-sunset-700">visit our wholesale page</a> to
+                  request custom pricing.
                 </p>
               </div>
             </details>
+          </div>
+
+          {/* Wholesale CTA */}
+          <div className="mt-8 p-6 bg-sunset-50 border border-sunset-200 rounded-xl">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 className="text-lg font-bold text-charcoal-950">Need Custom Pricing?</h3>
+                <p className="text-charcoal-700 text-sm">Get volume discounts for your restaurant account.</p>
+              </div>
+              <a
+                href="/wholesale"
+                className="shrink-0 inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-5 py-2.5 rounded-lg font-bold transition-colors text-sm"
+              >
+                Request Wholesale Pricing
+              </a>
+            </div>
           </div>
         </div>
       </section>
