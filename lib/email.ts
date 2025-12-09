@@ -1,8 +1,11 @@
 import { Resend } from 'resend';
 import { generateOrderConfirmationEmail, generateOrderShippedEmail } from './email-templates';
 
-// Admin email for order notifications
-const ADMIN_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL || 'howdy@lonestartortilla.com';
+// Admin emails for order notifications
+const ADMIN_EMAILS = [
+  'matthewtrundle@gmail.com',
+  'allan.henslee@gmail.com',
+];
 
 // Lazy-load Resend client to avoid build-time initialization
 let resendClient: Resend | null = null;
@@ -576,7 +579,7 @@ export async function sendAdminOrderNotification(props: OrderConfirmationEmailPr
     const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from: fromEmail,
-      to: ADMIN_EMAIL,
+      to: ADMIN_EMAILS,
       subject: `💰 New Order #${orderNumber} - $${(total / 100).toFixed(2)} from ${customerName}`,
       html,
     });
@@ -701,7 +704,7 @@ export async function sendWholesaleInquiryEmail(props: {
     const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from: fromEmail,
-      to: ADMIN_EMAIL,
+      to: ADMIN_EMAILS,
       replyTo: email,
       subject: `🏢 Wholesale Inquiry: ${businessName} (${businessType}) - ${estimatedVolume}`,
       html,
@@ -819,7 +822,7 @@ export async function sendContactFormEmail(props: {
     const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from: fromEmail,
-      to: ADMIN_EMAIL,
+      to: ADMIN_EMAILS,
       replyTo: email,
       subject: `Contact Form: ${subject} - from ${name}`,
       html,
