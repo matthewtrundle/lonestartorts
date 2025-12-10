@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
-import { trackFormSubmission, event } from '@/lib/analytics'
+import { trackWaitlistSignup } from '@/lib/analytics'
 
 export default function PreSalePage() {
   const [email, setEmail] = useState('')
@@ -51,12 +51,10 @@ export default function PreSalePage() {
       setSubmitted(true)
       setSignupCount(prev => prev + 1)
 
-      // Track the form submission in Google Analytics
-      trackFormSubmission('Waitlist Signup')
-      event({
-        action: 'waitlist_signup',
-        category: 'Lead Generation',
-        label: `Interests: ${Object.keys(interests).filter(k => interests[k as keyof typeof interests]).join(', ')}`,
+      // Track the form submission in Vercel Analytics
+      trackWaitlistSignup({
+        interests: Object.keys(interests).filter(k => interests[k as keyof typeof interests]).join(', '),
+        quantity,
       })
 
       // Scroll to top to show success message

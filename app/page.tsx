@@ -11,6 +11,7 @@ import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { Header } from '@/components/layout/Header'
 import { HeroInteractions } from '@/components/HeroInteractions'
 import { ContactForm } from '@/components/ContactForm'
+import { trackVideoPlay } from '@/lib/analytics'
 
 export default function Home() {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -20,6 +21,12 @@ export default function Home() {
     { src: '/tiks/H-E-B Tortillas_ Ride With Us_compressed.mp4', title: 'Ride With Us' },
     { src: '/tiks/Texan Tortilla Secret_compressed.mp4', title: 'Texan Secret' }
   ];
+
+  // Track video play and switch video
+  const handleVideoChange = (index: number) => {
+    trackVideoPlay({ videoTitle: videos[index].title });
+    setCurrentVideo(index);
+  };
 
   return (
     <ScrollAnimations>
@@ -288,6 +295,7 @@ export default function Home() {
                     onClick={() => {
                       const video = document.getElementById('maria-video') as HTMLVideoElement;
                       if (video) {
+                        trackVideoPlay({ videoTitle: "Maria's Story - A Taste of Texas" });
                         video.play();
                         video.scrollIntoView({ behavior: 'smooth', block: 'center' });
                       }
@@ -334,6 +342,7 @@ export default function Home() {
                             const video = document.getElementById('maria-video') as HTMLVideoElement;
                             const overlay = document.getElementById('video-play-overlay');
                             if (video && overlay) {
+                              trackVideoPlay({ videoTitle: "Maria's Story - A Taste of Texas" });
                               video.play();
                               overlay.style.opacity = '0';
                               overlay.style.pointerEvents = 'none';
@@ -655,7 +664,7 @@ export default function Home() {
                   {videos.map((_, index) => (
                     <button
                       key={index}
-                      onClick={() => setCurrentVideo(index)}
+                      onClick={() => handleVideoChange(index)}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${
                         currentVideo === index
                           ? 'w-8 bg-cream-50'
@@ -668,7 +677,10 @@ export default function Home() {
 
                 {/* Side Navigation Arrows */}
                 <button
-                  onClick={() => setCurrentVideo((prev) => (prev - 1 + videos.length) % videos.length)}
+                  onClick={() => {
+                    const prevIndex = (currentVideo - 1 + videos.length) % videos.length;
+                    handleVideoChange(prevIndex);
+                  }}
                   className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-cream-50/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-cream-50/30 transition-colors"
                   aria-label="Previous video"
                 >
@@ -678,7 +690,10 @@ export default function Home() {
                 </button>
 
                 <button
-                  onClick={() => setCurrentVideo((prev) => (prev + 1) % videos.length)}
+                  onClick={() => {
+                    const nextIndex = (currentVideo + 1) % videos.length;
+                    handleVideoChange(nextIndex);
+                  }}
                   className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-cream-50/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-cream-50/30 transition-colors"
                   aria-label="Next video"
                 >
@@ -693,7 +708,7 @@ export default function Home() {
                 {videos.map((video, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentVideo(index)}
+                    onClick={() => handleVideoChange(index)}
                     className={`relative w-20 h-32 rounded-lg overflow-hidden transition-all duration-300 ${
                       currentVideo === index
                         ? 'ring-2 ring-sunset-500 scale-105'

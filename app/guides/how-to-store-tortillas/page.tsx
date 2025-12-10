@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { TacoIcon, BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'How to Store Tortillas',
@@ -67,6 +68,11 @@ const articleSchema = {
 export default function HowToStoreTortillasPage() {
   return (
     <>
+      <PageViewTracker
+        type="guide"
+        slug="how-to-store-tortillas"
+        title="How to Store Tortillas"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

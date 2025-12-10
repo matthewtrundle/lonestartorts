@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { trackOutboundLink, event } from '@/lib/analytics';
+import { trackOutboundLink, trackCTAClick } from '@/lib/analytics';
 import { AnchorHTMLAttributes } from 'react';
 
 interface TrackedLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -34,11 +34,7 @@ export default function TrackedLink({
 
     // Track custom event if provided
     if (eventName && eventCategory) {
-      event({
-        action: eventName,
-        category: eventCategory,
-        label: href,
-      });
+      trackCTAClick(eventName, eventCategory);
     }
 
     // Call the original onClick if provided

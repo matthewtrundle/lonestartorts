@@ -47,15 +47,10 @@ export default function CheckoutPage() {
 
     try {
       // Track begin checkout event
-      trackBeginCheckout(
-        total / 100,
-        items.map((item) => ({
-          item_id: item.sku,
-          item_name: item.name,
-          quantity: item.quantity,
-          price: item.price / 100,
-        }))
-      );
+      trackBeginCheckout({
+        itemCount: items.length,
+        cartTotal: total / 100,
+      });
 
       // Create Stripe checkout session
       const response = await fetch('/api/checkout', {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'BBQ Event Planning: Taco Bars & Catering',
@@ -35,6 +36,12 @@ const articleSchema = {
 export default function TexasEventPlanningGuidePage() {
   return (
     <>
+      <PageViewTracker
+        type="blog"
+        slug="texas-event-planning-guide"
+        title="BBQ Event Planning: Taco Bars & Catering"
+        category="Business & Culture"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">

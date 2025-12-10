@@ -1,12 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
-import { Suspense } from 'react';
-import Script from 'next/script';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
-import Analytics from '@/components/Analytics';
-import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
-import WebVitalsMonitor from '@/components/seo/WebVitalsMonitor';
 import { CartProvider } from '@/lib/cart-context';
 import { CartSidebar } from '@/components/cart/CartSidebar';
 
@@ -212,11 +208,6 @@ export default function RootLayout({
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-
-        {/* Google Tag Manager */}
-        <GoogleTagManager />
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         {/* JSON-LD Structured Data */}
@@ -231,35 +222,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
 
-        <GoogleTagManagerNoScript />
+        {/* Vercel Analytics */}
+        <Analytics />
 
-        {/* Google Analytics 4 */}
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true' && (
-          <>
-            <Script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script
-              id="google-analytics"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
-                `,
-              }}
-            />
-          </>
-        )}
         <ClerkProvider>
-          <Suspense fallback={null}>
-            <Analytics />
-          </Suspense>
-          <WebVitalsMonitor />
           <CartProvider>
             <CartSidebar />
             <div className="min-h-screen flex flex-col">

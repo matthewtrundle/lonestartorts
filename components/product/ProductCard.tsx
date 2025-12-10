@@ -78,7 +78,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
     // Track analytics
     trackAddToCart({
-      id: sku,
+      productId: sku,
       name,
       price: price / 100,
       quantity,

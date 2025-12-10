@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
+import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'Texas Smoked Brisket Tacos Recipe',
@@ -97,6 +98,11 @@ export default function BrisketTacosRecipe() {
 
   return (
     <>
+      <PageViewTracker
+        type="recipe"
+        slug="brisket-tacos"
+        title="Texas Smoked Brisket Tacos Recipe"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">

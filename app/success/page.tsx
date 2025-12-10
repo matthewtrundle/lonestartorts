@@ -72,17 +72,11 @@ function SuccessContent() {
         if (data.success && data.order) {
           setOrderDetails(data.order);
 
-          // Track conversion in Google Analytics
+          // Track conversion in Vercel Analytics
           trackPurchase({
-            transaction_id: data.order.orderNumber,
-            value: data.order.total / 100, // Convert cents to dollars
-            currency: 'USD',
-            items: data.order.items.map((item: any) => ({
-              item_id: item.sku,
-              item_name: item.name,
-              quantity: item.quantity,
-              price: item.price / 100,
-            }))
+            orderId: data.order.orderNumber,
+            total: data.order.total / 100, // Convert cents to dollars
+            itemCount: data.order.items.length,
           });
         }
       })
