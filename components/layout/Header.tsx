@@ -125,6 +125,12 @@ export function Header() {
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
+            <Link href="/contact" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
+                Contact
+              </span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+            </Link>
 
             {/* Cart Icon */}
             <button
@@ -242,6 +248,13 @@ export function Header() {
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
               Story
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+            >
+              Contact
             </Link>
           </nav>
         </div>
