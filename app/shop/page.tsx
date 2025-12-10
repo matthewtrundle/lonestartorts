@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Truck, Shield, Star, Clock } from 'lucide-react';
+import { trackPageView, trackViewCategory } from '@/lib/analytics';
 
 import type { Product } from '@/lib/products';
 
@@ -15,11 +16,16 @@ export default function ShopPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Track shop page view
+    trackPageView('shop', 'Shop Page');
+
     fetch('/api/products')
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
           setProducts(data.products);
+          // Track product category view with product count
+          trackViewCategory('All Products', data.products.length);
         } else {
           setError('Failed to load products');
         }

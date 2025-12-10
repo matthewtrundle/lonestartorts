@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { trackFormSubmission } from '@/lib/analytics';
 
 interface FormData {
   businessName: string;
@@ -73,6 +74,9 @@ export function WholesaleForm() {
       if (!response.ok) {
         throw new Error('Failed to submit inquiry');
       }
+
+      // Track successful form submission
+      trackFormSubmission('Wholesale Inquiry');
 
       setIsSubmitted(true);
       setFormData(initialFormData);

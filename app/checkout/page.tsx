@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { trackBeginCheckout } from '@/lib/analytics';
+import { trackBeginCheckout, trackPageView } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
 import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { Header } from '@/components/layout/Header';
@@ -34,10 +34,15 @@ export default function CheckoutPage() {
     return 'Shipping';
   };
 
-  // Redirect if cart is empty (wait for hydration to avoid race condition)
+  // Track checkout page view and redirect if cart is empty
   React.useEffect(() => {
-    if (isHydrated && items.length === 0) {
-      router.push('/');
+    if (isHydrated) {
+      if (items.length === 0) {
+        router.push('/');
+      } else {
+        // Track checkout page view
+        trackPageView('checkout', 'Checkout Page');
+      }
     }
   }, [items.length, isHydrated, router]);
 

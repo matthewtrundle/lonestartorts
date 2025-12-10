@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { trackFormSubmission } from '@/lib/analytics';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -31,6 +32,9 @@ export function ContactForm() {
       if (!response.ok) {
         throw new Error(data.error || 'Failed to send message');
       }
+
+      // Track successful form submission
+      trackFormSubmission('Contact Form');
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });

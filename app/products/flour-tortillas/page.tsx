@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ProductViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'Premium Flour Tortillas',
@@ -105,6 +106,13 @@ export default function FlourTortillasProductPage() {
 
   return (
     <>
+      {/* Analytics tracking for product view */}
+      <ProductViewTracker
+        productId="flour-tortillas"
+        productName="Premium Flour Tortillas"
+        category="Flour Tortillas"
+        price={6.99}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}

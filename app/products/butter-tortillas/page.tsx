@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ProductViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'H-E-B® Butter Flour Tortillas',
@@ -27,6 +28,13 @@ const productSchema = {
 export default function ButterTortillasPage() {
   return (
     <>
+      {/* Analytics tracking for product view */}
+      <ProductViewTracker
+        productId="butter-tortillas"
+        productName="H-E-B Butter Flour Tortillas"
+        category="Butter Tortillas"
+        price={16.99}
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <nav className="container mx-auto px-8 py-6">

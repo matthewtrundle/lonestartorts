@@ -158,6 +158,95 @@ export const trackSearch = (searchTerm: string): void => {
   });
 };
 
+// Track page views with page type context
+export type PageType =
+  | 'homepage'
+  | 'shop'
+  | 'product_detail'
+  | 'product_category'
+  | 'cart'
+  | 'checkout'
+  | 'blog'
+  | 'blog_article'
+  | 'guide'
+  | 'recipe'
+  | 'wholesale'
+  | 'about'
+  | 'other';
+
+export const trackPageView = (pageType: PageType, pageName?: string): void => {
+  if (!isAnalyticsEnabled()) return;
+
+  window.gtag?.('event', 'page_view_custom', {
+    page_type: pageType,
+    page_name: pageName || pageType,
+  });
+};
+
+// Track content engagement (scroll depth, time on page)
+export const trackContentEngagement = (contentType: string, contentId: string, action: 'start' | 'scroll_25' | 'scroll_50' | 'scroll_75' | 'scroll_100' | 'complete'): void => {
+  if (!isAnalyticsEnabled()) return;
+
+  window.gtag?.('event', 'content_engagement', {
+    content_type: contentType,
+    content_id: contentId,
+    engagement_action: action,
+  });
+};
+
+// Track product category view
+export const trackViewCategory = (category: string, productCount?: number): void => {
+  if (!isAnalyticsEnabled()) return;
+
+  window.gtag?.('event', 'view_item_list', {
+    item_list_id: category,
+    item_list_name: category,
+    items_count: productCount,
+  });
+};
+
+// Track newsletter signup
+export const trackNewsletterSignup = (location: string): void => {
+  if (!isAnalyticsEnabled()) return;
+
+  window.gtag?.('event', 'newsletter_signup', {
+    event_category: 'Lead Generation',
+    event_label: location,
+  });
+};
+
+// Track cart view
+export const trackViewCart = (value: number, itemCount: number): void => {
+  if (!isAnalyticsEnabled()) return;
+
+  window.gtag?.('event', 'view_cart', {
+    currency: 'USD',
+    value,
+    items_count: itemCount,
+  });
+};
+
+// Track remove from cart
+export const trackRemoveFromCart = (product: {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}): void => {
+  if (!isAnalyticsEnabled()) return;
+
+  window.gtag?.('event', 'remove_from_cart', {
+    currency: 'USD',
+    value: product.price * product.quantity,
+    items: [{
+      item_id: product.id,
+      item_name: product.name,
+      quantity: product.quantity,
+      price: product.price,
+    }],
+  });
+};
+
 // Extend Window interface for TypeScript
 declare global {
   interface Window {

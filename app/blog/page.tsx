@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'Tortilla Stories & Traditions',
@@ -172,6 +173,8 @@ const CategoryBadge = ({ category }: { category: string }) => {
 export default function BlogPage() {
   return (
     <>
+      {/* Analytics tracking for blog listing */}
+      <PageViewTracker pageType="blog" pageName="Blog Listing" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">

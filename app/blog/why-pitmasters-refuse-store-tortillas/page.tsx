@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ContentViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'Why Pitmasters Refuse Store-Bought Tortillas',
@@ -30,6 +31,12 @@ const articleSchema = {
 export default function PitmastersRefuseStoreTortillasPage() {
   return (
     <>
+      {/* Analytics tracking for blog content */}
+      <ContentViewTracker
+        contentType="blog"
+        contentId="why-pitmasters-refuse-store-tortillas"
+        contentTitle="Why Pitmasters Refuse Store-Bought Tortillas"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">

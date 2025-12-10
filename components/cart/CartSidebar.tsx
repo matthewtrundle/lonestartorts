@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { trackBeginCheckout } from '@/lib/analytics';
+import { trackBeginCheckout, trackViewCart, trackRemoveFromCart } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
 import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock } from 'lucide-react';
 
@@ -15,7 +15,28 @@ export function CartSidebar() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Track cart view when opened
+  useEffect(() => {
+    if (isOpen && items.length > 0) {
+      trackViewCart(total / 100, itemCount);
+    }
+  }, [isOpen, total, itemCount, items.length]);
+
   const handleClose = () => setIsOpen(false);
+
+  // Handle remove with tracking
+  const handleRemoveItem = (sku: string) => {
+    const item = items.find(i => i.sku === sku);
+    if (item) {
+      trackRemoveFromCart({
+        id: item.sku,
+        name: item.name,
+        price: item.price / 100,
+        quantity: item.quantity,
+      });
+    }
+    removeItem(sku);
+  };
 
   const handleCheckout = async () => {
     setIsProcessing(true);
@@ -160,7 +181,7 @@ export function CartSidebar() {
                             {item.name}
                           </h3>
                           <button
-                            onClick={() => removeItem(item.sku)}
+                            onClick={() => handleRemoveItem(item.sku)}
                             className="text-gray-400 hover:text-red-600 transition-colors"
                             aria-label="Remove item"
                           >
