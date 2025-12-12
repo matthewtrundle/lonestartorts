@@ -11,13 +11,20 @@ import { getStripe } from '@/lib/stripe';
 import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
-import { Lock, ShieldCheck, Truck, ArrowLeft } from 'lucide-react';
+import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X } from 'lucide-react';
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, itemCount, subtotal, shipping, total, clearCart, isHydrated } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Discount code state
+  const [email, setEmail] = useState('');
+  const [discountCode, setDiscountCode] = useState('');
+  const [isValidatingCode, setIsValidatingCode] = useState(false);
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [discountError, setDiscountError] = useState<string | null>(null);
 
   // Calculate shipping breakdown for better display
   const tortillaPacks = items.filter(item => item.productType !== 'sauce').reduce((sum, item) => sum + item.quantity, 0);
@@ -41,6 +48,60 @@ export default function CheckoutPage() {
     }
   }, [items.length, isHydrated, router]);
 
+  // Calculate display total (with discount if applied)
+  const displayShipping = discountApplied ? 0 : shipping;
+  const displayTotal = discountApplied ? subtotal : total;
+
+  // Validate discount code
+  const handleApplyDiscount = async () => {
+    if (!email.trim()) {
+      setDiscountError('Please enter your email address');
+      return;
+    }
+    if (!discountCode.trim()) {
+      setDiscountError('Please enter a discount code');
+      return;
+    }
+
+    setIsValidatingCode(true);
+    setDiscountError(null);
+
+    try {
+      const response = await fetch('/api/validate-discount', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(),
+          discountCode: discountCode.trim().toUpperCase(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Invalid discount code');
+      }
+
+      if (data.valid) {
+        setDiscountApplied(true);
+        setDiscountError(null);
+      } else {
+        setDiscountError(data.error || 'Invalid discount code');
+      }
+    } catch (err) {
+      setDiscountError(err instanceof Error ? err.message : 'Failed to validate code');
+    } finally {
+      setIsValidatingCode(false);
+    }
+  };
+
+  // Remove applied discount
+  const handleRemoveDiscount = () => {
+    setDiscountApplied(false);
+    setDiscountCode('');
+    setDiscountError(null);
+  };
+
   const handleCheckout = async () => {
     setIsProcessing(true);
     setError(null);
@@ -49,7 +110,7 @@ export default function CheckoutPage() {
       // Track begin checkout event
       trackBeginCheckout({
         itemCount: items.length,
-        cartTotal: total / 100,
+        cartTotal: displayTotal / 100,
       });
 
       // Create Stripe checkout session
@@ -63,6 +124,11 @@ export default function CheckoutPage() {
             sku: item.sku,
             quantity: item.quantity,
           })),
+          // Include discount info if applied
+          ...(discountApplied && {
+            email: email.trim().toLowerCase(),
+            discountCode: discountCode.trim().toUpperCase(),
+          }),
         }),
       });
 
@@ -177,6 +243,65 @@ export default function CheckoutPage() {
               <div className="bg-white rounded-xl shadow-soft p-6 md:p-8 sticky top-32 space-y-6">
                 <h2 className="text-2xl font-semibold text-charcoal-950">Order Total</h2>
 
+                {/* Discount Code Section */}
+                <div className="pb-6 border-b border-cream-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Tag className="w-4 h-4 text-sunset-600" />
+                    <span className="font-medium text-charcoal-950">Discount Code</span>
+                  </div>
+
+                  {discountApplied ? (
+                    // Show applied discount
+                    <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-green-600" />
+                        <span className="text-green-800 font-medium">
+                          Free shipping applied!
+                        </span>
+                      </div>
+                      <button
+                        onClick={handleRemoveDiscount}
+                        className="text-charcoal-500 hover:text-charcoal-700 p-1"
+                        aria-label="Remove discount"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    // Show input form
+                    <div className="space-y-3">
+                      <input
+                        type="email"
+                        placeholder="Email address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full px-3 py-2 border border-cream-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                      />
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="Enter code"
+                          value={discountCode}
+                          onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
+                          className="flex-1 px-3 py-2 border border-cream-300 rounded-lg text-sm uppercase focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                        />
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={handleApplyDiscount}
+                          disabled={isValidatingCode}
+                          className="px-4"
+                        >
+                          {isValidatingCode ? '...' : 'Apply'}
+                        </Button>
+                      </div>
+                      {discountError && (
+                        <p className="text-sm text-red-600">{discountError}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
                 {/* Price Breakdown */}
                 <div className="space-y-4 pb-6 border-b border-cream-200">
                   <div className="flex justify-between items-center">
@@ -190,7 +315,14 @@ export default function CheckoutPage() {
                         {getShippingLabel()}
                       </span>
                     </div>
-                    <span className="font-semibold text-charcoal-950">{formatPrice(shipping)}</span>
+                    {discountApplied ? (
+                      <div className="flex items-center gap-2">
+                        <span className="text-charcoal-400 line-through text-sm">{formatPrice(shipping)}</span>
+                        <span className="font-semibold text-green-600">FREE</span>
+                      </div>
+                    ) : (
+                      <span className="font-semibold text-charcoal-950">{formatPrice(shipping)}</span>
+                    )}
                   </div>
                 </div>
 
@@ -198,7 +330,7 @@ export default function CheckoutPage() {
                 <div className="flex justify-between items-center py-2">
                   <span className="font-bold text-xl text-charcoal-950">Total</span>
                   <span className="font-bold text-2xl text-sunset-600">
-                    {formatPrice(total)}
+                    {formatPrice(displayTotal)}
                   </span>
                 </div>
 

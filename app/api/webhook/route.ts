@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
-import { calculateShipping, getProductBySku } from '@/lib/products';
+// Products imported for reference if needed
+// import { getProductBySku } from '@/lib/products';
 import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
 import { randomUUID } from 'crypto';
 
@@ -53,31 +54,19 @@ export async function POST(req: NextRequest) {
           const random = Math.random().toString(36).substring(2, 4).toUpperCase();
           const orderNumber = `LST-${timestamp}${random}`;
 
-          // Extract line items (filter out shipping item)
-          const allItems = fullSession.line_items?.data.map((item) => ({
+          // Extract line items (all are products now, shipping is separate)
+          const items = fullSession.line_items?.data.map((item) => ({
             sku: item.price?.metadata?.sku || '',
             name: item.description || '',
             quantity: item.quantity || 0,
             price: item.price?.unit_amount || 0,
           })) || [];
 
-          // Separate product items from shipping
-          const items = allItems.filter((item) => item.sku !== 'SHIPPING');
-
           // Calculate totals (amounts in cents)
           const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-          // Build full items array with productType for shipping calculation
-          const fullItems = items.map((item) => {
-            const product = getProductBySku(item.sku);
-            return {
-              quantity: item.quantity,
-              productType: product?.productType || 'tortilla',
-            };
-          });
-
-          // Calculate smart shipping based on items
-          const shipping = calculateShipping(fullItems);
+          // Get shipping from Stripe session (now properly separated from line items)
+          const shipping = fullSession.shipping_cost?.amount_total || 0;
 
           const tax = Math.round(subtotal * 0.0825); // 8.25% Texas sales tax
           const total = session.amount_total || (subtotal + shipping + tax);
