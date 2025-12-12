@@ -1,72 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { trackBeginCheckout } from '@/lib/analytics';
-import { getStripe } from '@/lib/stripe';
 import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock } from 'lucide-react';
 
 export function CartSidebar() {
+  const router = useRouter();
   const { items, itemCount, subtotal, shipping, total, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleClose = () => setIsOpen(false);
 
-  const handleCheckout = async () => {
-    setIsProcessing(true);
-    setError(null);
-
-    try {
-      // Track begin checkout event
-      trackBeginCheckout({
-        itemCount: items.length,
-        cartTotal: total / 100,
-      });
-
-      // Create Stripe checkout session
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: items.map((item) => ({
-            sku: item.sku,
-            quantity: item.quantity,
-          })),
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to create checkout session');
-      }
-
-      // Redirect to Stripe Checkout
-      const stripe = await getStripe();
-
-      if (!stripe) {
-        throw new Error('Failed to load Stripe');
-      }
-
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      });
-
-      if (stripeError) {
-        throw new Error(stripeError.message);
-      }
-    } catch (err) {
-      console.error('Checkout error:', err);
-      setError(err instanceof Error ? err.message : 'An error occurred during checkout');
-      setIsProcessing(false);
-    }
+  // Redirect to checkout page (where discount codes can be entered)
+  const handleCheckout = () => {
+    setIsOpen(false);
+    router.push('/checkout');
   };
 
   return (
@@ -244,19 +196,11 @@ export function CartSidebar() {
                 {/* Checkout Button */}
                 <button
                   onClick={handleCheckout}
-                  disabled={isProcessing}
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center gap-2 w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg"
                 >
                   <Lock className="w-4 h-4" />
-                  {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
+                  Proceed to Checkout
                 </button>
-
-                {/* Error Message */}
-                {error && (
-                  <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-800">
-                    {error}
-                  </div>
-                )}
 
                 {/* Continue Shopping */}
                 <button
