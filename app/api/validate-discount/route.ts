@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 // Valid discount codes for free shipping on first order
-// Can be moved to environment variable or database later
-const VALID_DISCOUNT_CODES = ['FREESHIP', 'WELCOME', 'FIRSTORDER', 'GUYSGUYSGUYS', 'XMAS2025'];
+// Each code has a custom success message
+const DISCOUNT_CODES: Record<string, string> = {
+  'FREESHIP': 'Free shipping unlocked!',
+  'WELCOME': 'Welcome to the tortilla family!',
+  'FIRSTORDER': 'First order = free shipping!',
+  'GUYSGUYSGUYS': 'Guys rule! Free shipping for you!',
+  'XMAS2025': 'Have a wonderful holiday season!',
+};
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,7 +32,9 @@ export async function POST(req: NextRequest) {
 
     // Check if discount code is valid
     const normalizedCode = discountCode.trim().toUpperCase();
-    if (!VALID_DISCOUNT_CODES.includes(normalizedCode)) {
+    const successMessage = DISCOUNT_CODES[normalizedCode];
+
+    if (!successMessage) {
       return NextResponse.json(
         { valid: false, error: 'Invalid discount code' },
         { status: 200 }
@@ -49,9 +57,10 @@ export async function POST(req: NextRequest) {
     // All checks passed - discount is valid
     return NextResponse.json({
       valid: true,
+      message: successMessage,
       discount: {
         type: 'free_shipping',
-        description: 'Free shipping on your first order',
+        code: normalizedCode,
       },
     });
   } catch (error) {

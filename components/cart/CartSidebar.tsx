@@ -20,6 +20,7 @@ export function CartSidebar() {
   const [discountCode, setDiscountCode] = useState('');
   const [isValidatingCode, setIsValidatingCode] = useState(false);
   const [discountApplied, setDiscountApplied] = useState(false);
+  const [discountMessage, setDiscountMessage] = useState<string>('Free shipping!');
   const [discountError, setDiscountError] = useState<string | null>(null);
 
   const handleClose = () => setIsOpen(false);
@@ -56,6 +57,7 @@ export function CartSidebar() {
 
       if (data.valid) {
         setDiscountApplied(true);
+        setDiscountMessage(data.message || 'Free shipping!');
         setDiscountError(null);
       } else {
         setDiscountError(data.error || 'Invalid code');
@@ -277,7 +279,7 @@ export function CartSidebar() {
                     <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded">
                       <div className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-green-600" />
-                        <span className="text-xs text-green-800 font-medium">Free shipping!</span>
+                        <span className="text-xs text-green-800 font-medium">{discountMessage}</span>
                       </div>
                       <button
                         onClick={handleRemoveDiscount}

@@ -9,7 +9,7 @@ const stripe = stripeKey ? new Stripe(stripeKey, {
 }) : null;
 
 // Valid discount codes for free shipping on first order
-const VALID_DISCOUNT_CODES = ['FREESHIP', 'WELCOME', 'FIRSTORDER', 'GUYSGUYSGUYS', 'XMAS2025'];
+const VALID_DISCOUNT_CODES = ['FREESHIP', 'WELCOME', 'FIRSTORDER', 'GUYSGUYSGUYS', 'XMAS2025'] as const;
 
 export async function POST(req: NextRequest) {
   try {
