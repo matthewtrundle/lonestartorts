@@ -1,24 +1,134 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock } from 'lucide-react';
+import { trackBeginCheckout } from '@/lib/analytics';
+import { getStripe } from '@/lib/stripe';
+import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check } from 'lucide-react';
 
 export function CartSidebar() {
-  const router = useRouter();
   const { items, itemCount, subtotal, shipping, total, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Discount code state
+  const [email, setEmail] = useState('');
+  const [discountCode, setDiscountCode] = useState('');
+  const [isValidatingCode, setIsValidatingCode] = useState(false);
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [discountError, setDiscountError] = useState<string | null>(null);
 
   const handleClose = () => setIsOpen(false);
 
-  // Redirect to checkout page (where discount codes can be entered)
-  const handleCheckout = () => {
-    setIsOpen(false);
-    router.push('/checkout');
+  // Calculate display totals
+  const displayShipping = discountApplied ? 0 : shipping;
+  const displayTotal = discountApplied ? subtotal : total;
+
+  // Validate discount code
+  const handleApplyDiscount = async () => {
+    if (!email.trim()) {
+      setDiscountError('Enter your email');
+      return;
+    }
+    if (!discountCode.trim()) {
+      setDiscountError('Enter a code');
+      return;
+    }
+
+    setIsValidatingCode(true);
+    setDiscountError(null);
+
+    try {
+      const response = await fetch('/api/validate-discount', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(),
+          discountCode: discountCode.trim().toUpperCase(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.valid) {
+        setDiscountApplied(true);
+        setDiscountError(null);
+      } else {
+        setDiscountError(data.error || 'Invalid code');
+      }
+    } catch (err) {
+      setDiscountError('Failed to validate');
+    } finally {
+      setIsValidatingCode(false);
+    }
+  };
+
+  // Remove applied discount
+  const handleRemoveDiscount = () => {
+    setDiscountApplied(false);
+    setDiscountCode('');
+    setDiscountError(null);
+  };
+
+  const handleCheckout = async () => {
+    setIsProcessing(true);
+    setError(null);
+
+    try {
+      // Track begin checkout event
+      trackBeginCheckout({
+        itemCount: items.length,
+        cartTotal: displayTotal / 100,
+      });
+
+      // Create Stripe checkout session
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            sku: item.sku,
+            quantity: item.quantity,
+          })),
+          // Include discount info if applied
+          ...(discountApplied && {
+            email: email.trim().toLowerCase(),
+            discountCode: discountCode.trim().toUpperCase(),
+          }),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      // Redirect to Stripe Checkout
+      const stripe = await getStripe();
+
+      if (!stripe) {
+        throw new Error('Failed to load Stripe');
+      }
+
+      const { error: stripeError } = await stripe.redirectToCheckout({
+        sessionId: data.sessionId,
+      });
+
+      if (stripeError) {
+        throw new Error(stripeError.message);
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setError(err instanceof Error ? err.message : 'An error occurred during checkout');
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -156,8 +266,61 @@ export function CartSidebar() {
             {/* Footer with totals and checkout */}
             {items.length > 0 && (
               <div className="border-t border-gray-200 p-6 bg-gray-50">
+                {/* Discount Code Section */}
+                <div className="mb-4 p-3 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Tag className="w-4 h-4 text-sunset-600" />
+                    <span className="text-xs font-medium uppercase tracking-wide">Discount Code</span>
+                  </div>
+
+                  {discountApplied ? (
+                    <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded">
+                      <div className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-green-600" />
+                        <span className="text-xs text-green-800 font-medium">Free shipping!</span>
+                      </div>
+                      <button
+                        onClick={handleRemoveDiscount}
+                        className="text-gray-400 hover:text-gray-600 p-1"
+                        aria-label="Remove discount"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <input
+                        type="email"
+                        placeholder="Email address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                      />
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="Enter code"
+                          value={discountCode}
+                          onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
+                          className="flex-1 px-3 py-2 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                        />
+                        <button
+                          onClick={handleApplyDiscount}
+                          disabled={isValidatingCode}
+                          className="px-4 py-2 bg-gray-900 text-white text-xs uppercase tracking-wide rounded hover:bg-gray-800 disabled:bg-gray-400"
+                        >
+                          {isValidatingCode ? '...' : 'Apply'}
+                        </button>
+                      </div>
+                      {discountError && (
+                        <p className="text-xs text-red-600">{discountError}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
                 {/* Totals */}
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-dark">Subtotal</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
@@ -166,41 +329,53 @@ export function CartSidebar() {
                     <span className="text-gray-dark">
                       Shipping ({itemCount} {itemCount === 1 ? 'pack' : 'packs'})
                     </span>
-                    <span className="font-medium">{formatPrice(shipping)}</span>
+                    {discountApplied ? (
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-400 line-through text-xs">{formatPrice(shipping)}</span>
+                        <span className="font-medium text-green-600">FREE</span>
+                      </div>
+                    ) : (
+                      <span className="font-medium">{formatPrice(shipping)}</span>
+                    )}
                   </div>
                   <div className="flex justify-between text-base font-medium pt-2 border-t border-gray-300">
                     <span>Total</span>
-                    <span>{formatPrice(total)}</span>
+                    <span>{formatPrice(displayTotal)}</span>
                   </div>
                 </div>
 
                 {/* Trust Badges */}
-                <div className="mb-4 grid grid-cols-3 gap-2 p-4 bg-white rounded-lg border border-gray-200">
+                <div className="mb-4 grid grid-cols-3 gap-2 p-3 bg-white rounded-lg border border-gray-200">
                   <div className="flex flex-col items-center gap-1 text-center">
-                    <Shield className="w-5 h-5 text-green-600" />
-                    <p className="text-xs font-semibold text-charcoal-950">Secure</p>
-                    <p className="text-[10px] text-charcoal-600 leading-tight">SSL Encrypted</p>
+                    <Shield className="w-4 h-4 text-green-600" />
+                    <p className="text-[10px] font-semibold text-charcoal-950">Secure</p>
                   </div>
                   <div className="flex flex-col items-center gap-1 text-center">
-                    <Truck className="w-5 h-5 text-blue-600" />
-                    <p className="text-xs font-semibold text-charcoal-950">Fast Ship</p>
-                    <p className="text-[10px] text-charcoal-600 leading-tight">2-3 Day Delivery</p>
+                    <Truck className="w-4 h-4 text-blue-600" />
+                    <p className="text-[10px] font-semibold text-charcoal-950">2-3 Days</p>
                   </div>
                   <div className="flex flex-col items-center gap-1 text-center">
-                    <RefreshCw className="w-5 h-5 text-orange-600" />
-                    <p className="text-xs font-semibold text-charcoal-950">Guarantee</p>
-                    <p className="text-[10px] text-charcoal-600 leading-tight">100% Satisfaction</p>
+                    <RefreshCw className="w-4 h-4 text-orange-600" />
+                    <p className="text-[10px] font-semibold text-charcoal-950">Guaranteed</p>
                   </div>
                 </div>
 
                 {/* Checkout Button */}
                 <button
                   onClick={handleCheckout}
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg"
+                  disabled={isProcessing}
+                  className="flex items-center justify-center gap-2 w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   <Lock className="w-4 h-4" />
-                  Proceed to Checkout
+                  {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
                 </button>
+
+                {/* Error Message */}
+                {error && (
+                  <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-800">
+                    {error}
+                  </div>
+                )}
 
                 {/* Continue Shopping */}
                 <button
