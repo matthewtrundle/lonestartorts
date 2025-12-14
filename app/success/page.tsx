@@ -78,6 +78,16 @@ function SuccessContent() {
             total: data.order.total / 100, // Convert cents to dollars
             itemCount: data.order.items.length,
           });
+
+          // Track conversion in Google Ads
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'conversion', {
+              'send_to': 'AW-17804372077/nT9bCJvLpdEbEO3Q5KlC',
+              'value': data.order.total / 100,
+              'currency': 'USD',
+              'transaction_id': data.order.orderNumber,
+            });
+          }
         }
       })
       .catch(error => {
