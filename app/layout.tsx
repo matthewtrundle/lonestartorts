@@ -120,11 +120,12 @@ export const viewport = {
 // JSON-LD Structured Data for SEO and AIO
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['Organization', 'OnlineStore'],
   '@id': 'https://lonestartortillas.com/#organization',
   name: 'Lonestar Tortillas',
   legalName: 'Lonestar Tortillas LLC',
-  description: 'Independent reseller of authentic H-E-B® tortillas, delivering Texas flavor nationwide',
+  description: 'Independent reseller of authentic H-E-B® tortillas, delivering Texas flavor nationwide. We are not affiliated with or endorsed by H-E-B®.',
+  slogan: 'Premium Texas Tortillas Delivered Nationwide',
   url: 'https://lonestartortillas.com',
   logo: {
     '@type': 'ImageObject',
@@ -162,7 +163,49 @@ const jsonLd = {
     '@type': 'Country',
     name: 'United States'
   },
-  knowsAbout: ['Tortillas', 'Mexican Food', 'Texas Cuisine', 'H-E-B Products']
+  knowsAbout: ['Tortillas', 'Mexican Food', 'Texas Cuisine', 'H-E-B Products'],
+  // Commerce signals
+  paymentAccepted: ['Credit Card', 'Apple Pay', 'Google Pay'],
+  currenciesAccepted: 'USD',
+  priceRange: '$$',
+  // Product offerings
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'H-E-B Tortillas',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Product',
+          name: 'H-E-B Bakery Flour Tortillas',
+          brand: { '@type': 'Brand', name: 'H-E-B' }
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Product',
+          name: 'H-E-B Bakery Butter Tortillas',
+          brand: { '@type': 'Brand', name: 'H-E-B' }
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Product',
+          name: 'H-E-B Bakery Wheat Tortillas',
+          brand: { '@type': 'Brand', name: 'H-E-B' }
+        }
+      }
+    ]
+  },
+  // Return policy
+  hasMerchantReturnPolicy: {
+    '@type': 'MerchantReturnPolicy',
+    applicableCountry: 'US',
+    returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+    merchantReturnDays: 7
+  }
 };
 
 // Website Schema for SEO - Product schemas are on individual product pages
@@ -171,15 +214,29 @@ const websiteSchema = {
   '@type': 'WebSite',
   name: 'Lonestar Tortillas',
   url: 'https://lonestartortillas.com',
-  description: 'Authentic H-E-B tortillas delivered nationwide',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://lonestartortillas.com/search?q={search_term_string}'
+  description: 'Buy authentic H-E-B tortillas online. Independent reseller shipping nationwide from Texas.',
+  inLanguage: 'en-US',
+  publisher: {
+    '@id': 'https://lonestartortillas.com/#organization'
+  },
+  potentialAction: [
+    {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://lonestartortillas.com/search?q={search_term_string}'
+      },
+      'query-input': 'required name=search_term_string'
     },
-    'query-input': 'required name=search_term_string'
-  }
+    {
+      '@type': 'BuyAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://lonestartortillas.com/shop'
+      },
+      name: 'Buy H-E-B Tortillas'
+    }
+  ]
 };
 
 export default function RootLayout({
