@@ -85,13 +85,6 @@ export default function ShopPage() {
               </div>
             </div>
 
-            {/* Urgency Message - Subtle */}
-            <div className="inline-flex items-center gap-2 bg-sunset-50 border border-sunset-200 rounded-md px-4 py-2">
-              <span className="text-sunset-600 text-lg">🔥</span>
-              <p className="text-sm font-medium text-sunset-700">
-                Order today, ships tomorrow • Limited stock
-              </p>
-            </div>
           </div>
 
           {/* Loading State */}
