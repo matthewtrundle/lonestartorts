@@ -24,14 +24,12 @@ const pricingTiers = [
     name: 'Starter',
     packs: '1-5 packs',
     discount: 'Standard pricing',
-    shipping: '$12.99 flat rate',
     ideal: 'Small cafes, home caterers',
   },
   {
     name: 'Business',
     packs: '6-15 packs',
     discount: '10% volume discount',
-    shipping: '$12.99 flat rate',
     ideal: 'Food trucks, small restaurants',
     popular: true,
   },
@@ -39,14 +37,12 @@ const pricingTiers = [
     name: 'Professional',
     packs: '16-30 packs',
     discount: '15% volume discount',
-    shipping: '$12.99 flat rate',
     ideal: 'Busy restaurants, catering companies',
   },
   {
     name: 'Enterprise',
     packs: '30+ packs',
     discount: 'Custom pricing',
-    shipping: 'Contact for rates',
     ideal: 'Restaurant chains, large caterers',
   },
 ];
@@ -207,9 +203,6 @@ export default function WholesalePage() {
                   <ul className={`space-y-2 text-sm ${tier.popular ? 'text-white/90' : 'text-charcoal-700'}`}>
                     <li className="flex items-start gap-2">
                       <span className="font-semibold">Discount:</span> {tier.discount}
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="font-semibold">Shipping:</span> {tier.shipping}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="font-semibold">Ideal for:</span> {tier.ideal}

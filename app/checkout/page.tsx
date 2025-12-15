@@ -15,7 +15,7 @@ import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X } from 'lucide-react
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, itemCount, subtotal, shipping, total, clearCart, isHydrated } = useCart();
+  const { items, itemCount, subtotal, shipping, total, shippingMethod, clearCart, isHydrated } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,14 +31,15 @@ export default function CheckoutPage() {
   const sauceBottles = items.filter(item => item.productType === 'sauce').reduce((sum, item) => sum + item.quantity, 0);
 
   const getShippingLabel = () => {
+    const methodLabel = shippingMethod === 'usps' ? 'USPS' : 'FedEx 2nd Day';
     if (tortillaPacks > 0 && sauceBottles > 0) {
-      return `Shipping (${tortillaPacks} tortilla ${tortillaPacks === 1 ? 'pack' : 'packs'} + ${sauceBottles} sauce)`;
+      return `${methodLabel} (${tortillaPacks} tortilla ${tortillaPacks === 1 ? 'pack' : 'packs'} + ${sauceBottles} sauce)`;
     } else if (tortillaPacks > 0) {
-      return `Shipping (${tortillaPacks} ${tortillaPacks === 1 ? 'pack' : 'packs'})`;
+      return `${methodLabel} (${tortillaPacks} ${tortillaPacks === 1 ? 'pack' : 'packs'})`;
     } else if (sauceBottles > 0) {
-      return `Shipping (sauce)`;
+      return `${methodLabel} (sauce)`;
     }
-    return 'Shipping';
+    return methodLabel;
   };
 
   // Redirect if cart is empty (wait for hydration to avoid race condition)
@@ -124,6 +125,7 @@ export default function CheckoutPage() {
             sku: item.sku,
             quantity: item.quantity,
           })),
+          shippingMethod,
           // Include discount info if applied
           ...(discountApplied && {
             email: email.trim().toLowerCase(),

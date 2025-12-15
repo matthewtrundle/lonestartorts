@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, calculateShipping } from '@/lib/products';
+import { getProductBySku, getShippingCost, ShippingMethod } from '@/lib/products';
 import { prisma } from '@/lib/prisma';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -18,7 +18,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
     }
 
-    const { items, email, discountCode } = await req.json();
+    const { items, shippingMethod: rawShippingMethod, email, discountCode } = await req.json();
+
+    // Validate and default shipping method
+    const shippingMethod: ShippingMethod = rawShippingMethod === 'fedex' ? 'fedex' : 'usps';
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
@@ -36,8 +39,8 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    // Calculate shipping based on items (handles sauce + tortilla logic)
-    let shippingCost = calculateShipping(fullItems);
+    // Calculate shipping based on items and selected method
+    let shippingCost = getShippingCost(fullItems, shippingMethod);
     let freeShippingApplied = false;
 
     // Validate discount code if provided (server-side re-validation)
@@ -94,6 +97,7 @@ export async function POST(req: NextRequest) {
 
     // Build shipping display name
     const getShippingDisplayName = () => {
+      const methodName = shippingMethod === 'usps' ? 'USPS Priority Mail' : 'FedEx 2nd Day Air';
       const baseLabel = (() => {
         if (totalPacks > 0 && sauceBottles > 0) {
           return `${totalPacks} tortilla ${totalPacks === 1 ? 'pack' : 'packs'} + ${sauceBottles} sauce`;
@@ -106,9 +110,9 @@ export async function POST(req: NextRequest) {
       })();
 
       if (freeShippingApplied) {
-        return baseLabel ? `FREE Shipping (${baseLabel}) - First Order Discount` : 'FREE Shipping - First Order Discount';
+        return baseLabel ? `FREE ${methodName} (${baseLabel}) - First Order Discount` : `FREE ${methodName} - First Order Discount`;
       }
-      return baseLabel ? `Standard Shipping (${baseLabel})` : 'Standard Shipping';
+      return baseLabel ? `${methodName} (${baseLabel})` : methodName;
     };
 
     // Create Stripe checkout session with shipping as actual shipping rate (not a line item)
@@ -120,6 +124,7 @@ export async function POST(req: NextRequest) {
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}`,
       metadata: {
         disclaimer: 'Independent reseller. Not affiliated with or endorsed by H-E-B®.',
+        shippingMethod, // Store shipping method (usps or fedex)
         shippingCost: shippingCost.toString(), // Store for webhook reference
         ...(freeShippingApplied && {
           discountCode: discountCode?.trim().toUpperCase(),
@@ -146,7 +151,7 @@ export async function POST(req: NextRequest) {
               },
               maximum: {
                 unit: 'business_day',
-                value: 3,
+                value: shippingMethod === 'usps' ? 3 : 2, // USPS: 2-3 days, FedEx: 2 days
               },
             },
           },

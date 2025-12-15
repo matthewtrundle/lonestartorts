@@ -2,6 +2,29 @@
 // Simple pricing: $20 per pack (20 tortillas each)
 // Smart shipping: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
 
+// Shipping method type
+export type ShippingMethod = 'usps' | 'fedex';
+
+// FedEx 2nd Day extra costs (in cents) based on bag count
+// Index 0 = 1 bag, Index 1 = 2 bags, etc. Index 14+ = 15+ bags
+const FEDEX_EXTRA_COSTS = [
+  900,   // 1 bag: +$9
+  1000,  // 2 bags: +$10
+  1200,  // 3 bags: +$12
+  1400,  // 4 bags: +$14
+  1600,  // 5 bags: +$16
+  1900,  // 6 bags: +$19
+  2200,  // 7 bags: +$22
+  2500,  // 8 bags: +$25
+  2700,  // 9 bags: +$27
+  2900,  // 10 bags: +$29
+  3100,  // 11 bags: +$31
+  3300,  // 12 bags: +$33
+  3500,  // 13 bags: +$35
+  3700,  // 14 bags: +$37
+  3900,  // 15+ bags: +$39
+];
+
 export interface Product {
   sku: string;
   name: string;
@@ -105,4 +128,42 @@ export function calculateShipping(items: { productType?: string; quantity: numbe
 
   // Empty cart
   return 0;
+}
+
+// Get FedEx extra cost based on bag count (tortilla packs only)
+export function getFedExExtraCost(bagCount: number): number {
+  if (bagCount <= 0) return 0;
+  const index = Math.min(bagCount - 1, FEDEX_EXTRA_COSTS.length - 1);
+  return FEDEX_EXTRA_COSTS[index];
+}
+
+// Calculate shipping for a specific method
+export function getShippingCost(
+  items: { productType?: string; quantity: number }[],
+  method: ShippingMethod
+): number {
+  const uspsShipping = calculateShipping(items);
+
+  if (method === 'usps') {
+    return uspsShipping;
+  }
+
+  // FedEx: USPS base + extra cost based on bag count
+  const tortillaPacks = items
+    .filter(item => item.productType !== 'sauce')
+    .reduce((total, item) => total + item.quantity, 0);
+
+  const fedexExtra = getFedExExtraCost(tortillaPacks);
+  return uspsShipping + fedexExtra;
+}
+
+// Get both shipping options for display
+export function getShippingOptions(items: { productType?: string; quantity: number }[]): {
+  usps: number;
+  fedex: number;
+} {
+  return {
+    usps: getShippingCost(items, 'usps'),
+    fedex: getShippingCost(items, 'fedex'),
+  };
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { calculateShipping } from '@/lib/products';
+import { calculateShipping, getShippingCost, getShippingOptions, ShippingMethod } from '@/lib/products';
 
 // Cart item structure matching the product catalog
 export interface CartItem {
@@ -20,6 +20,9 @@ interface CartContextType {
   subtotal: number;
   shipping: number;
   total: number;
+  shippingMethod: ShippingMethod;
+  setShippingMethod: (method: ShippingMethod) => void;
+  shippingOptions: { usps: number; fedex: number };
   addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
   removeItem: (sku: string) => void;
   updateQuantity: (sku: string, quantity: number) => void;
@@ -32,19 +35,25 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CART_STORAGE_KEY = 'lonestar-cart';
+const SHIPPING_METHOD_KEY = 'lonestar-shipping-method';
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [shippingMethod, setShippingMethodState] = useState<ShippingMethod>('usps');
 
-  // Load cart from localStorage on mount
+  // Load cart and shipping method from localStorage on mount
   useEffect(() => {
     try {
       const stored = localStorage.getItem(CART_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
         setItems(parsed);
+      }
+      const storedMethod = localStorage.getItem(SHIPPING_METHOD_KEY) as ShippingMethod | null;
+      if (storedMethod === 'usps' || storedMethod === 'fedex') {
+        setShippingMethodState(storedMethod);
       }
     } catch (error) {
       console.error('Failed to load cart from localStorage:', error);
@@ -62,6 +71,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
     }
   }, [items, isHydrated]);
+
+  // Save shipping method to localStorage
+  useEffect(() => {
+    if (isHydrated) {
+      try {
+        localStorage.setItem(SHIPPING_METHOD_KEY, shippingMethod);
+      } catch (error) {
+        console.error('Failed to save shipping method to localStorage:', error);
+      }
+    }
+  }, [shippingMethod, isHydrated]);
+
+  const setShippingMethod = (method: ShippingMethod) => {
+    setShippingMethodState(method);
+  };
 
   const addItem = (item: Omit<CartItem, 'quantity'>, quantity: number = 1) => {
     setItems((prevItems) => {
@@ -104,13 +128,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Calculate totals with smart shipping
   // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
-  // Shipping:
-  //   - Tortilla tiers: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
-  //   - Sauce-only: $9.99 flat rate
-  //   - Sauce + tortillas: Sauce ships free with tortillas
+  // Shipping options: USPS (standard) or FedEx 2nd Day (premium)
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const shipping = calculateShipping(items);
+  const shippingOptions = getShippingOptions(items);
+  const shipping = getShippingCost(items, shippingMethod);
   const total = subtotal + shipping;
 
   const value: CartContextType = {
@@ -119,6 +141,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     subtotal,
     shipping,
     total,
+    shippingMethod,
+    setShippingMethod,
+    shippingOptions,
     addItem,
     removeItem,
     updateQuantity,

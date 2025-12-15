@@ -11,7 +11,7 @@ import { getStripe } from '@/lib/stripe';
 import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check } from 'lucide-react';
 
 export function CartSidebar() {
-  const { items, itemCount, subtotal, shipping, total, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
+  const { items, itemCount, subtotal, shipping, total, shippingMethod, setShippingMethod, shippingOptions, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -98,6 +98,7 @@ export function CartSidebar() {
             sku: item.sku,
             quantity: item.quantity,
           })),
+          shippingMethod,
           // Include discount info if applied
           ...(discountApplied && {
             email: email.trim().toLowerCase(),
@@ -321,6 +322,61 @@ export function CartSidebar() {
                   )}
                 </div>
 
+                {/* Shipping Method Selector */}
+                <div className="mb-4 p-3 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Truck className="w-4 h-4 text-sunset-600" />
+                    <span className="text-xs font-medium uppercase tracking-wide">Shipping Method</span>
+                  </div>
+                  <div className="space-y-2">
+                    {/* USPS Option */}
+                    <label className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${
+                      shippingMethod === 'usps'
+                        ? 'border-sunset-500 bg-sunset-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}>
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="shippingMethod"
+                          value="usps"
+                          checked={shippingMethod === 'usps'}
+                          onChange={() => setShippingMethod('usps')}
+                          className="w-4 h-4 text-sunset-600 focus:ring-sunset-500"
+                        />
+                        <div>
+                          <p className="text-sm font-medium">USPS Priority Mail</p>
+                          <p className="text-xs text-gray-500">2-3 business days</p>
+                        </div>
+                      </div>
+                      <span className="text-sm font-medium">{formatPrice(shippingOptions.usps)}</span>
+                    </label>
+
+                    {/* FedEx Option */}
+                    <label className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${
+                      shippingMethod === 'fedex'
+                        ? 'border-sunset-500 bg-sunset-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}>
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="shippingMethod"
+                          value="fedex"
+                          checked={shippingMethod === 'fedex'}
+                          onChange={() => setShippingMethod('fedex')}
+                          className="w-4 h-4 text-sunset-600 focus:ring-sunset-500"
+                        />
+                        <div>
+                          <p className="text-sm font-medium">FedEx 2nd Day Air</p>
+                          <p className="text-xs text-gray-500">2 business days</p>
+                        </div>
+                      </div>
+                      <span className="text-sm font-medium">{formatPrice(shippingOptions.fedex)}</span>
+                    </label>
+                  </div>
+                </div>
+
                 {/* Totals */}
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
@@ -329,7 +385,7 @@ export function CartSidebar() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-dark">
-                      Shipping ({itemCount} {itemCount === 1 ? 'pack' : 'packs'})
+                      Shipping ({shippingMethod === 'usps' ? 'USPS' : 'FedEx'})
                     </span>
                     {discountApplied ? (
                       <div className="flex items-center gap-2">
