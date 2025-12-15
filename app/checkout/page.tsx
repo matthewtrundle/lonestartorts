@@ -362,7 +362,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex items-center gap-3 text-sm text-charcoal-700">
                     <Truck className="w-5 h-5 text-sunset-600 flex-shrink-0" />
-                    <span>Fast 2-3 day shipping nationwide</span>
+                    <span>Fast 3-4 day shipping nationwide</span>
                   </div>
                 </div>
 

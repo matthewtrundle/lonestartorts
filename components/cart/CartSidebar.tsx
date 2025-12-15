@@ -346,7 +346,7 @@ export function CartSidebar() {
                         />
                         <div>
                           <p className="text-sm font-medium">USPS Priority Mail</p>
-                          <p className="text-xs text-gray-500">2-3 business days</p>
+                          <p className="text-xs text-gray-500">3-4 business days</p>
                         </div>
                       </div>
                       <span className="text-sm font-medium">{formatPrice(shippingOptions.usps)}</span>
@@ -410,7 +410,7 @@ export function CartSidebar() {
                   </div>
                   <div className="flex flex-col items-center gap-1 text-center">
                     <Truck className="w-4 h-4 text-blue-600" />
-                    <p className="text-[10px] font-semibold text-charcoal-950">2-3 Days</p>
+                    <p className="text-[10px] font-semibold text-charcoal-950">3-4 Days</p>
                   </div>
                   <div className="flex flex-col items-center gap-1 text-center">
                     <RefreshCw className="w-4 h-4 text-orange-600" />

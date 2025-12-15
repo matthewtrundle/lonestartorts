@@ -147,11 +147,11 @@ export async function POST(req: NextRequest) {
             delivery_estimate: {
               minimum: {
                 unit: 'business_day',
-                value: 2,
+                value: shippingMethod === 'usps' ? 3 : 2, // USPS: 3-4 days, FedEx: 2 days
               },
               maximum: {
                 unit: 'business_day',
-                value: shippingMethod === 'usps' ? 3 : 2, // USPS: 2-3 days, FedEx: 2 days
+                value: shippingMethod === 'usps' ? 4 : 2, // USPS: 3-4 days, FedEx: 2 days
               },
             },
           },
