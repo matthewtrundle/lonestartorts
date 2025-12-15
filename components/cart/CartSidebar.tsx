@@ -195,16 +195,16 @@ export function CartSidebar() {
               ) : (
                 <div className="space-y-6">
                   {items.map((item) => (
-                    <div key={item.sku} className="flex gap-4">
+                    <div key={item.sku} className="flex gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                       {/* Item Image */}
-                      <div className="w-24 h-24 bg-cream-100 rounded-lg flex-shrink-0 overflow-hidden relative">
+                      <div className="w-20 h-20 bg-cream-100 rounded-lg flex-shrink-0 overflow-hidden relative">
                         {item.image ? (
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
                             className="object-cover"
-                            sizes="96px"
+                            sizes="80px"
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-charcoal-400">
@@ -214,51 +214,51 @@ export function CartSidebar() {
                       </div>
 
                       {/* Item Details */}
-                      <div className="flex-1">
-                        <div className="flex justify-between items-start mb-2">
-                          <h3 className="text-sm font-medium leading-tight">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between items-start gap-2 mb-1">
+                          <h3 className="text-sm font-medium leading-tight line-clamp-2">
                             {item.name}
                           </h3>
                           <button
                             onClick={() => removeItem(item.sku)}
-                            className="text-gray-400 hover:text-red-600 transition-colors"
+                            className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
                             aria-label="Remove item"
                           >
                             <X className="w-4 h-4" />
                           </button>
                         </div>
 
-                        <p className="text-sm text-gray-600 mb-3">
-                          {formatPrice(item.price)}
+                        <p className="text-sm text-gray-500 mb-2">
+                          {formatPrice(item.price)} each
                         </p>
 
                         {/* Quantity Controls */}
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={() => updateQuantity(item.sku, item.quantity - 1)}
-                            className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-100 transition-colors"
-                            aria-label="Decrease quantity"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="w-8 text-center text-sm font-medium">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(item.sku, item.quantity + 1)}
-                            className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-100 transition-colors"
-                            aria-label="Increase quantity"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                            <button
+                              onClick={() => updateQuantity(item.sku, item.quantity - 1)}
+                              className="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-gray-50 border border-gray-200 transition-colors"
+                              aria-label="Decrease quantity"
+                            >
+                              <Minus className="w-4 h-4 text-gray-600" />
+                            </button>
+                            <span className="w-10 text-center text-sm font-semibold">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => updateQuantity(item.sku, item.quantity + 1)}
+                              className="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-gray-50 border border-gray-200 transition-colors"
+                              aria-label="Increase quantity"
+                            >
+                              <Plus className="w-4 h-4 text-gray-600" />
+                            </button>
+                          </div>
 
-                      {/* Item Total */}
-                      <div className="text-right">
-                        <p className="text-sm font-medium">
-                          {formatPrice(item.price * item.quantity)}
-                        </p>
+                          {/* Item Total */}
+                          <p className="text-base font-semibold text-charcoal-950">
+                            {formatPrice(item.price * item.quantity)}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   ))}
