@@ -8,7 +8,7 @@ import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
-import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown } from 'lucide-react';
 
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, total, shippingMethod, setShippingMethod, shippingOptions, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
@@ -22,6 +22,10 @@ export function CartSidebar() {
   const [discountApplied, setDiscountApplied] = useState(false);
   const [discountMessage, setDiscountMessage] = useState<string>('Free shipping!');
   const [discountError, setDiscountError] = useState<string | null>(null);
+
+  // Collapsible sections
+  const [discountOpen, setDiscountOpen] = useState(false);
+  const [shippingOpen, setShippingOpen] = useState(false);
 
   const handleClose = () => setIsOpen(false);
 
@@ -268,127 +272,149 @@ export function CartSidebar() {
 
             {/* Footer with totals and checkout */}
             {items.length > 0 && (
-              <div className="border-t border-gray-200 p-6 bg-gray-50">
-                {/* Discount Code Section */}
-                <div className="mb-4 p-3 bg-white rounded-lg border border-gray-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Tag className="w-4 h-4 text-sunset-600" />
-                    <span className="text-xs font-medium uppercase tracking-wide">Discount Code</span>
-                  </div>
-
-                  {discountApplied ? (
-                    <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded">
-                      <div className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-green-600" />
-                        <span className="text-xs text-green-800 font-medium">{discountMessage}</span>
-                      </div>
-                      <button
-                        onClick={handleRemoveDiscount}
-                        className="text-gray-400 hover:text-gray-600 p-1"
-                        aria-label="Remove discount"
-                      >
-                        <X className="w-3 h-3" />
-                      </button>
+              <div className="border-t border-gray-200 p-4 bg-gray-50">
+                {/* Discount Code Section - Collapsible */}
+                <div className="mb-3 bg-white rounded-lg border border-gray-200 overflow-hidden">
+                  <button
+                    onClick={() => setDiscountOpen(!discountOpen)}
+                    className="w-full flex items-center justify-between p-2.5 hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Tag className="w-3.5 h-3.5 text-sunset-600" />
+                      <span className="text-xs font-medium uppercase tracking-wide">
+                        {discountApplied ? 'Discount Applied' : 'Discount Code'}
+                      </span>
+                      {discountApplied && <Check className="w-3.5 h-3.5 text-green-600" />}
                     </div>
-                  ) : (
-                    <div className="space-y-2">
-                      <input
-                        type="email"
-                        placeholder="Email address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
-                      />
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          placeholder="Enter code"
-                          value={discountCode}
-                          onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
-                          className="flex-1 px-3 py-2 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
-                        />
-                        <button
-                          onClick={handleApplyDiscount}
-                          disabled={isValidatingCode}
-                          className="px-4 py-2 bg-gray-900 text-white text-xs uppercase tracking-wide rounded hover:bg-gray-800 disabled:bg-gray-400"
-                        >
-                          {isValidatingCode ? '...' : 'Apply'}
-                        </button>
-                      </div>
-                      {discountError && (
-                        <p className="text-xs text-red-600">{discountError}</p>
+                    <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${discountOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {discountOpen && (
+                    <div className="px-2.5 pb-2.5 border-t border-gray-100">
+                      {discountApplied ? (
+                        <div className="flex items-center justify-between p-2 mt-2 bg-green-50 border border-green-200 rounded">
+                          <span className="text-xs text-green-800 font-medium">{discountMessage}</span>
+                          <button
+                            onClick={handleRemoveDiscount}
+                            className="text-gray-400 hover:text-gray-600 p-1"
+                            aria-label="Remove discount"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="space-y-2 mt-2">
+                          <input
+                            type="email"
+                            placeholder="Email address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full px-2.5 py-1.5 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                          />
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              placeholder="Enter code"
+                              value={discountCode}
+                              onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
+                              className="flex-1 px-2.5 py-1.5 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                            />
+                            <button
+                              onClick={handleApplyDiscount}
+                              disabled={isValidatingCode}
+                              className="px-3 py-1.5 bg-gray-900 text-white text-xs uppercase tracking-wide rounded hover:bg-gray-800 disabled:bg-gray-400"
+                            >
+                              {isValidatingCode ? '...' : 'Apply'}
+                            </button>
+                          </div>
+                          {discountError && (
+                            <p className="text-xs text-red-600">{discountError}</p>
+                          )}
+                        </div>
                       )}
                     </div>
                   )}
                 </div>
 
-                {/* Shipping Method Selector */}
-                <div className="mb-4 p-3 bg-white rounded-lg border border-gray-200">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Truck className="w-4 h-4 text-sunset-600" />
-                    <span className="text-xs font-medium uppercase tracking-wide">Shipping Method</span>
-                  </div>
-                  <div className="space-y-2">
-                    {/* USPS Option */}
-                    <label className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${
-                      shippingMethod === 'usps'
-                        ? 'border-sunset-500 bg-sunset-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}>
-                      <div className="flex items-center gap-3">
-                        <input
-                          type="radio"
-                          name="shippingMethod"
-                          value="usps"
-                          checked={shippingMethod === 'usps'}
-                          onChange={() => setShippingMethod('usps')}
-                          className="w-4 h-4 text-sunset-600 focus:ring-sunset-500"
-                        />
-                        <div>
-                          <p className="text-sm font-medium">USPS Priority Mail</p>
-                          <p className="text-xs text-gray-500">3-4 business days</p>
-                        </div>
-                      </div>
-                      <span className="text-sm font-medium">{formatPrice(shippingOptions.usps)}</span>
-                    </label>
+                {/* Shipping Method Selector - Collapsible */}
+                <div className="mb-3 bg-white rounded-lg border border-gray-200 overflow-hidden">
+                  <button
+                    onClick={() => setShippingOpen(!shippingOpen)}
+                    className="w-full flex items-center justify-between p-2.5 hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Truck className="w-3.5 h-3.5 text-sunset-600" />
+                      <span className="text-xs font-medium uppercase tracking-wide">
+                        {shippingMethod === 'usps' ? 'USPS 3-4 days' : 'FedEx 2 days'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
+                      <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${shippingOpen ? 'rotate-180' : ''}`} />
+                    </div>
+                  </button>
 
-                    {/* FedEx Option */}
-                    <label className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${
-                      shippingMethod === 'fedex'
-                        ? 'border-sunset-500 bg-sunset-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}>
-                      <div className="flex items-center gap-3">
-                        <input
-                          type="radio"
-                          name="shippingMethod"
-                          value="fedex"
-                          checked={shippingMethod === 'fedex'}
-                          onChange={() => setShippingMethod('fedex')}
-                          className="w-4 h-4 text-sunset-600 focus:ring-sunset-500"
-                        />
-                        <div>
-                          <p className="text-sm font-medium">FedEx 2nd Day Air</p>
-                          <p className="text-xs text-gray-500">2 business days</p>
+                  {shippingOpen && (
+                    <div className="px-2.5 pb-2.5 border-t border-gray-100 space-y-1.5 mt-2">
+                      {/* USPS Option */}
+                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
+                        shippingMethod === 'usps'
+                          ? 'border-sunset-500 bg-sunset-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}>
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            name="shippingMethod"
+                            value="usps"
+                            checked={shippingMethod === 'usps'}
+                            onChange={() => setShippingMethod('usps')}
+                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
+                          />
+                          <div>
+                            <p className="text-xs font-medium">USPS Priority Mail</p>
+                            <p className="text-[10px] text-gray-500">3-4 business days</p>
+                          </div>
                         </div>
-                      </div>
-                      <span className="text-sm font-medium">{formatPrice(shippingOptions.fedex)}</span>
-                    </label>
-                  </div>
+                        <span className="text-xs font-medium">{formatPrice(shippingOptions.usps)}</span>
+                      </label>
+
+                      {/* FedEx Option */}
+                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
+                        shippingMethod === 'fedex'
+                          ? 'border-sunset-500 bg-sunset-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}>
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            name="shippingMethod"
+                            value="fedex"
+                            checked={shippingMethod === 'fedex'}
+                            onChange={() => setShippingMethod('fedex')}
+                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
+                          />
+                          <div>
+                            <p className="text-xs font-medium">FedEx 2nd Day Air</p>
+                            <p className="text-[10px] text-gray-500">2 business days</p>
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{formatPrice(shippingOptions.fedex)}</span>
+                      </label>
+                    </div>
+                  )}
                 </div>
 
-                {/* Totals */}
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-dark">Subtotal</span>
+                {/* Totals - More Compact */}
+                <div className="space-y-1 mb-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Subtotal</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-dark">
-                      Shipping ({shippingMethod === 'usps' ? 'USPS' : 'FedEx'})
-                    </span>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Shipping</span>
                     {discountApplied ? (
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         <span className="text-gray-400 line-through text-xs">{formatPrice(shipping)}</span>
                         <span className="font-medium text-green-600">FREE</span>
                       </div>
@@ -396,25 +422,25 @@ export function CartSidebar() {
                       <span className="font-medium">{formatPrice(shipping)}</span>
                     )}
                   </div>
-                  <div className="flex justify-between text-base font-medium pt-2 border-t border-gray-300">
+                  <div className="flex justify-between text-base font-semibold pt-1.5 border-t border-gray-300">
                     <span>Total</span>
                     <span>{formatPrice(displayTotal)}</span>
                   </div>
                 </div>
 
-                {/* Trust Badges */}
-                <div className="mb-4 grid grid-cols-3 gap-2 p-3 bg-white rounded-lg border border-gray-200">
-                  <div className="flex flex-col items-center gap-1 text-center">
-                    <Shield className="w-4 h-4 text-green-600" />
-                    <p className="text-[10px] font-semibold text-charcoal-950">Secure</p>
+                {/* Trust Badges - More Compact */}
+                <div className="mb-3 flex justify-center gap-6 py-2 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center gap-1.5">
+                    <Shield className="w-3.5 h-3.5 text-green-600" />
+                    <span className="text-[10px] font-medium text-charcoal-700">Secure</span>
                   </div>
-                  <div className="flex flex-col items-center gap-1 text-center">
-                    <Truck className="w-4 h-4 text-blue-600" />
-                    <p className="text-[10px] font-semibold text-charcoal-950">3-4 Days</p>
+                  <div className="flex items-center gap-1.5">
+                    <Truck className="w-3.5 h-3.5 text-blue-600" />
+                    <span className="text-[10px] font-medium text-charcoal-700">Fast</span>
                   </div>
-                  <div className="flex flex-col items-center gap-1 text-center">
-                    <RefreshCw className="w-4 h-4 text-orange-600" />
-                    <p className="text-[10px] font-semibold text-charcoal-950">Guaranteed</p>
+                  <div className="flex items-center gap-1.5">
+                    <RefreshCw className="w-3.5 h-3.5 text-orange-600" />
+                    <span className="text-[10px] font-medium text-charcoal-700">Guaranteed</span>
                   </div>
                 </div>
 
@@ -422,15 +448,15 @@ export function CartSidebar() {
                 <button
                   onClick={handleCheckout}
                   disabled={isProcessing}
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-black text-white text-center text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-black text-white text-center text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
-                  <Lock className="w-4 h-4" />
+                  <Lock className="w-3.5 h-3.5" />
                   {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
                 </button>
 
                 {/* Error Message */}
                 {error && (
-                  <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-800">
+                  <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-800">
                     {error}
                   </div>
                 )}
@@ -438,7 +464,7 @@ export function CartSidebar() {
                 {/* Continue Shopping */}
                 <button
                   onClick={handleClose}
-                  className="block w-full mt-3 py-3 text-sm text-gray-dark hover:text-black transition-colors"
+                  className="block w-full mt-2 py-2 text-xs text-gray-500 hover:text-black transition-colors"
                 >
                   Continue Shopping
                 </button>
