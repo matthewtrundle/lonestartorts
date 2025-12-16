@@ -138,7 +138,7 @@ const faqSchema = {
       name: 'What is your return policy?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We want you to love your tortillas! If you\'re not satisfied, contact us within 7 days of delivery. We offer refunds or replacements for damaged or unsatisfactory products. Your satisfaction is our priority.'
+        text: 'We want you to love your tortillas! If you\'re not satisfied, submit a return request at lonestartortillas.com/returns within 7 days of delivery. We offer full refunds or replacements for damaged or unsatisfactory products. No return shipping required - your satisfaction is our priority.'
       }
     },
     {
@@ -324,11 +324,11 @@ const faqs = [
       },
       {
         q: 'What is your return policy?',
-        a: 'Your satisfaction is our top priority! If you\'re not completely satisfied with your tortillas, contact us within 7 days of delivery at howdy@lonestartortilla.com. We offer full refunds or replacements for any damaged, defective, or unsatisfactory products. We want you to love your authentic Texas tortillas!'
+        a: 'Your satisfaction is our top priority! If you\'re not completely satisfied with your tortillas, submit a return request within 7 days of delivery at lonestartortillas.com/returns. We offer full refunds or replacements for any damaged, defective, or unsatisfactory products. No return shipping required - we want you to love your authentic Texas tortillas!'
       },
       {
         q: 'What if my order arrives damaged?',
-        a: 'While we package carefully, shipping damage can occasionally happen. If your tortillas arrive damaged, please contact us immediately at howdy@lonestartortilla.com with photos of the damage. We\'ll send a replacement order right away at no additional cost, or provide a full refund if you prefer.'
+        a: 'While we package carefully, shipping damage can occasionally happen. If your tortillas arrive damaged, please submit a return request at lonestartortillas.com/returns with details about the damage. We\'ll send a replacement order right away at no additional cost, or provide a full refund if you prefer.'
       }
     ]
   },
@@ -498,12 +498,18 @@ export default function FAQPage() {
                 We're here to help! Reach out to our team and we'll get back to you quickly.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="mailto:howdy@lonestartortilla.com"
+                <Link
+                  href="/contact"
                   className="inline-block bg-cream-50 text-sunset-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors shadow-lg"
                 >
-                  Email Us
-                </a>
+                  Contact Us
+                </Link>
+                <Link
+                  href="/returns"
+                  className="inline-block bg-transparent border-2 border-cream-50 text-cream-50 px-8 py-4 rounded-full font-bold text-lg hover:bg-cream-50/10 transition-colors"
+                >
+                  Returns & Refunds
+                </Link>
               </div>
             </div>
           </div>
