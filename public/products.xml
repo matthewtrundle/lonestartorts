@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>Lonestar Tortillas</title>
+    <link>https://lonestartortillas.com</link>
+    <description>Premium Texas Tortillas Delivered Nationwide - Independent reseller of authentic H-E-B tortillas</description>
+
+    <item>
+      <g:id>HEB-FLOUR</g:id>
+      <g:title>H-E-B Bakery Flour Tortillas - 20 Pack</g:title>
+      <g:description>Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile. Pack of 20 authentic Texas tortillas shipped nationwide.</g:description>
+      <g:link>https://lonestartortillas.com/shop</g:link>
+      <g:image_link>https://lonestartortillas.com/images/products/flour-tortillas-heb.png</g:image_link>
+      <g:price>20.00 USD</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>H-E-B</g:brand>
+      <g:product_type>Food, Beverages &amp; Tobacco > Food Items > Bakery > Tortillas</g:product_type>
+      <g:google_product_category>Food, Beverages &amp; Tobacco > Food Items > Bakery > Tortillas &amp; Wraps</g:google_product_category>
+      <g:shipping>
+        <g:country>US</g:country>
+        <g:service>USPS Priority Mail</g:service>
+        <g:price>10.60 USD</g:price>
+      </g:shipping>
+      <g:custom_label_0>tortilla</g:custom_label_0>
+      <g:custom_label_1>flour</g:custom_label_1>
+      <g:custom_label_2>best_seller</g:custom_label_2>
+    </item>
+
+    <item>
+      <g:id>HEB-BUTTER</g:id>
+      <g:title>H-E-B Bakery Butter Tortillas - 20 Pack</g:title>
+      <g:description>A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer. Pack of 20 authentic Texas tortillas shipped nationwide.</g:description>
+      <g:link>https://lonestartortillas.com/shop</g:link>
+      <g:image_link>https://lonestartortillas.com/images/products/butter-tortillas-heb.png</g:image_link>
+      <g:price>20.00 USD</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>H-E-B</g:brand>
+      <g:product_type>Food, Beverages &amp; Tobacco > Food Items > Bakery > Tortillas</g:product_type>
+      <g:google_product_category>Food, Beverages &amp; Tobacco > Food Items > Bakery > Tortillas &amp; Wraps</g:google_product_category>
+      <g:shipping>
+        <g:country>US</g:country>
+        <g:service>USPS Priority Mail</g:service>
+        <g:price>10.60 USD</g:price>
+      </g:shipping>
+      <g:custom_label_0>tortilla</g:custom_label_0>
+      <g:custom_label_1>butter</g:custom_label_1>
+    </item>
+
+    <item>
+      <g:id>HEB-WHEAT</g:id>
+      <g:title>H-E-B Bakery Wheat Tortillas - 20 Pack</g:title>
+      <g:description>Whole wheat tortillas with wholesome grain flavor. Perfect for health-conscious meals without sacrificing taste. Pack of 20 authentic Texas tortillas shipped nationwide.</g:description>
+      <g:link>https://lonestartortillas.com/shop</g:link>
+      <g:image_link>https://lonestartortillas.com/images/products/wheat-tortillas-heb.png</g:image_link>
+      <g:price>20.00 USD</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>H-E-B</g:brand>
+      <g:product_type>Food, Beverages &amp; Tobacco > Food Items > Bakery > Tortillas</g:product_type>
+      <g:google_product_category>Food, Beverages &amp; Tobacco > Food Items > Bakery > Tortillas &amp; Wraps</g:google_product_category>
+      <g:shipping>
+        <g:country>US</g:country>
+        <g:service>USPS Priority Mail</g:service>
+        <g:price>10.60 USD</g:price>
+      </g:shipping>
+      <g:custom_label_0>tortilla</g:custom_label_0>
+      <g:custom_label_1>wheat</g:custom_label_1>
+    </item>
+
+    <item>
+      <g:id>HEB-GREEN-SAUCE</g:id>
+      <g:title>H-E-B That Green Sauce</g:title>
+      <g:description>The legendary H-E-B That Green Sauce. Perfect for tacos, enchiladas, and everything in between. Authentic Texas flavor shipped nationwide.</g:description>
+      <g:link>https://lonestartortillas.com/shop</g:link>
+      <g:image_link>https://lonestartortillas.com/images/products/green-sauce-heb.png</g:image_link>
+      <g:price>12.00 USD</g:price>
+      <g:availability>in_stock</g:availability>
+      <g:condition>new</g:condition>
+      <g:brand>H-E-B</g:brand>
+      <g:product_type>Food, Beverages &amp; Tobacco > Food Items > Condiments &amp; Sauces > Salsa</g:product_type>
+      <g:google_product_category>Food, Beverages &amp; Tobacco > Food Items > Condiments &amp; Sauces > Salsa</g:google_product_category>
+      <g:shipping>
+        <g:country>US</g:country>
+        <g:service>USPS Priority Mail</g:service>
+        <g:price>9.99 USD</g:price>
+      </g:shipping>
+      <g:custom_label_0>sauce</g:custom_label_0>
+      <g:custom_label_1>green_sauce</g:custom_label_1>
+    </item>
+
+  </channel>
+</rss>
