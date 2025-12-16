@@ -79,27 +79,19 @@ function SuccessContent() {
             itemCount: data.order.items.length,
           });
 
-          // Track conversion in Google Ads (uses 'conversion' event type)
+          // Track conversion in Google Ads
           if (typeof window !== 'undefined' && (window as any).gtag) {
-            // Google Ads conversion tracking
+            // Google Ads "Purchase" conversion action (label: yeE1COz1ptEbEO3Q5KlC)
             (window as any).gtag('event', 'conversion', {
-              'send_to': 'AW-17804372077/nT9bCJvLpdEbEO3Q5KlC',
+              'send_to': 'AW-17804372077/yeE1COz1ptEbEO3Q5KlC',
               'value': data.order.total / 100,
               'currency': 'USD',
               'transaction_id': data.order.orderNumber,
-            });
-
-            // Also fire purchase event for enhanced ecommerce / GA4
-            (window as any).gtag('event', 'purchase', {
-              'transaction_id': data.order.orderNumber,
-              'value': data.order.total / 100,
-              'currency': 'USD',
-              'tax': data.order.tax / 100,
-              'shipping': data.order.shipping / 100,
             });
 
             // Debug logging
-            console.log('Google Ads conversion fired:', {
+            console.log('Google Ads Purchase conversion fired:', {
+              send_to: 'AW-17804372077/yeE1COz1ptEbEO3Q5KlC',
               transaction_id: data.order.orderNumber,
               value: data.order.total / 100,
             });
