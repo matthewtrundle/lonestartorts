@@ -283,7 +283,7 @@ export default function Home() {
                 <blockquote className="relative">
                   <span className="absolute -top-4 -left-4 text-8xl text-sunset-200 font-serif">"</span>
                   <p className="relative text-xl italic text-charcoal-700 pl-8 leading-relaxed">
-                    Those who know tortillas, know H-E-B®. Growing up in San Antonio, these tortillas were on our table every single day. Now I'm proud to share that same authentic Texas taste with families across America.
+                    Those who know Texas tortillas, know quality. Growing up in San Antonio, these tortillas were on our table every single day. Now I'm proud to share that same authentic Texas taste with families across America.
                   </p>
                   <cite className="block mt-4 text-sm font-medium text-charcoal-600 pl-8">
                     — Maria Rodriguez, Founder & CEO
@@ -525,12 +525,12 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-lg leading-relaxed text-charcoal-700">
-                  Those who know tortillas know H-E-B®. We're your trusted independent source
-                  for genuine H-E-B® products, delivering the tortillas Texas loves to connoisseurs nationwide.
+                  Those who know Texas tortillas, know quality. We're your trusted independent source
+                  for authentic Texas products, delivering the tortillas Texas loves to connoisseurs nationwide.
                 </p>
                 <blockquote className="border-l-4 border-sunset-500 pl-6 py-2">
                   <p className="text-xl font-display italic text-charcoal-800">
-                    "If you know tortillas, you know H-E-B®. We deliver."
+                    "Those who know Texas tortillas, know quality."
                   </p>
                   <cite className="text-sm text-charcoal-600 mt-2 block">— Maria Rodriguez, Founder</cite>
                 </blockquote>
@@ -628,9 +628,9 @@ export default function Home() {
               <span className="text-9xl font-display text-masa-300 leading-none">"</span>
               <h3 className="text-4xl lg:text-5xl font-display leading-tight mt-6 mb-8 text-charcoal-900">
                 Those who<br />
-                <span className="text-gradient-masa">know quality</span><br />
-                choose<br />
-                <span className="font-black">H-E-B® Tortillas</span>
+                <span className="text-gradient-masa">know Texas</span><br />
+                <span className="font-black">tortillas,</span><br />
+                <span className="text-gradient-masa">know quality</span>
               </h3>
             </div>
           </div>
@@ -867,6 +867,24 @@ export default function Home() {
                 OUR TREASURES
               </h2>
               <p className="text-2xl text-charcoal-700 mt-4 slide-left">Shelf-stable Texas gold, ready for your pantry</p>
+              <p className="text-lg text-charcoal-600 mt-2">
+                Made fresh, sealed for shipping — no refrigeration needed until opened.
+              </p>
+              {/* Trust Badges */}
+              <div className="flex flex-wrap gap-4 mt-6 text-sm text-charcoal-600">
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  Ships Nationwide
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-sunset-500 rounded-full"></span>
+                  Arrives in 2-4 Days
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-masa-500 rounded-full"></span>
+                  Shipping to All 50 States
+                </span>
+              </div>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-12">
@@ -899,8 +917,8 @@ export default function Home() {
                   shadow: 'shadow-xl'
                 }
               ].map((product, i) => (
-                <div key={i} className="scale-in group">
-                  <div className={`relative ${product.gradient} p-12 h-80 flex flex-col justify-between overflow-hidden hover-lift ${product.shadow} transition-all duration-500`}>
+                <Link href="/shop" key={i} className="scale-in group block cursor-pointer">
+                  <div className={`relative ${product.gradient} p-12 h-80 flex flex-col justify-between overflow-hidden hover-lift hover:shadow-2xl hover:-translate-y-1 ${product.shadow} transition-all duration-500`}>
                     {/* Background pattern */}
                     <div className="absolute inset-0 opacity-10">
                       <div className="absolute top-0 right-0 w-32 h-32 border-8 border-current rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -916,12 +934,16 @@ export default function Home() {
                     <div className="relative z-10">
                       <p className="text-charcoal-600">{product.style}</p>
                       <p className="text-sm mt-2 font-medium tracking-wider uppercase opacity-60">{product.badge}</p>
+                      {/* Shop CTA indicator */}
+                      <p className="text-sm mt-3 font-semibold text-sunset-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
+                        Shop Now →
+                      </p>
                     </div>
 
                     {/* Hover effect */}
                     <div className="absolute inset-0 bg-charcoal-950 opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
