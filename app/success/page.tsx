@@ -79,13 +79,15 @@ function SuccessContent() {
             itemCount: data.order.items.length,
           });
 
-          // Track conversion in Google Ads
+          // Track purchase in Google Ads
           if (typeof window !== 'undefined' && (window as any).gtag) {
-            (window as any).gtag('event', 'conversion', {
+            (window as any).gtag('event', 'purchase', {
               'send_to': 'AW-17804372077/nT9bCJvLpdEbEO3Q5KlC',
+              'transaction_id': data.order.orderNumber,
               'value': data.order.total / 100,
               'currency': 'USD',
-              'transaction_id': data.order.orderNumber,
+              'tax': data.order.tax / 100,
+              'shipping': data.order.shipping / 100,
             });
           }
         }
