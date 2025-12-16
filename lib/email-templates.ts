@@ -208,12 +208,13 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
               </div>
               <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
               <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
-              <p style="margin: 0 0 4px 0;">
-                <a href="https://lonestartortillas.com" style="color: #fbbf24; text-decoration: none; font-size: 14px;">lonestartortillas.com</a>
-              </p>
-              <p style="margin: 0 0 16px 0;">
-                <a href="mailto:${customerEmail}" style="color: #fbbf24; text-decoration: none; font-size: 14px;">${customerEmail}</a>
-              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 16px auto;">
+                <tr>
+                  <td style="background-color: #d97706; border-radius: 6px;">
+                    <a href="https://lonestartortillas.com/contact" style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600;">Questions? Contact Us</a>
+                  </td>
+                </tr>
+              </table>
               <p style="margin: 0; font-size: 12px; color: #78716c;">
                 Independent reseller • Not affiliated with or endorsed by H-E-B®
               </p>
@@ -352,12 +353,13 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
               </div>
               <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
               <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
-              <p style="margin: 0 0 4px 0;">
-                <a href="https://lonestartortillas.com" style="color: #fbbf24; text-decoration: none; font-size: 14px;">lonestartortillas.com</a>
-              </p>
-              <p style="margin: 0 0 16px 0;">
-                <a href="mailto:support@lonestartortillas.com" style="color: #fbbf24; text-decoration: none; font-size: 14px;">support@lonestartortillas.com</a>
-              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 16px auto;">
+                <tr>
+                  <td style="background-color: #d97706; border-radius: 6px;">
+                    <a href="https://lonestartortillas.com/contact" style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600;">Questions? Contact Us</a>
+                  </td>
+                </tr>
+              </table>
               <p style="margin: 0; font-size: 12px; color: #78716c;">
                 Independent reseller • Not affiliated with or endorsed by H-E-B®
               </p>
