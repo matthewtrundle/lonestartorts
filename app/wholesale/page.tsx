@@ -7,7 +7,7 @@ import { Package, Truck, Clock, Shield, Users, TrendingUp } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Wholesale & Bulk Orders | H-E-B Tortillas for Restaurants',
-  description: 'Order H-E-B tortillas in bulk for your restaurant, food truck, or catering business. Volume discounts, 60-day shelf life, fast nationwide shipping.',
+  description: 'Order H-E-B tortillas in bulk for your restaurant, food truck, or catering business. Volume discounts, long shelf life, fast shipping with overnight available.',
   keywords: 'wholesale tortillas, bulk tortilla order, restaurant tortilla supplier, H-E-B tortillas wholesale, commercial tortilla order',
   alternates: {
     canonical: 'https://lonestartortillas.com/wholesale',
@@ -50,13 +50,13 @@ const pricingTiers = [
 const benefits = [
   {
     icon: Package,
-    title: '60-Day Shelf Life',
-    description: 'No refrigeration needed. Stock up without worrying about spoilage or daily deliveries.',
+    title: 'Long Shelf Life',
+    description: 'Vacuum sealed for shipping. Throw it in the freezer, and they will last for months.',
   },
   {
     icon: Truck,
-    title: 'Fast Nationwide Shipping',
-    description: '2-3 day delivery anywhere in the US. Same-day shipping on orders before 2 PM CT.',
+    title: 'Fast Shipping',
+    description: 'Multiple options available including overnight.',
   },
   {
     icon: Clock,
@@ -301,9 +301,8 @@ export default function WholesalePage() {
                 </summary>
                 <div className="p-5 pt-0 border-t border-charcoal-200">
                   <p className="text-charcoal-700">
-                    H-E-B tortillas are shelf-stable with a 60-day freshness guarantee from the production date. They don&apos;t require
-                    refrigeration before opening, making storage easy for busy kitchens. Once opened, most operators find packs
-                    stay fresh for 1-2 weeks under normal kitchen conditions.
+                    Our tortillas are vacuum sealed for shipping. Throw them in the freezer and they&apos;ll last for months.
+                    Once thawed, most operators find packs stay fresh for 1-2 weeks under normal kitchen conditions.
                   </p>
                 </div>
               </details>
@@ -345,9 +344,8 @@ export default function WholesalePage() {
                 </summary>
                 <div className="p-5 pt-0 border-t border-charcoal-200">
                   <p className="text-charcoal-700">
-                    Most orders arrive within 2-3 business days via USPS Priority Mail. Orders placed before 2 PM CT Monday-Friday
-                    ship the same day. For urgent needs, we offer expedited shipping options. We recommend maintaining a 1-2 week
-                    buffer stock for restaurant operations.
+                    We offer multiple shipping options including overnight delivery. For urgent needs, expedited shipping is available.
+                    We recommend maintaining a 1-2 week buffer stock for restaurant operations.
                   </p>
                 </div>
               </details>
