@@ -192,23 +192,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Shipping Savings Message - Only show for tortillas */}
-        {productType === 'tortilla' && quantity >= 3 && (
-          <div className="mb-3 text-center">
-            <p className="text-xs font-medium text-green-700 bg-green-50 px-3 py-2 rounded-md border border-green-200">
-              ✓ Optimized Shipping Unlocked
-            </p>
-          </div>
-        )}
-
-        {/* Sauce shipping message */}
-        {productType === 'sauce' && (
-          <div className="mb-3 text-center">
-            <p className="text-xs font-medium text-blue-700 bg-blue-50 px-3 py-2 rounded-md border border-blue-200">
-              Ships free with tortillas • $9.99 flat rate alone
-            </p>
-          </div>
-        )}
 
         {/* Premium CTA Button */}
         <Button
