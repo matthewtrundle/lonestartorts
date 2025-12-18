@@ -126,73 +126,86 @@ export default function StoryPage() {
             </div>
           </section>
 
-        {/* Timeline Section */}
+        {/* Texas Food Culture Section */}
         <section className="py-16 md:py-20 bg-gradient-to-b from-cream-50 to-cream-100">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-12 md:mb-16 reveal-text">
-              {t('story.timeline.title')}
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-6 reveal-text">
+              A Texas Tradition
             </h2>
+            <p className="text-xl text-center text-charcoal-700 max-w-3xl mx-auto mb-12 md:mb-16">
+              Tortillas are more than food in Texas — they&apos;re a way of life
+            </p>
 
             <div className="max-w-4xl mx-auto">
               {[
                 {
-                  year: '2020',
-                  title: 'The Great Tortilla Crisis',
-                  desc: 'Moved to Brooklyn. Tried local tortillas. Immediately regretted life choices.',
+                  icon: (
+                    <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ),
+                  title: 'Generations at the Table',
+                  desc: 'In Texas homes, tortillas have brought families together for generations. From abuelitas teaching grandchildren to make masa by hand, to Sunday barbacoa breakfasts, the tortilla is the foundation of our most treasured meals and memories.',
                   highlight: true,
                 },
                 {
-                  year: '2021',
-                  title: 'The Pilgrimage',
-                  desc: 'Drove 1,800 miles to Texas just to stock up on H-E-B® tortillas. Worth it.',
+                  icon: (
+                    <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ),
+                  title: 'The Heart of Tex-Mex',
+                  desc: 'Texas created a cuisine all its own — a beautiful fusion of Mexican tradition and Texas flair. Breakfast tacos, fajitas, enchiladas, and more all start with one essential ingredient: a quality tortilla that can hold bold flavors and bring people together.',
                 },
                 {
-                  year: '2022',
-                  title: 'The Lightbulb Moment',
-                  desc: 'Wait... what if we just... buy them and ship them to people? Genius!',
+                  icon: (
+                    <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ),
+                  title: 'H-E-B: A Texas Institution',
+                  desc: 'For over a century, H-E-B has been the grocery store Texans trust. Their tortillas are made with the same care and quality that has made them a household name. When Texans move away, H-E-B tortillas are what they miss most.',
                 },
                 {
-                  year: '2023',
-                  title: 'The Underground Network',
-                  desc: 'Fellow tortilla enthusiasts start sliding into our DMs. "You got the goods?"',
-                },
-                {
-                  year: '2024',
-                  title: 'Going Legit',
-                  desc: 'Turns out we\'re not the only ones with this problem. Who knew?',
+                  icon: (
+                    <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ),
+                  title: 'Comfort Food, Anywhere',
+                  desc: 'Whether you&apos;re a Texan living far from home or someone who discovered the magic of authentic Texas tortillas, we believe everyone deserves access to this comfort. Good food connects us to our roots and to each other.',
                   highlight: true,
                 },
                 {
-                  year: 'Today',
-                  title: 'Living the Dream',
-                  desc: 'Helping tortilla-deprived Americans, one H-E-B® package at a time',
+                  icon: (
+                    <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ),
+                  title: 'Our Mission',
+                  desc: 'We&apos;re on a mission to share the taste of Texas with tortilla lovers everywhere. Authentic H-E-B tortillas, shipped fresh to your door, no matter where you call home. Because great food shouldn&apos;t have borders.',
                   highlight: true,
                 },
-              ].map((milestone, i) => (
-                <div key={i} className="relative mb-8 md:mb-12 last:mb-0">
-                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-8 slide-left" style={{ animationDelay: `${i * 0.1}s` }}>
-                    {/* Year */}
-                    <div className="flex-shrink-0 sm:w-32">
-                      <div className={`text-xl sm:text-2xl font-bold ${milestone.highlight ? 'text-sunset-600' : 'text-masa-600'}`}>
-                        {milestone.year}
+              ].map((item, i) => (
+                <div key={i} className="relative mb-10 md:mb-14 last:mb-0">
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 slide-left" style={{ animationDelay: `${i * 0.1}s` }}>
+                    {/* Icon */}
+                    <div className="flex-shrink-0">
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${item.highlight ? 'bg-sunset-100 text-sunset-600' : 'bg-masa-100 text-masa-600'}`}>
+                        {item.icon}
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="flex-grow pl-4 sm:pl-0 border-l-2 sm:border-l-0 border-masa-200 sm:border-transparent">
-                      <h3 className="text-xl sm:text-2xl font-display font-bold text-charcoal-950 mb-1 sm:mb-2">
-                        {milestone.title}
+                    <div className="flex-grow">
+                      <h3 className="text-xl sm:text-2xl font-display font-bold text-charcoal-950 mb-2 sm:mb-3">
+                        {item.title}
                       </h3>
-                      <p className="text-base sm:text-lg text-charcoal-700">
-                        {milestone.desc}
+                      <p className="text-base sm:text-lg text-charcoal-700 leading-relaxed">
+                        {item.desc}
                       </p>
                     </div>
                   </div>
-
-                  {/* Connecting Line - Hidden on mobile */}
-                  {i < 5 && (
-                    <div className="hidden sm:block absolute left-16 top-12 w-0.5 h-12 bg-gradient-to-b from-masa-300 to-transparent" />
-                  )}
                 </div>
               ))}
             </div>
@@ -203,7 +216,7 @@ export default function StoryPage() {
                 href="/shop"
                 className="inline-block bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-8 sm:px-12 py-4 text-base sm:text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl"
               >
-                Shop H-E-B Tortillas
+                Taste the Tradition
               </Link>
             </div>
           </div>

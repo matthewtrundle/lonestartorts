@@ -64,13 +64,14 @@ export function LogoFull({
 }: {
   className?: string;
   animated?: boolean;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }) {
   const sizes = {
-    sm: { width: 180, height: 102 },
-    md: { width: 260, height: 147 },
-    lg: { width: 320, height: 181 },
-    xl: { width: 400, height: 226 },
+    xs: { width: 120, height: 68 },
+    sm: { width: 150, height: 85 },
+    md: { width: 200, height: 113 },
+    lg: { width: 260, height: 147 },
+    xl: { width: 320, height: 181 },
   };
 
   const { width, height } = sizes[size];

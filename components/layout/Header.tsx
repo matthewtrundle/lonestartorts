@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
-import { ShoppingBag, Menu, X, Globe } from 'lucide-react';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
   const { language, setLanguage, t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'es' : 'en');
@@ -18,9 +19,13 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
+      const scrolled = window.scrollY > 30;
+      setIsScrolled(scrolled);
+
+      // Also update class for any CSS that depends on it
       const header = document.getElementById('main-header');
       if (header) {
-        if (window.scrollY > 50) {
+        if (scrolled) {
           header.classList.add('scrolled');
         } else {
           header.classList.remove('scrolled');
@@ -45,15 +50,14 @@ export function Header() {
   }, [isMobileMenuOpen]);
 
   return (
-    <header className="shrink-header fixed top-[28px] left-0 right-0 z-[100] transition-all duration-500 bg-white shadow-md" id="main-header">
+    <header className={`shrink-header fixed top-[28px] left-0 right-0 z-[100] transition-all duration-300 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`} id="main-header">
 
       <div className="container mx-auto px-4 md:px-8 relative">
-        <div className="header-content flex justify-between items-center py-3 md:py-4 transition-all duration-500">
-          <Link href="/" className="logo-wrapper group relative -ml-2 md:-ml-4 transition-all duration-500">
+        <div className="header-content flex justify-between items-center py-1">
+          <Link href="/" className="logo-wrapper group relative">
             <LogoFull
-              className="text-charcoal-950 transition-all duration-500 group-hover:scale-105"
-              animated
-              size="md"
+              className="text-charcoal-950 transition-transform duration-300 group-hover:scale-105"
+              size="xs"
             />
           </Link>
 
@@ -88,7 +92,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation - Premium styling */}
-          <nav className="nav-items hidden md:flex items-center gap-6">
+          <nav className={`nav-items hidden md:flex items-center transition-all duration-300 ${isScrolled ? 'gap-4' : 'gap-5'}`}>
             <Link href="/shop" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.shop')}
@@ -138,14 +142,38 @@ export function Header() {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
 
-            {/* Language Toggle */}
+            {/* Language Toggle with Mexican Flag */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium text-charcoal-700 hover:text-sunset-600 hover:bg-sunset-50 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium text-charcoal-700 hover:text-sunset-600 hover:bg-sunset-50 rounded-lg transition-colors border border-charcoal-200 hover:border-sunset-300"
               aria-label={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}
             >
-              <Globe className="w-4 h-4" />
-              <span className="uppercase">{t('language.toggle')}</span>
+              {language === 'en' ? (
+                <>
+                  {/* Mexican Flag for Spanish option */}
+                  <svg className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
+                    <rect width="10" height="20" fill="#006847"/>
+                    <rect x="10" width="10" height="20" fill="#fff"/>
+                    <rect x="20" width="10" height="20" fill="#ce1126"/>
+                  </svg>
+                  <span className="font-semibold">ES</span>
+                </>
+              ) : (
+                <>
+                  {/* US Flag for English option */}
+                  <svg className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
+                    <rect width="30" height="20" fill="#bf0a30"/>
+                    <rect y="1.54" width="30" height="1.54" fill="#fff"/>
+                    <rect y="4.62" width="30" height="1.54" fill="#fff"/>
+                    <rect y="7.69" width="30" height="1.54" fill="#fff"/>
+                    <rect y="10.77" width="30" height="1.54" fill="#fff"/>
+                    <rect y="13.85" width="30" height="1.54" fill="#fff"/>
+                    <rect y="16.92" width="30" height="1.54" fill="#fff"/>
+                    <rect width="12" height="10.77" fill="#002868"/>
+                  </svg>
+                  <span className="font-semibold">EN</span>
+                </>
+              )}
             </button>
 
             {/* Cart Icon */}
@@ -164,7 +192,7 @@ export function Header() {
 
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 bg-sunset-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm tracking-wide hover:bg-sunset-700 hover:shadow-md transition-all"
+              className={`inline-flex items-center gap-2 bg-sunset-600 text-white rounded-lg font-semibold text-sm tracking-wide hover:bg-sunset-700 hover:shadow-md transition-all ${isScrolled ? 'px-4 py-2' : 'px-5 py-2.5'}`}
             >
               {t('nav.shopNow')}
             </Link>
@@ -199,16 +227,38 @@ export function Header() {
 
           {/* Mobile Menu Content */}
           <nav className="flex flex-col p-6 space-y-1 overflow-y-auto h-[calc(100vh-180px)]">
-            {/* Language Toggle - Mobile */}
+            {/* Language Toggle - Mobile with Flags */}
             <button
               onClick={() => {
                 toggleLanguage();
                 setIsMobileMenuOpen(false);
               }}
-              className="flex items-center gap-2 px-4 py-3 text-charcoal-700 font-medium hover:bg-sunset-50 rounded-lg transition-colors mb-4 border border-charcoal-200"
+              className="flex items-center gap-3 px-4 py-3 text-charcoal-700 font-medium hover:bg-sunset-50 rounded-lg transition-colors mb-4 border border-charcoal-200"
             >
-              <Globe className="w-5 h-5" />
-              <span>{language === 'en' ? 'Cambiar a Español' : 'Switch to English'}</span>
+              {language === 'en' ? (
+                <>
+                  <svg className="w-6 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
+                    <rect width="10" height="20" fill="#006847"/>
+                    <rect x="10" width="10" height="20" fill="#fff"/>
+                    <rect x="20" width="10" height="20" fill="#ce1126"/>
+                  </svg>
+                  <span>Cambiar a Español</span>
+                </>
+              ) : (
+                <>
+                  <svg className="w-6 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
+                    <rect width="30" height="20" fill="#bf0a30"/>
+                    <rect y="1.54" width="30" height="1.54" fill="#fff"/>
+                    <rect y="4.62" width="30" height="1.54" fill="#fff"/>
+                    <rect y="7.69" width="30" height="1.54" fill="#fff"/>
+                    <rect y="10.77" width="30" height="1.54" fill="#fff"/>
+                    <rect y="13.85" width="30" height="1.54" fill="#fff"/>
+                    <rect y="16.92" width="30" height="1.54" fill="#fff"/>
+                    <rect width="12" height="10.77" fill="#002868"/>
+                  </svg>
+                  <span>Switch to English</span>
+                </>
+              )}
             </button>
 
             {/* Shop Now CTA - Prominent */}
