@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { ProductCard } from '@/components/product/ProductCard';
-import { Truck, Shield, Clock } from 'lucide-react';
+import { Truck, Shield, Clock, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
 
 import type { Product } from '@/lib/products';
@@ -16,7 +17,7 @@ export default function ShopPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch('/api/products?type=tortilla')
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -138,6 +139,18 @@ export default function ShopPage() {
               <p className="text-gray-600 text-lg">{t('shop.emptyState')}</p>
             </div>
           )}
+
+          {/* Other HEB Products Link */}
+          <div className="mt-10 text-center">
+            <Link
+              href="/shop/heb-products"
+              className="inline-flex items-center gap-2 text-sunset-600 hover:text-sunset-700 font-semibold text-lg transition-colors group"
+            >
+              Shop Other H-E-B Products
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <p className="text-gray-500 text-sm mt-1">Sauces, salsas, and more Texas favorites</p>
+          </div>
 
           {/* Wholesale CTA */}
           <div className="mt-16 bg-gradient-to-r from-charcoal-900 to-charcoal-950 rounded-xl p-6 md:p-8 text-white">
