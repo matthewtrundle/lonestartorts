@@ -199,7 +199,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           size="lg"
           onClick={handleAddToCart}
           className="w-full uppercase flex items-center justify-center gap-2 text-sm font-semibold py-3 shadow-md hover:shadow-lg transition-all"
-          aria-label={`Add ${quantity > 1 ? `${quantity} ${productType === 'sauce' ? 'bottles' : 'packs'} of ` : ''}${name} to cart`}
         >
           <ShoppingBag className="w-4 h-4" />
           Add {quantity > 1 ? `${quantity} ${productType === 'sauce' ? 'Bottles' : 'Packs'}` : ''} to Cart
