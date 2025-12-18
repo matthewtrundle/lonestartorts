@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
-import { DisclaimerBanner } from '@/components/DisclaimerBanner'
+import { Header } from '@/components/layout/Header'
 import { trackWaitlistSignup } from '@/lib/analytics'
 import { useLanguage } from '@/lib/language-context'
 
@@ -75,39 +75,8 @@ export default function PreSalePage() {
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 min-h-screen">
-        {/* Disclaimer Banner */}
-        <DisclaimerBanner />
-
         {/* Header */}
-        <header className="fixed top-12 left-0 right-0 z-50 bg-cream-50/80 backdrop-blur-md border-b border-charcoal-200/10">
-          <div className="container mx-auto px-8">
-            <div className="flex justify-between items-center py-3">
-              <Link href="/">
-                <LogoFull className="text-charcoal-950" animated size="sm" />
-              </Link>
-              <nav className="hidden md:flex items-center gap-8">
-                <Link href="/pre-sale" className="text-sm font-medium tracking-wider uppercase text-sunset-600">
-                  {t('nav.preSale')}
-                </Link>
-                <Link href="/craft" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  {t('nav.source')}
-                </Link>
-                <Link href="/guides" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  {t('nav.guides')}
-                </Link>
-                <Link href="/recipes" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  {t('nav.recipes')}
-                </Link>
-                <Link href="/blog" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  {t('nav.blog')}
-                </Link>
-                <Link href="/story" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  {t('nav.story')}
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <Header />
 
         {/* Hero Section */}
         <section className="pt-28 pb-20 relative overflow-hidden">

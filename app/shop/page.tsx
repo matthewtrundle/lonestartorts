@@ -3,9 +3,8 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
-import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ProductCard } from '@/components/product/ProductCard';
-import { Truck, Shield, Star, Clock } from 'lucide-react';
+import { Truck, Shield, Clock } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 
 import type { Product } from '@/lib/products';
@@ -37,7 +36,6 @@ export default function ShopPage() {
 
   return (
     <>
-      <DisclaimerBanner />
       <Header />
 
       <main className="min-h-screen bg-cream-50">
@@ -66,23 +64,29 @@ export default function ShopPage() {
               {t('shop.subtitle')}
             </p>
 
-            {/* Trust Signals Bar - Premium layout */}
-            <div className="max-w-4xl mx-auto mb-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
-                  <Clock className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">{t('shop.trustSignals.sameDay')}</p>
-                  <p className="text-xs text-gray-600">{t('shop.trustSignals.sameDaySub')}</p>
+            {/* Trust Signals Bar - Centered Premium layout */}
+            <div className="flex justify-center mb-6">
+              <div className="inline-flex flex-wrap justify-center gap-4 md:gap-6">
+                <div className="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-sunset-200 transition-all min-w-[140px]">
+                  <div className="w-12 h-12 rounded-full bg-sunset-50 flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-sunset-600" />
+                  </div>
+                  <p className="text-sm font-bold text-charcoal-950">{t('shop.trustSignals.sameDay')}</p>
+                  <p className="text-xs text-gray-500">{t('shop.trustSignals.sameDaySub')}</p>
                 </div>
-                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
-                  <Shield className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">{t('shop.trustSignals.secure')}</p>
-                  <p className="text-xs text-gray-600">{t('shop.trustSignals.secureSub')}</p>
+                <div className="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-sunset-200 transition-all min-w-[140px]">
+                  <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center">
+                    <Shield className="w-6 h-6 text-green-600" />
+                  </div>
+                  <p className="text-sm font-bold text-charcoal-950">{t('shop.trustSignals.secure')}</p>
+                  <p className="text-xs text-gray-500">{t('shop.trustSignals.secureSub')}</p>
                 </div>
-                <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
-                  <Truck className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">{t('shop.trustSignals.smartShipping')}</p>
-                  <p className="text-xs text-gray-600">{t('shop.trustSignals.smartShippingSub')}</p>
+                <div className="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-sunset-200 transition-all min-w-[140px]">
+                  <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
+                    <Truck className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <p className="text-sm font-bold text-charcoal-950">{t('shop.trustSignals.smartShipping')}</p>
+                  <p className="text-xs text-gray-500">{t('shop.trustSignals.smartShippingSub')}</p>
                 </div>
               </div>
             </div>

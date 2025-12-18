@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { formatPrice } from '@/lib/utils';
-import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { Header } from '@/components/layout/Header';
 import { useLanguage } from '@/lib/language-context';
 
@@ -78,7 +77,6 @@ export default function TrackOrderPage() {
 
   return (
     <>
-      <DisclaimerBanner />
       <Header />
 
       <main className="min-h-screen bg-cream-50 pt-40 pb-16">

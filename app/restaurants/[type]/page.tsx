@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CompactHeader } from '@/components/layout/CompactHeader';
-import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { RestaurantHero } from '@/components/restaurant/RestaurantHero';
 import { PainPointGrid } from '@/components/restaurant/PainPointGrid';
 import { FeatureGrid } from '@/components/restaurant/FeatureGrid';
@@ -307,9 +306,6 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
           </div>
         </div>
       </section>
-
-      {/* Disclaimer Banner */}
-      <DisclaimerBanner />
     </>
   );
 }

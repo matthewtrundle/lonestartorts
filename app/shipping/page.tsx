@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
-import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { Truck, Clock, Package, MapPin, ShieldCheck, DollarSign } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 
@@ -131,7 +130,6 @@ export default function ShippingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <DisclaimerBanner />
       <Header />
 
       <main className="min-h-screen bg-cream-50">

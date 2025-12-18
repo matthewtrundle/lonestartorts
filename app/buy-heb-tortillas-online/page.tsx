@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
-import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ShoppingBag, Truck, Shield, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -263,7 +262,6 @@ export default function BuyHebTortillasOnlinePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <DisclaimerBanner />
       <Header />
 
       <main className="min-h-screen bg-cream-50">

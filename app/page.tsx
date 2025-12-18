@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
-import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { Header } from '@/components/layout/Header'
 import { HeroInteractions } from '@/components/HeroInteractions'
 import { ContactForm } from '@/components/ContactForm'
@@ -33,9 +32,6 @@ export default function Home() {
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
-        {/* Prominent Disclaimer Banner */}
-        <DisclaimerBanner />
-
         {/* Background Music Player - Removed for now */}
         {/* <BackgroundMusic /> */}
 

@@ -8,7 +8,6 @@ import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
-import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X } from 'lucide-react';
@@ -169,7 +168,6 @@ export default function CheckoutPage() {
 
   return (
     <>
-      <DisclaimerBanner />
       <Header />
 
       <main className="min-h-screen bg-cream-50 pt-32 pb-16">

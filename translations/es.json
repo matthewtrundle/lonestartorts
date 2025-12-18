@@ -348,8 +348,8 @@
     "noRefrigeration": "Sin Refrigeraci\u00f3n Necesaria",
     "emptyState": "No hay productos disponibles en este momento.",
     "trustSignals": {
-      "sameDay": "Env\u00edo Mismo D\u00eda",
-      "sameDaySub": "antes de las 2pm CT",
+      "sameDay": "Envío al Día Siguiente",
+      "sameDaySub": "pedidos después de 10am CT",
       "secure": "100% Seguro",
       "secureSub": "encriptado",
       "smartShipping": "Env\u00edo Inteligente",
@@ -383,15 +383,15 @@
     "faq": {
       "title": "Preguntas Frecuentes de Compra",
       "shippingCostQ": "\u00bfCu\u00e1nto cuesta el env\u00edo?",
-      "shippingCostA": "El env\u00edo tiene una tarifa fija de $12.99 para todos los pedidos. Ofrecemos env\u00edo gratis en pedidos mayores a $45. Todos los pedidos se env\u00edan por USPS Priority Mail para entrega r\u00e1pida y confiable.",
+      "shippingCostA": "El envío varía según el tamaño: 1 paquete es $10.60, 2-3 paquetes es $18.40, y 4-5 paquetes es $22.65. ¡Envío gratis en pedidos mayores a $45! Todos los pedidos se envían por USPS Priority Mail para entrega rápida en 2-3 días.",
       "arrivalQ": "\u00bfCu\u00e1ndo llegar\u00e1 mi pedido?",
-      "arrivalA": "La mayor\u00eda de los pedidos llegan en 2-3 d\u00edas h\u00e1biles. Los pedidos a Alaska y Hawaii pueden tardar 4-7 d\u00edas h\u00e1biles. Enviamos de lunes a viernes, y los pedidos realizados antes de las 2 PM CT se env\u00edan el mismo d\u00eda.",
+      "arrivalA": "La mayoría de los pedidos llegan en 2-3 días hábiles. Los pedidos a Alaska y Hawaii pueden tardar 4-7 días hábiles. Enviamos de lunes a viernes, y los pedidos antes de las 10 AM CT se envían al día siguiente.",
       "refrigerationQ": "\u00bfNecesito refrigerar las tortillas?",
-      "refrigerationA": "\u00a1No! Nuestras tortillas H-E-B son estables en estante y no requieren refrigeraci\u00f3n. Mantienen su frescura a temperatura ambiente por 3-4 semanas sin abrir. Despu\u00e9s de abrir, puedes refrigerar para extender la frescura o congelar para almacenamiento m\u00e1s largo.",
+      "refrigerationA": "¡No! Nuestras tortillas H-E-B son estables en estante y no requieren refrigeración. Mantienen su frescura a temperatura ambiente por 3-4 semanas sin abrir. Después de abrir, puedes refrigerar para extender la frescura. Consejo: ¡se congelan muy bien! Ponlas en el congelador y durarán meses.",
       "paymentQ": "\u00bfQu\u00e9 m\u00e9todos de pago aceptan?",
       "paymentA": "Aceptamos todas las tarjetas de cr\u00e9dito principales (Visa, Mastercard, American Express, Discover) as\u00ed como Apple Pay y Google Pay. Todas las transacciones est\u00e1n aseguradas con encriptaci\u00f3n est\u00e1ndar de la industria.",
       "bulkQ": "\u00bfPuedo comprar al por mayor para restaurantes o eventos?",
-      "bulkA": "\u00a1S\u00ed! Ofrecemos descuentos por cantidad para pedidos al por mayor. Nuestras opciones de m\u00faltiples paquetes proporcionan ahorros del 5-15% dependiendo de la cantidad. Para pedidos muy grandes o cuentas de restaurantes, cont\u00e1ctanos directamente.",
+      "bulkA": "¡Sí! Ofrecemos precios de mayoreo para restaurantes y negocios. Visita nuestra página de Mayoreo para descuentos por volumen, términos de pago flexibles y soporte dedicado para tus necesidades de servicio de alimentos.",
       "damagedQ": "\u00bfQu\u00e9 pasa si mis tortillas llegan da\u00f1adas?",
       "damagedA": "Respaldamos nuestros productos. Si tus tortillas llegan da\u00f1adas o no cumplen con nuestros est\u00e1ndares de calidad, cont\u00e1ctanos dentro de las 48 horas de la entrega y lo resolveremos con un reemplazo o reembolso."
     }

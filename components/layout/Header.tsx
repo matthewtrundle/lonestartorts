@@ -45,7 +45,7 @@ export function Header() {
   }, [isMobileMenuOpen]);
 
   return (
-    <header className="shrink-header fixed top-0 left-0 right-0 z-[100] transition-all duration-500 bg-white shadow-md" id="main-header">
+    <header className="shrink-header fixed top-[28px] left-0 right-0 z-[100] transition-all duration-500 bg-white shadow-md" id="main-header">
 
       <div className="container mx-auto px-4 md:px-8 relative">
         <div className="header-content flex justify-between items-center py-3 md:py-4 transition-all duration-500">
