@@ -97,7 +97,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="group relative bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-sunset-600 hover:shadow-lg transition-all duration-300">
+    <div className="group relative bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-sunset-600 hover:shadow-lg transition-all duration-300 flex flex-col h-full">
       {/* Premium Image Container - Smaller aspect ratio */}
       <div className="aspect-[3/2] relative overflow-hidden bg-gray-50">
         <Image
@@ -128,7 +128,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Product Details - Premium spacing */}
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-grow">
         <div className="flex justify-between items-start mb-3">
           <div className="flex-1">
             <h3 className="text-lg font-semibold leading-tight mb-2 text-charcoal-950 group-hover:text-sunset-600 transition-colors">
@@ -167,7 +167,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </p>
 
         {/* Quantity Selector - Cleaner design */}
-        <div className="flex items-center justify-between mb-3 bg-gray-50 rounded-md p-3 border border-gray-200">
+        <div className="flex items-center justify-between mb-3 bg-gray-50 rounded-md p-3 border border-gray-200 mt-auto">
           <span className="text-sm font-medium text-gray-700">Quantity</span>
           <div className="flex items-center gap-3">
             <button
