@@ -384,92 +384,84 @@ export default function Home() {
               {/* Left Column - Main Content */}
               <div className="space-y-6">
                 <div>
-                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">About Lonestar Tortillas</span>
+                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">{t('about.label')}</span>
                   <h2 className="text-4xl lg:text-5xl font-display font-black text-charcoal-950 mt-3 mb-6">
-                    Bringing Authentic Texas Tortillas to Your Table
+                    {t('about.title')}
                   </h2>
                 </div>
 
                 <div className="prose prose-lg max-w-none text-charcoal-800 space-y-4">
-                  <p className="leading-relaxed">
-                    At Lonestar Tortillas, we're proud to be your independent source for authentic <strong>H-E-B tortillas delivered nationwide</strong>. Those who know tortillas know H-E-B—and now families across all 50 states can enjoy the same premium Texas tortillas that Texans have trusted for generations.
-                  </p>
-
-                  <p className="leading-relaxed">
-                    Whether you're in <strong>Austin, Houston, Dallas, San Antonio</strong>, or anywhere else in America, you can now order genuine H-E-B tortillas online and have them shipped directly to your door. Our shelf-stable tortillas require no refrigeration, making them perfect for your pantry and easy to ship anywhere in the country.
-                  </p>
-
-                  <p className="leading-relaxed">
-                    We specialize in sourcing premium <strong>flour tortillas, corn tortillas, and butter tortillas</strong>—the same authentic products you'd find in H-E-B stores throughout Texas. Every order is carefully packed and shipped fresh, maintaining the quality and taste that H-E-B is known for.
-                  </p>
+                  <p className="leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.intro1') }} />
+                  <p className="leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.intro2') }} />
+                  <p className="leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.intro3') }} />
                 </div>
               </div>
 
               {/* Right Column - Key Benefits */}
               <div className="space-y-6">
                 <div className="bg-white p-8 rounded-lg shadow-lg border-l-4 border-sunset-500">
-                  <h3 className="text-2xl font-bold text-charcoal-950 mb-4">Why Choose Lonestar?</h3>
+                  <h3 className="text-2xl font-bold text-charcoal-950 mb-4">{t('about.whyChoose')}</h3>
                   <ul className="space-y-3 text-charcoal-700">
                     <li className="flex items-start gap-3">
                       <span className="text-sunset-500 text-xl mt-1">✓</span>
-                      <span><strong>Genuine H-E-B Products:</strong> We source authentic H-E-B tortillas, the same products Texas families trust</span>
+                      <span><strong>{t('about.benefits.genuine.title')}</strong> {t('about.benefits.genuine.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-sunset-500 text-xl mt-1">✓</span>
-                      <span><strong>Nationwide Delivery:</strong> Serving all 50 states with reliable, fast shipping</span>
+                      <span><strong>{t('about.benefits.nationwide.title')}</strong> {t('about.benefits.nationwide.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-sunset-500 text-xl mt-1">✓</span>
-                      <span><strong>Shelf-Stable Quality:</strong> No refrigeration needed—our tortillas stay fresh in your pantry</span>
+                      <span><strong>{t('about.benefits.shelfStable.title')}</strong> {t('about.benefits.shelfStable.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-sunset-500 text-xl mt-1">✓</span>
-                      <span><strong>Texas Authentic:</strong> Real Texas taste, traditional recipes, premium ingredients</span>
+                      <span><strong>{t('about.benefits.authentic.title')}</strong> {t('about.benefits.authentic.text')}</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="bg-masa-50 p-6 rounded-lg">
                   <p className="text-charcoal-700 leading-relaxed">
-                    Our mission is simple: make authentic Texas tortillas accessible to everyone, no matter where you live. From breakfast tacos in New York to fajita night in California, Lonestar brings the taste of Texas to your kitchen.
+                    {t('about.mission')}
                   </p>
                 </div>
 
                 <p className="text-xs text-charcoal-500 uppercase tracking-wider">
-                  Independent reseller • Not affiliated with or endorsed by H-E-B®
+                  {t('disclaimer.short')}
                 </p>
               </div>
             </div>
 
             {/* Additional SEO Content - How It Works */}
             <div className="mt-16 pt-16 border-t border-charcoal-200">
-              <h3 className="text-3xl font-bold text-charcoal-950 mb-8 text-center">How Lonestar Tortilla Delivery Works</h3>
+              <h3 className="text-3xl font-bold text-charcoal-950 mb-8 text-center">{t('howItWorks.title')}</h3>
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl font-bold text-sunset-600">1</span>
                   </div>
-                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">Order Online</h4>
+                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">{t('howItWorks.step1.title')}</h4>
                   <p className="text-charcoal-700">
-                    Browse our selection of authentic H-E-B corn, flour, and butter tortillas. Choose your favorites and place your order.
+                    {t('howItWorks.step1.text')}
                   </p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl font-bold text-sunset-600">2</span>
                   </div>
-                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">We Source & Pack</h4>
+                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">{t('howItWorks.step2.title')}</h4>
                   <p className="text-charcoal-700">
-                    We carefully source your tortillas from H-E-B and pack them securely for shipping. All products are shelf-stable and ship fresh.
+                    {t('howItWorks.step2.text')}
                   </p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl font-bold text-sunset-600">3</span>
                   </div>
-                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">Delivered to You</h4>
+                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">{t('howItWorks.step3.title')}</h4>
                   <p className="text-charcoal-700">
-                    Your tortillas arrive at your door, ready for your pantry. No refrigeration needed—just authentic Texas taste whenever you want it.
+                    {t('howItWorks.step3.text')}
                   </p>
                 </div>
               </div>

@@ -73,6 +73,9 @@
   "about": {
     "label": "About Lonestar Tortillas",
     "title": "Bringing Authentic Texas Tortillas to Your Table",
+    "intro1": "At Lonestar Tortillas, we're proud to be your independent source for authentic <strong>H-E-B tortillas delivered nationwide</strong>. Those who know tortillas know H-E-B—and now families across all 50 states can enjoy the same premium Texas tortillas that Texans have trusted for generations.",
+    "intro2": "Whether you're in <strong>Austin, Houston, Dallas, San Antonio</strong>, or anywhere else in America, you can now order genuine H-E-B tortillas online and have them shipped directly to your door. Our shelf-stable tortillas require no refrigeration, making them perfect for your pantry and easy to ship anywhere in the country.",
+    "intro3": "We specialize in sourcing premium <strong>flour tortillas, corn tortillas, and butter tortillas</strong>—the same authentic products you'd find in H-E-B stores throughout Texas. Every order is carefully packed and shipped fresh, maintaining the quality and taste that H-E-B is known for.",
     "whyChoose": "Why Choose Lonestar?",
     "benefits": {
       "genuine": {
@@ -383,7 +386,7 @@
     "faq": {
       "title": "Shopping FAQs",
       "shippingCostQ": "How much does shipping cost?",
-      "shippingCostA": "Shipping varies by order size: 1 pack is $10.60, 2-3 packs is $18.40, and 4-5 packs is $22.65. Free shipping on orders over $45! All orders ship via USPS Priority Mail for fast, reliable 2-3 day delivery.",
+      "shippingCostA": "Shipping varies by order size: 1 pack is $10.60, 2-3 packs is $18.40, and 4-5 packs is $22.65. All orders ship via USPS Priority Mail for fast, reliable 2-3 day delivery.",
       "arrivalQ": "When will my order arrive?",
       "arrivalA": "Most orders arrive within 2-3 business days. Orders to Alaska and Hawaii may take 4-7 business days. We ship Monday through Friday, and orders placed before 10 AM CT ship next day.",
       "refrigerationQ": "Do I need to refrigerate the tortillas?",

@@ -73,6 +73,9 @@
   "about": {
     "label": "Sobre Lonestar Tortillas",
     "title": "Llevando Tortillas Aut\u00e9nticas de Texas a Tu Mesa",
+    "intro1": "En Lonestar Tortillas, estamos orgullosos de ser tu fuente independiente de <strong>tortillas H-E-B aut\u00e9nticas entregadas a todo el pa\u00eds</strong>. Los que conocen las tortillas conocen H-E-B\u2014y ahora las familias en los 50 estados pueden disfrutar de las mismas tortillas premium de Texas en las que los tejanos han confiado por generaciones.",
+    "intro2": "Ya sea que est\u00e9s en <strong>Austin, Houston, Dallas, San Antonio</strong>, o en cualquier otro lugar de Am\u00e9rica, ahora puedes ordenar tortillas genuinas H-E-B en l\u00ednea y recibirlas directamente en tu puerta. Nuestras tortillas son estables en estante y no requieren refrigeraci\u00f3n, perfectas para tu despensa y f\u00e1ciles de enviar a cualquier parte del pa\u00eds.",
+    "intro3": "Nos especializamos en obtener <strong>tortillas de harina, tortillas de ma\u00edz y tortillas de mantequilla</strong> premium\u2014los mismos productos aut\u00e9nticos que encontrar\u00edas en las tiendas H-E-B en todo Texas. Cada pedido es cuidadosamente empacado y enviado fresco, manteniendo la calidad y sabor por los que H-E-B es conocido.",
     "whyChoose": "\u00bfPor Qu\u00e9 Elegir Lonestar?",
     "benefits": {
       "genuine": {
@@ -383,7 +386,7 @@
     "faq": {
       "title": "Preguntas Frecuentes de Compra",
       "shippingCostQ": "\u00bfCu\u00e1nto cuesta el env\u00edo?",
-      "shippingCostA": "El envío varía según el tamaño: 1 paquete es $10.60, 2-3 paquetes es $18.40, y 4-5 paquetes es $22.65. ¡Envío gratis en pedidos mayores a $45! Todos los pedidos se envían por USPS Priority Mail para entrega rápida en 2-3 días.",
+      "shippingCostA": "El envío varía según el tamaño: 1 paquete es $10.60, 2-3 paquetes es $18.40, y 4-5 paquetes es $22.65. Todos los pedidos se envían por USPS Priority Mail para entrega rápida en 2-3 días.",
       "arrivalQ": "\u00bfCu\u00e1ndo llegar\u00e1 mi pedido?",
       "arrivalA": "La mayoría de los pedidos llegan en 2-3 días hábiles. Los pedidos a Alaska y Hawaii pueden tardar 4-7 días hábiles. Enviamos de lunes a viernes, y los pedidos antes de las 10 AM CT se envían al día siguiente.",
       "refrigerationQ": "\u00bfNecesito refrigerar las tortillas?",
