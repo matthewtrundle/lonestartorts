@@ -1,11 +1,9 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'FAQ - Frequently Asked Questions',
-  description: 'Find answers about ordering H-E-B® tortillas online, shipping, storage, and more. Get authentic Texas tortillas delivered nationwide.',
-  keywords: 'H-E-B tortillas FAQ, tortilla shipping questions, how to order H-E-B tortillas, tortilla storage, H-E-B delivery questions',
-};
+import Link from 'next/link';
+import { useLanguage } from '@/lib/language-context';
+
+// Note: Metadata moved to generateMetadata or handled via document head for client component
 
 // Enhanced FAQ Schema optimized for AI retrieval and purchase intent
 const faqSchema = {
@@ -409,6 +407,8 @@ const faqs = [
 ];
 
 export default function FAQPage() {
+  const { t } = useLanguage();
+
   return (
     <>
       <script
@@ -420,9 +420,9 @@ export default function FAQPage() {
         {/* Breadcrumbs */}
         <nav className="container mx-auto px-8 py-6">
           <ol className="flex items-center gap-2 text-sm text-charcoal-600">
-            <li><Link href="/" className="hover:text-sunset-500">Home</Link></li>
+            <li><Link href="/" className="hover:text-sunset-500">{t('faq.breadcrumb.home')}</Link></li>
             <li>/</li>
-            <li className="text-charcoal-950 font-medium">FAQ</li>
+            <li className="text-charcoal-950 font-medium">{t('faq.breadcrumb.faq')}</li>
           </ol>
         </nav>
 
@@ -430,17 +430,17 @@ export default function FAQPage() {
         <section className="container mx-auto px-8 py-12">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h1 className="text-5xl lg:text-7xl font-display font-black text-charcoal-950 mb-6">
-              Frequently Asked Questions
+              {t('faq.title')}
             </h1>
             <p className="text-xl text-charcoal-700 leading-relaxed">
-              Everything you need to know about ordering authentic H-E-B® tortillas online and getting them delivered anywhere in the United States.
+              {t('faq.heroText')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="max-w-5xl mx-auto mb-16">
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-display font-bold text-charcoal-950 mb-4">Jump to Section:</h2>
+              <h2 className="text-2xl font-display font-bold text-charcoal-950 mb-4">{t('faq.jumpToSection')}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {faqs.map((section, idx) => (
                   <a
@@ -492,23 +492,23 @@ export default function FAQPage() {
           <div className="max-w-4xl mx-auto mt-20">
             <div className="bg-gradient-to-br from-sunset-500 to-sunset-600 rounded-2xl shadow-2xl p-12 text-center text-cream-50">
               <h2 className="text-4xl font-display font-black mb-4">
-                Still Have Questions?
+                {t('faq.stillHaveQuestions')}
               </h2>
               <p className="text-xl mb-8 opacity-90">
-                We're here to help! Reach out to our team and we'll get back to you quickly.
+                {t('faq.stillHaveQuestionsText')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/contact"
                   className="inline-block bg-cream-50 text-sunset-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors shadow-lg"
                 >
-                  Contact Us
+                  {t('faq.contactUs')}
                 </Link>
                 <Link
                   href="/returns"
                   className="inline-block bg-transparent border-2 border-cream-50 text-cream-50 px-8 py-4 rounded-full font-bold text-lg hover:bg-cream-50/10 transition-colors"
                 >
-                  Returns & Refunds
+                  {t('faq.returnsRefunds')}
                 </Link>
               </div>
             </div>
@@ -517,44 +517,44 @@ export default function FAQPage() {
           {/* Related Links */}
           <div className="max-w-5xl mx-auto mt-16">
             <h2 className="text-3xl font-display font-bold text-charcoal-950 mb-6 text-center">
-              Explore Our Products
+              {t('faq.exploreProducts')}
             </h2>
             <div className="grid md:grid-cols-4 gap-6">
               <Link href="/products/corn-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
                 <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  Corn Tortillas
+                  {t('faq.products.corn')}
                 </h3>
-                <p className="text-sm text-charcoal-600">Traditional & authentic</p>
+                <p className="text-sm text-charcoal-600">{t('faq.products.cornDesc')}</p>
               </Link>
               <Link href="/products/flour-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
                 <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  Flour Tortillas
+                  {t('faq.products.flour')}
                 </h3>
-                <p className="text-sm text-charcoal-600">Soft & versatile</p>
+                <p className="text-sm text-charcoal-600">{t('faq.products.flourDesc')}</p>
               </Link>
               <Link href="/products/butter-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
                 <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  Butter Tortillas
+                  {t('faq.products.butter')}
                 </h3>
-                <p className="text-sm text-charcoal-600">Premium & rich</p>
+                <p className="text-sm text-charcoal-600">{t('faq.products.butterDesc')}</p>
               </Link>
               <Link href="/products/specialty-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
                 <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  Specialty Varieties
+                  {t('faq.products.specialty')}
                 </h3>
-                <p className="text-sm text-charcoal-600">Unique & flavorful</p>
+                <p className="text-sm text-charcoal-600">{t('faq.products.specialtyDesc')}</p>
               </Link>
             </div>
           </div>
 
           {/* SEO Content Block */}
           <div className="max-w-4xl mx-auto mt-20 prose prose-lg">
-            <h2 className="text-3xl font-display font-bold text-charcoal-950">About Ordering H-E-B® Tortillas Online</h2>
+            <h2 className="text-3xl font-display font-bold text-charcoal-950">{t('faq.seo.title')}</h2>
             <p className="text-charcoal-700">
-              Can you buy H-E-B tortillas outside of Texas? Yes! Lonestar Tortillas makes it easy to order authentic H-E-B® tortillas online and have them delivered anywhere in the United States. Whether you're in New York, California, Florida, or anywhere in between, you can now enjoy the same quality tortillas that Texans have loved for generations.
+              {t('faq.seo.paragraph1')}
             </p>
             <p className="text-charcoal-700">
-              Our shelf-stable tortillas are perfect for online ordering because they don't require refrigeration during shipping. This means your tortillas arrive fresh and delicious, ready to store in your pantry until you're ready to use them. We ship from Austin, Texas, and most orders arrive within 3-5 business days.
+              {t('faq.seo.paragraph2')}
             </p>
           </div>
         </section>

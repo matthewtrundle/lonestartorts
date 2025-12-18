@@ -12,8 +12,10 @@ import { Header } from '@/components/layout/Header'
 import { HeroInteractions } from '@/components/HeroInteractions'
 import { ContactForm } from '@/components/ContactForm'
 import { trackVideoPlay } from '@/lib/analytics'
+import { useLanguage } from '@/lib/language-context'
 
 export default function Home() {
+  const { t } = useLanguage();
   const [currentVideo, setCurrentVideo] = useState(0);
 
   const videos = [
@@ -179,7 +181,7 @@ export default function Home() {
                 {/* Small Quality Badge */}
                 <div className="mb-8 reveal-text">
                   <span className="text-xs font-bold tracking-[0.4em] uppercase text-masa-600">
-                    Premium • Quality • Authentic
+                    {t('hero.badge')}
                   </span>
                 </div>
 
@@ -221,7 +223,7 @@ export default function Home() {
                 <div className="flex items-center justify-center gap-6 my-10">
                   <span className="block w-20 h-px bg-charcoal-300"></span>
                   <span className="text-[11px] font-semibold tracking-[0.35em] uppercase text-charcoal-500">
-                    Est. 2020 • Texas
+                    {t('hero.established')}
                   </span>
                   <span className="block w-20 h-px bg-charcoal-300"></span>
                 </div>
@@ -229,10 +231,10 @@ export default function Home() {
                 {/* Tagline - Bold Statement */}
                 <div className="mt-8 mb-12 max-w-4xl mx-auto text-center">
                   <p className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight text-charcoal-950 mb-4 uppercase">
-                    AUTHENTIC TEXAS TORTILLAS
+                    {t('hero.tagline')}
                   </p>
                   <p className="text-lg md:text-xl lg:text-2xl font-light tracking-wider text-masa-700 italic">
-                    only the best, delivered nationwide
+                    {t('hero.subtagline')}
                   </p>
                 </div>
               </div>
@@ -240,16 +242,16 @@ export default function Home() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-6 justify-center mt-16">
                 <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl">
-                  SHOP NOW
+                  {t('hero.cta.shop')}
                 </Link>
                 <Link href="/story" className="border-2 border-charcoal-950 text-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors">
-                  OUR STORY
+                  {t('hero.cta.story')}
                 </Link>
               </div>
 
               {/* Disclaimer */}
               <p className="text-xs text-charcoal-500 mt-8 tracking-wider uppercase">
-                Independent reseller • Not affiliated with or endorsed by H-E-B
+                {t('disclaimer.short')}
               </p>
             </div>
 
@@ -271,22 +273,22 @@ export default function Home() {
               {/* Left Side - Text Content */}
               <div className="space-y-8">
                 <div>
-                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">Meet Our Founder</span>
+                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">{t('founder.label')}</span>
                   <h2 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mt-3 mb-6">
-                    Maria Rodriguez
+                    {t('founder.name')}
                   </h2>
                   <p className="text-2xl font-light text-charcoal-700 leading-relaxed">
-                    Third-generation Texan bringing authentic H-E-B® tortillas to families nationwide
+                    {t('founder.title')}
                   </p>
                 </div>
 
                 <blockquote className="relative">
                   <span className="absolute -top-4 -left-4 text-8xl text-sunset-200 font-serif">"</span>
                   <p className="relative text-xl italic text-charcoal-700 pl-8 leading-relaxed">
-                    Those who know Texas tortillas, know quality. Growing up in San Antonio, these tortillas were on our table every single day. Now I'm proud to share that same authentic Texas taste with families across America.
+                    {t('founder.quote')}
                   </p>
                   <cite className="block mt-4 text-sm font-medium text-charcoal-600 pl-8">
-                    — Maria Rodriguez, Founder & CEO
+                    — {t('founder.attribution')}
                   </cite>
                 </blockquote>
 
@@ -305,11 +307,11 @@ export default function Home() {
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
-                    <span className="font-bold text-lg">Watch Maria's Story</span>
+                    <span className="font-bold text-lg">{t('founder.watchStory')}</span>
                   </button>
 
                   <p className="text-xs text-charcoal-500 uppercase tracking-wider">
-                    Independent reseller • Not affiliated with or endorsed by H-E-B®
+                    {t('disclaimer.short')}
                   </p>
                 </div>
               </div>
@@ -362,8 +364,8 @@ export default function Home() {
 
                           {/* Video Title Overlay */}
                           <div className="absolute bottom-0 left-0 right-0 p-6 text-cream-50">
-                            <p className="font-bold text-lg">A Taste of Texas</p>
-                            <p className="text-sm opacity-80">Maria Rodriguez, Founder</p>
+                            <p className="font-bold text-lg">{t('founder.videoTitle')}</p>
+                            <p className="text-sm opacity-80">{t('founder.videoSubtitle')}</p>
                           </div>
                         </div>
                       </div>
@@ -742,9 +744,9 @@ export default function Home() {
           <div className="container mx-auto px-8 relative z-20">
             <div className="text-center mb-16">
               <h2 className="text-5xl lg:text-7xl font-display font-black text-cream-50 mb-4 reveal-text relative z-30">
-                WHY CHOOSE
+                {t('features.title')}
               </h2>
-              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">Lonestar Tortillas</p>
+              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">{t('features.subtitle')}</p>
             </div>
 
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -954,10 +956,10 @@ export default function Home() {
           <div className="container mx-auto px-8">
             <div className="text-center mb-16">
               <h2 className="text-6xl lg:text-7xl font-display font-black text-charcoal-950 mb-6 reveal-text">
-                GUIDES & TIPS
+                {t('guides.title')}
               </h2>
               <p className="text-2xl text-charcoal-700 max-w-3xl mx-auto slide-left">
-                Master the art of tortillas with our expert guides
+                {t('guides.subtitle')}
               </p>
             </div>
 
@@ -1043,7 +1045,7 @@ export default function Home() {
                 href="/guides"
                 className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-xl"
               >
-                View All Guides
+                {t('guides.viewAll')}
               </Link>
             </div>
           </div>
@@ -1054,10 +1056,10 @@ export default function Home() {
           <div className="container mx-auto px-8">
             <div className="text-center mb-16">
               <h2 className="text-6xl lg:text-7xl font-display font-black text-charcoal-950 mb-6 reveal-text">
-                FROM OUR KITCHEN
+                {t('recipes.title')}
               </h2>
               <p className="text-2xl text-charcoal-700 max-w-3xl mx-auto slide-left">
-                Authentic Texas recipes that showcase quality tortillas
+                {t('recipes.subtitle')}
               </p>
             </div>
 
@@ -1136,7 +1138,7 @@ export default function Home() {
                   href="/recipes"
                   className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-xl"
                 >
-                  More Recipes Coming Soon
+                  {t('recipes.comingSoon')}
                 </Link>
               </div>
             </div>
@@ -1158,26 +1160,26 @@ export default function Home() {
           <div className="relative z-10 min-h-[60vh] flex items-center justify-center">
             <div className="text-center space-y-6 px-8 max-w-4xl mx-auto">
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-cream-50 split-text leading-tight">
-                READY TO TASTE TEXAS?
+                {t('cta.title')}
               </h2>
 
               <p className="text-xl lg:text-2xl text-cream-200 font-light slide-left">
-                Genuine H-E-B® tortillas delivered nationwide - now available!
+                {t('cta.subtitle')}
               </p>
 
               <div className="flex flex-wrap gap-6 justify-center mt-12 scale-in">
                 <Link href="/shop" className="group relative overflow-hidden bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover-glow">
-                  <span className="relative z-10">Shop Now</span>
+                  <span className="relative z-10">{t('cta.shop')}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-sunset-600 to-sunset-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                 </Link>
 
                 <Link href="/story" className="border-2 border-cream-50 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-cream-50 hover:text-charcoal-950 transition-all duration-300">
-                  Our Story
+                  {t('cta.story')}
                 </Link>
               </div>
 
               <p className="text-sm text-cream-400 mt-12 tracking-wider uppercase">
-                Independent reseller • Not affiliated with or endorsed by H-E-B®
+                {t('disclaimer.short')}
               </p>
             </div>
           </div>
@@ -1193,17 +1195,17 @@ export default function Home() {
               <div>
                 <LogoFull className="text-cream-50 mb-6" />
                 <p className="text-cream-300 leading-relaxed mb-4">
-                  Your trusted independent source for genuine H-E-B® tortillas, delivered nationwide.
+                  {t('footer.description')}
                 </p>
                 <div className="space-y-2 text-cream-400 text-sm">
-                  <p>howdy@lonestartortilla.com</p>
-                  <p>Austin, Texas</p>
+                  <p>{t('contact.email')}</p>
+                  <p>{t('contact.location')}</p>
                 </div>
               </div>
 
               {/* Quick Links */}
               <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Quick Links</h4>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">{t('footer.quickLinks')}</h4>
                 <div className="space-y-2">
                   <Link href="/shop" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Shop All Products</Link>
                   <Link href="/locations" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Delivery Locations</Link>
@@ -1215,7 +1217,7 @@ export default function Home() {
                   <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
                   <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Source</Link>
                 </div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">Popular Cities</h4>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">{t('footer.popularCities')}</h4>
                 <div className="space-y-2">
                   <Link href="/los-angeles" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Los Angeles</Link>
                   <Link href="/new-york" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">New York</Link>
@@ -1225,14 +1227,14 @@ export default function Home() {
 
               {/* Products */}
               <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Products</h4>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">{t('footer.products')}</h4>
                 <div className="space-y-2">
                   <Link href="/products/corn-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Corn Tortillas</Link>
                   <Link href="/products/flour-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Flour Tortillas</Link>
                   <Link href="/products/butter-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Butter Tortillas</Link>
                   <Link href="/products/specialty-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Specialty Varieties</Link>
                 </div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">For Restaurants</h4>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">{t('footer.forRestaurants')}</h4>
                 <div className="space-y-2">
                   <Link href="/restaurants/food-trucks" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Food Trucks</Link>
                   <Link href="/restaurants/bbq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">BBQ Restaurants</Link>
@@ -1246,16 +1248,16 @@ export default function Home() {
 
               {/* Contact Form */}
               <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">Contact Us</h4>
+                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">{t('footer.contactUs')}</h4>
                 <ContactForm />
               </div>
             </div>
 
             {/* Bottom Bar */}
             <div className="border-t border-masa-800/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-cream-500">© 2025 Lonestar Tortillas. All rights reserved.</p>
+              <p className="text-sm text-cream-500">{t('footer.copyright')}</p>
               <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
-                Independent reseller • Not affiliated with or endorsed by H-E-B®
+                {t('disclaimer.short')}
               </p>
             </div>
           </div>

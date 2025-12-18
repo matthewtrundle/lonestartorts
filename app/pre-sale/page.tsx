@@ -7,8 +7,10 @@ import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { trackWaitlistSignup } from '@/lib/analytics'
+import { useLanguage } from '@/lib/language-context'
 
 export default function PreSalePage() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [zipCode, setZipCode] = useState('')
@@ -85,22 +87,22 @@ export default function PreSalePage() {
               </Link>
               <nav className="hidden md:flex items-center gap-8">
                 <Link href="/pre-sale" className="text-sm font-medium tracking-wider uppercase text-sunset-600">
-                  Pre-Sale
+                  {t('nav.preSale')}
                 </Link>
                 <Link href="/craft" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  Source
+                  {t('nav.source')}
                 </Link>
                 <Link href="/guides" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  Guides & Tips
+                  {t('nav.guides')}
                 </Link>
                 <Link href="/recipes" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  Recipes
+                  {t('nav.recipes')}
                 </Link>
                 <Link href="/blog" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  Blog & Stories
+                  {t('nav.blog')}
                 </Link>
                 <Link href="/story" className="text-sm font-medium tracking-wider uppercase hover:text-sunset-600 transition-colors">
-                  Story
+                  {t('nav.story')}
                 </Link>
               </nav>
             </div>
@@ -118,32 +120,31 @@ export default function PreSalePage() {
             <div className="max-w-4xl mx-auto text-center">
               <div className="mb-6 inline-block">
                 <span className="bg-sunset-500 text-cream-50 px-4 py-2 rounded-full text-sm font-bold tracking-wider uppercase">
-                  Coming Soon - Limited First Batch
+                  {t('preSale.hero.badge')}
                 </span>
               </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black mb-6 leading-tight">
-                Be First to Get
-                <span className="block text-gradient mt-2">H-E-B® Tortillas</span>
+                {t('preSale.hero.title')}
+                <span className="block text-gradient mt-2">{t('preSale.hero.titleHighlight')}</span>
               </h1>
 
               <p className="text-xl md:text-2xl text-charcoal-700 mb-8">
-                Those who know, know. Join {signupCount.toLocaleString()} other H-E-B® enthusiasts
-                waiting for nationwide delivery of genuine H-E-B® tortillas.
+                {t('preSale.hero.description').replace('{count}', signupCount.toLocaleString())}
               </p>
 
               <div className="flex flex-wrap gap-6 justify-center text-lg">
                 <div className="flex items-center gap-2">
                   <span className="text-sunset-500">✓</span>
-                  <span>Early Bird Pricing</span>
+                  <span>{t('preSale.hero.benefit1')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-sunset-500">✓</span>
-                  <span>First Access</span>
+                  <span>{t('preSale.hero.benefit2')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-sunset-500">✓</span>
-                  <span>Founding Member Status</span>
+                  <span>{t('preSale.hero.benefit3')}</span>
                 </div>
               </div>
             </div>
@@ -162,28 +163,27 @@ export default function PreSalePage() {
                       <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <h2 className="text-3xl font-display font-bold mb-4">You're on the List!</h2>
+                  <h2 className="text-3xl font-display font-bold mb-4">{t('preSale.success.title')}</h2>
                   <p className="text-lg text-charcoal-700 mb-8">
-                    We'll email you as soon as H-E-B® tortillas are available for order.
-                    You'll get exclusive early access and special founding member pricing.
+                    {t('preSale.success.message')}
                   </p>
                   <div className="space-y-4">
                     <p className="text-sm text-charcoal-600">
-                      Share with fellow H-E-B® enthusiasts:
+                      {t('preSale.success.share')}
                     </p>
                     <div className="flex gap-4 justify-center">
                       <button
                         onClick={() => {
-                          const text = "I just joined the waitlist for H-E-B® tortillas delivered nationwide! 🌮"
+                          const text = t('preSale.success.tweetText')
                           const url = window.location.origin
                           window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`)
                         }}
                         className="px-6 py-3 bg-charcoal-950 text-cream-50 rounded-full hover:bg-charcoal-800 transition-colors"
                       >
-                        Share on X
+                        {t('preSale.success.shareButton')}
                       </button>
                       <Link href="/" className="px-6 py-3 border-2 border-charcoal-950 text-charcoal-950 rounded-full hover:bg-charcoal-950 hover:text-cream-50 transition-colors">
-                        Back to Home
+                        {t('preSale.success.backHome')}
                       </Link>
                     </div>
                   </div>
@@ -191,7 +191,7 @@ export default function PreSalePage() {
               ) : (
                 <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
                   <h2 className="text-2xl font-display font-bold mb-4 text-center">
-                    Join the Pre-Sale List
+                    {t('preSale.form.title')}
                   </h2>
 
                   {error && (
@@ -204,7 +204,7 @@ export default function PreSalePage() {
                     {/* Email */}
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium mb-1">
-                        Email Address *
+                        {t('preSale.form.emailLabel')}
                       </label>
                       <input
                         type="email"
@@ -213,7 +213,7 @@ export default function PreSalePage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
-                        placeholder="you@example.com"
+                        placeholder={t('preSale.form.emailPlaceholder')}
                       />
                     </div>
 
@@ -221,7 +221,7 @@ export default function PreSalePage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium mb-1">
-                          Name (Optional)
+                          {t('preSale.form.nameLabel')}
                         </label>
                         <input
                           type="text"
@@ -229,12 +229,12 @@ export default function PreSalePage() {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
-                          placeholder="Your name"
+                          placeholder={t('preSale.form.namePlaceholder')}
                         />
                       </div>
                       <div>
                         <label htmlFor="zip" className="block text-sm font-medium mb-1">
-                          ZIP Code (Optional)
+                          {t('preSale.form.zipLabel')}
                         </label>
                         <input
                           type="text"
@@ -243,7 +243,7 @@ export default function PreSalePage() {
                           onChange={(e) => setZipCode(e.target.value)}
                           maxLength={5}
                           className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
-                          placeholder="12345"
+                          placeholder={t('preSale.form.zipPlaceholder')}
                         />
                       </div>
                     </div>
@@ -251,14 +251,14 @@ export default function PreSalePage() {
                     {/* Product Interest */}
                     <div>
                       <label className="block text-sm font-medium mb-2">
-                        Products of Interest (Optional)
+                        {t('preSale.form.interestsLabel')}
                       </label>
                       <div className="grid grid-cols-2 gap-2">
                         {[
-                          { key: 'corn', label: 'Corn' },
-                          { key: 'butter', label: 'Butter' },
-                          { key: 'flour', label: 'Flour' },
-                          { key: 'variety', label: 'Variety' },
+                          { key: 'corn', label: t('preSale.form.corn') },
+                          { key: 'butter', label: t('preSale.form.butter') },
+                          { key: 'flour', label: t('preSale.form.flour') },
+                          { key: 'variety', label: t('preSale.form.variety') },
                         ].map((product) => (
                           <button
                             key={product.key}
@@ -279,7 +279,7 @@ export default function PreSalePage() {
                     {/* Expected Quantity */}
                     <div>
                       <label htmlFor="quantity" className="block text-sm font-medium mb-1">
-                        Expected Monthly Orders (Optional)
+                        {t('preSale.form.quantityLabel')}
                       </label>
                       <select
                         id="quantity"
@@ -287,10 +287,10 @@ export default function PreSalePage() {
                         onChange={(e) => setQuantity(e.target.value)}
                         className="w-full px-3 py-2 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
                       >
-                        <option value="1-2">1-2 packs/month</option>
-                        <option value="3-5">3-5 packs/month</option>
-                        <option value="6-10">6-10 packs/month</option>
-                        <option value="10+">10+ packs/month</option>
+                        <option value="1-2">{t('preSale.form.quantity1')}</option>
+                        <option value="3-5">{t('preSale.form.quantity2')}</option>
+                        <option value="6-10">{t('preSale.form.quantity3')}</option>
+                        <option value="10+">{t('preSale.form.quantity4')}</option>
                       </select>
                     </div>
 
@@ -300,11 +300,11 @@ export default function PreSalePage() {
                       disabled={isSubmitting}
                       className="w-full bg-sunset-500 text-cream-50 py-3 rounded-lg font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isSubmitting ? 'Joining...' : 'Join the Waitlist'}
+                      {isSubmitting ? t('preSale.form.submitting') : t('preSale.form.submitButton')}
                     </button>
 
                     <p className="text-xs text-center text-charcoal-600">
-                      No payment required. We'll email you when available.
+                      {t('preSale.form.noPayment')}
                     </p>
                   </div>
                 </form>
@@ -344,7 +344,7 @@ export default function PreSalePage() {
 
           <div className="container mx-auto px-8 relative z-10">
             <h2 className="text-4xl font-display font-bold text-center mb-12">
-              Why Join the Pre-Sale?
+              {t('preSale.valueProps.title')}
             </h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <div className="group text-center p-6 rounded-xl transition-all duration-300 hover:bg-charcoal-900/50 hover:shadow-xl">
@@ -356,9 +356,9 @@ export default function PreSalePage() {
                     <path d="M14 9l2 2m0-2l-2 2" strokeLinecap="round"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Early Bird Pricing</h3>
+                <h3 className="text-xl font-bold mb-2">{t('preSale.valueProps.earlyBird.title')}</h3>
                 <p className="text-cream-300">
-                  Founding members get exclusive discounts on their first orders
+                  {t('preSale.valueProps.earlyBird.desc')}
                 </p>
               </div>
               <div className="group text-center p-6 rounded-xl transition-all duration-300 hover:bg-charcoal-900/50 hover:shadow-xl">
@@ -368,9 +368,9 @@ export default function PreSalePage() {
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">First Access</h3>
+                <h3 className="text-xl font-bold mb-2">{t('preSale.valueProps.firstAccess.title')}</h3>
                 <p className="text-cream-300">
-                  Limited first batch - waitlist members get priority ordering
+                  {t('preSale.valueProps.firstAccess.desc')}
                 </p>
               </div>
               <div className="group text-center p-6 rounded-xl transition-all duration-300 hover:bg-charcoal-900/50 hover:shadow-xl">
@@ -382,9 +382,9 @@ export default function PreSalePage() {
                     <path d="M9 11l2 2 4-4" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Guaranteed Stock</h3>
+                <h3 className="text-xl font-bold mb-2">{t('preSale.valueProps.guaranteed.title')}</h3>
                 <p className="text-cream-300">
-                  Reserve your spot for genuine H-E-B® products before they sell out
+                  {t('preSale.valueProps.guaranteed.desc')}
                 </p>
               </div>
             </div>
@@ -397,29 +397,29 @@ export default function PreSalePage() {
             <div className="text-center mb-8">
               <LogoFull className="text-cream-50 mb-6 mx-auto" />
               <p className="text-sm text-cream-400 mb-4">
-                Your trusted independent source for genuine H-E-B® tortillas
+                {t('preSale.footer.tagline')}
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
-              <Link href="/shop" className="text-cream-400 hover:text-sunset-400 transition-colors">Shop</Link>
-              <Link href="/locations" className="text-cream-400 hover:text-sunset-400 transition-colors">Locations</Link>
-              <Link href="/guides" className="text-cream-400 hover:text-sunset-400 transition-colors">Guides</Link>
-              <Link href="/recipes" className="text-cream-400 hover:text-sunset-400 transition-colors">Recipes</Link>
-              <Link href="/blog" className="text-cream-400 hover:text-sunset-400 transition-colors">Blog</Link>
-              <Link href="/faq" className="text-cream-400 hover:text-sunset-400 transition-colors">FAQ</Link>
-              <Link href="/story" className="text-cream-400 hover:text-sunset-400 transition-colors">Our Story</Link>
+              <Link href="/shop" className="text-cream-400 hover:text-sunset-400 transition-colors">{t('nav.shop')}</Link>
+              <Link href="/locations" className="text-cream-400 hover:text-sunset-400 transition-colors">{t('nav.locations')}</Link>
+              <Link href="/guides" className="text-cream-400 hover:text-sunset-400 transition-colors">{t('nav.guides')}</Link>
+              <Link href="/recipes" className="text-cream-400 hover:text-sunset-400 transition-colors">{t('nav.recipes')}</Link>
+              <Link href="/blog" className="text-cream-400 hover:text-sunset-400 transition-colors">{t('nav.blog')}</Link>
+              <Link href="/faq" className="text-cream-400 hover:text-sunset-400 transition-colors">{t('nav.faq')}</Link>
+              <Link href="/story" className="text-cream-400 hover:text-sunset-400 transition-colors">{t('nav.story')}</Link>
             </div>
             <div className="flex flex-wrap justify-center gap-6 mb-8 text-xs">
-              <Link href="/restaurants/food-trucks" className="text-cream-500 hover:text-sunset-400 transition-colors">Food Trucks</Link>
-              <Link href="/restaurants/bbq" className="text-cream-500 hover:text-sunset-400 transition-colors">BBQ</Link>
-              <Link href="/restaurants/mexican" className="text-cream-500 hover:text-sunset-400 transition-colors">Mexican</Link>
-              <Link href="/restaurants/tex-mex" className="text-cream-500 hover:text-sunset-400 transition-colors">Tex-Mex</Link>
-              <Link href="/restaurants/taco-shops" className="text-cream-500 hover:text-sunset-400 transition-colors">Taco Shops</Link>
-              <Link href="/restaurants/catering" className="text-cream-500 hover:text-sunset-400 transition-colors">Catering</Link>
-              <Link href="/restaurants/breakfast" className="text-cream-500 hover:text-sunset-400 transition-colors">Breakfast</Link>
+              <Link href="/restaurants/food-trucks" className="text-cream-500 hover:text-sunset-400 transition-colors">{t('nav.restaurants.foodTrucks')}</Link>
+              <Link href="/restaurants/bbq" className="text-cream-500 hover:text-sunset-400 transition-colors">{t('nav.restaurants.bbq')}</Link>
+              <Link href="/restaurants/mexican" className="text-cream-500 hover:text-sunset-400 transition-colors">{t('nav.restaurants.mexican')}</Link>
+              <Link href="/restaurants/tex-mex" className="text-cream-500 hover:text-sunset-400 transition-colors">{t('nav.restaurants.texMex')}</Link>
+              <Link href="/restaurants/taco-shops" className="text-cream-500 hover:text-sunset-400 transition-colors">{t('nav.restaurants.tacoShops')}</Link>
+              <Link href="/restaurants/catering" className="text-cream-500 hover:text-sunset-400 transition-colors">{t('nav.restaurants.catering')}</Link>
+              <Link href="/restaurants/breakfast" className="text-cream-500 hover:text-sunset-400 transition-colors">{t('nav.restaurants.breakfast')}</Link>
             </div>
             <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
-              Independent reseller • Not affiliated with or endorsed by H-E-B®
+              {t('preSale.footer.disclaimer')}
             </p>
           </div>
         </footer>

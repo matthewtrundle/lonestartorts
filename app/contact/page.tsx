@@ -1,24 +1,14 @@
-import type { Metadata } from 'next';
+'use client';
+
 import { Header } from '@/components/layout/Header';
 import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ContactFormLight } from '@/components/ContactFormLight';
 import Link from 'next/link';
 import { MapPin, Clock } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Contact Us | Lonestar Tortillas',
-  description: 'Get in touch with Lonestar Tortillas. Questions about orders, shipping, wholesale inquiries, or general questions - we\'re here to help.',
-  alternates: {
-    canonical: 'https://lonestartortillas.com/contact',
-  },
-  openGraph: {
-    title: 'Contact Us | Lonestar Tortillas',
-    description: 'Have questions? We\'re here to help with orders, shipping, wholesale, and more.',
-    type: 'website',
-  },
-};
+import { useLanguage } from '@/lib/language-context';
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
@@ -53,10 +43,10 @@ export default function ContactPage() {
           <div className="container mx-auto px-4 md:px-8 max-w-6xl">
             <div className="max-w-2xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Contact Us
+                {t('contactPage.title')}
               </h1>
               <p className="text-xl text-cream-200">
-                Questions about your order, shipping, or anything else? We're here to help.
+                {t('contactPage.subtitle')}
               </p>
             </div>
           </div>
@@ -69,7 +59,7 @@ export default function ContactPage() {
               {/* Contact Form */}
               <div className="bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-charcoal-950 mb-6">
-                  Send Us a Message
+                  {t('contactPage.sendMessage')}
                 </h2>
                 <ContactFormLight />
               </div>
@@ -78,7 +68,7 @@ export default function ContactPage() {
               <div className="space-y-8">
                 <div>
                   <h2 className="text-2xl font-bold text-charcoal-950 mb-6">
-                    Get in Touch
+                    {t('contactPage.getInTouch')}
                   </h2>
 
                   <div className="space-y-6">
@@ -87,10 +77,10 @@ export default function ContactPage() {
                         <MapPin className="w-6 h-6 text-sunset-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-charcoal-950">Location</h3>
-                        <p className="text-charcoal-700">Austin, Texas</p>
+                        <h3 className="font-semibold text-charcoal-950">{t('contactPage.location')}</h3>
+                        <p className="text-charcoal-700">{t('contactPage.locationCity')}</p>
                         <p className="text-sm text-charcoal-600 mt-1">
-                          Shipping nationwide from the heart of Texas
+                          {t('contactPage.locationDesc')}
                         </p>
                       </div>
                     </div>
@@ -100,10 +90,10 @@ export default function ContactPage() {
                         <Clock className="w-6 h-6 text-sunset-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-charcoal-950">Business Hours</h3>
-                        <p className="text-charcoal-700">Monday - Friday: 9am - 5pm CT</p>
+                        <h3 className="font-semibold text-charcoal-950">{t('contactPage.businessHours')}</h3>
+                        <p className="text-charcoal-700">{t('contactPage.hoursValue')}</p>
                         <p className="text-sm text-charcoal-600 mt-1">
-                          Orders placed before 2pm CT ship same day
+                          {t('contactPage.hoursNote')}
                         </p>
                       </div>
                     </div>
@@ -112,31 +102,31 @@ export default function ContactPage() {
 
                 {/* Quick Links */}
                 <div className="bg-masa-50 rounded-xl p-6">
-                  <h3 className="font-semibold text-charcoal-950 mb-4">Quick Links</h3>
+                  <h3 className="font-semibold text-charcoal-950 mb-4">{t('contactPage.quickLinks')}</h3>
                   <div className="space-y-3">
                     <Link
                       href="/faq"
                       className="block text-charcoal-700 hover:text-sunset-600 transition-colors"
                     >
-                      Frequently Asked Questions
+                      {t('contactPage.links.faq')}
                     </Link>
                     <Link
                       href="/track"
                       className="block text-charcoal-700 hover:text-sunset-600 transition-colors"
                     >
-                      Track Your Order
+                      {t('contactPage.links.track')}
                     </Link>
                     <Link
                       href="/wholesale"
                       className="block text-charcoal-700 hover:text-sunset-600 transition-colors"
                     >
-                      Wholesale Inquiries
+                      {t('contactPage.links.wholesale')}
                     </Link>
                     <Link
                       href="/shop"
                       className="block text-charcoal-700 hover:text-sunset-600 transition-colors"
                     >
-                      Shop Tortillas
+                      {t('contactPage.links.shop')}
                     </Link>
                   </div>
                 </div>
@@ -148,7 +138,7 @@ export default function ContactPage() {
         {/* Disclaimer */}
         <div className="py-8 bg-cream-100">
           <p className="text-sm text-charcoal-500 italic text-center">
-            Independent reseller. Not affiliated with or endorsed by H-E-B.
+            {t('disclaimer.text')}
           </p>
         </div>
       </main>

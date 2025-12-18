@@ -1,0 +1,784 @@
+{
+  "nav": {
+    "shop": "Shop",
+    "source": "Source",
+    "guides": "Guides",
+    "recipes": "Recipes",
+    "blog": "Blog",
+    "locations": "Locations",
+    "wholesale": "Wholesale",
+    "contact": "Contact",
+    "story": "Story",
+    "shopNow": "Shop Now",
+    "guidesAndTips": "Guides & Tips",
+    "blogAndStories": "Blog & Stories",
+    "preSale": "Pre-Sale",
+    "faq": "FAQ",
+    "restaurants": {
+      "foodTrucks": "Food Trucks",
+      "bbq": "BBQ",
+      "mexican": "Mexican",
+      "texMex": "Tex-Mex",
+      "tacoShops": "Taco Shops",
+      "catering": "Catering",
+      "breakfast": "Breakfast"
+    }
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "noResults": "No results found"
+  },
+  "disclaimer": {
+    "title": "INDEPENDENT TEXAS RETAILER",
+    "text": "Independent reseller. Not affiliated with or endorsed by H-E-B\u00ae.",
+    "short": "Independent reseller \u2022 Not affiliated with or endorsed by H-E-B"
+  },
+  "hero": {
+    "badge": "Premium \u2022 Quality \u2022 Authentic",
+    "tagline": "AUTHENTIC TEXAS TORTILLAS",
+    "subtagline": "only the best, delivered nationwide",
+    "cta": {
+      "shop": "SHOP NOW",
+      "story": "OUR STORY"
+    },
+    "established": "Est. 2020 \u2022 Texas"
+  },
+  "founder": {
+    "label": "Meet Our Founder",
+    "name": "Maria Rodriguez",
+    "title": "Third-generation Texan bringing authentic H-E-B\u00ae tortillas to families nationwide",
+    "quote": "Those who know Texas tortillas, know quality. Growing up in San Antonio, these tortillas were on our table every single day. Now I'm proud to share that same authentic Texas taste with families across America.",
+    "attribution": "Maria Rodriguez, Founder & CEO",
+    "watchStory": "Watch Maria's Story",
+    "videoTitle": "A Taste of Texas",
+    "videoSubtitle": "Maria Rodriguez, Founder"
+  },
+  "about": {
+    "label": "About Lonestar Tortillas",
+    "title": "Bringing Authentic Texas Tortillas to Your Table",
+    "whyChoose": "Why Choose Lonestar?",
+    "benefits": {
+      "genuine": {
+        "title": "Genuine H-E-B Products:",
+        "text": "We source authentic H-E-B tortillas, the same products Texas families trust"
+      },
+      "nationwide": {
+        "title": "Nationwide Delivery:",
+        "text": "Serving all 50 states with reliable, fast shipping"
+      },
+      "shelfStable": {
+        "title": "Shelf-Stable Quality:",
+        "text": "No refrigeration needed\u2014our tortillas stay fresh in your pantry"
+      },
+      "authentic": {
+        "title": "Texas Authentic:",
+        "text": "Real Texas taste, traditional recipes, premium ingredients"
+      }
+    },
+    "mission": "Our mission is simple: make authentic Texas tortillas accessible to everyone, no matter where you live. From breakfast tacos in New York to fajita night in California, Lonestar brings the taste of Texas to your kitchen."
+  },
+  "howItWorks": {
+    "title": "How Lonestar Tortilla Delivery Works",
+    "step1": {
+      "title": "Order Online",
+      "text": "Browse our selection of authentic H-E-B corn, flour, and butter tortillas. Choose your favorites and place your order."
+    },
+    "step2": {
+      "title": "We Source & Pack",
+      "text": "We carefully source your tortillas from H-E-B and pack them securely for shipping. All products are shelf-stable and ship fresh."
+    },
+    "step3": {
+      "title": "Delivered to You",
+      "text": "Your tortillas arrive at your door, ready for your pantry. No refrigeration needed\u2014just authentic Texas taste whenever you want it."
+    }
+  },
+  "features": {
+    "title": "WHY CHOOSE",
+    "subtitle": "Lonestar Tortillas",
+    "items": {
+      "genuine": {
+        "title": "GENUINE H-E-B\u00ae",
+        "desc": "The same products Texas trusts, sourced and delivered"
+      },
+      "nationwide": {
+        "title": "NATIONWIDE DELIVERY",
+        "desc": "Shelf-stable goodness shipped to all 50 states"
+      },
+      "expert": {
+        "title": "EXPERT SOURCING",
+        "desc": "We know H-E-B\u00ae quality and deliver it nationwide"
+      },
+      "value": {
+        "title": "PREMIUM VALUE",
+        "desc": "Big flavor, fair prices, no bull"
+      },
+      "shelfStable": {
+        "title": "SHELF-STABLE",
+        "desc": "No refrigeration needed - pantry-ready!"
+      },
+      "guarantee": {
+        "title": "HAPPINESS GUARANTEE",
+        "desc": "Love em or we will make it right"
+      }
+    }
+  },
+  "products": {
+    "title": "OUR TREASURES",
+    "subtitle": "Shelf-stable Texas gold, ready for your pantry",
+    "shelfNote": "Made fresh, sealed for shipping \u2014 no refrigeration needed until opened.",
+    "badges": {
+      "shipsNationwide": "Ships Nationwide",
+      "arrives": "Arrives in 2-4 Days",
+      "allStates": "Shipping to All 50 States"
+    },
+    "categories": {
+      "corn": {
+        "name": "CORN CLASSICS",
+        "type": "Traditional Corn Tortillas",
+        "style": "Shelf-Stable \u2022 No Refrigeration",
+        "badge": "Pantry Ready"
+      },
+      "flour": {
+        "name": "FLOUR POWER",
+        "type": "Soft Flour Tortillas",
+        "style": "Shelf-Stable \u2022 30-Day Fresh",
+        "badge": "Best Seller"
+      },
+      "specialty": {
+        "name": "WILD CARDS",
+        "type": "Specialty Varieties",
+        "style": "Shelf-Stable \u2022 Limited Edition",
+        "badge": "Coming Soon"
+      }
+    },
+    "items": {
+      "HEB-FLOUR": {
+        "name": "H-E-B Bakery Flour Tortillas",
+        "description": "Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile."
+      },
+      "HEB-BUTTER": {
+        "name": "H-E-B Bakery Butter Tortillas",
+        "description": "A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer."
+      },
+      "HEB-WHEAT": {
+        "name": "H-E-B Bakery Wheat Tortillas",
+        "description": "Whole wheat tortillas with wholesome grain flavor. Perfect for health-conscious meals without sacrificing taste."
+      },
+      "HEB-GREEN-SAUCE": {
+        "name": "H-E-B That Green Sauce",
+        "description": "The legendary H-E-B That Green Sauce. Perfect for tacos, enchiladas, and everything in between."
+      }
+    }
+  },
+  "guides": {
+    "title": "GUIDES & TIPS",
+    "subtitle": "Master the art of tortillas with our expert guides",
+    "viewAll": "View All Guides",
+    "readGuide": "Read Guide",
+    "items": {
+      "store": {
+        "title": "How to Store Tortillas",
+        "text": "Keep your tortillas fresh for weeks with proper storage. Learn room temperature, refrigeration, and freezing methods."
+      },
+      "reheat": {
+        "title": "How to Reheat Tortillas",
+        "text": "Warm tortillas to perfection every time. Master stovetop, microwave, and oven techniques for soft, pliable results."
+      },
+      "compare": {
+        "title": "Corn vs Flour Tortillas",
+        "text": "Which tortilla is right for you? Compare taste, texture, nutrition, and best uses for each type."
+      }
+    }
+  },
+  "recipes": {
+    "title": "FROM OUR KITCHEN",
+    "subtitle": "Authentic Texas recipes that showcase quality tortillas",
+    "viewRecipe": "View Full Recipe",
+    "comingSoon": "More Recipes Coming Soon",
+    "featured": "Featured Recipe",
+    "time": "minutes",
+    "servings": "servings",
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    }
+  },
+  "cta": {
+    "title": "READY TO TASTE TEXAS?",
+    "subtitle": "Genuine H-E-B\u00ae tortillas delivered nationwide - now available!",
+    "shop": "Shop Now",
+    "story": "Our Story"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "emptySubtitle": "Add some delicious tortillas to get started!",
+    "continueShopping": "Continue Shopping",
+    "each": "each",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "processing": "Processing...",
+    "noImage": "No image",
+    "removeItem": "Remove item",
+    "increaseQuantity": "Increase quantity",
+    "decreaseQuantity": "Decrease quantity",
+    "discount": {
+      "title": "Discount Code",
+      "applied": "Discount Applied",
+      "email": "Email address",
+      "enterCode": "Enter code",
+      "apply": "Apply",
+      "remove": "Remove discount",
+      "enterEmail": "Enter your email",
+      "enterCodeError": "Enter a code",
+      "freeShipping": "Free shipping!",
+      "invalid": "Invalid code",
+      "failed": "Failed to validate"
+    },
+    "shippingMethod": {
+      "usps": {
+        "name": "USPS Priority Mail",
+        "time": "3-4 business days"
+      },
+      "fedex": {
+        "name": "FedEx 2nd Day Air",
+        "time": "2 business days"
+      }
+    },
+    "trust": {
+      "secure": "Secure",
+      "fast": "Fast",
+      "guaranteed": "Guaranteed"
+    },
+    "free": "FREE"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "subject": "Subject",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent!",
+    "error": "Something went wrong. Please try again.",
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "topics": {
+      "select": "Select a topic",
+      "order": "Order Question",
+      "shipping": "Shipping Inquiry",
+      "product": "Product Question",
+      "wholesale": "Wholesale Inquiry",
+      "other": "Other"
+    },
+    "placeholders": {
+      "name": "Your name",
+      "email": "your@email.com",
+      "message": "How can we help you?"
+    }
+  },
+  "footer": {
+    "description": "Your trusted independent source for genuine H-E-B\u00ae tortillas, delivered nationwide.",
+    "quickLinks": "Quick Links",
+    "products": "Products",
+    "forRestaurants": "For Restaurants",
+    "popularCities": "Popular Cities",
+    "contactUs": "Contact Us",
+    "copyright": "\u00a9 2025 Lonestar Tortillas. All rights reserved.",
+    "links": {
+      "shopAll": "Shop All Products",
+      "locations": "Delivery Locations",
+      "guides": "Guides & Tips",
+      "recipes": "Recipes",
+      "blog": "Blog",
+      "track": "Track Order",
+      "faq": "FAQ",
+      "story": "Our Story",
+      "craft": "Our Source"
+    },
+    "productLinks": {
+      "corn": "Corn Tortillas",
+      "flour": "Flour Tortillas",
+      "butter": "Butter Tortillas",
+      "specialty": "Specialty Varieties"
+    },
+    "restaurantLinks": {
+      "foodTrucks": "Food Trucks",
+      "bbq": "BBQ Restaurants",
+      "mexican": "Mexican Restaurants",
+      "texMex": "Tex-Mex",
+      "tacoShops": "Taco Shops",
+      "catering": "Catering",
+      "breakfast": "Breakfast & Brunch"
+    }
+  },
+  "shop": {
+    "title": "Shop Premium Texas Tortillas",
+    "subtitle": "Authentic H-E-B\u00ae tortillas delivered nationwide",
+    "addToCart": "Add to Cart",
+    "addedToCart": "Added to Cart!",
+    "outOfStock": "Out of Stock",
+    "perPack": "per pack",
+    "tortillas": "tortillas",
+    "bestSeller": "Best Seller",
+    "new": "New",
+    "sale": "Sale",
+    "shelfStable": "Shelf-Stable",
+    "noRefrigeration": "No Refrigeration Needed",
+    "emptyState": "No products available at this time.",
+    "trustSignals": {
+      "sameDay": "Same-Day Ship",
+      "sameDaySub": "before 2pm CT",
+      "secure": "100% Secure",
+      "secureSub": "encrypted",
+      "smartShipping": "Smart Shipping",
+      "smartShippingSub": "nationwide delivery"
+    },
+    "wholesale": {
+      "title": "Ordering for a Restaurant or Business?",
+      "subtitle": "Get volume discounts, priority fulfillment, and dedicated support for your food service needs.",
+      "cta": "View Wholesale Options"
+    },
+    "whyChoose": {
+      "title": "Why Choose Lonestar Tortillas?",
+      "premium": "Premium Quality",
+      "premiumText": "Authentic Texas-style tortillas made with quality ingredients",
+      "fast": "Fast Shipping",
+      "fastText": "2-3 day delivery anywhere in the US",
+      "shelfStable": "Shelf Stable",
+      "shelfStableText": "Long-lasting freshness without refrigeration"
+    },
+    "aboutTortillas": {
+      "title": "About Our Tortillas",
+      "corn": "Corn Tortillas",
+      "cornText": "Our corn tortillas are made with authentic nixtamalized masa, giving them that distinctive flavor that Texans love. Perfect for tacos, enchiladas, tostadas, and chilaquiles. Naturally gluten-free and packed with traditional Mexican flavor. Each tortilla is soft, pliable, and holds up beautifully whether you're frying them crisp or warming them soft.",
+      "flour": "Flour Tortillas",
+      "flourText": "Our premium flour tortillas are soft, stretchy, and perfect for burritos, quesadillas, and wraps. Made with simple ingredients, these tortillas stay soft and pliable, even after refrigeration. The larger size makes them ideal for loading up with your favorite fillings without worrying about tears or breaks.",
+      "butter": "Butter Tortillas",
+      "butterText": "The crown jewel of Texas tortillas. Our butter flour tortillas have a rich, indulgent taste that elevates any dish. The buttery flavor makes them perfect for breakfast tacos, and they're incredible simply warmed and eaten on their own. These are the tortillas that Texans crave when they move away from the Lone Star State.",
+      "freshness": "Freshness Guaranteed",
+      "freshnessText": "All our tortillas are shelf-stable, meaning they don't require refrigeration and arrive fresh at your door. Each package has a 60-day shelf life from production. Once opened, store in an airtight container or resealable bag for best results. Warm before serving for the ultimate tortilla experience."
+    },
+    "faq": {
+      "title": "Shopping FAQs",
+      "shippingCostQ": "How much does shipping cost?",
+      "shippingCostA": "Shipping is a flat rate of $12.99 for all orders. We offer free shipping on orders over $45. All orders ship via USPS Priority Mail for fast, reliable delivery.",
+      "arrivalQ": "When will my order arrive?",
+      "arrivalA": "Most orders arrive within 2-3 business days. Orders to Alaska and Hawaii may take 4-7 business days. We ship Monday through Friday, and orders placed before 2 PM CT ship the same day.",
+      "refrigerationQ": "Do I need to refrigerate the tortillas?",
+      "refrigerationA": "No! Our H-E-B tortillas are shelf-stable and don't require refrigeration. They maintain freshness at room temperature for 3-4 weeks unopened. After opening, you can refrigerate to extend freshness or freeze for longer storage.",
+      "paymentQ": "What payment methods do you accept?",
+      "paymentA": "We accept all major credit cards (Visa, Mastercard, American Express, Discover) as well as Apple Pay and Google Pay. All transactions are secured with industry-standard encryption.",
+      "bulkQ": "Can I buy in bulk for restaurants or events?",
+      "bulkA": "Yes! We offer quantity discounts for bulk orders. Our multi-pack options provide savings of 5-15% depending on quantity. For very large orders or restaurant accounts, please contact us directly.",
+      "damagedQ": "What if my tortillas arrive damaged?",
+      "damagedA": "We stand behind our products. If your tortillas arrive damaged or aren't up to our quality standards, contact us within 48 hours of delivery and we'll make it right with a replacement or refund."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have a question? We'd love to hear from you.",
+    "email": "howdy@lonestartortilla.com",
+    "location": "Austin, Texas",
+    "sendAnother": "Send another message",
+    "responseTime": "We'll get back to you soon."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about Lonestar Tortillas",
+    "breadcrumb": {
+      "home": "Home",
+      "faq": "FAQ"
+    },
+    "heroText": "Everything you need to know about ordering authentic H-E-B\u00ae tortillas online and getting them delivered anywhere in the United States.",
+    "jumpToSection": "Jump to Section:",
+    "stillHaveQuestions": "Still Have Questions?",
+    "stillHaveQuestionsText": "We're here to help! Reach out to our team and we'll get back to you quickly.",
+    "contactUs": "Contact Us",
+    "returnsRefunds": "Returns & Refunds",
+    "exploreProducts": "Explore Our Products",
+    "products": {
+      "corn": "Corn Tortillas",
+      "cornDesc": "Traditional & authentic",
+      "flour": "Flour Tortillas",
+      "flourDesc": "Soft & versatile",
+      "butter": "Butter Tortillas",
+      "butterDesc": "Premium & rich",
+      "specialty": "Specialty Varieties",
+      "specialtyDesc": "Unique & flavorful"
+    },
+    "seo": {
+      "title": "About Ordering H-E-B\u00ae Tortillas Online",
+      "paragraph1": "Can you buy H-E-B tortillas outside of Texas? Yes! Lonestar Tortillas makes it easy to order authentic H-E-B\u00ae tortillas online and have them delivered anywhere in the United States. Whether you're in New York, California, Florida, or anywhere in between, you can now enjoy the same quality tortillas that Texans have loved for generations.",
+      "paragraph2": "Our shelf-stable tortillas are perfect for online ordering because they don't require refrigeration during shipping. This means your tortillas arrive fresh and delicious, ready to store in your pantry until you're ready to use them. We ship from Austin, Texas, and most orders arrive within 3-5 business days."
+    }
+  },
+  "shipping": {
+    "title": "Shipping Information",
+    "subtitle": "Fast, reliable delivery to all 50 states",
+    "hero": {
+      "badge": "Nationwide Shipping",
+      "title": "H-E-B Tortillas Shipped to All 50 States",
+      "description": "Lonestar Tortillas ships authentic H-E-B Bakery tortillas nationwide from Austin, Texas. Orders ship same-day before 2 PM CT via USPS Priority Mail. Delivery takes 2-3 business days. We are an independent reseller, not affiliated with H-E-B.",
+      "orderNow": "Order Now"
+    },
+    "keyPoints": {
+      "sameDay": "Same-Day Shipping",
+      "sameDayDesc": "Orders before 2 PM CT ship same day",
+      "delivery": "2-3 Day Delivery",
+      "deliveryDesc": "USPS Priority Mail to most addresses",
+      "shipsFrom": "Ships from Texas",
+      "shipsFromDesc": "Our Austin warehouse serves all 50 states",
+      "noRefrigeration": "No Refrigeration",
+      "noRefrigerationDesc": "Shelf-stable tortillas ship safely"
+    },
+    "costs": {
+      "title": "Shipping Costs",
+      "orderSize": "Order Size",
+      "shippingCost": "Shipping Cost",
+      "shippingMethod": "Shipping Method"
+    },
+    "deliveryTimes": {
+      "title": "Delivery Times"
+    },
+    "shippingFaqs": "Shipping FAQs",
+    "seller": {
+      "title": "About the Seller",
+      "description": "Lonestar Tortillas is an independent reseller of H-E-B products based in Austin, Texas. We are not affiliated with, endorsed by, or connected to H-E-B Grocery Company. We purchase authentic H-E-B Bakery tortillas locally and ship them to customers nationwide.",
+      "shopButton": "Shop H-E-B Tortillas"
+    }
+  },
+  "story": {
+    "title": "Our Story",
+    "subtitle": "How Lonestar Tortillas began",
+    "hero": {
+      "title": "OUR STORY",
+      "subtitle": "begins in Texas",
+      "description": "What started as a desperate midnight Google search for \"H-E-B\u00ae tortillas shipped to NYC\" became a mission to help fellow tortilla refugees nationwide."
+    },
+    "timeline": {
+      "title": "THE JOURNEY"
+    },
+    "values": {
+      "title": "OUR VALUES"
+    },
+    "mission": {
+      "title": "OUR MISSION",
+      "quote": "\"To rescue tortilla-deprived Americans from mediocre wraps\"",
+      "description": "Look, we get it. You moved away from Texas and suddenly realized that not all tortillas are created equal. We're here because we had the same existential crisis. Now we're just some folks who go to H-E-B\u00ae, buy tortillas, and ship them to people who understand the struggle."
+    },
+    "cta": {
+      "title": "BE PART OF OUR STORY",
+      "subtitle": "Join thousands of families enjoying authentic Texas tortillas delivered nationwide",
+      "preSale": "Join Pre-Sale",
+      "whyHeb": "Why H-E-B\u00ae?"
+    }
+  },
+  "checkout": {
+    "title": "Checkout",
+    "backToShop": "Back to Shop",
+    "reviewOrder": "Review your order before proceeding to payment",
+    "orderSummary": "Order Summary",
+    "item": "item",
+    "items": "items",
+    "qty": "Qty",
+    "orderTotal": "Order Total",
+    "processing": "Processing...",
+    "proceedToPayment": "Proceed to Payment",
+    "trust": {
+      "secure": "Secure 256-bit SSL encryption",
+      "fastShipping": "Fast 3-4 day shipping nationwide"
+    },
+    "notice": {
+      "title": "Important Notice:",
+      "text": "Independent reseller. Not affiliated with or endorsed by H-E-B\u00ae. We source authentic Texas tortillas through authorized channels."
+    }
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Questions about your order, shipping, or anything else? We're here to help.",
+    "sendMessage": "Send Us a Message",
+    "getInTouch": "Get in Touch",
+    "location": "Location",
+    "locationCity": "Austin, Texas",
+    "locationDesc": "Shipping nationwide from the heart of Texas",
+    "businessHours": "Business Hours",
+    "hoursValue": "Monday - Friday: 9am - 5pm CT",
+    "hoursNote": "Orders placed before 2pm CT ship same day",
+    "quickLinks": "Quick Links",
+    "links": {
+      "faq": "Frequently Asked Questions",
+      "track": "Track Your Order",
+      "wholesale": "Wholesale Inquiries",
+      "shop": "Shop Tortillas"
+    }
+  },
+  "craft": {
+    "hero": {
+      "title": "THE SOURCE",
+      "subtitle": "of excellence",
+      "description": "Those who know tortillas know H-E-B\u00ae. We're expert curators bringing genuine H-E-B\u00ae products to connoisseurs nationwide who won't settle for anything less."
+    },
+    "expertise": {
+      "title": "OUR EXPERTISE",
+      "step1": {
+        "title": "PRODUCT SELECTION",
+        "desc": "We source only genuine H-E-B\u00ae tortillas, the gold standard that Texas locals trust for authentic quality",
+        "detail": "Every product is verified authentic H-E-B\u00ae merchandise"
+      },
+      "step2": {
+        "title": "QUALITY ASSURANCE",
+        "desc": "Each batch is inspected to ensure it meets H-E-B\u00ae standards and our exacting requirements for freshness",
+        "detail": "Only the freshest products make it to our inventory"
+      },
+      "step3": {
+        "title": "EXPERT PACKAGING",
+        "desc": "Products are carefully repackaged to maintain H-E-B\u00ae quality during nationwide shipping",
+        "detail": "Shelf-stable packaging preserves authentic taste and texture"
+      },
+      "step4": {
+        "title": "RAPID FULFILLMENT",
+        "desc": "Orders are processed same-day and shipped via our optimized logistics network for maximum freshness",
+        "detail": "2-3 day delivery ensures you get H-E-B\u00ae quality at its peak"
+      },
+      "step5": {
+        "title": "CUSTOMER SATISFACTION",
+        "desc": "We stand behind every H-E-B\u00ae product we ship with our satisfaction guarantee",
+        "detail": "Your trust in our curation expertise is our top priority"
+      }
+    },
+    "whyHeb": {
+      "title": "WHY H-E-B\u00ae?",
+      "quality": {
+        "title": "QUALITY",
+        "desc": "H-E-B\u00ae sets the standard for tortilla excellence in Texas"
+      },
+      "trust": {
+        "title": "TRUST",
+        "desc": "The brand Texans have relied on for generations"
+      },
+      "expertise": {
+        "title": "EXPERTISE",
+        "desc": "We know how to source and ship H-E-B\u00ae products perfectly"
+      },
+      "quote": "\"Those who know, know H-E-B\u00ae tortillas.\"",
+      "tagline": "The choice of tortilla connoisseurs"
+    },
+    "freshness": {
+      "title": "Our Freshness Promise",
+      "intro": "At Lonestar Tortillas, we understand that freshness is everything when it comes to tortillas. That's why we've developed a sourcing and shipping process that ensures every package arrives at your door with the same quality you'd find on H-E-B\u00ae shelves in Texas.",
+      "sourcing": {
+        "title": "Direct-from-Store Sourcing",
+        "text": "We source our H-E-B\u00ae tortillas directly from stores in Texas, selecting only products with optimal freshness dates. Our team regularly rotates inventory to ensure you receive tortillas with maximum shelf life remaining. We never sell products that are close to expiration."
+      },
+      "packaging": {
+        "title": "Shelf-Stable Packaging",
+        "text": "H-E-B\u00ae tortillas are already designed for extended shelf life at room temperature. This means no refrigeration is required during shipping, and your tortillas arrive ready to use. Most products have a 30-45 day shelf life, giving you plenty of time to enjoy them."
+      },
+      "shipping": {
+        "title": "Fast, Protected Shipping",
+        "text": "Orders are shipped within 24 hours via USPS Priority or UPS Ground, arriving in 2-3 business days. Each package is carefully padded to prevent damage during transit. During extreme weather, we monitor conditions and may delay shipments to protect product quality."
+      },
+      "guarantee": {
+        "title": "Satisfaction Guaranteed",
+        "text": "If you receive damaged tortillas or are unsatisfied for any reason, contact us within 7 days for a full replacement or refund. We stand behind every H-E-B\u00ae product we ship."
+      }
+    },
+    "selection": {
+      "title": "H-E-B\u00ae SELECTION",
+      "corn": "H-E-B\u00ae Mi Tienda Corn",
+      "butter": "H-E-B\u00ae Butter Tortillas",
+      "flour": "H-E-B\u00ae Flour Tortillas",
+      "wheat": "H-E-B\u00ae Whole Wheat"
+    },
+    "cta": {
+      "title": "TASTE THE DIFFERENCE",
+      "subtitle": "Experience why H-E-B\u00ae tortillas are the gold standard - now available nationwide",
+      "button": "Join Pre-Sale List"
+    }
+  },
+  "preSale": {
+    "hero": {
+      "badge": "Pre-Sale Open",
+      "title": "Be First in Line",
+      "titleHighlight": "For Texas Tortillas",
+      "description": "Join {count} others who signed up for exclusive early access to genuine H-E-B® tortillas, shipped nationwide.",
+      "benefit1": "Early Bird Pricing",
+      "benefit2": "First Access",
+      "benefit3": "Guaranteed Stock"
+    },
+    "success": {
+      "title": "You're on the List!",
+      "message": "Thank you for joining our pre-sale list. We'll notify you as soon as we're ready to ship.",
+      "share": "Share with friends who love great tortillas:",
+      "tweetText": "Just signed up for @LonestarTorts pre-sale! Genuine H-E-B® tortillas shipped nationwide 🌮",
+      "shareButton": "Share on X",
+      "backHome": "Back to Home"
+    },
+    "form": {
+      "title": "Join the Pre-Sale List",
+      "emailLabel": "Email Address *",
+      "emailPlaceholder": "you@example.com",
+      "nameLabel": "Name (Optional)",
+      "namePlaceholder": "Your name",
+      "zipLabel": "ZIP Code (Optional)",
+      "zipPlaceholder": "12345",
+      "interestsLabel": "Products of Interest (Optional)",
+      "corn": "Corn",
+      "butter": "Butter",
+      "flour": "Flour",
+      "variety": "Variety",
+      "quantityLabel": "Expected Monthly Orders (Optional)",
+      "quantity1": "1-2 packs/month",
+      "quantity2": "3-5 packs/month",
+      "quantity3": "6-10 packs/month",
+      "quantity4": "10+ packs/month",
+      "submitButton": "Join the Waitlist",
+      "submitting": "Joining...",
+      "noPayment": "No payment required. We'll email you when available."
+    },
+    "valueProps": {
+      "title": "Why Join the Pre-Sale?",
+      "earlyBird": {
+        "title": "Early Bird Pricing",
+        "desc": "Founding members get exclusive discounts on their first orders"
+      },
+      "firstAccess": {
+        "title": "First Access",
+        "desc": "Limited first batch - waitlist members get priority ordering"
+      },
+      "guaranteed": {
+        "title": "Guaranteed Stock",
+        "desc": "Reserve your spot for genuine H-E-B® products before they sell out"
+      }
+    },
+    "footer": {
+      "tagline": "Your trusted independent source for genuine H-E-B® tortillas",
+      "disclaimer": "Independent reseller • Not affiliated with or endorsed by H-E-B®"
+    }
+  },
+  "track": {
+    "title": "Track Your Order",
+    "subtitle": "Enter your order number or email to view your order status",
+    "orderNumber": "Order Number",
+    "emailAddress": "Email Address",
+    "orderNumberPlaceholder": "Enter order number (e.g., LST-1234567890-ABC)",
+    "emailPlaceholder": "Enter email address",
+    "searching": "Searching...",
+    "trackOrder": "Track Order",
+    "timeline": {
+      "title": "Shipping Timeline",
+      "step1": {
+        "title": "Order Confirmed",
+        "desc": "Your order is received and payment is processed. You'll receive an email confirmation with your order details."
+      },
+      "step2": {
+        "title": "Processing",
+        "desc": "Orders placed before 2 PM CT Monday-Friday are packed the same day. Weekend orders ship Monday."
+      },
+      "step3": {
+        "title": "Shipped",
+        "desc": "Your tortillas ship via USPS Priority Mail. You'll receive tracking information via email."
+      },
+      "step4": {
+        "title": "Delivered",
+        "desc": "Most orders arrive in 2-3 business days. Alaska and Hawaii may take 4-7 days."
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "Where is my tracking number?",
+        "answer": "Your tracking number is emailed once your order ships, typically within 1 business day. Check your spam folder if you don't see it."
+      },
+      "q2": {
+        "question": "Do tortillas need refrigeration during shipping?",
+        "answer": "No! H-E-B tortillas are shelf-stable and don't require refrigeration. They stay fresh at room temperature for 3-4 weeks unopened."
+      },
+      "q3": {
+        "question": "My order is delayed. What should I do?",
+        "answer": "USPS occasionally experiences delays. If your package hasn't arrived within 5 business days, please contact us with your order number."
+      },
+      "q4": {
+        "question": "Can I change my shipping address?",
+        "answer": "Contact us immediately if you need to change your address. Once an order ships, we cannot modify the destination."
+      }
+    },
+    "order": {
+      "title": "Order",
+      "placedOn": "Placed on",
+      "trackingInfo": "Tracking Information",
+      "carrier": "Carrier",
+      "trackingNumber": "Tracking #",
+      "items": "Order Items",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "total": "Total"
+    }
+  },
+  "success": {
+    "loading": "Loading your order...",
+    "notFound": {
+      "title": "Order Not Found",
+      "message": "Please check your email for order confirmation or contact support.",
+      "returnHome": "Return Home"
+    },
+    "confirmed": {
+      "title": "Order Confirmed!",
+      "subtitle": "Your premium Texas tortillas are on their way. We'll keep you updated every step of the journey."
+    },
+    "orderNumber": "Order Number",
+    "placedOn": "Placed on",
+    "summary": {
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "total": "Total"
+    },
+    "shippingTo": "Shipping To",
+    "whatsNext": {
+      "title": "What Happens Next",
+      "step1": "Order confirmation sent to your email",
+      "step2": "Your order will be prepared and packaged within 24 hours",
+      "step3": "Shipping confirmation with tracking in 24-48 hours",
+      "step4": "Fresh tortillas arrive in 2-3 business days"
+    },
+    "emailSent": "Confirmation email sent to",
+    "backToHome": "Back to Home",
+    "trackOrder": "Track Order",
+    "footer": {
+      "tagline": "Premium Texas Tortillas",
+      "disclaimer": "Independent reseller • Not affiliated with or endorsed by H-E-B®"
+    }
+  },
+  "language": {
+    "toggle": "ES",
+    "english": "English",
+    "spanish": "Español",
+    "switchTo": "Cambiar a Español"
+  }
+}

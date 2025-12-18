@@ -247,3 +247,284 @@ enum UserRole {
   ADMIN
   VIEWER
 }
+
+// ===========================================
+// WHOLESALE SYSTEM MODELS
+// ===========================================
+
+// Stores wholesale inquiry submissions from the public form
+model WholesaleInquiry {
+  id              String              @id @default(uuid())
+  businessName    String
+  contactName     String
+  email           String
+  phone           String?
+  businessType    String
+  estimatedVolume String
+  message         String?
+  status          InquiryStatus       @default(PENDING)
+  reviewedAt      DateTime?
+  reviewedBy      String?
+  notes           String?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  // If approved, links to the created client
+  wholesaleClient WholesaleClient?
+
+  @@index([status])
+  @@index([email])
+  @@index([createdAt])
+}
+
+// Approved wholesale customer account
+model WholesaleClient {
+  id                  String                @id @default(uuid())
+  businessName        String
+  contactName         String
+  email               String                @unique
+  phone               String?
+  businessType        String
+
+  // Stripe integration
+  stripeCustomerId    String?               @unique
+
+  // Pricing and terms
+  pricingTier         PricingTier           @default(STANDARD)
+  discountPercent     Int                   @default(0)
+  paymentTerms        PaymentTerms          @default(DUE_ON_RECEIPT)
+  creditLimit         Int?
+
+  // Shipping address
+  shippingName        String?
+  shippingAddress1    String?
+  shippingAddress2    String?
+  shippingCity        String?
+  shippingState       String?
+  shippingZip         String?
+  shippingCountry     String                @default("US")
+
+  // Billing address (if different)
+  billingName         String?
+  billingAddress1     String?
+  billingAddress2     String?
+  billingCity         String?
+  billingState        String?
+  billingZip          String?
+  billingCountry      String                @default("US")
+
+  // Account status
+  status              ClientStatus          @default(ACTIVE)
+  accountNotes        String?
+
+  // Timestamps
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  approvedAt          DateTime?
+  approvedBy          String?
+
+  // Relations
+  inquiryId           String?               @unique
+  inquiry             WholesaleInquiry?     @relation(fields: [inquiryId], references: [id])
+  orders              WholesaleOrder[]
+  subscriptions       WholesaleSubscription[]
+
+  @@index([status])
+  @@index([email])
+  @@index([stripeCustomerId])
+}
+
+// Individual wholesale order/invoice
+model WholesaleOrder {
+  id                  String                   @id @default(uuid())
+  orderNumber         String                   @unique
+  clientId            String
+
+  // Stripe invoice reference
+  stripeInvoiceId     String?                  @unique
+  stripeInvoiceUrl    String?
+  stripeInvoiceNumber String?
+
+  // Order details
+  subtotal            Int
+  discount            Int                      @default(0)
+  shipping            Int                      @default(0)
+  tax                 Int                      @default(0)
+  total               Int
+
+  // Payment tracking
+  paymentStatus       WholesalePaymentStatus   @default(DRAFT)
+  paymentTerms        PaymentTerms
+  dueDate             DateTime?
+  paidAt              DateTime?
+
+  // Fulfillment
+  orderStatus         WholesaleOrderStatus     @default(PENDING)
+  shippedAt           DateTime?
+  deliveredAt         DateTime?
+  trackingNumber      String?
+  carrier             String?
+
+  // Shipping address (snapshot at order time)
+  shippingName        String?
+  shippingAddress1    String?
+  shippingAddress2    String?
+  shippingCity        String?
+  shippingState       String?
+  shippingZip         String?
+  shippingCountry     String?
+
+  // Notes
+  internalNotes       String?
+  customerNotes       String?
+
+  // Timestamps
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+  invoiceSentAt       DateTime?
+
+  // Relations
+  client              WholesaleClient          @relation(fields: [clientId], references: [id])
+  items               WholesaleOrderItem[]
+  subscription        WholesaleSubscription?   @relation(fields: [subscriptionId], references: [id])
+  subscriptionId      String?
+
+  @@index([clientId])
+  @@index([paymentStatus])
+  @@index([orderStatus])
+  @@index([stripeInvoiceId])
+  @@index([createdAt])
+}
+
+// Line items for wholesale orders
+model WholesaleOrderItem {
+  id          String          @id @default(uuid())
+  orderId     String
+  sku         String?
+  name        String
+  description String?
+  quantity    Int
+  unitPrice   Int
+  totalPrice  Int
+  createdAt   DateTime        @default(now())
+
+  order       WholesaleOrder  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+// Recurring subscription for wholesale clients
+model WholesaleSubscription {
+  id                   String             @id @default(uuid())
+  clientId             String
+
+  // Stripe subscription reference
+  stripeSubscriptionId String?            @unique
+  stripePriceId        String?
+
+  // Subscription details
+  name                 String
+  status               SubscriptionStatus @default(ACTIVE)
+
+  // Billing cycle
+  interval             BillingInterval    @default(MONTHLY)
+  intervalCount        Int                @default(1)
+
+  // Next billing/order
+  nextBillingDate      DateTime?
+  lastBilledAt         DateTime?
+
+  // Default order items (JSON for flexibility)
+  defaultItems         Json
+
+  // Pricing
+  subtotal             Int
+  discount             Int                @default(0)
+  shipping             Int                @default(0)
+  estimatedTotal       Int
+
+  // Configuration
+  autoSendInvoice      Boolean            @default(true)
+  pausedUntil          DateTime?
+
+  // Timestamps
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  cancelledAt          DateTime?
+
+  // Relations
+  client               WholesaleClient    @relation(fields: [clientId], references: [id])
+  orders               WholesaleOrder[]
+
+  @@index([clientId])
+  @@index([status])
+  @@index([nextBillingDate])
+}
+
+// ===========================================
+// WHOLESALE ENUMS
+// ===========================================
+
+enum InquiryStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  NEEDS_INFO
+}
+
+enum ClientStatus {
+  ACTIVE
+  SUSPENDED
+  INACTIVE
+}
+
+enum PricingTier {
+  STANDARD
+  SILVER
+  GOLD
+  PLATINUM
+  CUSTOM
+}
+
+enum PaymentTerms {
+  DUE_ON_RECEIPT
+  NET_7
+  NET_15
+  NET_30
+  NET_45
+  NET_60
+}
+
+enum WholesalePaymentStatus {
+  DRAFT
+  PENDING
+  PAID
+  PARTIAL
+  OVERDUE
+  VOID
+  REFUNDED
+}
+
+enum WholesaleOrderStatus {
+  PENDING
+  PROCESSING
+  READY
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAUSED
+  CANCELLED
+  PAST_DUE
+}
+
+enum BillingInterval {
+  WEEKLY
+  BIWEEKLY
+  MONTHLY
+  QUARTERLY
+}

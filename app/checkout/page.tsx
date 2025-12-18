@@ -12,10 +12,12 @@ import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, itemCount, subtotal, shipping, total, shippingMethod, clearCart, isHydrated } = useCart();
+  const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -179,12 +181,12 @@ export default function CheckoutPage() {
               className="inline-flex items-center gap-2 text-sm text-charcoal-600 hover:text-sunset-600 transition-colors mb-4"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Shop
+              {t('checkout.backToShop')}
             </Link>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-charcoal-950 mb-2">
-              Checkout
+              {t('checkout.title')}
             </h1>
-            <p className="text-charcoal-600 text-lg">Review your order before proceeding to payment</p>
+            <p className="text-charcoal-600 text-lg">{t('checkout.reviewOrder')}</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
@@ -192,8 +194,8 @@ export default function CheckoutPage() {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-xl shadow-soft p-6 md:p-8">
                 <h2 className="text-2xl font-semibold text-charcoal-950 mb-6 flex items-center gap-2">
-                  Order Summary
-                  <span className="text-sm font-normal text-charcoal-600">({itemCount} {itemCount === 1 ? 'item' : 'items'})</span>
+                  {t('checkout.orderSummary')}
+                  <span className="text-sm font-normal text-charcoal-600">({itemCount} {itemCount === 1 ? t('checkout.item') : t('checkout.items')})</span>
                 </h2>
 
                 <div className="space-y-6">
@@ -211,7 +213,7 @@ export default function CheckoutPage() {
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-charcoal-400">
-                            <span className="text-xs">No image</span>
+                            <span className="text-xs">{t('cart.noImage')}</span>
                           </div>
                         )}
                       </div>
@@ -222,9 +224,9 @@ export default function CheckoutPage() {
                           {item.name}
                         </h3>
                         <div className="flex flex-wrap items-center gap-3 text-sm text-charcoal-600">
-                          <span className="font-medium">Qty: {item.quantity}</span>
+                          <span className="font-medium">{t('checkout.qty')}: {item.quantity}</span>
                           <span className="text-charcoal-400">•</span>
-                          <span>{formatPrice(item.price)} each</span>
+                          <span>{formatPrice(item.price)} {t('cart.each')}</span>
                         </div>
                       </div>
 
@@ -243,13 +245,13 @@ export default function CheckoutPage() {
             {/* Order Totals & Checkout */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl shadow-soft p-6 md:p-8 sticky top-32 space-y-6">
-                <h2 className="text-2xl font-semibold text-charcoal-950">Order Total</h2>
+                <h2 className="text-2xl font-semibold text-charcoal-950">{t('checkout.orderTotal')}</h2>
 
                 {/* Discount Code Section */}
                 <div className="pb-6 border-b border-cream-200">
                   <div className="flex items-center gap-2 mb-3">
                     <Tag className="w-4 h-4 text-sunset-600" />
-                    <span className="font-medium text-charcoal-950">Discount Code</span>
+                    <span className="font-medium text-charcoal-950">{t('cart.discount.title')}</span>
                   </div>
 
                   {discountApplied ? (
@@ -258,13 +260,13 @@ export default function CheckoutPage() {
                       <div className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-green-600" />
                         <span className="text-green-800 font-medium">
-                          Free shipping applied!
+                          {t('cart.discount.freeShipping')}
                         </span>
                       </div>
                       <button
                         onClick={handleRemoveDiscount}
                         className="text-charcoal-500 hover:text-charcoal-700 p-1"
-                        aria-label="Remove discount"
+                        aria-label={t('cart.discount.remove')}
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -274,7 +276,7 @@ export default function CheckoutPage() {
                     <div className="space-y-3">
                       <input
                         type="email"
-                        placeholder="Email address"
+                        placeholder={t('cart.discount.email')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full px-3 py-2 border border-cream-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
@@ -282,7 +284,7 @@ export default function CheckoutPage() {
                       <div className="flex gap-2">
                         <input
                           type="text"
-                          placeholder="Enter code"
+                          placeholder={t('cart.discount.enterCode')}
                           value={discountCode}
                           onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
                           className="flex-1 px-3 py-2 border border-cream-300 rounded-lg text-sm uppercase focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
@@ -294,7 +296,7 @@ export default function CheckoutPage() {
                           disabled={isValidatingCode}
                           className="px-4"
                         >
-                          {isValidatingCode ? '...' : 'Apply'}
+                          {isValidatingCode ? '...' : t('cart.discount.apply')}
                         </Button>
                       </div>
                       {discountError && (
@@ -307,7 +309,7 @@ export default function CheckoutPage() {
                 {/* Price Breakdown */}
                 <div className="space-y-4 pb-6 border-b border-cream-200">
                   <div className="flex justify-between items-center">
-                    <span className="text-charcoal-600">Subtotal</span>
+                    <span className="text-charcoal-600">{t('cart.subtotal')}</span>
                     <span className="font-semibold text-charcoal-950">{formatPrice(subtotal)}</span>
                   </div>
                   <div className="flex justify-between items-center">
@@ -320,7 +322,7 @@ export default function CheckoutPage() {
                     {discountApplied ? (
                       <div className="flex items-center gap-2">
                         <span className="text-charcoal-400 line-through text-sm">{formatPrice(shipping)}</span>
-                        <span className="font-semibold text-green-600">FREE</span>
+                        <span className="font-semibold text-green-600">{t('cart.free')}</span>
                       </div>
                     ) : (
                       <span className="font-semibold text-charcoal-950">{formatPrice(shipping)}</span>
@@ -330,7 +332,7 @@ export default function CheckoutPage() {
 
                 {/* Total */}
                 <div className="flex justify-between items-center py-2">
-                  <span className="font-bold text-xl text-charcoal-950">Total</span>
+                  <span className="font-bold text-xl text-charcoal-950">{t('cart.total')}</span>
                   <span className="font-bold text-2xl text-sunset-600">
                     {formatPrice(displayTotal)}
                   </span>
@@ -345,7 +347,7 @@ export default function CheckoutPage() {
                   className="w-full rounded-lg uppercase flex items-center justify-center gap-2"
                 >
                   <Lock className="w-4 h-4" />
-                  {isProcessing ? 'Processing...' : 'Proceed to Payment'}
+                  {isProcessing ? t('checkout.processing') : t('checkout.proceedToPayment')}
                 </Button>
 
                 {error && (
@@ -358,20 +360,19 @@ export default function CheckoutPage() {
                 <div className="space-y-3 pt-4 border-t border-cream-200">
                   <div className="flex items-center gap-3 text-sm text-charcoal-700">
                     <ShieldCheck className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span>Secure 256-bit SSL encryption</span>
+                    <span>{t('checkout.trust.secure')}</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-charcoal-700">
                     <Truck className="w-5 h-5 text-sunset-600 flex-shrink-0" />
-                    <span>Fast 3-4 day shipping nationwide</span>
+                    <span>{t('checkout.trust.fastShipping')}</span>
                   </div>
                 </div>
 
                 {/* H-E-B Compliance Disclaimer */}
                 <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg text-xs leading-relaxed text-charcoal-700">
-                  <p className="font-semibold mb-2">Important Notice:</p>
+                  <p className="font-semibold mb-2">{t('checkout.notice.title')}</p>
                   <p>
-                    Independent reseller. Not affiliated with or endorsed by H-E-B®. We source
-                    authentic Texas tortillas through authorized channels.
+                    {t('checkout.notice.text')}
                   </p>
                 </div>
 
@@ -380,7 +381,7 @@ export default function CheckoutPage() {
                   href="/shop"
                   className="block text-center text-sm text-charcoal-600 hover:text-sunset-600 transition-colors font-medium"
                 >
-                  ← Continue Shopping
+                  ← {t('cart.continueShopping')}
                 </Link>
               </div>
             </div>

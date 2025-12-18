@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
 import './globals.css';
 import { CartProvider } from '@/lib/cart-context';
+import { LanguageProvider } from '@/lib/language-context';
 import { CartSidebar } from '@/components/cart/CartSidebar';
 
 // Optimized font loading with Next.js
@@ -298,12 +299,14 @@ export default function RootLayout({
         <Analytics />
 
         <ClerkProvider>
-          <CartProvider>
-            <CartSidebar />
-            <div className="min-h-screen flex flex-col">
-              {children}
-            </div>
-          </CartProvider>
+          <LanguageProvider>
+            <CartProvider>
+              <CartSidebar />
+              <div className="min-h-screen flex flex-col">
+                {children}
+              </div>
+            </CartProvider>
+          </LanguageProvider>
         </ClerkProvider>
       </body>
     </html>

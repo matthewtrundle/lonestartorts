@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { trackContactSubmit } from '@/lib/analytics';
+import { useLanguage } from '@/lib/language-context';
 
 export function ContactForm() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -54,13 +56,13 @@ export function ContactForm() {
   if (status === 'success') {
     return (
       <div className="bg-green-900/30 border border-green-700/50 rounded-lg p-4 text-center">
-        <p className="text-green-400 font-medium">Message sent!</p>
-        <p className="text-cream-400 text-sm mt-1">We'll get back to you soon.</p>
+        <p className="text-green-400 font-medium">{t('forms.success')}</p>
+        <p className="text-cream-400 text-sm mt-1">{t('contact.responseTime')}</p>
         <button
           onClick={() => setStatus('idle')}
           className="mt-3 text-sm text-sunset-400 hover:text-sunset-300 underline"
         >
-          Send another message
+          {t('contact.sendAnother')}
         </button>
       </div>
     );
@@ -72,7 +74,7 @@ export function ContactForm() {
         <input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder={t('forms.name')}
           value={formData.name}
           onChange={handleChange}
           required
@@ -81,7 +83,7 @@ export function ContactForm() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder={t('forms.email')}
           value={formData.email}
           onChange={handleChange}
           required
@@ -94,16 +96,16 @@ export function ContactForm() {
         onChange={handleChange}
         className="w-full bg-charcoal-800 border border-charcoal-700 rounded-lg px-3 py-2 text-sm text-cream-50 focus:outline-none focus:border-sunset-500 transition-colors"
       >
-        <option value="">Select a topic...</option>
-        <option value="Order Question">Order Question</option>
-        <option value="Shipping Inquiry">Shipping Inquiry</option>
-        <option value="Product Question">Product Question</option>
-        <option value="Wholesale/Bulk">Wholesale/Bulk Orders</option>
-        <option value="General">General Inquiry</option>
+        <option value="">{t('forms.topics.select')}...</option>
+        <option value="Order Question">{t('forms.topics.order')}</option>
+        <option value="Shipping Inquiry">{t('forms.topics.shipping')}</option>
+        <option value="Product Question">{t('forms.topics.product')}</option>
+        <option value="Wholesale/Bulk">{t('forms.topics.wholesale')}</option>
+        <option value="General">{t('forms.topics.other')}</option>
       </select>
       <textarea
         name="message"
-        placeholder="Your message..."
+        placeholder={t('forms.placeholders.message')}
         value={formData.message}
         onChange={handleChange}
         required
@@ -118,7 +120,7 @@ export function ContactForm() {
         disabled={status === 'loading'}
         className="w-full bg-sunset-500 hover:bg-sunset-600 disabled:bg-sunset-700 disabled:cursor-not-allowed text-cream-50 font-semibold py-2 px-4 rounded-lg text-sm transition-colors"
       >
-        {status === 'loading' ? 'Sending...' : 'Send Message'}
+        {status === 'loading' ? t('forms.sending') : t('forms.submit')}
       </button>
     </form>
   );

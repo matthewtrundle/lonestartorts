@@ -4,8 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
+import { useLanguage } from '@/lib/language-context'
 
 export default function StoryPage() {
+  const { t } = useLanguage();
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
@@ -59,15 +61,14 @@ export default function StoryPage() {
           <div className="relative z-10 container mx-auto px-8 text-center text-cream-50">
             <h1 className="magazine-text">
               <span className="block text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.8]">
-                OUR STORY
+                {t('story.hero.title')}
               </span>
               <span className="block text-3xl md:text-4xl lg:text-5xl font-display font-light italic mt-4 text-masa-400">
-                begins in Texas
+                {t('story.hero.subtitle')}
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              What started as a desperate midnight Google search for "H-E-B® tortillas shipped to NYC"
-              became a mission to help fellow tortilla refugees nationwide.
+              {t('story.hero.description')}
             </p>
           </div>
         </section>
@@ -76,7 +77,7 @@ export default function StoryPage() {
         <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              THE JOURNEY
+              {t('story.timeline.title')}
             </h2>
 
             <div className="max-w-4xl mx-auto">
@@ -149,7 +150,7 @@ export default function StoryPage() {
         <section className="py-20 bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              OUR VALUES
+              {t('story.values.title')}
             </h2>
 
             <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
@@ -204,15 +205,13 @@ export default function StoryPage() {
           <div className="container mx-auto px-8">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-8 magazine-text">
-                OUR MISSION
+                {t('story.mission.title')}
               </h2>
               <p className="text-2xl md:text-3xl font-display italic text-masa-600 mb-8">
-                "To rescue tortilla-deprived Americans from mediocre wraps"
+                {t('story.mission.quote')}
               </p>
               <p className="text-lg text-charcoal-700 mb-12">
-                Look, we get it. You moved away from Texas and suddenly realized that not all tortillas
-                are created equal. We\'re here because we had the same existential crisis. Now we\'re just
-                some folks who go to H-E-B®, buy tortillas, and ship them to people who understand the struggle.
+                {t('story.mission.description')}
               </p>
 
               <div className="grid md:grid-cols-3 gap-8 mt-16">
@@ -270,21 +269,21 @@ export default function StoryPage() {
         {/* CTA Section */}
         <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-8">
-            BE PART OF OUR STORY
+            {t('story.cta.title')}
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto text-charcoal-700">
-            Join thousands of families enjoying authentic Texas tortillas delivered nationwide
+            {t('story.cta.subtitle')}
           </p>
           <div className="flex gap-6 justify-center">
             <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors hover-lift">
-              Join Pre-Sale
+              {t('story.cta.preSale')}
             </Link>
             <Link href="/craft" className="inline-block border-2 border-charcoal-950 text-charcoal-950 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-charcoal-950 hover:text-cream-50 transition-colors">
-              Why H-E-B®?
+              {t('story.cta.whyHeb')}
             </Link>
           </div>
           <p className="text-sm text-charcoal-500 mt-8 tracking-wider uppercase">
-            Independent reseller • Not affiliated with or endorsed by H-E-B®
+            {t('disclaimer.short')}
           </p>
         </section>
       </div>

@@ -233,6 +233,138 @@ export async function POST(req: NextRequest) {
         // Handle failed payment
         break;
 
+      // Wholesale invoice events
+      case 'invoice.paid':
+        const paidInvoice = event.data.object as Stripe.Invoice;
+        console.log('Invoice paid:', paidInvoice.id);
+
+        try {
+          // Find matching wholesale order
+          const paidOrder = await prisma.wholesaleOrder.findUnique({
+            where: { stripeInvoiceId: paidInvoice.id },
+          });
+
+          if (paidOrder) {
+            await prisma.wholesaleOrder.update({
+              where: { id: paidOrder.id },
+              data: {
+                paymentStatus: 'PAID',
+                paidAt: new Date(),
+              },
+            });
+            console.log('Wholesale order marked as paid:', paidOrder.orderNumber);
+            // TODO: Send payment confirmation email
+          }
+        } catch (invoiceError) {
+          console.error('Failed to process paid invoice:', invoiceError);
+        }
+        break;
+
+      case 'invoice.payment_failed':
+        const failedInvoice = event.data.object as Stripe.Invoice;
+        console.log('Invoice payment failed:', failedInvoice.id);
+
+        try {
+          const failedOrder = await prisma.wholesaleOrder.findUnique({
+            where: { stripeInvoiceId: failedInvoice.id },
+          });
+
+          if (failedOrder) {
+            await prisma.wholesaleOrder.update({
+              where: { id: failedOrder.id },
+              data: {
+                paymentStatus: 'OVERDUE',
+              },
+            });
+            console.log('Wholesale order marked as overdue:', failedOrder.orderNumber);
+            // TODO: Send payment failed notification
+          }
+        } catch (invoiceError) {
+          console.error('Failed to process failed invoice:', invoiceError);
+        }
+        break;
+
+      case 'invoice.finalized':
+        const finalizedInvoice = event.data.object as Stripe.Invoice;
+        console.log('Invoice finalized:', finalizedInvoice.id);
+
+        try {
+          await prisma.wholesaleOrder.updateMany({
+            where: { stripeInvoiceId: finalizedInvoice.id },
+            data: {
+              paymentStatus: 'PENDING',
+              stripeInvoiceUrl: finalizedInvoice.hosted_invoice_url,
+              stripeInvoiceNumber: finalizedInvoice.number,
+              invoiceSentAt: new Date(),
+            },
+          });
+        } catch (invoiceError) {
+          console.error('Failed to process finalized invoice:', invoiceError);
+        }
+        break;
+
+      case 'invoice.voided':
+        const voidedInvoice = event.data.object as Stripe.Invoice;
+        console.log('Invoice voided:', voidedInvoice.id);
+
+        try {
+          await prisma.wholesaleOrder.updateMany({
+            where: { stripeInvoiceId: voidedInvoice.id },
+            data: {
+              paymentStatus: 'VOID',
+            },
+          });
+        } catch (invoiceError) {
+          console.error('Failed to process voided invoice:', invoiceError);
+        }
+        break;
+
+      // Subscription events
+      case 'customer.subscription.updated':
+        const updatedSub = event.data.object as Stripe.Subscription;
+        console.log('Subscription updated:', updatedSub.id);
+
+        try {
+          const statusMap: Record<string, string> = {
+            active: 'ACTIVE',
+            trialing: 'ACTIVE',
+            paused: 'PAUSED',
+            canceled: 'CANCELLED',
+            past_due: 'PAST_DUE',
+            unpaid: 'PAST_DUE',
+          };
+
+          await prisma.wholesaleSubscription.updateMany({
+            where: { stripeSubscriptionId: updatedSub.id },
+            data: {
+              status: (statusMap[updatedSub.status] || 'ACTIVE') as any,
+              nextBillingDate: updatedSub.current_period_end
+                ? new Date(updatedSub.current_period_end * 1000)
+                : null,
+            },
+          });
+        } catch (subError) {
+          console.error('Failed to update subscription:', subError);
+        }
+        break;
+
+      case 'customer.subscription.deleted':
+        const deletedSub = event.data.object as Stripe.Subscription;
+        console.log('Subscription deleted:', deletedSub.id);
+
+        try {
+          await prisma.wholesaleSubscription.updateMany({
+            where: { stripeSubscriptionId: deletedSub.id },
+            data: {
+              status: 'CANCELLED',
+              cancelledAt: new Date(),
+            },
+          });
+        } catch (subError) {
+          console.error('Failed to process subscription deletion:', subError);
+        }
+        break;
+
       default:
         console.log(`Unhandled event type: ${event.type}`);
     }

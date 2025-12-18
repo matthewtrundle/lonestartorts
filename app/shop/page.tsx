@@ -6,10 +6,12 @@ import { Header } from '@/components/layout/Header';
 import { DisclaimerBanner } from '@/components/layout/DisclaimerBanner';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Truck, Shield, Star, Clock } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
 
 import type { Product } from '@/lib/products';
 
 export default function ShopPage() {
+  const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -58,10 +60,10 @@ export default function ShopPage() {
           {/* Hero Section - Premium hierarchy */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-charcoal-950 mb-4 tracking-tight">
-              Shop Our H-E-B Tortillas
+              {t('shop.title')}
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-              Premium Texas tortillas from H-E-B, shipped directly to your door.
+              {t('shop.subtitle')}
             </p>
 
             {/* Trust Signals Bar - Premium layout */}
@@ -69,18 +71,18 @@ export default function ShopPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
                   <Clock className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">Same-Day Ship</p>
-                  <p className="text-xs text-gray-600">before 2pm CT</p>
+                  <p className="text-sm font-semibold text-charcoal-950">{t('shop.trustSignals.sameDay')}</p>
+                  <p className="text-xs text-gray-600">{t('shop.trustSignals.sameDaySub')}</p>
                 </div>
                 <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
                   <Shield className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">100% Secure</p>
-                  <p className="text-xs text-gray-600">encrypted</p>
+                  <p className="text-sm font-semibold text-charcoal-950">{t('shop.trustSignals.secure')}</p>
+                  <p className="text-xs text-gray-600">{t('shop.trustSignals.secureSub')}</p>
                 </div>
                 <div className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-sunset-600 transition-colors">
                   <Truck className="w-6 h-6 text-sunset-600" />
-                  <p className="text-sm font-semibold text-charcoal-950">Smart Shipping</p>
-                  <p className="text-xs text-gray-600">nationwide delivery</p>
+                  <p className="text-sm font-semibold text-charcoal-950">{t('shop.trustSignals.smartShipping')}</p>
+                  <p className="text-xs text-gray-600">{t('shop.trustSignals.smartShippingSub')}</p>
                 </div>
               </div>
             </div>
@@ -91,7 +93,7 @@ export default function ShopPage() {
           {loading && (
             <div className="text-center py-8">
               <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-sunset-orange border-r-transparent"></div>
-              <p className="mt-4 text-gray-600">Loading products...</p>
+              <p className="mt-4 text-gray-600">{t('common.loading')}</p>
             </div>
           )}
 
@@ -129,7 +131,7 @@ export default function ShopPage() {
           {/* Empty State */}
           {!loading && !error && products.length === 0 && (
             <div className="text-center py-8">
-              <p className="text-gray-600 text-lg">No products available at this time.</p>
+              <p className="text-gray-600 text-lg">{t('shop.emptyState')}</p>
             </div>
           )}
 
@@ -137,16 +139,16 @@ export default function ShopPage() {
           <div className="mt-16 bg-gradient-to-r from-charcoal-900 to-charcoal-950 rounded-xl p-6 md:p-8 text-white">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
-                <h2 className="text-2xl font-bold mb-2">Ordering for a Restaurant or Business?</h2>
+                <h2 className="text-2xl font-bold mb-2">{t('shop.wholesale.title')}</h2>
                 <p className="text-cream-200">
-                  Get volume discounts, priority fulfillment, and dedicated support for your food service needs.
+                  {t('shop.wholesale.subtitle')}
                 </p>
               </div>
               <a
                 href="/wholesale"
                 className="shrink-0 inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-6 py-3 rounded-lg font-bold transition-colors"
               >
-                View Wholesale Options
+                {t('shop.wholesale.cta')}
               </a>
             </div>
           </div>
@@ -155,25 +157,25 @@ export default function ShopPage() {
           <div className="mt-16 bg-white rounded-xl shadow-sm p-6 md:p-8">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-display font-bold text-texas-brown mb-6">
-                Why Choose Lonestar Tortillas?
+                {t('shop.whyChoose.title')}
               </h2>
               <div className="grid md:grid-cols-3 gap-8 mt-8">
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Premium Quality</h3>
+                  <h3 className="font-semibold text-lg mb-2">{t('shop.whyChoose.premium')}</h3>
                   <p className="text-gray-600">
-                    Authentic Texas-style tortillas made with quality ingredients
+                    {t('shop.whyChoose.premiumText')}
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Fast Shipping</h3>
+                  <h3 className="font-semibold text-lg mb-2">{t('shop.whyChoose.fast')}</h3>
                   <p className="text-gray-600">
-                    2-3 day delivery anywhere in the US
+                    {t('shop.whyChoose.fastText')}
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Shelf Stable</h3>
+                  <h3 className="font-semibold text-lg mb-2">{t('shop.whyChoose.shelfStable')}</h3>
                   <p className="text-gray-600">
-                    Long-lasting freshness without refrigeration
+                    {t('shop.whyChoose.shelfStableText')}
                   </p>
                 </div>
               </div>
@@ -182,68 +184,68 @@ export default function ShopPage() {
 
           {/* Product Details Section */}
           <div className="mt-12 bg-gradient-to-r from-masa-50 to-sunset-50 rounded-xl p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">About Our Tortillas</h2>
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">{t('shop.aboutTortillas.title')}</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Corn Tortillas</h3>
-                <p className="text-charcoal-700 mb-4">Our corn tortillas are made with authentic nixtamalized masa, giving them that distinctive flavor that Texans love. Perfect for tacos, enchiladas, tostadas, and chilaquiles. Naturally gluten-free and packed with traditional Mexican flavor. Each tortilla is soft, pliable, and holds up beautifully whether you&apos;re frying them crisp or warming them soft.</p>
-                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Flour Tortillas</h3>
-                <p className="text-charcoal-700">Our premium flour tortillas are soft, stretchy, and perfect for burritos, quesadillas, and wraps. Made with simple ingredients, these tortillas stay soft and pliable, even after refrigeration. The larger size makes them ideal for loading up with your favorite fillings without worrying about tears or breaks.</p>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">{t('shop.aboutTortillas.corn')}</h3>
+                <p className="text-charcoal-700 mb-4">{t('shop.aboutTortillas.cornText')}</p>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">{t('shop.aboutTortillas.flour')}</h3>
+                <p className="text-charcoal-700">{t('shop.aboutTortillas.flourText')}</p>
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Butter Tortillas</h3>
-                <p className="text-charcoal-700 mb-4">The crown jewel of Texas tortillas. Our butter flour tortillas have a rich, indulgent taste that elevates any dish. The buttery flavor makes them perfect for breakfast tacos, and they&apos;re incredible simply warmed and eaten on their own. These are the tortillas that Texans crave when they move away from the Lone Star State.</p>
-                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">Freshness Guaranteed</h3>
-                <p className="text-charcoal-700">All our tortillas are shelf-stable, meaning they don&apos;t require refrigeration and arrive fresh at your door. Each package has a 60-day shelf life from production. Once opened, store in an airtight container or resealable bag for best results. Warm before serving for the ultimate tortilla experience.</p>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">{t('shop.aboutTortillas.butter')}</h3>
+                <p className="text-charcoal-700 mb-4">{t('shop.aboutTortillas.butterText')}</p>
+                <h3 className="font-semibold text-lg mb-3 text-charcoal-950">{t('shop.aboutTortillas.freshness')}</h3>
+                <p className="text-charcoal-700">{t('shop.aboutTortillas.freshnessText')}</p>
               </div>
             </div>
           </div>
 
           {/* Shopping FAQ Section */}
           <div className="mt-12 bg-white rounded-xl shadow-sm p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Shopping FAQs</h2>
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">{t('shop.faq.title')}</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <details className="group border-b border-gray-200 pb-4" open>
                 <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
-                  How much does shipping cost?
+                  {t('shop.faq.shippingCostQ')}
                   <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </summary>
-                <p className="text-charcoal-700 mt-3">Shipping is a flat rate of $12.99 for all orders. We offer free shipping on orders over $45. All orders ship via USPS Priority Mail for fast, reliable delivery.</p>
+                <p className="text-charcoal-700 mt-3">{t('shop.faq.shippingCostA')}</p>
               </details>
               <details className="group border-b border-gray-200 pb-4">
                 <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
-                  When will my order arrive?
+                  {t('shop.faq.arrivalQ')}
                   <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </summary>
-                <p className="text-charcoal-700 mt-3">Most orders arrive within 2-3 business days. Orders to Alaska and Hawaii may take 4-7 business days. We ship Monday through Friday, and orders placed before 2 PM CT ship the same day.</p>
+                <p className="text-charcoal-700 mt-3">{t('shop.faq.arrivalA')}</p>
               </details>
               <details className="group border-b border-gray-200 pb-4">
                 <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
-                  Do I need to refrigerate the tortillas?
+                  {t('shop.faq.refrigerationQ')}
                   <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </summary>
-                <p className="text-charcoal-700 mt-3">No! Our H-E-B tortillas are shelf-stable and don&apos;t require refrigeration. They maintain freshness at room temperature for 3-4 weeks unopened. After opening, you can refrigerate to extend freshness or freeze for longer storage.</p>
+                <p className="text-charcoal-700 mt-3">{t('shop.faq.refrigerationA')}</p>
               </details>
               <details className="group border-b border-gray-200 pb-4">
                 <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
-                  What payment methods do you accept?
+                  {t('shop.faq.paymentQ')}
                   <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </summary>
-                <p className="text-charcoal-700 mt-3">We accept all major credit cards (Visa, Mastercard, American Express, Discover) as well as Apple Pay and Google Pay. All transactions are secured with industry-standard encryption.</p>
+                <p className="text-charcoal-700 mt-3">{t('shop.faq.paymentA')}</p>
               </details>
               <details className="group border-b border-gray-200 pb-4">
                 <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
-                  Can I buy in bulk for restaurants or events?
+                  {t('shop.faq.bulkQ')}
                   <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </summary>
-                <p className="text-charcoal-700 mt-3">Yes! We offer quantity discounts for bulk orders. Our multi-pack options provide savings of 5-15% depending on quantity. For very large orders or restaurant accounts, please contact us directly.</p>
+                <p className="text-charcoal-700 mt-3">{t('shop.faq.bulkA')}</p>
               </details>
               <details className="group border-b border-gray-200 pb-4">
                 <summary className="font-semibold cursor-pointer list-none flex justify-between items-center text-charcoal-950">
-                  What if my tortillas arrive damaged?
+                  {t('shop.faq.damagedQ')}
                   <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </summary>
-                <p className="text-charcoal-700 mt-3">We stand behind our products. If your tortillas arrive damaged or aren&apos;t up to our quality standards, contact us within 48 hours of delivery and we&apos;ll make it right with a replacement or refund.</p>
+                <p className="text-charcoal-700 mt-3">{t('shop.faq.damagedA')}</p>
               </details>
             </div>
           </div>

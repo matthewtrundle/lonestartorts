@@ -1,0 +1,784 @@
+{
+  "nav": {
+    "shop": "Tienda",
+    "source": "Origen",
+    "guides": "Guías",
+    "recipes": "Recetas",
+    "blog": "Blog",
+    "locations": "Ubicaciones",
+    "wholesale": "Mayoreo",
+    "contact": "Contacto",
+    "story": "Historia",
+    "shopNow": "Comprar Ahora",
+    "guidesAndTips": "Guías y Consejos",
+    "blogAndStories": "Blog e Historias",
+    "preSale": "Pre-Venta",
+    "faq": "Preguntas Frecuentes",
+    "restaurants": {
+      "foodTrucks": "Food Trucks",
+      "bbq": "BBQ",
+      "mexican": "Mexicana",
+      "texMex": "Tex-Mex",
+      "tacoShops": "Taquerías",
+      "catering": "Catering",
+      "breakfast": "Desayunos"
+    }
+  },
+  "common": {
+    "learnMore": "Saber M\u00e1s",
+    "readMore": "Leer M\u00e1s",
+    "viewAll": "Ver Todo",
+    "close": "Cerrar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "\u00c9xito",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Atr\u00e1s",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "noResults": "No se encontraron resultados"
+  },
+  "disclaimer": {
+    "title": "REVENDEDOR INDEPENDIENTE DE TEXAS",
+    "text": "Revendedor independiente. No afiliado ni respaldado por H-E-B\u00ae.",
+    "short": "Revendedor independiente \u2022 No afiliado ni respaldado por H-E-B"
+  },
+  "hero": {
+    "badge": "Premium \u2022 Calidad \u2022 Aut\u00e9ntico",
+    "tagline": "TORTILLAS AUT\u00c9NTICAS DE TEXAS",
+    "subtagline": "solo lo mejor, entregado a todo el pa\u00eds",
+    "cta": {
+      "shop": "COMPRAR AHORA",
+      "story": "NUESTRA HISTORIA"
+    },
+    "established": "Est. 2020 \u2022 Texas"
+  },
+  "founder": {
+    "label": "Conoce a Nuestra Fundadora",
+    "name": "Mar\u00eda Rodr\u00edguez",
+    "title": "Tejana de tercera generaci\u00f3n llevando tortillas aut\u00e9nticas H-E-B\u00ae a familias en todo el pa\u00eds",
+    "quote": "Los que conocen las tortillas de Texas, conocen la calidad. Creciendo en San Antonio, estas tortillas estaban en nuestra mesa todos los d\u00edas. Ahora estoy orgullosa de compartir ese mismo sabor aut\u00e9ntico de Texas con familias en toda Am\u00e9rica.",
+    "attribution": "Mar\u00eda Rodr\u00edguez, Fundadora y CEO",
+    "watchStory": "Ver la Historia de Mar\u00eda",
+    "videoTitle": "Un Sabor de Texas",
+    "videoSubtitle": "Mar\u00eda Rodr\u00edguez, Fundadora"
+  },
+  "about": {
+    "label": "Sobre Lonestar Tortillas",
+    "title": "Llevando Tortillas Aut\u00e9nticas de Texas a Tu Mesa",
+    "whyChoose": "\u00bfPor Qu\u00e9 Elegir Lonestar?",
+    "benefits": {
+      "genuine": {
+        "title": "Productos Genuinos H-E-B:",
+        "text": "Obtenemos tortillas aut\u00e9nticas H-E-B, los mismos productos en los que conf\u00edan las familias tejanas"
+      },
+      "nationwide": {
+        "title": "Entrega Nacional:",
+        "text": "Sirviendo a los 50 estados con env\u00edo r\u00e1pido y confiable"
+      },
+      "shelfStable": {
+        "title": "Calidad Estable:",
+        "text": "No necesitan refrigeraci\u00f3n\u2014nuestras tortillas se mantienen frescas en tu despensa"
+      },
+      "authentic": {
+        "title": "Aut\u00e9ntico de Texas:",
+        "text": "Sabor real de Texas, recetas tradicionales, ingredientes premium"
+      }
+    },
+    "mission": "Nuestra misi\u00f3n es simple: hacer accesibles las tortillas aut\u00e9nticas de Texas para todos, sin importar d\u00f3nde vivas. Desde tacos de desayuno en Nueva York hasta noche de fajitas en California, Lonestar lleva el sabor de Texas a tu cocina."
+  },
+  "howItWorks": {
+    "title": "C\u00f3mo Funciona la Entrega de Lonestar",
+    "step1": {
+      "title": "Ordena en L\u00ednea",
+      "text": "Explora nuestra selecci\u00f3n de tortillas aut\u00e9nticas H-E-B de ma\u00edz, harina y mantequilla. Elige tus favoritas y haz tu pedido."
+    },
+    "step2": {
+      "title": "Empacamos con Cuidado",
+      "text": "Obtenemos cuidadosamente tus tortillas de H-E-B y las empacamos de forma segura para el env\u00edo. Todos los productos son estables y se env\u00edan frescos."
+    },
+    "step3": {
+      "title": "Entregado a Tu Puerta",
+      "text": "Tus tortillas llegan a tu puerta, listas para tu despensa. Sin necesidad de refrigeraci\u00f3n\u2014solo sabor aut\u00e9ntico de Texas cuando lo desees."
+    }
+  },
+  "features": {
+    "title": "POR QU\u00c9 ELEGIR",
+    "subtitle": "Lonestar Tortillas",
+    "items": {
+      "genuine": {
+        "title": "H-E-B\u00ae GENUINO",
+        "desc": "Los mismos productos en los que conf\u00eda Texas, obtenidos y entregados"
+      },
+      "nationwide": {
+        "title": "ENTREGA NACIONAL",
+        "desc": "Bondad estable enviada a los 50 estados"
+      },
+      "expert": {
+        "title": "OBTENCI\u00d3N EXPERTA",
+        "desc": "Conocemos la calidad H-E-B\u00ae y la entregamos nacionalmente"
+      },
+      "value": {
+        "title": "VALOR PREMIUM",
+        "desc": "Gran sabor, precios justos, sin rodeos"
+      },
+      "shelfStable": {
+        "title": "ESTABLE EN ESTANTE",
+        "desc": "\u00a1Sin refrigeraci\u00f3n necesaria - listo para tu despensa!"
+      },
+      "guarantee": {
+        "title": "GARANT\u00cdA DE FELICIDAD",
+        "desc": "\u00c1malas o lo arreglaremos"
+      }
+    }
+  },
+  "products": {
+    "title": "NUESTROS TESOROS",
+    "subtitle": "Oro tejano estable, listo para tu despensa",
+    "shelfNote": "Hechas frescas, selladas para env\u00edo \u2014 sin refrigeraci\u00f3n hasta abrir.",
+    "badges": {
+      "shipsNationwide": "Env\u00edo Nacional",
+      "arrives": "Llega en 2-4 D\u00edas",
+      "allStates": "Env\u00edo a los 50 Estados"
+    },
+    "categories": {
+      "corn": {
+        "name": "CL\u00c1SICOS DE MA\u00cdZ",
+        "type": "Tortillas de Ma\u00edz Tradicionales",
+        "style": "Estables \u2022 Sin Refrigeraci\u00f3n",
+        "badge": "Listas para Despensa"
+      },
+      "flour": {
+        "name": "PODER DE HARINA",
+        "type": "Tortillas de Harina Suaves",
+        "style": "Estables \u2022 30 D\u00edas Frescas",
+        "badge": "M\u00e1s Vendido"
+      },
+      "specialty": {
+        "name": "VARIEDADES",
+        "type": "Variedades Especiales",
+        "style": "Estables \u2022 Edici\u00f3n Limitada",
+        "badge": "Pr\u00f3ximamente"
+      }
+    },
+    "items": {
+      "HEB-FLOUR": {
+        "name": "Tortillas de Harina H-E-B Bakery",
+        "description": "Tortilla de harina regular hecha fresca en la secci\u00f3n de panader\u00eda. Suave, f\u00e1cil de enrollar, muy vers\u00e1til."
+      },
+      "HEB-BUTTER": {
+        "name": "Tortillas de Mantequilla H-E-B Bakery",
+        "description": "Una tortilla de harina con sabor y aroma a mantequilla. Perfecta para tacos de desayuno o cuando quieres algo rico y suave."
+      },
+      "HEB-WHEAT": {
+        "name": "Tortillas de Trigo H-E-B Bakery",
+        "description": "Tortillas de trigo integral con sabor a grano saludable. Perfectas para comidas saludables sin sacrificar el sabor."
+      },
+      "HEB-GREEN-SAUCE": {
+        "name": "H-E-B That Green Sauce",
+        "description": "La legendaria salsa verde H-E-B. Perfecta para tacos, enchiladas y todo lo dem\u00e1s."
+      }
+    }
+  },
+  "guides": {
+    "title": "GU\u00cdAS Y CONSEJOS",
+    "subtitle": "Domina el arte de las tortillas con nuestras gu\u00edas expertas",
+    "viewAll": "Ver Todas las Gu\u00edas",
+    "readGuide": "Leer Gu\u00eda",
+    "items": {
+      "store": {
+        "title": "C\u00f3mo Almacenar Tortillas",
+        "text": "Mant\u00e9n tus tortillas frescas por semanas con el almacenamiento adecuado. Aprende m\u00e9todos a temperatura ambiente, refrigeraci\u00f3n y congelaci\u00f3n."
+      },
+      "reheat": {
+        "title": "C\u00f3mo Recalentar Tortillas",
+        "text": "Calienta tortillas a la perfecci\u00f3n cada vez. Domina t\u00e9cnicas de estufa, microondas y horno para resultados suaves y flexibles."
+      },
+      "compare": {
+        "title": "Tortillas de Ma\u00edz vs Harina",
+        "text": "\u00bfCu\u00e1l tortilla es la indicada para ti? Compara sabor, textura, nutrici\u00f3n y mejores usos para cada tipo."
+      }
+    }
+  },
+  "recipes": {
+    "title": "DE NUESTRA COCINA",
+    "subtitle": "Recetas aut\u00e9nticas de Texas que destacan tortillas de calidad",
+    "viewRecipe": "Ver Receta Completa",
+    "comingSoon": "M\u00e1s Recetas Pr\u00f3ximamente",
+    "featured": "Receta Destacada",
+    "time": "minutos",
+    "servings": "porciones",
+    "difficulty": {
+      "easy": "F\u00e1cil",
+      "medium": "Medio",
+      "hard": "Dif\u00edcil"
+    }
+  },
+  "cta": {
+    "title": "\u00bfLISTO PARA PROBAR TEXAS?",
+    "subtitle": "\u00a1Tortillas genuinas H-E-B\u00ae entregadas nacionalmente - ya disponibles!",
+    "shop": "Comprar Ahora",
+    "story": "Nuestra Historia"
+  },
+  "cart": {
+    "title": "Tu Carrito",
+    "empty": "Tu carrito est\u00e1 vac\u00edo",
+    "emptySubtitle": "\u00a1Agrega algunas deliciosas tortillas para comenzar!",
+    "continueShopping": "Continuar Comprando",
+    "each": "c/u",
+    "subtotal": "Subtotal",
+    "shipping": "Env\u00edo",
+    "total": "Total",
+    "checkout": "Proceder al Pago",
+    "processing": "Procesando...",
+    "noImage": "Sin imagen",
+    "removeItem": "Eliminar art\u00edculo",
+    "increaseQuantity": "Aumentar cantidad",
+    "decreaseQuantity": "Disminuir cantidad",
+    "discount": {
+      "title": "C\u00f3digo de Descuento",
+      "applied": "Descuento Aplicado",
+      "email": "Correo electr\u00f3nico",
+      "enterCode": "Ingresa c\u00f3digo",
+      "apply": "Aplicar",
+      "remove": "Eliminar descuento",
+      "enterEmail": "Ingresa tu correo",
+      "enterCodeError": "Ingresa un c\u00f3digo",
+      "freeShipping": "\u00a1Env\u00edo gratis!",
+      "invalid": "C\u00f3digo inv\u00e1lido",
+      "failed": "Error al validar"
+    },
+    "shippingMethod": {
+      "usps": {
+        "name": "USPS Priority Mail",
+        "time": "3-4 d\u00edas h\u00e1biles"
+      },
+      "fedex": {
+        "name": "FedEx 2nd Day Air",
+        "time": "2 d\u00edas h\u00e1biles"
+      }
+    },
+    "trust": {
+      "secure": "Seguro",
+      "fast": "R\u00e1pido",
+      "guaranteed": "Garantizado"
+    },
+    "free": "GRATIS"
+  },
+  "forms": {
+    "name": "Nombre",
+    "email": "Correo",
+    "phone": "Tel\u00e9fono",
+    "message": "Mensaje",
+    "subject": "Asunto",
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "success": "\u00a1Mensaje enviado!",
+    "error": "Algo sali\u00f3 mal. Por favor intenta de nuevo.",
+    "required": "Este campo es requerido",
+    "invalidEmail": "Por favor ingresa un correo v\u00e1lido",
+    "topics": {
+      "select": "Selecciona un tema",
+      "order": "Pregunta sobre Pedido",
+      "shipping": "Consulta de Env\u00edo",
+      "product": "Pregunta sobre Producto",
+      "wholesale": "Consulta de Mayoreo",
+      "other": "Otro"
+    },
+    "placeholders": {
+      "name": "Tu nombre",
+      "email": "tu@correo.com",
+      "message": "\u00bfC\u00f3mo podemos ayudarte?"
+    }
+  },
+  "footer": {
+    "description": "Tu fuente independiente de confianza para tortillas genuinas H-E-B\u00ae, entregadas nacionalmente.",
+    "quickLinks": "Enlaces R\u00e1pidos",
+    "products": "Productos",
+    "forRestaurants": "Para Restaurantes",
+    "popularCities": "Ciudades Populares",
+    "contactUs": "Cont\u00e1ctanos",
+    "copyright": "\u00a9 2025 Lonestar Tortillas. Todos los derechos reservados.",
+    "links": {
+      "shopAll": "Ver Todos los Productos",
+      "locations": "Ubicaciones de Entrega",
+      "guides": "Gu\u00edas y Consejos",
+      "recipes": "Recetas",
+      "blog": "Blog",
+      "track": "Rastrear Pedido",
+      "faq": "Preguntas Frecuentes",
+      "story": "Nuestra Historia",
+      "craft": "Nuestro Origen"
+    },
+    "productLinks": {
+      "corn": "Tortillas de Ma\u00edz",
+      "flour": "Tortillas de Harina",
+      "butter": "Tortillas de Mantequilla",
+      "specialty": "Variedades Especiales"
+    },
+    "restaurantLinks": {
+      "foodTrucks": "Food Trucks",
+      "bbq": "Restaurantes BBQ",
+      "mexican": "Restaurantes Mexicanos",
+      "texMex": "Tex-Mex",
+      "tacoShops": "Taquer\u00edas",
+      "catering": "Catering",
+      "breakfast": "Desayuno y Brunch"
+    }
+  },
+  "shop": {
+    "title": "Tienda de Tortillas Premium de Texas",
+    "subtitle": "Tortillas aut\u00e9nticas H-E-B\u00ae entregadas nacionalmente",
+    "addToCart": "Agregar al Carrito",
+    "addedToCart": "\u00a1Agregado al Carrito!",
+    "outOfStock": "Agotado",
+    "perPack": "por paquete",
+    "tortillas": "tortillas",
+    "bestSeller": "M\u00e1s Vendido",
+    "new": "Nuevo",
+    "sale": "Oferta",
+    "shelfStable": "Estable en Estante",
+    "noRefrigeration": "Sin Refrigeraci\u00f3n Necesaria",
+    "emptyState": "No hay productos disponibles en este momento.",
+    "trustSignals": {
+      "sameDay": "Env\u00edo Mismo D\u00eda",
+      "sameDaySub": "antes de las 2pm CT",
+      "secure": "100% Seguro",
+      "secureSub": "encriptado",
+      "smartShipping": "Env\u00edo Inteligente",
+      "smartShippingSub": "entrega nacional"
+    },
+    "wholesale": {
+      "title": "\u00bfPedido para un Restaurante o Negocio?",
+      "subtitle": "Obt\u00e9n descuentos por volumen, cumplimiento prioritario y soporte dedicado para tus necesidades de servicio de alimentos.",
+      "cta": "Ver Opciones de Mayoreo"
+    },
+    "whyChoose": {
+      "title": "\u00bfPor Qu\u00e9 Elegir Lonestar Tortillas?",
+      "premium": "Calidad Premium",
+      "premiumText": "Tortillas aut\u00e9nticas estilo Texas hechas con ingredientes de calidad",
+      "fast": "Env\u00edo R\u00e1pido",
+      "fastText": "Entrega en 2-3 d\u00edas a cualquier lugar de EE.UU.",
+      "shelfStable": "Estable en Estante",
+      "shelfStableText": "Frescura duradera sin refrigeraci\u00f3n"
+    },
+    "aboutTortillas": {
+      "title": "Sobre Nuestras Tortillas",
+      "corn": "Tortillas de Ma\u00edz",
+      "cornText": "Nuestras tortillas de ma\u00edz est\u00e1n hechas con masa nixtamalizada aut\u00e9ntica, d\u00e1ndoles ese sabor distintivo que los tejanos aman. Perfectas para tacos, enchiladas, tostadas y chilaquiles. Naturalmente sin gluten y llenas de sabor mexicano tradicional. Cada tortilla es suave, flexible y se mantiene perfectamente ya sea que las fr\u00edas crujientes o las calientes suaves.",
+      "flour": "Tortillas de Harina",
+      "flourText": "Nuestras tortillas de harina premium son suaves, el\u00e1sticas y perfectas para burritos, quesadillas y wraps. Hechas con ingredientes simples, estas tortillas se mantienen suaves y flexibles, incluso despu\u00e9s de refrigerarlas. El tama\u00f1o m\u00e1s grande las hace ideales para cargar con tus rellenos favoritos sin preocuparte por roturas.",
+      "butter": "Tortillas de Mantequilla",
+      "butterText": "La joya de la corona de las tortillas de Texas. Nuestras tortillas de harina con mantequilla tienen un sabor rico e indulgente que eleva cualquier platillo. El sabor a mantequilla las hace perfectas para tacos de desayuno, y son incre\u00edbles simplemente calentadas y comidas solas. Estas son las tortillas que los tejanos anhelan cuando se mudan del Estado de la Estrella Solitaria.",
+      "freshness": "Frescura Garantizada",
+      "freshnessText": "Todas nuestras tortillas son estables en estante, lo que significa que no requieren refrigeraci\u00f3n y llegan frescas a tu puerta. Cada paquete tiene una vida \u00fatil de 60 d\u00edas desde la producci\u00f3n. Una vez abierto, guarda en un recipiente herm\u00e9tico o bolsa resellable para mejores resultados. Calienta antes de servir para la mejor experiencia de tortilla."
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes de Compra",
+      "shippingCostQ": "\u00bfCu\u00e1nto cuesta el env\u00edo?",
+      "shippingCostA": "El env\u00edo tiene una tarifa fija de $12.99 para todos los pedidos. Ofrecemos env\u00edo gratis en pedidos mayores a $45. Todos los pedidos se env\u00edan por USPS Priority Mail para entrega r\u00e1pida y confiable.",
+      "arrivalQ": "\u00bfCu\u00e1ndo llegar\u00e1 mi pedido?",
+      "arrivalA": "La mayor\u00eda de los pedidos llegan en 2-3 d\u00edas h\u00e1biles. Los pedidos a Alaska y Hawaii pueden tardar 4-7 d\u00edas h\u00e1biles. Enviamos de lunes a viernes, y los pedidos realizados antes de las 2 PM CT se env\u00edan el mismo d\u00eda.",
+      "refrigerationQ": "\u00bfNecesito refrigerar las tortillas?",
+      "refrigerationA": "\u00a1No! Nuestras tortillas H-E-B son estables en estante y no requieren refrigeraci\u00f3n. Mantienen su frescura a temperatura ambiente por 3-4 semanas sin abrir. Despu\u00e9s de abrir, puedes refrigerar para extender la frescura o congelar para almacenamiento m\u00e1s largo.",
+      "paymentQ": "\u00bfQu\u00e9 m\u00e9todos de pago aceptan?",
+      "paymentA": "Aceptamos todas las tarjetas de cr\u00e9dito principales (Visa, Mastercard, American Express, Discover) as\u00ed como Apple Pay y Google Pay. Todas las transacciones est\u00e1n aseguradas con encriptaci\u00f3n est\u00e1ndar de la industria.",
+      "bulkQ": "\u00bfPuedo comprar al por mayor para restaurantes o eventos?",
+      "bulkA": "\u00a1S\u00ed! Ofrecemos descuentos por cantidad para pedidos al por mayor. Nuestras opciones de m\u00faltiples paquetes proporcionan ahorros del 5-15% dependiendo de la cantidad. Para pedidos muy grandes o cuentas de restaurantes, cont\u00e1ctanos directamente.",
+      "damagedQ": "\u00bfQu\u00e9 pasa si mis tortillas llegan da\u00f1adas?",
+      "damagedA": "Respaldamos nuestros productos. Si tus tortillas llegan da\u00f1adas o no cumplen con nuestros est\u00e1ndares de calidad, cont\u00e1ctanos dentro de las 48 horas de la entrega y lo resolveremos con un reemplazo o reembolso."
+    }
+  },
+  "contact": {
+    "title": "Cont\u00e1ctanos",
+    "subtitle": "\u00bfTienes una pregunta? Nos encantar\u00eda saber de ti.",
+    "email": "howdy@lonestartortilla.com",
+    "location": "Austin, Texas",
+    "sendAnother": "Enviar otro mensaje",
+    "responseTime": "Te responderemos pronto."
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Todo lo que necesitas saber sobre Lonestar Tortillas",
+    "breadcrumb": {
+      "home": "Inicio",
+      "faq": "Preguntas Frecuentes"
+    },
+    "heroText": "Todo lo que necesitas saber sobre c\u00f3mo ordenar tortillas aut\u00e9nticas H-E-B\u00ae en l\u00ednea y recibirlas en cualquier lugar de Estados Unidos.",
+    "jumpToSection": "Ir a Secci\u00f3n:",
+    "stillHaveQuestions": "\u00bfA\u00fan Tienes Preguntas?",
+    "stillHaveQuestionsText": "\u00a1Estamos aqu\u00ed para ayudarte! Contacta a nuestro equipo y te responderemos r\u00e1pidamente.",
+    "contactUs": "Cont\u00e1ctanos",
+    "returnsRefunds": "Devoluciones y Reembolsos",
+    "exploreProducts": "Explora Nuestros Productos",
+    "products": {
+      "corn": "Tortillas de Ma\u00edz",
+      "cornDesc": "Tradicionales y aut\u00e9nticas",
+      "flour": "Tortillas de Harina",
+      "flourDesc": "Suaves y vers\u00e1tiles",
+      "butter": "Tortillas de Mantequilla",
+      "butterDesc": "Premium y ricas",
+      "specialty": "Variedades Especiales",
+      "specialtyDesc": "\u00danicas y sabrosas"
+    },
+    "seo": {
+      "title": "Sobre Ordenar Tortillas H-E-B\u00ae en L\u00ednea",
+      "paragraph1": "\u00bfPuedes comprar tortillas H-E-B fuera de Texas? \u00a1S\u00ed! Lonestar Tortillas hace f\u00e1cil ordenar tortillas aut\u00e9nticas H-E-B\u00ae en l\u00ednea y recibirlas en cualquier lugar de Estados Unidos. Ya sea que est\u00e9s en Nueva York, California, Florida o cualquier lugar intermedio, ahora puedes disfrutar de las mismas tortillas de calidad que los tejanos han amado por generaciones.",
+      "paragraph2": "Nuestras tortillas estables en estante son perfectas para ordenar en l\u00ednea porque no requieren refrigeraci\u00f3n durante el env\u00edo. Esto significa que tus tortillas llegan frescas y deliciosas, listas para guardar en tu despensa hasta que est\u00e9s listo para usarlas. Enviamos desde Austin, Texas, y la mayor\u00eda de los pedidos llegan en 3-5 d\u00edas h\u00e1biles."
+    }
+  },
+  "shipping": {
+    "title": "Informaci\u00f3n de Env\u00edo",
+    "subtitle": "Entrega r\u00e1pida y confiable a los 50 estados",
+    "hero": {
+      "badge": "Env\u00edo Nacional",
+      "title": "Tortillas H-E-B Enviadas a los 50 Estados",
+      "description": "Lonestar Tortillas env\u00eda tortillas aut\u00e9nticas H-E-B Bakery a todo el pa\u00eds desde Austin, Texas. Los pedidos antes de las 2 PM CT se env\u00edan el mismo d\u00eda por USPS Priority Mail. La entrega toma 2-3 d\u00edas h\u00e1biles. Somos un revendedor independiente, no afiliado a H-E-B.",
+      "orderNow": "Ordenar Ahora"
+    },
+    "keyPoints": {
+      "sameDay": "Env\u00edo Mismo D\u00eda",
+      "sameDayDesc": "Pedidos antes de las 2 PM CT se env\u00edan el mismo d\u00eda",
+      "delivery": "Entrega en 2-3 D\u00edas",
+      "deliveryDesc": "USPS Priority Mail a la mayor\u00eda de direcciones",
+      "shipsFrom": "Env\u00edo desde Texas",
+      "shipsFromDesc": "Nuestro almac\u00e9n en Austin sirve a los 50 estados",
+      "noRefrigeration": "Sin Refrigeraci\u00f3n",
+      "noRefrigerationDesc": "Tortillas estables en estante se env\u00edan de forma segura"
+    },
+    "costs": {
+      "title": "Costos de Env\u00edo",
+      "orderSize": "Tama\u00f1o del Pedido",
+      "shippingCost": "Costo de Env\u00edo",
+      "shippingMethod": "M\u00e9todo de Env\u00edo"
+    },
+    "deliveryTimes": {
+      "title": "Tiempos de Entrega"
+    },
+    "shippingFaqs": "Preguntas Frecuentes de Env\u00edo",
+    "seller": {
+      "title": "Sobre el Vendedor",
+      "description": "Lonestar Tortillas es un revendedor independiente de productos H-E-B con sede en Austin, Texas. No estamos afiliados con, respaldados por, o conectados a H-E-B Grocery Company. Compramos tortillas aut\u00e9nticas H-E-B Bakery localmente y las enviamos a clientes en todo el pa\u00eds.",
+      "shopButton": "Comprar Tortillas H-E-B"
+    }
+  },
+  "story": {
+    "title": "Nuestra Historia",
+    "subtitle": "C\u00f3mo comenz\u00f3 Lonestar Tortillas",
+    "hero": {
+      "title": "NUESTRA HISTORIA",
+      "subtitle": "comienza en Texas",
+      "description": "Lo que comenz\u00f3 como una b\u00fasqueda desesperada a medianoche en Google de \"tortillas H-E-B\u00ae enviadas a NYC\" se convirti\u00f3 en una misi\u00f3n para ayudar a compa\u00f1eros refugiados de tortillas en todo el pa\u00eds."
+    },
+    "timeline": {
+      "title": "EL VIAJE"
+    },
+    "values": {
+      "title": "NUESTROS VALORES"
+    },
+    "mission": {
+      "title": "NUESTRA MISI\u00d3N",
+      "quote": "\"Rescatar a los estadounidenses privados de tortillas de wraps mediocres\"",
+      "description": "Mira, lo entendemos. Te mudaste de Texas para un trabajo, por amor, o porque te gustan los inviernos (raro, pero est\u00e1 bien). Ahora est\u00e1s en alg\u00fan lugar extra\u00f1ando tus tacos del desayuno con esas tortillas perfectas que diste por sentado. Estamos aqu\u00ed para ayudar."
+    },
+    "cta": {
+      "title": "S\u00c9 PARTE DE NUESTRA HISTORIA",
+      "subtitle": "\u00danete a miles de familias que disfrutan tortillas aut\u00e9nticas de Texas entregadas en todo el pa\u00eds",
+      "preSale": "\u00danete a la Pre-Venta",
+      "whyHeb": "\u00bfPor qu\u00e9 H-E-B\u00ae?"
+    }
+  },
+  "checkout": {
+    "title": "Pago",
+    "backToShop": "Volver a la Tienda",
+    "reviewOrder": "Revisa tu pedido antes de proceder al pago",
+    "orderSummary": "Resumen del Pedido",
+    "item": "art\u00edculo",
+    "items": "art\u00edculos",
+    "qty": "Cant",
+    "orderTotal": "Total del Pedido",
+    "processing": "Procesando...",
+    "proceedToPayment": "Proceder al Pago",
+    "trust": {
+      "secure": "Encriptaci\u00f3n segura SSL de 256-bit",
+      "fastShipping": "Env\u00edo r\u00e1pido de 3-4 d\u00edas a todo el pa\u00eds"
+    },
+    "notice": {
+      "title": "Aviso Importante:",
+      "text": "Revendedor independiente. No afiliado ni respaldado por H-E-B\u00ae. Obtenemos tortillas aut\u00e9nticas de Texas a trav\u00e9s de canales autorizados."
+    }
+  },
+  "contactPage": {
+    "title": "Cont\u00e1ctanos",
+    "subtitle": "\u00bfPreguntas sobre tu pedido, env\u00edo o cualquier otra cosa? Estamos aqu\u00ed para ayudarte.",
+    "sendMessage": "Env\u00edanos un Mensaje",
+    "getInTouch": "Ponte en Contacto",
+    "location": "Ubicaci\u00f3n",
+    "locationCity": "Austin, Texas",
+    "locationDesc": "Env\u00edo a todo el pa\u00eds desde el coraz\u00f3n de Texas",
+    "businessHours": "Horario de Atenci\u00f3n",
+    "hoursValue": "Lunes - Viernes: 9am - 5pm CT",
+    "hoursNote": "Los pedidos antes de las 2pm CT se env\u00edan el mismo d\u00eda",
+    "quickLinks": "Enlaces R\u00e1pidos",
+    "links": {
+      "faq": "Preguntas Frecuentes",
+      "track": "Rastrea tu Pedido",
+      "wholesale": "Consultas de Mayoreo",
+      "shop": "Comprar Tortillas"
+    }
+  },
+  "craft": {
+    "hero": {
+      "title": "LA FUENTE",
+      "subtitle": "de excelencia",
+      "description": "Los que conocen las tortillas conocen H-E-B\u00ae. Somos curadores expertos llevando productos genuinos H-E-B\u00ae a conocedores en todo el pa\u00eds que no aceptan menos."
+    },
+    "expertise": {
+      "title": "NUESTRA EXPERIENCIA",
+      "step1": {
+        "title": "SELECCI\u00d3N DE PRODUCTOS",
+        "desc": "Obtenemos solo tortillas genuinas H-E-B\u00ae, el est\u00e1ndar de oro en el que conf\u00edan los tejanos para calidad aut\u00e9ntica",
+        "detail": "Cada producto est\u00e1 verificado como mercanc\u00eda aut\u00e9ntica H-E-B\u00ae"
+      },
+      "step2": {
+        "title": "CONTROL DE CALIDAD",
+        "desc": "Cada lote se inspecciona para asegurar que cumple con los est\u00e1ndares de H-E-B\u00ae y nuestros exigentes requisitos de frescura",
+        "detail": "Solo los productos m\u00e1s frescos llegan a nuestro inventario"
+      },
+      "step3": {
+        "title": "EMPAQUE EXPERTO",
+        "desc": "Los productos se reempaquetan cuidadosamente para mantener la calidad H-E-B\u00ae durante el env\u00edo nacional",
+        "detail": "El empaque estable preserva el sabor y la textura aut\u00e9nticos"
+      },
+      "step4": {
+        "title": "CUMPLIMIENTO R\u00c1PIDO",
+        "desc": "Los pedidos se procesan el mismo d\u00eda y se env\u00edan a trav\u00e9s de nuestra red log\u00edstica optimizada para m\u00e1xima frescura",
+        "detail": "Entrega en 2-3 d\u00edas asegura que recibas calidad H-E-B\u00ae en su punto \u00f3ptimo"
+      },
+      "step5": {
+        "title": "SATISFACCI\u00d3N DEL CLIENTE",
+        "desc": "Respaldamos cada producto H-E-B\u00ae que enviamos con nuestra garant\u00eda de satisfacci\u00f3n",
+        "detail": "Tu confianza en nuestra experiencia de curaci\u00f3n es nuestra m\u00e1xima prioridad"
+      }
+    },
+    "whyHeb": {
+      "title": "\u00bfPOR QU\u00c9 H-E-B\u00ae?",
+      "quality": {
+        "title": "CALIDAD",
+        "desc": "H-E-B\u00ae establece el est\u00e1ndar de excelencia en tortillas en Texas"
+      },
+      "trust": {
+        "title": "CONFIANZA",
+        "desc": "La marca en la que los tejanos han confiado por generaciones"
+      },
+      "expertise": {
+        "title": "EXPERIENCIA",
+        "desc": "Sabemos c\u00f3mo obtener y enviar productos H-E-B\u00ae perfectamente"
+      },
+      "quote": "\"Los que saben, saben de tortillas H-E-B\u00ae.\"",
+      "tagline": "La elecci\u00f3n de los conocedores de tortillas"
+    },
+    "freshness": {
+      "title": "Nuestra Promesa de Frescura",
+      "intro": "En Lonestar Tortillas, entendemos que la frescura lo es todo cuando se trata de tortillas. Por eso hemos desarrollado un proceso de abastecimiento y env\u00edo que asegura que cada paquete llegue a tu puerta con la misma calidad que encontrar\u00edas en los estantes de H-E-B\u00ae en Texas.",
+      "sourcing": {
+        "title": "Abastecimiento Directo de Tienda",
+        "text": "Obtenemos nuestras tortillas H-E-B\u00ae directamente de tiendas en Texas, seleccionando solo productos con fechas de frescura \u00f3ptimas. Nuestro equipo rota regularmente el inventario para asegurar que recibas tortillas con la m\u00e1xima vida \u00fatil restante. Nunca vendemos productos cercanos a su vencimiento."
+      },
+      "packaging": {
+        "title": "Empaque Estable",
+        "text": "Las tortillas H-E-B\u00ae ya est\u00e1n dise\u00f1adas para una vida \u00fatil extendida a temperatura ambiente. Esto significa que no se requiere refrigeraci\u00f3n durante el env\u00edo, y tus tortillas llegan listas para usar. La mayor\u00eda de los productos tienen una vida \u00fatil de 30-45 d\u00edas, d\u00e1ndote suficiente tiempo para disfrutarlas."
+      },
+      "shipping": {
+        "title": "Env\u00edo R\u00e1pido y Protegido",
+        "text": "Los pedidos se env\u00edan dentro de 24 horas v\u00eda USPS Priority o UPS Ground, llegando en 2-3 d\u00edas h\u00e1biles. Cada paquete se acolchona cuidadosamente para prevenir da\u00f1os durante el tr\u00e1nsito. Durante climas extremos, monitoreamos las condiciones y podemos retrasar env\u00edos para proteger la calidad del producto."
+      },
+      "guarantee": {
+        "title": "Satisfacci\u00f3n Garantizada",
+        "text": "Si recibes tortillas da\u00f1adas o no est\u00e1s satisfecho por cualquier raz\u00f3n, cont\u00e1ctanos dentro de 7 d\u00edas para un reemplazo completo o reembolso. Respaldamos cada producto H-E-B\u00ae que enviamos."
+      }
+    },
+    "selection": {
+      "title": "SELECCI\u00d3N H-E-B\u00ae",
+      "corn": "H-E-B\u00ae Mi Tienda Ma\u00edz",
+      "butter": "Tortillas de Mantequilla H-E-B\u00ae",
+      "flour": "Tortillas de Harina H-E-B\u00ae",
+      "wheat": "H-E-B\u00ae Trigo Integral"
+    },
+    "cta": {
+      "title": "PRUEBA LA DIFERENCIA",
+      "subtitle": "Descubre por qu\u00e9 las tortillas H-E-B\u00ae son el est\u00e1ndar de oro - ahora disponibles en todo el pa\u00eds",
+      "button": "\u00danete a la Lista de Pre-Venta"
+    }
+  },
+  "preSale": {
+    "hero": {
+      "badge": "Pre-Venta Abierta",
+      "title": "Sé el Primero en la Fila",
+      "titleHighlight": "Para Tortillas de Texas",
+      "description": "Únete a {count} personas que se inscribieron para acceso anticipado exclusivo a tortillas genuinas H-E-B®, enviadas a todo el país.",
+      "benefit1": "Precios de Madrugador",
+      "benefit2": "Primer Acceso",
+      "benefit3": "Inventario Garantizado"
+    },
+    "success": {
+      "title": "¡Estás en la Lista!",
+      "message": "Gracias por unirte a nuestra lista de pre-venta. Te notificaremos tan pronto estemos listos para enviar.",
+      "share": "Comparte con amigos que aman las buenas tortillas:",
+      "tweetText": "¡Acabo de inscribirme en la pre-venta de @LonestarTorts! Tortillas genuinas H-E-B® enviadas a todo el país 🌮",
+      "shareButton": "Compartir en X",
+      "backHome": "Volver al Inicio"
+    },
+    "form": {
+      "title": "Únete a la Lista de Pre-Venta",
+      "emailLabel": "Correo Electrónico *",
+      "emailPlaceholder": "tu@ejemplo.com",
+      "nameLabel": "Nombre (Opcional)",
+      "namePlaceholder": "Tu nombre",
+      "zipLabel": "Código Postal (Opcional)",
+      "zipPlaceholder": "12345",
+      "interestsLabel": "Productos de Interés (Opcional)",
+      "corn": "Maíz",
+      "butter": "Mantequilla",
+      "flour": "Harina",
+      "variety": "Variedad",
+      "quantityLabel": "Pedidos Mensuales Esperados (Opcional)",
+      "quantity1": "1-2 paquetes/mes",
+      "quantity2": "3-5 paquetes/mes",
+      "quantity3": "6-10 paquetes/mes",
+      "quantity4": "10+ paquetes/mes",
+      "submitButton": "Unirse a la Lista de Espera",
+      "submitting": "Uniéndose...",
+      "noPayment": "No se requiere pago. Te enviaremos un correo cuando esté disponible."
+    },
+    "valueProps": {
+      "title": "¿Por Qué Unirse a la Pre-Venta?",
+      "earlyBird": {
+        "title": "Precios de Madrugador",
+        "desc": "Los miembros fundadores obtienen descuentos exclusivos en sus primeros pedidos"
+      },
+      "firstAccess": {
+        "title": "Primer Acceso",
+        "desc": "Primer lote limitado - los miembros de la lista de espera tienen prioridad"
+      },
+      "guaranteed": {
+        "title": "Inventario Garantizado",
+        "desc": "Reserva tu lugar para productos genuinos H-E-B® antes de que se agoten"
+      }
+    },
+    "footer": {
+      "tagline": "Tu fuente independiente de confianza para tortillas genuinas H-E-B®",
+      "disclaimer": "Revendedor independiente • No afiliado ni respaldado por H-E-B®"
+    }
+  },
+  "track": {
+    "title": "Rastrea Tu Pedido",
+    "subtitle": "Ingresa tu número de pedido o correo electrónico para ver el estado de tu orden",
+    "orderNumber": "Número de Pedido",
+    "emailAddress": "Correo Electrónico",
+    "orderNumberPlaceholder": "Ingresa número de pedido (ej., LST-1234567890-ABC)",
+    "emailPlaceholder": "Ingresa correo electrónico",
+    "searching": "Buscando...",
+    "trackOrder": "Rastrear Pedido",
+    "timeline": {
+      "title": "Cronograma de Envío",
+      "step1": {
+        "title": "Pedido Confirmado",
+        "desc": "Tu pedido ha sido recibido y el pago procesado. Recibirás un correo de confirmación con los detalles de tu orden."
+      },
+      "step2": {
+        "title": "Procesando",
+        "desc": "Los pedidos realizados antes de las 2 PM CT de lunes a viernes se empaquetan el mismo día. Los pedidos de fin de semana se envían el lunes."
+      },
+      "step3": {
+        "title": "Enviado",
+        "desc": "Tus tortillas se envían por USPS Priority Mail. Recibirás la información de rastreo por correo electrónico."
+      },
+      "step4": {
+        "title": "Entregado",
+        "desc": "La mayoría de los pedidos llegan en 2-3 días hábiles. Alaska y Hawaii pueden tomar 4-7 días."
+      }
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "q1": {
+        "question": "¿Dónde está mi número de rastreo?",
+        "answer": "Tu número de rastreo se envía por correo una vez que tu pedido es enviado, típicamente en 1 día hábil. Revisa tu carpeta de spam si no lo ves."
+      },
+      "q2": {
+        "question": "¿Las tortillas necesitan refrigeración durante el envío?",
+        "answer": "¡No! Las tortillas H-E-B son estables a temperatura ambiente y no requieren refrigeración. Se mantienen frescas a temperatura ambiente por 3-4 semanas sin abrir."
+      },
+      "q3": {
+        "question": "Mi pedido está retrasado. ¿Qué debo hacer?",
+        "answer": "USPS ocasionalmente experimenta retrasos. Si tu paquete no ha llegado en 5 días hábiles, contáctanos con tu número de pedido."
+      },
+      "q4": {
+        "question": "¿Puedo cambiar mi dirección de envío?",
+        "answer": "Contáctanos inmediatamente si necesitas cambiar tu dirección. Una vez que un pedido es enviado, no podemos modificar el destino."
+      }
+    },
+    "order": {
+      "title": "Pedido",
+      "placedOn": "Realizado el",
+      "trackingInfo": "Información de Rastreo",
+      "carrier": "Transportista",
+      "trackingNumber": "Número de Rastreo",
+      "items": "Artículos del Pedido",
+      "quantity": "Cantidad",
+      "subtotal": "Subtotal",
+      "shipping": "Envío",
+      "tax": "Impuesto",
+      "total": "Total"
+    }
+  },
+  "success": {
+    "loading": "Cargando tu pedido...",
+    "notFound": {
+      "title": "Pedido No Encontrado",
+      "message": "Por favor revisa tu correo para la confirmación del pedido o contacta soporte.",
+      "returnHome": "Volver al Inicio"
+    },
+    "confirmed": {
+      "title": "¡Pedido Confirmado!",
+      "subtitle": "Tus tortillas premium de Texas están en camino. Te mantendremos informado en cada paso del viaje."
+    },
+    "orderNumber": "Número de Pedido",
+    "placedOn": "Realizado el",
+    "summary": {
+      "title": "Resumen del Pedido",
+      "subtotal": "Subtotal",
+      "shipping": "Envío",
+      "tax": "Impuesto",
+      "total": "Total"
+    },
+    "shippingTo": "Enviando a",
+    "whatsNext": {
+      "title": "¿Qué Sigue?",
+      "step1": "Confirmación del pedido enviada a tu correo",
+      "step2": "Tu pedido será preparado y empaquetado en 24 horas",
+      "step3": "Confirmación de envío con rastreo en 24-48 horas",
+      "step4": "Tortillas frescas llegan en 2-3 días hábiles"
+    },
+    "emailSent": "Correo de confirmación enviado a",
+    "backToHome": "Volver al Inicio",
+    "trackOrder": "Rastrear Pedido",
+    "footer": {
+      "tagline": "Tortillas Premium de Texas",
+      "disclaimer": "Revendedor independiente • No afiliado ni respaldado por H-E-B®"
+    }
+  },
+  "language": {
+    "toggle": "EN",
+    "english": "English",
+    "spanish": "Español",
+    "switchTo": "Switch to English"
+  }
+}

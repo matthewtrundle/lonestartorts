@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
+import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
@@ -12,6 +13,7 @@ import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check
 
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, total, shippingMethod, setShippingMethod, shippingOptions, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
+  const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -167,12 +169,12 @@ export function CartSidebar() {
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <h2 className="text-xl font-medium tracking-wide uppercase">
-                Your Cart ({itemCount})
+                {t('cart.title')} ({itemCount})
               </h2>
               <button
                 onClick={handleClose}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="Close cart"
+                aria-label={t('common.close')}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -184,16 +186,16 @@ export function CartSidebar() {
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <ShoppingBag className="w-16 h-16 text-gray-300 mb-4" />
                   <h3 className="text-lg font-medium text-gray-dark mb-2">
-                    Your cart is empty
+                    {t('cart.empty')}
                   </h3>
                   <p className="text-sm text-gray-dark mb-6">
-                    Add some delicious tortillas to get started!
+                    {t('cart.emptySubtitle')}
                   </p>
                   <button
                     onClick={handleClose}
                     className="px-6 py-3 bg-black text-white text-sm tracking-widest uppercase hover:bg-gray-800 transition-colors"
                   >
-                    Continue Shopping
+                    {t('cart.continueShopping')}
                   </button>
                 </div>
               ) : (
@@ -212,7 +214,7 @@ export function CartSidebar() {
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-charcoal-400">
-                            <span className="text-xs">No image</span>
+                            <span className="text-xs">{t('cart.noImage')}</span>
                           </div>
                         )}
                       </div>
@@ -226,14 +228,14 @@ export function CartSidebar() {
                           <button
                             onClick={() => removeItem(item.sku)}
                             className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
-                            aria-label="Remove item"
+                            aria-label={t('cart.removeItem')}
                           >
                             <X className="w-4 h-4" />
                           </button>
                         </div>
 
                         <p className="text-sm text-gray-500 mb-2">
-                          {formatPrice(item.price)} each
+                          {formatPrice(item.price)} {t('cart.each')}
                         </p>
 
                         {/* Quantity Controls */}
@@ -242,7 +244,7 @@ export function CartSidebar() {
                             <button
                               onClick={() => updateQuantity(item.sku, item.quantity - 1)}
                               className="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-gray-50 border border-gray-200 transition-colors"
-                              aria-label="Decrease quantity"
+                              aria-label={t('cart.decreaseQuantity')}
                             >
                               <Minus className="w-4 h-4 text-gray-600" />
                             </button>
@@ -252,7 +254,7 @@ export function CartSidebar() {
                             <button
                               onClick={() => updateQuantity(item.sku, item.quantity + 1)}
                               className="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-gray-50 border border-gray-200 transition-colors"
-                              aria-label="Increase quantity"
+                              aria-label={t('cart.increaseQuantity')}
                             >
                               <Plus className="w-4 h-4 text-gray-600" />
                             </button>
@@ -282,7 +284,7 @@ export function CartSidebar() {
                     <div className="flex items-center gap-2">
                       <Tag className="w-3.5 h-3.5 text-sunset-600" />
                       <span className="text-xs font-medium uppercase tracking-wide">
-                        {discountApplied ? 'Discount Applied' : 'Discount Code'}
+                        {discountApplied ? t('cart.discount.applied') : t('cart.discount.title')}
                       </span>
                       {discountApplied && <Check className="w-3.5 h-3.5 text-green-600" />}
                     </div>
@@ -297,7 +299,7 @@ export function CartSidebar() {
                           <button
                             onClick={handleRemoveDiscount}
                             className="text-gray-400 hover:text-gray-600 p-1"
-                            aria-label="Remove discount"
+                            aria-label={t('cart.discount.remove')}
                           >
                             <X className="w-3 h-3" />
                           </button>
@@ -306,7 +308,7 @@ export function CartSidebar() {
                         <div className="space-y-2 mt-2">
                           <input
                             type="email"
-                            placeholder="Email address"
+                            placeholder={t('cart.discount.email')}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-2.5 py-1.5 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
@@ -314,7 +316,7 @@ export function CartSidebar() {
                           <div className="flex gap-2">
                             <input
                               type="text"
-                              placeholder="Enter code"
+                              placeholder={t('cart.discount.enterCode')}
                               value={discountCode}
                               onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
                               className="flex-1 px-2.5 py-1.5 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
@@ -324,7 +326,7 @@ export function CartSidebar() {
                               disabled={isValidatingCode}
                               className="px-3 py-1.5 bg-gray-900 text-white text-xs uppercase tracking-wide rounded hover:bg-gray-800 disabled:bg-gray-400"
                             >
-                              {isValidatingCode ? '...' : 'Apply'}
+                              {isValidatingCode ? '...' : t('cart.discount.apply')}
                             </button>
                           </div>
                           {discountError && (
@@ -345,7 +347,7 @@ export function CartSidebar() {
                     <div className="flex items-center gap-2">
                       <Truck className="w-3.5 h-3.5 text-sunset-600" />
                       <span className="text-xs font-medium uppercase tracking-wide">
-                        {shippingMethod === 'usps' ? 'USPS 3-4 days' : 'FedEx 2 days'}
+                        {shippingMethod === 'usps' ? t('cart.shippingMethod.usps.name') : t('cart.shippingMethod.fedex.name')}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -372,8 +374,8 @@ export function CartSidebar() {
                             className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
                           />
                           <div>
-                            <p className="text-xs font-medium">USPS Priority Mail</p>
-                            <p className="text-[10px] text-gray-500">3-4 business days</p>
+                            <p className="text-xs font-medium">{t('cart.shippingMethod.usps.name')}</p>
+                            <p className="text-[10px] text-gray-500">{t('cart.shippingMethod.usps.time')}</p>
                           </div>
                         </div>
                         <span className="text-xs font-medium">{formatPrice(shippingOptions.usps)}</span>
@@ -395,8 +397,8 @@ export function CartSidebar() {
                             className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
                           />
                           <div>
-                            <p className="text-xs font-medium">FedEx 2nd Day Air</p>
-                            <p className="text-[10px] text-gray-500">2 business days</p>
+                            <p className="text-xs font-medium">{t('cart.shippingMethod.fedex.name')}</p>
+                            <p className="text-[10px] text-gray-500">{t('cart.shippingMethod.fedex.time')}</p>
                           </div>
                         </div>
                         <span className="text-xs font-medium">{formatPrice(shippingOptions.fedex)}</span>
@@ -408,22 +410,22 @@ export function CartSidebar() {
                 {/* Totals - More Compact */}
                 <div className="space-y-1 mb-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Subtotal</span>
+                    <span className="text-gray-600">{t('cart.subtotal')}</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Shipping</span>
+                    <span className="text-gray-600">{t('cart.shipping')}</span>
                     {discountApplied ? (
                       <div className="flex items-center gap-1.5">
                         <span className="text-gray-400 line-through text-xs">{formatPrice(shipping)}</span>
-                        <span className="font-medium text-green-600">FREE</span>
+                        <span className="font-medium text-green-600">{t('cart.free')}</span>
                       </div>
                     ) : (
                       <span className="font-medium">{formatPrice(shipping)}</span>
                     )}
                   </div>
                   <div className="flex justify-between text-base font-semibold pt-1.5 border-t border-gray-300">
-                    <span>Total</span>
+                    <span>{t('cart.total')}</span>
                     <span>{formatPrice(displayTotal)}</span>
                   </div>
                 </div>
@@ -432,15 +434,15 @@ export function CartSidebar() {
                 <div className="mb-3 flex justify-center gap-6 py-2 bg-white rounded-lg border border-gray-200">
                   <div className="flex items-center gap-1.5">
                     <Shield className="w-3.5 h-3.5 text-green-600" />
-                    <span className="text-[10px] font-medium text-charcoal-700">Secure</span>
+                    <span className="text-[10px] font-medium text-charcoal-700">{t('cart.trust.secure')}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Truck className="w-3.5 h-3.5 text-blue-600" />
-                    <span className="text-[10px] font-medium text-charcoal-700">Fast</span>
+                    <span className="text-[10px] font-medium text-charcoal-700">{t('cart.trust.fast')}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <RefreshCw className="w-3.5 h-3.5 text-orange-600" />
-                    <span className="text-[10px] font-medium text-charcoal-700">Guaranteed</span>
+                    <span className="text-[10px] font-medium text-charcoal-700">{t('cart.trust.guaranteed')}</span>
                   </div>
                 </div>
 
@@ -451,7 +453,7 @@ export function CartSidebar() {
                   className="flex items-center justify-center gap-2 w-full py-3 bg-black text-white text-center text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   <Lock className="w-3.5 h-3.5" />
-                  {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
+                  {isProcessing ? t('cart.processing') : t('cart.checkout')}
                 </button>
 
                 {/* Error Message */}
@@ -466,7 +468,7 @@ export function CartSidebar() {
                   onClick={handleClose}
                   className="block w-full mt-2 py-2 text-xs text-gray-500 hover:text-black transition-colors"
                 >
-                  Continue Shopping
+                  {t('cart.continueShopping')}
                 </button>
               </div>
             )}

@@ -5,8 +5,10 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
+import { useLanguage } from '@/lib/language-context'
 
 export default function CraftPage() {
+  const { t } = useLanguage();
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
@@ -62,15 +64,14 @@ export default function CraftPage() {
           <div className="relative z-10 container mx-auto px-8 text-center">
             <h1 className="magazine-text">
               <span className="block text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.8] text-gradient">
-                THE SOURCE
+                {t('craft.hero.title')}
               </span>
               <span className="block text-3xl md:text-4xl lg:text-5xl font-display font-light italic text-masa-600 mt-4">
-                of excellence
+                {t('craft.hero.subtitle')}
               </span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mt-8 slide-left">
-              Those who know tortillas know H-E-B®. We're expert curators bringing genuine H-E-B® products
-              to connoisseurs nationwide who won't settle for anything less.
+              {t('craft.hero.description')}
             </p>
           </div>
         </section>
@@ -79,40 +80,40 @@ export default function CraftPage() {
         <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              OUR EXPERTISE
+              {t('craft.expertise.title')}
             </h2>
 
             <div className="max-w-5xl mx-auto">
               {[
                 {
                   step: '01',
-                  title: 'PRODUCT SELECTION',
-                  desc: 'We source only genuine H-E-B® tortillas, the gold standard that Texas locals trust for authentic quality',
-                  detail: 'Every product is verified authentic H-E-B® merchandise',
+                  title: t('craft.expertise.step1.title'),
+                  desc: t('craft.expertise.step1.desc'),
+                  detail: t('craft.expertise.step1.detail'),
                 },
                 {
                   step: '02',
-                  title: 'QUALITY ASSURANCE',
-                  desc: 'Each batch is inspected to ensure it meets H-E-B® standards and our exacting requirements for freshness',
-                  detail: 'Only the freshest products make it to our inventory',
+                  title: t('craft.expertise.step2.title'),
+                  desc: t('craft.expertise.step2.desc'),
+                  detail: t('craft.expertise.step2.detail'),
                 },
                 {
                   step: '03',
-                  title: 'EXPERT PACKAGING',
-                  desc: 'Products are carefully repackaged to maintain H-E-B® quality during nationwide shipping',
-                  detail: 'Shelf-stable packaging preserves authentic taste and texture',
+                  title: t('craft.expertise.step3.title'),
+                  desc: t('craft.expertise.step3.desc'),
+                  detail: t('craft.expertise.step3.detail'),
                 },
                 {
                   step: '04',
-                  title: 'RAPID FULFILLMENT',
-                  desc: 'Orders are processed same-day and shipped via our optimized logistics network for maximum freshness',
-                  detail: '2-3 day delivery ensures you get H-E-B® quality at its peak',
+                  title: t('craft.expertise.step4.title'),
+                  desc: t('craft.expertise.step4.desc'),
+                  detail: t('craft.expertise.step4.detail'),
                 },
                 {
                   step: '05',
-                  title: 'CUSTOMER SATISFACTION',
-                  desc: 'We stand behind every H-E-B® product we ship with our satisfaction guarantee',
-                  detail: 'Your trust in our curation expertise is our top priority',
+                  title: t('craft.expertise.step5.title'),
+                  desc: t('craft.expertise.step5.desc'),
+                  detail: t('craft.expertise.step5.detail'),
                 },
               ].map((process, i) => (
                 <div key={i} className="relative mb-16 last:mb-0 slide-left" style={{ animationDelay: `${i * 0.1}s` }}>
@@ -152,24 +153,24 @@ export default function CraftPage() {
         <section className="py-20 bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              WHY H-E-B®?
+              {t('craft.whyHeb.title')}
             </h2>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               {[
                 {
-                  ingredient: 'QUALITY',
-                  desc: 'H-E-B® sets the standard for tortilla excellence in Texas',
+                  ingredient: t('craft.whyHeb.quality.title'),
+                  desc: t('craft.whyHeb.quality.desc'),
                   icon: '★',
                 },
                 {
-                  ingredient: 'TRUST',
-                  desc: 'The brand Texans have relied on for generations',
+                  ingredient: t('craft.whyHeb.trust.title'),
+                  desc: t('craft.whyHeb.trust.desc'),
                   icon: '🤝',
                 },
                 {
-                  ingredient: 'EXPERTISE',
-                  desc: 'We know how to source and ship H-E-B® products perfectly',
+                  ingredient: t('craft.whyHeb.expertise.title'),
+                  desc: t('craft.whyHeb.expertise.desc'),
                   icon: '🎯',
                 },
               ].map((item, i) => (
@@ -183,10 +184,10 @@ export default function CraftPage() {
 
             <div className="mt-16 text-center">
               <p className="text-2xl font-display italic text-masa-400">
-                "Those who know, know H-E-B® tortillas."
+                {t('craft.whyHeb.quote')}
               </p>
               <p className="text-sm text-cream-400 mt-4 tracking-wider uppercase">
-                The choice of tortilla connoisseurs
+                {t('craft.whyHeb.tagline')}
               </p>
             </div>
           </div>
@@ -196,32 +197,32 @@ export default function CraftPage() {
         <section className="py-20 bg-gradient-to-b from-cream-50 to-cream-100">
           <div className="container mx-auto px-8 max-w-4xl">
             <h2 className="text-4xl md:text-5xl font-display font-black text-center mb-12 text-charcoal-950">
-              Our Freshness Promise
+              {t('craft.freshness.title')}
             </h2>
 
             <div className="prose prose-lg max-w-none text-charcoal-700">
               <p className="text-xl leading-relaxed mb-6">
-                At Lonestar Tortillas, we understand that freshness is everything when it comes to tortillas. That's why we've developed a sourcing and shipping process that ensures every package arrives at your door with the same quality you'd find on H-E-B® shelves in Texas.
+                {t('craft.freshness.intro')}
               </p>
 
-              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Direct-from-Store Sourcing</h3>
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">{t('craft.freshness.sourcing.title')}</h3>
               <p className="mb-6">
-                We source our H-E-B® tortillas directly from stores in Texas, selecting only products with optimal freshness dates. Our team regularly rotates inventory to ensure you receive tortillas with maximum shelf life remaining. We never sell products that are close to expiration.
+                {t('craft.freshness.sourcing.text')}
               </p>
 
-              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Shelf-Stable Packaging</h3>
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">{t('craft.freshness.packaging.title')}</h3>
               <p className="mb-6">
-                H-E-B® tortillas are already designed for extended shelf life at room temperature. This means no refrigeration is required during shipping, and your tortillas arrive ready to use. Most products have a 30-45 day shelf life, giving you plenty of time to enjoy them.
+                {t('craft.freshness.packaging.text')}
               </p>
 
-              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Fast, Protected Shipping</h3>
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">{t('craft.freshness.shipping.title')}</h3>
               <p className="mb-6">
-                Orders are shipped within 24 hours via USPS Priority or UPS Ground, arriving in 2-3 business days. Each package is carefully padded to prevent damage during transit. During extreme weather, we monitor conditions and may delay shipments to protect product quality.
+                {t('craft.freshness.shipping.text')}
               </p>
 
-              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">Satisfaction Guaranteed</h3>
+              <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">{t('craft.freshness.guarantee.title')}</h3>
               <p className="mb-6">
-                If you receive damaged tortillas or are unsatisfied for any reason, contact us within 7 days for a full replacement or refund. We stand behind every H-E-B® product we ship.
+                {t('craft.freshness.guarantee.text')}
               </p>
             </div>
           </div>
@@ -231,15 +232,15 @@ export default function CraftPage() {
         <section className="py-20 bg-gradient-to-b from-cream-100 to-masa-50">
           <div className="container mx-auto px-8">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-16 reveal-text">
-              H-E-B® SELECTION
+              {t('craft.selection.title')}
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {[
-                { name: 'H-E-B® Mi Tienda Corn', color: 'from-sunset-400 to-sunset-600' },
-                { name: 'H-E-B® Butter Tortillas', color: 'from-masa-400 to-masa-600' },
-                { name: 'H-E-B® Flour Tortillas', color: 'from-cream-400 to-cream-600' },
-                { name: 'H-E-B® Whole Wheat', color: 'from-lime-500 to-lime-700' },
+                { name: t('craft.selection.corn'), color: 'from-sunset-400 to-sunset-600' },
+                { name: t('craft.selection.butter'), color: 'from-masa-400 to-masa-600' },
+                { name: t('craft.selection.flour'), color: 'from-cream-400 to-cream-600' },
+                { name: t('craft.selection.wheat'), color: 'from-lime-500 to-lime-700' },
               ].map((variety, i) => (
                 <div key={i} className="group hover-lift">
                   <div className={`h-64 bg-gradient-to-br ${variety.color} rounded-lg flex items-center justify-center relative overflow-hidden`}>
@@ -257,16 +258,16 @@ export default function CraftPage() {
         {/* CTA Section */}
         <section className="py-20 bg-charcoal-950 text-cream-50 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-8">
-            TASTE THE DIFFERENCE
+            {t('craft.cta.title')}
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto">
-            Experience why H-E-B® tortillas are the gold standard - now available nationwide
+            {t('craft.cta.subtitle')}
           </p>
           <Link href="/pre-sale" className="inline-block bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-sunset-600 transition-colors hover-glow">
-            Join Pre-Sale List
+            {t('craft.cta.button')}
           </Link>
           <p className="text-sm text-cream-400 mt-8 tracking-wider uppercase">
-            Independent reseller • Not affiliated with or endorsed by H-E-B®
+            {t('disclaimer.short')}
           </p>
         </section>
       </div>

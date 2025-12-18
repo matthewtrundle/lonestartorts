@@ -4,11 +4,17 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
+import { ShoppingBag, Menu, X, Globe } from 'lucide-react';
 
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
+  const { language, setLanguage, t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'es' : 'en');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,52 +91,62 @@ export function Header() {
           <nav className="nav-items hidden md:flex items-center gap-6">
             <Link href="/shop" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Shop
+                {t('nav.shop')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link href="/craft" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Source
+                {t('nav.source')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link href="/guides" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Guides
+                {t('nav.guides')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link href="/recipes" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Recipes
+                {t('nav.recipes')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link href="/blog" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Blog
+                {t('nav.blog')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link href="/locations" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Locations
+                {t('nav.locations')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link href="/wholesale" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Wholesale
+                {t('nav.wholesale')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
             <Link href="/contact" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                Contact
+                {t('nav.contact')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium text-charcoal-700 hover:text-sunset-600 hover:bg-sunset-50 rounded-lg transition-colors"
+              aria-label={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+            >
+              <Globe className="w-4 h-4" />
+              <span className="uppercase">{t('language.toggle')}</span>
+            </button>
 
             {/* Cart Icon */}
             <button
@@ -150,7 +166,7 @@ export function Header() {
               href="/shop"
               className="inline-flex items-center gap-2 bg-sunset-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm tracking-wide hover:bg-sunset-700 hover:shadow-md transition-all"
             >
-              Shop Now
+              {t('nav.shopNow')}
             </Link>
           </nav>
         </div>
@@ -183,13 +199,25 @@ export function Header() {
 
           {/* Mobile Menu Content */}
           <nav className="flex flex-col p-6 space-y-1 overflow-y-auto h-[calc(100vh-180px)]">
+            {/* Language Toggle - Mobile */}
+            <button
+              onClick={() => {
+                toggleLanguage();
+                setIsMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 px-4 py-3 text-charcoal-700 font-medium hover:bg-sunset-50 rounded-lg transition-colors mb-4 border border-charcoal-200"
+            >
+              <Globe className="w-5 h-5" />
+              <span>{language === 'en' ? 'Cambiar a Español' : 'Switch to English'}</span>
+            </button>
+
             {/* Shop Now CTA - Prominent */}
             <Link
               href="/shop"
               onClick={() => setIsMobileMenuOpen(false)}
               className="w-full bg-sunset-500 text-white px-6 py-4 rounded-lg font-semibold text-center tracking-wide uppercase hover:bg-sunset-600 transition-colors shadow-md mb-6"
             >
-              Shop Now
+              {t('nav.shopNow')}
             </Link>
 
             {/* Navigation Links */}
@@ -198,63 +226,63 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Shop
+              {t('nav.shop')}
             </Link>
             <Link
               href="/craft"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Source
+              {t('nav.source')}
             </Link>
             <Link
               href="/guides"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Guides & Tips
+              {t('nav.guidesAndTips')}
             </Link>
             <Link
               href="/recipes"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Recipes
+              {t('nav.recipes')}
             </Link>
             <Link
               href="/blog"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Blog & Stories
+              {t('nav.blogAndStories')}
             </Link>
             <Link
               href="/locations"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Locations
+              {t('nav.locations')}
             </Link>
             <Link
               href="/wholesale"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Wholesale
+              {t('nav.wholesale')}
             </Link>
             <Link
               href="/story"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Story
+              {t('nav.story')}
             </Link>
             <Link
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
-              Contact
+              {t('nav.contact')}
             </Link>
           </nav>
         </div>
