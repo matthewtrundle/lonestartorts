@@ -36,7 +36,7 @@ export const products: Product[] = [
     sku: 'HEB-FLOUR',
     name: 'H-E-B Bakery Flour Tortillas',
     description: 'Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile.',
-    image: '/images/products/flour-tortillas-heb.png',
+    image: '/images/products/flour-tortillas-heb.webp',
     price: 2000, // $20 per pack
     tortillaCount: 20,
     storage: 'shelf_stable',
@@ -49,7 +49,7 @@ export const products: Product[] = [
     sku: 'HEB-BUTTER',
     name: 'H-E-B Bakery Butter Tortillas',
     description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer.',
-    image: '/images/products/butter-tortillas-heb.png',
+    image: '/images/products/butter-tortillas-heb.webp',
     price: 2000, // $20 per pack
     tortillaCount: 20,
     storage: 'shelf_stable',
@@ -61,7 +61,7 @@ export const products: Product[] = [
     sku: 'HEB-WHEAT',
     name: 'H-E-B Bakery Wheat Tortillas',
     description: 'Whole wheat tortillas with wholesome grain flavor. Perfect for health-conscious meals without sacrificing taste.',
-    image: '/images/products/wheat-tortillas-heb.png',
+    image: '/images/products/wheat-tortillas-heb.webp',
     price: 2000, // $20 per pack
     tortillaCount: 20,
     storage: 'shelf_stable',
@@ -73,7 +73,7 @@ export const products: Product[] = [
     sku: 'HEB-GREEN-SAUCE',
     name: 'H-E-B That Green Sauce',
     description: 'The legendary H-E-B That Green Sauce. Perfect for tacos, enchiladas, and everything in between.',
-    image: '/images/products/green-sauce-heb.png',
+    image: '/images/products/green-sauce-heb.webp',
     price: 1200, // $12 per bottle
     tortillaCount: 0, // Not a tortilla product
     storage: 'refrigerated',

@@ -1,39 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { ProductCard } from '@/components/product/ProductCard';
 import { Truck, Shield, Clock, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
+import { products as allProducts } from '@/lib/products';
 
-import type { Product } from '@/lib/products';
+// Filter tortilla products at module level (no API call needed)
+const tortillaProducts = allProducts.filter(p => p.productType === 'tortilla');
 
 export default function ShopPage() {
   const { t } = useLanguage();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch('/api/products?type=tortilla')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setProducts(data.products);
-        } else {
-          setError('Failed to load products');
-        }
-      })
-      .catch((err) => {
-        console.error('Error fetching products:', err);
-        setError('Unable to load products');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
 
   return (
     <>
@@ -44,7 +23,7 @@ export default function ShopPage() {
         <div className="w-full mb-6">
           <div className="relative w-full h-[180px] md:h-[240px] overflow-hidden">
             <Image
-              src="/images/shop/texas-tortillas-hero.png"
+              src="/images/shop/texas-tortillas-hero.webp"
               alt="H-E-B Tortillas with Texas Flag - Butter, Southwest Style, Flour, and Corn Tortillas"
               fill
               className="object-cover object-center"
@@ -94,29 +73,10 @@ export default function ShopPage() {
 
           </div>
 
-          {/* Loading State */}
-          {loading && (
-            <div className="text-center py-8">
-              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-sunset-orange border-r-transparent"></div>
-              <p className="mt-4 text-gray-600">{t('common.loading')}</p>
-            </div>
-          )}
-
-          {/* Error State */}
-          {error && (
-            <div className="text-center py-8">
-              <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-                <p className="text-red-700">{error}</p>
-              </div>
-            </div>
-          )}
-
           {/* Products Grid - Premium spacing */}
-          {!loading && !error && products.length > 0 && (
-            <>
-              <h2 className="sr-only">Available Products</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
-              {products.map((product) => (
+          <h2 className="sr-only">Available Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
+            {tortillaProducts.map((product) => (
                 <ProductCard
                   key={product.sku}
                   sku={product.sku}
@@ -131,17 +91,8 @@ export default function ShopPage() {
                   isBestSeller={product.isBestSeller}
                   savingsPercent={product.savingsPercent}
                 />
-              ))}
-              </div>
-            </>
-          )}
-
-          {/* Empty State */}
-          {!loading && !error && products.length === 0 && (
-            <div className="text-center py-8">
-              <p className="text-gray-600 text-lg">{t('shop.emptyState')}</p>
-            </div>
-          )}
+            ))}
+          </div>
 
           {/* Other HEB Products Link */}
           <div className="mt-10 text-center">

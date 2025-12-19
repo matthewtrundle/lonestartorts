@@ -109,14 +109,16 @@ export default function Home() {
               <div className="absolute bottom-[-50%] right-[-25%] w-[150%] h-[150%] bg-gradient-radial from-masa-200/20 via-masa-100/10 to-transparent blur-[120px] animate-float-slow-reverse" />
             </div>
 
-            {/* Layer 3: Background Video */}
+            {/* Layer 3: Background Video - Lazy loaded */}
             <div className="absolute inset-0 parallax-layer" data-speed="0.3" data-rotation="2">
-              {/* Background Video */}
+              {/* Background Video - uses preload="none" for performance */}
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
+                preload="none"
+                poster="/images/hero-banner.webp"
                 className="absolute inset-0 w-full h-full object-cover opacity-30"
               >
                 <source src="/hero-background_compressed.mp4" type="video/mp4" />
@@ -471,16 +473,8 @@ export default function Home() {
 
         {/* Magazine Typography Section */}
         <section className="relative py-20 bg-gradient-to-b from-masa-50 to-cream-100 overflow-hidden">
-          {/* Background Video - Same as hero */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-20"
-          >
-            <source src="/hero-background.mp4" type="video/mp4" />
-          </video>
+          {/* Background gradient - removed video for performance */}
+          <div className="absolute inset-0 bg-gradient-to-br from-masa-100/50 via-cream-100/30 to-sunset-100/20 opacity-60" />
 
           {/* Overlay for better readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-masa-50/80 to-cream-100/90" />
@@ -638,6 +632,8 @@ export default function Home() {
                   muted
                   loop
                   playsInline
+                  preload="metadata"
+                  poster="/images/lonestar-logo.webp"
                 >
                   <source src={videos[currentVideo].src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -693,26 +689,24 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* Video Thumbnails Below */}
+              {/* Video Thumbnails Below - Static images instead of video elements */}
               <div className="flex gap-4 mt-6 justify-center">
                 {videos.map((video, index) => (
                   <button
                     key={index}
                     onClick={() => handleVideoChange(index)}
-                    className={`relative w-20 h-32 rounded-lg overflow-hidden transition-all duration-300 ${
+                    className={`relative w-20 h-32 rounded-lg overflow-hidden transition-all duration-300 bg-charcoal-800 ${
                       currentVideo === index
                         ? 'ring-2 ring-sunset-500 scale-105'
                         : 'opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <video
-                      className="w-full h-full object-cover"
-                      muted
-                      playsInline
-                    >
-                      <source src={video.src} type="video/mp4" />
-                    </video>
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/60 to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg className="w-8 h-8 text-cream-50/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 to-transparent" />
                     <p className="absolute bottom-1 left-0 right-0 text-[10px] text-cream-50 text-center px-1 truncate">
                       {video.title}
                     </p>
@@ -748,7 +742,7 @@ export default function Home() {
                   title: 'GENUINE H-E-B®',
                   desc: 'The same products Texas trusts, sourced and delivered',
                   gradient: 'from-sunset-400 to-sunset-600',
-                  bgImage: '/images/Cards/image (8).png'
+                  bgImage: '/images/Cards/image (8).webp'
                 },
                 {
                   icon: (
@@ -762,7 +756,7 @@ export default function Home() {
                   title: 'NATIONWIDE DELIVERY',
                   desc: 'Shelf-stable goodness shipped to all 50 states',
                   gradient: 'from-masa-400 to-masa-600',
-                  bgImage: '/images/Cards/image (9).png'
+                  bgImage: '/images/Cards/image (9).webp'
                 },
                 {
                   icon: (
@@ -774,7 +768,7 @@ export default function Home() {
                   title: 'EXPERT SOURCING',
                   desc: 'We know H-E-B® quality and deliver it nationwide',
                   gradient: 'from-lime-500 to-lime-700',
-                  bgImage: '/images/Cards/image (10).png'
+                  bgImage: '/images/Cards/image (10).webp'
                 },
                 {
                   icon: (
@@ -785,7 +779,7 @@ export default function Home() {
                   title: 'PREMIUM VALUE',
                   desc: 'Big flavor, fair prices, no bull',
                   gradient: 'from-sunset-500 to-masa-500',
-                  bgImage: '/images/Cards/image (11).png'
+                  bgImage: '/images/Cards/image (11).webp'
                 },
                 {
                   icon: (
@@ -798,7 +792,7 @@ export default function Home() {
                   title: 'SHELF-STABLE',
                   desc: 'No refrigeration needed - pantry-ready!',
                   gradient: 'from-cream-400 to-cream-600',
-                  bgImage: '/images/Cards/image (12).png'
+                  bgImage: '/images/Cards/image (12).webp'
                 },
                 {
                   icon: (
@@ -809,7 +803,7 @@ export default function Home() {
                   title: 'HAPPINESS GUARANTEE',
                   desc: 'Love em or we will make it right',
                   gradient: 'from-charcoal-600 to-charcoal-400',
-                  bgImage: '/images/Cards/image (13).png'
+                  bgImage: '/images/Cards/image (13).webp'
                 },
               ].map((feature, i) => (
                 <div key={i} className="stagger-item group">

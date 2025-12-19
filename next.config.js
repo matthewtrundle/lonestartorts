@@ -11,6 +11,11 @@ const nextConfig = {
         hostname: 'localhost',
       },
     ],
+    // Serve modern image formats for better performance
+    formats: ['image/avif', 'image/webp'],
+    // Optimize for common device sizes
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
   env: {
     ALLOW_REFRIGERATED: process.env.ALLOW_REFRIGERATED || 'false',
