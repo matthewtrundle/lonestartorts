@@ -200,20 +200,24 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation Drawer - Backdrop and Panel as siblings to prevent opacity inheritance */}
+      {/* Backdrop */}
       <div
         className={`fixed inset-0 bg-black/50 z-[150] transition-opacity duration-300 md:hidden ${
           isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Menu Panel - Separate from backdrop to ensure solid background */}
+      <div
+        className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm z-[160] bg-white shadow-2xl transform transition-transform duration-300 ease-out md:hidden ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{ backgroundColor: '#ffffff' }}
+        onClick={(e) => e.stopPropagation()}
       >
-        <div
-          className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm bg-white opacity-100 shadow-2xl transform transition-transform duration-300 ease-out ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-          style={{ backgroundColor: '#ffffff' }}
-          onClick={(e) => e.stopPropagation()}
-        >
           {/* Mobile Menu Header */}
           <div className="flex justify-between items-center p-6 border-b border-cream-200">
             <LogoFull className="text-charcoal-950" size="sm" />
@@ -337,7 +341,6 @@ export function Header() {
             </Link>
           </nav>
         </div>
-      </div>
     </header>
   );
 }
