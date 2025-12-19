@@ -50,6 +50,7 @@ export function Header() {
   }, [isMobileMenuOpen]);
 
   return (
+    <>
     <header className={`shrink-header fixed top-[28px] left-0 right-0 z-[100] transition-all duration-300 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`} id="main-header">
 
       <div className="container mx-auto px-4 md:px-8 relative">
@@ -199,27 +200,27 @@ export function Header() {
           </nav>
         </div>
       </div>
+    </header>
 
-      {/* Mobile Navigation Drawer - Backdrop and Panel as siblings to prevent opacity inheritance */}
+      {/* Mobile Navigation Drawer - OUTSIDE header to avoid stacking context issues */}
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-[150] transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300 md:hidden ${
           isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden="true"
       />
 
-      {/* Menu Panel - Separate from backdrop to ensure solid background */}
+      {/* Menu Panel - Outside header to avoid stacking context issues */}
       <div
-        className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm z-[160] bg-white shadow-2xl transform transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm z-[9999] bg-white shadow-2xl transition-transform duration-300 ease-out md:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        style={{ backgroundColor: '#ffffff' }}
         onClick={(e) => e.stopPropagation()}
       >
           {/* Mobile Menu Header */}
-          <div className="flex justify-between items-center p-6 border-b border-cream-200">
+          <div className="flex justify-between items-center p-6 border-b border-cream-200 bg-white">
             <LogoFull className="text-charcoal-950" size="sm" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
@@ -231,7 +232,7 @@ export function Header() {
           </div>
 
           {/* Mobile Menu Content */}
-          <nav className="flex flex-col p-6 space-y-1 overflow-y-auto h-[calc(100vh-180px)]">
+          <nav className="flex flex-col p-6 space-y-1 overflow-y-auto h-[calc(100vh-180px)] bg-white">
             {/* Language Toggle - Mobile with Flags */}
             <button
               onClick={() => {
@@ -341,6 +342,6 @@ export function Header() {
             </Link>
           </nav>
         </div>
-    </header>
+    </>
   );
 }
