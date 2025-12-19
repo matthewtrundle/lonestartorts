@@ -5,24 +5,15 @@
 // Shipping method type
 export type ShippingMethod = 'usps' | 'fedex';
 
-// FedEx 2nd Day extra costs (in cents) based on bag count
-// Index 0 = 1 bag, Index 1 = 2 bags, etc. Index 14+ = 15+ bags
-const FEDEX_EXTRA_COSTS = [
-  900,   // 1 bag: +$9
-  1000,  // 2 bags: +$10
-  1200,  // 3 bags: +$12
-  1400,  // 4 bags: +$14
-  1600,  // 5 bags: +$16
-  1900,  // 6 bags: +$19
-  2200,  // 7 bags: +$22
-  2500,  // 8 bags: +$25
-  2700,  // 9 bags: +$27
-  2900,  // 10 bags: +$29
-  3100,  // 11 bags: +$31
-  3300,  // 12 bags: +$33
-  3500,  // 13 bags: +$35
-  3700,  // 14 bags: +$37
-  3900,  // 15+ bags: +$39
+// FedEx 2nd Day Air flat rates (in cents) based on pack count
+// Index 0 = 1 pack, Index 1 = 2 packs, etc.
+const FEDEX_FLAT_RATES = [
+  9000,   // 1 pack: $90
+  9700,   // 2 packs: $97
+  10500,  // 3 packs: $105
+  11500,  // 4 packs: $115
+  12500,  // 5 packs: $125
+  13700,  // 6 packs: $137
 ];
 
 export interface Product {
@@ -130,31 +121,35 @@ export function calculateShipping(items: { productType?: string; quantity: numbe
   return 0;
 }
 
-// Get FedEx extra cost based on bag count (tortilla packs only)
-export function getFedExExtraCost(bagCount: number): number {
-  if (bagCount <= 0) return 0;
-  const index = Math.min(bagCount - 1, FEDEX_EXTRA_COSTS.length - 1);
-  return FEDEX_EXTRA_COSTS[index];
-}
-
 // Calculate shipping for a specific method
 export function getShippingCost(
   items: { productType?: string; quantity: number }[],
   method: ShippingMethod
 ): number {
-  const uspsShipping = calculateShipping(items);
-
-  if (method === 'usps') {
-    return uspsShipping;
-  }
-
-  // FedEx: USPS base + extra cost based on bag count
+  // Count tortilla packs (items that are not sauce)
   const tortillaPacks = items
     .filter(item => item.productType !== 'sauce')
     .reduce((total, item) => total + item.quantity, 0);
 
-  const fedexExtra = getFedExExtraCost(tortillaPacks);
-  return uspsShipping + fedexExtra;
+  // Check if there are any sauce items
+  const hasSauce = items.some(item => item.productType === 'sauce');
+
+  if (method === 'usps') {
+    return calculateShipping(items);
+  }
+
+  // FedEx 2nd Day Air - flat rates based on pack count
+  if (tortillaPacks > 0) {
+    const index = Math.min(tortillaPacks - 1, FEDEX_FLAT_RATES.length - 1);
+    return FEDEX_FLAT_RATES[index];
+  }
+
+  // Sauce-only FedEx order
+  if (hasSauce) {
+    return 999; // $9.99 - Sauce-only shipping (same as USPS)
+  }
+
+  return 0;
 }
 
 // Get both shipping options for display

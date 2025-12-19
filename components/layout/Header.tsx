@@ -208,9 +208,10 @@ export function Header() {
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div
-          className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm bg-white shadow-2xl transform transition-transform duration-300 ease-out ${
+          className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm bg-white opacity-100 shadow-2xl transform transition-transform duration-300 ease-out ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
+          style={{ backgroundColor: '#ffffff' }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Mobile Menu Header */}
