@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getShippingCost, ShippingMethod } from '@/lib/products';
+import { getProductBySku, getShippingCost, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, ShippingMethod } from '@/lib/products';
 import { prisma } from '@/lib/prisma';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
     }
 
-    // Build full items array with productType for shipping calculation
+    // Build full items array with productType and price for shipping calculation
     const fullItems = items.map((item: { sku: string; quantity: number }) => {
       const product = getProductBySku(item.sku);
       if (!product) {
@@ -36,15 +36,31 @@ export async function POST(req: NextRequest) {
       return {
         quantity: item.quantity,
         productType: product.productType,
+        price: product.price,
       };
     });
 
-    // Calculate shipping based on items and selected method
-    let shippingCost = getShippingCost(fullItems, shippingMethod);
+    // Calculate subtotal for free shipping threshold check
+    const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Calculate shipping based on items, method, and subtotal (for free shipping threshold)
+    let shippingCost = getShippingCost(fullItems, shippingMethod, subtotal);
     let freeShippingApplied = false;
+    let freeShippingReason = '';
+
+    // Check if free shipping was applied via threshold
+    if (shippingMethod === 'usps' && subtotal >= FREE_SHIPPING_THRESHOLD) {
+      freeShippingApplied = true;
+      freeShippingReason = 'threshold';
+      console.log(`Free shipping applied for order $${(subtotal / 100).toFixed(2)} (threshold: $${(FREE_SHIPPING_THRESHOLD / 100).toFixed(2)})`);
+    }
+
+    // Calculate base shipping for display (what they would have paid)
+    const baseShippingCost = calculateBaseShipping(fullItems);
 
     // Validate discount code if provided (server-side re-validation)
-    if (email && discountCode) {
+    // Only apply discount code if free shipping wasn't already applied via threshold
+    if (email && discountCode && !freeShippingApplied) {
       const normalizedCode = discountCode.trim().toUpperCase();
       const normalizedEmail = email.trim().toLowerCase();
 
@@ -58,6 +74,7 @@ export async function POST(req: NextRequest) {
           // Valid first-order discount - apply free shipping
           shippingCost = 0;
           freeShippingApplied = true;
+          freeShippingReason = 'discount_code';
           console.log(`Free shipping applied for first order: ${normalizedEmail}`);
         }
       }
@@ -110,7 +127,16 @@ export async function POST(req: NextRequest) {
       })();
 
       if (freeShippingApplied) {
-        return baseLabel ? `FREE ${methodName} (${baseLabel}) - First Order Discount` : `FREE ${methodName} - First Order Discount`;
+        const savingsText = `You saved $${(baseShippingCost / 100).toFixed(2)}`;
+        if (freeShippingReason === 'threshold') {
+          return baseLabel
+            ? `FREE ${methodName} (${baseLabel}) - Order $60+ ${savingsText}`
+            : `FREE ${methodName} - Order $60+ ${savingsText}`;
+        } else {
+          return baseLabel
+            ? `FREE ${methodName} (${baseLabel}) - First Order Discount`
+            : `FREE ${methodName} - First Order Discount`;
+        }
       }
       return baseLabel ? `${methodName} (${baseLabel})` : methodName;
     };
@@ -126,10 +152,15 @@ export async function POST(req: NextRequest) {
         disclaimer: 'Independent reseller. Not affiliated with or endorsed by H-E-B®.',
         shippingMethod, // Store shipping method (usps or fedex)
         shippingCost: shippingCost.toString(), // Store for webhook reference
+        baseShippingCost: baseShippingCost.toString(), // What shipping would have been
+        subtotal: subtotal.toString(), // Order subtotal
         ...(freeShippingApplied && {
-          discountCode: discountCode?.trim().toUpperCase(),
-          discountType: 'free_shipping',
-          discountEmail: email?.trim().toLowerCase(),
+          freeShippingReason, // 'threshold' or 'discount_code'
+          freeShippingSavings: baseShippingCost.toString(),
+          ...(freeShippingReason === 'discount_code' && {
+            discountCode: discountCode?.trim().toUpperCase(),
+            discountEmail: email?.trim().toLowerCase(),
+          }),
         }),
       },
       shipping_address_collection: {

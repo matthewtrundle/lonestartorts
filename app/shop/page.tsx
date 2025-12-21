@@ -3,7 +3,9 @@
 import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { ProductCard } from '@/components/product/ProductCard';
-import { Truck, Shield, Clock, ArrowRight } from 'lucide-react';
+import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
+import { SocialProofSection } from '@/components/shop/SocialProofSection';
+import { Truck, Shield, Clock, ArrowRight, Check, Package } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
 import { products as allProducts } from '@/lib/products';
@@ -40,9 +42,19 @@ export default function ShopPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-charcoal-950 mb-4 tracking-tight">
               {t('shop.title')}
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
               {t('shop.subtitle')}
             </p>
+
+            {/* Free Shipping Banner */}
+            <div className="bg-gradient-to-r from-green-600 to-green-500 text-white py-3 px-6 rounded-lg shadow-md mb-8 inline-block">
+              <div className="flex items-center justify-center gap-3">
+                <Truck className="w-5 h-5" />
+                <span className="font-semibold text-lg">FREE Shipping on orders $60+ (3 packs)</span>
+                <span className="text-green-100">•</span>
+                <span className="text-green-100">Save $18.40!</span>
+              </div>
+            </div>
 
             {/* Trust Signals Bar - Centered Premium layout */}
             <div className="flex justify-center mb-6">
@@ -92,6 +104,61 @@ export default function ShopPage() {
                   savingsPercent={product.savingsPercent}
                 />
             ))}
+          </div>
+
+          {/* Bulk Savings Table */}
+          <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                <Package className="w-5 h-5 text-green-600" />
+              </div>
+              <h2 className="text-xl font-bold text-charcoal-950">Bulk Savings</h2>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-4 font-semibold text-charcoal-950">Quantity</th>
+                    <th className="text-right py-3 px-4 font-semibold text-charcoal-950">Price</th>
+                    <th className="text-right py-3 px-4 font-semibold text-charcoal-950">Shipping</th>
+                    <th className="text-right py-3 px-4 font-semibold text-charcoal-950">Total</th>
+                    <th className="text-right py-3 px-4 font-semibold text-charcoal-950">You Save</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-3 px-4 text-charcoal-700">1 pack (20 tortillas)</td>
+                    <td className="py-3 px-4 text-right text-charcoal-700">$20.00</td>
+                    <td className="py-3 px-4 text-right text-charcoal-700">$10.60</td>
+                    <td className="py-3 px-4 text-right font-medium text-charcoal-950">$30.60</td>
+                    <td className="py-3 px-4 text-right text-gray-400">—</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-3 px-4 text-charcoal-700">2 packs (40 tortillas)</td>
+                    <td className="py-3 px-4 text-right text-charcoal-700">$40.00</td>
+                    <td className="py-3 px-4 text-right text-charcoal-700">$18.40</td>
+                    <td className="py-3 px-4 text-right font-medium text-charcoal-950">$58.40</td>
+                    <td className="py-3 px-4 text-right text-green-600 font-medium">$2.80</td>
+                  </tr>
+                  <tr className="bg-green-50 border border-green-200 rounded">
+                    <td className="py-3 px-4 font-semibold text-green-800 flex items-center gap-2">
+                      <Check className="w-4 h-4" />
+                      3+ packs (60+ tortillas)
+                    </td>
+                    <td className="py-3 px-4 text-right font-semibold text-green-800">$60.00+</td>
+                    <td className="py-3 px-4 text-right">
+                      <span className="line-through text-gray-400 text-xs mr-1">$18.40</span>
+                      <span className="font-semibold text-green-600">FREE</span>
+                    </td>
+                    <td className="py-3 px-4 text-right font-bold text-green-800">$60.00+</td>
+                    <td className="py-3 px-4 text-right font-bold text-green-600">$18.40+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 text-xs text-gray-500 text-center">
+              Prices shown for USPS Priority Mail (3-4 business days). FedEx 2nd Day Air available at checkout.
+            </p>
           </div>
 
           {/* Other HEB Products Link */}
@@ -221,6 +288,9 @@ export default function ShopPage() {
             </div>
           </div>
         </div>
+
+        {/* Social Proof Section */}
+        <SocialProofSection className="mt-16" />
       </main>
     </>
   );

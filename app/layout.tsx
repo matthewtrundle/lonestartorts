@@ -7,7 +7,7 @@ import './globals.css';
 import { CartProvider } from '@/lib/cart-context';
 import { LanguageProvider } from '@/lib/language-context';
 import { CartSidebar } from '@/components/cart/CartSidebar';
-import { DisclaimerBanner } from '@/components/DisclaimerBanner';
+import { Footer } from '@/components/layout/Footer';
 
 // Optimized font loading with Next.js
 const inter = Inter({
@@ -301,11 +301,13 @@ export default function RootLayout({
 
         <ClerkProvider>
           <LanguageProvider>
-            <DisclaimerBanner />
             <CartProvider>
               <CartSidebar />
               <div className="min-h-screen flex flex-col">
-                {children}
+                <main className="flex-grow">
+                  {children}
+                </main>
+                <Footer />
               </div>
             </CartProvider>
           </LanguageProvider>

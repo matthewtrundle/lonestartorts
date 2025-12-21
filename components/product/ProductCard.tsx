@@ -44,19 +44,45 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     ? 'Shelf Stable'
     : 'Keep Refrigerated';
 
-  // Calculate shipping savings based on quantity
-  const getShippingMessage = () => {
-    if (quantity === 1) {
-      return 'Add 2 more for discounted shipping';
+  // Calculate shipping and messaging based on quantity
+  const getShippingInfo = () => {
+    // Calculate what this order would cost with shipping
+    const itemTotal = price * quantity;
+
+    if (itemTotal >= 6000) { // $60 threshold in cents
+      return {
+        message: 'FREE shipping included!',
+        type: 'free' as const,
+        totalWithShipping: itemTotal,
+        shippingCost: 0,
+      };
+    } else if (quantity >= 3) {
+      // 3 packs = $60, qualifies for free shipping
+      return {
+        message: 'FREE shipping included!',
+        type: 'free' as const,
+        totalWithShipping: itemTotal,
+        shippingCost: 0,
+      };
     } else if (quantity === 2) {
-      return 'Add 1 more to save $2.20 on shipping';
-    } else if (quantity >= 3 && quantity < 5) {
-      return `Save $2.20 on shipping • ${5 - quantity} more for max savings`;
-    } else if (quantity >= 5) {
-      return 'Maximum shipping savings applied!';
+      return {
+        message: 'Add 1 more for FREE shipping',
+        type: 'progress' as const,
+        totalWithShipping: itemTotal + 1840, // $18.40 shipping
+        shippingCost: 1840,
+      };
+    } else {
+      // quantity === 1
+      return {
+        message: 'Order 3+ packs for FREE shipping',
+        type: 'hint' as const,
+        totalWithShipping: itemTotal + 1060, // $10.60 shipping
+        shippingCost: 1060,
+      };
     }
-    return '';
   };
+
+  const shippingInfo = getShippingInfo();
 
   const handleQuantityChange = (delta: number) => {
     const newQuantity = Math.max(1, Math.min(10, quantity + delta));
@@ -192,6 +218,32 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
+        {/* Shipping Info & Total */}
+        <div className={`mb-3 p-2 rounded-md text-center ${
+          shippingInfo.type === 'free'
+            ? 'bg-green-50 border border-green-200'
+            : shippingInfo.type === 'progress'
+            ? 'bg-amber-50 border border-amber-200'
+            : 'bg-gray-50 border border-gray-200'
+        }`}>
+          <div className="text-sm">
+            {shippingInfo.type === 'free' ? (
+              <span className="font-semibold text-green-700">
+                {formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping!
+              </span>
+            ) : (
+              <>
+                <span className="text-gray-600">
+                  {formatPrice(shippingInfo.totalWithShipping)} total incl. shipping
+                </span>
+                <span className="mx-1 text-gray-400">•</span>
+                <span className={shippingInfo.type === 'progress' ? 'text-amber-700 font-medium' : 'text-gray-500'}>
+                  {shippingInfo.message}
+                </span>
+              </>
+            )}
+          </div>
+        </div>
 
         {/* Premium CTA Button */}
         <Button

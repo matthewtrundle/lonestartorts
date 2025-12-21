@@ -1,7 +1,15 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { calculateShipping, getShippingCost, getShippingOptions, ShippingMethod } from '@/lib/products';
+import {
+  calculateShipping,
+  getShippingCost,
+  getShippingOptions,
+  getFreeShippingProgress,
+  calculateBaseShipping,
+  ShippingMethod,
+  FREE_SHIPPING_THRESHOLD,
+} from '@/lib/products';
 
 // Cart item structure matching the product catalog
 export interface CartItem {
@@ -14,15 +22,25 @@ export interface CartItem {
   image?: string;
 }
 
+interface FreeShippingProgress {
+  qualifies: boolean;
+  amountRemaining: number;
+  percentComplete: number;
+  savedAmount: number;
+}
+
 interface CartContextType {
   items: CartItem[];
   itemCount: number;
   subtotal: number;
   shipping: number;
+  baseShipping: number; // What shipping would be without free shipping
   total: number;
   shippingMethod: ShippingMethod;
   setShippingMethod: (method: ShippingMethod) => void;
   shippingOptions: { usps: number; fedex: number };
+  freeShippingProgress: FreeShippingProgress;
+  freeShippingThreshold: number;
   addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
   removeItem: (sku: string) => void;
   updateQuantity: (sku: string, quantity: number) => void;
@@ -129,21 +147,27 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Calculate totals with smart shipping
   // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
   // Shipping options: USPS (standard) or FedEx 2nd Day (premium)
+  // FREE shipping on USPS orders $60+
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const shippingOptions = getShippingOptions(items);
-  const shipping = getShippingCost(items, shippingMethod);
+  const shippingOptions = getShippingOptions(items, subtotal);
+  const shipping = getShippingCost(items, shippingMethod, subtotal);
+  const baseShipping = calculateBaseShipping(items); // What shipping would be without free threshold
   const total = subtotal + shipping;
+  const freeShippingProgress = getFreeShippingProgress(subtotal);
 
   const value: CartContextType = {
     items,
     itemCount,
     subtotal,
     shipping,
+    baseShipping,
     total,
     shippingMethod,
     setShippingMethod,
     shippingOptions,
+    freeShippingProgress,
+    freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
     addItem,
     removeItem,
     updateQuantity,

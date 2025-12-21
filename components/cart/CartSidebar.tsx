@@ -10,9 +10,10 @@ import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
 import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown } from 'lucide-react';
+import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
 
 export function CartSidebar() {
-  const { items, itemCount, subtotal, shipping, total, shippingMethod, setShippingMethod, shippingOptions, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
+  const { items, itemCount, subtotal, shipping, baseShipping, total, shippingMethod, setShippingMethod, shippingOptions, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -275,6 +276,9 @@ export function CartSidebar() {
             {/* Footer with totals and checkout */}
             {items.length > 0 && (
               <div className="border-t border-gray-200 p-4 bg-gray-50">
+                {/* Free Shipping Progress */}
+                <FreeShippingProgress className="mb-3" compact />
+
                 {/* Discount Code Section - Collapsible */}
                 <div className="mb-3 bg-white rounded-lg border border-gray-200 overflow-hidden">
                   <button
@@ -415,9 +419,9 @@ export function CartSidebar() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">{t('cart.shipping')}</span>
-                    {discountApplied ? (
+                    {discountApplied || freeShippingProgress.qualifies ? (
                       <div className="flex items-center gap-1.5">
-                        <span className="text-gray-400 line-through text-xs">{formatPrice(shipping)}</span>
+                        <span className="text-gray-400 line-through text-xs">{formatPrice(baseShipping)}</span>
                         <span className="font-medium text-green-600">{t('cart.free')}</span>
                       </div>
                     ) : (

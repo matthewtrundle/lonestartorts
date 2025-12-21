@@ -1,6 +1,10 @@
 // Product catalog - centralized source of truth
 // Simple pricing: $20 per pack (20 tortillas each)
 // Smart shipping: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
+// FREE SHIPPING on orders $60+ (3 packs)
+
+// Free shipping threshold in cents ($60)
+export const FREE_SHIPPING_THRESHOLD = 6000;
 
 // Shipping method type
 export type ShippingMethod = 'usps' | 'fedex';
@@ -89,10 +93,19 @@ export function getProductBySku(sku: string) {
 
 // Calculate smart shipping based on cart items
 // Shipping logic:
+// - FREE shipping on orders $60+ (3+ tortilla packs)
 // - Sauce-only orders: $9.99 flat rate
 // - Orders with tortillas: Calculate based on tortilla pack count only (sauce ships free with tortillas)
 // - Tortilla tiers: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
-export function calculateShipping(items: { productType?: string; quantity: number }[]): number {
+export function calculateShipping(
+  items: { productType?: string; quantity: number }[],
+  subtotal?: number
+): number {
+  // FREE shipping for orders $60+
+  if (subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
+    return 0;
+  }
+
   // Count tortilla packs (items that are not sauce)
   const tortillaPacks = items
     .filter(item => item.productType !== 'sauce')
@@ -121,11 +134,41 @@ export function calculateShipping(items: { productType?: string; quantity: numbe
   return 0;
 }
 
+// Calculate what shipping WOULD be without free shipping threshold
+// Used for showing "You're saving $X" messaging
+export function calculateBaseShipping(items: { productType?: string; quantity: number }[]): number {
+  const tortillaPacks = items
+    .filter(item => item.productType !== 'sauce')
+    .reduce((total, item) => total + item.quantity, 0);
+
+  const hasSauce = items.some(item => item.productType === 'sauce');
+
+  if (tortillaPacks > 0) {
+    if (tortillaPacks === 1) return 1060;
+    if (tortillaPacks <= 3) return 1840;
+    if (tortillaPacks <= 5) return 2265;
+    const largeBoxes = Math.ceil(tortillaPacks / 5);
+    return largeBoxes * 2265;
+  }
+
+  if (hasSauce) {
+    return 999;
+  }
+
+  return 0;
+}
+
 // Calculate shipping for a specific method
 export function getShippingCost(
   items: { productType?: string; quantity: number }[],
-  method: ShippingMethod
+  method: ShippingMethod,
+  subtotal?: number
 ): number {
+  // FREE shipping for orders $60+ (USPS only - FedEx always charged)
+  if (method === 'usps' && subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
+    return 0;
+  }
+
   // Count tortilla packs (items that are not sauce)
   const tortillaPacks = items
     .filter(item => item.productType !== 'sauce')
@@ -138,7 +181,7 @@ export function getShippingCost(
     return calculateShipping(items);
   }
 
-  // FedEx 2nd Day Air - flat rates based on pack count
+  // FedEx 2nd Day Air - flat rates based on pack count (no free shipping)
   if (tortillaPacks > 0) {
     const index = Math.min(tortillaPacks - 1, FEDEX_FLAT_RATES.length - 1);
     return FEDEX_FLAT_RATES[index];
@@ -153,12 +196,37 @@ export function getShippingCost(
 }
 
 // Get both shipping options for display
-export function getShippingOptions(items: { productType?: string; quantity: number }[]): {
+export function getShippingOptions(
+  items: { productType?: string; quantity: number }[],
+  subtotal?: number
+): {
   usps: number;
   fedex: number;
 } {
   return {
-    usps: getShippingCost(items, 'usps'),
-    fedex: getShippingCost(items, 'fedex'),
+    usps: getShippingCost(items, 'usps', subtotal),
+    fedex: getShippingCost(items, 'fedex', subtotal),
+  };
+}
+
+// Free shipping progress helper
+export function getFreeShippingProgress(subtotal: number): {
+  qualifies: boolean;
+  amountRemaining: number;
+  percentComplete: number;
+  savedAmount: number;
+} {
+  const qualifies = subtotal >= FREE_SHIPPING_THRESHOLD;
+  const amountRemaining = qualifies ? 0 : FREE_SHIPPING_THRESHOLD - subtotal;
+  const percentComplete = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100));
+
+  // Estimate savings (based on 3-pack shipping cost)
+  const savedAmount = qualifies ? 1840 : 0; // $18.40 for 3 packs
+
+  return {
+    qualifies,
+    amountRemaining,
+    percentComplete,
+    savedAmount,
   };
 }
