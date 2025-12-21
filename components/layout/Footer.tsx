@@ -21,8 +21,9 @@ export function Footer() {
               Same-day shipping, shelf-stable for weeks.
             </p>
             <div className="flex items-center gap-2 text-sm text-green-400">
+              <span>🎄</span>
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              FREE shipping on orders $60+
+              Holiday Special: FREE shipping on orders $60+
             </div>
           </div>
 

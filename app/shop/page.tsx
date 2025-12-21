@@ -46,13 +46,14 @@ export default function ShopPage() {
               {t('shop.subtitle')}
             </p>
 
-            {/* Free Shipping Banner */}
-            <div className="bg-gradient-to-r from-green-600 to-green-500 text-white py-3 px-6 rounded-lg shadow-md mb-8 inline-block">
+            {/* Free Shipping Banner - Holiday Special */}
+            <div className="bg-gradient-to-r from-green-600 to-red-600 text-white py-3 px-6 rounded-lg shadow-md mb-8 inline-block">
               <div className="flex items-center justify-center gap-3">
-                <Truck className="w-5 h-5" />
-                <span className="font-semibold text-lg">FREE Shipping on orders $60+ (3 packs)</span>
-                <span className="text-green-100">•</span>
-                <span className="text-green-100">Save $18.40!</span>
+                <span className="text-xl">🎄</span>
+                <span className="font-semibold text-lg">Holiday Special: FREE Shipping on orders $60+</span>
+                <span className="text-white/70">•</span>
+                <span className="text-white/90">Save $18.40!</span>
+                <span className="text-xl">🎁</span>
               </div>
             </div>
 
