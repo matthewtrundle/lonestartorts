@@ -54,6 +54,14 @@ export function Footer() {
             <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-gray-300">Support</h4>
             <ul className="space-y-2 text-sm">
               <li>
+                <a
+                  href="sms:+17372280037"
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span>Text Us: (737) 228-0037</span>
+                </a>
+              </li>
+              <li>
                 <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact Us
                 </Link>
