@@ -142,8 +142,8 @@ export default function ShopPage() {
             </div>
           </div>
 
-          {/* Text Support Callout */}
-          <div className="mt-8 text-center">
+          {/* Contact Callout */}
+          <div className="mt-8 text-center flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <a
               href="sms:+17372280037"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-sunset-600 transition-colors"
@@ -151,7 +151,17 @@ export default function ShopPage() {
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
-              <span className="text-sm">Questions? Text us at <span className="font-semibold">(737) 228-0037</span></span>
+              <span className="text-sm">Text us: <span className="font-semibold">(737) 228-0037</span></span>
+            </a>
+            <span className="hidden sm:inline text-gray-300">|</span>
+            <a
+              href="mailto:howdy@lonestartortillas.com"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-sunset-600 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span className="text-sm"><span className="font-semibold">howdy@lonestartortillas.com</span></span>
             </a>
           </div>
 
