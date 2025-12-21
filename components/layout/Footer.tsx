@@ -23,7 +23,7 @@ export function Footer() {
             <div className="flex items-center gap-2 text-sm text-green-400">
               <span>🎄</span>
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              Holiday Special: FREE shipping on orders $60+
+              Holiday Special: FREE shipping on orders $80+
             </div>
           </div>
 

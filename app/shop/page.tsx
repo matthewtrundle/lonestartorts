@@ -50,9 +50,9 @@ export default function ShopPage() {
             <div className="bg-gradient-to-r from-green-600 to-red-600 text-white py-3 px-6 rounded-lg shadow-md mb-8 inline-block">
               <div className="flex items-center justify-center gap-3">
                 <span className="text-xl">🎄</span>
-                <span className="font-semibold text-lg">Holiday Special: FREE Shipping on orders $60+</span>
+                <span className="font-semibold text-lg">Holiday Special: FREE Shipping on orders $80+</span>
                 <span className="text-white/70">•</span>
-                <span className="text-white/90">Save $18.40!</span>
+                <span className="text-white/90">Save $22.65!</span>
                 <span className="text-xl">🎁</span>
               </div>
             </div>
@@ -141,18 +141,25 @@ export default function ShopPage() {
                     <td className="py-3 px-4 text-right font-medium text-charcoal-950">$58.40</td>
                     <td className="py-3 px-4 text-right text-green-600 font-medium">$2.80</td>
                   </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-3 px-4 text-charcoal-700">3 packs (60 tortillas)</td>
+                    <td className="py-3 px-4 text-right text-charcoal-700">$60.00</td>
+                    <td className="py-3 px-4 text-right text-charcoal-700">$18.40</td>
+                    <td className="py-3 px-4 text-right font-medium text-charcoal-950">$78.40</td>
+                    <td className="py-3 px-4 text-right text-green-600 font-medium">$2.80</td>
+                  </tr>
                   <tr className="bg-green-50 border border-green-200 rounded">
                     <td className="py-3 px-4 font-semibold text-green-800 flex items-center gap-2">
                       <Check className="w-4 h-4" />
-                      3+ packs (60+ tortillas)
+                      4+ packs (80+ tortillas)
                     </td>
-                    <td className="py-3 px-4 text-right font-semibold text-green-800">$60.00+</td>
+                    <td className="py-3 px-4 text-right font-semibold text-green-800">$80.00+</td>
                     <td className="py-3 px-4 text-right">
-                      <span className="line-through text-gray-400 text-xs mr-1">$18.40</span>
+                      <span className="line-through text-gray-400 text-xs mr-1">$22.65</span>
                       <span className="font-semibold text-green-600">FREE</span>
                     </td>
-                    <td className="py-3 px-4 text-right font-bold text-green-800">$60.00+</td>
-                    <td className="py-3 px-4 text-right font-bold text-green-600">$18.40+</td>
+                    <td className="py-3 px-4 text-right font-bold text-green-800">$80.00+</td>
+                    <td className="py-3 px-4 text-right font-bold text-green-600">$22.65+</td>
                   </tr>
                 </tbody>
               </table>

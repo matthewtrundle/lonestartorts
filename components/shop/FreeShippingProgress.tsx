@@ -26,7 +26,7 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
         <div className="flex items-center gap-2 text-sm text-green-700">
           <span>🎄</span>
           <Truck className="w-4 h-4 flex-shrink-0" />
-          <span className="font-medium">Holiday Special: FREE shipping on orders $60+</span>
+          <span className="font-medium">Holiday Special: FREE shipping on orders $80+</span>
         </div>
       </div>
     );
