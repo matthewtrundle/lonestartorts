@@ -8,6 +8,7 @@ import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
 import { Header } from '@/components/layout/Header'
+import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { HeroInteractions } from '@/components/HeroInteractions'
 import { ContactForm } from '@/components/ContactForm'
 import { trackVideoPlay } from '@/lib/analytics'
@@ -31,6 +32,9 @@ export default function Home() {
 
   return (
     <ScrollAnimations>
+      {/* HEB Disclaimer - Homepage only */}
+      <DisclaimerBanner />
+
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
         {/* Background Music Player - Removed for now */}
         {/* <BackgroundMusic /> */}
