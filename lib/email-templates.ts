@@ -373,3 +373,131 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
 </body>
 </html>`;
 }
+
+interface FeedbackRequestData {
+  orderNumber: string;
+  customerName: string;
+  feedbackUrl: string; // Base URL like https://lonestartortillas.com/feedback?token=xxx
+}
+
+/**
+ * Generate Feedback Request Email HTML
+ * Each star is a clickable link that takes the customer to the feedback page
+ */
+export function generateFeedbackRequestEmail(data: FeedbackRequestData): string {
+  const { orderNumber, customerName, feedbackUrl } = data;
+
+  // Generate star links - each star links to feedback page with rating pre-selected
+  const generateStarLink = (rating: number) => {
+    const url = `${feedbackUrl}&rating=${rating}`;
+    return `<a href="${url}" style="display: inline-block; padding: 12px 16px; margin: 0 4px; background-color: #fef3c7; border-radius: 8px; text-decoration: none; font-size: 24px; color: #d97706; border: 2px solid #fcd34d;" title="Rate ${rating} star${rating > 1 ? 's' : ''}">${rating}</a>`;
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How were your tortillas? - Lonestar Tortillas</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center; background: linear-gradient(135deg, #111827 0%, #292524 100%);">
+              <div style="margin-bottom: 24px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h1 style="margin: 0 0 16px 0; font-size: 28px; font-weight: 700; color: #ffffff; line-height: 1.2;">How Were Your Tortillas?</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">We'd love to hear what you think, ${customerName}!</p>
+            </td>
+          </tr>
+
+          <!-- Order Reference -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #fef3c7; border-bottom: 4px solid #d97706; text-align: center;">
+              <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Order</p>
+              <p style="margin: 0; font-size: 20px; font-weight: 700; color: #1c1917; font-family: monospace; letter-spacing: 1px;">${orderNumber}</p>
+            </td>
+          </tr>
+
+          <!-- Rating Request -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center;">
+              <h2 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #111827;">Rate Your Experience</h2>
+              <p style="margin: 0 0 32px 0; font-size: 16px; color: #57534e; line-height: 1.6;">Click a number to rate your tortillas (1 = Poor, 5 = Excellent)</p>
+
+              <!-- Star Rating Links -->
+              <div style="margin: 0 0 32px 0;">
+                ${generateStarLink(1)}
+                ${generateStarLink(2)}
+                ${generateStarLink(3)}
+                ${generateStarLink(4)}
+                ${generateStarLink(5)}
+              </div>
+
+              <p style="margin: 0; font-size: 14px; color: #78716c;">Just click a number above — it takes less than 10 seconds!</p>
+            </td>
+          </tr>
+
+          <!-- Reward Banner -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <div style="padding: 24px; background: linear-gradient(135deg, #fef3c7 0%, #fff7ed 100%); border-radius: 12px; border: 2px dashed #d97706; text-align: center;">
+                <div style="font-size: 32px; margin-bottom: 12px;">&#127873;</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: #92400e;">Thank You Reward</h3>
+                <p style="margin: 0; font-size: 16px; color: #78350f; line-height: 1.5;">
+                  Share your feedback and get a <strong style="color: #d97706;">10% discount code</strong> for your next order!
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Why Feedback Matters -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <div style="padding: 24px; background-color: #f9fafb; border-radius: 8px; border-left: 4px solid #d97706;">
+                <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">Why Your Feedback Matters</h3>
+                <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.7;">
+                  We're a small Texas tortilla company, and every bit of feedback helps us improve. Your honest opinion — whether it's praise or suggestions — helps us make the best tortillas possible.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px; text-align: center; background-color: #111827;">
+              <div style="margin-bottom: 16px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 16px auto;">
+                <tr>
+                  <td style="background-color: #d97706; border-radius: 6px;">
+                    <a href="https://lonestartortillas.com/contact" style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600;">Questions? Contact Us</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Independent reseller • Not affiliated with or endorsed by H-E-B®
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}

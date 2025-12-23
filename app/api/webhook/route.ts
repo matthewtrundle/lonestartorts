@@ -219,6 +219,24 @@ export async function POST(req: NextRequest) {
             // Don't fail the webhook - log for manual follow-up
           }
 
+          // Mark feedback coupon as used if applicable
+          const feedbackCouponCode = fullSession.metadata?.feedbackCouponCode;
+          if (feedbackCouponCode) {
+            try {
+              await prisma.customerFeedback.update({
+                where: { couponCode: feedbackCouponCode },
+                data: {
+                  couponUsed: true,
+                  couponUsedAt: new Date(),
+                },
+              });
+              console.log('Feedback coupon marked as used:', feedbackCouponCode);
+            } catch (couponError) {
+              console.error('Failed to mark feedback coupon as used:', couponError);
+              // Don't fail the webhook - log for manual follow-up
+            }
+          }
+
         } catch (dbError) {
           console.error('Failed to save order to database:', dbError);
           // Still return 200 to Stripe to avoid retries

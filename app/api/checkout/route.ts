@@ -58,14 +58,33 @@ export async function POST(req: NextRequest) {
     // Calculate base shipping for display (what they would have paid)
     const baseShippingCost = calculateBaseShipping(fullItems);
 
+    // Track percentage discount info
+    let percentageDiscount = 0;
+    let discountAmount = 0;
+    let feedbackCouponCode: string | null = null;
+
     // Validate discount code if provided (server-side re-validation)
-    // Only apply discount code if free shipping wasn't already applied via threshold
-    if (email && discountCode && !freeShippingApplied) {
+    if (email && discountCode) {
       const normalizedCode = discountCode.trim().toUpperCase();
       const normalizedEmail = email.trim().toLowerCase();
 
-      // Check if code is valid and email has no previous orders
-      if (VALID_DISCOUNT_CODES.includes(normalizedCode)) {
+      // Check if it's a feedback coupon (THANKS-XXXXXX format)
+      if (normalizedCode.startsWith('THANKS-')) {
+        const feedbackCoupon = await prisma.customerFeedback.findUnique({
+          where: { couponCode: normalizedCode },
+        });
+
+        if (feedbackCoupon && !feedbackCoupon.couponUsed && new Date() <= feedbackCoupon.expiresAt) {
+          // Valid feedback coupon - apply 10% off subtotal
+          percentageDiscount = 10;
+          discountAmount = Math.round(subtotal * 0.10); // 10% of subtotal
+          feedbackCouponCode = normalizedCode;
+          console.log(`10% feedback discount applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+        }
+      }
+      // Check if code is valid first-order free shipping code
+      // Only apply free shipping if not already applied via threshold
+      else if (VALID_DISCOUNT_CODES.includes(normalizedCode) && !freeShippingApplied) {
         const existingOrderCount = await prisma.order.count({
           where: { email: normalizedEmail },
         });
@@ -85,7 +104,7 @@ export async function POST(req: NextRequest) {
     const sauceBottles = fullItems.filter(item => item.productType === 'sauce').reduce((sum, item) => sum + item.quantity, 0);
 
     // Create line items for Stripe with server-side validation
-    const lineItems = items.map((item: { sku: string; quantity: number }) => {
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: { sku: string; quantity: number }) => {
       const product = getProductBySku(item.sku);
       if (!product) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
@@ -111,6 +130,20 @@ export async function POST(req: NextRequest) {
         quantity: item.quantity,
       };
     });
+
+    // Create a Stripe coupon for percentage discount if feedback coupon is applied
+    let stripeCouponId: string | undefined;
+    if (discountAmount > 0 && feedbackCouponCode) {
+      const coupon = await stripe.coupons.create({
+        percent_off: percentageDiscount,
+        duration: 'once',
+        name: `Feedback Discount - ${feedbackCouponCode}`,
+        metadata: {
+          feedbackCouponCode,
+        },
+      });
+      stripeCouponId = coupon.id;
+    }
 
     // Build shipping display name
     const getShippingDisplayName = () => {
@@ -146,6 +179,10 @@ export async function POST(req: NextRequest) {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
+      // Apply discount coupon if created
+      ...(stripeCouponId && {
+        discounts: [{ coupon: stripeCouponId }],
+      }),
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}`,
       metadata: {
@@ -161,6 +198,12 @@ export async function POST(req: NextRequest) {
             discountCode: discountCode?.trim().toUpperCase(),
             discountEmail: email?.trim().toLowerCase(),
           }),
+        }),
+        // Feedback coupon info for marking as used in webhook
+        ...(feedbackCouponCode && {
+          feedbackCouponCode,
+          feedbackDiscountAmount: discountAmount.toString(),
+          feedbackDiscountPercent: percentageDiscount.toString(),
         }),
       },
       shipping_address_collection: {

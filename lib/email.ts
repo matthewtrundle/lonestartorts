@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { generateOrderConfirmationEmail, generateOrderShippedEmail } from './email-templates';
+import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeedbackRequestEmail } from './email-templates';
 
 // Admin emails for order notifications
 const ADMIN_EMAILS = [
@@ -837,6 +837,50 @@ export async function sendContactFormEmail(props: {
     return { success: true, data };
   } catch (error) {
     console.error('Error sending contact form email:', error);
+    return { success: false, error };
+  }
+}
+
+interface FeedbackRequestEmailProps {
+  to: string;
+  customerName: string;
+  orderNumber: string;
+  feedbackToken: string;
+}
+
+/**
+ * Send feedback request email to customer
+ */
+export async function sendFeedbackRequestEmail(props: FeedbackRequestEmailProps) {
+  const { to, customerName, orderNumber, feedbackToken } = props;
+
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://lonestartortillas.com';
+    const feedbackUrl = `${baseUrl}/feedback?token=${feedbackToken}`;
+
+    const html = generateFeedbackRequestEmail({
+      orderNumber,
+      customerName,
+      feedbackUrl,
+    });
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to,
+      subject: `How were your tortillas? Share your feedback - Order #${orderNumber}`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send feedback request email:', error);
+      return { success: false, error };
+    }
+
+    console.log('Feedback request email sent:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending feedback request email:', error);
     return { success: false, error };
   }
 }

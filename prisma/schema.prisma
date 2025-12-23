@@ -79,23 +79,23 @@ model Note {
 }
 
 model Order {
-  id               String        @id
-  orderNumber      String        @unique
+  id               String            @id
+  orderNumber      String            @unique
   customerId       String?
   email            String
   subtotal         Int
   shipping         Int
   tax              Int
   total            Int
-  createdAt        DateTime      @default(now())
+  createdAt        DateTime          @default(now())
   updatedAt        DateTime
   shippedAt        DateTime?
   deliveredAt      DateTime?
   carrier          String?
-  paymentStatus    PaymentStatus @default(PENDING)
+  paymentStatus    PaymentStatus     @default(PENDING)
   stripePaymentId  String?
   trackingNumber   String?
-  status           OrderStatus   @default(PENDING)
+  status           OrderStatus       @default(PENDING)
   shippingName     String?
   shippingAddress1 String?
   shippingAddress2 String?
@@ -105,13 +105,36 @@ model Order {
   shippingCountry  String?
   shippingPhone    String?
   labelUrl         String?
-  Customer         Customer?     @relation(fields: [customerId], references: [id])
+  Customer         Customer?         @relation(fields: [customerId], references: [id])
   OrderItem        OrderItem[]
+  CustomerFeedback CustomerFeedback?
 
   @@index([customerId])
   @@index([email])
   @@index([orderNumber])
   @@index([status])
+}
+
+model CustomerFeedback {
+  id            String    @id @default(uuid())
+  orderId       String    @unique
+  orderNumber   String
+  email         String
+  customerName  String?
+  feedbackToken String    @unique
+  rating        Int?
+  submittedAt   DateTime?
+  emailSentAt   DateTime?
+  couponCode    String?   @unique
+  couponUsed    Boolean   @default(false)
+  couponUsedAt  DateTime?
+  createdAt     DateTime  @default(now())
+  expiresAt     DateTime
+  Order         Order     @relation(fields: [orderId], references: [id])
+
+  @@index([feedbackToken])
+  @@index([couponCode])
+  @@index([email])
 }
 
 model OrderItem {

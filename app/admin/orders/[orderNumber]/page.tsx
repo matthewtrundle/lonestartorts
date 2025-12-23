@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
-import { ArrowLeft, Package, Truck, CheckCircle, Circle } from 'lucide-react';
+import { ArrowLeft, Package, Truck, CheckCircle, Circle, MessageSquare, Star } from 'lucide-react';
 
 interface Order {
   id: string;
@@ -36,10 +36,23 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
   const [trackingNumber, setTrackingNumber] = useState('');
   const [carrier, setCarrier] = useState('USPS');
   const [generatingLabel, setGeneratingLabel] = useState(false);
+  const [feedbackStatus, setFeedbackStatus] = useState<{
+    hasFeedback: boolean;
+    emailSentAt?: string;
+    rating?: number;
+    couponCode?: string;
+  } | null>(null);
+  const [sendingFeedback, setSendingFeedback] = useState(false);
 
   useEffect(() => {
     fetchOrder();
   }, [params.orderNumber]);
+
+  useEffect(() => {
+    if (order?.id) {
+      fetchFeedbackStatus();
+    }
+  }, [order?.id]);
 
   const fetchOrder = async () => {
     try {
@@ -61,6 +74,48 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
       console.error('Error fetching order:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchFeedbackStatus = async () => {
+    if (!order?.id) return;
+
+    try {
+      const response = await fetch(`/api/admin/orders/${order.id}/feedback`);
+      if (response.ok) {
+        const data = await response.json();
+        setFeedbackStatus(data.hasFeedback ? {
+          hasFeedback: true,
+          emailSentAt: data.feedback?.emailSentAt,
+          rating: data.feedback?.rating,
+          couponCode: data.feedback?.couponCode,
+        } : { hasFeedback: false });
+      }
+    } catch (err) {
+      console.error('Error fetching feedback status:', err);
+    }
+  };
+
+  const requestFeedback = async () => {
+    if (!order?.id) return;
+
+    setSendingFeedback(true);
+    try {
+      const response = await fetch(`/api/admin/orders/${order.id}/feedback`, {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send feedback request');
+      }
+
+      alert('Feedback request email sent successfully!');
+      await fetchFeedbackStatus();
+    } catch (err: any) {
+      alert(err.message || 'Failed to send feedback request');
+    } finally {
+      setSendingFeedback(false);
     }
   };
 
@@ -363,6 +418,75 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
           </div>
         )}
       </div>
+
+      {/* Feedback Section */}
+      {(order.status === 'SHIPPED' || order.status === 'DELIVERED') && (
+        <div className="bg-white rounded-lg shadow p-4">
+          <h2 className="text-base font-semibold text-charcoal-950 mb-3 flex items-center gap-2">
+            <MessageSquare className="w-4 h-4" />
+            Customer Feedback
+          </h2>
+
+          {feedbackStatus === null ? (
+            <p className="text-sm text-charcoal-500">Loading...</p>
+          ) : feedbackStatus.hasFeedback ? (
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-charcoal-600">Email sent:</span>
+                <span className="font-medium text-charcoal-900">
+                  {feedbackStatus.emailSentAt
+                    ? new Date(feedbackStatus.emailSentAt).toLocaleDateString()
+                    : 'Yes'}
+                </span>
+              </div>
+              {feedbackStatus.rating ? (
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-charcoal-600">Rating:</span>
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-4 h-4 ${
+                          star <= feedbackStatus.rating!
+                            ? 'fill-amber-400 text-amber-400'
+                            : 'fill-charcoal-200 text-charcoal-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm font-medium text-charcoal-900">
+                    ({feedbackStatus.rating}/5)
+                  </span>
+                </div>
+              ) : (
+                <p className="text-sm text-amber-600">Awaiting response...</p>
+              )}
+              {feedbackStatus.couponCode && (
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-charcoal-600">Coupon issued:</span>
+                  <code className="bg-charcoal-100 px-2 py-0.5 rounded font-mono text-sm">
+                    {feedbackStatus.couponCode}
+                  </code>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center gap-3">
+              <button
+                onClick={requestFeedback}
+                disabled={sendingFeedback}
+                className="px-4 py-2 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 disabled:opacity-50 flex items-center gap-2"
+              >
+                <MessageSquare className="w-4 h-4" />
+                {sendingFeedback ? 'Sending...' : 'Request Feedback'}
+              </button>
+              <span className="text-sm text-charcoal-500">
+                Send email to request feedback and offer 10% discount
+              </span>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Compact Customer & Shipping Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
