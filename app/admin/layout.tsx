@@ -63,6 +63,7 @@ export default function AdminLayout({
     { href: '/admin/orders', label: 'Orders' },
     { href: '/admin/wholesale', label: 'Wholesale' },
     { href: '/admin/marketing', label: 'Marketing' },
+    { href: '/admin/feedback', label: 'Feedback' },
   ];
 
   return (
