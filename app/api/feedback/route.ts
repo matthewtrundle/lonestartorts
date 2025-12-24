@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sendFeedbackThankYouEmail } from '@/lib/email';
 
 /**
  * Generate a unique coupon code
@@ -79,7 +80,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { token, rating } = body;
+    const { token, rating, comment } = body;
 
     if (!token) {
       return NextResponse.json(
@@ -147,15 +148,32 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Update the feedback record
+    // Update the feedback record with rating and optional comment
     const updatedFeedback = await prisma.customerFeedback.update({
       where: { id: feedback.id },
       data: {
         rating: ratingNum,
+        comment: comment?.trim() || null,
         submittedAt: new Date(),
         couponCode,
       },
     });
+
+    // Send thank you email with coupon code
+    try {
+      await sendFeedbackThankYouEmail({
+        to: feedback.email,
+        customerName: feedback.customerName || 'Customer',
+        orderNumber: feedback.orderNumber,
+        rating: ratingNum,
+        couponCode,
+        expiresAt: feedback.expiresAt,
+      });
+      console.log('Feedback thank you email sent for order:', feedback.orderNumber);
+    } catch (emailError) {
+      console.error('Failed to send feedback thank you email:', emailError);
+      // Don't fail the request if email fails - coupon is still valid
+    }
 
     return NextResponse.json({
       success: true,

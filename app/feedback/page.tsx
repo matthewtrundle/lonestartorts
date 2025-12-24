@@ -27,6 +27,7 @@ export default function FeedbackPage() {
   const [error, setError] = useState<string>('');
   const [couponCode, setCouponCode] = useState<string>('');
   const [copied, setCopied] = useState(false);
+  const [comment, setComment] = useState<string>('');
 
   useEffect(() => {
     if (!token) {
@@ -86,7 +87,11 @@ export default function FeedbackPage() {
       const response = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, rating: selectedRating }),
+        body: JSON.stringify({
+          token,
+          rating: selectedRating,
+          comment: comment.trim() || undefined,
+        }),
       });
 
       const result = await response.json();
@@ -317,6 +322,27 @@ export default function FeedbackPage() {
             {selectedRating === 5 && 'Excellent!'}
           </p>
         </div>
+
+        {/* Comment field for low ratings */}
+        {selectedRating >= 1 && selectedRating <= 3 && (
+          <div className="mb-6">
+            <label htmlFor="comment" className="block text-sm font-medium text-stone-700 mb-2">
+              What could we improve? (Optional)
+            </label>
+            <textarea
+              id="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Tell us how we can make your experience better..."
+              rows={3}
+              maxLength={500}
+              className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none text-stone-800 placeholder-stone-400"
+            />
+            <p className="text-xs text-stone-400 mt-1 text-right">
+              {comment.length}/500 characters
+            </p>
+          </div>
+        )}
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">

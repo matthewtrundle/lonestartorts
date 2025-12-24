@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeedbackRequestEmail } from './email-templates';
+import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeedbackRequestEmail, generateFeedbackThankYouEmail } from './email-templates';
 
 // Admin emails for order notifications
 const ADMIN_EMAILS = [
@@ -881,6 +881,51 @@ export async function sendFeedbackRequestEmail(props: FeedbackRequestEmailProps)
     return { success: true, data };
   } catch (error) {
     console.error('Error sending feedback request email:', error);
+    return { success: false, error };
+  }
+}
+
+interface FeedbackThankYouEmailProps {
+  to: string;
+  customerName: string;
+  orderNumber: string;
+  rating: number;
+  couponCode: string;
+  expiresAt: Date;
+}
+
+/**
+ * Send feedback thank you email with coupon code
+ */
+export async function sendFeedbackThankYouEmail(props: FeedbackThankYouEmailProps) {
+  const { to, customerName, orderNumber, rating, couponCode, expiresAt } = props;
+
+  try {
+    const html = generateFeedbackThankYouEmail({
+      orderNumber,
+      customerName,
+      rating,
+      couponCode,
+      expiresAt,
+    });
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to,
+      subject: `Thank you for your feedback! Here's 10% off your next order - Lonestar Tortillas`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send feedback thank you email:', error);
+      return { success: false, error };
+    }
+
+    console.log('Feedback thank you email sent:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending feedback thank you email:', error);
     return { success: false, error };
   }
 }

@@ -501,3 +501,151 @@ export function generateFeedbackRequestEmail(data: FeedbackRequestData): string 
 </body>
 </html>`;
 }
+
+interface FeedbackThankYouData {
+  orderNumber: string;
+  customerName: string;
+  rating: number;
+  couponCode: string;
+  expiresAt: Date;
+}
+
+/**
+ * Generate Feedback Thank You Email HTML
+ * Sent after customer submits feedback, contains their 10% discount code
+ */
+export function generateFeedbackThankYouEmail(data: FeedbackThankYouData): string {
+  const { orderNumber, customerName, rating, couponCode, expiresAt } = data;
+
+  const expirationDate = expiresAt.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+
+  // Generate star display
+  const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You for Your Feedback! - Lonestar Tortillas</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center; background: linear-gradient(135deg, #111827 0%, #292524 100%);">
+              <div style="margin-bottom: 24px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h1 style="margin: 0 0 16px 0; font-size: 28px; font-weight: 700; color: #ffffff; line-height: 1.2;">Thank You for Your Feedback!</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">We truly appreciate you taking the time, ${customerName}!</p>
+            </td>
+          </tr>
+
+          <!-- Rating Summary -->
+          <tr>
+            <td style="padding: 32px 32px 24px 32px; text-align: center; background-color: #fef3c7; border-bottom: 4px solid #d97706;">
+              <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Your Rating for Order ${orderNumber}</p>
+              <p style="margin: 0; font-size: 36px; color: #d97706; letter-spacing: 4px;">${stars}</p>
+            </td>
+          </tr>
+
+          <!-- Coupon Code -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center;">
+              <div style="font-size: 40px; margin-bottom: 16px;">&#127873;</div>
+              <h2 style="margin: 0 0 12px 0; font-size: 24px; font-weight: 700; color: #111827;">Here's Your 10% Discount!</h2>
+              <p style="margin: 0 0 24px 0; font-size: 16px; color: #57534e; line-height: 1.6;">Use this code on your next order to save 10%:</p>
+
+              <!-- Coupon Box -->
+              <div style="padding: 24px 32px; background: linear-gradient(135deg, #fef3c7 0%, #fff7ed 100%); border-radius: 12px; border: 3px dashed #d97706; display: inline-block; margin-bottom: 24px;">
+                <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Your Discount Code</p>
+                <p style="margin: 0; font-size: 32px; font-weight: 700; color: #d97706; font-family: monospace; letter-spacing: 3px;">${couponCode}</p>
+              </div>
+
+              <p style="margin: 0; font-size: 14px; color: #78716c;">Valid until ${expirationDate} • One-time use</p>
+            </td>
+          </tr>
+
+          <!-- How to Use -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <div style="padding: 24px; background-color: #f9fafb; border-radius: 8px; border-left: 4px solid #d97706;">
+                <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #111827;">How to Use Your Code</h3>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td style="padding: 8px 0; vertical-align: top; width: 28px;">
+                      <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px;">
+                        <span style="color: #ffffff; font-weight: 700; font-size: 11px;">1</span>
+                      </div>
+                    </td>
+                    <td style="padding: 8px 0; font-size: 15px; color: #57534e;">Add tortillas to your cart at lonestartortillas.com</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; vertical-align: top; width: 28px;">
+                      <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px;">
+                        <span style="color: #ffffff; font-weight: 700; font-size: 11px;">2</span>
+                      </div>
+                    </td>
+                    <td style="padding: 8px 0; font-size: 15px; color: #57534e;">Enter your discount code at checkout</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; vertical-align: top; width: 28px;">
+                      <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px;">
+                        <span style="color: #ffffff; font-weight: 700; font-size: 11px;">3</span>
+                      </div>
+                    </td>
+                    <td style="padding: 8px 0; font-size: 15px; color: #57534e;">Enjoy 10% off your order!</td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- CTA Button -->
+          <tr>
+            <td style="padding: 0 32px 40px 32px; text-align: center;">
+              <a href="https://lonestartortillas.com" style="display: inline-block; background-color: #111827; color: #ffffff; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 16px; box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2);">Shop Now →</a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px; text-align: center; background-color: #111827;">
+              <div style="margin-bottom: 16px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 16px auto;">
+                <tr>
+                  <td style="background-color: #d97706; border-radius: 6px;">
+                    <a href="https://lonestartortillas.com/contact" style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600;">Questions? Contact Us</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Independent reseller • Not affiliated with or endorsed by H-E-B®
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}

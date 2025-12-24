@@ -123,6 +123,7 @@ model CustomerFeedback {
   customerName  String?
   feedbackToken String    @unique
   rating        Int?
+  comment       String?
   submittedAt   DateTime?
   emailSentAt   DateTime?
   couponCode    String?   @unique
