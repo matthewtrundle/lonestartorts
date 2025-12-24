@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MetricCard } from '@/components/admin/MetricCard';
 import { StatusBadge } from '@/components/admin/StatusBadge';
-import { DollarSign, Package, Truck, ShoppingCart, TrendingUp, Award } from 'lucide-react';
+import { DollarSign, Package, Truck, ShoppingCart, TrendingUp, Award, Star, Mail, Clock } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
 interface DashboardStats {
@@ -28,6 +28,8 @@ interface DashboardStats {
     status: string;
     paymentStatus: string;
     createdAt: string;
+    feedbackStatus: 'none' | 'awaiting' | 'received';
+    feedbackRating: number | null;
   }>;
 }
 
@@ -35,6 +37,27 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [sendingFeedback, setSendingFeedback] = useState<string | null>(null);
+
+  const sendFeedbackRequest = async (orderId: string) => {
+    setSendingFeedback(orderId);
+    try {
+      const response = await fetch(`/api/admin/orders/${orderId}/feedback`, {
+        method: 'POST',
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send feedback request');
+      }
+      // Refresh data after sending
+      await fetchStats();
+    } catch (err) {
+      console.error('Error sending feedback:', err);
+      alert(err instanceof Error ? err.message : 'Failed to send feedback request');
+    } finally {
+      setSendingFeedback(null);
+    }
+  };
 
   useEffect(() => {
     fetchStats();
@@ -173,6 +196,9 @@ export default function DashboardPage() {
                 <th className="px-4 py-2 text-left text-xs font-medium text-charcoal-500 uppercase">
                   Status
                 </th>
+                <th className="px-4 py-2 text-center text-xs font-medium text-charcoal-500 uppercase">
+                  Feedback
+                </th>
                 <th className="px-4 py-2 text-right text-xs font-medium text-charcoal-500 uppercase">
                   Time
                 </th>
@@ -184,7 +210,7 @@ export default function DashboardPage() {
             <tbody className="bg-white divide-y divide-charcoal-200">
               {stats.recentOrders.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-4 py-6 text-center text-charcoal-500 text-sm">
+                  <td colSpan={7} className="px-4 py-6 text-center text-charcoal-500 text-sm">
                     No orders yet
                   </td>
                 </tr>
@@ -208,6 +234,33 @@ export default function DashboardPage() {
                     </td>
                     <td className="px-4 py-2.5 whitespace-nowrap">
                       <StatusBadge status={order.status as any} />
+                    </td>
+                    <td className="px-4 py-2.5 whitespace-nowrap text-center">
+                      {order.feedbackStatus === 'received' ? (
+                        <div className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">
+                          <Star className="w-3 h-3 fill-current" />
+                          {order.feedbackRating}/5
+                        </div>
+                      ) : order.feedbackStatus === 'awaiting' ? (
+                        <div className="inline-flex items-center gap-1 px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs font-medium">
+                          <Clock className="w-3 h-3" />
+                          Awaiting
+                        </div>
+                      ) : (order.status === 'SHIPPED' || order.status === 'DELIVERED') ? (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            sendFeedbackRequest(order.id);
+                          }}
+                          disabled={sendingFeedback === order.id}
+                          className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded text-xs font-medium disabled:opacity-50"
+                        >
+                          <Mail className="w-3 h-3" />
+                          {sendingFeedback === order.id ? 'Sending...' : 'Send'}
+                        </button>
+                      ) : (
+                        <span className="text-xs text-charcoal-400">-</span>
+                      )}
                     </td>
                     <td className="px-4 py-2.5 whitespace-nowrap text-sm text-right text-charcoal-500">
                       {formatRelativeTime(order.createdAt)}

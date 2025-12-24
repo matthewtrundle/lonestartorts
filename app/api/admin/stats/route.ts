@@ -106,7 +106,7 @@ export async function GET(req: NextRequest) {
     const topProduct = Object.entries(productCounts)
       .sort((a, b) => b[1].count - a[1].count)[0];
 
-    // Get recent orders (last 10)
+    // Get recent orders (last 10) with feedback status
     const rawRecentOrders = await prisma.order.findMany({
       orderBy: { createdAt: 'desc' },
       take: 10,
@@ -119,14 +119,36 @@ export async function GET(req: NextRequest) {
         status: true,
         paymentStatus: true,
         createdAt: true,
+        CustomerFeedback: {
+          select: {
+            id: true,
+            rating: true,
+            emailSentAt: true,
+          },
+        },
       },
     });
 
-    // Transform orders to include customerName for backward compatibility
-    const recentOrders = rawRecentOrders.map((order) => ({
-      ...order,
-      customerName: order.shippingName,
-    }));
+    // Transform orders to include customerName and feedback status
+    const recentOrders = rawRecentOrders.map((order) => {
+      let feedbackStatus: 'none' | 'awaiting' | 'received' = 'none';
+      if (order.CustomerFeedback) {
+        feedbackStatus = order.CustomerFeedback.rating !== null ? 'received' : 'awaiting';
+      }
+      return {
+        id: order.id,
+        orderNumber: order.orderNumber,
+        shippingName: order.shippingName,
+        email: order.email,
+        total: order.total,
+        status: order.status,
+        paymentStatus: order.paymentStatus,
+        createdAt: order.createdAt,
+        customerName: order.shippingName,
+        feedbackStatus,
+        feedbackRating: order.CustomerFeedback?.rating || null,
+      };
+    });
 
     return NextResponse.json({
       metrics: {
