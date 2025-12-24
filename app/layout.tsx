@@ -26,6 +26,9 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lonestartortillas.com'),
+  alternates: {
+    canonical: './',
+  },
   title: {
     default: 'H-E-B® Tortillas Delivered Nationwide',
     template: '%s | Lonestar Tortillas'
@@ -170,37 +173,6 @@ const jsonLd = {
   paymentAccepted: ['Credit Card', 'Apple Pay', 'Google Pay'],
   currenciesAccepted: 'USD',
   priceRange: '$$',
-  // Product offerings
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'H-E-B Tortillas',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Product',
-          name: 'H-E-B Bakery Flour Tortillas',
-          brand: { '@type': 'Brand', name: 'H-E-B' }
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Product',
-          name: 'H-E-B Bakery Butter Tortillas',
-          brand: { '@type': 'Brand', name: 'H-E-B' }
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Product',
-          name: 'H-E-B Bakery Wheat Tortillas',
-          brand: { '@type': 'Brand', name: 'H-E-B' }
-        }
-      }
-    ]
-  },
   // Return policy
   hasMerchantReturnPolicy: {
     '@type': 'MerchantReturnPolicy',
