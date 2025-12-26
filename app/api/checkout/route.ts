@@ -179,6 +179,10 @@ export async function POST(req: NextRequest) {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
+      // Enable automatic tax calculation (Stripe Tax)
+      automatic_tax: {
+        enabled: true,
+      },
       // Apply discount coupon if created
       ...(stripeCouponId && {
         discounts: [{ coupon: stripeCouponId }],
