@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
-import { Header } from '@/components/layout/Header'
 import { useLanguage } from '@/lib/language-context'
 
 // SVG Icons as components
@@ -130,9 +129,7 @@ export default function CraftPage() {
   ];
 
   return (
-    <>
-      <Header />
-      <ScrollAnimations>
+    <ScrollAnimations>
         <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
 
           {/* Hero Section */}
@@ -364,6 +361,5 @@ export default function CraftPage() {
           </section>
         </div>
       </ScrollAnimations>
-    </>
   )
 }

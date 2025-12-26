@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
-import { Header } from '@/components/layout/Header'
 import { trackWaitlistSignup } from '@/lib/analytics'
 import { useLanguage } from '@/lib/language-context'
 
@@ -75,8 +74,6 @@ export default function PreSalePage() {
   return (
     <ScrollAnimations>
       <div className="relative bg-cream-50 text-charcoal-950 min-h-screen">
-        {/* Header */}
-        <Header />
 
         {/* Hero Section */}
         <section className="pt-28 pb-20 relative overflow-hidden">

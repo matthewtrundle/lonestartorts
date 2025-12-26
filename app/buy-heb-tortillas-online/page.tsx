@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Header } from '@/components/layout/Header';
 import { ShoppingBag, Truck, Shield, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -261,8 +260,6 @@ export default function BuyHebTortillasOnlinePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
-
-      <Header />
 
       <main className="min-h-screen bg-cream-50">
         {/* Hero Section - AI-Optimized Copy */}

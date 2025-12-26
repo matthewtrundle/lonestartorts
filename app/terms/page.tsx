@@ -1,4 +1,3 @@
-import { Header } from '@/components/layout/Header';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -9,10 +8,7 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <>
-      <Header />
-
-      <main className="min-h-screen bg-cream-50 pt-24">
+    <main className="min-h-screen bg-cream-50 pt-24">
         {/* Hero Section */}
         <section className="bg-charcoal-950 text-white py-12">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
@@ -156,6 +152,5 @@ export default function TermsOfServicePage() {
           </div>
         </section>
       </main>
-    </>
   );
 }

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Header } from '@/components/layout/Header';
 import { ReturnsForm } from '@/components/ReturnsForm';
 import Link from 'next/link';
 import { Package, Clock, ShieldCheck, RefreshCw } from 'lucide-react';
@@ -42,8 +41,6 @@ export default function ReturnsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Header />
-
       <main className="min-h-screen bg-cream-50 pt-24">
         {/* Hero Section */}
         <section className="bg-charcoal-950 text-white py-16">

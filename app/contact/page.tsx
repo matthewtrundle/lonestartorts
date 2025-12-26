@@ -1,6 +1,5 @@
 'use client';
 
-import { Header } from '@/components/layout/Header';
 import { ContactFormLight } from '@/components/ContactFormLight';
 import Link from 'next/link';
 import { MapPin, Clock } from 'lucide-react';
@@ -33,8 +32,6 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Header />
-
       <main className="min-h-screen bg-cream-50 pt-24">
         {/* Hero Section */}
         <section className="bg-charcoal-950 text-white py-16">

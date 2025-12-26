@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
 import { Truck, Clock, Package, MapPin, ShieldCheck, DollarSign } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 
@@ -129,8 +128,6 @@ export default function ShippingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
-
-      <Header />
 
       <main className="min-h-screen bg-cream-50">
         {/* Hero Section */}

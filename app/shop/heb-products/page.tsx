@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ArrowLeft, Truck, Shield } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
@@ -35,10 +34,7 @@ export default function HEBProductsPage() {
   }, []);
 
   return (
-    <>
-      <Header />
-
-      <main className="min-h-screen bg-cream-50">
+    <main className="min-h-screen bg-cream-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-36">
           {/* Back Link */}
           <Link
@@ -142,6 +138,5 @@ export default function HEBProductsPage() {
           </div>
         </div>
       </main>
-    </>
   );
 }

@@ -8,6 +8,7 @@ import { CartProvider } from '@/lib/cart-context';
 import { LanguageProvider } from '@/lib/language-context';
 import { CartSidebar } from '@/components/cart/CartSidebar';
 import { Footer } from '@/components/layout/Footer';
+import { HeaderWrapper } from '@/components/layout/HeaderWrapper';
 
 // Optimized font loading with Next.js
 const inter = Inter({
@@ -276,6 +277,7 @@ export default function RootLayout({
             <CartProvider>
               <CartSidebar />
               <div className="min-h-screen flex flex-col">
+                <HeaderWrapper />
                 <main className="flex-grow">
                   {children}
                 </main>

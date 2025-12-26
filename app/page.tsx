@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { LogoFull } from '@/components/ui/Logo'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
-import { Header } from '@/components/layout/Header'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { HeroInteractions } from '@/components/HeroInteractions'
 import { ContactForm } from '@/components/ContactForm'
@@ -47,9 +46,7 @@ export default function Home() {
           <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-radial from-masa-400/20 to-transparent blur-3xl" />
         </div>
 
-        {/* Shared Header with Clerk integration */}
-        <Header />
-
+        
         {/* Artistic Floating Navigation - Shows on scroll */}
         <div className="fixed-nav-artistic fixed right-8 top-1/2 -translate-y-1/2 z-[150] opacity-0 pointer-events-none transition-all duration-700" id="floating-nav">
           {/* Vertical navigation dots */}

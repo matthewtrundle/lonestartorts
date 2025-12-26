@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
 import { WholesaleForm } from '@/components/wholesale/WholesaleForm';
 import { Package, Truck, Clock, Shield, Users, TrendingUp } from 'lucide-react';
 
@@ -108,7 +107,6 @@ export default function WholesalePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Header />
 
       <main className="min-h-screen bg-cream-50 pt-24">
         {/* Hero Section */}

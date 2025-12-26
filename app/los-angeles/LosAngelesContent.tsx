@@ -1,14 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Header } from '@/components/layout/Header'
 
 export function LosAngelesContent() {
   return (
-    <>
-      <Header />
-
-      <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50 pt-32">
+    <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50 pt-32">
         {/* Page Header */}
         <header className="bg-charcoal-950 text-cream-50 py-12">
           <div className="container mx-auto px-6">
@@ -357,6 +353,5 @@ export function LosAngelesContent() {
           </section>
         </article>
       </div>
-    </>
   )
 }

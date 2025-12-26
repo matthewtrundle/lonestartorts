@@ -4,14 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 import { useLanguage } from '@/lib/language-context'
-import { Header } from '@/components/layout/Header'
 
 export default function StoryPage() {
   const { t } = useLanguage();
   return (
-    <>
-      <Header />
-      <ScrollAnimations>
+    <ScrollAnimations>
         <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
           {/* Hero Section with Animated Background */}
           <section className="min-h-screen relative flex items-center justify-center overflow-hidden pt-32">
@@ -391,6 +388,5 @@ export default function StoryPage() {
         </section>
       </div>
     </ScrollAnimations>
-    </>
   )
 }

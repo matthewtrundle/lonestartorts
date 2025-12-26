@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { Header } from '@/components/layout/Header';
 import { ProductCard } from '@/components/product/ProductCard';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
@@ -17,10 +16,7 @@ export default function ShopPage() {
   const { t } = useLanguage();
 
   return (
-    <>
-      <Header />
-
-      <main className="min-h-screen bg-cream-50">
+    <main className="min-h-screen bg-cream-50">
         {/* Hero Image Section - Compact */}
         <div className="w-full mb-6">
           <div className="relative w-full h-[180px] md:h-[240px] overflow-hidden">
@@ -296,6 +292,5 @@ export default function ShopPage() {
         {/* Social Proof Section */}
         <SocialProofSection className="mt-16" />
       </main>
-    </>
   );
 }

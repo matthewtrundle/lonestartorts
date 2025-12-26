@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { formatPrice } from '@/lib/utils';
-import { Header } from '@/components/layout/Header';
 import { useLanguage } from '@/lib/language-context';
 
 interface Order {
@@ -76,10 +75,7 @@ export default function TrackOrderPage() {
   };
 
   return (
-    <>
-      <Header />
-
-      <main className="min-h-screen bg-cream-50 pt-40 pb-16">
+    <main className="min-h-screen bg-cream-50 pt-40 pb-16">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Page Header */}
           <div className="mb-8">
@@ -300,6 +296,5 @@ export default function TrackOrderPage() {
           )}
         </div>
       </main>
-    </>
   );
 }

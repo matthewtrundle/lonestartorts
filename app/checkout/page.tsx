@@ -8,7 +8,6 @@ import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
-import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
@@ -167,10 +166,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <>
-      <Header />
-
-      <main className="min-h-screen bg-cream-50 pt-32 pb-16">
+    <main className="min-h-screen bg-cream-50 pt-32 pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Page Header with Back Button */}
           <div className="mb-8">
@@ -386,6 +382,5 @@ export default function CheckoutPage() {
           </div>
         </div>
       </main>
-    </>
   );
 }
