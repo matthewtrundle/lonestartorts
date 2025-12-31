@@ -57,11 +57,11 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live https://clerk.com https://*.clerk.accounts.dev https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://js.stripe.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live https://clerk.com https://*.clerk.accounts.dev https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://js.stripe.com https://analytics.tiktok.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https://images.unsplash.com https://*.clerk.accounts.dev https://www.google.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://vercel.live https://clerk.com https://*.clerk.accounts.dev https://api.stripe.com https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com",
+              "connect-src 'self' https://vercel.live https://clerk.com https://*.clerk.accounts.dev https://api.stripe.com https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://analytics.tiktok.com",
               "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.googletagmanager.com https://bid.g.doubleclick.net",
               "media-src 'self' blob: data:",
             ].join("; "),
