@@ -8,6 +8,45 @@ import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
 import { products as allProducts } from '@/lib/products';
+import { useEffect, useState } from 'react';
+
+// Firework particle component
+function Firework({ delay, left }: { delay: number; left: number }) {
+  return (
+    <div
+      className="absolute pointer-events-none"
+      style={{
+        left: `${left}%`,
+        bottom: '0',
+        animation: `firework-rise 1.5s ease-out ${delay}s infinite`,
+      }}
+    >
+      {/* Rising trail */}
+      <div className="w-1 h-1 bg-yellow-400 rounded-full shadow-lg shadow-yellow-400/50" />
+      {/* Explosion particles */}
+      <div
+        className="absolute -top-2 -left-2"
+        style={{
+          animation: `firework-burst 1.5s ease-out ${delay + 0.8}s infinite`,
+          opacity: 0,
+        }}
+      >
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1.5 h-1.5 rounded-full"
+            style={{
+              background: ['#FFD700', '#FF6B6B', '#4ECDC4', '#FF69B4', '#00CED1'][i % 5],
+              transform: `rotate(${i * 45}deg) translateY(-20px)`,
+              animation: `firework-particle 0.7s ease-out ${delay + 0.8}s infinite`,
+              boxShadow: `0 0 6px ${['#FFD700', '#FF6B6B', '#4ECDC4', '#FF69B4', '#00CED1'][i % 5]}`,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 // Filter tortilla products at module level (no API call needed)
 const tortillaProducts = allProducts.filter(p => p.productType === 'tortilla');
@@ -42,15 +81,46 @@ export default function ShopPage() {
               {t('shop.subtitle')}
             </p>
 
-            {/* Free Shipping Banner - Holiday Special */}
-            <div className="bg-gradient-to-r from-green-600 to-red-600 text-white py-3 px-6 rounded-lg shadow-md mb-8 inline-block">
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-xl">🎄</span>
-                <span className="font-semibold text-lg">Holiday Special: FREE Shipping on orders $80+</span>
-                <span className="text-white/70">•</span>
-                <span className="text-white/90">Save $22.65!</span>
-                <span className="text-xl">🎁</span>
+            {/* Free Shipping Banner - New Year's Special with Fireworks */}
+            <div className="relative bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-900 text-white py-4 px-8 rounded-lg shadow-lg mb-8 inline-block overflow-hidden">
+              {/* Fireworks animation container */}
+              <div className="absolute inset-0 overflow-hidden">
+                <Firework delay={0} left={10} />
+                <Firework delay={0.5} left={25} />
+                <Firework delay={1} left={50} />
+                <Firework delay={0.3} left={75} />
+                <Firework delay={0.8} left={90} />
               </div>
+              {/* Sparkle overlay */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_50%)] animate-pulse" />
+              {/* Content */}
+              <div className="relative flex items-center justify-center gap-3">
+                <span className="text-2xl animate-bounce" style={{ animationDuration: '2s' }}>🎆</span>
+                <span className="font-bold text-lg bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                  New Year&apos;s Special: FREE Shipping on orders $80+
+                </span>
+                <span className="text-white/50">•</span>
+                <span className="text-yellow-300 font-semibold">Save $22.65!</span>
+                <span className="text-2xl animate-bounce" style={{ animationDuration: '2s', animationDelay: '0.5s' }}>🎇</span>
+              </div>
+              {/* CSS Animations */}
+              <style jsx>{`
+                @keyframes firework-rise {
+                  0% { transform: translateY(0); opacity: 1; }
+                  50% { transform: translateY(-60px); opacity: 1; }
+                  60% { transform: translateY(-60px); opacity: 0; }
+                  100% { transform: translateY(-60px); opacity: 0; }
+                }
+                @keyframes firework-burst {
+                  0% { opacity: 0; transform: scale(0); }
+                  50% { opacity: 1; transform: scale(1); }
+                  100% { opacity: 0; transform: scale(1.5); }
+                }
+                @keyframes firework-particle {
+                  0% { transform: rotate(var(--rotation)) translateY(-10px); opacity: 1; }
+                  100% { transform: rotate(var(--rotation)) translateY(-30px); opacity: 0; }
+                }
+              `}</style>
             </div>
 
             {/* Trust Signals Bar - Centered Premium layout */}
@@ -104,36 +174,36 @@ export default function ShopPage() {
           </div>
 
           {/* Best Value Callout */}
-          <div className="mt-12 bg-gradient-to-r from-green-50 to-red-50 rounded-xl shadow-sm border border-green-200 p-6 md:p-8">
+          <div className="mt-12 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-sm border border-indigo-200 p-6 md:p-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                  <span className="text-2xl">🎁</span>
-                  <h2 className="text-xl font-bold text-green-800">Best Value: Order 4 Packs</h2>
+                  <span className="text-2xl">🎇</span>
+                  <h2 className="text-xl font-bold text-indigo-800">Best Value: Order 4 Packs</h2>
                 </div>
-                <p className="text-green-700 mb-3">
-                  Get <span className="font-bold">FREE shipping</span> and pay just <span className="font-bold text-green-800">$1.00 per tortilla</span>
+                <p className="text-indigo-700 mb-3">
+                  Get <span className="font-bold">FREE shipping</span> and pay just <span className="font-bold text-indigo-800">$1.00 per tortilla</span>
                 </p>
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm">
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-indigo-600" />
                     <span className="text-gray-700">80 tortillas for $80</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-indigo-600" />
                     <span className="text-gray-700">Save $22.65 on shipping</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-indigo-600" />
                     <span className="text-gray-700">35% cheaper per tortilla</span>
                   </div>
                 </div>
               </div>
-              <div className="text-center bg-white rounded-lg p-4 border border-green-200 shadow-sm">
+              <div className="text-center bg-white rounded-lg p-4 border border-indigo-200 shadow-sm">
                 <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Single pack price</p>
                 <p className="text-2xl font-bold text-gray-400 line-through">$1.53/ea</p>
                 <p className="text-xs text-gray-500 uppercase tracking-wide mt-2 mb-1">4-pack price</p>
-                <p className="text-3xl font-bold text-green-600">$1.00/ea</p>
+                <p className="text-3xl font-bold text-indigo-600">$1.00/ea</p>
               </div>
             </div>
           </div>
