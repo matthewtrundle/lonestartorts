@@ -98,6 +98,30 @@ function SuccessContent() {
               value: data.order.total / 100,
             });
           }
+
+          // Track conversion in TikTok Pixel
+          if (typeof window !== 'undefined' && (window as any).ttq) {
+            const contents = data.order.items.map((item: any) => ({
+              content_id: item.sku,
+              content_type: 'product',
+              content_name: item.name,
+              quantity: item.quantity,
+              price: item.price / 100,
+            }));
+
+            (window as any).ttq.track('CompletePayment', {
+              contents: contents,
+              content_type: 'product',
+              value: data.order.total / 100,
+              currency: 'USD',
+            });
+
+            console.log('TikTok CompletePayment conversion fired:', {
+              transaction_id: data.order.orderNumber,
+              value: data.order.total / 100,
+              contents: contents,
+            });
+          }
         }
       })
       .catch(error => {

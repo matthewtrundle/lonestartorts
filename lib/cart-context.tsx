@@ -121,6 +121,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return [...prevItems, { ...item, quantity }];
       }
     });
+
+    // Track AddToCart event for TikTok Pixel
+    if (typeof window !== 'undefined' && (window as any).ttq) {
+      (window as any).ttq.track('AddToCart', {
+        content_id: item.sku,
+        content_type: 'product',
+        content_name: item.name,
+        quantity: quantity,
+        price: item.price / 100, // Convert cents to dollars
+        value: (item.price * quantity) / 100,
+        currency: 'USD',
+      });
+    }
   };
 
   const removeItem = (sku: string) => {
