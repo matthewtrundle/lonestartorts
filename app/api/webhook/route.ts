@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 // Products imported for reference if needed
 // import { getProductBySku } from '@/lib/products';
 import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
+import { trackTikTokPurchase } from '@/lib/tiktok';
 import { randomUUID } from 'crypto';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -216,6 +217,27 @@ export async function POST(req: NextRequest) {
             console.log('Admin notification email sent:', order.orderNumber);
           } catch (adminEmailError) {
             console.error('Failed to send admin notification:', adminEmailError);
+            // Don't fail the webhook - log for manual follow-up
+          }
+
+          // Send Purchase event to TikTok Events API (server-side tracking)
+          try {
+            await trackTikTokPurchase({
+              orderNumber: order.orderNumber,
+              email: order.email,
+              phone: order.shippingPhone || undefined,
+              value: order.total / 100, // Convert cents to dollars
+              currency: 'USD',
+              contents: items.map((item) => ({
+                content_id: item.sku,
+                content_type: 'product',
+                content_name: item.name,
+                quantity: item.quantity,
+                price: item.price / 100,
+              })),
+            });
+          } catch (tiktokError) {
+            console.error('Failed to send TikTok purchase event:', tiktokError);
             // Don't fail the webhook - log for manual follow-up
           }
 
