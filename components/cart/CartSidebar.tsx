@@ -94,6 +94,24 @@ export function CartSidebar() {
         cartTotal: displayTotal / 100,
       });
 
+      // Track InitiateCheckout for TikTok Pixel
+      if (typeof window !== 'undefined' && (window as any).ttq) {
+        const contents = items.map((item) => ({
+          content_id: item.sku,
+          content_type: 'product',
+          content_name: item.name,
+          quantity: item.quantity,
+          price: item.price / 100,
+        }));
+
+        (window as any).ttq.track('InitiateCheckout', {
+          contents: contents,
+          content_type: 'product',
+          value: displayTotal / 100,
+          currency: 'USD',
+        });
+      }
+
       // Create Stripe checkout session
       const response = await fetch('/api/checkout', {
         method: 'POST',
