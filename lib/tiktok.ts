@@ -38,26 +38,22 @@ export async function trackTikTokPurchase(event: TikTokPurchaseEvent): Promise<b
   try {
     // Build the event payload following TikTok's Events API v1.3 format
     const eventId = `purchase_${event.orderNumber}_${Date.now()}`;
+    const eventTime = Math.floor(Date.now() / 1000); // Unix timestamp in seconds
 
-    const payload = {
-      pixel_code: TIKTOK_PIXEL_ID,
-      event: 'Purchase', // Use 'Purchase' for server-side (CompletePayment for browser)
+    const eventData = {
+      event: 'Purchase',
       event_id: eventId,
-      timestamp: new Date().toISOString(),
-      context: {
-        user_agent: event.userAgent || 'Mozilla/5.0 (Server)',
-        ip: event.ip || '127.0.0.1',
+      event_time: eventTime,
+      user: {
+        email: event.email,
+        ...(event.phone && { phone: event.phone }),
+        external_id: event.orderNumber,
       },
       properties: {
         contents: event.contents,
         content_type: 'product',
         currency: event.currency,
         value: event.value,
-      },
-      user: {
-        email: event.email,
-        ...(event.phone && { phone: event.phone }),
-        external_id: event.orderNumber,
       },
     };
 
@@ -75,7 +71,9 @@ export async function trackTikTokPurchase(event: TikTokPurchaseEvent): Promise<b
         'Access-Token': accessToken,
       },
       body: JSON.stringify({
-        data: [payload],
+        event_source: 'web',
+        event_source_id: TIKTOK_PIXEL_ID,
+        data: [eventData],
       }),
     });
 
