@@ -36,14 +36,17 @@ export async function trackTikTokPurchase(event: TikTokPurchaseEvent): Promise<b
   }
 
   try {
+    // Build the event payload following TikTok's Events API v1.3 format
+    const eventId = `purchase_${event.orderNumber}_${Date.now()}`;
+
     const payload = {
       pixel_code: TIKTOK_PIXEL_ID,
-      event: 'CompletePayment',
-      event_id: `purchase_${event.orderNumber}_${Date.now()}`, // Unique event ID for deduplication
+      event: 'Purchase', // Use 'Purchase' for server-side (CompletePayment for browser)
+      event_id: eventId,
       timestamp: new Date().toISOString(),
       context: {
-        user_agent: event.userAgent || 'Server',
-        ip: event.ip || '0.0.0.0',
+        user_agent: event.userAgent || 'Mozilla/5.0 (Server)',
+        ip: event.ip || '127.0.0.1',
       },
       properties: {
         contents: event.contents,
@@ -51,13 +54,19 @@ export async function trackTikTokPurchase(event: TikTokPurchaseEvent): Promise<b
         currency: event.currency,
         value: event.value,
       },
-      // User data for matching (hashed by TikTok)
       user: {
         email: event.email,
         ...(event.phone && { phone: event.phone }),
         external_id: event.orderNumber,
       },
     };
+
+    console.log('TikTok Events API: Sending event', {
+      event: 'Purchase',
+      orderNumber: event.orderNumber,
+      value: event.value,
+      pixelId: TIKTOK_PIXEL_ID,
+    });
 
     const response = await fetch(TIKTOK_API_URL, {
       method: 'POST',
@@ -72,10 +81,17 @@ export async function trackTikTokPurchase(event: TikTokPurchaseEvent): Promise<b
 
     const result = await response.json();
 
+    console.log('TikTok Events API response:', {
+      status: response.status,
+      code: result.code,
+      message: result.message,
+    });
+
     if (response.ok && result.code === 0) {
       console.log('TikTok Events API: Purchase event sent successfully', {
         orderNumber: event.orderNumber,
         value: event.value,
+        eventId,
       });
       return true;
     } else {
