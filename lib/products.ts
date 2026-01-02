@@ -66,8 +66,8 @@ export const products: Product[] = [
     name: 'H-E-B Bakery Wheat Tortillas',
     description: 'Whole wheat tortillas with wholesome grain flavor. Perfect for health-conscious meals without sacrificing taste.',
     image: '/images/products/wheat-tortillas-heb.webp',
-    price: 2000, // $20 per pack
-    tortillaCount: 20,
+    price: 1000, // $10 per pack
+    tortillaCount: 10,
     storage: 'shelf_stable',
     category: 'wheat',
     productType: 'tortilla',
