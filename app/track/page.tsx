@@ -5,6 +5,22 @@ import Link from 'next/link';
 import { formatPrice } from '@/lib/utils';
 import { useLanguage } from '@/lib/language-context';
 
+// Generate carrier-specific tracking URL
+function getTrackingUrl(carrier: string | undefined, trackingNumber: string): string {
+  if (!carrier) return `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+
+  const normalizedCarrier = carrier.toLowerCase();
+
+  if (normalizedCarrier.includes('ups')) {
+    return `https://www.ups.com/track?tracknum=${trackingNumber}`;
+  } else if (normalizedCarrier.includes('fedex')) {
+    return `https://www.fedex.com/fedextrack/?trknbr=${trackingNumber}`;
+  } else {
+    // Default to USPS
+    return `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+  }
+}
+
 interface Order {
   orderNumber: string;
   email: string;
@@ -249,9 +265,17 @@ export default function TrackOrderPage() {
                   <p className="text-sm text-gray-700">
                     {t('track.order.carrier')}: {order.carrier}
                   </p>
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 mb-3">
                     {t('track.order.trackingNumber')}: {order.trackingNumber}
                   </p>
+                  <a
+                    href={getTrackingUrl(order.carrier, order.trackingNumber)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition-colors"
+                  >
+                    Track Package →
+                  </a>
                 </div>
               )}
 

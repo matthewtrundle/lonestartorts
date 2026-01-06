@@ -7,6 +7,22 @@ import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
 import { ArrowLeft, Package, Truck, CheckCircle, Circle, MessageSquare, Star } from 'lucide-react';
 
+// Generate carrier-specific tracking URL
+function getTrackingUrl(carrier: string | null, trackingNumber: string): string {
+  if (!carrier) return `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+
+  const normalizedCarrier = carrier.toLowerCase();
+
+  if (normalizedCarrier.includes('ups')) {
+    return `https://www.ups.com/track?tracknum=${trackingNumber}`;
+  } else if (normalizedCarrier.includes('fedex')) {
+    return `https://www.fedex.com/fedextrack/?trknbr=${trackingNumber}`;
+  } else {
+    // Default to USPS
+    return `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+  }
+}
+
 interface Order {
   id: string;
   orderNumber: string;
@@ -293,16 +309,14 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
                     <span className="font-medium">Tracking:</span>{' '}
                     <code className="bg-white px-2 py-0.5 rounded border">{order.trackingNumber}</code>
                   </p>
-                  {order.carrier?.toLowerCase().includes('usps') && (
-                    <a
-                      href={`https://tools.usps.com/go/TrackConfirmAction?tLabels=${order.trackingNumber}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-sm text-blue-600 hover:text-blue-700 font-medium"
-                    >
-                      Track Package →
-                    </a>
-                  )}
+                  <a
+                    href={getTrackingUrl(order.carrier, order.trackingNumber)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-sm text-blue-600 hover:text-blue-700 font-medium"
+                  >
+                    Track Package →
+                  </a>
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
@@ -315,9 +329,23 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
                       onChange={(e) => setCarrier(e.target.value)}
                       className="w-full px-3 py-1.5 text-sm border border-charcoal-300 rounded focus:ring-2 focus:ring-blue-500"
                     >
-                      <option value="USPS">USPS</option>
-                      <option value="USPS Priority Mail">USPS Priority</option>
-                      <option value="USPS First Class">USPS First Class</option>
+                      <optgroup label="USPS">
+                        <option value="USPS">USPS</option>
+                        <option value="USPS Priority Mail">USPS Priority</option>
+                        <option value="USPS First Class">USPS First Class</option>
+                      </optgroup>
+                      <optgroup label="UPS">
+                        <option value="UPS">UPS</option>
+                        <option value="UPS Ground">UPS Ground</option>
+                        <option value="UPS 2nd Day Air">UPS 2nd Day Air</option>
+                        <option value="UPS Next Day Air">UPS Next Day Air</option>
+                      </optgroup>
+                      <optgroup label="FedEx">
+                        <option value="FedEx">FedEx</option>
+                        <option value="FedEx Ground">FedEx Ground</option>
+                        <option value="FedEx Express">FedEx Express</option>
+                        <option value="FedEx 2Day">FedEx 2Day</option>
+                      </optgroup>
                     </select>
                   </div>
 
