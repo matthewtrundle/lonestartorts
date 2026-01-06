@@ -163,7 +163,8 @@ export async function POST(req: NextRequest) {
               tax,
               total,
 
-              // Payment - Store session ID so we can look up order on success page
+              // Payment - checkout.session.completed means payment succeeded
+              paymentStatus: 'SUCCEEDED',
               stripePaymentId: session.id || null,
 
               updatedAt: new Date(),
