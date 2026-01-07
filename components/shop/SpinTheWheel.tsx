@@ -24,16 +24,16 @@ interface SpinTheWheelProps {
   utmSource?: string;
 }
 
-// Prize segments with refined colors
+// Prize segments with refined colors - labels are arrays for multi-line
 const WHEEL_SEGMENTS = [
-  { id: 'five_off', label: '$5 OFF', color: '#E67E22', textColor: '#FFFFFF' },
-  { id: 'free_shipping', label: 'FREE SHIP', color: '#27AE60', textColor: '#FFFFFF' },
-  { id: 'five_off', label: '$5 OFF', color: '#C0392B', textColor: '#FFFFFF' },
-  { id: 'bonus_tortillas', label: '+10 FREE', color: '#8E44AD', textColor: '#FFFFFF' },
-  { id: 'five_off', label: '$5 OFF', color: '#E67E22', textColor: '#FFFFFF' },
-  { id: 'free_sauce', label: 'FREE SALSA', color: '#16A085', textColor: '#FFFFFF' },
-  { id: 'five_off', label: '$5 OFF', color: '#C0392B', textColor: '#FFFFFF' },
-  { id: 'jackpot', label: 'JACKPOT', color: '#D4AF37', textColor: '#FFFFFF' },
+  { id: 'five_off', label: ['$5', 'OFF'], color: '#E67E22', textColor: '#FFFFFF' },
+  { id: 'free_shipping', label: ['FREE', 'SHIP'], color: '#27AE60', textColor: '#FFFFFF' },
+  { id: 'five_off', label: ['$5', 'OFF'], color: '#C0392B', textColor: '#FFFFFF' },
+  { id: 'bonus_tortillas', label: ['+10', 'FREE'], color: '#8E44AD', textColor: '#FFFFFF' },
+  { id: 'five_off', label: ['$5', 'OFF'], color: '#E67E22', textColor: '#FFFFFF' },
+  { id: 'free_sauce', label: ['FREE', 'SALSA'], color: '#16A085', textColor: '#FFFFFF' },
+  { id: 'five_off', label: ['$5', 'OFF'], color: '#C0392B', textColor: '#FFFFFF' },
+  { id: 'jackpot', label: ['JACK', 'POT'], color: '#D4AF37', textColor: '#FFFFFF' },
 ];
 
 // Pre-generate confetti
@@ -240,7 +240,7 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
 
   const getPendingPrizeName = () => {
     const segment = WHEEL_SEGMENTS.find(s => s.id === pendingPrizeId);
-    return segment?.label || 'PRIZE';
+    return segment?.label.join(' ') || 'PRIZE';
   };
 
   // Wheel component with SVG for better text rendering
@@ -303,17 +303,22 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
                   x={textX}
                   y={textY}
                   fill="white"
-                  fontSize="13"
+                  fontSize="12"
                   fontWeight="800"
                   textAnchor="middle"
                   dominantBaseline="middle"
                   transform={`rotate(${textRotation}, ${textX}, ${textY})`}
-                  style={{
-                    textShadow: '0 2px 4px rgba(0,0,0,0.8)',
-                    filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.9))'
-                  }}
+                  style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.9))' }}
                 >
-                  {seg.label}
+                  {seg.label.map((line, lineIndex) => (
+                    <tspan
+                      key={lineIndex}
+                      x={textX}
+                      dy={lineIndex === 0 ? '-0.4em' : '1.1em'}
+                    >
+                      {line}
+                    </tspan>
+                  ))}
                 </text>
               </g>
             );
