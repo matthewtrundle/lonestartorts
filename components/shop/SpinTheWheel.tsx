@@ -246,7 +246,7 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
   // Wheel component
   const SpinWheel = ({ isSpinning = false, onClick }: { isSpinning?: boolean; onClick?: () => void }) => (
     <div
-      className={`relative w-56 h-56 md:w-64 md:h-64 mx-auto ${onClick ? 'cursor-pointer' : ''}`}
+      className={`relative w-64 h-64 md:w-72 md:h-72 mx-auto ${onClick ? 'cursor-pointer' : ''}`}
       onClick={onClick}
     >
       {/* Outer ring with metallic effect */}
@@ -268,18 +268,24 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
         animate={isSpinning ? { rotate: rotation } : {}}
         transition={isSpinning ? { duration: 3.5, ease: [0.2, 0.1, 0.2, 1] } : {}}
       >
-        {/* Segment labels */}
+        {/* Segment labels - positioned radially outward */}
         {WHEEL_SEGMENTS.map((seg, i) => {
-          const angle = (i * 360) / WHEEL_SEGMENTS.length + (180 / WHEEL_SEGMENTS.length);
+          const segmentAngle = 360 / WHEEL_SEGMENTS.length;
+          const angle = i * segmentAngle + segmentAngle / 2;
           return (
             <div
               key={i}
-              className="absolute left-1/2 top-1/2 origin-left font-bold text-white"
+              className="absolute font-extrabold text-white text-center"
               style={{
-                transform: `rotate(${angle}deg) translateX(50px)`,
-                fontSize: '10px',
-                textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                left: '50%',
+                top: '50%',
+                transform: `rotate(${angle}deg) translateY(-70px) rotate(90deg)`,
+                fontSize: '11px',
+                textShadow: '0 1px 3px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.5)',
                 letterSpacing: '0.5px',
+                width: '60px',
+                marginLeft: '-30px',
+                lineHeight: '1.1',
               }}
             >
               {seg.label}
@@ -293,7 +299,7 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
           return (
             <div
               key={`line-${i}`}
-              className="absolute left-1/2 top-1/2 w-[1px] h-1/2 bg-white/30 origin-bottom"
+              className="absolute left-1/2 top-1/2 w-[2px] h-1/2 bg-white/40 origin-bottom"
               style={{ transform: `rotate(${angle}deg) translateX(-50%)` }}
             />
           );
@@ -302,14 +308,14 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
 
       {/* Center hub */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 shadow-lg flex items-center justify-center border-4 border-yellow-300">
-          <Star className="w-6 h-6 md:w-7 md:h-7 text-white fill-white" />
+        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 shadow-lg flex items-center justify-center border-4 border-yellow-300">
+          <Star className="w-7 h-7 md:w-8 md:h-8 text-white fill-white" />
         </div>
       </div>
 
       {/* Pointer */}
       <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
-        <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-gray-900 drop-shadow-md" />
+        <div className="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[24px] border-t-gray-900 drop-shadow-md" />
       </div>
     </div>
   );
