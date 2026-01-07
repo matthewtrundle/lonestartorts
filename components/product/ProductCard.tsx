@@ -49,38 +49,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     // Calculate what this order would cost with shipping
     const itemTotal = price * quantity;
 
-    if (itemTotal >= 10000) { // $100 threshold in cents (5 packs)
+    if (itemTotal >= 8000) { // $80 threshold in cents (4 packs)
       return {
         message: 'FREE shipping included!',
         type: 'free' as const,
         totalWithShipping: itemTotal,
         shippingCost: 0,
       };
-    } else if (quantity >= 5) {
-      // 5 packs = $100, qualifies for free shipping
+    } else if (quantity >= 4) {
+      // 4 packs = $80, qualifies for free shipping
       return {
         message: 'FREE shipping included!',
         type: 'free' as const,
         totalWithShipping: itemTotal,
         shippingCost: 0,
-      };
-    } else if (quantity === 4) {
-      return {
-        message: 'Add 1 more for FREE shipping',
-        type: 'progress' as const,
-        totalWithShipping: itemTotal + 2265, // $22.65 shipping for 4 packs
-        shippingCost: 2265,
       };
     } else if (quantity === 3) {
       return {
-        message: 'Add 2 more for FREE shipping',
+        message: 'Add 1 more for FREE shipping',
         type: 'progress' as const,
         totalWithShipping: itemTotal + 1840, // $18.40 shipping for 3 packs
         shippingCost: 1840,
       };
     } else if (quantity === 2) {
       return {
-        message: 'Add 3 more for FREE shipping',
+        message: 'Add 2 more for FREE shipping',
         type: 'progress' as const,
         totalWithShipping: itemTotal + 1840, // $18.40 shipping
         shippingCost: 1840,
@@ -88,7 +81,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     } else {
       // quantity === 1
       return {
-        message: 'Order 5+ packs for FREE shipping',
+        message: 'Order 4+ packs for FREE shipping',
         type: 'hint' as const,
         totalWithShipping: itemTotal + 1060, // $10.60 shipping
         shippingCost: 1060,

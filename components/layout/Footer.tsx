@@ -23,7 +23,7 @@ export function Footer() {
             <div className="flex items-center gap-2 text-sm text-purple-400">
               <span>🎆</span>
               <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-              New Year Fiesta: FREE shipping on orders $100+
+              New Year Fiesta: FREE shipping on orders $80+
             </div>
           </div>
 

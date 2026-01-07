@@ -67,7 +67,7 @@ function ShopContent() {
           {/* Bold Free Shipping Banner for TikTok */}
           <div className="bg-sunset-600 text-white py-4 px-4 text-center">
             <p className="text-xl md:text-2xl font-bold">
-              FREE Shipping on orders $100+
+              FREE Shipping on orders $80+
             </p>
             <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
           </div>
@@ -141,7 +141,7 @@ function ShopContent() {
 
           {/* Simple Free Shipping Banner */}
           <div className="bg-sunset-600 text-white py-3 px-6 rounded-lg inline-block">
-            <span className="font-semibold">FREE Shipping on orders $100+ — Save $22.65!</span>
+            <span className="font-semibold">FREE Shipping on orders $80+ — Save $22.65!</span>
           </div>
         </div>
 

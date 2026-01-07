@@ -241,8 +241,8 @@ export async function POST(req: NextRequest) {
         const savingsText = `You saved $${(baseShippingCost / 100).toFixed(2)}`;
         if (freeShippingReason === 'threshold') {
           return baseLabel
-            ? `FREE ${methodName} (${baseLabel}) - Order $60+ ${savingsText}`
-            : `FREE ${methodName} - Order $60+ ${savingsText}`;
+            ? `FREE ${methodName} (${baseLabel}) - Order $80+ ${savingsText}`
+            : `FREE ${methodName} - Order $80+ ${savingsText}`;
         } else {
           return baseLabel
             ? `FREE ${methodName} (${baseLabel}) - First Order Discount`

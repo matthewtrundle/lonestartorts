@@ -212,7 +212,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Calculate totals with smart shipping
   // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
   // Shipping options: USPS (standard) or UPS (Ground, 3-Day, 2-Day, Next Day)
-  // FREE shipping on USPS orders $100+
+  // FREE shipping on USPS orders $80+
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
   const shippingOptions = getShippingOptions(items, subtotal);

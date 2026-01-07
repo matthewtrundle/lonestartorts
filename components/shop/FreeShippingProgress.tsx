@@ -26,7 +26,7 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
         <div className="flex items-center gap-2 text-sm text-indigo-700">
           <span>🎆</span>
           <Truck className="w-4 h-4 flex-shrink-0" />
-          <span className="font-medium">New Year Fiesta: FREE shipping on orders $100+</span>
+          <span className="font-medium">New Year Fiesta: FREE shipping on orders $80+</span>
         </div>
       </div>
     );
@@ -66,7 +66,7 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
           </span>
         </div>
         <span className="text-xs text-amber-600">
-          {formatPrice(subtotal)} / $100
+          {formatPrice(subtotal)} / $80
         </span>
       </div>
       {!compact && (

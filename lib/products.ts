@@ -1,10 +1,10 @@
 // Product catalog - centralized source of truth
 // Simple pricing: $20 per pack (20 tortillas each)
 // Smart shipping: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
-// FREE SHIPPING on orders $100+ (5 packs)
+// FREE SHIPPING on orders $80+ (4 packs)
 
-// Free shipping threshold in cents ($100 = 5 packs)
-export const FREE_SHIPPING_THRESHOLD = 10000;
+// Free shipping threshold in cents ($80 = 4 packs)
+export const FREE_SHIPPING_THRESHOLD = 8000;
 
 // Shipping method type
 export type ShippingMethod = 'usps' | 'ups_ground' | 'ups_3day' | 'ups_2day' | 'ups_nextday';
@@ -91,7 +91,7 @@ export function getProductBySku(sku: string) {
 
 // Calculate smart shipping based on cart items
 // Shipping logic:
-// - FREE shipping on orders $60+ (3+ tortilla packs)
+// - FREE shipping on orders $80+ (4+ tortilla packs)
 // - Sauce-only orders: $9.99 flat rate
 // - Orders with tortillas: Calculate based on tortilla pack count only (sauce ships free with tortillas)
 // - Tortilla tiers: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
@@ -99,7 +99,7 @@ export function calculateShipping(
   items: { productType?: string; quantity: number }[],
   subtotal?: number
 ): number {
-  // FREE shipping for orders $60+
+  // FREE shipping for orders $80+
   if (subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
     return 0;
   }
