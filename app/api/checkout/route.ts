@@ -107,11 +107,11 @@ export async function POST(req: NextRequest) {
         if (spinEntry && !spinEntry.used && new Date() <= spinEntry.expiresAt) {
           // Valid spin prize - apply based on prize type
           switch (spinEntry.prize) {
-            case 'jackpot':
-              // 100% off up to $50 (5000 cents)
-              percentageDiscount = 100;
-              discountAmount = Math.min(subtotal, 5000);
-              console.log(`JACKPOT spin prize applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+            case 'ten_percent':
+              // 10% off up to $10 max (1000 cents)
+              percentageDiscount = 10;
+              discountAmount = Math.min(Math.round(subtotal * 0.10), 1000);
+              console.log(`10% off spin prize applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
               break;
             case 'free_shipping':
               // Free shipping

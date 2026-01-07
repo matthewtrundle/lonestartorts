@@ -25,6 +25,7 @@ interface SpinTheWheelProps {
 }
 
 // Prize segments with refined colors - labels are arrays for multi-line
+// Prizes: $5 off (most common), free shipping, +10 tortillas, free salsa, 10% off (rare)
 const WHEEL_SEGMENTS = [
   { id: 'five_off', label: ['$5', 'OFF'], color: '#E67E22', textColor: '#FFFFFF' },
   { id: 'free_shipping', label: ['FREE', 'SHIP'], color: '#27AE60', textColor: '#FFFFFF' },
@@ -33,7 +34,7 @@ const WHEEL_SEGMENTS = [
   { id: 'five_off', label: ['$5', 'OFF'], color: '#E67E22', textColor: '#FFFFFF' },
   { id: 'free_sauce', label: ['FREE', 'SALSA'], color: '#16A085', textColor: '#FFFFFF' },
   { id: 'five_off', label: ['$5', 'OFF'], color: '#C0392B', textColor: '#FFFFFF' },
-  { id: 'jackpot', label: ['JACK', 'POT'], color: '#D4AF37', textColor: '#FFFFFF' },
+  { id: 'ten_percent', label: ['10%', 'OFF'], color: '#D4AF37', textColor: '#FFFFFF' },
 ];
 
 // Pre-generate confetti

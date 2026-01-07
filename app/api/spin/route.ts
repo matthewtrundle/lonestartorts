@@ -3,10 +3,11 @@ import { prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
 
 // Prize definitions with weights (must sum to 100)
+// Cost-controlled prizes - no huge discounts
 const PRIZES = [
-  { id: 'jackpot', name: 'FREE ORDER!', description: 'Your entire order is FREE (up to $50)!', weight: 2, type: 'percentage', value: 100, maxValue: 5000 },
+  { id: 'ten_percent', name: '10% OFF', description: '10% off your order (up to $10 max)!', weight: 5, type: 'percentage', value: 10, maxValue: 1000 },
   { id: 'free_sauce', name: 'Free Green Sauce', description: 'H-E-B That Green Sauce added to your order!', weight: 8, type: 'product', sku: 'HEB-GREEN-SAUCE' },
-  { id: 'free_shipping', name: 'FREE Shipping', description: 'Free shipping on this order!', weight: 25, type: 'free_shipping', value: 0 },
+  { id: 'free_shipping', name: 'FREE Shipping', description: 'Free shipping on this order!', weight: 22, type: 'free_shipping', value: 0 },
   { id: 'bonus_tortillas', name: '10 Bonus Tortillas', description: '10 extra tortillas added FREE!', weight: 25, type: 'bonus', value: 500 },
   { id: 'five_off', name: '$5 OFF', description: '$5 off your order!', weight: 40, type: 'fixed', value: 500 },
 ] as const;
