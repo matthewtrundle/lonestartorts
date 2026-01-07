@@ -137,9 +137,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="group relative bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-sunset-600 hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-      {/* Premium Image Container - Smaller aspect ratio */}
-      <div className="aspect-[3/2] relative overflow-hidden bg-gray-50">
+    <div className="group relative bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-sunset-500 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+      {/* Image Container */}
+      <div className="aspect-square relative overflow-hidden bg-gray-100">
         <Image
           src={image}
           alt={name}
@@ -148,126 +148,105 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
 
-        {/* Best Seller Badge - Minimal */}
+        {/* Best Seller Badge */}
         {isBestSeller && (
           <div className="absolute top-3 left-3 z-10">
-            <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase bg-sunset-600 text-white shadow-md">
+            <span className="inline-block px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase bg-sunset-600 text-white rounded-full shadow-lg">
               Best Seller
             </span>
           </div>
         )}
 
-        {/* Savings Badge - Only if significant */}
+        {/* Savings Badge */}
         {savingsPercent && savingsPercent >= 10 && (
           <div className="absolute top-3 right-3 z-10">
-            <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase bg-green-600 text-white shadow-md">
+            <span className="inline-block px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase bg-green-600 text-white rounded-full shadow-lg">
               {savingsPercent}% OFF
             </span>
           </div>
         )}
       </div>
 
-      {/* Product Details - Premium spacing */}
-      <div className="p-4 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-3">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold leading-tight mb-2 text-charcoal-950 group-hover:text-sunset-600 transition-colors">
+      {/* Product Details */}
+      <div className="p-5 flex flex-col flex-grow">
+        {/* Header: Name + Price */}
+        <div className="mb-3">
+          <div className="flex justify-between items-start gap-3 mb-1.5">
+            <h3 className="text-base font-bold leading-snug text-charcoal-950 group-hover:text-sunset-600 transition-colors line-clamp-2 min-h-[2.5rem]">
               {name}
             </h3>
-            <div className="flex items-center gap-2 flex-wrap text-xs text-gray-600">
-              {tortillaType && (
-                <>
-                  <span className="font-medium">{tortillaType}</span>
-                  <span className="text-gray-300">•</span>
-                </>
-              )}
-              {tortillaCount > 0 && (
-                <span className="font-medium">{tortillaCount} tortillas</span>
-              )}
-              {tortillaCount > 0 && savingsPercent && (
-                <span className="text-gray-300">•</span>
-              )}
-              {savingsPercent && (
-                <span className="uppercase tracking-wide">{storageLabel}</span>
-              )}
+            <div className="text-right flex-shrink-0">
+              <span className="text-xl font-bold text-sunset-600">
+                {formatPrice(price)}
+              </span>
             </div>
           </div>
-          <div className="text-right ml-4">
-            <span className="text-2xl font-bold text-sunset-600 block">
-              {formatPrice(price)}
-            </span>
-            <span className="text-xs text-gray-500">
-              {productType === 'sauce' ? 'per bottle' : 'per pack'}
-            </span>
+          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+            {tortillaType && <span>{tortillaType}</span>}
+            {tortillaType && tortillaCount > 0 && <span>•</span>}
+            {tortillaCount > 0 && <span>{tortillaCount} tortillas</span>}
+            {!tortillaType && !tortillaCount && productType === 'sauce' && <span>Per bottle</span>}
           </div>
         </div>
 
-        <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        {/* Description - Fixed height */}
+        <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 min-h-[2.5rem] mb-4">
           {description}
         </p>
 
-        {/* Quantity Selector - Cleaner design */}
-        <div className="flex items-center justify-between mb-3 bg-gray-50 rounded-md p-3 border border-gray-200 mt-auto">
-          <span className="text-sm font-medium text-gray-700">Quantity</span>
-          <div className="flex items-center gap-3">
+        {/* Spacer to push bottom content down */}
+        <div className="flex-grow" />
+
+        {/* Quantity Selector */}
+        <div className="flex items-center justify-between mb-3 bg-gray-50 rounded-lg p-2.5">
+          <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Qty</span>
+          <div className="flex items-center gap-2">
             <button
               onClick={() => handleQuantityChange(-1)}
               disabled={quantity <= 1}
-              className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:border-sunset-600 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-7 h-7 flex items-center justify-center rounded-md bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Decrease quantity"
             >
-              <Minus className="w-4 h-4" />
+              <Minus className="w-3.5 h-3.5" />
             </button>
-            <span className="text-lg font-semibold text-charcoal-950 min-w-[2ch] text-center">
+            <span className="text-base font-bold text-charcoal-950 w-6 text-center">
               {quantity}
             </span>
             <button
               onClick={() => handleQuantityChange(1)}
               disabled={quantity >= 10}
-              className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:border-sunset-600 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-7 h-7 flex items-center justify-center rounded-md bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Increase quantity"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
-        {/* Shipping Info & Total */}
-        <div className={`mb-3 p-2 rounded-md text-center ${
+        {/* Shipping Info */}
+        <div className={`mb-3 py-2 px-3 rounded-lg text-center text-xs ${
           shippingInfo.type === 'free'
-            ? 'bg-green-50 border border-green-200'
+            ? 'bg-green-50 text-green-700 font-semibold'
             : shippingInfo.type === 'progress'
-            ? 'bg-amber-50 border border-amber-200'
-            : 'bg-gray-50 border border-gray-200'
+            ? 'bg-amber-50 text-amber-700'
+            : 'bg-gray-50 text-gray-600'
         }`}>
-          <div className="text-sm">
-            {shippingInfo.type === 'free' ? (
-              <span className="font-semibold text-green-700">
-                {formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping!
-              </span>
-            ) : (
-              <>
-                <span className="text-gray-600">
-                  {formatPrice(shippingInfo.totalWithShipping)} total incl. shipping
-                </span>
-                <span className="mx-1 text-gray-400">•</span>
-                <span className={shippingInfo.type === 'progress' ? 'text-amber-700 font-medium' : 'text-gray-500'}>
-                  {shippingInfo.message}
-                </span>
-              </>
-            )}
-          </div>
+          {shippingInfo.type === 'free' ? (
+            <span>{formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping!</span>
+          ) : (
+            <span>{shippingInfo.message}</span>
+          )}
         </div>
 
-        {/* Premium CTA Button */}
+        {/* CTA Button */}
         <Button
           variant="cart"
           size="lg"
           onClick={handleAddToCart}
-          className="w-full uppercase flex items-center justify-center gap-2 text-sm font-semibold py-3 shadow-md hover:shadow-lg transition-all"
+          className="w-full uppercase flex items-center justify-center gap-2 text-xs font-bold tracking-wide py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
         >
           <ShoppingBag className="w-4 h-4" />
-          Add {quantity > 1 ? `${quantity} ${productType === 'sauce' ? 'Bottles' : 'Packs'}` : ''} to Cart
+          Add to Cart
         </Button>
       </div>
     </div>

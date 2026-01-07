@@ -134,7 +134,7 @@ function selectRandomPrize(): { id: string; index: number } {
 }
 
 export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheWheelProps) {
-  const { addItem, setIsOpen: setCartOpen, setSpinPrize } = useCart();
+  const { addItem, setIsOpen: setCartOpen, setSpinPrize, items } = useCart();
 
   const [step, setStep] = useState<'ready' | 'spinning' | 'result' | 'done'>('ready');
   const [email, setEmail] = useState('');
@@ -144,6 +144,7 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
   const [pendingPrizeId, setPendingPrizeId] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [showAddProductMessage, setShowAddProductMessage] = useState(false);
 
   const handleSpin = () => {
     // Track spin click
@@ -257,7 +258,14 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
       });
     }
     onClose();
-    setCartOpen(true);
+
+    // If cart is empty, show message instead of opening cart
+    if (items.length === 0) {
+      setShowAddProductMessage(true);
+      setTimeout(() => setShowAddProductMessage(false), 4000);
+    } else {
+      setCartOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -394,11 +402,30 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
+    <>
+      {/* Toast message for empty cart */}
+      <AnimatePresence>
+        {showAddProductMessage && (
           <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[10001] bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3"
+          >
+            <Gift className="w-6 h-6" />
+            <div>
+              <p className="font-bold">Your prize is saved!</p>
+              <p className="text-sm text-white/90">Add a product to cart to use your discount</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -605,8 +632,9 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
             )}
             </div>
           </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
