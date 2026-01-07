@@ -33,7 +33,70 @@ export async function POST(req: NextRequest) {
     const normalizedCode = discountCode.trim().toUpperCase();
     const normalizedEmail = email.trim().toLowerCase();
 
-    // First, check if it's a feedback coupon (THANKS-XXXXXX format)
+    // First, check if it's a spin wheel code (SPIN-* format)
+    if (normalizedCode.startsWith('SPIN-')) {
+      const spinEntry = await prisma.spinWheelEntry.findUnique({
+        where: { code: normalizedCode },
+      });
+
+      if (spinEntry) {
+        // Check if code is already used
+        if (spinEntry.used) {
+          return NextResponse.json(
+            { valid: false, error: 'This spin wheel code has already been used' },
+            { status: 200 }
+          );
+        }
+
+        // Check if code is expired
+        if (new Date() > spinEntry.expiresAt) {
+          return NextResponse.json(
+            { valid: false, error: 'This spin wheel code has expired' },
+            { status: 200 }
+          );
+        }
+
+        // Determine the discount type based on prize
+        let discountInfo: { type: string; message: string; amount?: number };
+        switch (spinEntry.prize) {
+          case 'five_off':
+            discountInfo = { type: 'fixed', message: '$5 off applied!', amount: 500 };
+            break;
+          case 'ten_percent':
+            discountInfo = { type: 'percentage', message: '10% off applied! (max $10)', amount: 10 };
+            break;
+          case 'free_shipping':
+            discountInfo = { type: 'free_shipping', message: 'Free shipping applied!' };
+            break;
+          case 'free_sauce':
+            discountInfo = { type: 'product', message: 'Free sauce added to order!' };
+            break;
+          case 'bonus_tortillas':
+            discountInfo = { type: 'bonus', message: '10 bonus tortillas added!' };
+            break;
+          default:
+            discountInfo = { type: 'unknown', message: 'Spin prize applied!' };
+        }
+
+        return NextResponse.json({
+          valid: true,
+          message: discountInfo.message,
+          discount: {
+            type: discountInfo.type,
+            amount: discountInfo.amount,
+            code: normalizedCode,
+            prize: spinEntry.prize,
+          },
+        });
+      } else {
+        return NextResponse.json(
+          { valid: false, error: 'Invalid spin wheel code' },
+          { status: 200 }
+        );
+      }
+    }
+
+    // Check if it's a feedback coupon (THANKS-XXXXXX format)
     if (normalizedCode.startsWith('THANKS-')) {
       const feedbackCoupon = await prisma.customerFeedback.findUnique({
         where: { couponCode: normalizedCode },
