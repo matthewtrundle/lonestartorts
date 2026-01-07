@@ -217,3 +217,52 @@ export const trackOutboundLink = (url: string, linkText?: string) => {
     linkText: linkText || 'unknown',
   });
 };
+
+// ============================================
+// SPIN WHEEL FUNNEL EVENTS
+// ============================================
+
+export interface SpinWheelPrizeData {
+  prizeId: string;
+  prizeName: string;
+  prizeType: string;
+  code?: string;
+}
+
+/** Track when spin wheel modal is shown */
+export const trackSpinWheelShown = (utmSource?: string) => {
+  track('spin_wheel_shown', {
+    utmSource: utmSource || 'direct',
+  });
+};
+
+/** Track when user clicks the spin button */
+export const trackSpinWheelSpin = () => {
+  track('spin_wheel_spin', {});
+};
+
+/** Track the spin result/prize won */
+export const trackSpinWheelResult = (prize: SpinWheelPrizeData) => {
+  track('spin_wheel_result', {
+    prizeId: prize.prizeId,
+    prizeName: prize.prizeName,
+    prizeType: prize.prizeType,
+  });
+};
+
+/** Track when user submits email to claim prize */
+export const trackSpinWheelEmailSubmit = (prizeId: string) => {
+  track('spin_wheel_email_submit', {
+    prizeId,
+  });
+};
+
+/** Track when prize is claimed and applied to cart */
+export const trackSpinWheelClaim = (prize: SpinWheelPrizeData) => {
+  track('spin_wheel_claim', {
+    prizeId: prize.prizeId,
+    prizeName: prize.prizeName,
+    prizeType: prize.prizeType,
+    code: prize.code || '',
+  });
+};

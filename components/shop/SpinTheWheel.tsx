@@ -5,6 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, Clock, ShoppingCart, Star, Gift, Check, Zap } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 import { getProductBySku } from '@/lib/products';
+import {
+  trackSpinWheelShown,
+  trackSpinWheelSpin,
+  trackSpinWheelResult,
+  trackSpinWheelEmailSubmit,
+  trackSpinWheelClaim,
+} from '@/lib/analytics';
 
 interface Prize {
   id: string;
@@ -139,6 +146,9 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
   const [rotation, setRotation] = useState(0);
 
   const handleSpin = () => {
+    // Track spin click
+    trackSpinWheelSpin();
+
     const selected = selectRandomPrize();
     setPendingPrizeId(selected.id);
 
@@ -151,6 +161,14 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
     setStep('spinning');
 
     setTimeout(() => {
+      // Track the spin result
+      const segment = WHEEL_SEGMENTS[selected.index];
+      trackSpinWheelResult({
+        prizeId: selected.id,
+        prizeName: segment.label.join(' '),
+        prizeType: selected.id,
+      });
+
       setStep('result');
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 3000);
@@ -192,6 +210,9 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
       }
 
       if (data.success && data.prize) {
+        // Track successful email submission
+        trackSpinWheelEmailSubmit(data.prize.id);
+
         setPrize(data.prize);
         setStep('done');
 
@@ -219,6 +240,15 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
   };
 
   const handleContinueToCheckout = () => {
+    // Track prize claim when they proceed to checkout
+    if (prize) {
+      trackSpinWheelClaim({
+        prizeId: prize.id,
+        prizeName: prize.name,
+        prizeType: prize.type,
+        code: prize.code,
+      });
+    }
     onClose();
     setCartOpen(true);
   };
@@ -227,6 +257,13 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
     if (step === 'spinning') return;
     onClose();
   };
+
+  // Track when modal is shown
+  useEffect(() => {
+    if (isOpen) {
+      trackSpinWheelShown(utmSource);
+    }
+  }, [isOpen, utmSource]);
 
   useEffect(() => {
     if (!isOpen) {
