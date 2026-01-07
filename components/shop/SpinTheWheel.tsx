@@ -155,7 +155,8 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
     const segmentAngle = 360 / WHEEL_SEGMENTS.length;
     const targetAngle = selected.index * segmentAngle;
     const fullRotations = 5 * 360;
-    const finalRotation = fullRotations + (360 - targetAngle) + (segmentAngle / 2);
+    // To land on segment center: rotate so (index + 0.5) * segmentAngle is at top (0 degrees)
+    const finalRotation = fullRotations + (360 - targetAngle - segmentAngle / 2);
 
     setRotation(finalRotation);
     setStep('spinning');
