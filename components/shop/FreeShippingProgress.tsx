@@ -22,11 +22,11 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
   // Empty cart - show static message
   if (subtotal === 0) {
     return (
-      <div className={`bg-gradient-to-r from-green-50 to-red-50 border border-green-200 rounded-lg p-3 ${className}`}>
-        <div className="flex items-center gap-2 text-sm text-green-700">
-          <span>🎄</span>
+      <div className={`bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-3 ${className}`}>
+        <div className="flex items-center gap-2 text-sm text-indigo-700">
+          <span>🎆</span>
           <Truck className="w-4 h-4 flex-shrink-0" />
-          <span className="font-medium">Holiday Special: FREE shipping on orders $80+</span>
+          <span className="font-medium">New Year Fiesta: FREE shipping on orders $100+</span>
         </div>
       </div>
     );
@@ -35,20 +35,20 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
   // Qualified for free shipping
   if (qualifies) {
     return (
-      <div className={`bg-gradient-to-r from-green-50 to-red-50 border border-green-200 rounded-lg p-3 ${className}`}>
+      <div className={`bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-3 ${className}`}>
         <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-sm text-green-700">
-            <span>🎁</span>
+          <div className="flex items-center gap-2 text-sm text-indigo-700">
+            <span>🎇</span>
             <Check className="w-4 h-4 flex-shrink-0" />
-            <span className="font-semibold">Holiday FREE shipping unlocked!</span>
+            <span className="font-semibold">FREE shipping unlocked!</span>
           </div>
-          <span className="text-xs font-medium text-green-600 bg-green-100 px-2 py-0.5 rounded">
+          <span className="text-xs font-medium text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded">
             Saving {formatPrice(baseShipping)}
           </span>
         </div>
         {!compact && (
-          <div className="mt-2 h-2 bg-green-200 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-green-500 to-red-500 rounded-full w-full" />
+          <div className="mt-2 h-2 bg-indigo-200 rounded-full overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full w-full" />
           </div>
         )}
       </div>
@@ -66,7 +66,7 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
           </span>
         </div>
         <span className="text-xs text-amber-600">
-          {formatPrice(subtotal)} / $60
+          {formatPrice(subtotal)} / $100
         </span>
       </div>
       {!compact && (

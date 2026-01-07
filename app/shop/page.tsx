@@ -97,7 +97,7 @@ export default function ShopPage() {
               <div className="relative flex items-center justify-center gap-3">
                 <span className="text-2xl animate-bounce" style={{ animationDuration: '2s' }}>🎆</span>
                 <span className="font-bold text-lg bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200 bg-clip-text text-transparent">
-                  New Year&apos;s Special: FREE Shipping on orders $80+
+                  New Year Fiesta: FREE Shipping on orders $100+
                 </span>
                 <span className="text-white/50">•</span>
                 <span className="text-yellow-300 font-semibold">Save $22.65!</span>
@@ -179,7 +179,7 @@ export default function ShopPage() {
               <div className="text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
                   <span className="text-2xl">🎇</span>
-                  <h2 className="text-xl font-bold text-indigo-800">Best Value: Order 4 Packs</h2>
+                  <h2 className="text-xl font-bold text-indigo-800">Best Value: Order 5 Packs</h2>
                 </div>
                 <p className="text-indigo-700 mb-3">
                   Get <span className="font-bold">FREE shipping</span> and pay just <span className="font-bold text-indigo-800">$1.00 per tortilla</span>
@@ -187,7 +187,7 @@ export default function ShopPage() {
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm">
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-indigo-600" />
-                    <span className="text-gray-700">80 tortillas for $80</span>
+                    <span className="text-gray-700">100 tortillas for $100</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-indigo-600" />
@@ -202,7 +202,7 @@ export default function ShopPage() {
               <div className="text-center bg-white rounded-lg p-4 border border-indigo-200 shadow-sm">
                 <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Single pack price</p>
                 <p className="text-2xl font-bold text-gray-400 line-through">$1.53/ea</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wide mt-2 mb-1">4-pack price</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wide mt-2 mb-1">5-pack price</p>
                 <p className="text-3xl font-bold text-indigo-600">$1.00/ea</p>
               </div>
             </div>

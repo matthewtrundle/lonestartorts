@@ -1,10 +1,10 @@
 // Product catalog - centralized source of truth
 // Simple pricing: $20 per pack (20 tortillas each)
 // Smart shipping: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
-// FREE SHIPPING on orders $80+ (4 packs)
+// FREE SHIPPING on orders $100+ (5 packs)
 
-// Free shipping threshold in cents ($80 = 4 packs)
-export const FREE_SHIPPING_THRESHOLD = 8000;
+// Free shipping threshold in cents ($100 = 5 packs)
+export const FREE_SHIPPING_THRESHOLD = 10000;
 
 // Shipping method type
 export type ShippingMethod = 'usps' | 'fedex';
