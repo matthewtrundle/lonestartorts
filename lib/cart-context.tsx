@@ -29,6 +29,17 @@ interface FreeShippingProgress {
   savedAmount: number;
 }
 
+interface SpinPrize {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  code: string;
+  expiresAt: string;
+  sku?: string;
+  value?: number;
+}
+
 interface CartContextType {
   items: CartItem[];
   itemCount: number;
@@ -48,18 +59,31 @@ interface CartContextType {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   isHydrated: boolean;
+  // Spin wheel state
+  showSpinWheel: boolean;
+  setShowSpinWheel: (show: boolean) => void;
+  spinPrize: SpinPrize | null;
+  setSpinPrize: (prize: SpinPrize | null) => void;
+  hasTriggeredSpin: boolean;
+  triggerSpinForTikTok: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CART_STORAGE_KEY = 'lonestar-cart';
 const SHIPPING_METHOD_KEY = 'lonestar-shipping-method';
+const SPIN_TRIGGERED_KEY = 'lonestar-spin-triggered';
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
   const [shippingMethod, setShippingMethodState] = useState<ShippingMethod>('usps');
+
+  // Spin wheel state
+  const [showSpinWheel, setShowSpinWheel] = useState(false);
+  const [spinPrize, setSpinPrize] = useState<SpinPrize | null>(null);
+  const [hasTriggeredSpin, setHasTriggeredSpin] = useState(false);
 
   // Load cart and shipping method from localStorage on mount
   useEffect(() => {
@@ -73,6 +97,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const validMethods = ['usps', 'ups_ground', 'ups_3day', 'ups_2day', 'ups_nextday'];
       if (storedMethod && validMethods.includes(storedMethod)) {
         setShippingMethodState(storedMethod);
+      }
+      // Check if spin was already triggered this session
+      const spinTriggered = sessionStorage.getItem(SPIN_TRIGGERED_KEY);
+      if (spinTriggered === 'true') {
+        setHasTriggeredSpin(true);
       }
     } catch (error) {
       console.error('Failed to load cart from localStorage:', error);
@@ -158,6 +187,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
   };
 
+  // Trigger spin wheel for TikTok users (called after first add-to-cart)
+  const triggerSpinForTikTok = () => {
+    if (!hasTriggeredSpin) {
+      setHasTriggeredSpin(true);
+      setShowSpinWheel(true);
+      try {
+        sessionStorage.setItem(SPIN_TRIGGERED_KEY, 'true');
+      } catch (error) {
+        console.error('Failed to save spin triggered state:', error);
+      }
+    }
+  };
+
   // Calculate totals with smart shipping
   // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
   // Shipping options: USPS (standard) or UPS (Ground, 3-Day, 2-Day, Next Day)
@@ -189,6 +231,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     isOpen,
     setIsOpen,
     isHydrated,
+    // Spin wheel
+    showSpinWheel,
+    setShowSpinWheel,
+    spinPrize,
+    setSpinPrize,
+    hasTriggeredSpin,
+    triggerSpinForTikTok,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

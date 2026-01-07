@@ -152,6 +152,23 @@ model OrderItem {
   @@index([orderId])
 }
 
+// Spin-the-wheel entries for TikTok gamification
+model SpinWheelEntry {
+  id        String    @id @default(uuid())
+  email     String
+  prize     String    // 'jackpot', 'free_sauce', 'free_shipping', 'bonus_tortillas', 'five_off'
+  code      String    @unique
+  used      Boolean   @default(false)
+  usedAt    DateTime?
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  utmSource String?   // Track which campaign
+
+  @@index([email])
+  @@index([code])
+  @@index([expiresAt])
+}
+
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Order_backup_1762893219972 {
   id              String?

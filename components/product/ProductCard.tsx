@@ -21,6 +21,7 @@ interface ProductCardProps {
   isBestSeller?: boolean;
   savingsPercent?: number;
   onAddToOrder?: (sku: string) => void;
+  isTikTok?: boolean; // Trigger spin wheel for TikTok users
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -36,8 +37,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   isBestSeller,
   savingsPercent,
   onAddToOrder,
+  isTikTok,
 }) => {
-  const { addItem, setIsOpen } = useCart();
+  const { addItem, setIsOpen, triggerSpinForTikTok } = useCart();
   const [quantity, setQuantity] = useState(1);
 
   const storageLabel = storage === 'shelf_stable'
@@ -129,6 +131,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
     // Reset quantity to 1 after adding
     setQuantity(1);
+
+    // Trigger spin wheel for TikTok users (after small delay for cart to open)
+    if (isTikTok) {
+      setTimeout(() => {
+        triggerSpinForTikTok();
+      }, 500);
+    }
 
     // Call legacy callback if provided
     if (onAddToOrder) {

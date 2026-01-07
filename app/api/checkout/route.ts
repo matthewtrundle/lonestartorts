@@ -98,6 +98,54 @@ export async function POST(req: NextRequest) {
           console.log(`Free shipping applied for first order: ${normalizedEmail}`);
         }
       }
+      // Check if it's a spin wheel prize code (SPIN-XXXXX format)
+      else if (normalizedCode.startsWith('SPIN-')) {
+        const spinEntry = await prisma.spinWheelEntry.findUnique({
+          where: { code: normalizedCode },
+        });
+
+        if (spinEntry && !spinEntry.used && new Date() <= spinEntry.expiresAt) {
+          // Valid spin prize - apply based on prize type
+          switch (spinEntry.prize) {
+            case 'jackpot':
+              // 100% off up to $50 (5000 cents)
+              percentageDiscount = 100;
+              discountAmount = Math.min(subtotal, 5000);
+              console.log(`JACKPOT spin prize applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+              break;
+            case 'free_shipping':
+              // Free shipping
+              if (!freeShippingApplied) {
+                shippingCost = 0;
+                freeShippingApplied = true;
+                freeShippingReason = 'spin_prize';
+                console.log(`Free shipping spin prize applied: ${normalizedCode}`);
+              }
+              break;
+            case 'five_off':
+              // $5 off
+              discountAmount = 500;
+              console.log(`$5 off spin prize applied: ${normalizedCode}`);
+              break;
+            case 'bonus_tortillas':
+              // 10 bonus tortillas - $5 value applied as discount
+              discountAmount = 500;
+              console.log(`Bonus tortillas spin prize applied: ${normalizedCode}`);
+              break;
+            case 'free_sauce':
+              // Free sauce - $12 value applied as discount
+              discountAmount = 1200;
+              console.log(`Free sauce spin prize applied: ${normalizedCode}`);
+              break;
+          }
+
+          // Mark spin entry as used
+          await prisma.spinWheelEntry.update({
+            where: { code: normalizedCode },
+            data: { used: true, usedAt: new Date() },
+          });
+        }
+      }
     }
 
     // Calculate total packs for display (exclude sauce)

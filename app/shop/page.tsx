@@ -4,9 +4,11 @@ import Image from 'next/image';
 import { Suspense } from 'react';
 import { ProductCard } from '@/components/product/ProductCard';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
+import { SpinTheWheel } from '@/components/shop/SpinTheWheel';
 import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
+import { useCart } from '@/lib/cart-context';
 import { products as allProducts } from '@/lib/products';
 import { useSearchParams } from 'next/navigation';
 
@@ -16,56 +18,67 @@ const tortillaProducts = allProducts.filter(p => p.productType === 'tortilla');
 // Wrap the main content to use useSearchParams
 function ShopContent() {
   const { t } = useLanguage();
+  const { showSpinWheel, setShowSpinWheel } = useCart();
   const searchParams = useSearchParams();
   const isTikTok = searchParams.get('utm_source') === 'tiktok';
 
   // TikTok variant - ultra minimal for fast conversion
   if (isTikTok) {
     return (
-      <main className="min-h-screen bg-white pt-[100px]">
-        {/* Bold Free Shipping Banner for TikTok */}
-        <div className="bg-sunset-600 text-white py-4 px-4 text-center">
-          <p className="text-xl md:text-2xl font-bold">
-            FREE Shipping on orders $100+
-          </p>
-          <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
-        </div>
+      <>
+        {/* Spin The Wheel Modal for TikTok users */}
+        <SpinTheWheel
+          isOpen={showSpinWheel}
+          onClose={() => setShowSpinWheel(false)}
+          utmSource="tiktok"
+        />
 
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          {/* Products Grid - Immediately visible */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {tortillaProducts.map((product) => (
-              <ProductCard
-                key={product.sku}
-                sku={product.sku}
-                name={product.name}
-                description={product.description}
-                image={product.image}
-                price={product.price}
-                tortillaCount={product.tortillaCount}
-                storage={product.storage}
-                productType={product.productType}
-                tortillaType={product.tortillaType}
-                isBestSeller={product.isBestSeller}
-                savingsPercent={product.savingsPercent}
-              />
-            ))}
+        <main className="min-h-screen bg-white pt-[100px]">
+          {/* Bold Free Shipping Banner for TikTok */}
+          <div className="bg-sunset-600 text-white py-4 px-4 text-center">
+            <p className="text-xl md:text-2xl font-bold">
+              FREE Shipping on orders $100+
+            </p>
+            <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
           </div>
 
-          {/* Simple trust line */}
-          <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
-            <span className="flex items-center gap-1">
-              <Truck className="w-4 h-4" /> Fast Shipping
-            </span>
-            <span className="flex items-center gap-1">
-              <Shield className="w-4 h-4" /> Secure Checkout
-            </span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-4 h-4" /> Ships Same Day
-            </span>
+          <div className="max-w-6xl mx-auto px-4 py-6">
+            {/* Products Grid - Immediately visible */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {tortillaProducts.map((product) => (
+                <ProductCard
+                  key={product.sku}
+                  sku={product.sku}
+                  name={product.name}
+                  description={product.description}
+                  image={product.image}
+                  price={product.price}
+                  tortillaCount={product.tortillaCount}
+                  storage={product.storage}
+                  productType={product.productType}
+                  tortillaType={product.tortillaType}
+                  isBestSeller={product.isBestSeller}
+                  savingsPercent={product.savingsPercent}
+                  isTikTok={true}
+                />
+              ))}
+            </div>
+
+            {/* Simple trust line */}
+            <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
+              <span className="flex items-center gap-1">
+                <Truck className="w-4 h-4" /> Fast Shipping
+              </span>
+              <span className="flex items-center gap-1">
+                <Shield className="w-4 h-4" /> Secure Checkout
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock className="w-4 h-4" /> Ships Same Day
+              </span>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </>
     );
   }
 
