@@ -38,7 +38,7 @@ interface CartContextType {
   total: number;
   shippingMethod: ShippingMethod;
   setShippingMethod: (method: ShippingMethod) => void;
-  shippingOptions: { usps: number; fedex: number };
+  shippingOptions: { usps: number; ups_ground: number; ups_3day: number; ups_2day: number; ups_nextday: number };
   freeShippingProgress: FreeShippingProgress;
   freeShippingThreshold: number;
   addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
@@ -70,7 +70,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setItems(parsed);
       }
       const storedMethod = localStorage.getItem(SHIPPING_METHOD_KEY) as ShippingMethod | null;
-      if (storedMethod === 'usps' || storedMethod === 'fedex') {
+      const validMethods = ['usps', 'ups_ground', 'ups_3day', 'ups_2day', 'ups_nextday'];
+      if (storedMethod && validMethods.includes(storedMethod)) {
         setShippingMethodState(storedMethod);
       }
     } catch (error) {
@@ -159,8 +160,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Calculate totals with smart shipping
   // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
-  // Shipping options: USPS (standard) or FedEx 2nd Day (premium)
-  // FREE shipping on USPS orders $60+
+  // Shipping options: USPS (standard) or UPS (Ground, 3-Day, 2-Day, Next Day)
+  // FREE shipping on USPS orders $100+
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
   const shippingOptions = getShippingOptions(items, subtotal);

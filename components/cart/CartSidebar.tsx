@@ -369,7 +369,11 @@ export function CartSidebar() {
                     <div className="flex items-center gap-2">
                       <Truck className="w-3.5 h-3.5 text-sunset-600" />
                       <span className="text-xs font-medium uppercase tracking-wide">
-                        {shippingMethod === 'usps' ? t('cart.shippingMethod.usps.name') : t('cart.shippingMethod.fedex.name')}
+                        {shippingMethod === 'usps' ? 'USPS Priority' :
+                         shippingMethod === 'ups_ground' ? 'UPS Ground' :
+                         shippingMethod === 'ups_3day' ? 'UPS 3-Day' :
+                         shippingMethod === 'ups_2day' ? 'UPS 2-Day' :
+                         'UPS Next Day'}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -396,16 +400,16 @@ export function CartSidebar() {
                             className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
                           />
                           <div>
-                            <p className="text-xs font-medium">{t('cart.shippingMethod.usps.name')}</p>
-                            <p className="text-[10px] text-gray-500">{t('cart.shippingMethod.usps.time')}</p>
+                            <p className="text-xs font-medium">USPS Priority Mail</p>
+                            <p className="text-[10px] text-gray-500">3-5 business days</p>
                           </div>
                         </div>
                         <span className="text-xs font-medium">{formatPrice(shippingOptions.usps)}</span>
                       </label>
 
-                      {/* FedEx Option */}
+                      {/* UPS 3-Day Select */}
                       <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
-                        shippingMethod === 'fedex'
+                        shippingMethod === 'ups_3day'
                           ? 'border-sunset-500 bg-sunset-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}>
@@ -413,17 +417,63 @@ export function CartSidebar() {
                           <input
                             type="radio"
                             name="shippingMethod"
-                            value="fedex"
-                            checked={shippingMethod === 'fedex'}
-                            onChange={() => setShippingMethod('fedex')}
+                            value="ups_3day"
+                            checked={shippingMethod === 'ups_3day'}
+                            onChange={() => setShippingMethod('ups_3day')}
                             className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
                           />
                           <div>
-                            <p className="text-xs font-medium">{t('cart.shippingMethod.fedex.name')}</p>
-                            <p className="text-[10px] text-gray-500">{t('cart.shippingMethod.fedex.time')}</p>
+                            <p className="text-xs font-medium">UPS 3-Day Select</p>
+                            <p className="text-[10px] text-gray-500">3 business days</p>
                           </div>
                         </div>
-                        <span className="text-xs font-medium">{formatPrice(shippingOptions.fedex)}</span>
+                        <span className="text-xs font-medium">{formatPrice(shippingOptions.ups_3day)}</span>
+                      </label>
+
+                      {/* UPS 2nd Day Air */}
+                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
+                        shippingMethod === 'ups_2day'
+                          ? 'border-sunset-500 bg-sunset-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}>
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            name="shippingMethod"
+                            value="ups_2day"
+                            checked={shippingMethod === 'ups_2day'}
+                            onChange={() => setShippingMethod('ups_2day')}
+                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
+                          />
+                          <div>
+                            <p className="text-xs font-medium">UPS 2nd Day Air</p>
+                            <p className="text-[10px] text-gray-500">2 business days</p>
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{formatPrice(shippingOptions.ups_2day)}</span>
+                      </label>
+
+                      {/* UPS Next Day Air */}
+                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
+                        shippingMethod === 'ups_nextday'
+                          ? 'border-sunset-500 bg-sunset-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}>
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            name="shippingMethod"
+                            value="ups_nextday"
+                            checked={shippingMethod === 'ups_nextday'}
+                            onChange={() => setShippingMethod('ups_nextday')}
+                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
+                          />
+                          <div>
+                            <p className="text-xs font-medium">UPS Next Day Air</p>
+                            <p className="text-[10px] text-gray-500">Next business day</p>
+                          </div>
+                        </div>
+                        <span className="text-xs font-medium">{formatPrice(shippingOptions.ups_nextday)}</span>
                       </label>
                     </div>
                   )}

@@ -7,18 +7,16 @@
 export const FREE_SHIPPING_THRESHOLD = 10000;
 
 // Shipping method type
-export type ShippingMethod = 'usps' | 'fedex';
+export type ShippingMethod = 'usps' | 'ups_ground' | 'ups_3day' | 'ups_2day' | 'ups_nextday';
 
-// FedEx 2nd Day Air flat rates (in cents) based on pack count
-// Index 0 = 1 pack, Index 1 = 2 packs, etc.
-const FEDEX_FLAT_RATES = [
-  9000,   // 1 pack: $90
-  9700,   // 2 packs: $97
-  10500,  // 3 packs: $105
-  11500,  // 4 packs: $115
-  12500,  // 5 packs: $125
-  13700,  // 6 packs: $137
-];
+// UPS flat rates (in cents) - base rate for 1 pack
+// These are approximate rates that can be adjusted
+const UPS_RATES = {
+  ground: 2500,     // ~$25 (3-5 business days)
+  threeDay: 3300,   // ~$33 (3 business days)
+  secondDay: 4500,  // ~$45 (2 business days)
+  nextDay: 8500,    // ~$85 (next business day)
+};
 
 export interface Product {
   sku: string;
@@ -164,7 +162,7 @@ export function getShippingCost(
   method: ShippingMethod,
   subtotal?: number
 ): number {
-  // FREE shipping for orders $60+ (USPS only - FedEx always charged)
+  // FREE shipping for orders $100+ (USPS only - UPS always charged)
   if (method === 'usps' && subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
     return 0;
   }
@@ -181,13 +179,23 @@ export function getShippingCost(
     return calculateShipping(items);
   }
 
-  // FedEx 2nd Day Air - flat rates based on pack count (no free shipping)
+  // UPS shipping - flat rates (no free shipping on expedited)
   if (tortillaPacks > 0) {
-    const index = Math.min(tortillaPacks - 1, FEDEX_FLAT_RATES.length - 1);
-    return FEDEX_FLAT_RATES[index];
+    switch (method) {
+      case 'ups_ground':
+        return UPS_RATES.ground;
+      case 'ups_3day':
+        return UPS_RATES.threeDay;
+      case 'ups_2day':
+        return UPS_RATES.secondDay;
+      case 'ups_nextday':
+        return UPS_RATES.nextDay;
+      default:
+        return UPS_RATES.threeDay; // Default to 3-day
+    }
   }
 
-  // Sauce-only FedEx order
+  // Sauce-only UPS order
   if (hasSauce) {
     return 999; // $9.99 - Sauce-only shipping (same as USPS)
   }
@@ -195,17 +203,23 @@ export function getShippingCost(
   return 0;
 }
 
-// Get both shipping options for display
+// Get all shipping options for display
 export function getShippingOptions(
   items: { productType?: string; quantity: number }[],
   subtotal?: number
 ): {
   usps: number;
-  fedex: number;
+  ups_ground: number;
+  ups_3day: number;
+  ups_2day: number;
+  ups_nextday: number;
 } {
   return {
     usps: getShippingCost(items, 'usps', subtotal),
-    fedex: getShippingCost(items, 'fedex', subtotal),
+    ups_ground: getShippingCost(items, 'ups_ground', subtotal),
+    ups_3day: getShippingCost(items, 'ups_3day', subtotal),
+    ups_2day: getShippingCost(items, 'ups_2day', subtotal),
+    ups_nextday: getShippingCost(items, 'ups_nextday', subtotal),
   };
 }
 

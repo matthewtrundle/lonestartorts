@@ -21,7 +21,8 @@ export async function POST(req: NextRequest) {
     const { items, shippingMethod: rawShippingMethod, email, discountCode } = await req.json();
 
     // Validate and default shipping method
-    const shippingMethod: ShippingMethod = rawShippingMethod === 'fedex' ? 'fedex' : 'usps';
+    const validMethods: ShippingMethod[] = ['usps', 'ups_ground', 'ups_3day', 'ups_2day', 'ups_nextday'];
+    const shippingMethod: ShippingMethod = validMethods.includes(rawShippingMethod) ? rawShippingMethod : 'usps';
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
@@ -147,7 +148,11 @@ export async function POST(req: NextRequest) {
 
     // Build shipping display name
     const getShippingDisplayName = () => {
-      const methodName = shippingMethod === 'usps' ? 'USPS Priority Mail' : 'FedEx 2nd Day Air';
+      const methodName = shippingMethod === 'usps' ? 'USPS Priority Mail' :
+        shippingMethod === 'ups_ground' ? 'UPS Ground' :
+        shippingMethod === 'ups_3day' ? 'UPS 3-Day Select' :
+        shippingMethod === 'ups_2day' ? 'UPS 2nd Day Air' :
+        'UPS Next Day Air';
       const baseLabel = (() => {
         if (totalPacks > 0 && sauceBottles > 0) {
           return `${totalPacks} tortilla ${totalPacks === 1 ? 'pack' : 'packs'} + ${sauceBottles} sauce`;
@@ -225,11 +230,17 @@ export async function POST(req: NextRequest) {
             delivery_estimate: {
               minimum: {
                 unit: 'business_day',
-                value: shippingMethod === 'usps' ? 3 : 2, // USPS: 3-4 days, FedEx: 2 days
+                value: shippingMethod === 'usps' ? 3 :
+                  shippingMethod === 'ups_ground' ? 3 :
+                  shippingMethod === 'ups_3day' ? 3 :
+                  shippingMethod === 'ups_2day' ? 2 : 1,
               },
               maximum: {
                 unit: 'business_day',
-                value: shippingMethod === 'usps' ? 4 : 2, // USPS: 3-4 days, FedEx: 2 days
+                value: shippingMethod === 'usps' ? 5 :
+                  shippingMethod === 'ups_ground' ? 5 :
+                  shippingMethod === 'ups_3day' ? 3 :
+                  shippingMethod === 'ups_2day' ? 2 : 1,
               },
             },
           },
