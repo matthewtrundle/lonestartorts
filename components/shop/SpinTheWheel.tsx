@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Timer, ShoppingCart, Sparkles } from 'lucide-react';
+import { X, Mail, Clock, ShoppingCart, Star, Gift, Check, Zap } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 import { getProductBySku } from '@/lib/products';
 
@@ -24,43 +24,43 @@ interface SpinTheWheelProps {
   utmSource?: string;
 }
 
-// Prize segments for the wheel visual (in order around the wheel)
+// Prize segments with refined colors
 const WHEEL_SEGMENTS = [
-  { id: 'five_off', label: '$5 OFF', color: '#F59E0B', textColor: '#FFFFFF' },
-  { id: 'free_shipping', label: 'FREE SHIPPING', color: '#10B981', textColor: '#FFFFFF' },
-  { id: 'five_off', label: '$5 OFF', color: '#DC2626', textColor: '#FFFFFF' },
-  { id: 'bonus_tortillas', label: '+10 TORTILLAS', color: '#8B5CF6', textColor: '#FFFFFF' },
-  { id: 'five_off', label: '$5 OFF', color: '#F59E0B', textColor: '#FFFFFF' },
-  { id: 'free_sauce', label: 'FREE SALSA', color: '#059669', textColor: '#FFFFFF' },
-  { id: 'five_off', label: '$5 OFF', color: '#DC2626', textColor: '#FFFFFF' },
-  { id: 'jackpot', label: 'JACKPOT!', color: '#EC4899', textColor: '#FFFFFF' },
+  { id: 'five_off', label: '$5 OFF', color: '#E67E22', textColor: '#FFFFFF' },
+  { id: 'free_shipping', label: 'FREE SHIP', color: '#27AE60', textColor: '#FFFFFF' },
+  { id: 'five_off', label: '$5 OFF', color: '#C0392B', textColor: '#FFFFFF' },
+  { id: 'bonus_tortillas', label: '+10 FREE', color: '#8E44AD', textColor: '#FFFFFF' },
+  { id: 'five_off', label: '$5 OFF', color: '#E67E22', textColor: '#FFFFFF' },
+  { id: 'free_sauce', label: 'FREE SALSA', color: '#16A085', textColor: '#FFFFFF' },
+  { id: 'five_off', label: '$5 OFF', color: '#C0392B', textColor: '#FFFFFF' },
+  { id: 'jackpot', label: 'JACKPOT', color: '#D4AF37', textColor: '#FFFFFF' },
 ];
 
-// Pre-generate confetti data
-const CONFETTI_PIECES = Array.from({ length: 60 }).map((_, i) => ({
+// Pre-generate confetti
+const CONFETTI_PIECES = Array.from({ length: 50 }).map((_, i) => ({
   id: i,
-  color: ['#F59E0B', '#10B981', '#EF4444', '#8B5CF6', '#EC4899', '#3B82F6'][Math.floor(Math.random() * 6)],
+  color: ['#E67E22', '#27AE60', '#C0392B', '#8E44AD', '#D4AF37', '#3498DB'][Math.floor(Math.random() * 6)],
   left: Math.random() * 100,
-  delay: Math.random() * 0.5,
-  duration: 2 + Math.random() * 2,
-  size: 8 + Math.random() * 10,
+  delay: Math.random() * 0.3,
+  duration: 1.5 + Math.random() * 1.5,
+  size: 6 + Math.random() * 8,
   rotation: 360 * (Math.random() > 0.5 ? 1 : -1),
 }));
 
-// Confetti component
 function Confetti() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[10001]">
       {CONFETTI_PIECES.map((piece) => (
         <motion.div
           key={piece.id}
-          className="absolute rounded-sm"
+          className="absolute"
           style={{
             left: `${piece.left}%`,
             top: -20,
             width: piece.size,
             height: piece.size,
             backgroundColor: piece.color,
+            borderRadius: piece.id % 3 === 0 ? '50%' : '2px',
           }}
           initial={{ y: 0, opacity: 1, rotate: 0 }}
           animate={{
@@ -79,7 +79,6 @@ function Confetti() {
   );
 }
 
-// Countdown timer component
 function CountdownTimer({ expiresAt }: { expiresAt: string }) {
   const [timeLeft, setTimeLeft] = useState('');
 
@@ -105,16 +104,15 @@ function CountdownTimer({ expiresAt }: { expiresAt: string }) {
   }, [expiresAt]);
 
   return (
-    <div className="flex items-center justify-center gap-2 text-red-600 font-bold text-lg">
-      <Timer className="w-5 h-5 animate-pulse" />
+    <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-200 rounded-full text-red-700 font-semibold">
+      <Clock className="w-4 h-4" />
       <span>Expires in {timeLeft}</span>
     </div>
   );
 }
 
-// Select a random prize (client-side for immediate spin)
 function selectRandomPrize(): { id: string; index: number } {
-  const weights = [40, 25, 40, 25, 40, 8, 40, 2]; // Must match WHEEL_SEGMENTS order
+  const weights = [40, 25, 40, 25, 40, 8, 40, 2];
   const totalWeight = weights.reduce((a, b) => a + b, 0);
   let random = Math.random() * totalWeight;
 
@@ -130,8 +128,7 @@ function selectRandomPrize(): { id: string; index: number } {
 export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheWheelProps) {
   const { addItem, setIsOpen: setCartOpen } = useCart();
 
-  // Steps: 'ready' -> 'spinning' -> 'result' -> 'claim' -> 'done'
-  const [step, setStep] = useState<'ready' | 'spinning' | 'result' | 'claim' | 'done'>('ready');
+  const [step, setStep] = useState<'ready' | 'spinning' | 'result' | 'done'>('ready');
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -140,31 +137,25 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
   const [showConfetti, setShowConfetti] = useState(false);
   const [rotation, setRotation] = useState(0);
 
-  // Handle spin button click - spin first, no email required
   const handleSpin = () => {
-    // Select prize client-side for immediate feedback
     const selected = selectRandomPrize();
     setPendingPrizeId(selected.id);
 
-    // Calculate rotation to land on the correct segment
     const segmentAngle = 360 / WHEEL_SEGMENTS.length;
     const targetAngle = selected.index * segmentAngle;
-    // Add multiple full rotations for effect
     const fullRotations = 5 * 360;
     const finalRotation = fullRotations + (360 - targetAngle) + (segmentAngle / 2);
 
     setRotation(finalRotation);
     setStep('spinning');
 
-    // After spin animation, show result
     setTimeout(() => {
       setStep('result');
       setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 4000);
-    }, 4000);
+      setTimeout(() => setShowConfetti(false), 3000);
+    }, 3500);
   };
 
-  // Handle email submission to claim prize
   const handleClaimPrize = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) {
@@ -182,7 +173,6 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
         body: JSON.stringify({
           email: email.trim(),
           utmSource,
-          // Server will generate its own prize, but we pass what they "won" visually
           clientPrizeId: pendingPrizeId,
         }),
       });
@@ -204,7 +194,6 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
         setPrize(data.prize);
         setStep('done');
 
-        // Auto-add product prizes to cart
         if (data.prize.type === 'product' && data.prize.sku) {
           const product = getProductBySku(data.prize.sku);
           if (product) {
@@ -221,7 +210,7 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
       } else {
         setError(data.error || 'Something went wrong');
       }
-    } catch (err) {
+    } catch {
       setError('Failed to claim prize. Please try again.');
     } finally {
       setIsLoading(false);
@@ -238,7 +227,6 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
     onClose();
   };
 
-  // Reset state when modal closes
   useEffect(() => {
     if (!isOpen) {
       setStep('ready');
@@ -250,11 +238,81 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
     }
   }, [isOpen]);
 
-  // Get the display name for the pending prize
   const getPendingPrizeName = () => {
     const segment = WHEEL_SEGMENTS.find(s => s.id === pendingPrizeId);
     return segment?.label || 'PRIZE';
   };
+
+  // Wheel component
+  const SpinWheel = ({ isSpinning = false, onClick }: { isSpinning?: boolean; onClick?: () => void }) => (
+    <div
+      className={`relative w-56 h-56 md:w-64 md:h-64 mx-auto ${onClick ? 'cursor-pointer' : ''}`}
+      onClick={onClick}
+    >
+      {/* Outer ring with metallic effect */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-b from-yellow-600 via-yellow-500 to-yellow-700 shadow-xl">
+        <div className="absolute inset-1 rounded-full bg-gradient-to-b from-yellow-700 to-yellow-800" />
+      </div>
+
+      {/* Wheel segments */}
+      <motion.div
+        className="absolute inset-3 rounded-full overflow-hidden shadow-inner"
+        style={{
+          background: `conic-gradient(
+            ${WHEEL_SEGMENTS.map((seg, i) => {
+              const angle = 360 / WHEEL_SEGMENTS.length;
+              return `${seg.color} ${i * angle}deg ${(i + 1) * angle}deg`;
+            }).join(', ')}
+          )`,
+        }}
+        animate={isSpinning ? { rotate: rotation } : {}}
+        transition={isSpinning ? { duration: 3.5, ease: [0.2, 0.1, 0.2, 1] } : {}}
+      >
+        {/* Segment labels */}
+        {WHEEL_SEGMENTS.map((seg, i) => {
+          const angle = (i * 360) / WHEEL_SEGMENTS.length + (180 / WHEEL_SEGMENTS.length);
+          return (
+            <div
+              key={i}
+              className="absolute left-1/2 top-1/2 origin-left font-bold text-white"
+              style={{
+                transform: `rotate(${angle}deg) translateX(50px)`,
+                fontSize: '10px',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                letterSpacing: '0.5px',
+              }}
+            >
+              {seg.label}
+            </div>
+          );
+        })}
+
+        {/* Divider lines */}
+        {WHEEL_SEGMENTS.map((_, i) => {
+          const angle = (i * 360) / WHEEL_SEGMENTS.length;
+          return (
+            <div
+              key={`line-${i}`}
+              className="absolute left-1/2 top-1/2 w-[1px] h-1/2 bg-white/30 origin-bottom"
+              style={{ transform: `rotate(${angle}deg) translateX(-50%)` }}
+            />
+          );
+        })}
+      </motion.div>
+
+      {/* Center hub */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 shadow-lg flex items-center justify-center border-4 border-yellow-300">
+          <Star className="w-6 h-6 md:w-7 md:h-7 text-white fill-white" />
+        </div>
+      </div>
+
+      {/* Pointer */}
+      <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
+        <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-gray-900 drop-shadow-md" />
+      </div>
+    </div>
+  );
 
   return (
     <AnimatePresence>
@@ -265,307 +323,203 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 z-[10000]"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[10000]"
             onClick={handleClose}
           />
 
-          {/* Confetti */}
           {showConfetti && <Confetti />}
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-md bg-gradient-to-b from-amber-50 to-orange-100 rounded-2xl shadow-2xl z-[10000] overflow-y-auto max-h-[90vh]"
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-1.5rem)] max-w-sm bg-white rounded-2xl shadow-2xl z-[10000] overflow-hidden"
           >
+            {/* Header gradient */}
+            <div className="h-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500" />
+
             {/* Close button */}
             {step !== 'spinning' && (
               <button
                 onClick={handleClose}
-                className="absolute top-3 right-3 p-2 hover:bg-black/10 rounded-full transition-colors z-10"
+                className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-full transition-colors z-10"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 text-gray-500" />
               </button>
             )}
 
-            {/* Ready to Spin Step */}
+            {/* Ready Step */}
             {step === 'ready' && (
-              <div className="p-4 md:p-6 text-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
-                  Spin the Sombrero!
-                </h2>
-                <p className="text-gray-600 mb-4">
-                  Tap to spin and win a prize!
-                </p>
-
-                {/* Sombrero Wheel - clickable */}
-                <div
-                  className="relative w-64 h-64 md:w-72 md:h-72 mx-auto mb-4 cursor-pointer"
-                  onClick={handleSpin}
-                >
-                  {/* Outer decorative ring */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-b from-amber-600 to-amber-800 shadow-2xl" />
-
-                  {/* Wheel */}
-                  <div
-                    className="absolute inset-2 rounded-full overflow-hidden shadow-inner"
-                    style={{
-                      background: `conic-gradient(
-                        ${WHEEL_SEGMENTS.map((seg, i) => {
-                          const angle = 360 / WHEEL_SEGMENTS.length;
-                          return `${seg.color} ${i * angle}deg ${(i + 1) * angle}deg`;
-                        }).join(', ')}
-                      )`,
-                    }}
-                  >
-                    {/* Segment labels */}
-                    {WHEEL_SEGMENTS.map((seg, i) => {
-                      const angle = (i * 360) / WHEEL_SEGMENTS.length + (180 / WHEEL_SEGMENTS.length);
-                      return (
-                        <div
-                          key={i}
-                          className="absolute left-1/2 top-1/2 origin-left font-extrabold text-white"
-                          style={{
-                            transform: `rotate(${angle}deg) translateX(60px)`,
-                            fontSize: '12px',
-                            textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
-                            letterSpacing: '0.5px',
-                          }}
-                        >
-                          {seg.label}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Center Sombrero */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative">
-                      {/* Sombrero brim */}
-                      <div className="w-24 h-8 md:w-28 md:h-10 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-lg absolute -bottom-1 left-1/2 -translate-x-1/2" />
-                      {/* Sombrero top */}
-                      <div className="w-14 h-10 md:w-16 md:h-12 bg-gradient-to-b from-amber-400 to-amber-600 rounded-t-full mx-auto relative z-10 shadow-md flex items-center justify-center">
-                        <span className="text-xl md:text-2xl">🌮</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Pointer */}
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-20">
-                    <div className="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[24px] border-t-red-600 drop-shadow-lg" />
-                  </div>
+              <div className="p-5 text-center">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold mb-3">
+                  <Gift className="w-3.5 h-3.5" />
+                  EXCLUSIVE OFFER
                 </div>
 
-                {/* Spin Button */}
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">
+                  Spin to Win!
+                </h2>
+                <p className="text-gray-500 text-sm mb-4">
+                  Try your luck for instant savings
+                </p>
+
+                <SpinWheel onClick={handleSpin} />
+
                 <button
                   onClick={handleSpin}
-                  className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-lg rounded-xl hover:from-red-600 hover:to-orange-600 transition-all shadow-lg flex items-center justify-center gap-2 transform hover:scale-105"
+                  className="mt-4 w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-xl hover:from-orange-600 hover:to-red-600 transition-all shadow-lg flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-5 h-5" />
-                  TAP TO SPIN!
+                  <Zap className="w-5 h-5" />
+                  SPIN NOW
                 </button>
 
-                <p className="text-xs text-gray-500 mt-2">
-                  Everyone wins something!
+                <p className="text-xs text-gray-400 mt-3">
+                  Everyone wins • No purchase necessary
                 </p>
               </div>
             )}
 
             {/* Spinning Step */}
             {step === 'spinning' && (
-              <div className="p-4 md:p-6 text-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              <div className="p-5 text-center">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">
                   Spinning...
                 </h2>
 
-                {/* Spinning Wheel */}
-                <div className="relative w-64 h-64 md:w-72 md:h-72 mx-auto mb-4">
-                  {/* Outer decorative ring */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-b from-amber-600 to-amber-800 shadow-2xl" />
+                <SpinWheel isSpinning />
 
-                  {/* Wheel - animated */}
-                  <motion.div
-                    className="absolute inset-2 rounded-full overflow-hidden shadow-inner"
-                    style={{
-                      background: `conic-gradient(
-                        ${WHEEL_SEGMENTS.map((seg, i) => {
-                          const angle = 360 / WHEEL_SEGMENTS.length;
-                          return `${seg.color} ${i * angle}deg ${(i + 1) * angle}deg`;
-                        }).join(', ')}
-                      )`,
-                    }}
-                    animate={{ rotate: rotation }}
-                    transition={{ duration: 4, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    {/* Segment labels */}
-                    {WHEEL_SEGMENTS.map((seg, i) => {
-                      const angle = (i * 360) / WHEEL_SEGMENTS.length + (180 / WHEEL_SEGMENTS.length);
-                      return (
-                        <div
-                          key={i}
-                          className="absolute left-1/2 top-1/2 origin-left font-extrabold text-white"
-                          style={{
-                            transform: `rotate(${angle}deg) translateX(60px)`,
-                            fontSize: '12px',
-                            textShadow: '2px 2px 4px rgba(0,0,0,0.7)',
-                            letterSpacing: '0.5px',
-                          }}
-                        >
-                          {seg.label}
-                        </div>
-                      );
-                    })}
-                  </motion.div>
-
-                  {/* Center Sombrero */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="relative">
-                      <div className="w-24 h-8 md:w-28 md:h-10 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-lg absolute -bottom-1 left-1/2 -translate-x-1/2" />
-                      <div className="w-14 h-10 md:w-16 md:h-12 bg-gradient-to-b from-amber-400 to-amber-600 rounded-t-full mx-auto relative z-10 shadow-md flex items-center justify-center">
-                        <span className="text-xl md:text-2xl">🌮</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Pointer */}
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-20">
-                    <div className="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[24px] border-t-red-600 drop-shadow-lg" />
-                  </div>
-                </div>
-
-                <p className="text-gray-600 animate-pulse">
+                <p className="text-gray-500 mt-4 animate-pulse">
                   Good luck!
                 </p>
               </div>
             )}
 
-            {/* Result Step - Show what they won, ask for email */}
+            {/* Result Step */}
             {step === 'result' && (
-              <div className="p-6 md:p-8 text-center">
+              <div className="p-5 text-center">
                 <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ type: 'spring', damping: 10 }}
-                  className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', damping: 12 }}
+                  className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg"
                 >
-                  <span className="text-4xl md:text-5xl">🎉</span>
+                  <Gift className="w-8 h-8 text-white" />
                 </motion.div>
 
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-2"
+                  transition={{ delay: 0.15 }}
+                  className="text-2xl font-bold text-gray-900 mb-1"
                 >
-                  YOU WON!
+                  You Won!
                 </motion.h2>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="bg-gradient-to-r from-amber-200 to-orange-200 rounded-xl p-4 md:p-6 mb-6 border-2 border-amber-400"
+                  transition={{ delay: 0.25 }}
+                  className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-4 border border-yellow-200"
                 >
-                  <p className="text-2xl md:text-3xl font-bold text-amber-800">{getPendingPrizeName()}</p>
+                  <p className="text-2xl font-bold text-gray-900">{getPendingPrizeName()}</p>
                 </motion.div>
 
-                {/* Email form to claim */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.35 }}
                 >
-                  <p className="text-gray-600 mb-4">
-                    Enter your email to claim your prize!
+                  <p className="text-gray-600 text-sm mb-3">
+                    Enter your email to claim:
                   </p>
 
-                  <form onSubmit={handleClaimPrize} className="space-y-4">
+                  <form onSubmit={handleClaimPrize} className="space-y-3">
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="your@email.com"
-                        className="w-full pl-10 pr-4 py-3 border-2 border-amber-300 rounded-xl focus:border-amber-500 focus:outline-none text-lg bg-white"
+                        className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200 focus:outline-none text-sm"
                         disabled={isLoading}
                         autoFocus
                       />
                     </div>
 
                     {error && (
-                      <p className="text-red-600 text-sm">{error}</p>
+                      <p className="text-red-600 text-xs">{error}</p>
                     )}
 
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-lg rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all shadow-lg disabled:opacity-50 flex items-center justify-center gap-2"
+                      className="w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all shadow disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                       {isLoading ? (
-                        <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+                        <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
                       ) : (
-                        'CLAIM MY PRIZE!'
+                        <>
+                          <Check className="w-4 h-4" />
+                          Claim Prize
+                        </>
                       )}
                     </button>
                   </form>
 
                   <button
                     onClick={handleClose}
-                    className="mt-4 text-gray-500 text-sm hover:text-gray-700"
+                    className="mt-3 text-gray-400 text-xs hover:text-gray-600"
                   >
-                    No thanks, I'll pass
+                    No thanks
                   </button>
                 </motion.div>
               </div>
             )}
 
-            {/* Done Step - Prize claimed */}
+            {/* Done Step */}
             {step === 'done' && prize && (
-              <div className="p-6 md:p-8 text-center">
+              <div className="p-5 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring' }}
-                  className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg"
+                  className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg"
                 >
-                  <span className="text-4xl">✅</span>
+                  <Check className="w-8 h-8 text-white" />
                 </motion.div>
 
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                <h2 className="text-xl font-bold text-gray-900 mb-1">
                   Prize Claimed!
                 </h2>
 
-                <div className="bg-gradient-to-r from-amber-100 to-orange-100 rounded-xl p-4 mb-4 border-2 border-amber-300">
-                  <p className="text-xl md:text-2xl font-bold text-amber-700">{prize.name}</p>
-                  <p className="text-gray-600 text-sm mt-1">{prize.description}</p>
+                <div className="bg-gray-50 rounded-xl p-4 mb-3 border border-gray-200">
+                  <p className="text-lg font-bold text-gray-900">{prize.name}</p>
+                  <p className="text-gray-500 text-xs mt-1">{prize.description}</p>
                 </div>
 
-                {/* Countdown */}
-                <div className="mb-4">
+                <div className="mb-3">
                   <CountdownTimer expiresAt={prize.expiresAt} />
                 </div>
 
-                {/* Prize code */}
-                <div className="bg-gray-100 rounded-lg p-3 mb-6">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Your Code</p>
-                  <p className="font-mono font-bold text-lg">{prize.code}</p>
+                <div className="bg-gray-100 rounded-lg px-4 py-2 mb-4 inline-block">
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">Your Code</p>
+                  <p className="font-mono font-bold text-gray-900">{prize.code}</p>
                 </div>
 
-                {/* CTA Button */}
                 <button
                   onClick={handleContinueToCheckout}
-                  className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-lg rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all shadow-lg flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all shadow flex items-center justify-center gap-2"
                 >
-                  <ShoppingCart className="w-5 h-5" />
-                  Complete Checkout Now!
+                  <ShoppingCart className="w-4 h-4" />
+                  Continue to Checkout
                 </button>
 
-                <p className="text-xs text-gray-500 mt-4">
+                <p className="text-xs text-gray-400 mt-3">
                   {prize.type === 'product'
-                    ? 'Prize has been added to your cart!'
-                    : 'Enter code at checkout to apply discount.'}
+                    ? 'Prize added to your cart!'
+                    : 'Code auto-applied at checkout'}
                 </p>
               </div>
             )}
