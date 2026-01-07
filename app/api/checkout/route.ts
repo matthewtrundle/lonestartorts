@@ -63,6 +63,8 @@ export async function POST(req: NextRequest) {
     let percentageDiscount = 0;
     let discountAmount = 0;
     let feedbackCouponCode: string | null = null;
+    let spinPrizeCode: string | null = null;
+    let spinPrizeType: string | null = null;
 
     // Validate discount code if provided (server-side re-validation)
     if (email && discountCode) {
@@ -106,6 +108,9 @@ export async function POST(req: NextRequest) {
 
         if (spinEntry && !spinEntry.used && new Date() <= spinEntry.expiresAt) {
           // Valid spin prize - apply based on prize type
+          spinPrizeCode = normalizedCode;
+          spinPrizeType = spinEntry.prize;
+
           switch (spinEntry.prize) {
             case 'ten_percent':
               // 10% off up to $10 max (1000 cents)
@@ -180,18 +185,38 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    // Create a Stripe coupon for percentage discount if feedback coupon is applied
+    // Create a Stripe coupon for discounts (feedback or spin wheel)
     let stripeCouponId: string | undefined;
-    if (discountAmount > 0 && feedbackCouponCode) {
-      const coupon = await stripe.coupons.create({
-        percent_off: percentageDiscount,
-        duration: 'once',
-        name: `Feedback Discount - ${feedbackCouponCode}`,
-        metadata: {
-          feedbackCouponCode,
-        },
-      });
-      stripeCouponId = coupon.id;
+    if (discountAmount > 0 && (feedbackCouponCode || spinPrizeCode)) {
+      // Determine if it's a percentage or fixed amount discount
+      if (percentageDiscount > 0) {
+        // Percentage discount (10% off)
+        const coupon = await stripe.coupons.create({
+          percent_off: percentageDiscount,
+          duration: 'once',
+          name: feedbackCouponCode
+            ? `Feedback Discount - ${feedbackCouponCode}`
+            : `Spin Prize - ${spinPrizeCode}`,
+          metadata: {
+            ...(feedbackCouponCode && { feedbackCouponCode }),
+            ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
+          },
+        });
+        stripeCouponId = coupon.id;
+      } else {
+        // Fixed amount discount ($5 off, free sauce, bonus tortillas)
+        const coupon = await stripe.coupons.create({
+          amount_off: discountAmount,
+          currency: 'usd',
+          duration: 'once',
+          name: `Spin Prize - ${spinPrizeCode}`,
+          metadata: {
+            spinPrizeCode: spinPrizeCode || '',
+            spinPrizeType: spinPrizeType || '',
+          },
+        });
+        stripeCouponId = coupon.id;
+      }
     }
 
     // Build shipping display name
@@ -261,6 +286,12 @@ export async function POST(req: NextRequest) {
           feedbackCouponCode,
           feedbackDiscountAmount: discountAmount.toString(),
           feedbackDiscountPercent: percentageDiscount.toString(),
+        }),
+        // Spin prize info for tracking
+        ...(spinPrizeCode && {
+          spinPrizeCode,
+          spinPrizeType: spinPrizeType || '',
+          spinDiscountAmount: discountAmount.toString(),
         }),
       },
       shipping_address_collection: {
