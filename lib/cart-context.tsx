@@ -187,16 +187,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
   };
 
-  // Trigger spin wheel for TikTok users (called after first add-to-cart)
-  const triggerSpinForTikTok = () => {
-    if (!hasTriggeredSpin) {
+  // Wrap setShowSpinWheel to also track triggered state
+  const handleSetShowSpinWheel = (show: boolean) => {
+    setShowSpinWheel(show);
+    // When showing the wheel, mark as triggered so it doesn't show again
+    if (show && !hasTriggeredSpin) {
       setHasTriggeredSpin(true);
-      setShowSpinWheel(true);
       try {
         sessionStorage.setItem(SPIN_TRIGGERED_KEY, 'true');
       } catch (error) {
         console.error('Failed to save spin triggered state:', error);
       }
+    }
+  };
+
+  // Legacy function - now just calls handleSetShowSpinWheel
+  const triggerSpinForTikTok = () => {
+    if (!hasTriggeredSpin) {
+      handleSetShowSpinWheel(true);
     }
   };
 
@@ -233,7 +241,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     isHydrated,
     // Spin wheel
     showSpinWheel,
-    setShowSpinWheel,
+    setShowSpinWheel: handleSetShowSpinWheel,
     spinPrize,
     setSpinPrize,
     hasTriggeredSpin,

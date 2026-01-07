@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { ProductCard } from '@/components/product/ProductCard';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { SpinTheWheel } from '@/components/shop/SpinTheWheel';
@@ -18,9 +18,39 @@ const tortillaProducts = allProducts.filter(p => p.productType === 'tortilla');
 // Wrap the main content to use useSearchParams
 function ShopContent() {
   const { t } = useLanguage();
-  const { showSpinWheel, setShowSpinWheel } = useCart();
+  const { showSpinWheel, setShowSpinWheel, hasTriggeredSpin } = useCart();
   const searchParams = useSearchParams();
   const isTikTok = searchParams.get('utm_source') === 'tiktok';
+  const spinTriggeredRef = useRef(false);
+
+  // Spin wheel trigger for TikTok users: 25% scroll OR 8 second timer (whichever first)
+  useEffect(() => {
+    if (!isTikTok || hasTriggeredSpin || spinTriggeredRef.current) return;
+
+    const triggerSpin = () => {
+      if (spinTriggeredRef.current) return;
+      spinTriggeredRef.current = true;
+      setShowSpinWheel(true);
+    };
+
+    // 8 second fallback timer
+    const timer = setTimeout(triggerSpin, 8000);
+
+    // Scroll trigger at 25% down
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent >= 25) {
+        triggerSpin();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isTikTok, hasTriggeredSpin, setShowSpinWheel]);
 
   // TikTok variant - ultra minimal for fast conversion
   if (isTikTok) {
@@ -59,7 +89,6 @@ function ShopContent() {
                   tortillaType={product.tortillaType}
                   isBestSeller={product.isBestSeller}
                   savingsPercent={product.savingsPercent}
-                  isTikTok={true}
                 />
               ))}
             </div>
