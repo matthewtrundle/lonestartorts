@@ -69,10 +69,10 @@ export async function POST(req: NextRequest) {
             discountInfo = { type: 'free_shipping', message: 'Free shipping applied!' };
             break;
           case 'free_sauce':
-            discountInfo = { type: 'product', message: 'Free sauce added to order!' };
+            discountInfo = { type: 'product', message: 'Free sauce added to order!', amount: 1200 }; // $12 value
             break;
           case 'bonus_tortillas':
-            discountInfo = { type: 'bonus', message: '10 bonus tortillas added!' };
+            discountInfo = { type: 'bonus', message: '10 bonus tortillas added!', amount: 500 }; // $5 value
             break;
           default:
             discountInfo = { type: 'unknown', message: 'Spin prize applied!' };

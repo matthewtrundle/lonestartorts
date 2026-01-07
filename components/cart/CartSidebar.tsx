@@ -25,6 +25,8 @@ export function CartSidebar() {
   const [discountApplied, setDiscountApplied] = useState(false);
   const [discountMessage, setDiscountMessage] = useState<string>('Free shipping!');
   const [discountError, setDiscountError] = useState<string | null>(null);
+  const [discountType, setDiscountType] = useState<string | null>(null); // 'free_shipping', 'fixed', 'percentage', 'product', 'bonus'
+  const [discountAmount, setDiscountAmount] = useState<number>(0); // Amount in cents for fixed, percent for percentage
 
   // Collapsible sections
   const [discountOpen, setDiscountOpen] = useState(false);
@@ -41,9 +43,35 @@ export function CartSidebar() {
 
   const handleClose = () => setIsOpen(false);
 
-  // Calculate display totals
-  const displayShipping = discountApplied ? 0 : shipping;
-  const displayTotal = discountApplied ? subtotal : total;
+  // Calculate display totals based on discount type
+  const calculateDiscountedTotal = () => {
+    if (!discountApplied) return total;
+
+    let discountedTotal = subtotal;
+
+    // Apply product discount (free shipping types)
+    if (discountType === 'free_shipping') {
+      // Free shipping - just use subtotal (no shipping cost added)
+      return subtotal;
+    }
+
+    // Apply fixed discount ($5 off, free sauce value, etc.)
+    if (discountType === 'fixed' || discountType === 'product' || discountType === 'bonus') {
+      discountedTotal = Math.max(0, subtotal - discountAmount);
+    }
+
+    // Apply percentage discount (10% off)
+    if (discountType === 'percentage') {
+      const percentOff = Math.min(Math.round(subtotal * (discountAmount / 100)), 1000); // Max $10 off
+      discountedTotal = subtotal - percentOff;
+    }
+
+    return discountedTotal;
+  };
+
+  const isFreeShipping = discountApplied && discountType === 'free_shipping';
+  const displayShipping = isFreeShipping ? 0 : shipping;
+  const displayTotal = calculateDiscountedTotal() + displayShipping;
 
   // Validate discount code
   const handleApplyDiscount = async () => {
@@ -75,6 +103,11 @@ export function CartSidebar() {
         setDiscountApplied(true);
         setDiscountMessage(data.message || 'Free shipping!');
         setDiscountError(null);
+        // Store discount type and amount for total calculation
+        if (data.discount) {
+          setDiscountType(data.discount.type || 'free_shipping');
+          setDiscountAmount(data.discount.amount || 0);
+        }
       } else {
         setDiscountError(data.error || 'Invalid code');
       }
@@ -90,6 +123,8 @@ export function CartSidebar() {
     setDiscountApplied(false);
     setDiscountCode('');
     setDiscountError(null);
+    setDiscountType(null);
+    setDiscountAmount(0);
   };
 
   const handleCheckout = async () => {
@@ -494,9 +529,21 @@ export function CartSidebar() {
                     <span className="text-gray-600">{t('cart.subtotal')}</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
+                  {/* Show discount line for non-shipping discounts */}
+                  {discountApplied && discountType !== 'free_shipping' && discountAmount > 0 && (
+                    <div className="flex justify-between text-green-600">
+                      <span>{discountType === 'percentage' ? `Discount (${discountAmount}%)` : 'Discount'}</span>
+                      <span className="font-medium">
+                        -{formatPrice(discountType === 'percentage'
+                          ? Math.min(Math.round(subtotal * (discountAmount / 100)), 1000)
+                          : discountAmount
+                        )}
+                      </span>
+                    </div>
+                  )}
                   <div className="flex justify-between">
                     <span className="text-gray-600">{t('cart.shipping')}</span>
-                    {discountApplied || freeShippingProgress.qualifies ? (
+                    {isFreeShipping || freeShippingProgress.qualifies ? (
                       <div className="flex items-center gap-1.5">
                         <span className="text-gray-400 line-through text-xs">{formatPrice(baseShipping)}</span>
                         <span className="font-medium text-green-600">{t('cart.free')}</span>
