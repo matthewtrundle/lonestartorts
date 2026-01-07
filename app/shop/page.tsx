@@ -21,6 +21,7 @@ function ShopContent() {
   const { showSpinWheel, setShowSpinWheel, hasTriggeredSpin } = useCart();
   const searchParams = useSearchParams();
   const isTikTok = searchParams.get('utm_source') === 'tiktok';
+  const isGoogleAds = searchParams.get('utm_source') === 'google' || searchParams.get('gclid') !== null;
   const spinTriggeredRef = useRef(false);
 
   // Spin wheel trigger for TikTok users: 25% scroll OR 8 second timer (whichever first)
@@ -108,6 +109,56 @@ function ShopContent() {
           </div>
         </main>
       </>
+    );
+  }
+
+  // Google Ads variant - clean, conversion-focused
+  if (isGoogleAds) {
+    return (
+      <main className="min-h-screen bg-white pt-[100px]">
+        {/* Bold Free Shipping Banner for Google Ads */}
+        <div className="bg-sunset-600 text-white py-4 px-4 text-center">
+          <p className="text-xl md:text-2xl font-bold">
+            FREE Shipping on orders $80+
+          </p>
+          <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          {/* Products Grid - Immediately visible */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {tortillaProducts.map((product) => (
+              <ProductCard
+                key={product.sku}
+                sku={product.sku}
+                name={product.name}
+                description={product.description}
+                image={product.image}
+                price={product.price}
+                tortillaCount={product.tortillaCount}
+                storage={product.storage}
+                productType={product.productType}
+                tortillaType={product.tortillaType}
+                isBestSeller={product.isBestSeller}
+                savingsPercent={product.savingsPercent}
+              />
+            ))}
+          </div>
+
+          {/* Simple trust line */}
+          <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
+            <span className="flex items-center gap-1">
+              <Truck className="w-4 h-4" /> Fast Shipping
+            </span>
+            <span className="flex items-center gap-1">
+              <Shield className="w-4 h-4" /> Secure Checkout
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-4 h-4" /> Ships Same Day
+            </span>
+          </div>
+        </div>
+      </main>
     );
   }
 
