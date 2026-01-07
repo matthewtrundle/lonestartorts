@@ -243,82 +243,105 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
     return segment?.label || 'PRIZE';
   };
 
-  // Wheel component
-  const SpinWheel = ({ isSpinning = false, onClick }: { isSpinning?: boolean; onClick?: () => void }) => (
-    <div
-      className={`relative w-64 h-64 md:w-72 md:h-72 mx-auto ${onClick ? 'cursor-pointer' : ''}`}
-      onClick={onClick}
-    >
-      {/* Outer ring with metallic effect */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-b from-yellow-600 via-yellow-500 to-yellow-700 shadow-xl">
-        <div className="absolute inset-1 rounded-full bg-gradient-to-b from-yellow-700 to-yellow-800" />
-      </div>
+  // Wheel component with SVG for better text rendering
+  const SpinWheel = ({ isSpinning = false, onClick }: { isSpinning?: boolean; onClick?: () => void }) => {
+    const size = 280;
+    const center = size / 2;
+    const radius = size / 2 - 20;
+    const innerRadius = 45;
+    const segmentCount = WHEEL_SEGMENTS.length;
+    const segmentAngle = 360 / segmentCount;
 
-      {/* Wheel segments */}
-      <motion.div
-        className="absolute inset-3 rounded-full overflow-hidden shadow-inner"
-        style={{
-          background: `conic-gradient(
-            ${WHEEL_SEGMENTS.map((seg, i) => {
-              const angle = 360 / WHEEL_SEGMENTS.length;
-              return `${seg.color} ${i * angle}deg ${(i + 1) * angle}deg`;
-            }).join(', ')}
-          )`,
-        }}
-        animate={isSpinning ? { rotate: rotation } : {}}
-        transition={isSpinning ? { duration: 3.5, ease: [0.2, 0.1, 0.2, 1] } : {}}
+    return (
+      <div
+        className={`relative mx-auto ${onClick ? 'cursor-pointer' : ''}`}
+        style={{ width: size, height: size }}
+        onClick={onClick}
       >
-        {/* Segment labels - positioned radially outward */}
-        {WHEEL_SEGMENTS.map((seg, i) => {
-          const segmentAngle = 360 / WHEEL_SEGMENTS.length;
-          const angle = i * segmentAngle + segmentAngle / 2;
-          return (
-            <div
-              key={i}
-              className="absolute font-extrabold text-white text-center"
-              style={{
-                left: '50%',
-                top: '50%',
-                transform: `rotate(${angle}deg) translateY(-70px) rotate(90deg)`,
-                fontSize: '11px',
-                textShadow: '0 1px 3px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.5)',
-                letterSpacing: '0.5px',
-                width: '60px',
-                marginLeft: '-30px',
-                lineHeight: '1.1',
-              }}
-            >
-              {seg.label}
-            </div>
-          );
-        })}
+        {/* Outer ring */}
+        <div
+          className="absolute rounded-full bg-gradient-to-b from-yellow-500 via-yellow-600 to-yellow-700 shadow-xl"
+          style={{ inset: 0 }}
+        />
 
-        {/* Divider lines */}
-        {WHEEL_SEGMENTS.map((_, i) => {
-          const angle = (i * 360) / WHEEL_SEGMENTS.length;
-          return (
-            <div
-              key={`line-${i}`}
-              className="absolute left-1/2 top-1/2 w-[2px] h-1/2 bg-white/40 origin-bottom"
-              style={{ transform: `rotate(${angle}deg) translateX(-50%)` }}
-            />
-          );
-        })}
-      </motion.div>
+        <motion.svg
+          width={size}
+          height={size}
+          className="absolute inset-0"
+          animate={isSpinning ? { rotate: rotation } : {}}
+          transition={isSpinning ? { duration: 3.5, ease: [0.2, 0.1, 0.2, 1] } : {}}
+          style={{ transformOrigin: 'center' }}
+        >
+          {WHEEL_SEGMENTS.map((seg, i) => {
+            const startAngle = (i * segmentAngle - 90) * (Math.PI / 180);
+            const endAngle = ((i + 1) * segmentAngle - 90) * (Math.PI / 180);
+            const midAngle = ((i + 0.5) * segmentAngle - 90) * (Math.PI / 180);
 
-      {/* Center hub */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-b from-yellow-400 via-yellow-500 to-yellow-600 shadow-lg flex items-center justify-center border-4 border-yellow-300">
-          <Star className="w-7 h-7 md:w-8 md:h-8 text-white fill-white" />
+            const x1 = center + radius * Math.cos(startAngle);
+            const y1 = center + radius * Math.sin(startAngle);
+            const x2 = center + radius * Math.cos(endAngle);
+            const y2 = center + radius * Math.sin(endAngle);
+
+            const textRadius = radius * 0.65;
+            const textX = center + textRadius * Math.cos(midAngle);
+            const textY = center + textRadius * Math.sin(midAngle);
+            const textRotation = (i + 0.5) * segmentAngle;
+
+            const largeArcFlag = segmentAngle > 180 ? 1 : 0;
+
+            const pathD = [
+              `M ${center} ${center}`,
+              `L ${x1} ${y1}`,
+              `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+              'Z'
+            ].join(' ');
+
+            return (
+              <g key={i}>
+                <path d={pathD} fill={seg.color} stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+                <text
+                  x={textX}
+                  y={textY}
+                  fill="white"
+                  fontSize="13"
+                  fontWeight="800"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  transform={`rotate(${textRotation}, ${textX}, ${textY})`}
+                  style={{
+                    textShadow: '0 2px 4px rgba(0,0,0,0.8)',
+                    filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.9))'
+                  }}
+                >
+                  {seg.label}
+                </text>
+              </g>
+            );
+          })}
+
+          {/* Center circle */}
+          <circle cx={center} cy={center} r={innerRadius} fill="url(#centerGradient)" stroke="#FCD34D" strokeWidth="4" />
+          <defs>
+            <linearGradient id="centerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FBBF24" />
+              <stop offset="50%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#D97706" />
+            </linearGradient>
+          </defs>
+        </motion.svg>
+
+        {/* Center star icon */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <Star className="w-8 h-8 text-white fill-white drop-shadow-md" />
+        </div>
+
+        {/* Pointer */}
+        <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-20">
+          <div className="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[24px] border-t-gray-900 drop-shadow-lg" />
         </div>
       </div>
-
-      {/* Pointer */}
-      <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20">
-        <div className="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[24px] border-t-gray-900 drop-shadow-md" />
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <AnimatePresence>
