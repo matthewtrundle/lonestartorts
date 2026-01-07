@@ -38,6 +38,7 @@ interface SpinPrize {
   expiresAt: string;
   sku?: string;
   value?: number;
+  email?: string; // Email used to claim the prize
 }
 
 interface CartContextType {

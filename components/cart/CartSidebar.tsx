@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,7 +13,7 @@ import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
 
 export function CartSidebar() {
-  const { items, itemCount, subtotal, shipping, baseShipping, total, shippingMethod, setShippingMethod, shippingOptions, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen } = useCart();
+  const { items, itemCount, subtotal, shipping, baseShipping, total, shippingMethod, setShippingMethod, shippingOptions, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,6 +29,15 @@ export function CartSidebar() {
   // Collapsible sections
   const [discountOpen, setDiscountOpen] = useState(false);
   const [shippingOpen, setShippingOpen] = useState(false);
+
+  // Auto-fill discount code from spin wheel prize
+  useEffect(() => {
+    if (spinPrize && spinPrize.code && !discountApplied) {
+      setEmail(spinPrize.email || '');
+      setDiscountCode(spinPrize.code);
+      setDiscountOpen(true); // Expand the discount section
+    }
+  }, [spinPrize, discountApplied]);
 
   const handleClose = () => setIsOpen(false);
 

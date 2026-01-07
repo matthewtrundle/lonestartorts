@@ -64,6 +64,7 @@ export default function AdminLayout({
     { href: '/admin/wholesale', label: 'Wholesale' },
     { href: '/admin/marketing', label: 'Marketing' },
     { href: '/admin/feedback', label: 'Feedback' },
+    { href: '/admin/spin-leads', label: 'Spin Leads' },
   ];
 
   return (

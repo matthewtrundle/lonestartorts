@@ -39,11 +39,19 @@ function generateCode(prizeId: string): string {
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, utmSource } = await req.json();
+    const { email, utmSource, clientPrizeId } = await req.json();
 
     if (!email || typeof email !== 'string') {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
+
+    // Validate clientPrizeId if provided (synced with visual wheel)
+    const validPrizeIds = PRIZES.map(p => p.id);
+    const prizeIdToUse = clientPrizeId && validPrizeIds.includes(clientPrizeId)
+      ? clientPrizeId
+      : null;
+
+    console.log('Spin API - clientPrizeId:', clientPrizeId, 'valid:', !!prizeIdToUse, 'validIds:', validPrizeIds);
 
     const normalizedEmail = email.trim().toLowerCase();
 
@@ -79,9 +87,14 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Select random prize
-    const selectedPrize = selectPrize();
+    // Use client's prize if valid (syncs visual wheel with actual prize)
+    // Fall back to random selection if no valid clientPrizeId
+    const selectedPrize = prizeIdToUse
+      ? PRIZES.find(p => p.id === prizeIdToUse)!
+      : selectPrize();
     const code = generateCode(selectedPrize.id);
+
+    console.log('Spin API - Selected prize:', selectedPrize.id, selectedPrize.name, 'usedClientPrize:', !!prizeIdToUse);
 
     // Prize expires in 15 minutes
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000);

@@ -134,7 +134,7 @@ function selectRandomPrize(): { id: string; index: number } {
 }
 
 export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheWheelProps) {
-  const { addItem, setIsOpen: setCartOpen } = useCart();
+  const { addItem, setIsOpen: setCartOpen, setSpinPrize } = useCart();
 
   const [step, setStep] = useState<'ready' | 'spinning' | 'result' | 'done'>('ready');
   const [email, setEmail] = useState('');
@@ -215,6 +215,12 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
 
         setPrize(data.prize);
         setStep('done');
+
+        // Store prize in cart context for auto-fill in cart sidebar
+        setSpinPrize({
+          ...data.prize,
+          email: email.trim().toLowerCase(),
+        });
 
         if (data.prize.type === 'product' && data.prize.sku) {
           const product = getProductBySku(data.prize.sku);
