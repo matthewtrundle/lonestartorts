@@ -277,7 +277,7 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-lg md:w-full bg-gradient-to-b from-amber-50 to-orange-100 rounded-2xl shadow-2xl z-[10000] overflow-y-auto max-h-[90vh]"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-md bg-gradient-to-b from-amber-50 to-orange-100 rounded-2xl shadow-2xl z-[10000] overflow-y-auto max-h-[90vh]"
           >
             {/* Close button */}
             {step !== 'spinning' && (
@@ -291,16 +291,19 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
 
             {/* Ready to Spin Step */}
             {step === 'ready' && (
-              <div className="p-6 md:p-8 text-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              <div className="p-4 md:p-6 text-center">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
                   Spin the Sombrero!
                 </h2>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 mb-4">
                   Tap to spin and win a prize!
                 </p>
 
-                {/* Sombrero Wheel */}
-                <div className="relative w-72 h-72 md:w-80 md:h-80 mx-auto mb-6">
+                {/* Sombrero Wheel - clickable */}
+                <div
+                  className="relative w-64 h-64 md:w-72 md:h-72 mx-auto mb-4 cursor-pointer"
+                  onClick={handleSpin}
+                >
                   {/* Outer decorative ring */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-b from-amber-600 to-amber-800 shadow-2xl" />
 
@@ -337,13 +340,13 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
                   </div>
 
                   {/* Center Sombrero */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative">
                       {/* Sombrero brim */}
-                      <div className="w-28 h-10 md:w-32 md:h-12 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-lg absolute -bottom-2 left-1/2 -translate-x-1/2" />
+                      <div className="w-24 h-8 md:w-28 md:h-10 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-lg absolute -bottom-1 left-1/2 -translate-x-1/2" />
                       {/* Sombrero top */}
-                      <div className="w-16 h-12 md:w-20 md:h-14 bg-gradient-to-b from-amber-400 to-amber-600 rounded-t-full mx-auto relative z-10 shadow-md flex items-center justify-center">
-                        <span className="text-2xl md:text-3xl">🌮</span>
+                      <div className="w-14 h-10 md:w-16 md:h-12 bg-gradient-to-b from-amber-400 to-amber-600 rounded-t-full mx-auto relative z-10 shadow-md flex items-center justify-center">
+                        <span className="text-xl md:text-2xl">🌮</span>
                       </div>
                     </div>
                   </div>
@@ -357,13 +360,13 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
                 {/* Spin Button */}
                 <button
                   onClick={handleSpin}
-                  className="w-full py-4 bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-xl rounded-xl hover:from-red-600 hover:to-orange-600 transition-all shadow-lg flex items-center justify-center gap-3 transform hover:scale-105"
+                  className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-lg rounded-xl hover:from-red-600 hover:to-orange-600 transition-all shadow-lg flex items-center justify-center gap-2 transform hover:scale-105"
                 >
-                  <Sparkles className="w-6 h-6" />
+                  <Sparkles className="w-5 h-5" />
                   TAP TO SPIN!
                 </button>
 
-                <p className="text-xs text-gray-500 mt-4">
+                <p className="text-xs text-gray-500 mt-2">
                   Everyone wins something!
                 </p>
               </div>
@@ -371,13 +374,13 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
 
             {/* Spinning Step */}
             {step === 'spinning' && (
-              <div className="p-6 md:p-8 text-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              <div className="p-4 md:p-6 text-center">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                   Spinning...
                 </h2>
 
                 {/* Spinning Wheel */}
-                <div className="relative w-72 h-72 md:w-80 md:h-80 mx-auto mb-6">
+                <div className="relative w-64 h-64 md:w-72 md:h-72 mx-auto mb-4">
                   {/* Outer decorative ring */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-b from-amber-600 to-amber-800 shadow-2xl" />
 
@@ -418,9 +421,9 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
                   {/* Center Sombrero */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="relative">
-                      <div className="w-28 h-10 md:w-32 md:h-12 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-lg absolute -bottom-2 left-1/2 -translate-x-1/2" />
-                      <div className="w-16 h-12 md:w-20 md:h-14 bg-gradient-to-b from-amber-400 to-amber-600 rounded-t-full mx-auto relative z-10 shadow-md flex items-center justify-center">
-                        <span className="text-2xl md:text-3xl">🌮</span>
+                      <div className="w-24 h-8 md:w-28 md:h-10 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-lg absolute -bottom-1 left-1/2 -translate-x-1/2" />
+                      <div className="w-14 h-10 md:w-16 md:h-12 bg-gradient-to-b from-amber-400 to-amber-600 rounded-t-full mx-auto relative z-10 shadow-md flex items-center justify-center">
+                        <span className="text-xl md:text-2xl">🌮</span>
                       </div>
                     </div>
                   </div>
@@ -431,7 +434,7 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
                   </div>
                 </div>
 
-                <p className="text-gray-600 text-lg animate-pulse">
+                <p className="text-gray-600 animate-pulse">
                   Good luck!
                 </p>
               </div>
