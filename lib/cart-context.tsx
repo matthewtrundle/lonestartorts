@@ -17,7 +17,7 @@ export interface CartItem {
   name: string;
   price: number; // Price in cents
   quantity: number;
-  productType?: 'tortilla' | 'sauce'; // Product type for shipping calculation
+  productType?: 'tortilla' | 'sauce' | 'wholesale'; // Product type for shipping calculation
   description?: string;
   image?: string;
 }

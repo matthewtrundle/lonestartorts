@@ -16,7 +16,7 @@ interface ProductCardProps {
   price: number;
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
-  productType?: 'tortilla' | 'sauce';
+  productType?: 'tortilla' | 'sauce' | 'wholesale';
   tortillaType?: string;
   isBestSeller?: boolean;
   savingsPercent?: number;

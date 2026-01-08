@@ -27,7 +27,7 @@ export interface Product {
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
   category: string;
-  productType?: 'tortilla' | 'sauce'; // Distinguish between product types for shipping logic
+  productType?: 'tortilla' | 'sauce' | 'wholesale'; // Distinguish between product types for shipping logic
   tortillaType?: string; // "Flour", "Corn", "Wheat", etc.
   isBestSeller?: boolean; // Show "Best Seller" badge
   savingsPercent?: number; // Show savings percentage (e.g., 15 for "15% OFF")
@@ -84,6 +84,69 @@ export const products: Product[] = [
   },
 ];
 
+// Wholesale products - tiered pricing with volume discounts
+// All wholesale orders include free shipping
+export const wholesaleProducts: Product[] = [
+  {
+    sku: 'WHOLESALE-TIER-STARTER',
+    name: 'Wholesale Starter Pack',
+    description: '10% wholesale discount - 20 tortillas per pack. Free shipping included.',
+    image: '/images/products/flour-tortillas-heb.webp',
+    price: 1800, // $18 per pack (10% off $20)
+    tortillaCount: 20,
+    storage: 'shelf_stable',
+    category: 'wholesale',
+    productType: 'wholesale',
+    tortillaType: 'Flour',
+  },
+  {
+    sku: 'WHOLESALE-TIER-BUSINESS',
+    name: 'Wholesale Business Pack',
+    description: '15% wholesale discount - 20 tortillas per pack. Free shipping included.',
+    image: '/images/products/flour-tortillas-heb.webp',
+    price: 1700, // $17 per pack (15% off $20)
+    tortillaCount: 20,
+    storage: 'shelf_stable',
+    category: 'wholesale',
+    productType: 'wholesale',
+    tortillaType: 'Flour',
+  },
+  {
+    sku: 'WHOLESALE-TIER-PROFESSIONAL',
+    name: 'Wholesale Professional Pack',
+    description: '20% wholesale discount - 20 tortillas per pack. Free shipping included.',
+    image: '/images/products/flour-tortillas-heb.webp',
+    price: 1600, // $16 per pack (20% off $20)
+    tortillaCount: 20,
+    storage: 'shelf_stable',
+    category: 'wholesale',
+    productType: 'wholesale',
+    tortillaType: 'Flour',
+  },
+  {
+    sku: 'WHOLESALE-TIER-ENTERPRISE',
+    name: 'Wholesale Enterprise Pack',
+    description: '25% wholesale discount - 20 tortillas per pack. Free shipping included.',
+    image: '/images/products/flour-tortillas-heb.webp',
+    price: 1500, // $15 per pack (25% off $20)
+    tortillaCount: 20,
+    storage: 'shelf_stable',
+    category: 'wholesale',
+    productType: 'wholesale',
+    tortillaType: 'Flour',
+  },
+];
+
+// Check if an item is a wholesale product
+export function isWholesaleProduct(sku: string): boolean {
+  return sku.startsWith('WHOLESALE-');
+}
+
+// Get wholesale product by SKU
+export function getWholesaleProductBySku(sku: string) {
+  return wholesaleProducts.find((p) => p.sku === sku);
+}
+
 // Helper function to get product by SKU
 export function getProductBySku(sku: string) {
   return products.find((p) => p.sku === sku);
@@ -92,15 +155,22 @@ export function getProductBySku(sku: string) {
 // Calculate smart shipping based on cart items
 // Shipping logic:
 // - FREE shipping on orders $80+ (4+ tortilla packs)
+// - FREE shipping on all wholesale orders
 // - Sauce-only orders: $9.99 flat rate
 // - Orders with tortillas: Calculate based on tortilla pack count only (sauce ships free with tortillas)
 // - Tortilla tiers: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
 export function calculateShipping(
-  items: { productType?: string; quantity: number }[],
+  items: { productType?: string; quantity: number; sku?: string }[],
   subtotal?: number
 ): number {
   // FREE shipping for orders $80+
   if (subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
+    return 0;
+  }
+
+  // FREE shipping for wholesale orders
+  const hasWholesale = items.some(item => item.sku?.startsWith('WHOLESALE-') || item.productType === 'wholesale');
+  if (hasWholesale) {
     return 0;
   }
 

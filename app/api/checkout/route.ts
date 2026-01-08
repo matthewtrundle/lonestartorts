@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getShippingCost, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, ShippingMethod } from '@/lib/products';
+import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getShippingCost, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, ShippingMethod } from '@/lib/products';
 import { prisma } from '@/lib/prisma';
+
+// Helper to get any product by SKU (retail or wholesale)
+function getAnyProductBySku(sku: string) {
+  if (isWholesaleProduct(sku)) {
+    return getWholesaleProductBySku(sku);
+  }
+  return getProductBySku(sku);
+}
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
 const stripe = stripeKey ? new Stripe(stripeKey, {
@@ -28,9 +36,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
     }
 
-    // Build full items array with productType and price for shipping calculation
+    // Build full items array with productType, sku, and price for shipping calculation
     const fullItems = items.map((item: { sku: string; quantity: number }) => {
-      const product = getProductBySku(item.sku);
+      const product = getAnyProductBySku(item.sku);
       if (!product) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
       }
@@ -38,8 +46,12 @@ export async function POST(req: NextRequest) {
         quantity: item.quantity,
         productType: product.productType,
         price: product.price,
+        sku: item.sku,
       };
     });
+
+    // Check if this is a wholesale order (for free shipping and metadata)
+    const isWholesaleOrder = fullItems.some(item => isWholesaleProduct(item.sku));
 
     // Calculate subtotal for free shipping threshold check
     const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -49,8 +61,13 @@ export async function POST(req: NextRequest) {
     let freeShippingApplied = false;
     let freeShippingReason = '';
 
-    // Check if free shipping was applied via threshold
-    if (shippingMethod === 'usps' && subtotal >= FREE_SHIPPING_THRESHOLD) {
+    // Check if free shipping was applied via threshold or wholesale
+    if (isWholesaleOrder) {
+      shippingCost = 0;
+      freeShippingApplied = true;
+      freeShippingReason = 'wholesale';
+      console.log(`Free shipping applied for wholesale order $${(subtotal / 100).toFixed(2)}`);
+    } else if (shippingMethod === 'usps' && subtotal >= FREE_SHIPPING_THRESHOLD) {
       freeShippingApplied = true;
       freeShippingReason = 'threshold';
       console.log(`Free shipping applied for order $${(subtotal / 100).toFixed(2)} (threshold: $${(FREE_SHIPPING_THRESHOLD / 100).toFixed(2)})`);
@@ -159,7 +176,7 @@ export async function POST(req: NextRequest) {
 
     // Create line items for Stripe with server-side validation
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: { sku: string; quantity: number }) => {
-      const product = getProductBySku(item.sku);
+      const product = getAnyProductBySku(item.sku);
       if (!product) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
       }
@@ -239,7 +256,11 @@ export async function POST(req: NextRequest) {
 
       if (freeShippingApplied) {
         const savingsText = `You saved $${(baseShippingCost / 100).toFixed(2)}`;
-        if (freeShippingReason === 'threshold') {
+        if (freeShippingReason === 'wholesale') {
+          return baseLabel
+            ? `FREE ${methodName} (${baseLabel}) - Wholesale Order`
+            : `FREE ${methodName} - Wholesale Order`;
+        } else if (freeShippingReason === 'threshold') {
           return baseLabel
             ? `FREE ${methodName} (${baseLabel}) - Order $80+ ${savingsText}`
             : `FREE ${methodName} - Order $80+ ${savingsText}`;
@@ -273,6 +294,7 @@ export async function POST(req: NextRequest) {
         shippingCost: shippingCost.toString(), // Store for webhook reference
         baseShippingCost: baseShippingCost.toString(), // What shipping would have been
         subtotal: subtotal.toString(), // Order subtotal
+        isWholesaleOrder: isWholesaleOrder.toString(), // Track wholesale orders
         ...(freeShippingApplied && {
           freeShippingReason, // 'threshold' or 'discount_code'
           freeShippingSavings: baseShippingCost.toString(),

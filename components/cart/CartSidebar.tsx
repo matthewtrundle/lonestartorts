@@ -18,6 +18,9 @@ export function CartSidebar() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Check if cart contains wholesale items
+  const hasWholesaleItems = items.some(item => item.sku.startsWith('WHOLESALE-'));
+
   // Discount code state
   const [email, setEmail] = useState('');
   const [discountCode, setDiscountCode] = useState('');
@@ -407,13 +410,14 @@ export function CartSidebar() {
                 {/* Shipping Method Selector - Collapsible */}
                 <div className="mb-3 bg-white rounded-lg border border-gray-200 overflow-hidden">
                   <button
-                    onClick={() => setShippingOpen(!shippingOpen)}
-                    className="w-full flex items-center justify-between p-2.5 hover:bg-gray-50 transition-colors"
+                    onClick={() => !hasWholesaleItems && setShippingOpen(!shippingOpen)}
+                    className={`w-full flex items-center justify-between p-2.5 transition-colors ${hasWholesaleItems ? 'cursor-default' : 'hover:bg-gray-50'}`}
                   >
                     <div className="flex items-center gap-2">
                       <Truck className="w-3.5 h-3.5 text-sunset-600" />
                       <span className="text-xs font-medium uppercase tracking-wide">
-                        {shippingMethod === 'usps' ? 'USPS Priority' :
+                        {hasWholesaleItems ? 'Wholesale Shipping' :
+                         shippingMethod === 'usps' ? 'USPS Priority' :
                          shippingMethod === 'ups_ground' ? 'UPS Ground' :
                          shippingMethod === 'ups_3day' ? 'UPS 3-Day' :
                          shippingMethod === 'ups_2day' ? 'UPS 2-Day' :
@@ -421,12 +425,18 @@ export function CartSidebar() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
-                      <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${shippingOpen ? 'rotate-180' : ''}`} />
+                      {hasWholesaleItems ? (
+                        <span className="text-xs font-semibold text-green-600">FREE</span>
+                      ) : (
+                        <>
+                          <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
+                          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${shippingOpen ? 'rotate-180' : ''}`} />
+                        </>
+                      )}
                     </div>
                   </button>
 
-                  {shippingOpen && (
+                  {shippingOpen && !hasWholesaleItems && (
                     <div className="px-2.5 pb-2.5 border-t border-gray-100 space-y-1.5 mt-2">
                       {/* USPS Option */}
                       <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
@@ -543,7 +553,9 @@ export function CartSidebar() {
                   )}
                   <div className="flex justify-between">
                     <span className="text-gray-600">{t('cart.shipping')}</span>
-                    {isFreeShipping || freeShippingProgress.qualifies ? (
+                    {hasWholesaleItems ? (
+                      <span className="font-medium text-green-600">Wholesale - FREE</span>
+                    ) : isFreeShipping || freeShippingProgress.qualifies ? (
                       <div className="flex items-center gap-1.5">
                         <span className="text-gray-400 line-through text-xs">{formatPrice(baseShipping)}</span>
                         <span className="font-medium text-green-600">{t('cart.free')}</span>
