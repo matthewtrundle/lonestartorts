@@ -34,16 +34,16 @@ export const wholesaleTiers: WholesaleTier[] = [
     id: 'tier-starter',
     name: 'Starter',
     description: 'Perfect for small cafes and food trucks getting started',
-    packsPerWeek: 20,
-    packsPerMonth: 80,
-    tortillasPerMonth: 1600,
+    packsPerWeek: 4,
+    packsPerMonth: 16,
+    tortillasPerMonth: 320,
     discountPercent: 10,
     pricePerTortilla: 90, // $0.90
     pricePerPack: 1800, // $18.00
-    monthlyCost: 144000, // $1,440/month
+    monthlyCost: 28800, // $288/month
     idealFor: 'Small cafes, home caterers',
     features: [
-      '1,600 tortillas/month',
+      '320 tortillas/month',
       'Weekly delivery available',
       'Free shipping on all orders',
       '10% volume discount',
@@ -53,17 +53,17 @@ export const wholesaleTiers: WholesaleTier[] = [
     id: 'tier-business',
     name: 'Business',
     description: 'For growing restaurants with steady demand',
-    packsPerWeek: 40,
-    packsPerMonth: 160,
-    tortillasPerMonth: 3200,
+    packsPerWeek: 8,
+    packsPerMonth: 32,
+    tortillasPerMonth: 640,
     discountPercent: 15,
     pricePerTortilla: 85, // $0.85
     pricePerPack: 1700, // $17.00
-    monthlyCost: 272000, // $2,720/month
+    monthlyCost: 54400, // $544/month
     idealFor: 'Food trucks, small restaurants',
     isBestValue: true,
     features: [
-      '3,200 tortillas/month',
+      '640 tortillas/month',
       'Weekly delivery included',
       'Free shipping on all orders',
       '15% volume discount',
@@ -74,16 +74,16 @@ export const wholesaleTiers: WholesaleTier[] = [
     id: 'tier-professional',
     name: 'Professional',
     description: 'High-volume solution for busy kitchens',
-    packsPerWeek: 80,
-    packsPerMonth: 320,
-    tortillasPerMonth: 6400,
+    packsPerWeek: 12,
+    packsPerMonth: 48,
+    tortillasPerMonth: 960,
     discountPercent: 20,
     pricePerTortilla: 80, // $0.80
     pricePerPack: 1600, // $16.00
-    monthlyCost: 512000, // $5,120/month
+    monthlyCost: 76800, // $768/month
     idealFor: 'Busy restaurants, catering companies',
     features: [
-      '6,400 tortillas/month',
+      '960 tortillas/month',
       'Weekly delivery included',
       'Free shipping on all orders',
       '20% volume discount',
@@ -94,16 +94,16 @@ export const wholesaleTiers: WholesaleTier[] = [
     id: 'tier-enterprise',
     name: 'Enterprise',
     description: 'Maximum savings for large-scale operations',
-    packsPerWeek: 160,
-    packsPerMonth: 640,
-    tortillasPerMonth: 12800,
+    packsPerWeek: 24,
+    packsPerMonth: 96,
+    tortillasPerMonth: 1920,
     discountPercent: 25,
     pricePerTortilla: 75, // $0.75
     pricePerPack: 1500, // $15.00
-    monthlyCost: 960000, // $9,600/month
+    monthlyCost: 144000, // $1,440/month
     idealFor: 'Restaurant chains, large caterers',
     features: [
-      '12,800 tortillas/month',
+      '1,920 tortillas/month',
       'Weekly delivery included',
       'Free shipping on all orders',
       '25% volume discount',
@@ -124,7 +124,7 @@ export function calculateWholesalePrice(packCount: number): {
   const monthlyPacks = packCount;
   const retailTotal = monthlyPacks * BASE_PRICE_PER_PACK;
 
-  if (monthlyPacks >= 640) {
+  if (monthlyPacks >= 96) {
     const totalPrice = monthlyPacks * 1500;
     return {
       discountPercent: 25,
@@ -134,7 +134,7 @@ export function calculateWholesalePrice(packCount: number): {
       tier: wholesaleTiers[3],
       savings: retailTotal - totalPrice,
     };
-  } else if (monthlyPacks >= 320) {
+  } else if (monthlyPacks >= 48) {
     const totalPrice = monthlyPacks * 1600;
     return {
       discountPercent: 20,
@@ -144,7 +144,7 @@ export function calculateWholesalePrice(packCount: number): {
       tier: wholesaleTiers[2],
       savings: retailTotal - totalPrice,
     };
-  } else if (monthlyPacks >= 160) {
+  } else if (monthlyPacks >= 32) {
     const totalPrice = monthlyPacks * 1700;
     return {
       discountPercent: 15,
@@ -154,7 +154,7 @@ export function calculateWholesalePrice(packCount: number): {
       tier: wholesaleTiers[1],
       savings: retailTotal - totalPrice,
     };
-  } else if (monthlyPacks >= 80) {
+  } else if (monthlyPacks >= 16) {
     const totalPrice = monthlyPacks * 1800;
     return {
       discountPercent: 10,
@@ -179,9 +179,9 @@ export function calculateWholesalePrice(packCount: number): {
 
 // Get the tier that applies for a given pack count
 export function getTierForPackCount(packCount: number): WholesaleTier | null {
-  if (packCount >= 640) return wholesaleTiers[3];
-  if (packCount >= 320) return wholesaleTiers[2];
-  if (packCount >= 160) return wholesaleTiers[1];
-  if (packCount >= 80) return wholesaleTiers[0];
+  if (packCount >= 96) return wholesaleTiers[3];
+  if (packCount >= 48) return wholesaleTiers[2];
+  if (packCount >= 32) return wholesaleTiers[1];
+  if (packCount >= 16) return wholesaleTiers[0];
   return null;
 }

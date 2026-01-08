@@ -277,7 +277,7 @@ export default function WholesalePage() {
                 </summary>
                 <div className="p-5 pt-0 border-t border-charcoal-200">
                   <p className="text-charcoal-700">
-                    Wholesale pricing starts at 80 packs per month (1,600
+                    Wholesale pricing starts at 16 packs per month (320
                     tortillas), which qualifies for our Starter tier with 10%
                     off. You can adjust your order in increments of 4 packs to
                     find the right volume for your business.
@@ -306,7 +306,7 @@ export default function WholesalePage() {
                 <div className="p-5 pt-0 border-t border-charcoal-200">
                   <p className="text-charcoal-700">
                     Your monthly volume is divided into weekly shipments. For
-                    example, the Business tier (160 packs/month) ships as 40
+                    example, the Business tier (32 packs/month) ships as 8
                     packs each week. This keeps your kitchen stocked with fresh
                     tortillas without requiring large storage space.
                   </p>
