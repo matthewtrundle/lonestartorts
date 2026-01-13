@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Premium Corn Tortillas',
@@ -122,7 +123,6 @@ export default function CornTortillasProductPage() {
       <div className="min-h-screen bg-gradient-to-br from-cream-50 to-sunset-50">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-b from-sunset-600 to-sunset-700 text-white">
-          <div className="absolute inset-0 bg-[url('/noise.png')] opacity-30 mix-blend-overlay" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             {/* Breadcrumb */}
@@ -172,11 +172,15 @@ export default function CornTortillasProductPage() {
               </div>
 
               <div className="relative">
-                <div className="aspect-square rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/20 overflow-hidden">
-                  {/* Placeholder for product image */}
-                  <div className="w-full h-full flex items-center justify-center text-white/50">
-                    <span className="text-6xl">🌮</span>
-                  </div>
+                <div className="aspect-square rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/20 overflow-hidden relative">
+                  <Image
+                    src="/images/products/corn-tortillas.jpg"
+                    alt="H-E-B Corn Tortillas - Authentic Texas corn tortillas"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
               </div>
             </div>

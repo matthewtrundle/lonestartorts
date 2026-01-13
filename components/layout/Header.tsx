@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
@@ -10,8 +11,12 @@ import { ShoppingBag, Menu, X } from 'lucide-react';
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
   const { language, setLanguage, t } = useLanguage();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Only offset the header on homepage where DisclaimerBanner is shown
+  const isHomepage = pathname === '/';
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'es' : 'en');
@@ -51,7 +56,7 @@ export function Header() {
 
   return (
     <>
-    <header className={`shrink-header fixed top-[28px] left-0 right-0 z-[100] transition-all duration-300 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`} id="main-header">
+    <header className={`shrink-header fixed ${isHomepage ? 'top-[28px]' : 'top-0'} left-0 right-0 z-[100] transition-all duration-300 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`} id="main-header">
 
       <div className="container mx-auto px-4 md:px-8 relative">
         <div className="header-content flex justify-between items-center py-1">

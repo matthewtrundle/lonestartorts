@@ -130,39 +130,52 @@ export default function HookEmTortillasPage() {
 
       <main className="min-h-screen bg-cream-50 pt-24">
         {/* Campaign Banner - Tortas for the Tip-Off (UT Basketball) */}
-        <div className="relative bg-gradient-to-r from-orange-700 via-orange-600 to-amber-500 text-white overflow-hidden">
-          {/* Subtle star pattern overlay */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-2 left-[10%] text-6xl">★</div>
-            <div className="absolute bottom-2 right-[15%] text-4xl">★</div>
-            <div className="absolute top-1/2 left-[70%] text-3xl">★</div>
+        <div className="relative bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 text-white overflow-hidden border-b-4 border-orange-800">
+          {/* Animated shimmer overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+
+          {/* Basketball pattern background */}
+          <div className="absolute inset-0 opacity-15">
+            <div className="absolute top-1 left-[5%] text-4xl animate-bounce" style={{ animationDelay: '0s', animationDuration: '2s' }}>🏀</div>
+            <div className="absolute top-2 left-[25%] text-2xl animate-bounce" style={{ animationDelay: '0.3s', animationDuration: '2.5s' }}>🏀</div>
+            <div className="absolute bottom-1 right-[10%] text-3xl animate-bounce" style={{ animationDelay: '0.6s', animationDuration: '2.2s' }}>🏀</div>
+            <div className="absolute top-1/2 right-[30%] text-2xl animate-bounce" style={{ animationDelay: '0.9s', animationDuration: '2.8s' }}>🏀</div>
+            <div className="absolute bottom-2 left-[40%] text-xl animate-bounce" style={{ animationDelay: '1.2s', animationDuration: '2.3s' }}>🏀</div>
           </div>
 
-          <div className="container mx-auto px-4 py-4 md:py-5 relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 text-center md:text-left">
-              {/* Basketball icon */}
-              <div className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm">
-                <span className="text-2xl">🏀</span>
+          <div className="container mx-auto px-4 py-5 md:py-6 relative z-10">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-center">
+              {/* Basketball icon with glow */}
+              <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/25 backdrop-blur-sm shadow-lg shadow-orange-900/30 animate-pulse">
+                <span className="text-3xl">🏀</span>
               </div>
 
               {/* Campaign text */}
-              <div className="flex flex-col md:flex-row items-center gap-1 md:gap-4">
-                <h2 className="text-xl md:text-2xl font-black tracking-tight">
-                  Tortas for the Tip-Off
-                </h2>
-                <span className="hidden md:block text-white/60">|</span>
-                <p className="text-sm md:text-base text-white/90">
-                  Free shipping on $80+ &bull; Extra 5% off all tiers
-                </p>
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex items-center gap-3">
+                  <span className="text-amber-200 text-lg">★</span>
+                  <h2 className="text-2xl md:text-3xl font-black tracking-tight drop-shadow-lg">
+                    Tortas for the Tip-Off
+                  </h2>
+                  <span className="text-amber-200 text-lg">★</span>
+                </div>
+                <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-sm md:text-base">
+                  <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full font-semibold">
+                    🚚 FREE Shipping $80+
+                  </span>
+                  <span className="inline-flex items-center gap-1 bg-green-500/80 backdrop-blur-sm px-3 py-1 rounded-full font-semibold">
+                    🎉 Extra 5% Off All Tiers
+                  </span>
+                </div>
               </div>
 
-              {/* CTA */}
+              {/* CTA with animation */}
               <a
                 href="#pricing"
-                className="mt-2 md:mt-0 md:ml-4 inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+                className="mt-2 md:mt-0 md:ml-4 inline-flex items-center gap-2 bg-white text-orange-600 hover:bg-amber-50 px-6 py-3 rounded-full text-base font-bold transition-all hover:scale-105 shadow-lg"
               >
                 Shop Now
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </a>

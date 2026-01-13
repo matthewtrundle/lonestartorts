@@ -20,6 +20,9 @@ module.exports = {
     '/denver',   // redirects to /locations/colorado/denver
     '/maria-story', // redirects to /blog/marias-story
     '/order',    // redirects to /track
+    '/track',    // utility page - order tracking
+    '/unsubscribe', // utility page - email unsubscribe
+    '/feedback', // utility page - customer feedback
   ],
 
   // Custom transform for specific page priorities and frequencies
@@ -100,16 +103,6 @@ module.exports = {
         loc: path,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
-      };
-    }
-
-    // Track page - lower priority
-    if (path === '/track') {
-      return {
-        loc: path,
-        changefreq: 'monthly',
-        priority: 0.6,
         lastmod: new Date().toISOString(),
       };
     }
