@@ -50,6 +50,20 @@ export async function GET(req: NextRequest) {
       select: { prize: true, used: true, utmSource: true },
     });
 
+    // Get drip campaign stats
+    const dripCampaigns = await prisma.dripCampaignProgress.findMany({
+      select: { status: true },
+    });
+
+    const dripEmailLogs = await prisma.dripEmailLog.findMany({
+      select: { openedAt: true, clickedAt: true, sentAt: true },
+      where: {
+        sentAt: {
+          gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // Last 30 days
+        },
+      },
+    });
+
     const stats = {
       total: allEntries.length,
       used: allEntries.filter(e => e.used).length,
@@ -66,6 +80,27 @@ export async function GET(req: NextRequest) {
       bySource: {
         tiktok: allEntries.filter(e => e.utmSource === 'tiktok').length,
         other: allEntries.filter(e => e.utmSource !== 'tiktok').length,
+      },
+      // Drip campaign stats
+      drip: {
+        active: dripCampaigns.filter(d => d.status === 'ACTIVE').length,
+        converted: dripCampaigns.filter(d => d.status === 'CONVERTED').length,
+        completed: dripCampaigns.filter(d => d.status === 'COMPLETED').length,
+        unsubscribed: dripCampaigns.filter(d => d.status === 'UNSUBSCRIBED').length,
+        totalEnrolled: dripCampaigns.length,
+        conversionRate: dripCampaigns.length > 0
+          ? ((dripCampaigns.filter(d => d.status === 'CONVERTED').length / dripCampaigns.length) * 100).toFixed(1)
+          : '0',
+        // Email stats (last 30 days)
+        emailsSent: dripEmailLogs.length,
+        emailsOpened: dripEmailLogs.filter(e => e.openedAt).length,
+        emailsClicked: dripEmailLogs.filter(e => e.clickedAt).length,
+        openRate: dripEmailLogs.length > 0
+          ? ((dripEmailLogs.filter(e => e.openedAt).length / dripEmailLogs.length) * 100).toFixed(1)
+          : '0',
+        clickRate: dripEmailLogs.length > 0
+          ? ((dripEmailLogs.filter(e => e.clickedAt).length / dripEmailLogs.length) * 100).toFixed(1)
+          : '0',
       },
     };
 

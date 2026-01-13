@@ -132,6 +132,41 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Check if it's a drip campaign code (DRIP-* format)
+    if (normalizedCode.startsWith('DRIP-')) {
+      // Parse the code to determine type: DRIP-10OFF-XXXXXX, DRIP-5OFF-XXXXXX, DRIP-FREESHIP-XXXXXX
+      const parts = normalizedCode.split('-');
+      const discountType = parts[1];
+
+      let discountInfo: { type: string; message: string; amount?: number };
+      switch (discountType) {
+        case '10OFF':
+          discountInfo = { type: 'percentage', message: 'Welcome back! 10% off applied.', amount: 10 };
+          break;
+        case '5OFF':
+          discountInfo = { type: 'fixed', message: 'Welcome back! $5 off applied.', amount: 500 };
+          break;
+        case 'FREESHIP':
+          discountInfo = { type: 'free_shipping', message: 'Welcome back! Free shipping applied.' };
+          break;
+        default:
+          return NextResponse.json(
+            { valid: false, error: 'Invalid drip campaign code' },
+            { status: 200 }
+          );
+      }
+
+      return NextResponse.json({
+        valid: true,
+        message: discountInfo.message,
+        discount: {
+          type: discountInfo.type,
+          amount: discountInfo.amount,
+          code: normalizedCode,
+        },
+      });
+    }
+
     // Check if it's a first-order free shipping code
     const successMessage = DISCOUNT_CODES[normalizedCode];
 

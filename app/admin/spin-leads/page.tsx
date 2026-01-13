@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Search, Filter, Mail, Gift, Truck, Percent, Download, Users, TrendingUp, CheckCircle } from 'lucide-react';
+import { Search, Filter, Mail, Gift, Truck, Percent, Download, Users, TrendingUp, CheckCircle, Send, MousePointerClick, Eye, UserX } from 'lucide-react';
 
 interface SpinEntry {
   id: string;
@@ -30,6 +30,19 @@ interface Stats {
   bySource: {
     tiktok: number;
     other: number;
+  };
+  drip: {
+    active: number;
+    converted: number;
+    completed: number;
+    unsubscribed: number;
+    totalEnrolled: number;
+    conversionRate: string;
+    emailsSent: number;
+    emailsOpened: number;
+    emailsClicked: number;
+    openRate: string;
+    clickRate: string;
   };
 }
 
@@ -207,6 +220,90 @@ export default function SpinLeadsPage() {
               <div>
                 <p className="text-sm text-charcoal-500">TikTok Leads</p>
                 <p className="text-2xl font-bold text-charcoal-900">{stats.bySource.tiktok}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Drip Campaign Stats */}
+      {stats?.drip && stats.drip.totalEnrolled > 0 && (
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-charcoal-900 mb-4">Drip Campaign Stats</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div className="bg-blue-50 rounded-lg p-4 text-center">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <Send className="w-4 h-4 text-blue-600" />
+                <p className="text-2xl font-bold text-blue-700">{stats.drip.active}</p>
+              </div>
+              <p className="text-xs text-blue-600">Active Campaigns</p>
+            </div>
+            <div className="bg-green-50 rounded-lg p-4 text-center">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <CheckCircle className="w-4 h-4 text-green-600" />
+                <p className="text-2xl font-bold text-green-700">{stats.drip.converted}</p>
+              </div>
+              <p className="text-xs text-green-600">Converted</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-4 text-center">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <Mail className="w-4 h-4 text-gray-600" />
+                <p className="text-2xl font-bold text-gray-700">{stats.drip.completed}</p>
+              </div>
+              <p className="text-xs text-gray-600">Completed</p>
+            </div>
+            <div className="bg-red-50 rounded-lg p-4 text-center">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <UserX className="w-4 h-4 text-red-600" />
+                <p className="text-2xl font-bold text-red-700">{stats.drip.unsubscribed}</p>
+              </div>
+              <p className="text-xs text-red-600">Unsubscribed</p>
+            </div>
+            <div className="bg-amber-50 rounded-lg p-4 text-center">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <TrendingUp className="w-4 h-4 text-amber-600" />
+                <p className="text-2xl font-bold text-amber-700">{stats.drip.conversionRate}%</p>
+              </div>
+              <p className="text-xs text-amber-600">Drip Conversion</p>
+            </div>
+            <div className="bg-purple-50 rounded-lg p-4 text-center">
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <Users className="w-4 h-4 text-purple-600" />
+                <p className="text-2xl font-bold text-purple-700">{stats.drip.totalEnrolled}</p>
+              </div>
+              <p className="text-xs text-purple-600">Total Enrolled</p>
+            </div>
+          </div>
+
+          {/* Email Performance (last 30 days) */}
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <h3 className="text-sm font-medium text-charcoal-700 mb-3">Email Performance (Last 30 Days)</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="text-center">
+                <p className="text-xl font-bold text-charcoal-900">{stats.drip.emailsSent}</p>
+                <p className="text-xs text-charcoal-500">Emails Sent</p>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <Eye className="w-3 h-3 text-charcoal-400" />
+                  <p className="text-xl font-bold text-charcoal-900">{stats.drip.emailsOpened}</p>
+                </div>
+                <p className="text-xs text-charcoal-500">Opened</p>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <MousePointerClick className="w-3 h-3 text-charcoal-400" />
+                  <p className="text-xl font-bold text-charcoal-900">{stats.drip.emailsClicked}</p>
+                </div>
+                <p className="text-xs text-charcoal-500">Clicked</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-green-600">{stats.drip.openRate}%</p>
+                <p className="text-xs text-charcoal-500">Open Rate</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-blue-600">{stats.drip.clickRate}%</p>
+                <p className="text-xs text-charcoal-500">Click Rate</p>
               </div>
             </div>
           </div>

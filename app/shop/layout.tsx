@@ -38,6 +38,7 @@ const productSchemas = [
       url: 'https://lonestartortillas.com/shop',
       priceCurrency: 'USD',
       price: '20.00',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: {
@@ -70,6 +71,7 @@ const productSchemas = [
       url: 'https://lonestartortillas.com/shop',
       priceCurrency: 'USD',
       price: '20.00',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: {
@@ -102,6 +104,7 @@ const productSchemas = [
       url: 'https://lonestartortillas.com/shop',
       priceCurrency: 'USD',
       price: '20.00',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: {
@@ -134,6 +137,7 @@ const productSchemas = [
       url: 'https://lonestartortillas.com/shop',
       priceCurrency: 'USD',
       price: '12.00',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: {

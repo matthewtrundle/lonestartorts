@@ -19,6 +19,7 @@ const productSchema = {
     '@type': 'Offer',
     price: '16.99',
     priceCurrency: 'USD',
+    priceValidUntil: '2026-12-31',
     availability: 'https://schema.org/PreOrder',
     seller: { '@type': 'Organization', name: 'Lonestar Tortillas' }
   },

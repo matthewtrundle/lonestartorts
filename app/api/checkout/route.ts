@@ -166,6 +166,51 @@ export async function POST(req: NextRequest) {
             where: { code: normalizedCode },
             data: { used: true, usedAt: new Date() },
           });
+
+          // Mark any associated drip campaign as converted
+          try {
+            await prisma.dripCampaignProgress.updateMany({
+              where: {
+                spinWheelEntryId: spinEntry.id,
+                status: 'ACTIVE',
+              },
+              data: {
+                status: 'CONVERTED',
+                convertedAt: new Date(),
+              },
+            });
+          } catch (dripError) {
+            // Non-critical, just log
+            console.error('Failed to update drip campaign:', dripError);
+          }
+        }
+      }
+      // Check if it's a drip campaign code (DRIP-* format)
+      else if (normalizedCode.startsWith('DRIP-')) {
+        const parts = normalizedCode.split('-');
+        const discountType = parts[1];
+
+        switch (discountType) {
+          case '10OFF':
+            // 10% off
+            percentageDiscount = 10;
+            discountAmount = Math.round(subtotal * 0.10);
+            console.log(`Drip 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+            break;
+          case '5OFF':
+            // $5 off
+            discountAmount = 500;
+            console.log(`Drip $5 off applied: ${normalizedCode}`);
+            break;
+          case 'FREESHIP':
+            // Free shipping
+            if (!freeShippingApplied) {
+              shippingCost = 0;
+              freeShippingApplied = true;
+              freeShippingReason = 'drip_code';
+              console.log(`Drip free shipping applied: ${normalizedCode}`);
+            }
+            break;
         }
       }
     }
@@ -202,21 +247,28 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    // Create a Stripe coupon for discounts (feedback or spin wheel)
+    // Create a Stripe coupon for discounts (feedback, spin wheel, or drip)
     let stripeCouponId: string | undefined;
-    if (discountAmount > 0 && (feedbackCouponCode || spinPrizeCode)) {
+    const dripCode = discountCode?.startsWith('DRIP-') ? discountCode : null;
+    if (discountAmount > 0 && (feedbackCouponCode || spinPrizeCode || dripCode)) {
+      // Determine coupon name
+      const couponName = feedbackCouponCode
+        ? `Feedback Discount - ${feedbackCouponCode}`
+        : spinPrizeCode
+        ? `Spin Prize - ${spinPrizeCode}`
+        : `Drip Discount - ${dripCode}`;
+
       // Determine if it's a percentage or fixed amount discount
       if (percentageDiscount > 0) {
         // Percentage discount (10% off)
         const coupon = await stripe.coupons.create({
           percent_off: percentageDiscount,
           duration: 'once',
-          name: feedbackCouponCode
-            ? `Feedback Discount - ${feedbackCouponCode}`
-            : `Spin Prize - ${spinPrizeCode}`,
+          name: couponName,
           metadata: {
             ...(feedbackCouponCode && { feedbackCouponCode }),
             ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
+            ...(dripCode && { dripCode }),
           },
         });
         stripeCouponId = coupon.id;
@@ -226,10 +278,10 @@ export async function POST(req: NextRequest) {
           amount_off: discountAmount,
           currency: 'usd',
           duration: 'once',
-          name: `Spin Prize - ${spinPrizeCode}`,
+          name: couponName,
           metadata: {
-            spinPrizeCode: spinPrizeCode || '',
-            spinPrizeType: spinPrizeType || '',
+            ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
+            ...(dripCode && { dripCode }),
           },
         });
         stripeCouponId = coupon.id;

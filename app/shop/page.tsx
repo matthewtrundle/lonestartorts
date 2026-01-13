@@ -165,36 +165,47 @@ function ShopContent() {
   // Main shop page - cleaner design
   return (
     <main className="min-h-screen bg-cream-50">
-      {/* Hero Image Section */}
-      <div className="w-full mb-6">
-        <div className="relative w-full h-[180px] md:h-[220px] overflow-hidden">
+      {/* Hero Section - Matching hook-em style */}
+      <section className="text-white py-16 md:py-20 overflow-hidden relative">
+        {/* Background Image */}
+        <div className="absolute inset-0">
           <Image
-            src="/images/shop/texas-tortillas-hero.webp"
-            alt="H-E-B Tortillas with Texas Flag"
+            src="/images/campaigns/hero-hook-em.png"
+            alt="Texas sunset skyline"
             fill
-            className="object-cover object-center"
+            className="object-cover"
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/5" />
+          <div className="absolute inset-0 bg-gradient-to-r from-sunset-900/85 via-sunset-800/75 to-transparent" />
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-charcoal-950 mb-3">
-            {t('shop.title')}
-          </h1>
-          <p className="text-gray-600 max-w-xl mx-auto mb-5">
-            {t('shop.subtitle')}
-          </p>
+        {/* Texas star pattern overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 text-8xl">★</div>
+          <div className="absolute bottom-20 right-20 text-6xl">★</div>
+          <div className="absolute top-1/2 left-1/4 text-4xl">★</div>
+        </div>
 
-          {/* Simple Free Shipping Banner */}
-          <div className="bg-sunset-600 text-white py-3 px-6 rounded-lg inline-block">
-            <span className="font-semibold">FREE Shipping on orders $80+ — Save $22.65!</span>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              {t('shop.title')}
+              <br />
+              <span className="text-sunset-200">Texas Tortillas, Shipped Nationwide</span>
+            </h1>
+            <p className="text-xl text-white/90 mb-6 max-w-2xl">
+              {t('shop.subtitle')}
+            </p>
+            {/* Free Shipping Banner */}
+            <div className="inline-block bg-white/20 backdrop-blur-sm text-white py-3 px-6 rounded-lg">
+              <span className="font-semibold">FREE Shipping on orders $80+ — Save $22.65!</span>
+            </div>
           </div>
         </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
         {/* Compact Trust Signals */}
         <div className="flex justify-center gap-6 mb-8 text-sm text-gray-600">

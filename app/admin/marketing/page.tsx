@@ -4,7 +4,37 @@ import { useState } from 'react';
 import { MARKETING_TEMPLATES, type EmailTemplate } from '@/lib/marketing-templates';
 import { COLD_EMAIL_TEMPLATES, type ColdEmailTemplate } from '@/lib/cold-emails';
 import { REFINED_ORDER_CONFIRMATION, REFINED_ORDER_SHIPPED } from '@/lib/transactional-emails-refined';
-import { Copy, Eye, Mail, Check, FileText } from 'lucide-react';
+import {
+  generateDripEmail1,
+  generateDripEmail2,
+  generateDripEmail3,
+  generateDripEmail4,
+  generateDripEmail5,
+  generateDripEmail6,
+  type DripEmailData,
+} from '@/lib/drip-email-templates';
+import { Copy, Eye, Mail, Check, FileText, Zap } from 'lucide-react';
+
+// Sample data for drip email previews
+const DRIP_SAMPLE_DATA: DripEmailData = {
+  email: 'customer@example.com',
+  originalPrize: 'five_off',
+  originalCode: 'SPIN-ABC123',
+  discountCode: 'DRIP-10OFF-XYZ789',
+  trackingPixelUrl: 'https://lonestartortillas.com/api/track/open?id=preview',
+  unsubscribeUrl: 'https://lonestartortillas.com/unsubscribe?id=preview',
+  shopUrl: 'https://lonestartortillas.com/shop',
+};
+
+// Generate all drip email previews
+const DRIP_EMAILS = [
+  { ...generateDripEmail1(DRIP_SAMPLE_DATA), id: 'drip-1', name: 'Day 1: Prize Reminder', day: 1, description: 'Reminds them about their unclaimed prize' },
+  { ...generateDripEmail2(DRIP_SAMPLE_DATA), id: 'drip-2', name: 'Day 3: Value Proposition', day: 3, description: 'Why Texans love our tortillas' },
+  { ...generateDripEmail3(DRIP_SAMPLE_DATA), id: 'drip-3', name: 'Day 5: Social Proof', day: 5, description: 'Customer testimonials and reviews' },
+  { ...generateDripEmail4(DRIP_SAMPLE_DATA), id: 'drip-4', name: 'Day 12: New Offer', day: 12, description: 'Fresh 10% off discount code' },
+  { ...generateDripEmail5(DRIP_SAMPLE_DATA), id: 'drip-5', name: 'Day 18: Brand Story', day: 18, description: 'Our Texas kitchen story' },
+  { ...generateDripEmail6(DRIP_SAMPLE_DATA), id: 'drip-6', name: 'Day 30: Last Chance', day: 30, description: 'Final call with urgency' },
+];
 
 const TEXAS_EMAILS = [
   { id: 'refined-confirmation', name: 'Order Confirmation', subject: 'Order Confirmed - Lonestar Tortillas', html: REFINED_ORDER_CONFIRMATION },
@@ -15,9 +45,10 @@ export default function MarketingTemplatesPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<EmailTemplate | null>(null);
   const [selectedColdEmail, setSelectedColdEmail] = useState<ColdEmailTemplate | null>(null);
   const [selectedTexasEmail, setSelectedTexasEmail] = useState<typeof TEXAS_EMAILS[0] | null>(null);
+  const [selectedDripEmail, setSelectedDripEmail] = useState<typeof DRIP_EMAILS[0] | null>(null);
   const [viewMode, setViewMode] = useState<'preview' | 'code'>('preview');
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'html' | 'cold' | 'texas'>('cold');
+  const [activeTab, setActiveTab] = useState<'drip' | 'html' | 'cold' | 'texas'>('drip');
 
   const copyToClipboard = async (content: string, id: string) => {
     try {
@@ -48,6 +79,20 @@ export default function MarketingTemplatesPage() {
       {/* Tabs */}
       <div className="border-b border-stone-200">
         <nav className="-mb-px flex space-x-8">
+          <button
+            onClick={() => setActiveTab('drip')}
+            className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === 'drip'
+                ? 'border-amber-600 text-amber-600'
+                : 'border-transparent text-charcoal-600 hover:text-charcoal-800 hover:border-charcoal-300'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Zap className="w-4 h-4" />
+              Drip Campaign
+              <span className="ml-1 bg-green-100 text-green-800 text-xs font-semibold px-2 py-0.5 rounded">6</span>
+            </div>
+          </button>
           <button
             onClick={() => setActiveTab('cold')}
             className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
@@ -92,6 +137,64 @@ export default function MarketingTemplatesPage() {
           </button>
         </nav>
       </div>
+
+      {/* Drip Campaign Tab */}
+      {activeTab === 'drip' && (
+        <>
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+            <h3 className="text-sm font-semibold text-green-900 mb-2">Automated Drip Campaign for Spin-to-Win Leads</h3>
+            <p className="text-sm text-green-800">6-email sequence sent to leads who claimed a spin prize but haven&apos;t purchased. Emails are sent on days 1, 3, 5, 12, 18, and 30 after enrollment.</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {DRIP_EMAILS.map((template) => (
+              <div key={template.id} className="bg-white rounded-lg shadow-sm border border-stone-200 overflow-hidden hover:shadow-md transition-shadow">
+                <div className="p-6 border-b border-stone-200">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="text-lg font-semibold text-charcoal-950 mb-1">{template.name}</h3>
+                      <p className="text-sm text-charcoal-600">{template.description}</p>
+                    </div>
+                    <span className="text-xs font-medium px-2.5 py-1 rounded bg-green-100 text-green-800">
+                      Day {template.day}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-charcoal-600">
+                    <Mail className="w-4 h-4" />
+                    <span className="font-medium">Subject:</span>
+                    <span className="truncate">{template.subject}</span>
+                  </div>
+                </div>
+                <div className="p-4 bg-stone-50 flex gap-3">
+                  <button
+                    onClick={() => setSelectedDripEmail(template)}
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-md hover:bg-stone-800 transition-colors font-medium text-sm"
+                  >
+                    <Eye className="w-4 h-4" />
+                    Preview
+                  </button>
+                  <button
+                    onClick={() => copyToClipboard(template.html, template.id)}
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-white border border-stone-300 text-stone-900 rounded-md hover:bg-stone-50 transition-colors font-medium text-sm"
+                  >
+                    {copiedId === template.id ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        Copy HTML
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Cold Emails Tab */}
       {activeTab === 'cold' && (
@@ -274,6 +377,94 @@ export default function MarketingTemplatesPage() {
             })}
           </div>
         </>
+      )}
+
+      {/* Drip Email Modal */}
+      {selectedDripEmail && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedDripEmail(null)}>
+          <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="p-6 border-b border-stone-200 flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-charcoal-950">{selectedDripEmail.name}</h2>
+                <p className="text-sm text-charcoal-600 mt-1">{selectedDripEmail.subject}</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium px-3 py-1 rounded bg-green-100 text-green-800">
+                  Day {selectedDripEmail.day}
+                </span>
+                <div className="flex bg-stone-100 rounded-md p-1">
+                  <button
+                    onClick={() => setViewMode('preview')}
+                    className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
+                      viewMode === 'preview'
+                        ? 'bg-white text-stone-900 shadow-sm'
+                        : 'text-stone-600 hover:text-stone-900'
+                    }`}
+                  >
+                    Preview
+                  </button>
+                  <button
+                    onClick={() => setViewMode('code')}
+                    className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
+                      viewMode === 'code'
+                        ? 'bg-white text-stone-900 shadow-sm'
+                        : 'text-stone-600 hover:text-stone-900'
+                    }`}
+                  >
+                    HTML Code
+                  </button>
+                </div>
+                <button
+                  onClick={() => setSelectedDripEmail(null)}
+                  className="text-charcoal-500 hover:text-charcoal-700 text-2xl font-bold w-8 h-8 flex items-center justify-center"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+            <div className="overflow-auto" style={{ maxHeight: 'calc(90vh - 180px)' }}>
+              {viewMode === 'preview' ? (
+                <div className="p-6 bg-stone-50">
+                  <div className="bg-white rounded-lg shadow-sm border border-stone-200 overflow-hidden">
+                    <iframe
+                      srcDoc={selectedDripEmail.html}
+                      className="w-full"
+                      style={{ height: '70vh', border: 'none' }}
+                      title="Email Preview"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="p-6">
+                  <pre className="bg-stone-900 text-green-400 p-6 rounded-lg overflow-x-auto text-sm font-mono leading-relaxed">
+                    {selectedDripEmail.html}
+                  </pre>
+                </div>
+              )}
+            </div>
+            <div className="p-6 border-t border-stone-200 flex items-center justify-between bg-stone-50">
+              <p className="text-sm text-charcoal-600">
+                {selectedDripEmail.description}
+              </p>
+              <button
+                onClick={() => copyToClipboard(selectedDripEmail.html, selectedDripEmail.id)}
+                className="flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-md hover:bg-stone-800 transition-colors font-medium"
+              >
+                {copiedId === selectedDripEmail.id ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    Copy HTML
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Cold Email Modal */}

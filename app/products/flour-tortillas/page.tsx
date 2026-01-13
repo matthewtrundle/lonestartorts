@@ -33,6 +33,7 @@ export default function FlourTortillasProductPage() {
       '@type': 'Offer',
       price: '6.99',
       priceCurrency: 'USD',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/PreOrder',
       url: 'https://lonestartortillas.com/products/flour-tortillas',
     },

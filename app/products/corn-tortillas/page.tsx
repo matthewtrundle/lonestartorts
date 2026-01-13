@@ -33,6 +33,7 @@ export default function CornTortillasProductPage() {
       '@type': 'Offer',
       price: '5.99',
       priceCurrency: 'USD',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/PreOrder',
       url: 'https://lonestartortillas.com/products/corn-tortillas',
     },

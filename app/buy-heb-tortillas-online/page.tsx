@@ -89,7 +89,7 @@ export default function BuyHebTortillasOnlinePage() {
       url: 'https://lonestartortillas.com/shop',
       priceCurrency: 'USD',
       price: product.price.toFixed(2),
-      priceValidUntil: '2025-12-31',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: {

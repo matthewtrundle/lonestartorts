@@ -164,9 +164,60 @@ model SpinWheelEntry {
   createdAt DateTime  @default(now())
   utmSource String?   // Track which campaign
 
+  // Drip campaign relation
+  dripCampaign DripCampaignProgress?
+
   @@index([email])
   @@index([code])
   @@index([expiresAt])
+}
+
+// ===========================================
+// DRIP CAMPAIGN SYSTEM
+// ===========================================
+
+// Tracks progress of leads through the drip email sequence
+model DripCampaignProgress {
+  id                String              @id @default(uuid())
+  spinWheelEntryId  String              @unique
+  spinWheelEntry    SpinWheelEntry      @relation(fields: [spinWheelEntryId], references: [id])
+  email             String              // Denormalized for easy querying
+  status            DripCampaignStatus  @default(ACTIVE)
+  currentStep       Int                 @default(1) // 1-6, which email is next
+  lastEmailSentAt   DateTime?
+  nextEmailDueAt    DateTime
+  enrolledAt        DateTime            @default(now())
+  convertedAt       DateTime?
+  unsubscribedAt    DateTime?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  emailLogs         DripEmailLog[]
+
+  @@index([status, nextEmailDueAt])
+  @@index([email])
+}
+
+// Individual email log for drip campaign
+model DripEmailLog {
+  id              String               @id @default(uuid())
+  dripCampaignId  String
+  dripCampaign    DripCampaignProgress @relation(fields: [dripCampaignId], references: [id], onDelete: Cascade)
+  emailNumber     Int                  // 1-6
+  subject         String
+  sentAt          DateTime             @default(now())
+  openedAt        DateTime?
+  clickedAt       DateTime?
+  discountCode    String?              // Generated code for emails 4-6
+
+  @@index([dripCampaignId])
+}
+
+enum DripCampaignStatus {
+  ACTIVE
+  COMPLETED
+  CONVERTED
+  UNSUBSCRIBED
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.

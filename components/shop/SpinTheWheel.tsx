@@ -484,6 +484,9 @@ export function SpinTheWheel({ isOpen, onClose, utmSource = 'tiktok' }: SpinTheW
                 <p className="text-xs text-gray-400 mt-3">
                   Everyone wins • No purchase necessary
                 </p>
+                <p className="text-[10px] text-gray-400 mt-1">
+                  By claiming your prize, you agree to receive promotional emails. Unsubscribe anytime.
+                </p>
               </div>
             )}
 

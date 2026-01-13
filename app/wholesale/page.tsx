@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { WholesaleForm } from '@/components/wholesale/WholesaleForm';
 import { WholesaleTierCard } from '@/components/wholesale/WholesaleTierCard';
 import { wholesaleTiers } from '@/lib/wholesale-tiers';
@@ -87,8 +88,27 @@ export default function WholesalePage() {
 
       <main className="min-h-screen bg-cream-50 pt-24">
         {/* Hero Section */}
-        <section className="bg-charcoal-950 text-white py-16 md:py-24 overflow-hidden">
-          <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+        <section className="text-white py-16 md:py-24 overflow-hidden relative">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/campaigns/hero-hook-em.png"
+              alt="Texas sunset skyline"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-900/80 to-transparent" />
+          </div>
+
+          {/* Texas star pattern overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-10 text-8xl">★</div>
+            <div className="absolute bottom-20 right-20 text-6xl">★</div>
+            <div className="absolute top-1/2 left-1/4 text-4xl">★</div>
+          </div>
+
+          <div className="container mx-auto px-4 md:px-8 max-w-6xl relative z-10">
             <div className="flex items-center justify-between">
               <div className="max-w-3xl">
                 <span className="inline-block px-4 py-1 bg-sunset-500 text-white text-sm font-semibold rounded-full mb-6">
@@ -96,6 +116,8 @@ export default function WholesalePage() {
                 </span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                   Wholesale & Bulk Tortilla Orders
+                  <br />
+                  <span className="text-sunset-300">Texas Tortillas, Shipped Nationwide</span>
                 </h1>
                 <p className="text-xl text-cream-200 mb-8">
                   Premium H-E-B tortillas for your restaurant, food truck, or
