@@ -620,3 +620,51 @@ enum BillingInterval {
   MONTHLY
   QUARTERLY
 }
+
+// ===========================================
+// VERCEL WEB ANALYTICS DRAIN
+// ===========================================
+
+model AnalyticsEvent {
+  id            String   @id @default(uuid())
+  receivedAt    DateTime @default(now())
+
+  // Core event data
+  eventType     String   // "pageview" or "event"
+  eventName     String?  // for custom events
+  timestamp     BigInt   // Unix timestamp from Vercel
+
+  // Page info
+  path          String?
+  route         String?
+  origin        String?
+  referrer      String?
+  queryParams   String?  // contains utm_source, utm_medium, etc.
+
+  // Session/device
+  sessionId     BigInt?
+  deviceId      BigInt?
+
+  // Geo
+  country       String?
+  region        String?
+  city          String?
+
+  // Device/browser
+  osName        String?
+  clientName    String?  // browser name
+  deviceType    String?  // desktop, mobile, tablet
+
+  // Full payload for future use
+  rawJson       Json
+
+  // Dedup hash
+  payloadHash   String?  @unique
+
+  @@index([receivedAt])
+  @@index([path])
+  @@index([referrer])
+  @@index([country])
+  @@index([eventType])
+  @@index([timestamp])
+}
