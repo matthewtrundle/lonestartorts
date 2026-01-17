@@ -284,14 +284,14 @@ export async function POST(req: NextRequest) {
       if (freeShippingApplied) {
         const savingsText = `You saved $${(baseShippingCost / 100).toFixed(2)}`;
         if (freeShippingReason === 'wholesale') {
-          return `FREE Standard Shipping - Wholesale Order`;
+          return `FREE Fast Shipping - Wholesale Order`;
         } else if (freeShippingReason === 'threshold') {
-          return `FREE Standard Shipping - Order $80+ ${savingsText}`;
+          return `FREE Fast Shipping - Order $80+ ${savingsText}`;
         } else {
-          return `FREE Standard Shipping - First Order Discount`;
+          return `FREE Fast Shipping - First Order Discount`;
         }
       }
-      return `Standard Shipping (3-5 business days)`;
+      return `Fast Shipping (3-5 business days)`;
     };
 
     // Create Stripe checkout session with shipping as actual shipping rate (not a line item)

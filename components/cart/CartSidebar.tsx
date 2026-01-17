@@ -413,7 +413,7 @@ export function CartSidebar() {
                       <Truck className="w-3.5 h-3.5 text-sunset-600" />
                       <div>
                         <span className="text-xs font-medium uppercase tracking-wide">
-                          {hasWholesaleItems ? 'Wholesale Shipping' : 'Standard Shipping'}
+                          {hasWholesaleItems ? 'Wholesale Shipping' : 'Fast Shipping'}
                         </span>
                         {!hasWholesaleItems && !freeShippingProgress.qualifies && (
                           <p className="text-[10px] text-gray-500">3-5 business days</p>

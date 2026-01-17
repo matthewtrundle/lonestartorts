@@ -28,7 +28,7 @@ export default function CheckoutPage() {
 
   // Simplified shipping label
   const getShippingLabel = () => {
-    return 'Standard Shipping (3-5 business days)';
+    return 'Fast Shipping (3-5 business days)';
   };
 
   // Redirect if cart is empty (wait for hydration to avoid race condition)
