@@ -1,21 +1,16 @@
 // Product catalog - centralized source of truth
 // Simple pricing: $20 per pack (20 tortillas each)
-// Smart shipping: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
+// Simplified flat-rate shipping: 1 pack = $9.95, 2+ packs = $19.95
 // FREE SHIPPING on orders $80+ (4 packs)
 
 // Free shipping threshold in cents ($80 = 4 packs)
 export const FREE_SHIPPING_THRESHOLD = 8000;
 
-// Shipping method type
-export type ShippingMethod = 'usps' | 'ups_ground' | 'ups_3day' | 'ups_2day' | 'ups_nextday';
-
-// UPS flat rates (in cents) - base rate for 1 pack
-// These are approximate rates that can be adjusted
-const UPS_RATES = {
-  ground: 2500,     // ~$25 (3-5 business days)
-  threeDay: 3300,   // ~$33 (3 business days)
-  secondDay: 4500,  // ~$45 (2 business days)
-  nextDay: 8500,    // ~$85 (next business day)
+// Simplified flat-rate shipping (in cents)
+export const SHIPPING_RATES = {
+  small: 995,    // $9.95 for 1 pack (small box)
+  large: 1995,   // $19.95 for 2+ packs (large box)
+  sauce: 999,    // $9.99 for sauce-only orders
 };
 
 export interface Product {
@@ -152,13 +147,13 @@ export function getProductBySku(sku: string) {
   return products.find((p) => p.sku === sku);
 }
 
-// Calculate smart shipping based on cart items
+// Calculate flat-rate shipping based on cart items
 // Shipping logic:
-// - FREE shipping on orders $80+ (4+ tortilla packs)
+// - FREE shipping on orders $80+
 // - FREE shipping on all wholesale orders
-// - Sauce-only orders: $9.99 flat rate
-// - Orders with tortillas: Calculate based on tortilla pack count only (sauce ships free with tortillas)
-// - Tortilla tiers: 1 pack = $10.60, 2-3 packs = $18.40, 4-5 packs = $22.65
+// - 1 pack: $9.95 (small box)
+// - 2+ packs: $19.95 (large box)
+// - Sauce-only: $9.99
 export function calculateShipping(
   items: { productType?: string; quantity: number; sku?: string }[],
   subtotal?: number
@@ -182,20 +177,15 @@ export function calculateShipping(
   // Check if there are any sauce items
   const hasSauce = items.some(item => item.productType === 'sauce');
 
-  // If there are tortillas, calculate shipping based on tortilla count only
+  // Flat-rate shipping based on pack count
   if (tortillaPacks > 0) {
-    if (tortillaPacks === 1) return 1060; // $10.60 - Padded envelope
-    if (tortillaPacks <= 3) return 1840; // $18.40 - Medium box (2-3 packs)
-    if (tortillaPacks <= 5) return 2265; // $22.65 - Large flat rate box (4-5 packs)
-
-    // For 6+ packs, calculate based on multiples of large boxes
-    const largeBoxes = Math.ceil(tortillaPacks / 5);
-    return largeBoxes * 2265;
+    // 1 pack = small box ($9.95), 2+ packs = large box ($19.95)
+    return tortillaPacks === 1 ? SHIPPING_RATES.small : SHIPPING_RATES.large;
   }
 
   // If only sauce (no tortillas), charge sauce shipping
   if (hasSauce) {
-    return 999; // $9.99 - Sauce-only shipping
+    return SHIPPING_RATES.sauce;
   }
 
   // Empty cart
@@ -212,85 +202,15 @@ export function calculateBaseShipping(items: { productType?: string; quantity: n
   const hasSauce = items.some(item => item.productType === 'sauce');
 
   if (tortillaPacks > 0) {
-    if (tortillaPacks === 1) return 1060;
-    if (tortillaPacks <= 3) return 1840;
-    if (tortillaPacks <= 5) return 2265;
-    const largeBoxes = Math.ceil(tortillaPacks / 5);
-    return largeBoxes * 2265;
+    // Flat rate: 1 pack = $9.95, 2+ packs = $19.95
+    return tortillaPacks === 1 ? SHIPPING_RATES.small : SHIPPING_RATES.large;
   }
 
   if (hasSauce) {
-    return 999;
+    return SHIPPING_RATES.sauce;
   }
 
   return 0;
-}
-
-// Calculate shipping for a specific method
-export function getShippingCost(
-  items: { productType?: string; quantity: number }[],
-  method: ShippingMethod,
-  subtotal?: number
-): number {
-  // FREE shipping for orders $100+ (USPS only - UPS always charged)
-  if (method === 'usps' && subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
-    return 0;
-  }
-
-  // Count tortilla packs (items that are not sauce)
-  const tortillaPacks = items
-    .filter(item => item.productType !== 'sauce')
-    .reduce((total, item) => total + item.quantity, 0);
-
-  // Check if there are any sauce items
-  const hasSauce = items.some(item => item.productType === 'sauce');
-
-  if (method === 'usps') {
-    return calculateShipping(items);
-  }
-
-  // UPS shipping - flat rates (no free shipping on expedited)
-  if (tortillaPacks > 0) {
-    switch (method) {
-      case 'ups_ground':
-        return UPS_RATES.ground;
-      case 'ups_3day':
-        return UPS_RATES.threeDay;
-      case 'ups_2day':
-        return UPS_RATES.secondDay;
-      case 'ups_nextday':
-        return UPS_RATES.nextDay;
-      default:
-        return UPS_RATES.threeDay; // Default to 3-day
-    }
-  }
-
-  // Sauce-only UPS order
-  if (hasSauce) {
-    return 999; // $9.99 - Sauce-only shipping (same as USPS)
-  }
-
-  return 0;
-}
-
-// Get all shipping options for display
-export function getShippingOptions(
-  items: { productType?: string; quantity: number }[],
-  subtotal?: number
-): {
-  usps: number;
-  ups_ground: number;
-  ups_3day: number;
-  ups_2day: number;
-  ups_nextday: number;
-} {
-  return {
-    usps: getShippingCost(items, 'usps', subtotal),
-    ups_ground: getShippingCost(items, 'ups_ground', subtotal),
-    ups_3day: getShippingCost(items, 'ups_3day', subtotal),
-    ups_2day: getShippingCost(items, 'ups_2day', subtotal),
-    ups_nextday: getShippingCost(items, 'ups_nextday', subtotal),
-  };
 }
 
 // Free shipping progress helper
@@ -304,8 +224,8 @@ export function getFreeShippingProgress(subtotal: number): {
   const amountRemaining = qualifies ? 0 : FREE_SHIPPING_THRESHOLD - subtotal;
   const percentComplete = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100));
 
-  // Estimate savings (based on 4-pack shipping cost)
-  const savedAmount = qualifies ? 2265 : 0; // $22.65 for 4 packs
+  // Estimate savings (based on large box shipping cost)
+  const savedAmount = qualifies ? SHIPPING_RATES.large : 0; // $19.95 for 2+ packs
 
   return {
     qualifies,

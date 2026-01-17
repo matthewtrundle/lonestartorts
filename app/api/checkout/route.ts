@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getShippingCost, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, ShippingMethod } from '@/lib/products';
+import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD } from '@/lib/products';
 import { prisma } from '@/lib/prisma';
 
 // Helper to get any product by SKU (retail or wholesale)
@@ -26,11 +26,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
     }
 
-    const { items, shippingMethod: rawShippingMethod, email, discountCode } = await req.json();
-
-    // Validate and default shipping method
-    const validMethods: ShippingMethod[] = ['usps', 'ups_ground', 'ups_3day', 'ups_2day', 'ups_nextday'];
-    const shippingMethod: ShippingMethod = validMethods.includes(rawShippingMethod) ? rawShippingMethod : 'usps';
+    const { items, email, discountCode } = await req.json();
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
@@ -56,18 +52,17 @@ export async function POST(req: NextRequest) {
     // Calculate subtotal for free shipping threshold check
     const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    // Calculate shipping based on items, method, and subtotal (for free shipping threshold)
-    let shippingCost = getShippingCost(fullItems, shippingMethod, subtotal);
+    // Calculate flat-rate shipping based on items and subtotal
+    let shippingCost = calculateShipping(fullItems, subtotal);
     let freeShippingApplied = false;
     let freeShippingReason = '';
 
     // Check if free shipping was applied via threshold or wholesale
     if (isWholesaleOrder) {
-      shippingCost = 0;
       freeShippingApplied = true;
       freeShippingReason = 'wholesale';
       console.log(`Free shipping applied for wholesale order $${(subtotal / 100).toFixed(2)}`);
-    } else if (shippingMethod === 'usps' && subtotal >= FREE_SHIPPING_THRESHOLD) {
+    } else if (subtotal >= FREE_SHIPPING_THRESHOLD) {
       freeShippingApplied = true;
       freeShippingReason = 'threshold';
       console.log(`Free shipping applied for order $${(subtotal / 100).toFixed(2)} (threshold: $${(FREE_SHIPPING_THRESHOLD / 100).toFixed(2)})`);
@@ -215,10 +210,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Calculate total packs for display (exclude sauce)
-    const totalPacks = fullItems.filter(item => item.productType !== 'sauce').reduce((sum, item) => sum + item.quantity, 0);
-    const sauceBottles = fullItems.filter(item => item.productType === 'sauce').reduce((sum, item) => sum + item.quantity, 0);
-
     // Create line items for Stripe with server-side validation
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: { sku: string; quantity: number }) => {
       const product = getAnyProductBySku(item.sku);
@@ -288,41 +279,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Build shipping display name
+    // Build shipping display name - simplified flat-rate display
     const getShippingDisplayName = () => {
-      const methodName = shippingMethod === 'usps' ? 'USPS Priority Mail' :
-        shippingMethod === 'ups_ground' ? 'UPS Ground' :
-        shippingMethod === 'ups_3day' ? 'UPS 3-Day Select' :
-        shippingMethod === 'ups_2day' ? 'UPS 2nd Day Air' :
-        'UPS Next Day Air';
-      const baseLabel = (() => {
-        if (totalPacks > 0 && sauceBottles > 0) {
-          return `${totalPacks} tortilla ${totalPacks === 1 ? 'pack' : 'packs'} + ${sauceBottles} sauce`;
-        } else if (totalPacks > 0) {
-          return `${totalPacks} ${totalPacks === 1 ? 'pack' : 'packs'}`;
-        } else if (sauceBottles > 0) {
-          return `sauce`;
-        }
-        return '';
-      })();
-
       if (freeShippingApplied) {
         const savingsText = `You saved $${(baseShippingCost / 100).toFixed(2)}`;
         if (freeShippingReason === 'wholesale') {
-          return baseLabel
-            ? `FREE ${methodName} (${baseLabel}) - Wholesale Order`
-            : `FREE ${methodName} - Wholesale Order`;
+          return `FREE Standard Shipping - Wholesale Order`;
         } else if (freeShippingReason === 'threshold') {
-          return baseLabel
-            ? `FREE ${methodName} (${baseLabel}) - Order $80+ ${savingsText}`
-            : `FREE ${methodName} - Order $80+ ${savingsText}`;
+          return `FREE Standard Shipping - Order $80+ ${savingsText}`;
         } else {
-          return baseLabel
-            ? `FREE ${methodName} (${baseLabel}) - First Order Discount`
-            : `FREE ${methodName} - First Order Discount`;
+          return `FREE Standard Shipping - First Order Discount`;
         }
       }
-      return baseLabel ? `${methodName} (${baseLabel})` : methodName;
+      return `Standard Shipping (3-5 business days)`;
     };
 
     // Create Stripe checkout session with shipping as actual shipping rate (not a line item)
@@ -342,13 +311,13 @@ export async function POST(req: NextRequest) {
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}`,
       metadata: {
         disclaimer: 'Independent reseller. Not affiliated with or endorsed by H-E-B®.',
-        shippingMethod, // Store shipping method (usps or fedex)
+        shippingMethod: 'standard', // Simplified to single method
         shippingCost: shippingCost.toString(), // Store for webhook reference
         baseShippingCost: baseShippingCost.toString(), // What shipping would have been
         subtotal: subtotal.toString(), // Order subtotal
         isWholesaleOrder: isWholesaleOrder.toString(), // Track wholesale orders
         ...(freeShippingApplied && {
-          freeShippingReason, // 'threshold' or 'discount_code'
+          freeShippingReason, // 'threshold', 'wholesale', 'discount_code', 'spin_prize', 'drip_code'
           freeShippingSavings: baseShippingCost.toString(),
           ...(freeShippingReason === 'discount_code' && {
             discountCode: discountCode?.trim().toUpperCase(),
@@ -376,24 +345,18 @@ export async function POST(req: NextRequest) {
           shipping_rate_data: {
             type: 'fixed_amount',
             fixed_amount: {
-              amount: shippingCost, // Actual shipping cost
+              amount: shippingCost,
               currency: 'usd',
             },
             display_name: getShippingDisplayName(),
             delivery_estimate: {
               minimum: {
                 unit: 'business_day',
-                value: shippingMethod === 'usps' ? 3 :
-                  shippingMethod === 'ups_ground' ? 3 :
-                  shippingMethod === 'ups_3day' ? 3 :
-                  shippingMethod === 'ups_2day' ? 2 : 1,
+                value: 3,
               },
               maximum: {
                 unit: 'business_day',
-                value: shippingMethod === 'usps' ? 5 :
-                  shippingMethod === 'ups_ground' ? 5 :
-                  shippingMethod === 'ups_3day' ? 3 :
-                  shippingMethod === 'ups_2day' ? 2 : 1,
+                value: 5,
               },
             },
           },

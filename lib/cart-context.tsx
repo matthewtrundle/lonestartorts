@@ -3,11 +3,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import {
   calculateShipping,
-  getShippingCost,
-  getShippingOptions,
   getFreeShippingProgress,
   calculateBaseShipping,
-  ShippingMethod,
   FREE_SHIPPING_THRESHOLD,
 } from '@/lib/products';
 
@@ -48,9 +45,6 @@ interface CartContextType {
   shipping: number;
   baseShipping: number; // What shipping would be without free shipping
   total: number;
-  shippingMethod: ShippingMethod;
-  setShippingMethod: (method: ShippingMethod) => void;
-  shippingOptions: { usps: number; ups_ground: number; ups_3day: number; ups_2day: number; ups_nextday: number };
   freeShippingProgress: FreeShippingProgress;
   freeShippingThreshold: number;
   addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
@@ -72,32 +66,25 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CART_STORAGE_KEY = 'lonestar-cart';
-const SHIPPING_METHOD_KEY = 'lonestar-shipping-method';
 const SPIN_TRIGGERED_KEY = 'lonestar-spin-triggered';
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [shippingMethod, setShippingMethodState] = useState<ShippingMethod>('usps');
 
   // Spin wheel state
   const [showSpinWheel, setShowSpinWheel] = useState(false);
   const [spinPrize, setSpinPrize] = useState<SpinPrize | null>(null);
   const [hasTriggeredSpin, setHasTriggeredSpin] = useState(false);
 
-  // Load cart and shipping method from localStorage on mount
+  // Load cart from localStorage on mount
   useEffect(() => {
     try {
       const stored = localStorage.getItem(CART_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
         setItems(parsed);
-      }
-      const storedMethod = localStorage.getItem(SHIPPING_METHOD_KEY) as ShippingMethod | null;
-      const validMethods = ['usps', 'ups_ground', 'ups_3day', 'ups_2day', 'ups_nextday'];
-      if (storedMethod && validMethods.includes(storedMethod)) {
-        setShippingMethodState(storedMethod);
       }
       // Check if spin was already triggered this session
       const spinTriggered = sessionStorage.getItem(SPIN_TRIGGERED_KEY);
@@ -120,21 +107,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
     }
   }, [items, isHydrated]);
-
-  // Save shipping method to localStorage
-  useEffect(() => {
-    if (isHydrated) {
-      try {
-        localStorage.setItem(SHIPPING_METHOD_KEY, shippingMethod);
-      } catch (error) {
-        console.error('Failed to save shipping method to localStorage:', error);
-      }
-    }
-  }, [shippingMethod, isHydrated]);
-
-  const setShippingMethod = (method: ShippingMethod) => {
-    setShippingMethodState(method);
-  };
 
   const addItem = (item: Omit<CartItem, 'quantity'>, quantity: number = 1) => {
     setItems((prevItems) => {
@@ -209,14 +181,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // Calculate totals with smart shipping
+  // Calculate totals with flat-rate shipping
   // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
-  // Shipping options: USPS (standard) or UPS (Ground, 3-Day, 2-Day, Next Day)
-  // FREE shipping on USPS orders $80+
+  // Shipping: $9.95 (1 pack), $19.95 (2+ packs), FREE on $80+
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const shippingOptions = getShippingOptions(items, subtotal);
-  const shipping = getShippingCost(items, shippingMethod, subtotal);
+  const shipping = calculateShipping(items, subtotal);
   const baseShipping = calculateBaseShipping(items); // What shipping would be without free threshold
   const total = subtotal + shipping;
   const freeShippingProgress = getFreeShippingProgress(subtotal);
@@ -228,9 +198,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     shipping,
     baseShipping,
     total,
-    shippingMethod,
-    setShippingMethod,
-    shippingOptions,
     freeShippingProgress,
     freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
     addItem,

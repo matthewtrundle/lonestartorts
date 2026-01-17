@@ -13,7 +13,7 @@ import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
 
 export function CartSidebar() {
-  const { items, itemCount, subtotal, shipping, baseShipping, total, shippingMethod, setShippingMethod, shippingOptions, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
+  const { items, itemCount, subtotal, shipping, baseShipping, total, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,7 +33,6 @@ export function CartSidebar() {
 
   // Collapsible sections
   const [discountOpen, setDiscountOpen] = useState(false);
-  const [shippingOpen, setShippingOpen] = useState(false);
 
   // Auto-fill discount code from spin wheel prize
   useEffect(() => {
@@ -171,7 +170,6 @@ export function CartSidebar() {
             sku: item.sku,
             quantity: item.quantity,
           })),
-          shippingMethod,
           // Include discount info if applied
           ...(discountApplied && {
             email: email.trim().toLowerCase(),
@@ -408,130 +406,26 @@ export function CartSidebar() {
                   )}
                 </div>
 
-                {/* Shipping Method Selector - Collapsible */}
-                <div className="mb-3 bg-white rounded-lg border border-gray-200 overflow-hidden">
-                  <button
-                    onClick={() => !hasWholesaleItems && setShippingOpen(!shippingOpen)}
-                    className={`w-full flex items-center justify-between p-2.5 transition-colors ${hasWholesaleItems ? 'cursor-default' : 'hover:bg-gray-50'}`}
-                  >
+                {/* Shipping - Simple flat-rate display */}
+                <div className="mb-3 bg-white rounded-lg border border-gray-200 p-2.5">
+                  <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Truck className="w-3.5 h-3.5 text-sunset-600" />
-                      <span className="text-xs font-medium uppercase tracking-wide">
-                        {hasWholesaleItems ? 'Wholesale Shipping' :
-                         shippingMethod === 'usps' ? 'USPS Priority' :
-                         shippingMethod === 'ups_ground' ? 'UPS Ground' :
-                         shippingMethod === 'ups_3day' ? 'UPS 3-Day' :
-                         shippingMethod === 'ups_2day' ? 'UPS 2-Day' :
-                         'UPS Next Day'}
-                      </span>
+                      <div>
+                        <span className="text-xs font-medium uppercase tracking-wide">
+                          {hasWholesaleItems ? 'Wholesale Shipping' : 'Standard Shipping'}
+                        </span>
+                        {!hasWholesaleItems && !freeShippingProgress.qualifies && (
+                          <p className="text-[10px] text-gray-500">3-5 business days</p>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      {hasWholesaleItems ? (
-                        <span className="text-xs font-semibold text-green-600">FREE</span>
-                      ) : (
-                        <>
-                          <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
-                          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${shippingOpen ? 'rotate-180' : ''}`} />
-                        </>
-                      )}
-                    </div>
-                  </button>
-
-                  {shippingOpen && !hasWholesaleItems && (
-                    <div className="px-2.5 pb-2.5 border-t border-gray-100 space-y-1.5 mt-2">
-                      {/* USPS Option */}
-                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
-                        shippingMethod === 'usps'
-                          ? 'border-sunset-500 bg-sunset-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="shippingMethod"
-                            value="usps"
-                            checked={shippingMethod === 'usps'}
-                            onChange={() => setShippingMethod('usps')}
-                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
-                          />
-                          <div>
-                            <p className="text-xs font-medium">USPS Priority Mail</p>
-                            <p className="text-[10px] text-gray-500">3-5 business days</p>
-                          </div>
-                        </div>
-                        <span className="text-xs font-medium">{formatPrice(shippingOptions.usps)}</span>
-                      </label>
-
-                      {/* UPS 3-Day Select */}
-                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
-                        shippingMethod === 'ups_3day'
-                          ? 'border-sunset-500 bg-sunset-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="shippingMethod"
-                            value="ups_3day"
-                            checked={shippingMethod === 'ups_3day'}
-                            onChange={() => setShippingMethod('ups_3day')}
-                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
-                          />
-                          <div>
-                            <p className="text-xs font-medium">UPS 3-Day Select</p>
-                            <p className="text-[10px] text-gray-500">3 business days</p>
-                          </div>
-                        </div>
-                        <span className="text-xs font-medium">{formatPrice(shippingOptions.ups_3day)}</span>
-                      </label>
-
-                      {/* UPS 2nd Day Air */}
-                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
-                        shippingMethod === 'ups_2day'
-                          ? 'border-sunset-500 bg-sunset-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="shippingMethod"
-                            value="ups_2day"
-                            checked={shippingMethod === 'ups_2day'}
-                            onChange={() => setShippingMethod('ups_2day')}
-                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
-                          />
-                          <div>
-                            <p className="text-xs font-medium">UPS 2nd Day Air</p>
-                            <p className="text-[10px] text-gray-500">2 business days</p>
-                          </div>
-                        </div>
-                        <span className="text-xs font-medium">{formatPrice(shippingOptions.ups_2day)}</span>
-                      </label>
-
-                      {/* UPS Next Day Air */}
-                      <label className={`flex items-center justify-between p-2 rounded border cursor-pointer transition-colors ${
-                        shippingMethod === 'ups_nextday'
-                          ? 'border-sunset-500 bg-sunset-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}>
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="shippingMethod"
-                            value="ups_nextday"
-                            checked={shippingMethod === 'ups_nextday'}
-                            onChange={() => setShippingMethod('ups_nextday')}
-                            className="w-3.5 h-3.5 text-sunset-600 focus:ring-sunset-500"
-                          />
-                          <div>
-                            <p className="text-xs font-medium">UPS Next Day Air</p>
-                            <p className="text-[10px] text-gray-500">Next business day</p>
-                          </div>
-                        </div>
-                        <span className="text-xs font-medium">{formatPrice(shippingOptions.ups_nextday)}</span>
-                      </label>
-                    </div>
-                  )}
+                    {hasWholesaleItems || freeShippingProgress.qualifies ? (
+                      <span className="text-xs font-semibold text-green-600">FREE</span>
+                    ) : (
+                      <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Totals - More Compact */}

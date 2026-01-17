@@ -45,11 +45,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     : 'Keep Refrigerated';
 
   // Calculate shipping and messaging based on quantity
+  // Flat-rate: $9.95 (1 pack), $19.95 (2+ packs), FREE on $80+
   const getShippingInfo = () => {
-    // Calculate what this order would cost with shipping
     const itemTotal = price * quantity;
 
-    // FREE shipping threshold is $80 (8000 cents) - check price, not quantity
+    // FREE shipping threshold is $80 (8000 cents)
     if (itemTotal >= 8000) {
       return {
         message: 'FREE shipping included!',
@@ -63,15 +63,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     const amountToFreeShipping = 8000 - itemTotal;
     const packsNeeded = Math.ceil(amountToFreeShipping / price);
 
-    // Determine shipping cost based on quantity
-    let shippingCost: number;
-    if (quantity === 1) {
-      shippingCost = 1060; // $10.60 for 1 pack
-    } else if (quantity <= 3) {
-      shippingCost = 1840; // $18.40 for 2-3 packs
-    } else {
-      shippingCost = 2265; // $22.65 for 4-5 packs
-    }
+    // Flat-rate shipping: $9.95 for 1 pack, $19.95 for 2+ packs
+    const shippingCost = quantity === 1 ? 995 : 1995;
 
     // Show progress message if close to free shipping
     if (packsNeeded <= 2) {
