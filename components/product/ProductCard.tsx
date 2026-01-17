@@ -49,44 +49,47 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     // Calculate what this order would cost with shipping
     const itemTotal = price * quantity;
 
-    if (itemTotal >= 8000) { // $80 threshold in cents (4 packs)
+    // FREE shipping threshold is $80 (8000 cents) - check price, not quantity
+    if (itemTotal >= 8000) {
       return {
         message: 'FREE shipping included!',
         type: 'free' as const,
         totalWithShipping: itemTotal,
         shippingCost: 0,
-      };
-    } else if (quantity >= 4) {
-      // 4 packs = $80, qualifies for free shipping
-      return {
-        message: 'FREE shipping included!',
-        type: 'free' as const,
-        totalWithShipping: itemTotal,
-        shippingCost: 0,
-      };
-    } else if (quantity === 3) {
-      return {
-        message: 'Add 1 more for FREE shipping',
-        type: 'progress' as const,
-        totalWithShipping: itemTotal + 1840, // $18.40 shipping for 3 packs
-        shippingCost: 1840,
-      };
-    } else if (quantity === 2) {
-      return {
-        message: 'Add 2 more for FREE shipping',
-        type: 'progress' as const,
-        totalWithShipping: itemTotal + 1840, // $18.40 shipping
-        shippingCost: 1840,
-      };
-    } else {
-      // quantity === 1
-      return {
-        message: 'Order 4+ packs for FREE shipping',
-        type: 'hint' as const,
-        totalWithShipping: itemTotal + 1060, // $10.60 shipping
-        shippingCost: 1060,
       };
     }
+
+    // Calculate how much more needed for free shipping
+    const amountToFreeShipping = 8000 - itemTotal;
+    const packsNeeded = Math.ceil(amountToFreeShipping / price);
+
+    // Determine shipping cost based on quantity
+    let shippingCost: number;
+    if (quantity === 1) {
+      shippingCost = 1060; // $10.60 for 1 pack
+    } else if (quantity <= 3) {
+      shippingCost = 1840; // $18.40 for 2-3 packs
+    } else {
+      shippingCost = 2265; // $22.65 for 4-5 packs
+    }
+
+    // Show progress message if close to free shipping
+    if (packsNeeded <= 2) {
+      return {
+        message: `Add ${packsNeeded} more for FREE shipping`,
+        type: 'progress' as const,
+        totalWithShipping: itemTotal + shippingCost,
+        shippingCost,
+      };
+    }
+
+    // Default: show hint about free shipping
+    return {
+      message: `Order $80+ for FREE shipping`,
+      type: 'hint' as const,
+      totalWithShipping: itemTotal + shippingCost,
+      shippingCost,
+    };
   };
 
   const shippingInfo = getShippingInfo();
