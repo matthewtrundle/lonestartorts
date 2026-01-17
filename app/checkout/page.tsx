@@ -9,12 +9,12 @@ import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
 import { Button } from '@/components/ui/button';
-import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X } from 'lucide-react';
+import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Snowflake, Trash2 } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, itemCount, subtotal, shipping, total, clearCart, isHydrated } = useCart();
+  const { items, itemCount, subtotal, shipping, total, clearCart, isHydrated, updateQuantity, removeItem } = useCart();
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -205,10 +205,37 @@ export default function CheckoutPage() {
                         <h3 className="font-semibold text-charcoal-950 text-lg mb-2 leading-tight">
                           {item.name}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-charcoal-600">
-                          <span className="font-medium">{t('checkout.qty')}: {item.quantity}</span>
-                          <span className="text-charcoal-400">•</span>
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-charcoal-600 mb-3">
                           <span>{formatPrice(item.price)} {t('cart.each')}</span>
+                        </div>
+                        {/* Quantity Controls */}
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                            <button
+                              onClick={() => updateQuantity(item.sku, item.quantity - 1)}
+                              className="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-gray-50 border border-gray-200 transition-colors"
+                              aria-label="Decrease quantity"
+                            >
+                              <Minus className="w-4 h-4 text-gray-600" />
+                            </button>
+                            <span className="w-10 text-center text-sm font-semibold">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => updateQuantity(item.sku, item.quantity + 1)}
+                              className="w-8 h-8 flex items-center justify-center rounded-md bg-white hover:bg-gray-50 border border-gray-200 transition-colors"
+                              aria-label="Increase quantity"
+                            >
+                              <Plus className="w-4 h-4 text-gray-600" />
+                            </button>
+                          </div>
+                          <button
+                            onClick={() => removeItem(item.sku)}
+                            className="text-gray-400 hover:text-red-600 transition-colors p-1"
+                            aria-label="Remove item"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
                         </div>
                       </div>
 
@@ -228,6 +255,27 @@ export default function CheckoutPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl shadow-soft p-6 md:p-8 sticky top-32 space-y-6">
                 <h2 className="text-2xl font-semibold text-charcoal-950">{t('checkout.orderTotal')}</h2>
+
+                {/* Free Shipping Banner */}
+                {subtotal < 8000 ? (
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <Truck className="w-4 h-4 text-amber-600" />
+                      <span className="text-amber-800 font-medium text-sm">
+                        Add {formatPrice(8000 - subtotal)} more for FREE shipping!
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <Truck className="w-4 h-4 text-green-600" />
+                      <span className="text-green-700 font-medium text-sm">
+                        You qualify for FREE shipping!
+                      </span>
+                    </div>
+                  </div>
+                )}
 
                 {/* Discount Code Section */}
                 <div className="pb-6 border-b border-cream-200">
@@ -348,6 +396,14 @@ export default function CheckoutPage() {
                     <Truck className="w-5 h-5 text-sunset-600 flex-shrink-0" />
                     <span>{t('checkout.trust.fastShipping')}</span>
                   </div>
+                </div>
+
+                {/* Freezing Tip */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-center gap-2">
+                  <Snowflake className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                  <span className="text-blue-800 text-sm font-medium">
+                    Stock up! Freeze for 6+ months
+                  </span>
                 </div>
 
                 {/* H-E-B Compliance Disclaimer */}
