@@ -190,28 +190,28 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Spacer to push bottom content down */}
         <div className="flex-grow" />
 
-        {/* Quantity Selector */}
-        <div className="flex items-center justify-between mb-3 bg-gray-50 rounded-lg p-2.5">
+        {/* Quantity Selector - 44px minimum tap targets for mobile */}
+        <div className="flex items-center justify-between mb-3 bg-gray-50 rounded-lg p-2">
           <span className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Qty</span>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <button
               onClick={() => handleQuantityChange(-1)}
               disabled={quantity <= 1}
-              className="w-7 h-7 flex items-center justify-center rounded-md bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-11 h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
               aria-label="Decrease quantity"
             >
-              <Minus className="w-3.5 h-3.5" />
+              <Minus className="w-5 h-5" />
             </button>
-            <span className="text-base font-bold text-charcoal-950 w-6 text-center">
+            <span className="text-lg font-bold text-charcoal-950 w-10 text-center">
               {quantity}
             </span>
             <button
               onClick={() => handleQuantityChange(1)}
               disabled={quantity >= 10}
-              className="w-7 h-7 flex items-center justify-center rounded-md bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-11 h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
               aria-label="Increase quantity"
             >
-              <Plus className="w-3.5 h-3.5" />
+              <Plus className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -231,14 +231,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button - 48px minimum height for mobile tap target */}
         <Button
           variant="cart"
           size="lg"
           onClick={handleAddToCart}
-          className="w-full uppercase flex items-center justify-center gap-2 text-xs font-bold tracking-wide py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
+          className="w-full uppercase flex items-center justify-center gap-2 text-sm font-bold tracking-wide min-h-[48px] rounded-lg shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
         >
-          <ShoppingBag className="w-4 h-4" />
+          <ShoppingBag className="w-5 h-5" />
           Add to Cart
         </Button>
       </div>

@@ -5,6 +5,8 @@ import { Suspense, useEffect, useRef } from 'react';
 import { ProductCard } from '@/components/product/ProductCard';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { SpinTheWheel } from '@/components/shop/SpinTheWheel';
+import { StickyCartBar } from '@/components/shop/StickyCartBar';
+import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
 import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
@@ -164,9 +166,9 @@ function ShopContent() {
 
   // Main shop page - cleaner design
   return (
-    <main className="min-h-screen bg-cream-50">
-      {/* Hero Section - Matching hook-em style */}
-      <section className="text-white py-16 md:py-20 overflow-hidden relative">
+    <main className="min-h-screen bg-cream-50 pb-24 md:pb-0">
+      {/* Hero Section - Compact on mobile */}
+      <section className="text-white py-8 md:py-16 lg:py-20 overflow-hidden relative">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -205,19 +207,24 @@ function ShopContent() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
+
+        {/* Ships Today Countdown - Mobile prominent */}
+        <div className="mb-4 md:hidden">
+          <ShipsTodayCountdown />
+        </div>
 
         {/* Compact Trust Signals */}
-        <div className="flex justify-center gap-6 mb-8 text-sm text-gray-600">
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-sunset-600" />
-            <span>Same Day Shipping</span>
+        <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-6 md:mb-8 text-xs md:text-sm text-gray-600">
+          {/* Ships Today - Desktop only inline */}
+          <div className="hidden md:flex items-center gap-2">
+            <ShipsTodayCountdown />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 md:gap-2">
             <Shield className="w-4 h-4 text-green-600" />
             <span>Secure Checkout</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 md:gap-2">
             <Truck className="w-4 h-4 text-blue-600" />
             <span>Nationwide Delivery</span>
           </div>
@@ -331,6 +338,9 @@ function ShopContent() {
 
       {/* Social Proof - Only on main page */}
       <SocialProofSection className="mt-12" />
+
+      {/* Sticky Cart Bar - Mobile only */}
+      <StickyCartBar />
     </main>
   );
 }
