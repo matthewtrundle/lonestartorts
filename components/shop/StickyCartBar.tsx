@@ -15,7 +15,7 @@ export function StickyCartBar() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[90] md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-[90]">
       {/* Free shipping progress bar */}
       {!freeShippingProgress.qualifies && (
         <div className="bg-cream-100 px-4 py-2 text-center text-sm">

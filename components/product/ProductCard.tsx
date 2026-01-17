@@ -37,7 +37,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   savingsPercent,
   onAddToOrder,
 }) => {
-  const { addItem, setIsOpen } = useCart();
+  const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
 
   const storageLabel = storage === 'shelf_stable'
@@ -112,9 +112,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       price: price / 100,
       quantity,
     });
-
-    // Auto-open cart immediately (no toast delay)
-    setIsOpen(true);
 
     // Reset quantity to 1 after adding
     setQuantity(1);
