@@ -6,7 +6,7 @@ import { Clock, Truck } from 'lucide-react';
 // Shipping cutoff is noon Central Time (12:00 PM CST/CDT)
 const CUTOFF_HOUR = 12; // noon
 
-function getTimeUntilCutoff(): { hours: number; minutes: number; seconds: number; isPastCutoff: boolean } {
+function getTimeUntilCutoff(): { hours: number; minutes: number; seconds: number; isPastCutoff: boolean; shipsMonday: boolean } {
   const now = new Date();
 
   // Convert to Central Time
@@ -14,10 +14,21 @@ function getTimeUntilCutoff(): { hours: number; minutes: number; seconds: number
   const currentHour = centralTime.getHours();
   const currentMinute = centralTime.getMinutes();
   const currentSecond = centralTime.getSeconds();
+  const currentDay = centralTime.getDay(); // 0 = Sunday, 6 = Saturday
 
-  // Check if we're past the cutoff
+  // No shipping on Sundays - ships Monday
+  if (currentDay === 0) {
+    return { hours: 0, minutes: 0, seconds: 0, isPastCutoff: true, shipsMonday: true };
+  }
+
+  // Saturday after cutoff - also ships Monday (no Sunday shipping)
+  if (currentDay === 6 && currentHour >= CUTOFF_HOUR) {
+    return { hours: 0, minutes: 0, seconds: 0, isPastCutoff: true, shipsMonday: true };
+  }
+
+  // Check if we're past the cutoff (Mon-Sat before cutoff, or Mon-Fri after cutoff)
   if (currentHour >= CUTOFF_HOUR) {
-    return { hours: 0, minutes: 0, seconds: 0, isPastCutoff: true };
+    return { hours: 0, minutes: 0, seconds: 0, isPastCutoff: true, shipsMonday: false };
   }
 
   // Calculate time until cutoff
@@ -30,6 +41,7 @@ function getTimeUntilCutoff(): { hours: number; minutes: number; seconds: number
     minutes: minutesLeft,
     seconds: secondsLeft,
     isPastCutoff: false,
+    shipsMonday: false,
   };
 }
 
@@ -52,6 +64,18 @@ export function ShipsTodayCountdown() {
       <div className="bg-green-50 border border-green-200 rounded-lg px-3 py-2 flex items-center gap-2">
         <Truck className="w-4 h-4 text-green-600 flex-shrink-0" />
         <span className="text-sm font-medium text-green-800">Same-day shipping available</span>
+      </div>
+    );
+  }
+
+  // Sunday or Saturday after cutoff - ships Monday
+  if (timeLeft.shipsMonday) {
+    return (
+      <div className="bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 flex items-center gap-2">
+        <Truck className="w-4 h-4 text-blue-600 flex-shrink-0" />
+        <span className="text-sm font-medium text-blue-800">
+          Order now, ships Monday morning
+        </span>
       </div>
     );
   }
@@ -109,6 +133,16 @@ export function ShipsTodayBadge() {
       <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">
         <Truck className="w-3 h-3" />
         Ships today
+      </span>
+    );
+  }
+
+  // Sunday or Saturday after cutoff - ships Monday
+  if (timeLeft.shipsMonday) {
+    return (
+      <span className="inline-flex items-center gap-1 text-xs font-medium text-blue-700 bg-blue-100 px-2 py-1 rounded-full">
+        <Truck className="w-3 h-3" />
+        Ships Monday
       </span>
     );
   }

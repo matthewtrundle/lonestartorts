@@ -47,8 +47,9 @@ export function CartSidebar() {
   const handleClose = () => setIsOpen(false);
 
   // Calculate display totals based on discount type
+  // Note: This returns the SUBTOTAL portion (before shipping), not the full total
   const calculateDiscountedTotal = () => {
-    if (!discountApplied) return total;
+    if (!discountApplied) return subtotal; // Return subtotal, NOT total (shipping is added separately)
 
     let discountedTotal = subtotal;
 
