@@ -167,6 +167,21 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    // UT Alumni codes - 10% off, any order (no restrictions)
+    const utAlumniCodes = ['HOOKEM', 'UTALUMNI'];
+    if (utAlumniCodes.includes(normalizedCode)) {
+      return NextResponse.json({
+        valid: true,
+        message: 'Hook \'em! 10% off your order.',
+        discount: {
+          type: 'percentage',
+          amount: 10,
+          code: normalizedCode,
+          description: 'UT Alumni - 10% Off'
+        },
+      });
+    }
+
     // Check if it's a first-order free shipping code
     const successMessage = DISCOUNT_CODES[normalizedCode];
 

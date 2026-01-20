@@ -77,6 +77,7 @@ export async function POST(req: NextRequest) {
     let feedbackCouponCode: string | null = null;
     let spinPrizeCode: string | null = null;
     let spinPrizeType: string | null = null;
+    let utAlumniCode: string | null = null;
 
     // Validate discount code if provided (server-side re-validation)
     if (email && discountCode) {
@@ -208,6 +209,13 @@ export async function POST(req: NextRequest) {
             break;
         }
       }
+      // UT Alumni codes - 10% off, any order (no restrictions)
+      else if (['HOOKEM', 'UTALUMNI'].includes(normalizedCode)) {
+        percentageDiscount = 10;
+        discountAmount = Math.round(subtotal * 0.10);
+        utAlumniCode = normalizedCode;
+        console.log(`UT Alumni 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+      }
     }
 
     // Create line items for Stripe with server-side validation
@@ -238,15 +246,17 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    // Create a Stripe coupon for discounts (feedback, spin wheel, or drip)
+    // Create a Stripe coupon for discounts (feedback, spin wheel, drip, or UT alumni)
     let stripeCouponId: string | undefined;
     const dripCode = discountCode?.startsWith('DRIP-') ? discountCode : null;
-    if (discountAmount > 0 && (feedbackCouponCode || spinPrizeCode || dripCode)) {
+    if (discountAmount > 0 && (feedbackCouponCode || spinPrizeCode || dripCode || utAlumniCode)) {
       // Determine coupon name
       const couponName = feedbackCouponCode
         ? `Feedback Discount - ${feedbackCouponCode}`
         : spinPrizeCode
         ? `Spin Prize - ${spinPrizeCode}`
+        : utAlumniCode
+        ? `UT Alumni - 10% Off`
         : `Drip Discount - ${dripCode}`;
 
       // Determine if it's a percentage or fixed amount discount
@@ -260,6 +270,7 @@ export async function POST(req: NextRequest) {
             ...(feedbackCouponCode && { feedbackCouponCode }),
             ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
             ...(dripCode && { dripCode }),
+            ...(utAlumniCode && { utAlumniCode }),
           },
         });
         stripeCouponId = coupon.id;
