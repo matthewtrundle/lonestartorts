@@ -1,16 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense } from 'react';
 import { ProductCard } from '@/components/product/ProductCard';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
-import { SpinTheWheel } from '@/components/shop/SpinTheWheel';
 import { StickyCartBar } from '@/components/shop/StickyCartBar';
 import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
 import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
-import { useCart } from '@/lib/cart-context';
 import { products as allProducts } from '@/lib/products';
 import { useSearchParams } from 'next/navigation';
 
@@ -20,53 +18,14 @@ const tortillaProducts = allProducts.filter(p => p.productType === 'tortilla');
 // Wrap the main content to use useSearchParams
 function ShopContent() {
   const { t } = useLanguage();
-  const { showSpinWheel, setShowSpinWheel, hasTriggeredSpin } = useCart();
   const searchParams = useSearchParams();
   const isTikTok = searchParams.get('utm_source') === 'tiktok';
   const isGoogleAds = searchParams.get('utm_source') === 'google' || searchParams.get('gclid') !== null;
-  const spinTriggeredRef = useRef(false);
 
-  // Spin wheel trigger for TikTok users: 25% scroll OR 8 second timer (whichever first)
-  useEffect(() => {
-    if (!isTikTok || hasTriggeredSpin || spinTriggeredRef.current) return;
-
-    const triggerSpin = () => {
-      if (spinTriggeredRef.current) return;
-      spinTriggeredRef.current = true;
-      setShowSpinWheel(true);
-    };
-
-    // 8 second fallback timer
-    const timer = setTimeout(triggerSpin, 8000);
-
-    // Scroll trigger at 25% down
-    const handleScroll = () => {
-      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      if (scrollPercent >= 25) {
-        triggerSpin();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isTikTok, hasTriggeredSpin, setShowSpinWheel]);
-
-  // TikTok variant - ultra minimal for fast conversion
+  // TikTok variant - ultra minimal for fast conversion (spin wheel disabled)
   if (isTikTok) {
     return (
-      <>
-        {/* Spin The Wheel Modal for TikTok users */}
-        <SpinTheWheel
-          isOpen={showSpinWheel}
-          onClose={() => setShowSpinWheel(false)}
-          utmSource="tiktok"
-        />
-
-        <main className="min-h-screen bg-white pt-[100px]">
+      <main className="min-h-screen bg-white pt-[100px]">
           {/* Bold Free Shipping Banner for TikTok */}
           <div className="bg-sunset-600 text-white py-4 px-4 text-center">
             <p className="text-xl md:text-2xl font-bold">
@@ -110,7 +69,6 @@ function ShopContent() {
             </div>
           </div>
         </main>
-      </>
     );
   }
 
