@@ -167,8 +167,8 @@ function ShopContent() {
   // Main shop page - conversion-focused design
   return (
     <main className="min-h-screen bg-white pb-24 md:pb-0">
-      {/* Hero Section - Compact on mobile */}
-      <section className="text-white py-6 md:py-12 overflow-hidden relative">
+      {/* Hero Section - Compact on mobile, proper spacing on desktop */}
+      <section className="text-white pt-24 pb-6 md:pt-32 md:pb-14 overflow-hidden relative">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -184,9 +184,10 @@ function ShopContent() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
           <div className="max-w-2xl">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-3 leading-tight">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 leading-tight">
               Premium H-E-B® Tortillas
-              <span className="md:block"> — <span className="text-sunset-400">Shipped Nationwide</span></span>
+              <br className="hidden md:block" />
+              <span className="text-sunset-400">Shipped Nationwide</span>
             </h1>
             <p className="text-sm md:text-lg text-white/90 mb-3 md:mb-5">
               Authentic Texas tortillas delivered fresh to your door
