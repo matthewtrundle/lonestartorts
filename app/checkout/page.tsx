@@ -25,6 +25,9 @@ export default function CheckoutPage() {
   const [isValidatingCode, setIsValidatingCode] = useState(false);
   const [discountApplied, setDiscountApplied] = useState(false);
   const [discountError, setDiscountError] = useState<string | null>(null);
+  const [discountType, setDiscountType] = useState<string | null>(null);
+  const [discountAmount, setDiscountAmount] = useState<number>(0);
+  const [discountMessage, setDiscountMessage] = useState<string>('');
 
   // Simplified shipping label
   const getShippingLabel = () => {
@@ -39,8 +42,12 @@ export default function CheckoutPage() {
   }, [items.length, isHydrated, router]);
 
   // Calculate display total (with discount if applied)
-  const displayShipping = discountApplied ? 0 : shipping;
-  const displayTotal = discountApplied ? subtotal : total;
+  const isFreeShipping = discountApplied && discountType === 'free_shipping';
+  const isPercentageDiscount = discountApplied && discountType === 'percentage';
+  const percentageDiscountValue = isPercentageDiscount ? Math.round(subtotal * (discountAmount / 100)) : 0;
+  const displayShipping = isFreeShipping ? 0 : shipping;
+  const displaySubtotalAfterDiscount = isPercentageDiscount ? subtotal - percentageDiscountValue : subtotal;
+  const displayTotal = displaySubtotalAfterDiscount + displayShipping;
 
   // Validate discount code
   const handleApplyDiscount = async () => {
@@ -75,6 +82,11 @@ export default function CheckoutPage() {
       if (data.valid) {
         setDiscountApplied(true);
         setDiscountError(null);
+        setDiscountMessage(data.message || 'Discount applied!');
+        if (data.discount) {
+          setDiscountType(data.discount.type || 'free_shipping');
+          setDiscountAmount(data.discount.amount || 0);
+        }
       } else {
         setDiscountError(data.error || 'Invalid discount code');
       }
@@ -90,6 +102,9 @@ export default function CheckoutPage() {
     setDiscountApplied(false);
     setDiscountCode('');
     setDiscountError(null);
+    setDiscountType(null);
+    setDiscountAmount(0);
+    setDiscountMessage('');
   };
 
   const handleCheckout = async () => {
@@ -290,7 +305,7 @@ export default function CheckoutPage() {
                       <div className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-green-600" />
                         <span className="text-green-800 font-medium">
-                          {t('cart.discount.freeShipping')}
+                          {discountMessage || t('cart.discount.freeShipping')}
                         </span>
                       </div>
                       <button
@@ -342,6 +357,13 @@ export default function CheckoutPage() {
                     <span className="text-charcoal-600">{t('cart.subtotal')}</span>
                     <span className="font-semibold text-charcoal-950">{formatPrice(subtotal)}</span>
                   </div>
+                  {/* Percentage Discount Line */}
+                  {isPercentageDiscount && (
+                    <div className="flex justify-between items-center text-green-600">
+                      <span>Discount ({discountAmount}%)</span>
+                      <span className="font-semibold">-{formatPrice(percentageDiscountValue)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Truck className="w-4 h-4 text-sunset-600" />
@@ -349,7 +371,7 @@ export default function CheckoutPage() {
                         {getShippingLabel()}
                       </span>
                     </div>
-                    {discountApplied ? (
+                    {isFreeShipping ? (
                       <div className="flex items-center gap-2">
                         <span className="text-charcoal-400 line-through text-sm">{formatPrice(shipping)}</span>
                         <span className="font-semibold text-green-600">{t('cart.free')}</span>

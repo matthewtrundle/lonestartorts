@@ -232,8 +232,8 @@ export function CartSidebar() {
             className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-[9999] flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <h2 className="text-xl font-medium tracking-wide uppercase">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-lg font-medium tracking-wide uppercase">
                 {t('cart.title')} ({itemCount})
               </h2>
               <button
@@ -246,7 +246,7 @@ export function CartSidebar() {
             </div>
 
             {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-4">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <ShoppingBag className="w-16 h-16 text-gray-300 mb-4" />
@@ -264,18 +264,18 @@ export function CartSidebar() {
                   </button>
                 </div>
               ) : (
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {items.map((item) => (
-                    <div key={item.sku} className="flex gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+                    <div key={item.sku} className="flex gap-3 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
                       {/* Item Image */}
-                      <div className="w-20 h-20 bg-cream-100 rounded-lg flex-shrink-0 overflow-hidden relative">
+                      <div className="w-16 h-16 bg-cream-100 rounded-lg flex-shrink-0 overflow-hidden relative">
                         {item.image ? (
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
                             className="object-cover"
-                            sizes="80px"
+                            sizes="64px"
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-charcoal-400">
@@ -339,12 +339,12 @@ export function CartSidebar() {
 
             {/* Footer with totals and checkout */}
             {items.length > 0 && (
-              <div className="border-t border-gray-200 p-4 bg-gray-50">
+              <div className="border-t border-gray-200 p-3 bg-gray-50">
                 {/* Free Shipping Progress */}
-                <FreeShippingProgress className="mb-3" compact />
+                <FreeShippingProgress className="mb-2" compact />
 
                 {/* Discount Code Section - Collapsible */}
-                <div className="mb-3 bg-white rounded-lg border border-gray-200 overflow-hidden">
+                <div className="mb-2 bg-white rounded-lg border border-gray-200 overflow-hidden">
                   <button
                     onClick={() => setDiscountOpen(!discountOpen)}
                     className="w-full flex items-center justify-between p-2.5 hover:bg-gray-50 transition-colors"
@@ -407,7 +407,7 @@ export function CartSidebar() {
                 </div>
 
                 {/* Shipping - Simple flat-rate display */}
-                <div className="mb-3 bg-white rounded-lg border border-gray-200 p-2.5">
+                <div className="mb-2 bg-white rounded-lg border border-gray-200 p-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Truck className="w-3.5 h-3.5 text-sunset-600" />
@@ -429,7 +429,7 @@ export function CartSidebar() {
                 </div>
 
                 {/* Totals - More Compact */}
-                <div className="space-y-1 mb-3 text-sm">
+                <div className="space-y-1 mb-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">{t('cart.subtotal')}</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
@@ -465,8 +465,8 @@ export function CartSidebar() {
                   </div>
                 </div>
 
-                {/* Trust Badges - More Compact */}
-                <div className="mb-3 flex justify-center gap-6 py-2 bg-white rounded-lg border border-gray-200">
+                {/* Trust Badges - Hidden on desktop for compactness */}
+                <div className="mb-2 flex md:hidden justify-center gap-4 py-1.5 bg-white rounded-lg border border-gray-200">
                   <div className="flex items-center gap-1.5">
                     <Shield className="w-3.5 h-3.5 text-green-600" />
                     <span className="text-[10px] font-medium text-charcoal-700">{t('cart.trust.secure')}</span>
