@@ -167,8 +167,8 @@ function ShopContent() {
   // Main shop page - conversion-focused design
   return (
     <main className="min-h-screen bg-white pb-24 md:pb-0">
-      {/* Hero Section - Bold and direct */}
-      <section className="text-white py-10 md:py-14 overflow-hidden relative">
+      {/* Hero Section - Compact on mobile */}
+      <section className="text-white py-6 md:py-12 overflow-hidden relative">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -184,45 +184,44 @@ function ShopContent() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
           <div className="max-w-2xl">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-3 leading-tight">
               Premium H-E-B® Tortillas
-              <br />
-              <span className="text-sunset-400">Shipped Nationwide</span>
+              <span className="md:block"> — <span className="text-sunset-400">Shipped Nationwide</span></span>
             </h1>
-            <p className="text-lg text-white/90 mb-5">
+            <p className="text-sm md:text-lg text-white/90 mb-3 md:mb-5">
               Authentic Texas tortillas delivered fresh to your door
             </p>
             {/* Free Shipping CTA */}
-            <div className="inline-flex items-center gap-3 bg-sunset-600 text-white py-3 px-5 rounded-lg font-bold text-lg shadow-lg">
-              <Truck className="w-5 h-5" />
-              FREE Shipping on $80+ Orders
+            <div className="inline-flex items-center gap-2 bg-sunset-600 text-white py-2 px-4 md:py-3 md:px-5 rounded-lg font-bold text-sm md:text-lg shadow-lg">
+              <Truck className="w-4 h-4 md:w-5 md:h-5" />
+              FREE Shipping on $80+
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trust Bar */}
+      {/* Trust Bar - Compact on mobile */}
       <div className="bg-cream-50 border-b border-cream-200">
-        <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm text-charcoal-700">
+        <div className="max-w-7xl mx-auto px-4 py-2">
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-8 text-xs md:text-sm text-charcoal-700">
             <ShipsTodayCountdown />
-            <div className="flex items-center gap-1.5">
-              <Shield className="w-4 h-4 text-green-600" />
-              <span>Secure Checkout</span>
+            <div className="flex items-center gap-1">
+              <Shield className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600" />
+              <span>Secure</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Truck className="w-4 h-4 text-blue-600" />
-              <span>Fast Nationwide Shipping</span>
+            <div className="flex items-center gap-1">
+              <Truck className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-600" />
+              <span>Fast Shipping</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
-        {/* Section Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-charcoal-950 mb-2">Shop Our Tortillas</h2>
-          <p className="text-gray-600">Choose your favorites • Order 4+ packs for FREE shipping</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+        {/* Section Header - Compact on mobile */}
+        <div className="text-center mb-4 md:mb-8">
+          <h2 className="text-xl md:text-3xl font-bold text-charcoal-950 mb-1">Shop Our Tortillas</h2>
+          <p className="text-sm md:text-base text-gray-600">Order 4+ packs for FREE shipping</p>
         </div>
 
         {/* Products Grid - Tighter, more prominent */}
