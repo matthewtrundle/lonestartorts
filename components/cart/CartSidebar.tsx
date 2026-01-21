@@ -63,9 +63,9 @@ export function CartSidebar() {
       discountedTotal = Math.max(0, subtotal - discountAmount);
     }
 
-    // Apply percentage discount (10% off)
+    // Apply percentage discount (10% off) - no cap for most codes
     if (discountType === 'percentage') {
-      const percentOff = Math.min(Math.round(subtotal * (discountAmount / 100)), 1000); // Max $10 off
+      const percentOff = Math.round(subtotal * (discountAmount / 100));
       discountedTotal = subtotal - percentOff;
     }
 
@@ -440,7 +440,7 @@ export function CartSidebar() {
                       <span>{discountType === 'percentage' ? `Discount (${discountAmount}%)` : 'Discount'}</span>
                       <span className="font-medium">
                         -{formatPrice(discountType === 'percentage'
-                          ? Math.min(Math.round(subtotal * (discountAmount / 100)), 1000)
+                          ? Math.round(subtotal * (discountAmount / 100))
                           : discountAmount
                         )}
                       </span>
