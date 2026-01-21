@@ -125,6 +125,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
     });
 
+    // Open cart sidebar on desktop only (768px+)
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      setIsOpen(true);
+    }
+
     // Track AddToCart event for TikTok Pixel
     if (typeof window !== 'undefined' && (window as any).ttq) {
       (window as any).ttq.track('AddToCart', {
