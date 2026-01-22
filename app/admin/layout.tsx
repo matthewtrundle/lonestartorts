@@ -61,6 +61,7 @@ export default function AdminLayout({
   const navItems = [
     { href: '/admin', label: 'Dashboard', exact: true },
     { href: '/admin/orders', label: 'Orders' },
+    { href: '/admin/discounts', label: 'Discounts' },
     { href: '/admin/wholesale', label: 'Wholesale' },
     { href: '/admin/marketing', label: 'Marketing' },
     { href: '/admin/feedback', label: 'Feedback' },
