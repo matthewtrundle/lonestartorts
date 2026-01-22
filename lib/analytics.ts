@@ -6,6 +6,66 @@
 import { track } from '@vercel/analytics';
 
 // ============================================
+// CLIENT FINGERPRINT FOR BETTER USER TRACKING
+// ============================================
+
+let clientFingerprint: string | null = null;
+
+/** Generate a simple client fingerprint for better user tracking */
+const getClientFingerprint = (): string => {
+  if (clientFingerprint) return clientFingerprint;
+
+  if (typeof window === 'undefined') return 'server';
+
+  // Create fingerprint from browser characteristics
+  const components = [
+    navigator.userAgent,
+    navigator.language,
+    screen.width + 'x' + screen.height,
+    screen.colorDepth,
+    new Date().getTimezoneOffset(),
+    navigator.hardwareConcurrency || 'unknown',
+  ];
+
+  // Simple hash function
+  const hash = components.join('|').split('').reduce((a, b) => {
+    a = ((a << 5) - a) + b.charCodeAt(0);
+    return a & a;
+  }, 0);
+
+  clientFingerprint = Math.abs(hash).toString(36);
+  return clientFingerprint;
+};
+
+/** Get traffic source info from URL */
+const getTrafficSource = (): { source: string; medium: string; campaign: string; gclid: string | null } => {
+  if (typeof window === 'undefined') {
+    return { source: 'server', medium: 'none', campaign: 'none', gclid: null };
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  return {
+    source: params.get('utm_source') || 'direct',
+    medium: params.get('utm_medium') || 'none',
+    campaign: params.get('utm_campaign') || 'none',
+    gclid: params.get('gclid'),
+  };
+};
+
+/** Enhanced track function with fingerprint and traffic source */
+const enhancedTrack = (eventName: string, properties: Record<string, unknown>) => {
+  const trafficSource = getTrafficSource();
+  track(eventName, {
+    ...properties,
+    _fingerprint: getClientFingerprint(),
+    _source: trafficSource.source,
+    _medium: trafficSource.medium,
+    _hasGclid: trafficSource.gclid ? 'yes' : 'no',
+    _timestamp: Date.now(),
+  });
+};
+
+// ============================================
 // E-COMMERCE EVENTS
 // ============================================
 
@@ -37,7 +97,7 @@ export interface PurchaseData {
 
 /** Track when a user views a product */
 export const trackProductView = (product: ProductData) => {
-  track('product_view', {
+  enhancedTrack('product_view', {
     productId: product.productId,
     name: product.name,
     price: product.price,
@@ -47,7 +107,7 @@ export const trackProductView = (product: ProductData) => {
 
 /** Track when a user adds an item to cart */
 export const trackAddToCart = (item: CartItemData) => {
-  track('add_to_cart', {
+  enhancedTrack('add_to_cart', {
     productId: item.productId,
     name: item.name,
     price: item.price,
@@ -74,7 +134,7 @@ export const trackViewCart = (data: CartData) => {
 
 /** Track when a user begins checkout */
 export const trackBeginCheckout = (data: CartData) => {
-  track('begin_checkout', {
+  enhancedTrack('begin_checkout', {
     itemCount: data.itemCount,
     cartTotal: data.cartTotal,
   });
@@ -82,7 +142,7 @@ export const trackBeginCheckout = (data: CartData) => {
 
 /** Track completed purchase */
 export const trackPurchase = (data: PurchaseData) => {
-  track('purchase', {
+  enhancedTrack('purchase', {
     orderId: data.orderId,
     total: data.total,
     itemCount: data.itemCount,

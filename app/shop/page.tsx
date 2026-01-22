@@ -68,6 +68,9 @@ function ShopContent() {
               </span>
             </div>
           </div>
+
+          {/* Sticky Cart Bar - Critical for mobile checkout */}
+          <StickyCartBar />
         </main>
     );
   }
@@ -118,6 +121,9 @@ function ShopContent() {
             </span>
           </div>
         </div>
+
+        {/* Sticky Cart Bar - Critical for mobile checkout */}
+        <StickyCartBar />
       </main>
     );
   }
