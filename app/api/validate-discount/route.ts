@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { validateDiscount, includesFreeShipping, getDiscountSummary } from '@/lib/discount-engine';
+import { getProductBySku, products } from '@/lib/products';
 
-// Valid discount codes for free shipping on first order
+// Valid discount codes for free shipping on first order (LEGACY)
 // Each code has a custom success message
 const DISCOUNT_CODES: Record<string, string> = {
   'FREESHIP': 'Free shipping unlocked!',
@@ -13,7 +15,7 @@ const DISCOUNT_CODES: Record<string, string> = {
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, discountCode } = await req.json();
+    const { email, discountCode, cart } = await req.json();
 
     // Validate inputs
     if (!email || typeof email !== 'string') {
@@ -33,7 +35,70 @@ export async function POST(req: NextRequest) {
     const normalizedCode = discountCode.trim().toUpperCase();
     const normalizedEmail = email.trim().toLowerCase();
 
-    // First, check if it's a spin wheel code (SPIN-* format)
+    // Build cart items array for discount engine validation
+    // If cart not provided, create a minimal cart for validation
+    const cartItems = cart?.map((item: { sku: string; quantity: number }) => {
+      const product = getProductBySku(item.sku);
+      return {
+        sku: item.sku,
+        quantity: item.quantity,
+        price: product?.price || 2000,
+        name: product?.name || item.sku,
+      };
+    }) || [{ sku: 'PLACEHOLDER', quantity: 1, price: 2000, name: 'Placeholder' }];
+
+    // FIRST: Check the new DiscountCode table
+    const discountResult = await validateDiscount(normalizedCode, normalizedEmail, cartItems);
+
+    if (discountResult.valid && discountResult.discount) {
+      const discount = discountResult.discount;
+      const hasFreeShipping = includesFreeShipping(discount);
+
+      // Format response based on discount type
+      let responseType = discount.type;
+      let responseAmount = discount.calculatedDiscount;
+
+      if (discount.type === 'percentage') {
+        responseType = 'percentage';
+        responseAmount = discount.amount!;
+      } else if (discount.type === 'fixed') {
+        responseType = 'fixed';
+        responseAmount = discount.calculatedDiscount;
+      } else if (discount.type === 'bogo') {
+        responseType = 'bogo';
+        responseAmount = discount.calculatedDiscount;
+      }
+
+      return NextResponse.json({
+        valid: true,
+        message: discount.message,
+        discount: {
+          type: responseType,
+          amount: responseAmount,
+          code: normalizedCode,
+          discountId: discountResult.discountId,
+          calculatedDiscount: discount.calculatedDiscount,
+          hasFreeShipping,
+          freeItems: discount.freeItems,
+          rules: discount.rules,
+          summary: getDiscountSummary(discount),
+        },
+      });
+    }
+
+    // If not found in new system, check if error is "Invalid discount code" (meaning not found)
+    // If so, fall through to legacy validation
+    // Otherwise, return the error from the new system
+    if (discountResult.error && discountResult.error !== 'Invalid discount code') {
+      return NextResponse.json(
+        { valid: false, error: discountResult.error },
+        { status: 200 }
+      );
+    }
+
+    // LEGACY VALIDATION: Fall through to existing code handling
+
+    // LEGACY: Check if it's a spin wheel code (SPIN-* format)
     if (normalizedCode.startsWith('SPIN-')) {
       const spinEntry = await prisma.spinWheelEntry.findUnique({
         where: { code: normalizedCode },

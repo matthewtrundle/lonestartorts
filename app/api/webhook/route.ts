@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 // import { getProductBySku } from '@/lib/products';
 import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
 import { trackTikTokPurchase } from '@/lib/tiktok';
+import { recordDiscountUsage, AppliedRule } from '@/lib/discount-engine';
 import { randomUUID } from 'crypto';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -256,6 +257,31 @@ export async function POST(req: NextRequest) {
               console.log('Feedback coupon marked as used:', feedbackCouponCode);
             } catch (couponError) {
               console.error('Failed to mark feedback coupon as used:', couponError);
+              // Don't fail the webhook - log for manual follow-up
+            }
+          }
+
+          // Record new discount system usage if applicable
+          const newSystemDiscountId = fullSession.metadata?.newSystemDiscountId;
+          if (newSystemDiscountId) {
+            try {
+              const discountAmount = parseInt(fullSession.metadata?.newSystemDiscountAmount || '0', 10);
+              const rulesApplied = fullSession.metadata?.newSystemRulesApplied
+                ? JSON.parse(fullSession.metadata.newSystemRulesApplied) as AppliedRule[]
+                : [];
+
+              await recordDiscountUsage(
+                newSystemDiscountId,
+                customerEmail,
+                order.id,
+                order.orderNumber,
+                subtotal,
+                discountAmount,
+                rulesApplied
+              );
+              console.log('Discount usage recorded for:', newSystemDiscountId, 'order:', order.orderNumber);
+            } catch (discountError) {
+              console.error('Failed to record discount usage:', discountError);
               // Don't fail the webhook - log for manual follow-up
             }
           }

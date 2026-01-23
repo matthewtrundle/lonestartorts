@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD } from '@/lib/products';
 import { prisma } from '@/lib/prisma';
+import { validateDiscount, includesFreeShipping, recordDiscountUsage, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
 
 // Helper to get any product by SKU (retail or wholesale)
 function getAnyProductBySku(sku: string) {
@@ -71,151 +72,195 @@ export async function POST(req: NextRequest) {
     // Calculate base shipping for display (what they would have paid)
     const baseShippingCost = calculateBaseShipping(fullItems);
 
-    // Track percentage discount info
+    // Track discount info
     let percentageDiscount = 0;
     let discountAmount = 0;
     let feedbackCouponCode: string | null = null;
     let spinPrizeCode: string | null = null;
     let spinPrizeType: string | null = null;
     let utAlumniCode: string | null = null;
+    let newSystemDiscountId: string | null = null;
+    let newSystemDiscount: ApplicableDiscount | null = null;
+    let appliedRules: AppliedRule[] = [];
 
     // Validate discount code if provided (server-side re-validation)
     if (email && discountCode) {
       const normalizedCode = discountCode.trim().toUpperCase();
       const normalizedEmail = email.trim().toLowerCase();
 
-      // Check if it's a feedback coupon (THANKS-XXXXXX format)
-      if (normalizedCode.startsWith('THANKS-')) {
-        const feedbackCoupon = await prisma.customerFeedback.findUnique({
-          where: { couponCode: normalizedCode },
-        });
+      // Build cart items for discount engine
+      const cartItems = fullItems.map(item => {
+        const product = getAnyProductBySku(item.sku);
+        return {
+          sku: item.sku,
+          quantity: item.quantity,
+          price: product?.price || item.price,
+          name: product?.name || item.sku,
+        };
+      });
 
-        if (feedbackCoupon && !feedbackCoupon.couponUsed && new Date() <= feedbackCoupon.expiresAt) {
-          // Valid feedback coupon - apply 10% off subtotal
-          percentageDiscount = 10;
-          discountAmount = Math.round(subtotal * 0.10); // 10% of subtotal
-          feedbackCouponCode = normalizedCode;
-          console.log(`10% feedback discount applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+      // FIRST: Check the new DiscountCode system
+      const discountResult = await validateDiscount(normalizedCode, normalizedEmail, cartItems);
+
+      if (discountResult.valid && discountResult.discount) {
+        // Use new discount system
+        newSystemDiscountId = discountResult.discountId || null;
+        newSystemDiscount = discountResult.discount;
+        appliedRules = discountResult.discount.rules;
+
+        // Apply the discount
+        discountAmount = discountResult.discount.calculatedDiscount;
+
+        // Check for percentage discount
+        if (discountResult.discount.type === 'percentage' && discountResult.discount.amount) {
+          percentageDiscount = discountResult.discount.amount;
         }
-      }
-      // Check if code is valid first-order free shipping code
-      // Only apply free shipping if not already applied via threshold
-      else if (VALID_DISCOUNT_CODES.includes(normalizedCode) && !freeShippingApplied) {
-        const existingOrderCount = await prisma.order.count({
-          where: { email: normalizedEmail },
-        });
 
-        if (existingOrderCount === 0) {
-          // Valid first-order discount - apply free shipping
+        // Check for free shipping in the discount
+        if (includesFreeShipping(discountResult.discount) && !freeShippingApplied) {
           shippingCost = 0;
           freeShippingApplied = true;
           freeShippingReason = 'discount_code';
-          console.log(`Free shipping applied for first order: ${normalizedEmail}`);
         }
-      }
-      // Check if it's a spin wheel prize code (SPIN-XXXXX format)
-      else if (normalizedCode.startsWith('SPIN-')) {
-        const spinEntry = await prisma.spinWheelEntry.findUnique({
-          where: { code: normalizedCode },
-        });
 
-        if (spinEntry && !spinEntry.used && new Date() <= spinEntry.expiresAt) {
-          // Valid spin prize - apply based on prize type
-          spinPrizeCode = normalizedCode;
-          spinPrizeType = spinEntry.prize;
+        console.log(`New system discount applied: ${normalizedCode}, type: ${discountResult.discount.type}, saving $${(discountAmount / 100).toFixed(2)}`);
+      } else if (!discountResult.valid && discountResult.error === 'Invalid discount code') {
+        // Not found in new system - fall through to legacy validation
 
-          switch (spinEntry.prize) {
-            case 'ten_percent':
-              // 10% off up to $10 max (1000 cents)
+        // LEGACY: Check if it's a feedback coupon (THANKS-XXXXXX format)
+        if (normalizedCode.startsWith('THANKS-')) {
+          const feedbackCoupon = await prisma.customerFeedback.findUnique({
+            where: { couponCode: normalizedCode },
+          });
+
+          if (feedbackCoupon && !feedbackCoupon.couponUsed && new Date() <= feedbackCoupon.expiresAt) {
+            // Valid feedback coupon - apply 10% off subtotal
+            percentageDiscount = 10;
+            discountAmount = Math.round(subtotal * 0.10); // 10% of subtotal
+            feedbackCouponCode = normalizedCode;
+            console.log(`10% feedback discount applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+          }
+        }
+        // Check if code is valid first-order free shipping code
+        // Only apply free shipping if not already applied via threshold
+        else if (VALID_DISCOUNT_CODES.includes(normalizedCode as typeof VALID_DISCOUNT_CODES[number]) && !freeShippingApplied) {
+          const existingOrderCount = await prisma.order.count({
+            where: { email: normalizedEmail },
+          });
+
+          if (existingOrderCount === 0) {
+            // Valid first-order discount - apply free shipping
+            shippingCost = 0;
+            freeShippingApplied = true;
+            freeShippingReason = 'discount_code';
+            console.log(`Free shipping applied for first order: ${normalizedEmail}`);
+          }
+        }
+        // Check if it's a spin wheel prize code (SPIN-XXXXX format)
+        else if (normalizedCode.startsWith('SPIN-')) {
+          const spinEntry = await prisma.spinWheelEntry.findUnique({
+            where: { code: normalizedCode },
+          });
+
+          if (spinEntry && !spinEntry.used && new Date() <= spinEntry.expiresAt) {
+            // Valid spin prize - apply based on prize type
+            spinPrizeCode = normalizedCode;
+            spinPrizeType = spinEntry.prize;
+
+            switch (spinEntry.prize) {
+              case 'ten_percent':
+                // 10% off up to $10 max (1000 cents)
+                percentageDiscount = 10;
+                discountAmount = Math.min(Math.round(subtotal * 0.10), 1000);
+                console.log(`10% off spin prize applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+                break;
+              case 'free_shipping':
+                // Free shipping
+                if (!freeShippingApplied) {
+                  shippingCost = 0;
+                  freeShippingApplied = true;
+                  freeShippingReason = 'spin_prize';
+                  console.log(`Free shipping spin prize applied: ${normalizedCode}`);
+                }
+                break;
+              case 'five_off':
+                // $5 off
+                discountAmount = 500;
+                console.log(`$5 off spin prize applied: ${normalizedCode}`);
+                break;
+              case 'bonus_tortillas':
+                // 10 bonus tortillas - $5 value applied as discount
+                discountAmount = 500;
+                console.log(`Bonus tortillas spin prize applied: ${normalizedCode}`);
+                break;
+              case 'free_sauce':
+                // Free sauce - $12 value applied as discount
+                discountAmount = 1200;
+                console.log(`Free sauce spin prize applied: ${normalizedCode}`);
+                break;
+            }
+
+            // Mark spin entry as used
+            await prisma.spinWheelEntry.update({
+              where: { code: normalizedCode },
+              data: { used: true, usedAt: new Date() },
+            });
+
+            // Mark any associated drip campaign as converted
+            try {
+              await prisma.dripCampaignProgress.updateMany({
+                where: {
+                  spinWheelEntryId: spinEntry.id,
+                  status: 'ACTIVE',
+                },
+                data: {
+                  status: 'CONVERTED',
+                  convertedAt: new Date(),
+                },
+              });
+            } catch (dripError) {
+              // Non-critical, just log
+              console.error('Failed to update drip campaign:', dripError);
+            }
+          }
+        }
+        // Check if it's a drip campaign code (DRIP-* format)
+        else if (normalizedCode.startsWith('DRIP-')) {
+          const parts = normalizedCode.split('-');
+          const discountType = parts[1];
+
+          switch (discountType) {
+            case '10OFF':
+              // 10% off
               percentageDiscount = 10;
-              discountAmount = Math.min(Math.round(subtotal * 0.10), 1000);
-              console.log(`10% off spin prize applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
+              discountAmount = Math.round(subtotal * 0.10);
+              console.log(`Drip 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
               break;
-            case 'free_shipping':
+            case '5OFF':
+              // $5 off
+              discountAmount = 500;
+              console.log(`Drip $5 off applied: ${normalizedCode}`);
+              break;
+            case 'FREESHIP':
               // Free shipping
               if (!freeShippingApplied) {
                 shippingCost = 0;
                 freeShippingApplied = true;
-                freeShippingReason = 'spin_prize';
-                console.log(`Free shipping spin prize applied: ${normalizedCode}`);
+                freeShippingReason = 'drip_code';
+                console.log(`Drip free shipping applied: ${normalizedCode}`);
               }
               break;
-            case 'five_off':
-              // $5 off
-              discountAmount = 500;
-              console.log(`$5 off spin prize applied: ${normalizedCode}`);
-              break;
-            case 'bonus_tortillas':
-              // 10 bonus tortillas - $5 value applied as discount
-              discountAmount = 500;
-              console.log(`Bonus tortillas spin prize applied: ${normalizedCode}`);
-              break;
-            case 'free_sauce':
-              // Free sauce - $12 value applied as discount
-              discountAmount = 1200;
-              console.log(`Free sauce spin prize applied: ${normalizedCode}`);
-              break;
-          }
-
-          // Mark spin entry as used
-          await prisma.spinWheelEntry.update({
-            where: { code: normalizedCode },
-            data: { used: true, usedAt: new Date() },
-          });
-
-          // Mark any associated drip campaign as converted
-          try {
-            await prisma.dripCampaignProgress.updateMany({
-              where: {
-                spinWheelEntryId: spinEntry.id,
-                status: 'ACTIVE',
-              },
-              data: {
-                status: 'CONVERTED',
-                convertedAt: new Date(),
-              },
-            });
-          } catch (dripError) {
-            // Non-critical, just log
-            console.error('Failed to update drip campaign:', dripError);
           }
         }
-      }
-      // Check if it's a drip campaign code (DRIP-* format)
-      else if (normalizedCode.startsWith('DRIP-')) {
-        const parts = normalizedCode.split('-');
-        const discountType = parts[1];
-
-        switch (discountType) {
-          case '10OFF':
-            // 10% off
-            percentageDiscount = 10;
-            discountAmount = Math.round(subtotal * 0.10);
-            console.log(`Drip 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
-            break;
-          case '5OFF':
-            // $5 off
-            discountAmount = 500;
-            console.log(`Drip $5 off applied: ${normalizedCode}`);
-            break;
-          case 'FREESHIP':
-            // Free shipping
-            if (!freeShippingApplied) {
-              shippingCost = 0;
-              freeShippingApplied = true;
-              freeShippingReason = 'drip_code';
-              console.log(`Drip free shipping applied: ${normalizedCode}`);
-            }
-            break;
+        // UT Alumni codes - 10% off, any order (no restrictions)
+        else if (['HOOKEM', 'UTALUMNI'].includes(normalizedCode)) {
+          percentageDiscount = 10;
+          discountAmount = Math.round(subtotal * 0.10);
+          utAlumniCode = normalizedCode;
+          console.log(`UT Alumni 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
         }
       }
-      // UT Alumni codes - 10% off, any order (no restrictions)
-      else if (['HOOKEM', 'UTALUMNI'].includes(normalizedCode)) {
-        percentageDiscount = 10;
-        discountAmount = Math.round(subtotal * 0.10);
-        utAlumniCode = normalizedCode;
-        console.log(`UT Alumni 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
-      }
+      // If the new system returned a different error (expired, used, etc.), don't apply any discount
     }
 
     // Create line items for Stripe with server-side validation
@@ -246,12 +291,14 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    // Create a Stripe coupon for discounts (feedback, spin wheel, drip, or UT alumni)
+    // Create a Stripe coupon for discounts (new system, feedback, spin wheel, drip, or UT alumni)
     let stripeCouponId: string | undefined;
     const dripCode = discountCode?.startsWith('DRIP-') ? discountCode : null;
-    if (discountAmount > 0 && (feedbackCouponCode || spinPrizeCode || dripCode || utAlumniCode)) {
+    if (discountAmount > 0 && (newSystemDiscountId || feedbackCouponCode || spinPrizeCode || dripCode || utAlumniCode)) {
       // Determine coupon name
-      const couponName = feedbackCouponCode
+      const couponName = newSystemDiscountId
+        ? `${newSystemDiscount?.name || 'Discount'} - ${discountCode?.toUpperCase()}`
+        : feedbackCouponCode
         ? `Feedback Discount - ${feedbackCouponCode}`
         : spinPrizeCode
         ? `Spin Prize - ${spinPrizeCode}`
@@ -267,6 +314,7 @@ export async function POST(req: NextRequest) {
           duration: 'once',
           name: couponName,
           metadata: {
+            ...(newSystemDiscountId && { newSystemDiscountId, discountCode: discountCode?.toUpperCase() }),
             ...(feedbackCouponCode && { feedbackCouponCode }),
             ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
             ...(dripCode && { dripCode }),
@@ -275,13 +323,14 @@ export async function POST(req: NextRequest) {
         });
         stripeCouponId = coupon.id;
       } else {
-        // Fixed amount discount ($5 off, free sauce, bonus tortillas)
+        // Fixed amount discount ($5 off, free sauce, bonus tortillas, BOGO)
         const coupon = await stripe.coupons.create({
           amount_off: discountAmount,
           currency: 'usd',
           duration: 'once',
           name: couponName,
           metadata: {
+            ...(newSystemDiscountId && { newSystemDiscountId, discountCode: discountCode?.toUpperCase() }),
             ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
             ...(dripCode && { dripCode }),
           },
@@ -346,6 +395,13 @@ export async function POST(req: NextRequest) {
           spinPrizeCode,
           spinPrizeType: spinPrizeType || '',
           spinDiscountAmount: discountAmount.toString(),
+        }),
+        // New discount system info for tracking
+        ...(newSystemDiscountId && {
+          newSystemDiscountId,
+          newSystemDiscountType: newSystemDiscount?.type || '',
+          newSystemDiscountAmount: discountAmount.toString(),
+          newSystemRulesApplied: JSON.stringify(appliedRules),
         }),
       },
       shipping_address_collection: {
