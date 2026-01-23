@@ -125,7 +125,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className="group relative bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-sunset-500 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
       {/* Image Container - Shorter on mobile */}
-      <div className="aspect-[4/3] md:aspect-square relative overflow-hidden bg-gray-100">
+      <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
         <Image
           src={image}
           alt={name}

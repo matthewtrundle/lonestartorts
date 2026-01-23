@@ -132,7 +132,7 @@ function ShopContent() {
   return (
     <main className="min-h-screen bg-white pb-24 md:pb-0">
       {/* Hero Section - Compact on mobile, proper spacing on desktop */}
-      <section className="text-white pt-24 pb-6 md:pt-32 md:pb-14 overflow-hidden relative">
+      <section className="text-white pt-24 pb-6 md:pt-24 md:pb-8 overflow-hidden relative">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -182,9 +182,9 @@ function ShopContent() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
         {/* Section Header - Compact on mobile */}
-        <div className="text-center mb-4 md:mb-8">
+        <div className="text-center mb-4 md:mb-5">
           <h2 className="text-xl md:text-3xl font-bold text-charcoal-950 mb-1">Shop Our Tortillas</h2>
           <p className="text-sm md:text-base text-gray-600">Order 4+ packs for FREE shipping</p>
         </div>
