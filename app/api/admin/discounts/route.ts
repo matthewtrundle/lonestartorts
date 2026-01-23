@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { cookies } from 'next/headers';
+import { isAuthenticated } from '@/lib/auth';
 
 // Static discount codes with their details
 const STATIC_CODES = [
@@ -25,10 +25,8 @@ const SPIN_PRIZE_DETAILS: Record<string, { type: string; description: string; va
 
 export async function GET(req: NextRequest) {
   // Check authentication
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get('admin_auth');
-
-  if (!authToken || authToken.value !== process.env.ADMIN_TOKEN) {
+  const authenticated = await isAuthenticated();
+  if (!authenticated) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
