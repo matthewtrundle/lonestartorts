@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
-import { trackBeginCheckout } from '@/lib/analytics';
+import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed } from '@/lib/analytics';
+import { ExitIntentSurvey } from '@/components/ExitIntentSurvey';
 import { getStripe } from '@/lib/stripe';
 import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
@@ -17,6 +18,34 @@ export function CartSidebar() {
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [didProceedToCheckout, setDidProceedToCheckout] = useState(false);
+
+  // Track cart sidebar open
+  useEffect(() => {
+    if (isOpen && items.length > 0) {
+      trackCartSidebarOpened({
+        itemCount: items.length,
+        subtotal,
+        shipping,
+        total,
+      });
+      setDidProceedToCheckout(false);
+    }
+  }, [isOpen, items.length, subtotal, shipping, total]);
+
+  // Track cart sidebar close (without checkout)
+  const handleCloseWithTracking = () => {
+    if (items.length > 0 && !didProceedToCheckout) {
+      trackCartSidebarClosed({
+        itemCount: items.length,
+        subtotal,
+        shipping,
+        total,
+        proceedToCheckout: false,
+      });
+    }
+    setIsOpen(false);
+  };
 
   // Check if cart contains wholesale items
   const hasWholesaleItems = items.some(item => item.sku.startsWith('WHOLESALE-'));
@@ -43,7 +72,7 @@ export function CartSidebar() {
     }
   }, [spinPrize, discountApplied]);
 
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => handleCloseWithTracking();
 
   // Calculate display totals based on discount type
   // Note: This returns the SUBTOTAL portion (before shipping), not the full total
@@ -133,6 +162,7 @@ export function CartSidebar() {
   const handleCheckout = async () => {
     setIsProcessing(true);
     setError(null);
+    setDidProceedToCheckout(true);
 
     try {
       // Track begin checkout event
@@ -207,6 +237,9 @@ export function CartSidebar() {
 
   return (
     <>
+      {/* Exit Intent Survey */}
+      <ExitIntentSurvey page="cart" />
+
       {/* Backdrop */}
       <AnimatePresence>
         {isOpen && (

@@ -326,3 +326,74 @@ export const trackSpinWheelClaim = (prize: SpinWheelPrizeData) => {
     code: prize.code || '',
   });
 };
+
+// ============================================
+// CART ABANDONMENT FUNNEL EVENTS
+// ============================================
+
+export interface CartFunnelData {
+  itemCount: number;
+  subtotal: number;
+  shipping: number;
+  total: number;
+  hasDiscount?: boolean;
+  discountType?: string;
+}
+
+/** Track when cart sidebar is opened (user sees shipping cost) */
+export const trackCartSidebarOpened = (data: CartFunnelData) => {
+  enhancedTrack('cart_sidebar_opened', {
+    itemCount: data.itemCount,
+    subtotal: data.subtotal,
+    shipping: data.shipping,
+    total: data.total,
+    shippingShown: data.shipping > 0 ? 'paid' : 'free',
+  });
+};
+
+/** Track when cart sidebar is closed without proceeding to checkout */
+export const trackCartSidebarClosed = (data: CartFunnelData & { proceedToCheckout: boolean }) => {
+  enhancedTrack('cart_sidebar_closed', {
+    itemCount: data.itemCount,
+    subtotal: data.subtotal,
+    shipping: data.shipping,
+    total: data.total,
+    proceedToCheckout: data.proceedToCheckout,
+  });
+};
+
+/** Track when checkout page is viewed */
+export const trackCheckoutPageViewed = (data: CartFunnelData) => {
+  enhancedTrack('checkout_page_viewed', {
+    itemCount: data.itemCount,
+    subtotal: data.subtotal,
+    shipping: data.shipping,
+    total: data.total,
+  });
+};
+
+/** Track when user abandons checkout page */
+export const trackCheckoutAbandoned = (data: CartFunnelData & { timeOnPage: number }) => {
+  enhancedTrack('checkout_abandoned', {
+    itemCount: data.itemCount,
+    subtotal: data.subtotal,
+    shipping: data.shipping,
+    total: data.total,
+    timeOnPageSeconds: Math.round(data.timeOnPage / 1000),
+  });
+};
+
+/** Track exit intent survey response */
+export const trackExitSurveyResponse = (data: {
+  reason: string;
+  page: 'cart' | 'checkout';
+  itemCount: number;
+  cartTotal: number;
+}) => {
+  enhancedTrack('exit_survey_response', {
+    reason: data.reason,
+    page: data.page,
+    itemCount: data.itemCount,
+    cartTotal: data.cartTotal,
+  });
+};

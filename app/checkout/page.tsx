@@ -6,7 +6,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { trackBeginCheckout } from '@/lib/analytics';
+import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned } from '@/lib/analytics';
+import { ExitIntentSurvey } from '@/components/ExitIntentSurvey';
 import { getStripe } from '@/lib/stripe';
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake } from 'lucide-react';
@@ -35,12 +36,46 @@ export default function CheckoutPage() {
     return 'Fast Shipping (3-5 business days)';
   };
 
+  // Track when checkout page is viewed
+  const [pageLoadTime] = React.useState(() => Date.now());
+  const [didProceedToPayment, setDidProceedToPayment] = React.useState(false);
+
   // Redirect if cart is empty (wait for hydration to avoid race condition)
   React.useEffect(() => {
     if (isHydrated && items.length === 0) {
       router.push('/');
     }
   }, [items.length, isHydrated, router]);
+
+  // Track checkout page view
+  React.useEffect(() => {
+    if (isHydrated && items.length > 0) {
+      trackCheckoutPageViewed({
+        itemCount: items.length,
+        subtotal,
+        shipping,
+        total,
+      });
+    }
+  }, [isHydrated, items.length, subtotal, shipping, total]);
+
+  // Track checkout abandonment on page leave
+  React.useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (items.length > 0 && !didProceedToPayment) {
+        trackCheckoutAbandoned({
+          itemCount: items.length,
+          subtotal,
+          shipping,
+          total,
+          timeOnPage: Date.now() - pageLoadTime,
+        });
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [items.length, subtotal, shipping, total, pageLoadTime, didProceedToPayment]);
 
   // Calculate display total (with discount if applied)
   const isFreeShipping = discountApplied && discountType === 'free_shipping';
@@ -111,6 +146,7 @@ export default function CheckoutPage() {
   const handleCheckout = async () => {
     setIsProcessing(true);
     setError(null);
+    setDidProceedToPayment(true);
 
     try {
       // Track begin checkout event
@@ -171,6 +207,9 @@ export default function CheckoutPage() {
 
   return (
     <main className="min-h-screen bg-cream-50 pt-24 pb-12">
+        {/* Exit Intent Survey */}
+        <ExitIntentSurvey page="checkout" />
+
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Page Header */}
           <div className="mb-6">

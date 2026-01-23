@@ -668,3 +668,173 @@ model AnalyticsEvent {
   @@index([eventType])
   @@index([timestamp])
 }
+
+// ===========================================
+// DISCOUNT CODE MANAGEMENT SYSTEM
+// ===========================================
+
+model DiscountCode {
+  id                 String    @id @default(uuid())
+  code               String    @unique
+  name               String
+  description        String?
+
+  // Source tracking - where did this code originate
+  source             DiscountSource @default(ADMIN)
+  sourceRef          String?    // Reference to source record (e.g., spinWheelEntryId)
+
+  // Validity
+  isActive           Boolean   @default(true)
+  startsAt           DateTime?
+  expiresAt          DateTime?
+
+  // Global restrictions
+  minOrderAmount     Int?      // Minimum subtotal in cents
+  maxDiscountAmount  Int?      // Cap on total discount value
+
+  // Usage limits
+  maxUsageTotal      Int?      // null = unlimited total uses
+  maxUsagePerEmail   Int       @default(1)  // Uses per email
+  currentUsageCount  Int       @default(0)
+
+  // Targeting
+  firstOrderOnly     Boolean   @default(false)
+
+  // Combination rules
+  stackable          Boolean   @default(false)  // Can be combined with other codes
+  priority           Int       @default(0)      // Higher priority wins for non-stackable
+
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  createdBy          String?   // Admin user who created it
+
+  rules              DiscountRule[]
+  restrictions       DiscountRestriction[]
+  usages             DiscountUsage[]
+
+  @@index([code])
+  @@index([isActive])
+  @@index([source])
+  @@index([expiresAt])
+}
+
+model DiscountRule {
+  id                 String       @id @default(uuid())
+  discountId         String
+
+  type               RuleType
+
+  // For PERCENTAGE and FIXED_AMOUNT rules
+  value              Int?         // Percentage (1-100) or cents
+  maxDiscount        Int?         // Cap for percentage discounts
+
+  // For BOGO rules
+  buyProductSku      String?      // SKU customer must buy
+  buyQuantity        Int?         // Minimum quantity to trigger BOGO
+  getProductSku      String?      // SKU customer receives
+  getQuantity        Int?         // How many they receive
+  getDiscountPct     Int?         // Discount on free item (100 = free)
+
+  // Tier threshold - for tiered discounts
+  minOrderAmount     Int?         // Minimum order to qualify for this rule
+  priority           Int          @default(0) // Higher priority checked first
+
+  createdAt          DateTime     @default(now())
+
+  discount           DiscountCode @relation(fields: [discountId], references: [id], onDelete: Cascade)
+
+  @@index([discountId])
+  @@index([type])
+}
+
+model DiscountRestriction {
+  id                 String       @id @default(uuid())
+  discountId         String
+
+  type               RestrictionType
+  value              String       // SKU or email domain
+  include            Boolean      @default(true) // true = only these, false = exclude these
+
+  createdAt          DateTime     @default(now())
+
+  discount           DiscountCode @relation(fields: [discountId], references: [id], onDelete: Cascade)
+
+  @@index([discountId])
+  @@index([type])
+}
+
+model DiscountUsage {
+  id                 String       @id @default(uuid())
+  discountId         String
+  email              String
+  orderId            String?
+  orderNumber        String?
+  subtotal           Int          // Order subtotal in cents
+  discountApplied    Int          // Actual discount amount in cents
+  rulesApplied       Json         // Which rules were applied
+  usedAt             DateTime     @default(now())
+
+  // Fraud tracking
+  ipAddress          String?
+
+  discount           DiscountCode @relation(fields: [discountId], references: [id])
+
+  @@index([discountId])
+  @@index([email])
+  @@index([orderId])
+  @@index([usedAt])
+}
+
+enum RuleType {
+  PERCENTAGE
+  FIXED_AMOUNT
+  FREE_SHIPPING
+  BOGO
+}
+
+enum RestrictionType {
+  PRODUCT_SKU
+  EMAIL_DOMAIN
+}
+
+enum DiscountSource {
+  ADMIN
+  SPIN_WHEEL
+  FEEDBACK
+  DRIP_CAMPAIGN
+  SYSTEM
+}
+
+// ============================================
+// EXIT INTENT SURVEY
+// ============================================
+
+model ExitSurveyResponse {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+
+  // Where the exit happened
+  page        String   // 'cart' or 'checkout'
+
+  // What they selected
+  reason      String   // 'price_too_high', 'shipping_expensive', 'just_browsing', 'will_order_later', 'other'
+  otherText   String?  // Free text if they selected 'other'
+
+  // Cart context at time of exit
+  itemCount   Int
+  subtotal    Int      // In cents
+  shipping    Int      // In cents
+  total       Int      // In cents
+
+  // Traffic source for correlation
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+
+  // Device info
+  deviceType  String?  // 'mobile', 'desktop', 'tablet'
+
+  @@index([createdAt])
+  @@index([reason])
+  @@index([page])
+}
