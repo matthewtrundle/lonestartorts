@@ -241,6 +241,9 @@ export default function RootLayout({
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://js.stripe.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://analytics.tiktok.com" />
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         {/* JSON-LD Structured Data */}

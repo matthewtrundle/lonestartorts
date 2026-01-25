@@ -12,7 +12,7 @@ export function Footer() {
     <footer className="bg-charcoal-950 text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-xl font-bold mb-4">Lonestar Tortillas</h3>
@@ -27,7 +27,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Shop */}
           <div>
             <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-gray-300">Shop</h4>
             <ul className="space-y-2 text-sm">
@@ -44,6 +44,60 @@ export function Footer() {
               <li>
                 <Link href="/wholesale" className="text-gray-400 hover:text-white transition-colors">
                   Wholesale
+                </Link>
+              </li>
+              <li>
+                <Link href="/buy-heb-tortillas-online" className="text-gray-400 hover:text-white transition-colors">
+                  Buy H-E-B Online
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-gray-300">Resources</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/guides" className="text-gray-400 hover:text-white transition-colors">
+                  Tortilla Guides
+                </Link>
+              </li>
+              <li>
+                <Link href="/recipes" className="text-gray-400 hover:text-white transition-colors">
+                  Recipes
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/party-calculator" className="text-gray-400 hover:text-white transition-colors">
+                  Party Calculator
+                </Link>
+              </li>
+              <li>
+                <Link href="/shipping" className="text-gray-400 hover:text-white transition-colors">
+                  Shipping Info
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Programs */}
+          <div>
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-gray-300">Programs</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/hook-em-tortillas" className="text-gray-400 hover:text-white transition-colors">
+                  Hook 'em Tortillas
+                </Link>
+              </li>
+              <li>
+                <Link href="/military-care-packages" className="text-gray-400 hover:text-white transition-colors">
+                  Military Care Packages
+                </Link>
+              </li>
+              <li>
+                <Link href="/story" className="text-gray-400 hover:text-white transition-colors">
+                  Our Story
                 </Link>
               </li>
             </ul>

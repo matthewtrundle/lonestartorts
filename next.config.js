@@ -50,6 +50,13 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Cache headers for static assets (1 year, immutable)
+        source: '/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
+        ]
+      },
+      {
         // Apply these headers to all routes
         source: '/:path*',
         headers: [
