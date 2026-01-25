@@ -64,6 +64,67 @@ export function ExitIntentSurvey({ page }: ExitIntentSurveyProps) {
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, [hasShown, items.length]);
 
+  // Handle mobile exit intent via rapid scroll up or back gesture
+  useEffect(() => {
+    if (hasShown || items.length === 0) return;
+
+    let lastScrollY = window.scrollY;
+    let scrollUpDistance = 0;
+    const SCROLL_THRESHOLD = 300; // pixels of rapid upward scroll to trigger
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const delta = lastScrollY - currentScrollY;
+
+      // Track rapid upward scrolling (positive delta = scrolling up)
+      if (delta > 0) {
+        scrollUpDistance += delta;
+        // Trigger if user scrolls up rapidly (indicating exit intent on mobile)
+        if (scrollUpDistance > SCROLL_THRESHOLD && currentScrollY < 100 && !hasShown && items.length > 0) {
+          setIsVisible(true);
+          setHasShown(true);
+        }
+      } else {
+        // Reset if scrolling down
+        scrollUpDistance = 0;
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    // Only add scroll listener on mobile/tablet
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [hasShown, items.length]);
+
+  // Handle beforeunload (works on both desktop and mobile)
+  useEffect(() => {
+    if (hasShown || items.length === 0) return;
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Can't show modal here, but we can track the abandon
+      if (items.length > 0 && !hasShown) {
+        // Track cart abandonment silently
+        navigator.sendBeacon('/api/exit-survey', JSON.stringify({
+          page,
+          reason: 'page_close',
+          itemCount: items.length,
+          subtotal,
+          shipping,
+          total,
+          deviceType: getDeviceType(),
+          ...getUtmParams(),
+        }));
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [hasShown, items.length, page, subtotal, shipping, total, getDeviceType, getUtmParams]);
+
   // Handle visibility change (tab switch or close)
   useEffect(() => {
     if (hasShown || items.length === 0) return;
@@ -164,7 +225,7 @@ export function ExitIntentSurvey({ page }: ExitIntentSurveyProps) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed inset-x-4 top-1/2 -translate-y-1/2 mx-auto max-w-md bg-white rounded-2xl shadow-2xl z-[10001] overflow-hidden sm:inset-x-auto"
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-md bg-white rounded-2xl shadow-2xl z-[10001] overflow-hidden"
           >
             {/* Close button */}
             <button

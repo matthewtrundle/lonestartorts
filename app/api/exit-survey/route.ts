@@ -7,6 +7,7 @@ const VALID_REASONS = [
   'just_browsing',
   'will_order_later',
   'other',
+  'page_close', // Auto-tracked when user closes/navigates away
 ];
 
 export async function POST(request: NextRequest) {

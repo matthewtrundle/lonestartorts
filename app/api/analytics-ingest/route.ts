@@ -63,7 +63,8 @@ export async function POST(req: NextRequest) {
       origin: event.origin ? String(event.origin) : null,
       referrer: event.referrer ? String(event.referrer) : null,
       queryParams: event.queryParams ? String(event.queryParams) : null,
-      sessionId: event.sessionId !== undefined && event.sessionId !== null ? BigInt(event.sessionId as number) : null,
+      // Note: Vercel Analytics sends sessionId: 0 for all events (known issue), so we treat 0 as null
+      sessionId: event.sessionId && event.sessionId !== 0 ? BigInt(event.sessionId as number) : null,
       deviceId: event.deviceId !== undefined && event.deviceId !== null ? BigInt(event.deviceId as number) : null,
       country: event.country ? String(event.country) : null,
       region: event.region ? String(event.region) : null,
