@@ -48,25 +48,26 @@ export function ExitIntentSurvey({ page }: ExitIntentSurveyProps) {
     return 'desktop';
   }, []);
 
-  // Handle mouse leave (desktop exit intent)
+  // Handle mouse leave (desktop exit intent) - only triggers when mouse leaves toward top of window
   useEffect(() => {
     if (hasShown || items.length === 0) return;
 
     // Desktop only
-    if (window.innerWidth < 1024) return;
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
 
-    const handleMouseOut = (e: MouseEvent) => {
-      // Check if mouse is leaving the document (going to browser chrome/tabs)
-      // relatedTarget is null when leaving the document entirely
-      if (!e.relatedTarget && e.clientY <= 50 && !hasShown && items.length > 0) {
+    const handleMouseLeave = (e: MouseEvent) => {
+      // Only trigger when mouse leaves through the TOP of the document (toward browser chrome/tabs)
+      // e.clientY will be negative or very small when leaving through top
+      if (e.clientY <= 0 && !hasShown && items.length > 0) {
         setIsVisible(true);
         setHasShown(true);
         sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
       }
     };
 
-    document.addEventListener('mouseout', handleMouseOut);
-    return () => document.removeEventListener('mouseout', handleMouseOut);
+    // Use mouseleave on documentElement - only fires when leaving the entire document
+    document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+    return () => document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
   }, [hasShown, items.length]);
 
   // Handle mobile exit intent via rapid scroll up or back gesture
