@@ -52,16 +52,21 @@ export function ExitIntentSurvey({ page }: ExitIntentSurveyProps) {
   useEffect(() => {
     if (hasShown || items.length === 0) return;
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      // Only trigger when mouse moves to top of page (leaving intent)
-      if (e.clientY <= 5 && !hasShown && items.length > 0) {
+    // Desktop only
+    if (window.innerWidth < 1024) return;
+
+    const handleMouseOut = (e: MouseEvent) => {
+      // Check if mouse is leaving the document (going to browser chrome/tabs)
+      // relatedTarget is null when leaving the document entirely
+      if (!e.relatedTarget && e.clientY <= 50 && !hasShown && items.length > 0) {
         setIsVisible(true);
         setHasShown(true);
+        sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
       }
     };
 
-    document.addEventListener('mouseleave', handleMouseLeave);
-    return () => document.removeEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseout', handleMouseOut);
+    return () => document.removeEventListener('mouseout', handleMouseOut);
   }, [hasShown, items.length]);
 
   // Handle mobile exit intent via rapid scroll up or back gesture
@@ -146,6 +151,37 @@ export function ExitIntentSurvey({ page }: ExitIntentSurveyProps) {
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [hasShown, items.length]);
+
+  // Inactivity timeout - show survey after 45 seconds of no interaction on checkout page
+  useEffect(() => {
+    if (hasShown || items.length === 0 || page !== 'checkout') return;
+
+    let inactivityTimer: NodeJS.Timeout;
+    const INACTIVITY_TIMEOUT = 45000; // 45 seconds
+
+    const resetTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        if (!hasShown && items.length > 0) {
+          setIsVisible(true);
+          setHasShown(true);
+          sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+        }
+      }, INACTIVITY_TIMEOUT);
+    };
+
+    // Reset timer on any user activity
+    const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll'];
+    events.forEach(event => document.addEventListener(event, resetTimer, { passive: true }));
+
+    // Start the timer
+    resetTimer();
+
+    return () => {
+      clearTimeout(inactivityTimer);
+      events.forEach(event => document.removeEventListener(event, resetTimer));
+    };
+  }, [hasShown, items.length, page]);
 
   // Check if already shown this session
   useEffect(() => {
