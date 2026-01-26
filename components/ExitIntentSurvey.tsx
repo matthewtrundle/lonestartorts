@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MessageCircle } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
@@ -16,15 +16,17 @@ const REASONS = [
 
 interface ExitIntentSurveyProps {
   page: 'cart' | 'checkout';
+  onCartClose?: boolean; // Trigger when cart sidebar closes without checkout
 }
 
-export function ExitIntentSurvey({ page }: ExitIntentSurveyProps) {
+export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
   const [otherText, setOtherText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasShown, setHasShown] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const cartCloseCountRef = useRef(0);
 
   const { items, subtotal, shipping, total } = useCart();
 
@@ -183,6 +185,64 @@ export function ExitIntentSurvey({ page }: ExitIntentSurveyProps) {
       events.forEach(event => document.removeEventListener(event, resetTimer));
     };
   }, [hasShown, items.length, page]);
+
+  // NEW: Time-based trigger for mobile users (25 seconds on any page with cart items)
+  useEffect(() => {
+    if (hasShown || items.length === 0) return;
+
+    // Only on mobile/tablet
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) return;
+
+    const MOBILE_TIMEOUT = 25000; // 25 seconds
+
+    const timer = setTimeout(() => {
+      if (!hasShown && items.length > 0) {
+        setIsVisible(true);
+        setHasShown(true);
+        sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+      }
+    }, MOBILE_TIMEOUT);
+
+    return () => clearTimeout(timer);
+  }, [hasShown, items.length]);
+
+  // NEW: Cart close trigger - show survey when user closes cart sidebar without checking out
+  useEffect(() => {
+    if (!onCartClose || hasShown || items.length === 0) return;
+
+    // Only trigger after the second cart close (first might be accidental)
+    cartCloseCountRef.current++;
+
+    if (cartCloseCountRef.current >= 2) {
+      setIsVisible(true);
+      setHasShown(true);
+      sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+    }
+  }, [onCartClose, hasShown, items.length]);
+
+  // NEW: Back button intercept - catch browser back navigation
+  useEffect(() => {
+    if (hasShown || items.length === 0) return;
+
+    // Push a fake history state
+    const handlePopState = () => {
+      if (!hasShown && items.length > 0) {
+        // Push state back to prevent navigation
+        window.history.pushState(null, '', window.location.href);
+        setIsVisible(true);
+        setHasShown(true);
+        sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+      }
+    };
+
+    // Push initial state so we can detect back button
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [hasShown, items.length]);
 
   // Check if already shown this session
   useEffect(() => {
