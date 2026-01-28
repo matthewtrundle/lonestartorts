@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
 import './globals.css';
@@ -289,20 +288,18 @@ export default function RootLayout({
         {/* Vercel Analytics */}
         <Analytics />
 
-        <ClerkProvider>
-          <LanguageProvider>
-            <CartProvider>
-              <CartSidebar />
-              <div className="min-h-screen flex flex-col">
-                <HeaderWrapper />
-                <main className="flex-grow">
-                  {children}
-                </main>
-                <Footer />
-              </div>
-            </CartProvider>
-          </LanguageProvider>
-        </ClerkProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <CartSidebar />
+            <div className="min-h-screen flex flex-col">
+              <HeaderWrapper />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
