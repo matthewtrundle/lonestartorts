@@ -84,22 +84,41 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
   useEffect(() => {
     if (hasShown || items.length === 0) return;
 
+    // Only add scroll listener on mobile/tablet
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+    if (!isMobile) return;
+
     let lastScrollY = window.scrollY;
     let scrollUpDistance = 0;
+    let hasScrolledDown = false; // Must scroll down first before we track upward scroll
+    let isActive = false; // Delay activation to prevent false triggers on page load
     const SCROLL_THRESHOLD = 300; // pixels of rapid upward scroll to trigger
 
+    // Delay activation to avoid false triggers from scroll restoration on page load
+    const activationTimer = setTimeout(() => {
+      isActive = true;
+      lastScrollY = window.scrollY; // Reset baseline after activation
+    }, 1000);
+
     const handleScroll = () => {
+      if (!isActive) return;
+
       const currentScrollY = window.scrollY;
       const delta = lastScrollY - currentScrollY;
 
-      // Track rapid upward scrolling (positive delta = scrolling up)
-      if (delta > 0) {
+      // Require user to scroll down at least 200px before tracking upward scroll
+      if (!hasScrolledDown && currentScrollY > 200) {
+        hasScrolledDown = true;
+      }
+
+      // Only track rapid upward scrolling after user has scrolled down
+      if (hasScrolledDown && delta > 0) {
         scrollUpDistance += delta;
         // Trigger if user scrolls up rapidly (indicating exit intent on mobile)
         if (scrollUpDistance > SCROLL_THRESHOLD && currentScrollY < 100 && !hasShown && items.length > 0) {
           showSurvey('rapid_scroll_up');
         }
-      } else {
+      } else if (delta < 0) {
         // Reset if scrolling down
         scrollUpDistance = 0;
       }
@@ -107,12 +126,11 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
       lastScrollY = currentScrollY;
     };
 
-    // Only add scroll listener on mobile/tablet
-    const isMobile = window.innerWidth < 1024;
-    if (isMobile) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      clearTimeout(activationTimer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [hasShown, items.length, showSurvey]);
 
   // Handle beforeunload (works on both desktop and mobile)
