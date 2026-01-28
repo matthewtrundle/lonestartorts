@@ -80,58 +80,8 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
     return () => document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
   }, [hasShown, items.length, showSurvey]);
 
-  // Handle mobile exit intent via rapid scroll up or back gesture
-  useEffect(() => {
-    if (hasShown || items.length === 0) return;
-
-    // Only add scroll listener on mobile/tablet
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
-    if (!isMobile) return;
-
-    let lastScrollY = window.scrollY;
-    let scrollUpDistance = 0;
-    let hasScrolledDown = false; // Must scroll down first before we track upward scroll
-    let isActive = false; // Delay activation to prevent false triggers on page load
-    const SCROLL_THRESHOLD = 300; // pixels of rapid upward scroll to trigger
-
-    // Delay activation to avoid false triggers from scroll restoration on page load
-    const activationTimer = setTimeout(() => {
-      isActive = true;
-      lastScrollY = window.scrollY; // Reset baseline after activation
-    }, 1000);
-
-    const handleScroll = () => {
-      if (!isActive) return;
-
-      const currentScrollY = window.scrollY;
-      const delta = lastScrollY - currentScrollY;
-
-      // Require user to scroll down at least 200px before tracking upward scroll
-      if (!hasScrolledDown && currentScrollY > 200) {
-        hasScrolledDown = true;
-      }
-
-      // Only track rapid upward scrolling after user has scrolled down
-      if (hasScrolledDown && delta > 0) {
-        scrollUpDistance += delta;
-        // Trigger if user scrolls up rapidly (indicating exit intent on mobile)
-        if (scrollUpDistance > SCROLL_THRESHOLD && currentScrollY < 100 && !hasShown && items.length > 0) {
-          showSurvey('rapid_scroll_up');
-        }
-      } else if (delta < 0) {
-        // Reset if scrolling down
-        scrollUpDistance = 0;
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      clearTimeout(activationTimer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [hasShown, items.length, showSurvey]);
+  // REMOVED: rapid_scroll_up trigger - too unreliable, caused false triggers on cart page
+  // Mobile users now rely on: checkout inactivity (45s), cart close (2x), tab switch return
 
   // Handle beforeunload (works on both desktop and mobile)
   useEffect(() => {
