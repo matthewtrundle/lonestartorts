@@ -26,9 +26,19 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasShown, setHasShown] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [triggerSource, setTriggerSource] = useState<string>('');
   const cartCloseCountRef = useRef(0);
 
   const { items, subtotal, shipping, total } = useCart();
+
+  // Debug helper - shows survey with trigger logging
+  const showSurvey = useCallback((trigger: string) => {
+    console.log(`[ExitSurvey] Triggered by: ${trigger}`);
+    setTriggerSource(trigger);
+    setIsVisible(true);
+    setHasShown(true);
+    sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+  }, []);
 
   // Get UTM params from URL
   const getUtmParams = useCallback(() => {
@@ -61,16 +71,14 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
       // Only trigger when mouse leaves through the TOP of the document (toward browser chrome/tabs)
       // e.clientY will be negative or very small when leaving through top
       if (e.clientY <= 0 && !hasShown && items.length > 0) {
-        setIsVisible(true);
-        setHasShown(true);
-        sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+        showSurvey('mouse_leave_top');
       }
     };
 
     // Use mouseleave on documentElement - only fires when leaving the entire document
     document.documentElement.addEventListener('mouseleave', handleMouseLeave);
     return () => document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
-  }, [hasShown, items.length]);
+  }, [hasShown, items.length, showSurvey]);
 
   // Handle mobile exit intent via rapid scroll up or back gesture
   useEffect(() => {
@@ -89,8 +97,7 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
         scrollUpDistance += delta;
         // Trigger if user scrolls up rapidly (indicating exit intent on mobile)
         if (scrollUpDistance > SCROLL_THRESHOLD && currentScrollY < 100 && !hasShown && items.length > 0) {
-          setIsVisible(true);
-          setHasShown(true);
+          showSurvey('rapid_scroll_up');
         }
       } else {
         // Reset if scrolling down
@@ -106,7 +113,7 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
       window.addEventListener('scroll', handleScroll, { passive: true });
       return () => window.removeEventListener('scroll', handleScroll);
     }
-  }, [hasShown, items.length]);
+  }, [hasShown, items.length, showSurvey]);
 
   // Handle beforeunload (works on both desktop and mobile)
   useEffect(() => {
@@ -145,15 +152,14 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
         const pending = sessionStorage.getItem('lonestar_exit_intent_pending');
         if (pending === 'true' && !hasShown && items.length > 0) {
           sessionStorage.removeItem('lonestar_exit_intent_pending');
-          setIsVisible(true);
-          setHasShown(true);
+          showSurvey('tab_switch_return');
         }
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [hasShown, items.length]);
+  }, [hasShown, items.length, showSurvey]);
 
   // Inactivity timeout - show survey after 45 seconds of no interaction on checkout page
   useEffect(() => {
@@ -166,9 +172,7 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
         if (!hasShown && items.length > 0) {
-          setIsVisible(true);
-          setHasShown(true);
-          sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+          showSurvey('checkout_inactivity_45s');
         }
       }, INACTIVITY_TIMEOUT);
     };
@@ -184,29 +188,12 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
       clearTimeout(inactivityTimer);
       events.forEach(event => document.removeEventListener(event, resetTimer));
     };
-  }, [hasShown, items.length, page]);
+  }, [hasShown, items.length, page, showSurvey]);
 
-  // NEW: Time-based trigger for mobile users (25 seconds on any page with cart items)
-  useEffect(() => {
-    if (hasShown || items.length === 0) return;
+  // REMOVED: 25-second mobile timer was too aggressive and fired unexpectedly
+  // Mobile users now rely on: checkout inactivity (45s), cart close (2x), tab switch return, rapid scroll up
 
-    // Only on mobile/tablet
-    if (typeof window !== 'undefined' && window.innerWidth >= 1024) return;
-
-    const MOBILE_TIMEOUT = 25000; // 25 seconds
-
-    const timer = setTimeout(() => {
-      if (!hasShown && items.length > 0) {
-        setIsVisible(true);
-        setHasShown(true);
-        sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
-      }
-    }, MOBILE_TIMEOUT);
-
-    return () => clearTimeout(timer);
-  }, [hasShown, items.length]);
-
-  // NEW: Cart close trigger - show survey when user closes cart sidebar without checking out
+  // Cart close trigger - show survey when user closes cart sidebar without checking out
   useEffect(() => {
     if (!onCartClose || hasShown || items.length === 0) return;
 
@@ -214,35 +201,13 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
     cartCloseCountRef.current++;
 
     if (cartCloseCountRef.current >= 2) {
-      setIsVisible(true);
-      setHasShown(true);
-      sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
+      showSurvey('cart_close_2x');
     }
-  }, [onCartClose, hasShown, items.length]);
+  }, [onCartClose, hasShown, items.length, showSurvey]);
 
-  // NEW: Back button intercept - catch browser back navigation
-  useEffect(() => {
-    if (hasShown || items.length === 0) return;
-
-    // Push a fake history state
-    const handlePopState = () => {
-      if (!hasShown && items.length > 0) {
-        // Push state back to prevent navigation
-        window.history.pushState(null, '', window.location.href);
-        setIsVisible(true);
-        setHasShown(true);
-        sessionStorage.setItem('lonestar_exit_survey_shown', 'true');
-      }
-    };
-
-    // Push initial state so we can detect back button
-    window.history.pushState(null, '', window.location.href);
-    window.addEventListener('popstate', handlePopState);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [hasShown, items.length]);
+  // REMOVED: Back button intercept was firing unexpectedly on mobile browsers
+  // The history.pushState on mount + popstate listener caused immediate triggers
+  // when users navigated to the page via any history navigation
 
   // Check if already shown this session
   useEffect(() => {
@@ -251,6 +216,19 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
       setHasShown(true);
     }
   }, []);
+
+  // URL param for testing: ?exit_survey=test
+  useEffect(() => {
+    if (typeof window === 'undefined' || hasShown) return;
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('exit_survey') === 'test') {
+      // Small delay to ensure component is fully mounted
+      setTimeout(() => {
+        showSurvey('url_param_test');
+      }, 100);
+    }
+  }, [hasShown, showSurvey]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -317,13 +295,19 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
             onClick={handleClose}
           />
 
-          {/* Modal */}
+          {/* Modal wrapper - flexbox centering is more reliable than transform on mobile */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-md bg-white rounded-2xl shadow-2xl z-[10001] overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 flex items-center justify-center p-4 z-[10001] pointer-events-none"
           >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
+            >
             {/* Close button */}
             <button
               onClick={handleClose}
@@ -407,6 +391,7 @@ export function ExitIntentSurvey({ page, onCartClose }: ExitIntentSurveyProps) {
                 </>
               )}
             </div>
+            </motion.div>
           </motion.div>
         </>
       )}
