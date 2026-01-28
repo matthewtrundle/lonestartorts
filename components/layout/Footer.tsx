@@ -16,15 +16,10 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-xl font-bold mb-4">Lonestar Tortillas</h3>
-            <p className="text-gray-400 text-sm mb-4 max-w-md">
+            <p className="text-gray-400 text-sm max-w-md">
               Bringing authentic H-E-B bakery tortillas to Texas expats nationwide.
               Same-day shipping, shelf-stable for weeks.
             </p>
-            <div className="flex items-center gap-2 text-sm text-purple-400">
-              <span>🎆</span>
-              <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-              New Year Fiesta: FREE shipping on orders $80+
-            </div>
           </div>
 
           {/* Shop */}
