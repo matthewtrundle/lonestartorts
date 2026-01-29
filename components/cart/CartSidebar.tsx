@@ -8,7 +8,6 @@ import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed } from '@/lib/analytics';
-import { ExitIntentSurvey } from '@/components/ExitIntentSurvey';
 import { getStripe } from '@/lib/stripe';
 import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
@@ -19,7 +18,6 @@ export function CartSidebar() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [didProceedToCheckout, setDidProceedToCheckout] = useState(false);
-  const [cartClosedWithoutCheckout, setCartClosedWithoutCheckout] = useState(false);
 
   // Track cart sidebar open
   useEffect(() => {
@@ -44,8 +42,6 @@ export function CartSidebar() {
         total,
         proceedToCheckout: false,
       });
-      // Trigger exit intent survey after cart close
-      setCartClosedWithoutCheckout(prev => !prev); // Toggle to trigger useEffect
     }
     setIsOpen(false);
   };
@@ -240,9 +236,6 @@ export function CartSidebar() {
 
   return (
     <>
-      {/* Exit Intent Survey */}
-      <ExitIntentSurvey page="cart" onCartClose={cartClosedWithoutCheckout} />
-
       {/* Backdrop */}
       <AnimatePresence>
         {isOpen && (

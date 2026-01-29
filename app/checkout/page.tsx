@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned } from '@/lib/analytics';
-import { ExitIntentSurvey } from '@/components/ExitIntentSurvey';
 import { getStripe } from '@/lib/stripe';
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake } from 'lucide-react';
@@ -207,9 +206,6 @@ export default function CheckoutPage() {
 
   return (
     <main className="min-h-screen bg-cream-50 pt-24 pb-12">
-        {/* Exit Intent Survey */}
-        <ExitIntentSurvey page="checkout" />
-
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Page Header */}
           <div className="mb-6">
