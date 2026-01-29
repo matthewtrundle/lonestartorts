@@ -59,6 +59,8 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
     couponCode?: string;
   } | null>(null);
   const [sendingFeedback, setSendingFeedback] = useState(false);
+  const [showDeliveryDatePicker, setShowDeliveryDatePicker] = useState(false);
+  const [deliveryDate, setDeliveryDate] = useState('');
 
   useEffect(() => {
     fetchOrder();
@@ -157,7 +159,7 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
     }
   };
 
-  const markAsShipped = async () => {
+  const markAsShipped = async (skipEmail = false) => {
     if (!order || !trackingNumber.trim()) {
       alert('Please enter a tracking number');
       return;
@@ -172,15 +174,43 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
           status: 'SHIPPED',
           trackingNumber: trackingNumber.trim(),
           carrier,
+          skipEmail,
         }),
       });
 
       if (!response.ok) throw new Error('Failed to mark as shipped');
 
       await fetchOrder();
-      alert('Order marked as shipped! Tracking email sent to customer.');
+      alert(skipEmail ? 'Order marked as shipped (no email sent).' : 'Order marked as shipped! Tracking email sent to customer.');
     } catch (err) {
       alert('Failed to mark order as shipped');
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const markAsDeliveredWithDate = async (customDate?: string) => {
+    if (!order) return;
+
+    setUpdating(true);
+    try {
+      const response = await fetch(`/api/admin/orders/${order.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'DELIVERED',
+          deliveredAt: customDate || undefined,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to mark as delivered');
+
+      await fetchOrder();
+      setShowDeliveryDatePicker(false);
+      setDeliveryDate('');
+      alert('Order marked as delivered!');
+    } catch (err) {
+      alert('Failed to mark order as delivered');
     } finally {
       setUpdating(false);
     }
@@ -368,12 +398,19 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
             {order.status === 'PROCESSING' && (
               <div className="flex flex-col gap-2">
                 <button
-                  onClick={markAsShipped}
+                  onClick={() => markAsShipped(false)}
                   disabled={updating || !trackingNumber.trim()}
                   className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-bold flex items-center justify-center gap-2 shadow-lg"
                 >
                   <Truck className="w-5 h-5" />
                   {updating ? 'Shipping...' : 'Ship Now'}
+                </button>
+                <button
+                  onClick={() => markAsShipped(true)}
+                  disabled={updating || !trackingNumber.trim()}
+                  className="px-6 py-2 bg-charcoal-500 text-white text-sm rounded-lg hover:bg-charcoal-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                >
+                  Ship (No Email)
                 </button>
                 <button
                   onClick={generateShippingLabel}
@@ -434,15 +471,53 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
             </button>
           </div>
         )}
-        {order.status === 'SHIPPED' && (
+        {(order.status === 'SHIPPED' || order.status === 'PROCESSING') && order.status !== 'DELIVERED' && (
           <div className="mt-3 pt-3 border-t border-charcoal-200">
-            <button
-              onClick={() => updateOrderStatus('DELIVERED')}
-              disabled={updating}
-              className="px-4 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 disabled:opacity-50"
-            >
-              Mark Delivered
-            </button>
+            {!showDeliveryDatePicker ? (
+              <div className="flex gap-2 items-center flex-wrap">
+                <button
+                  onClick={() => markAsDeliveredWithDate()}
+                  disabled={updating}
+                  className="px-4 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 disabled:opacity-50"
+                >
+                  Mark Delivered (Today)
+                </button>
+                <button
+                  onClick={() => setShowDeliveryDatePicker(true)}
+                  disabled={updating}
+                  className="px-4 py-2 bg-charcoal-600 text-white text-sm rounded-lg hover:bg-charcoal-700 disabled:opacity-50"
+                >
+                  Set Custom Delivery Date
+                </button>
+                {order.status === 'PROCESSING' && (
+                  <span className="text-xs text-charcoal-500 italic">
+                    (Will skip shipped status - use for manually shipped orders)
+                  </span>
+                )}
+              </div>
+            ) : (
+              <div className="flex gap-2 items-center flex-wrap">
+                <input
+                  type="date"
+                  value={deliveryDate}
+                  onChange={(e) => setDeliveryDate(e.target.value)}
+                  className="px-3 py-2 text-sm border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                />
+                <button
+                  onClick={() => markAsDeliveredWithDate(deliveryDate)}
+                  disabled={updating || !deliveryDate}
+                  className="px-4 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 disabled:opacity-50"
+                >
+                  {updating ? 'Updating...' : 'Confirm Delivered'}
+                </button>
+                <button
+                  onClick={() => { setShowDeliveryDatePicker(false); setDeliveryDate(''); }}
+                  className="px-4 py-2 text-charcoal-600 text-sm hover:text-charcoal-800"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

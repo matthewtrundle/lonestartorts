@@ -81,7 +81,7 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { status, trackingNumber, carrier } = body;
+    const { status, trackingNumber, carrier, skipEmail, deliveredAt, shippedAt } = body;
 
     // Get current order
     const currentOrder = await prisma.order.findUnique({
@@ -100,10 +100,12 @@ export async function PATCH(
 
       // Set timestamps based on status
       if (status === 'SHIPPED' && currentOrder.status !== 'SHIPPED') {
-        updateData.shippedAt = new Date();
+        // Use provided shippedAt date or default to now
+        updateData.shippedAt = shippedAt ? new Date(shippedAt) : new Date();
       }
       if (status === 'DELIVERED' && currentOrder.status !== 'DELIVERED') {
-        updateData.deliveredAt = new Date();
+        // Use provided deliveredAt date or default to now
+        updateData.deliveredAt = deliveredAt ? new Date(deliveredAt) : new Date();
       }
     }
 
@@ -122,12 +124,13 @@ export async function PATCH(
       include: { OrderItem: true },
     });
 
-    // Send shipping notification email if status changed to SHIPPED
+    // Send shipping notification email if status changed to SHIPPED (unless skipEmail is true)
     if (
       status === 'SHIPPED' &&
       currentOrder.status !== 'SHIPPED' &&
       trackingNumber &&
-      carrier
+      carrier &&
+      !skipEmail
     ) {
       await sendOrderShippedEmail({
         to: updatedOrder.email,
