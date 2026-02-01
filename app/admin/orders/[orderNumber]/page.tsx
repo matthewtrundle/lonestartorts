@@ -471,7 +471,7 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
             </button>
           </div>
         )}
-        {(order.status === 'SHIPPED' || order.status === 'PROCESSING') && order.status !== 'DELIVERED' && (
+        {(order.status === 'SHIPPED' || order.status === 'PROCESSING') && (
           <div className="mt-3 pt-3 border-t border-charcoal-200">
             {!showDeliveryDatePicker ? (
               <div className="flex gap-2 items-center flex-wrap">
