@@ -12,8 +12,10 @@ import { useLanguage } from '@/lib/language-context';
 import { products as allProducts } from '@/lib/products';
 import { useSearchParams } from 'next/navigation';
 
-// Filter tortilla products at module level
-const tortillaProducts = allProducts.filter(p => p.productType === 'tortilla');
+// Filter tortilla products by collection at module level
+const bakeryProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'bakery');
+const pantryProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'pantry');
+const texasBrandsProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'texas-brands');
 
 // Wrap the main content to use useSearchParams
 function ShopContent() {
@@ -35,24 +37,76 @@ function ShopContent() {
           </div>
 
           <div className="max-w-6xl mx-auto px-4 py-6">
-            {/* Products Grid - Immediately visible */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {tortillaProducts.map((product) => (
-                <ProductCard
-                  key={product.sku}
-                  sku={product.sku}
-                  name={product.name}
-                  description={product.description}
-                  image={product.image}
-                  price={product.price}
-                  tortillaCount={product.tortillaCount}
-                  storage={product.storage}
-                  productType={product.productType}
-                  tortillaType={product.tortillaType}
-                  isBestSeller={product.isBestSeller}
-                  savingsPercent={product.savingsPercent}
-                />
-              ))}
+            {/* Bakery Fresh Section */}
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
+              <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {bakeryProducts.map((product) => (
+                  <ProductCard
+                    key={product.sku}
+                    sku={product.sku}
+                    name={product.name}
+                    description={product.description}
+                    image={product.image}
+                    price={product.price}
+                    tortillaCount={product.tortillaCount}
+                    storage={product.storage}
+                    productType={product.productType}
+                    tortillaType={product.tortillaType}
+                    isBestSeller={product.isBestSeller}
+                    savingsPercent={product.savingsPercent}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Pantry Staples Section */}
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
+              <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {pantryProducts.map((product) => (
+                  <ProductCard
+                    key={product.sku}
+                    sku={product.sku}
+                    name={product.name}
+                    description={product.description}
+                    image={product.image}
+                    price={product.price}
+                    tortillaCount={product.tortillaCount}
+                    storage={product.storage}
+                    productType={product.productType}
+                    tortillaType={product.tortillaType}
+                    isBestSeller={product.isBestSeller}
+                    savingsPercent={product.savingsPercent}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Texas-Born Favorites Section */}
+            <div>
+              <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
+              <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {texasBrandsProducts.map((product) => (
+                  <ProductCard
+                    key={product.sku}
+                    sku={product.sku}
+                    name={product.name}
+                    description={product.description}
+                    image={product.image}
+                    price={product.price}
+                    tortillaCount={product.tortillaCount}
+                    storage={product.storage}
+                    productType={product.productType}
+                    tortillaType={product.tortillaType}
+                    isBestSeller={product.isBestSeller}
+                    savingsPercent={product.savingsPercent}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Simple trust line */}
@@ -88,24 +142,76 @@ function ShopContent() {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 py-6">
-          {/* Products Grid - Immediately visible */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {tortillaProducts.map((product) => (
-              <ProductCard
-                key={product.sku}
-                sku={product.sku}
-                name={product.name}
-                description={product.description}
-                image={product.image}
-                price={product.price}
-                tortillaCount={product.tortillaCount}
-                storage={product.storage}
-                productType={product.productType}
-                tortillaType={product.tortillaType}
-                isBestSeller={product.isBestSeller}
-                savingsPercent={product.savingsPercent}
-              />
-            ))}
+          {/* Bakery Fresh Section */}
+          <div className="mb-8">
+            <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
+            <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {bakeryProducts.map((product) => (
+                <ProductCard
+                  key={product.sku}
+                  sku={product.sku}
+                  name={product.name}
+                  description={product.description}
+                  image={product.image}
+                  price={product.price}
+                  tortillaCount={product.tortillaCount}
+                  storage={product.storage}
+                  productType={product.productType}
+                  tortillaType={product.tortillaType}
+                  isBestSeller={product.isBestSeller}
+                  savingsPercent={product.savingsPercent}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Pantry Staples Section */}
+          <div className="mb-8">
+            <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
+            <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {pantryProducts.map((product) => (
+                <ProductCard
+                  key={product.sku}
+                  sku={product.sku}
+                  name={product.name}
+                  description={product.description}
+                  image={product.image}
+                  price={product.price}
+                  tortillaCount={product.tortillaCount}
+                  storage={product.storage}
+                  productType={product.productType}
+                  tortillaType={product.tortillaType}
+                  isBestSeller={product.isBestSeller}
+                  savingsPercent={product.savingsPercent}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Texas-Born Favorites Section */}
+          <div>
+            <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
+            <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {texasBrandsProducts.map((product) => (
+                <ProductCard
+                  key={product.sku}
+                  sku={product.sku}
+                  name={product.name}
+                  description={product.description}
+                  image={product.image}
+                  price={product.price}
+                  tortillaCount={product.tortillaCount}
+                  storage={product.storage}
+                  productType={product.productType}
+                  tortillaType={product.tortillaType}
+                  isBestSeller={product.isBestSeller}
+                  savingsPercent={product.savingsPercent}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Simple trust line */}
@@ -189,24 +295,76 @@ function ShopContent() {
           <p className="text-sm md:text-base text-gray-600">Order 4+ packs for FREE shipping</p>
         </div>
 
-        {/* Products Grid - Tighter, more prominent */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-          {tortillaProducts.map((product) => (
-            <ProductCard
-              key={product.sku}
-              sku={product.sku}
-              name={product.name}
-              description={product.description}
-              image={product.image}
-              price={product.price}
-              tortillaCount={product.tortillaCount}
-              storage={product.storage}
-              productType={product.productType}
-              tortillaType={product.tortillaType}
-              isBestSeller={product.isBestSeller}
-              savingsPercent={product.savingsPercent}
-            />
-          ))}
+        {/* Bakery Fresh Collection */}
+        <div className="mb-10">
+          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
+          <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {bakeryProducts.map((product) => (
+              <ProductCard
+                key={product.sku}
+                sku={product.sku}
+                name={product.name}
+                description={product.description}
+                image={product.image}
+                price={product.price}
+                tortillaCount={product.tortillaCount}
+                storage={product.storage}
+                productType={product.productType}
+                tortillaType={product.tortillaType}
+                isBestSeller={product.isBestSeller}
+                savingsPercent={product.savingsPercent}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Pantry Staples */}
+        <div className="mb-10">
+          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
+          <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+            {pantryProducts.map((product) => (
+              <ProductCard
+                key={product.sku}
+                sku={product.sku}
+                name={product.name}
+                description={product.description}
+                image={product.image}
+                price={product.price}
+                tortillaCount={product.tortillaCount}
+                storage={product.storage}
+                productType={product.productType}
+                tortillaType={product.tortillaType}
+                isBestSeller={product.isBestSeller}
+                savingsPercent={product.savingsPercent}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Texas-Born Favorites */}
+        <div className="mb-10">
+          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
+          <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {texasBrandsProducts.map((product) => (
+              <ProductCard
+                key={product.sku}
+                sku={product.sku}
+                name={product.name}
+                description={product.description}
+                image={product.image}
+                price={product.price}
+                tortillaCount={product.tortillaCount}
+                storage={product.storage}
+                productType={product.productType}
+                tortillaType={product.tortillaType}
+                isBestSeller={product.isBestSeller}
+                savingsPercent={product.savingsPercent}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Best Value Banner - More prominent */}
