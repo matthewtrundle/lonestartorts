@@ -93,7 +93,7 @@ const faqs = [
   {
     question: 'What if I just want tortillas for myself?',
     answer:
-      "No chapter, no problem! Head to our shop to order individual packs. Free shipping kicks in at 4 packs ($80). That's enough tortillas to last a while.",
+      "No chapter, no problem! Head to our shop to order individual packs. Free shipping on all orders!",
   },
   {
     question: 'Do you ship to Alaska and Hawaii?',
@@ -161,7 +161,7 @@ export default function HookEmTortillasPage() {
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-sm md:text-base">
                   <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full font-semibold">
-                    🚚 FREE Shipping $80+
+                    🚚 FREE Shipping
                   </span>
                   <span className="inline-flex items-center gap-1 bg-green-500/80 backdrop-blur-sm px-3 py-1 rounded-full font-semibold">
                     🎉 Extra 5% Off All Tiers

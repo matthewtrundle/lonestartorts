@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Truck, Check } from 'lucide-react';
+import { Truck } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
-import { formatPrice } from '@/lib/utils';
 
 interface FreeShippingProgressProps {
   className?: string;
@@ -11,72 +10,20 @@ interface FreeShippingProgressProps {
 }
 
 export function FreeShippingProgress({ className = '', compact = false }: FreeShippingProgressProps) {
-  const { subtotal, freeShippingProgress, baseShipping, isHydrated } = useCart();
-  const { qualifies, amountRemaining, percentComplete } = freeShippingProgress;
+  const { isHydrated } = useCart();
 
   // Don't render until hydrated to avoid hydration mismatch
   if (!isHydrated) {
     return null;
   }
 
-  // Empty cart - show static message
-  if (subtotal === 0) {
-    return (
-      <div className={`bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-3 ${className}`}>
-        <div className="flex items-center gap-2 text-sm text-indigo-700">
-          <span>🎆</span>
-          <Truck className="w-4 h-4 flex-shrink-0" />
-          <span className="font-medium">New Year Fiesta: FREE shipping on orders $80+</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Qualified for free shipping
-  if (qualifies) {
-    return (
-      <div className={`bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-3 ${className}`}>
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-sm text-indigo-700">
-            <span>🎇</span>
-            <Check className="w-4 h-4 flex-shrink-0" />
-            <span className="font-semibold">FREE shipping unlocked!</span>
-          </div>
-          <span className="text-xs font-medium text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded">
-            Saving {formatPrice(baseShipping)}
-          </span>
-        </div>
-        {!compact && (
-          <div className="mt-2 h-2 bg-indigo-200 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full w-full" />
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // In progress toward free shipping
+  // Always show free shipping message
   return (
-    <div className={`bg-amber-50 border border-amber-200 rounded-lg p-3 ${className}`}>
-      <div className="flex items-center justify-between gap-2 mb-2">
-        <div className="flex items-center gap-2 text-sm text-amber-700">
-          <Truck className="w-4 h-4 flex-shrink-0" />
-          <span className="font-medium">
-            Add {formatPrice(amountRemaining)} more for FREE shipping
-          </span>
-        </div>
-        <span className="text-xs text-amber-600">
-          {formatPrice(subtotal)} / $80
-        </span>
+    <div className={`bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3 ${className}`}>
+      <div className="flex items-center gap-2 text-sm text-green-700">
+        <Truck className="w-4 h-4 flex-shrink-0" />
+        <span className="font-semibold">FREE shipping on all orders</span>
       </div>
-      {!compact && (
-        <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-amber-500 rounded-full transition-all duration-300"
-            style={{ width: `${percentComplete}%` }}
-          />
-        </div>
-      )}
     </div>
   );
 }

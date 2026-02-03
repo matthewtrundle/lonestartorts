@@ -96,7 +96,7 @@ const faqSchema = {
       name: 'How much does shipping cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Standard shipping is $4.99 flat rate. Free shipping is available on orders over $45. Expedited 2-day shipping is available for $12.99. All orders are carefully packaged to ensure freshness.'
+        text: 'FREE shipping on all orders! All orders are carefully packaged with insulation to ensure freshness during transit.'
       }
     },
     {
@@ -246,7 +246,7 @@ const faqs = [
       },
       {
         q: 'How much does shipping cost?',
-        a: 'Standard shipping is $4.99 flat rate for any order. We offer FREE shipping on orders over $45 - that\'s just 3-4 packages of tortillas! Expedited 2-day shipping is available for $12.99 if you need your tortillas faster. All orders are carefully packaged to ensure freshness during transit.'
+        a: 'FREE shipping on all orders! All orders are carefully packaged with insulation to ensure freshness during transit.'
       },
       {
         q: 'How long does shipping take?',
@@ -301,7 +301,7 @@ const faqs = [
     questions: [
       {
         q: 'How much do the tortillas cost?',
-        a: 'Pricing varies by product: Corn Tortillas (30-count) are $12.99, Flour Tortillas (20-count) are $14.99, Butter Tortillas (8-count) are $16.99, and Specialty varieties are $15.99. We offer bulk discounts on larger orders and free shipping over $45.'
+        a: 'Pricing varies by product - check our shop page for current prices. All orders include FREE shipping!'
       },
       {
         q: 'Do you offer subscriptions or recurring orders?',

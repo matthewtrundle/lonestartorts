@@ -44,44 +44,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     ? 'Shelf Stable'
     : 'Keep Refrigerated';
 
-  // Calculate shipping and messaging based on quantity
-  // Flat-rate: $9.95 (1 pack), $19.95 (2+ packs), FREE on $80+
+  // Free shipping on all orders
   const getShippingInfo = () => {
     const itemTotal = price * quantity;
-
-    // FREE shipping threshold is $80 (8000 cents)
-    if (itemTotal >= 8000) {
-      return {
-        message: 'FREE shipping included!',
-        type: 'free' as const,
-        totalWithShipping: itemTotal,
-        shippingCost: 0,
-      };
-    }
-
-    // Calculate how much more needed for free shipping
-    const amountToFreeShipping = 8000 - itemTotal;
-    const packsNeeded = Math.ceil(amountToFreeShipping / price);
-
-    // Flat-rate shipping: $9.95 for 1 pack, $19.95 for 2+ packs
-    const shippingCost = quantity === 1 ? 995 : 1995;
-
-    // Show progress message if close to free shipping
-    if (packsNeeded <= 2) {
-      return {
-        message: `Add ${packsNeeded} more for FREE shipping`,
-        type: 'progress' as const,
-        totalWithShipping: itemTotal + shippingCost,
-        shippingCost,
-      };
-    }
-
-    // Default: show hint about free shipping
     return {
-      message: `Order $80+ for FREE shipping`,
-      type: 'hint' as const,
-      totalWithShipping: itemTotal + shippingCost,
-      shippingCost,
+      message: 'FREE shipping included!',
+      type: 'free' as const,
+      totalWithShipping: itemTotal,
+      shippingCost: 0,
     };
   };
 

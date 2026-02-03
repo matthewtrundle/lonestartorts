@@ -1,16 +1,15 @@
 // Product catalog - centralized source of truth
-// Simple pricing: $20 per pack (20 tortillas each)
-// Simplified flat-rate shipping: 1 pack = $9.95, 2+ packs = $19.95
-// FREE SHIPPING on orders $80+ (4 packs)
+// Pricing: 4x markup on all products
+// Shipping: FREE on all orders (minimum order $40)
 
-// Free shipping threshold in cents ($80 = 4 packs)
-export const FREE_SHIPPING_THRESHOLD = 8000;
+// Legacy constants (kept for compatibility)
+export const FREE_SHIPPING_THRESHOLD = 0; // Free shipping on all orders
 
-// Simplified flat-rate shipping (in cents)
+// Legacy shipping rates (not used - free shipping)
 export const SHIPPING_RATES = {
-  small: 995,    // $9.95 for 1 pack (small box)
-  large: 1995,   // $19.95 for 2+ packs (large box)
-  sauce: 999,    // $9.99 for sauce-only orders
+  small: 0,
+  large: 0,
+  sauce: 0,
 };
 
 export interface Product {
@@ -309,48 +308,13 @@ export function getProductBySku(sku: string) {
   return products.find((p) => p.sku === sku);
 }
 
-// Calculate flat-rate shipping based on cart items
-// Shipping logic:
-// - FREE shipping on orders $80+
-// - FREE shipping on all wholesale orders
-// - 1 pack: $9.95 (small box)
-// - 2+ packs: $19.95 (large box)
-// - Sauce-only: $9.99
+// Calculate shipping - FREE SHIPPING ON ALL ORDERS
+// Policy: Free shipping on all orders (minimum order $40)
 export function calculateShipping(
   items: { productType?: string; quantity: number; sku?: string }[],
   subtotal?: number
 ): number {
-  // FREE shipping for orders $80+
-  if (subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
-    return 0;
-  }
-
-  // FREE shipping for wholesale orders
-  const hasWholesale = items.some(item => item.sku?.startsWith('WHOLESALE-') || item.productType === 'wholesale');
-  if (hasWholesale) {
-    return 0;
-  }
-
-  // Count tortilla packs (items that are not sauce)
-  const tortillaPacks = items
-    .filter(item => item.productType !== 'sauce')
-    .reduce((total, item) => total + item.quantity, 0);
-
-  // Check if there are any sauce items
-  const hasSauce = items.some(item => item.productType === 'sauce');
-
-  // Flat-rate shipping based on pack count
-  if (tortillaPacks > 0) {
-    // 1 pack = small box ($9.95), 2+ packs = large box ($19.95)
-    return tortillaPacks === 1 ? SHIPPING_RATES.small : SHIPPING_RATES.large;
-  }
-
-  // If only sauce (no tortillas), charge sauce shipping
-  if (hasSauce) {
-    return SHIPPING_RATES.sauce;
-  }
-
-  // Empty cart
+  // FREE shipping on all orders
   return 0;
 }
 
