@@ -219,6 +219,53 @@ const websiteSchema = {
   ]
 };
 
+// LocalBusiness Schema for local SEO signals
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://lonestartortillas.com/#localbusiness',
+  name: 'Lonestar Tortillas',
+  description: 'Independent reseller of authentic H-E-B tortillas, delivering Texas flavor nationwide.',
+  image: 'https://lonestartortillas.com/images/lonestar-logo.webp',
+  url: 'https://lonestartortillas.com',
+  email: 'howdy@lonestartortilla.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '',
+    addressLocality: 'Austin',
+    addressRegion: 'TX',
+    postalCode: '78701',
+    addressCountry: 'US'
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 30.266666,
+    longitude: -97.733330
+  },
+  areaServed: [
+    { '@type': 'Country', name: 'United States' },
+    { '@type': 'State', name: 'Texas' },
+    { '@type': 'City', name: 'Austin' },
+    { '@type': 'City', name: 'Houston' },
+    { '@type': 'City', name: 'Dallas' },
+    { '@type': 'City', name: 'San Antonio' }
+  ],
+  priceRange: '$$',
+  currenciesAccepted: 'USD',
+  paymentAccepted: 'Credit Card, Apple Pay, Google Pay',
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59'
+  },
+  sameAs: [
+    'https://twitter.com/lonestartortillas',
+    'https://instagram.com/lonestartortillas',
+    'https://facebook.com/lonestartortillas'
+  ]
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -261,6 +308,11 @@ export default function RootLayout({
           id="json-ld-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          id="json-ld-localbusiness"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
 
         {/* Google Analytics 4 + Google Ads (gtag.js) */}

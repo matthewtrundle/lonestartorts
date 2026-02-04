@@ -23,6 +23,27 @@ export default function Home() {
     { src: '/tiks/Texan Tortilla Secret_compressed.mp4', title: 'Texan Secret' }
   ];
 
+  // Video schema for SEO - main promotional video
+  const videoSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'A Taste of Texas - Lonestar Tortillas',
+    description: 'Watch the story of Lonestar Tortillas and how we bring authentic Texas H-E-B tortillas to tortilla lovers nationwide.',
+    thumbnailUrl: 'https://lonestartortillas.com/images/lonestar-logo.webp',
+    uploadDate: '2025-01-15',
+    duration: 'PT1M30S',
+    contentUrl: 'https://lonestartortillas.com/Taste%20of%20Texas_compressed.mp4',
+    embedUrl: 'https://lonestartortillas.com',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Lonestar Tortillas',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://lonestartortillas.com/images/lonestar-logo.webp'
+      }
+    }
+  };
+
   // Track video play and switch video
   const handleVideoChange = (index: number) => {
     trackVideoPlay({ videoTitle: videos[index].title });
@@ -31,6 +52,12 @@ export default function Home() {
 
   return (
     <ScrollAnimations>
+      {/* Video Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
+
       {/* HEB Disclaimer - Homepage only */}
       <DisclaimerBanner />
 
