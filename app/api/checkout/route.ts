@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD } from '@/lib/products';
+import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
 import { prisma } from '@/lib/prisma';
 import { validateDiscount, includesFreeShipping, recordDiscountUsage, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
 
@@ -52,6 +52,16 @@ export async function POST(req: NextRequest) {
 
     // Calculate subtotal for free shipping threshold check
     const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Check minimum order amount ($40)
+    if (subtotal < MINIMUM_ORDER_AMOUNT) {
+      const minAmount = (MINIMUM_ORDER_AMOUNT / 100).toFixed(2);
+      const currentAmount = (subtotal / 100).toFixed(2);
+      const remaining = ((MINIMUM_ORDER_AMOUNT - subtotal) / 100).toFixed(2);
+      return NextResponse.json({
+        error: `Minimum order amount is $${minAmount}. Your current subtotal is $${currentAmount}. Add $${remaining} more to checkout.`
+      }, { status: 400 });
+    }
 
     // Calculate flat-rate shipping based on items and subtotal
     let shippingCost = calculateShipping(fullItems, subtotal);

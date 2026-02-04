@@ -2,6 +2,9 @@
 // Pricing: 4x markup on all products
 // Shipping: FREE on all orders (minimum order $40)
 
+// Minimum order amount in cents ($40)
+export const MINIMUM_ORDER_AMOUNT = 4000;
+
 // Legacy constants (kept for compatibility)
 export const FREE_SHIPPING_THRESHOLD = 0; // Free shipping on all orders
 
@@ -80,7 +83,7 @@ export const products: Product[] = [
     sku: 'HEB-FAJITA-FLOUR',
     name: 'H-E-B Fajita Flour Tortillas',
     description: 'Classic fajita-sized flour tortillas. Soft and pliable, perfect for fajitas and tacos.',
-    image: '/images/products/heb-fajita-flour.png',
+    image: '/images/products/heb-fajita-flour.webp',
     price: 1000, // $10
     tortillaCount: 20,
     storage: 'shelf_stable',
@@ -93,7 +96,7 @@ export const products: Product[] = [
     sku: 'HEB-HOMESTYLE-FLOUR',
     name: 'H-E-B Homestyle Flour Tortillas',
     description: 'Homestyle flour tortillas with traditional taste. Fluffy & soft, 20 count pack.',
-    image: '/images/products/heb-homestyle-flour.png',
+    image: '/images/products/heb-homestyle-flour.webp',
     price: 1200, // $12 (4x markup from $2.98 H-E-B price)
     tortillaCount: 20,
     storage: 'shelf_stable',
@@ -106,7 +109,7 @@ export const products: Product[] = [
     sku: 'HEB-BUTTER-SHELF',
     name: 'H-E-B Butter Flour Tortillas',
     description: 'Rich, buttery flour tortillas. Perfect for breakfast tacos and quesadillas.',
-    image: '/images/products/heb-butter.png',
+    image: '/images/products/heb-butter.webp',
     price: 1100, // $11 (4x markup from $2.68 H-E-B price)
     tortillaCount: 20,
     storage: 'shelf_stable',
@@ -119,7 +122,7 @@ export const products: Product[] = [
     sku: 'HEB-BURRITO-GRANDE',
     name: 'H-E-B Burrito Grande Flour Tortillas',
     description: 'Extra-large flour tortillas for hearty burritos. Big enough for all your favorite fillings.',
-    image: '/images/products/heb-burrito-grande.png',
+    image: '/images/products/heb-burrito-grande.webp',
     price: 1000, // $10
     tortillaCount: 10,
     storage: 'shelf_stable',
@@ -145,7 +148,7 @@ export const products: Product[] = [
     sku: 'HEB-WHITE-CORN',
     name: 'H-E-B White Corn Tortillas - Texas Size',
     description: 'Premium white corn tortillas in a Texas-sized 80-count pack. Perfect for families and meal prep.',
-    image: '/images/products/heb-white-corn.png',
+    image: '/images/products/heb-white-corn.webp',
     price: 1300, // $13
     tortillaCount: 80,
     storage: 'shelf_stable',
@@ -158,7 +161,7 @@ export const products: Product[] = [
     sku: 'HEB-STREET-TACO',
     name: 'H-E-B Street Taco White Corn Tortillas',
     description: 'Small white corn tortillas sized perfectly for authentic street tacos. 24-count pack.',
-    image: '/images/products/heb-street-taco.png',
+    image: '/images/products/heb-street-taco.webp',
     price: 600, // $6
     tortillaCount: 24,
     storage: 'shelf_stable',
@@ -171,7 +174,7 @@ export const products: Product[] = [
     sku: 'HEB-MIXLA',
     name: 'H-E-B Mixla Corn & Flour Blend Tortillas',
     description: 'Best of both worlds - corn and flour blend. Flexible yet authentic taste.',
-    image: '/images/products/heb-mixla.png',
+    image: '/images/products/heb-mixla.webp',
     price: 1500, // $15
     tortillaCount: 24,
     storage: 'shelf_stable',
@@ -184,7 +187,7 @@ export const products: Product[] = [
     sku: 'HEB-MI-TIENDA',
     name: 'H-E-B Mi Tienda Ready to Cook Street Taco Flour Tortillas',
     description: 'Authentic ready-to-cook street taco tortillas from Mi Tienda. Cook fresh on your comal for that homemade taste. 50 count value pack.',
-    image: '/images/products/heb-mi-tienda.png',
+    image: '/images/products/heb-mi-tienda.webp',
     price: 1800, // $18 (4x markup from $4.38 H-E-B price)
     tortillaCount: 50,
     storage: 'refrigerated',
@@ -200,7 +203,7 @@ export const products: Product[] = [
     sku: 'MISSION-SOFT-TACO',
     name: 'Mission Soft Taco Flour Tortillas',
     description: 'Super soft flour tortillas perfect for tacos and wraps. A Texas classic from San Antonio.',
-    image: '/images/products/mission-soft-taco-flour.png',
+    image: '/images/products/mission-soft-taco-flour.webp',
     price: 800, // $8
     tortillaCount: 10,
     storage: 'shelf_stable',
@@ -214,7 +217,7 @@ export const products: Product[] = [
     sku: 'MISSION-WHITE-CORN',
     name: 'Mission White Corn Tortillas',
     description: 'Authentic white corn tortillas. Gluten-free and perfect for street tacos.',
-    image: '/images/products/mission-white-corn.png',
+    image: '/images/products/mission-white-corn.webp',
     price: 800, // $8
     tortillaCount: 24,
     storage: 'shelf_stable',

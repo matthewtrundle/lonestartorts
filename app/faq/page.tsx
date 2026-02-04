@@ -5,6 +5,26 @@ import { useLanguage } from '@/lib/language-context';
 
 // Note: Metadata moved to generateMetadata or handled via document head for client component
 
+// Breadcrumb schema for better SERP display
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://lonestartortillas.com'
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Frequently Asked Questions',
+      item: 'https://lonestartortillas.com/faq'
+    }
+  ]
+};
+
 // Enhanced FAQ Schema optimized for AI retrieval and purchase intent
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -411,6 +431,10 @@ export default function FAQPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

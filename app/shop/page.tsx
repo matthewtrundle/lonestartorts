@@ -11,11 +11,68 @@ import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
 import { products as allProducts } from '@/lib/products';
 import { useSearchParams } from 'next/navigation';
+import { ProductGridSkeleton } from '@/components/product/ProductCardSkeleton';
 
 // Filter tortilla products by collection at module level
 const bakeryProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'bakery');
 const pantryProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'pantry');
 const texasBrandsProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'texas-brands');
+
+// All tortilla products for schema
+const allTortillaProducts = allProducts.filter(p => p.productType === 'tortilla');
+
+// ItemList schema for product collection rich snippets
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Premium Texas Tortillas',
+  description: 'Shop authentic H-E-B tortillas and Texas-born brands shipped nationwide with free shipping.',
+  numberOfItems: allTortillaProducts.length,
+  itemListElement: allTortillaProducts.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      image: `https://lonestartortillas.com${product.image}`,
+      url: `https://lonestartortillas.com/shop#${product.sku}`,
+      offers: {
+        '@type': 'Offer',
+        price: (product.price / 100).toFixed(2),
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+        seller: {
+          '@type': 'Organization',
+          name: 'Lonestar Tortillas'
+        },
+        shippingDetails: {
+          '@type': 'OfferShippingDetails',
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: '0',
+            currency: 'USD'
+          },
+          deliveryTime: {
+            '@type': 'ShippingDeliveryTime',
+            handlingTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 0,
+              maxValue: 1,
+              unitCode: 'DAY'
+            },
+            transitTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 2,
+              maxValue: 5,
+              unitCode: 'DAY'
+            }
+          }
+        }
+      }
+    }
+  }))
+};
 
 // Wrap the main content to use useSearchParams
 function ShopContent() {
@@ -236,7 +293,12 @@ function ShopContent() {
 
   // Main shop page - conversion-focused design
   return (
-    <main className="min-h-screen bg-white pb-24 md:pb-0">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
+      <main className="min-h-screen bg-white pb-24 md:pb-0">
       {/* Hero Section - Compact on mobile, proper spacing on desktop */}
       <section className="text-white pt-24 pb-6 md:pt-24 md:pb-8 overflow-hidden relative">
         {/* Background Image */}
@@ -450,14 +512,25 @@ function ShopContent() {
       {/* Sticky Cart Bar - Mobile only */}
       <StickyCartBar />
     </main>
+    </>
   );
 }
 
 export default function ShopPage() {
   return (
     <Suspense fallback={
-      <main className="min-h-screen bg-cream-50 flex items-center justify-center">
-        <div className="animate-pulse text-gray-400">Loading...</div>
+      <main className="min-h-screen bg-white pt-24 pb-24">
+        {/* Hero skeleton */}
+        <div className="bg-charcoal-950 h-48 mb-8" />
+
+        {/* Content skeleton */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="text-center mb-8">
+            <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-2 animate-pulse" />
+            <div className="h-4 bg-gray-200 rounded w-64 mx-auto animate-pulse" />
+          </div>
+          <ProductGridSkeleton count={6} />
+        </div>
       </main>
     }>
       <ShopContent />

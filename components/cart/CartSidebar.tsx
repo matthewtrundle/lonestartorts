@@ -9,8 +9,9 @@ import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
-import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown, AlertCircle } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
+import { MINIMUM_ORDER_AMOUNT } from '@/lib/products';
 
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, baseShipping, total, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
@@ -103,6 +104,10 @@ export function CartSidebar() {
   const isFreeShipping = discountApplied && discountType === 'free_shipping';
   const displayShipping = isFreeShipping ? 0 : shipping;
   const displayTotal = calculateDiscountedTotal() + displayShipping;
+
+  // Minimum order check
+  const meetsMinimumOrder = subtotal >= MINIMUM_ORDER_AMOUNT;
+  const amountToMinimum = MINIMUM_ORDER_AMOUNT - subtotal;
 
   // Validate discount code
   const handleApplyDiscount = async () => {
@@ -510,10 +515,23 @@ export function CartSidebar() {
                   </div>
                 </div>
 
+                {/* Minimum Order Message */}
+                {!meetsMinimumOrder && (
+                  <div className="mb-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                    <div className="flex items-center gap-2 text-amber-700">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span className="text-sm font-medium">
+                        Add {formatPrice(amountToMinimum)} more to checkout
+                      </span>
+                    </div>
+                    <p className="text-xs text-amber-600 mt-1">Minimum order: $40</p>
+                  </div>
+                )}
+
                 {/* Checkout Button */}
                 <button
                   onClick={handleCheckout}
-                  disabled={isProcessing}
+                  disabled={isProcessing || !meetsMinimumOrder}
                   className="flex items-center justify-center gap-2 w-full py-3 bg-black text-white text-center text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   <Lock className="w-3.5 h-3.5" />
