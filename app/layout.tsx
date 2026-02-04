@@ -2,12 +2,18 @@ import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
+import dynamic from 'next/dynamic';
 import './globals.css';
 import { CartProvider } from '@/lib/cart-context';
 import { LanguageProvider } from '@/lib/language-context';
-import { CartSidebar } from '@/components/cart/CartSidebar';
 import { Footer } from '@/components/layout/Footer';
 import { HeaderWrapper } from '@/components/layout/HeaderWrapper';
+
+// Lazy load CartSidebar - not needed on initial page render
+const CartSidebar = dynamic(
+  () => import('@/components/cart/CartSidebar').then(mod => mod.CartSidebar),
+  { ssr: false }
+);
 
 // Optimized font loading with Next.js
 const inter = Inter({

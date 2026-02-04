@@ -165,7 +165,7 @@ export default function MilitaryCarePackagesPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/images/campaigns/hero-military-care.png"
+              src="/images/campaigns/hero-military-care.webp"
               alt="Patriotic Texas theme"
               fill
               className="object-cover"

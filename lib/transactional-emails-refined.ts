@@ -235,7 +235,7 @@ export const REFINED_ORDER_SHIPPED = `<!DOCTYPE html>
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="https://lonestartortillas.com/images/Cards/image%20(12).png" alt="Your tortillas are on the way" style="width: 100%; height: auto; display: block; max-height: 200px; object-fit: cover;" />
+              <img src="https://lonestartortillas.com/images/Cards/image%20(12).webp" alt="Your tortillas are on the way" style="width: 100%; height: auto; display: block; max-height: 200px; object-fit: cover;" />
             </td>
           </tr>
 

@@ -188,7 +188,7 @@ export default function HookEmTortillasPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/images/campaigns/hero-hook-em.png"
+              src="/images/campaigns/hero-hook-em.webp"
               alt="Texas sunset skyline"
               fill
               className="object-cover"

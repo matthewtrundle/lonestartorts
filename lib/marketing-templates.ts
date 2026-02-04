@@ -443,7 +443,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="https://lonestartortillas.com/images/Cards/image%20(10).png" alt="Premium restaurant dishes with H-E-B tortillas" style="width: 100%; height: auto; display: block;" />
+              <img src="https://lonestartortillas.com/images/Cards/image%20(10).webp" alt="Premium restaurant dishes with H-E-B tortillas" style="width: 100%; height: auto; display: block;" />
             </td>
           </tr>
 
@@ -632,7 +632,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="https://lonestartortillas.com/images/Cards/image%20(12).png" alt="Food truck dining with H-E-B tortillas" style="width: 100%; height: auto; display: block;" />
+              <img src="https://lonestartortillas.com/images/Cards/image%20(12).webp" alt="Food truck dining with H-E-B tortillas" style="width: 100%; height: auto; display: block;" />
             </td>
           </tr>
 
