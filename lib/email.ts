@@ -5,6 +5,7 @@ import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeed
 const ADMIN_EMAILS = [
   'matthewtrundle@gmail.com',
   'allan.henslee@gmail.com',
+  'allan@partyondelivery.com',
 ];
 
 // Lazy-load Resend client to avoid build-time initialization
