@@ -64,7 +64,7 @@ const itemListSchema = {
             transitTime: {
               '@type': 'QuantitativeValue',
               minValue: 2,
-              maxValue: 5,
+              maxValue: 3,
               unitCode: 'DAY'
             }
           }
@@ -169,13 +169,13 @@ function ShopContent() {
             {/* Simple trust line */}
             <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
               <span className="flex items-center gap-1">
-                <Truck className="w-4 h-4" /> Fast Shipping
+                <Truck className="w-4 h-4" /> Freshness First Shipping
               </span>
               <span className="flex items-center gap-1">
                 <Shield className="w-4 h-4" /> Secure Checkout
               </span>
               <span className="flex items-center gap-1">
-                <Clock className="w-4 h-4" /> Ships Same Day
+                <Clock className="w-4 h-4" /> Ships Mon–Wed
               </span>
             </div>
           </div>
@@ -274,13 +274,13 @@ function ShopContent() {
           {/* Simple trust line */}
           <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
             <span className="flex items-center gap-1">
-              <Truck className="w-4 h-4" /> Fast Shipping
+              <Truck className="w-4 h-4" /> Freshness First Shipping
             </span>
             <span className="flex items-center gap-1">
               <Shield className="w-4 h-4" /> Secure Checkout
             </span>
             <span className="flex items-center gap-1">
-              <Clock className="w-4 h-4" /> Ships Same Day
+              <Clock className="w-4 h-4" /> Ships Mon–Wed
             </span>
           </div>
         </div>

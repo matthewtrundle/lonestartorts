@@ -890,7 +890,7 @@ export default function Home() {
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-sunset-500 rounded-full"></span>
-                  Arrives in 2-4 Days
+                  Freshness First Shipping
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-masa-500 rounded-full"></span>

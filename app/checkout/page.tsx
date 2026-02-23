@@ -30,9 +30,9 @@ export default function CheckoutPage() {
   const [discountMessage, setDiscountMessage] = useState<string>('');
   const [discountOpen, setDiscountOpen] = useState(false);
 
-  // Simplified shipping label
+  // Shipping label with Freshness First branding — static fallback, will be dynamic on client
   const getShippingLabel = () => {
-    return 'Fast Shipping (3-5 business days)';
+    return 'Freshness First Shipping';
   };
 
   // Track when checkout page is viewed
@@ -416,7 +416,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex items-center gap-1">
                     <Truck className="w-4 h-4 text-sunset-600" />
-                    <span>Fast shipping</span>
+                    <span>Freshness First Shipping</span>
                   </div>
                 </div>
 

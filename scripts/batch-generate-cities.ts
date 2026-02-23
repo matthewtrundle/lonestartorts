@@ -327,7 +327,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Authentic Texas Tortillas Delivered to ${city} | Lonestar Tortillas',
-  description: 'Get authentic H-E-B Texas tortillas shipped directly to ${city}, ${state}. Fresh flour & corn tortillas for tacos, burritos & more. Fast shipping, premium quality.',
+  description: 'Get authentic H-E-B Texas tortillas shipped directly to ${city}, ${state}. Fresh flour & corn tortillas for tacos, burritos & more. FREE Freshness First Shipping, premium quality.',
   keywords: 'tortillas ${city}, Texas tortillas ${state}, H-E-B tortillas delivery, authentic Mexican tortillas ${city}, fresh tortillas shipped',
   alternates: {
     canonical: 'https://lonestartortillas.com/locations/${stateSlug}/${citySlug}',
@@ -552,7 +552,7 @@ export default function ${componentName}() {
         <section className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg mb-12">
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">${state} Shipping</h2>
           <p className="text-charcoal-700">
-            <strong>Delivery Time:</strong> 2-3 business days to most ${state} addresses. Orders placed by 2 PM CT ship same day.
+            <strong>Freshness First Shipping:</strong> FREE shipping to all ${state} addresses. We ship Mon-Wed; orders before 2 PM CT ship same day. Arrives in 2-3 business days.
           </p>
         </section>
 

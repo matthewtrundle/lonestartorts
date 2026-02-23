@@ -12,6 +12,42 @@ import { getStripe } from '@/lib/stripe';
 import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown, AlertCircle } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
 import { MINIMUM_ORDER_AMOUNT } from '@/lib/products';
+import { getShippingMessage } from '@/lib/shipping-schedule';
+
+// Separate component to avoid hydration issues with dynamic ship dates
+function ShippingDisplay({ hasWholesaleItems, freeShippingQualifies, shipping }: { hasWholesaleItems: boolean; freeShippingQualifies: boolean; shipping: number }) {
+  const [mounted, setMounted] = useState(false);
+  const [message, setMessage] = useState(getShippingMessage());
+
+  useEffect(() => {
+    setMounted(true);
+    const timer = setInterval(() => setMessage(getShippingMessage()), 60000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="mb-2 bg-white rounded-lg border border-gray-200 p-2">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Truck className="w-3.5 h-3.5 text-sunset-600" />
+          <div>
+            <span className="text-xs font-medium uppercase tracking-wide">
+              {hasWholesaleItems ? 'Wholesale Shipping' : 'Freshness First Shipping'}
+            </span>
+            {!hasWholesaleItems && mounted && (
+              <p className="text-[10px] text-gray-500">Ships {message.shipDateFormatted}</p>
+            )}
+          </div>
+        </div>
+        {hasWholesaleItems || freeShippingQualifies ? (
+          <span className="text-xs font-semibold text-green-600">FREE</span>
+        ) : (
+          <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, baseShipping, total, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
@@ -440,27 +476,9 @@ export function CartSidebar() {
                   )}
                 </div>
 
-                {/* Shipping - Simple flat-rate display */}
-                <div className="mb-2 bg-white rounded-lg border border-gray-200 p-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Truck className="w-3.5 h-3.5 text-sunset-600" />
-                      <div>
-                        <span className="text-xs font-medium uppercase tracking-wide">
-                          {hasWholesaleItems ? 'Wholesale Shipping' : 'Fast Shipping'}
-                        </span>
-                        {!hasWholesaleItems && !freeShippingProgress.qualifies && (
-                          <p className="text-[10px] text-gray-500">3-5 business days</p>
-                        )}
-                      </div>
-                    </div>
-                    {hasWholesaleItems || freeShippingProgress.qualifies ? (
-                      <span className="text-xs font-semibold text-green-600">FREE</span>
-                    ) : (
-                      <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
-                    )}
-                  </div>
-                </div>
+                {/* Shipping - Freshness First display */}
+                <ShippingDisplay hasWholesaleItems={hasWholesaleItems} freeShippingQualifies={freeShippingProgress.qualifies} shipping={shipping} />
+
 
                 {/* Totals - More Compact */}
                 <div className="space-y-1 mb-2 text-sm">

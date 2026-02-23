@@ -7,7 +7,7 @@ import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Package, Truck, Mail, ArrowRight, MapPin } from 'lucide-react';
+import { CheckCircle2, Package, Truck, Mail, ArrowRight, MapPin, Calendar } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
@@ -239,6 +239,25 @@ function SuccessContent() {
             </div>
           </motion.div>
 
+          {/* Estimated Ship Date Card */}
+          {orderDetails.estimatedShipDate && (
+            <motion.div
+              variants={itemVariants}
+              className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl shadow-lg border border-blue-200/50 p-6 md:p-8"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md border border-blue-200">
+                  <Calendar className="w-7 h-7 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Freshness First Shipping</p>
+                  <p className="text-2xl md:text-3xl font-bold text-charcoal-950">Ships {orderDetails.estimatedShipDate}</p>
+                  <p className="text-sm text-charcoal-600 mt-1">We ship Mon–Wed for maximum freshness</p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Main Content Grid */}
           <div className="grid md:grid-cols-2 gap-6">
 
@@ -318,10 +337,10 @@ function SuccessContent() {
 
             <div className="space-y-5">
               {[
-                { icon: Mail, text: t('success.whatsNext.step1'), delay: 0 },
-                { icon: Package, text: t('success.whatsNext.step2'), delay: 0.1 },
-                { icon: Truck, text: t('success.whatsNext.step3'), delay: 0.2 },
-                { icon: CheckCircle2, text: t('success.whatsNext.step4'), delay: 0.3 }
+                { icon: Mail, text: `Confirmation email sent to ${orderDetails.email}`, delay: 0 },
+                { icon: Calendar, text: `Your order ships ${orderDetails.estimatedShipDate || 'soon'}`, delay: 0.1 },
+                { icon: Truck, text: 'Tracking number emailed on ship day', delay: 0.2 },
+                { icon: CheckCircle2, text: 'Fresh tortillas arrive 2–3 business days after shipping', delay: 0.3 }
               ].map((step, idx) => (
                 <motion.div
                   key={idx}

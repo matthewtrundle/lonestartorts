@@ -34,6 +34,7 @@ interface OrderConfirmationData {
   tax: number; // in cents
   total: number; // in cents
   shippingAddress: ShippingAddress;
+  estimatedShipDate?: string;
 }
 
 interface OrderShippedData {
@@ -59,6 +60,7 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
     tax,
     total,
     shippingAddress,
+    estimatedShipDate,
   } = data;
 
   const orderDate = new Date().toLocaleDateString('en-US', {
@@ -173,23 +175,31 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
                   <td style="width: 48%; vertical-align: top;">
                     <div style="padding: 24px; background-color: #fff7ed; border-radius: 8px; border-left: 4px solid #ea580c;">
                       <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #111827;">What Happens Next</h3>
+                      ${estimatedShipDate ? `
                       <div style="margin-bottom: 12px;">
                         <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
                           <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
                         </div>
-                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Shipping update within 24-48 hours</span>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Your order ships <strong style="color: #1c1917;">${estimatedShipDate}</strong></span>
+                      </div>
+                      ` : ''}
+                      <div style="margin-bottom: 12px;">
+                        <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
+                          <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
+                        </div>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Tracking number emailed on ship day</span>
                       </div>
                       <div style="margin-bottom: 12px;">
                         <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
                           <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
                         </div>
-                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Arrives in 2-3 business days</span>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Arrives 2–3 business days after shipping</span>
                       </div>
                       <div>
                         <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
                           <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
                         </div>
-                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">Track every step of the way</span>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">We ship Mon–Wed for maximum freshness</span>
                       </div>
                     </div>
                   </td>

@@ -48,6 +48,7 @@ interface OrderConfirmationEmailProps {
     zip?: string;
     country?: string;
   };
+  estimatedShipDate?: string;
 }
 
 interface OrderShippedEmailProps {
@@ -73,6 +74,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
     tax,
     total,
     shippingAddress,
+    estimatedShipDate,
   } = props;
 
   try {
@@ -86,6 +88,7 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
       tax,
       total,
       shippingAddress,
+      estimatedShipDate,
     });
 
     // Old HTML template kept as fallback - can be removed after testing

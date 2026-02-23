@@ -109,7 +109,7 @@
     },
     "step3": {
       "title": "Delivered to You",
-      "text": "Your tortillas arrive at your door, ready for your pantry. No refrigeration needed\u2014just authentic Texas taste whenever you want it."
+      "text": "Your tortillas ship Mon–Wed via our Freshness First program and arrive in 2-3 days. No refrigeration needed\u2014just authentic Texas taste whenever you want it."
     }
   },
   "features": {
@@ -148,7 +148,7 @@
     "shelfNote": "Made fresh, sealed for shipping \u2014 no refrigeration needed until opened.",
     "badges": {
       "shipsNationwide": "Ships Nationwide",
-      "arrives": "Arrives in 2-4 Days",
+      "arrives": "Freshness First Shipping",
       "allStates": "Shipping to All 50 States"
     },
     "categories": {
@@ -270,7 +270,7 @@
     },
     "trust": {
       "secure": "Secure",
-      "fast": "Fast",
+      "fast": "Freshness First",
       "guaranteed": "Guaranteed"
     },
     "free": "FREE"
@@ -351,8 +351,8 @@
     "noRefrigeration": "No Refrigeration Needed",
     "emptyState": "No products available at this time.",
     "trustSignals": {
-      "sameDay": "Next Day Ship",
-      "sameDaySub": "orders after 10am CT",
+      "sameDay": "Freshness First",
+      "sameDaySub": "ships Mon–Wed",
       "secure": "100% Secure",
       "secureSub": "encrypted",
       "smartShipping": "Smart Shipping",
@@ -367,8 +367,8 @@
       "title": "Why Choose Lonestar Tortillas?",
       "premium": "Premium Quality",
       "premiumText": "Authentic Texas-style tortillas made with quality ingredients",
-      "fast": "Fast Shipping",
-      "fastText": "2-3 day delivery anywhere in the US",
+      "fast": "Freshness First Shipping",
+      "fastText": "Ships Mon–Wed for maximum freshness, arrives in 2-3 days",
       "shelfStable": "Shelf Stable",
       "shelfStableText": "Long-lasting freshness without refrigeration"
     },
@@ -386,9 +386,9 @@
     "faq": {
       "title": "Shopping FAQs",
       "shippingCostQ": "How much does shipping cost?",
-      "shippingCostA": "Shipping varies by order size: 1 pack is $10.60, 2-3 packs is $18.40, and 4-5 packs is $22.65. All orders ship via USPS Priority Mail for fast, reliable 2-3 day delivery.",
+      "shippingCostA": "Shipping is FREE on all orders! We ship via USPS Priority Mail with 2-3 business day delivery.",
       "arrivalQ": "When will my order arrive?",
-      "arrivalA": "Most orders arrive within 2-3 business days. Orders to Alaska and Hawaii may take 4-7 business days. We ship Monday through Friday, and orders placed before 10 AM CT ship next day.",
+      "arrivalA": "We ship Monday, Tuesday, and Wednesday as part of our Freshness First Shipping program. Orders before 2 PM CT on a ship day go out same-day. Delivery takes 2-3 business days to most US addresses. Alaska and Hawaii may take 4-7 business days.",
       "refrigerationQ": "Do I need to refrigerate the tortillas?",
       "refrigerationA": "No! Our H-E-B tortillas are shelf-stable and don't require refrigeration. They maintain freshness at room temperature for 3-4 weeks unopened. After opening, you can refrigerate to extend freshness. Pro tip: they freeze beautifully! Just pop them in the freezer and they'll last for months.",
       "paymentQ": "What payment methods do you accept?",
@@ -434,7 +434,7 @@
     "seo": {
       "title": "About Ordering H-E-B\u00ae Tortillas Online",
       "paragraph1": "Can you buy H-E-B tortillas outside of Texas? Yes! Lonestar Tortillas makes it easy to order authentic H-E-B\u00ae tortillas online and have them delivered anywhere in the United States. Whether you're in New York, California, Florida, or anywhere in between, you can now enjoy the same quality tortillas that Texans have loved for generations.",
-      "paragraph2": "Our shelf-stable tortillas are perfect for online ordering because they don't require refrigeration during shipping. This means your tortillas arrive fresh and delicious, ready to store in your pantry until you're ready to use them. We ship from Austin, Texas, and most orders arrive within 3-5 business days."
+      "paragraph2": "Our shelf-stable tortillas are perfect for online ordering because they don't require refrigeration during shipping. This means your tortillas arrive fresh and delicious, ready to store in your pantry until you're ready to use them. We ship from Austin, Texas on Monday, Tuesday, and Wednesday for maximum freshness, and most orders arrive within 2-3 business days."
     }
   },
   "shipping": {
@@ -443,12 +443,12 @@
     "hero": {
       "badge": "Nationwide Shipping",
       "title": "H-E-B Tortillas Shipped to All 50 States",
-      "description": "Lonestar Tortillas ships authentic H-E-B Bakery tortillas nationwide from Austin, Texas. Orders ship same-day before 2 PM CT via USPS Priority Mail. Delivery takes 2-3 business days. We are an independent reseller, not affiliated with H-E-B.",
+      "description": "Lonestar Tortillas ships authentic H-E-B Bakery tortillas nationwide from Austin, Texas with FREE Freshness First Shipping. We ship Monday, Tuesday, and Wednesday — orders before 2 PM CT ship same day. Delivery takes 2-3 business days via USPS Priority Mail. We are an independent reseller, not affiliated with H-E-B.",
       "orderNow": "Order Now"
     },
     "keyPoints": {
-      "sameDay": "Same-Day Shipping",
-      "sameDayDesc": "Orders before 2 PM CT ship same day",
+      "sameDay": "Mon–Wed Shipping",
+      "sameDayDesc": "Orders before 2 PM CT ship same day on Mon, Tue, Wed",
       "delivery": "2-3 Day Delivery",
       "deliveryDesc": "USPS Priority Mail to most addresses",
       "shipsFrom": "Ships from Texas",
@@ -511,7 +511,7 @@
     "proceedToPayment": "Proceed to Payment",
     "trust": {
       "secure": "Secure 256-bit SSL encryption",
-      "fastShipping": "Fast 3-4 day shipping nationwide"
+      "fastShipping": "Freshness First Shipping — Ships Mon–Wed"
     },
     "notice": {
       "title": "Important Notice:",
@@ -528,7 +528,7 @@
     "locationDesc": "Shipping nationwide from the heart of Texas",
     "businessHours": "Business Hours",
     "hoursValue": "Monday - Friday: 9am - 5pm CT",
-    "hoursNote": "Orders placed before 2pm CT ship same day",
+    "hoursNote": "Orders placed before 2 PM CT on Mon–Wed ship same day",
     "quickLinks": "Quick Links",
     "links": {
       "faq": "Frequently Asked Questions",
@@ -766,9 +766,9 @@
     "whatsNext": {
       "title": "What Happens Next",
       "step1": "Order confirmation sent to your email",
-      "step2": "Your order will be prepared and packaged within 24 hours",
-      "step3": "Shipping confirmation with tracking in 24-48 hours",
-      "step4": "Fresh tortillas arrive in 2-3 business days"
+      "step2": "Your order ships on the next available ship day (Mon–Wed)",
+      "step3": "Tracking number emailed on ship day",
+      "step4": "Fresh tortillas arrive 2-3 business days after shipping"
     },
     "emailSent": "Confirmation email sent to",
     "backToHome": "Back to Home",

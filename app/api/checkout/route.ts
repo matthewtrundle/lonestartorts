@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
 import { prisma } from '@/lib/prisma';
 import { validateDiscount, includesFreeShipping, recordDiscountUsage, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
+import { getNextShipDate, getShipDateDisplay, formatShipDate } from '@/lib/shipping-schedule';
 
 // Helper to get any product by SKU (retail or wholesale)
 function getAnyProductBySku(sku: string) {
@@ -349,19 +350,24 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Build shipping display name - simplified flat-rate display
+    // Calculate ship date for display
+    const shipDateDisplay = getShipDateDisplay();
+    const nextShipDate = getNextShipDate();
+    const estimatedShipDate = formatShipDate(nextShipDate);
+
+    // Build shipping display name - Freshness First branding
     const getShippingDisplayName = () => {
       if (freeShippingApplied) {
         const savingsText = `You saved $${(baseShippingCost / 100).toFixed(2)}`;
         if (freeShippingReason === 'wholesale') {
-          return `FREE Fast Shipping - Wholesale Order`;
+          return `FREE Freshness First Shipping — Ships ${shipDateDisplay}`;
         } else if (freeShippingReason === 'threshold') {
-          return `FREE Fast Shipping - Order $80+ ${savingsText}`;
+          return `FREE Freshness First Shipping — Ships ${shipDateDisplay} (${savingsText})`;
         } else {
-          return `FREE Fast Shipping - First Order Discount`;
+          return `FREE Freshness First Shipping — Ships ${shipDateDisplay}`;
         }
       }
-      return `Fast Shipping (3-5 business days)`;
+      return `Freshness First Shipping — Ships ${shipDateDisplay}`;
     };
 
     // Create Stripe checkout session with shipping as actual shipping rate (not a line item)
@@ -386,6 +392,7 @@ export async function POST(req: NextRequest) {
         baseShippingCost: baseShippingCost.toString(), // What shipping would have been
         subtotal: subtotal.toString(), // Order subtotal
         isWholesaleOrder: isWholesaleOrder.toString(), // Track wholesale orders
+        estimatedShipDate, // Freshness First ship date
         ...(freeShippingApplied && {
           freeShippingReason, // 'threshold', 'wholesale', 'discount_code', 'spin_prize', 'drip_code'
           freeShippingSavings: baseShippingCost.toString(),
@@ -429,7 +436,7 @@ export async function POST(req: NextRequest) {
             delivery_estimate: {
               minimum: {
                 unit: 'business_day',
-                value: 3,
+                value: 2,
               },
               maximum: {
                 unit: 'business_day',

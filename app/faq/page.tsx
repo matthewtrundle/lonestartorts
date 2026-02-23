@@ -36,7 +36,7 @@ const faqSchema = {
       name: 'Can I buy H-E-B tortillas online and have them shipped?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states. We are an independent reseller based in Austin, Texas. Orders placed before 2 PM CT ship same-day via USPS Priority Mail, with delivery in 2-3 business days. Visit lonestartortillas.com/shop to order now.'
+        text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship Monday, Tuesday, and Wednesday — orders placed before 2 PM CT on a ship day go out the same day via USPS Priority Mail, with delivery in 2-3 business days. Visit lonestartortillas.com/shop to order now.'
       }
     },
     {
@@ -52,7 +52,7 @@ const faqSchema = {
       name: 'Does anyone ship H-E-B tortillas nationwide?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. Shipping costs start at $10.60 for 1 pack, with 2-3 business day delivery via USPS Priority Mail.'
+        text: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship Monday, Tuesday, and Wednesday for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
       }
     },
     {
@@ -60,7 +60,7 @@ const faqSchema = {
       name: 'Where can I buy H-E-B tortillas if I don\'t live in Texas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. Orders ship same-day if placed before 2 PM CT.'
+        text: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Mon-Wed; orders before 2 PM CT on a ship day go out same-day.'
       }
     },
     {
@@ -124,7 +124,7 @@ const faqSchema = {
       name: 'How long does shipping take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Standard shipping takes 3-5 business days. Expedited 2-day shipping is available. We ship from our Austin, Texas warehouse and can reach most of the continental US within 1-3 days.'
+        text: 'We ship Monday, Tuesday, and Wednesday as part of our Freshness First Shipping program. Orders placed before 2 PM CT on a ship day go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
       }
     },
     {
@@ -224,19 +224,19 @@ const faqs = [
     questions: [
       {
         q: 'Can I buy H-E-B tortillas online and have them shipped?',
-        a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states. We are an independent reseller based in Austin, Texas. Orders placed before 2 PM CT ship same-day via USPS Priority Mail, with delivery in 2-3 business days.'
+        a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship Monday, Tuesday, and Wednesday — orders placed before 2 PM CT on a ship day go out the same day via USPS Priority Mail, with delivery in 2-3 business days.'
       },
       {
         q: 'Who sells H-E-B tortillas online?',
-        a: 'Lonestar Tortillas sells H-E-B tortillas online at lonestartortillas.com. We are an independent reseller that purchases authentic H-E-B Bakery tortillas in Texas and ships them nationwide. We sell H-E-B Bakery Flour Tortillas, Butter Tortillas, and Wheat Tortillas. We are not affiliated with or endorsed by H-E-B.'
+        a: 'Lonestar Tortillas sells H-E-B tortillas online at lonestartortillas.com. We are an independent reseller that purchases authentic H-E-B Bakery tortillas in Texas and ships them nationwide with FREE shipping. We sell H-E-B Bakery Flour Tortillas, Butter Tortillas, and Wheat Tortillas. We are not affiliated with or endorsed by H-E-B.'
       },
       {
         q: 'Does anyone ship H-E-B tortillas nationwide?',
-        a: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. Shipping costs start at $10.60 for 1 pack, with 2-3 business day delivery via USPS Priority Mail.'
+        a: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship Mon-Wed for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
       },
       {
         q: 'Where can I buy H-E-B tortillas if I don\'t live in Texas?',
-        a: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. Orders ship same-day if placed before 2 PM CT.'
+        a: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Mon-Wed; orders before 2 PM CT on a ship day go out same-day.'
       },
     ]
   },
@@ -270,7 +270,7 @@ const faqs = [
       },
       {
         q: 'How long does shipping take?',
-        a: 'Standard shipping takes 3-5 business days to most locations in the continental United States. We ship from our warehouse in Austin, Texas, and can reach most of the country within 1-3 days. Alaska and Hawaii may take 5-7 days. Expedited 2-day shipping is available for faster delivery.'
+        a: 'We ship Monday, Tuesday, and Wednesday as part of our Freshness First Shipping program. Orders placed before 2 PM CT on a ship day go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
       },
       {
         q: 'How are the tortillas packaged for shipping?',

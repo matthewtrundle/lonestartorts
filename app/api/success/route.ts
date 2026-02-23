@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getNextShipDate, formatShipDate } from '@/lib/shipping-schedule';
 
 export const dynamic = 'force-dynamic';
 
@@ -35,6 +36,10 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    // Calculate estimated ship date from order creation time
+    const shipDate = getNextShipDate(new Date(order.createdAt));
+    const estimatedShipDate = formatShipDate(shipDate);
+
     return NextResponse.json({
       success: true,
       order: {
@@ -48,6 +53,7 @@ export async function GET(req: NextRequest) {
         total: order.total,
         status: order.status,
         createdAt: order.createdAt,
+        estimatedShipDate,
         shippingAddress: {
           name: order.shippingName,
           address1: order.shippingAddress1,
