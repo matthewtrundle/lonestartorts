@@ -4,15 +4,15 @@ import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Tortilla Nutrition Guide',
-  description: 'Complete nutritional breakdown of corn and flour tortillas. Calories, carbs, protein, fiber, and health benefits explained. Make informed choices.',
-  keywords: 'tortilla nutrition, tortilla calories, corn tortilla nutrition, flour tortilla nutrition, tortilla carbs, healthy tortillas, tortilla health benefits',
+  title: 'How Many Corn Tortillas Can You Eat a Day? Nutrition Facts',
+  description: 'How many corn tortillas can you eat per day? Get daily intake guidelines, complete nutrition facts, calories, carbs, and health benefits for corn and flour tortillas.',
+  keywords: 'how many corn tortillas a day, tortilla nutrition, tortilla calories, corn tortilla nutrition, flour tortilla nutrition, tortilla carbs, healthy tortillas, daily tortilla intake',
   alternates: {
     canonical: 'https://lonestartortillas.com/guides/tortilla-nutrition',
   },
   openGraph: {
-    title: 'Tortilla Nutrition Guide | Complete Nutritional Facts',
-    description: 'Everything you need to know about tortilla nutrition, from calories to health benefits.',
+    title: 'How Many Corn Tortillas Can You Eat a Day? Nutrition Facts',
+    description: 'Daily tortilla intake guidelines with complete nutrition facts, calories, carbs, and health benefits for corn and flour tortillas.',
     type: 'article',
   },
 };
@@ -51,8 +51,8 @@ const faqSchema = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Tortilla Nutrition Guide',
-  description: 'Complete nutritional information for corn and flour tortillas including calories, macros, and health benefits.',
+  headline: 'How Many Corn Tortillas Can You Eat a Day? Nutrition Facts',
+  description: 'Daily tortilla intake guidelines with complete nutrition facts, calories, carbs, and health benefits for corn and flour tortillas.',
   author: {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
@@ -130,7 +130,7 @@ export default function TortillaNutritionPage() {
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Health Benefits of Tortillas</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-masa-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-3">Corn Tortillas</h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-3"><Link href="/products/corn-tortillas" className="hover:text-sunset-600 transition-colors">Corn Tortillas</Link></h3>
                 <ul className="space-y-2 text-charcoal-800 text-sm">
                   <li>✓ Lower in calories and fat</li>
                   <li>✓ Naturally gluten-free</li>
@@ -223,7 +223,7 @@ export default function TortillaNutritionPage() {
           <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
             <h2 className="text-2xl font-bold mb-4">Choose Quality Tortillas</h2>
             <p className="text-cream-100 mb-6">
-              Start with authentic, quality tortillas for the best nutrition and taste. Our H-E-B® tortillas use simple, quality ingredients.
+              Start with authentic, quality tortillas for the best nutrition and taste. Our H-E-B® tortillas use simple, quality ingredients. We offer <Link href="/shipping" className="text-sunset-400 hover:text-sunset-300 underline">convenient shipping</Link> across Texas.
             </p>
             <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
               Shop Tortillas

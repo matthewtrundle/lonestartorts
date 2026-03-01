@@ -123,6 +123,26 @@ export default function ShippingPage() {
     },
   };
 
+  // BreadcrumbList schema
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://lonestartortillas.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Shipping',
+        item: 'https://lonestartortillas.com/shipping',
+      },
+    ],
+  };
+
   const shipDays = [
     { day: 'Monday', ships: true },
     { day: 'Tuesday', ships: true },
@@ -147,6 +167,10 @@ export default function ShippingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <main className="min-h-screen bg-cream-50">
@@ -324,7 +348,7 @@ export default function ShippingPage() {
             <Snowflake className="w-8 h-8 text-sky-600 flex-shrink-0 mt-0.5" />
             <div>
               <h3 className="font-bold text-sky-900 text-lg mb-1">Stock Up & Freeze for 6+ Months!</h3>
-              <p className="text-sky-700">Our tortillas freeze beautifully. Buy in bulk and your tortillas will keep for months in the freezer. Thaw at room temperature for 30 minutes or warm directly from frozen on a skillet.</p>
+              <p className="text-sky-700">Our tortillas freeze beautifully. Whether you order <Link href="/products/flour-tortillas" className="text-sky-800 font-semibold underline hover:text-sky-900">flour tortillas</Link> or <Link href="/products/corn-tortillas" className="text-sky-800 font-semibold underline hover:text-sky-900">corn tortillas</Link>, they&apos;ll keep for months in the freezer. Thaw at room temperature for 30 minutes or warm directly from frozen on a skillet.</p>
             </div>
           </div>
 
@@ -358,7 +382,11 @@ export default function ShippingPage() {
                 },
                 {
                   q: 'Do tortillas need refrigeration during shipping?',
-                  a: 'No. H-E-B Bakery tortillas are shelf-stable and do not require refrigeration. They maintain freshness at room temperature for 30+ days unopened, making them ideal for shipping.',
+                  a: (
+                    <>
+                      No. H-E-B Bakery tortillas are shelf-stable and do not require refrigeration. Our <Link href="/products/butter-tortillas" className="text-sunset-600 font-semibold underline hover:text-sunset-700">butter tortillas</Link> and all other varieties maintain freshness at room temperature for 30+ days unopened, making them ideal for shipping.
+                    </>
+                  ),
                 },
                 {
                   q: 'Can I track my order?',

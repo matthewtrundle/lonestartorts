@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Are Tortillas Healthy? Nutrition Facts & Benefits Guide',
+  title: 'Are Tortillas Healthy? Nutrition Guide (Corn vs Flour)',
   description: 'Are tortillas healthy? Yes! Learn about tortilla nutrition, calories, health benefits, and how corn and flour tortillas fit into a balanced diet. Expert nutritional analysis.',
-  keywords: 'are tortillas healthy, tortilla nutrition, tortilla calories, healthy tortillas, corn tortilla nutrition, flour tortilla calories, tortilla health benefits, are corn tortillas healthy',
+  keywords: 'are tortillas healthy, tortilla nutrition, tortilla calories, healthy tortillas, corn tortilla nutrition, flour tortilla calories, tortilla health benefits, are corn tortillas healthy, how many tortillas a day',
   alternates: {
     canonical: 'https://lonestartortillas.com/guides/are-tortillas-healthy',
   },
@@ -323,6 +323,7 @@ export default function AreTortillasHealthyPage() {
           {/* CTA */}
           <section className="bg-gradient-to-r from-green-100 to-masa-100 p-8 rounded-lg">
             <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Shop Healthy, Authentic Tortillas</h2>
+            <p className="text-charcoal-700 mb-6">Ready to try authentic Texas tortillas? Check out our <Link href="/shipping" className="text-green-700 font-medium hover:underline">shipping options</Link> for delivery across the state.</p>
             <div className="grid md:grid-cols-2 gap-6">
               <Link href="/products/corn-tortillas" className="bg-white p-6 rounded-lg hover:shadow-xl transition-shadow border-2 border-green-400">
                 <h3 className="font-bold text-charcoal-950 mb-2 text-lg">Corn Tortillas (Healthiest) →</h3>

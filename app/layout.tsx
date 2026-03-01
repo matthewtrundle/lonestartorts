@@ -36,10 +36,10 @@ export const metadata: Metadata = {
     canonical: './',
   },
   title: {
-    default: 'H-E-B® Tortillas Delivered Nationwide',
+    default: 'Lonestar Tortillas | HEB Tortillas Shipped Nationwide',
     template: '%s | Lonestar Tortillas'
   },
-  description: 'Buy authentic H-E-B® tortillas online - delivered nationwide! Premium Texas flour, corn & butter tortillas. Shelf-stable, ships fresh. Independent reseller serving all 50 states.',
+  description: 'Get authentic H-E-B® tortillas shipped nationwide! Premium Texas flour, corn & butter tortillas delivered to your door. Fast 2-4 day shipping. Independent reseller serving all 50 states.',
   keywords: [
     'H-E-B tortillas',
     'Texas tortillas delivery',

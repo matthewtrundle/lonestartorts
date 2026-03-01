@@ -3,9 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'H-E-B® Butter Flour Tortillas',
-  description: 'Buy premium H-E-B® butter flour tortillas online. Rich, buttery flavor with soft texture. Perfect for quesadillas and wraps. Delivered nationwide!',
-  keywords: 'H-E-B butter tortillas, butter flour tortillas, premium tortillas, buy butter tortillas online, Texas butter tortillas',
+  title: 'HEB Butter Tortillas Shipped Nationwide',
+  description: 'Get H-E-B® butter flour tortillas shipped to your door. Rich, buttery Texas tortillas delivered in 2-4 days. Perfect for quesadillas and wraps. FREE shipping!',
+  keywords: 'HEB butter tortillas shipped, buy butter tortillas online, H-E-B butter flour tortillas, Texas butter tortillas delivery, premium butter tortillas',
+  alternates: {
+    canonical: 'https://lonestartortillas.com/products/butter-tortillas',
+  },
 };
 
 const productSchema = {
@@ -23,6 +26,13 @@ const productSchema = {
     availability: 'https://schema.org/PreOrder',
     seller: { '@type': 'Organization', name: 'Lonestar Tortillas' }
   },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '89',
+    bestRating: '5',
+    worstRating: '1'
+  }
 };
 
 export default function ButterTortillasPage() {

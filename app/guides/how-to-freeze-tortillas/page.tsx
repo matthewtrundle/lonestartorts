@@ -5,15 +5,15 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Freeze Tortillas',
-  description: 'Learn how to properly freeze tortillas for long-term storage. Step-by-step guide for freezing corn and flour tortillas, plus thawing methods and storage tips.',
-  keywords: 'how to freeze tortillas, can you freeze tortillas, freezing corn tortillas, freezing flour tortillas, how long do frozen tortillas last, thawing tortillas',
+  title: 'How to Freeze & Defrost Tortillas | Sprouted, Corn, Flour Guide',
+  description: 'Complete guide to freezing and defrosting tortillas including sprouted whole grain, corn, and flour varieties. Step-by-step storage tips and thawing methods for perfect results.',
+  keywords: 'how to freeze tortillas, can you freeze tortillas, freezing corn tortillas, freezing flour tortillas, how long do frozen tortillas last, thawing tortillas, freezing sprouted whole grain tortillas, defrosting tortillas tips',
   alternates: {
     canonical: 'https://lonestartortillas.com/guides/how-to-freeze-tortillas',
   },
   openGraph: {
-    title: 'How to Freeze Tortillas | Complete Guide',
-    description: 'Extend tortilla shelf life to 6-8 months with proper freezing techniques. Complete guide with thawing tips.',
+    title: 'How to Freeze & Defrost Tortillas | Sprouted, Corn, Flour Guide',
+    description: 'Extend tortilla shelf life to 6-8 months with proper freezing techniques. Complete guide with thawing tips for sprouted, corn, and flour varieties.',
     type: 'article',
   },
 };
@@ -52,7 +52,7 @@ const faqSchema = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'How to Freeze Tortillas',
+  headline: 'How to Freeze & Defrost Tortillas | Sprouted, Corn, Flour Guide',
   description: 'Complete guide to freezing both corn and flour tortillas for long-term storage, plus thawing methods and quality tips.',
   author: {
     '@type': 'Organization',
@@ -110,7 +110,7 @@ export default function HowToFreezeTortillasPage() {
           <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Freeze Tortillas?</h2>
             <p className="text-charcoal-800 mb-4 text-lg">
-              Freezing tortillas is perfect for:
+              Freezing <Link href="/shop" className="text-sunset-600 hover:underline">tortillas</Link> is perfect for:
             </p>
             <ul className="space-y-3 text-charcoal-800">
               <li className="flex items-start gap-3">
@@ -250,7 +250,7 @@ export default function HowToFreezeTortillasPage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-masa-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌽 Corn Tortillas</h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌽 <Link href="/products/corn-tortillas" className="hover:text-sunset-600 transition-colors">Corn Tortillas</Link></h3>
                 <ul className="space-y-2 text-charcoal-800 text-sm">
                   <li><strong>Freeze very well</strong> - Less moisture means less ice crystal formation</li>
                   <li><strong>May become slightly brittle</strong> - Warm gently to restore flexibility</li>
@@ -260,7 +260,7 @@ export default function HowToFreezeTortillasPage() {
               </div>
 
               <div className="bg-sunset-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌾 Flour Tortillas</h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌾 <Link href="/products/flour-tortillas" className="hover:text-sunset-600 transition-colors">Flour Tortillas</Link></h3>
                 <ul className="space-y-2 text-charcoal-800 text-sm">
                   <li><strong>Freeze excellently</strong> - Higher fat content protects texture</li>
                   <li><strong>Stay pliable when thawed</strong> - More forgiving than corn</li>
