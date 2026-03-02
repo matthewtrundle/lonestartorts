@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { RelatedProducts } from '@/components/guides/RelatedProducts';
 
 export const metadata: Metadata = {
   title: 'How Many Corn Tortillas Can You Eat a Day? Nutrition Facts',
@@ -179,6 +180,14 @@ export default function TortillaNutritionPage() {
               </div>
             </div>
           </section>
+
+          {/* Related Products - Mid-page for higher engagement */}
+          <RelatedProducts
+            title="Health-Conscious Tortilla Options"
+            description="Looking for lower-calorie or gluten-free options? Our corn tortillas are naturally gluten-free with fewer calories than flour."
+            productSkus={['HEB-WHITE-CORN', 'HEB-STREET-TACO', 'HEB-WHOLE-WHEAT']}
+            ctaText="Shop All Tortillas"
+          />
 
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Special Dietary Considerations</h2>

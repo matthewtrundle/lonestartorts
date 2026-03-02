@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { RelatedProducts } from '@/components/guides/RelatedProducts';
 
 export const metadata: Metadata = {
   title: 'Sonoran Style Tortillas Guide',
@@ -227,6 +228,15 @@ export default function SonoranStyleTortillasPage() {
                 <strong>Stack and cover</strong> warmed tortillas to keep them soft while you prepare your filling.
               </li>
             </ol>
+
+            {/* Related Products - Flour tortillas for burritos */}
+            <RelatedProducts
+              title="Flour Tortillas for Burritos & Wraps"
+              description="Our soft, pliable flour tortillas are perfect for authentic Sonoran-style burritos and wraps."
+              productSkus={['HEB-FLOUR', 'HEB-BUTTER', 'HEB-BURRITO-GRANDE']}
+              ctaText="Shop Flour Tortillas"
+              ctaLink="/shop#bakery"
+            />
 
             {/* FAQ Section */}
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">

@@ -14,7 +14,7 @@ import { useLanguage } from '@/lib/language-context';
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, itemCount, subtotal, shipping, total, clearCart, isHydrated, updateQuantity, removeItem } = useCart();
+  const { items, itemCount, subtotal, tax, shipping, total, clearCart, isHydrated, updateQuantity, removeItem } = useCart();
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -82,7 +82,9 @@ export default function CheckoutPage() {
   const percentageDiscountValue = isPercentageDiscount ? Math.round(subtotal * (discountAmount / 100)) : 0;
   const displayShipping = isFreeShipping ? 0 : shipping;
   const displaySubtotalAfterDiscount = isPercentageDiscount ? subtotal - percentageDiscountValue : subtotal;
-  const displayTotal = displaySubtotalAfterDiscount + displayShipping;
+  // Recalculate tax based on discounted subtotal
+  const displayTax = Math.round(displaySubtotalAfterDiscount * 0.0825);
+  const displayTotal = displaySubtotalAfterDiscount + displayTax + displayShipping;
 
   // Validate discount code
   const handleApplyDiscount = async () => {
@@ -323,6 +325,10 @@ export default function CheckoutPage() {
                     ) : (
                       <span className="font-medium">{formatPrice(shipping)}</span>
                     )}
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-charcoal-600">Tax (8.25%)</span>
+                    <span className="font-medium">{formatPrice(displayTax)}</span>
                   </div>
                 </div>
 

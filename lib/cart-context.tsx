@@ -8,6 +8,9 @@ import {
   FREE_SHIPPING_THRESHOLD,
 } from '@/lib/products';
 
+// Texas sales tax rate
+export const TAX_RATE = 0.0825; // 8.25%
+
 // Cart item structure matching the product catalog
 export interface CartItem {
   sku: string;
@@ -43,6 +46,7 @@ interface CartContextType {
   items: CartItem[];
   itemCount: number;
   subtotal: number;
+  tax: number;
   shipping: number;
   baseShipping: number; // What shipping would be without free shipping
   total: number;
@@ -192,15 +196,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Shipping: $9.95 (1 pack), $19.95 (2+ packs), FREE on $80+
   const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const tax = Math.round(subtotal * TAX_RATE); // 8.25% Texas sales tax
   const shipping = calculateShipping(items, subtotal);
   const baseShipping = calculateBaseShipping(items); // What shipping would be without free threshold
-  const total = subtotal + shipping;
+  const total = subtotal + tax + shipping;
   const freeShippingProgress = getFreeShippingProgress(subtotal);
 
   const value: CartContextType = {
     items,
     itemCount,
     subtotal,
+    tax,
     shipping,
     baseShipping,
     total,

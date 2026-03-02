@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
+
+// Texas sales tax rate
+const TAX_RATE = 0.0825; // 8.25%
 import { prisma } from '@/lib/prisma';
 import { validateDiscount, includesFreeShipping, recordDiscountUsage, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
 import { getNextShipDate, getShipDateDisplay, formatShipDate } from '@/lib/shipping-schedule';
@@ -303,6 +306,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Create a Stripe coupon for discounts (new system, feedback, spin wheel, drip, or UT alumni)
+    // IMPORTANT: Always use fixed-amount coupons to avoid applying discount to tax line item
     let stripeCouponId: string | undefined;
     const dripCode = discountCode?.startsWith('DRIP-') ? discountCode : null;
     if (discountAmount > 0 && (newSystemDiscountId || feedbackCouponCode || spinPrizeCode || dripCode || utAlumniCode)) {
@@ -317,37 +321,44 @@ export async function POST(req: NextRequest) {
         ? `UT Alumni - 10% Off`
         : `Drip Discount - ${dripCode}`;
 
-      // Determine if it's a percentage or fixed amount discount
-      if (percentageDiscount > 0) {
-        // Percentage discount (10% off)
-        const coupon = await stripe.coupons.create({
-          percent_off: percentageDiscount,
-          duration: 'once',
-          name: couponName,
-          metadata: {
-            ...(newSystemDiscountId && { newSystemDiscountId, discountCode: discountCode?.toUpperCase() }),
-            ...(feedbackCouponCode && { feedbackCouponCode }),
-            ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
-            ...(dripCode && { dripCode }),
-            ...(utAlumniCode && { utAlumniCode }),
-          },
-        });
-        stripeCouponId = coupon.id;
-      } else {
-        // Fixed amount discount ($5 off, free sauce, bonus tortillas, BOGO)
-        const coupon = await stripe.coupons.create({
-          amount_off: discountAmount,
+      // Always use fixed amount to prevent discount from applying to tax line item
+      const coupon = await stripe.coupons.create({
+        amount_off: discountAmount,
+        currency: 'usd',
+        duration: 'once',
+        name: couponName,
+        metadata: {
+          ...(newSystemDiscountId && { newSystemDiscountId, discountCode: discountCode?.toUpperCase() }),
+          ...(feedbackCouponCode && { feedbackCouponCode }),
+          ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
+          ...(dripCode && { dripCode }),
+          ...(utAlumniCode && { utAlumniCode }),
+          ...(percentageDiscount > 0 && { originalPercentage: percentageDiscount.toString() }),
+        },
+      });
+      stripeCouponId = coupon.id;
+    }
+
+    // Calculate tax on subtotal after discount
+    const taxableAmount = subtotal - discountAmount;
+    const taxAmount = Math.round(taxableAmount * TAX_RATE);
+
+    // Add sales tax as a line item
+    if (taxAmount > 0) {
+      lineItems.push({
+        price_data: {
           currency: 'usd',
-          duration: 'once',
-          name: couponName,
-          metadata: {
-            ...(newSystemDiscountId && { newSystemDiscountId, discountCode: discountCode?.toUpperCase() }),
-            ...(spinPrizeCode && { spinPrizeCode, spinPrizeType: spinPrizeType || '' }),
-            ...(dripCode && { dripCode }),
+          product_data: {
+            name: 'Sales Tax (8.25%)',
+            description: 'Texas state sales tax',
+            metadata: {
+              type: 'tax',
+            },
           },
-        });
-        stripeCouponId = coupon.id;
-      }
+          unit_amount: taxAmount,
+        },
+        quantity: 1,
+      });
     }
 
     // Calculate ship date for display
@@ -375,10 +386,6 @@ export async function POST(req: NextRequest) {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      // Enable automatic tax calculation (Stripe Tax)
-      automatic_tax: {
-        enabled: true,
-      },
       // Apply discount coupon if created
       ...(stripeCouponId && {
         discounts: [{ coupon: stripeCouponId }],
@@ -391,6 +398,7 @@ export async function POST(req: NextRequest) {
         shippingCost: shippingCost.toString(), // Store for webhook reference
         baseShippingCost: baseShippingCost.toString(), // What shipping would have been
         subtotal: subtotal.toString(), // Order subtotal
+        taxAmount: taxAmount.toString(), // Sales tax amount
         isWholesaleOrder: isWholesaleOrder.toString(), // Track wholesale orders
         estimatedShipDate, // Freshness First ship date
         ...(freeShippingApplied && {

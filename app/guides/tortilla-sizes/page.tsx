@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { TacoIcon, BurritoIcon, CheeseIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { RelatedProducts } from '@/components/guides/RelatedProducts';
 
 export const metadata: Metadata = {
   title: 'Tortilla Size Guide',
@@ -239,6 +240,14 @@ export default function TortillaSizesPage() {
               </div>
             </div>
           </section>
+
+          {/* Related Products - Various sizes */}
+          <RelatedProducts
+            title="Find Your Perfect Size"
+            description="From street taco-sized corn tortillas to burrito-sized flour tortillas, we have the right size for every dish."
+            productSkus={['HEB-STREET-TACO', 'HEB-FAJITA-FLOUR', 'HEB-BURRITO-GRANDE']}
+            ctaText="Shop By Size"
+          />
 
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Common Questions</h2>

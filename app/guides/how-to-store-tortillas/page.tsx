@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { TacoIcon, BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { PageViewTracker } from '@/components/analytics/PageViewTracker';
+import { RelatedProducts } from '@/components/guides/RelatedProducts';
 
 export const metadata: Metadata = {
   title: 'How to Store Tortillas',
@@ -347,6 +348,15 @@ export default function HowToStoreTortillasPage() {
               They're safe to eat beyond that but may experience some texture changes.
             </p>
           </section>
+
+          {/* Related Products - Shelf-stable options */}
+          <RelatedProducts
+            title="Shelf-Stable Tortillas for Easy Storage"
+            description="Our pantry-stable tortillas last 3-4 weeks at room temperature and freeze beautifully for up to 6 months."
+            productSkus={['HEB-FAJITA-FLOUR', 'HEB-HOMESTYLE-FLOUR', 'HEB-WHITE-CORN']}
+            ctaText="Shop Pantry Staples"
+            ctaLink="/shop#pantry"
+          />
 
           {/* Section 5: Shelf Life Guide */}
           <section id="shelf-life" className="mb-12 scroll-mt-8">

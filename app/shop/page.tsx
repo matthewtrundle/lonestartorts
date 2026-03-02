@@ -505,6 +505,40 @@ function ShopContent() {
           <a href="mailto:howdy@lonestartortillas.com" className="text-sunset-600 hover:underline">howdy@lonestartortillas.com</a>
         </div>
 
+        {/* Why Our Tortillas - Trust/Education Section */}
+        <section className="mt-10 bg-gradient-to-r from-masa-50 to-cream-50 rounded-xl p-6 md:p-8 border border-masa-200">
+          <h2 className="text-xl md:text-2xl font-bold text-charcoal-950 mb-4 text-center">Why Texans Trust H-E-B Tortillas</h2>
+          <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="text-center">
+              <div className="text-3xl mb-2">🌾</div>
+              <h3 className="font-semibold text-charcoal-900 mb-1">Quality Ingredients</h3>
+              <p className="text-sm text-charcoal-600">Simple recipes with no artificial preservatives in our bakery-fresh line.</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">⭐</div>
+              <h3 className="font-semibold text-charcoal-900 mb-1">Texas Favorite</h3>
+              <p className="text-sm text-charcoal-600">H-E-B has been a Texas staple since 1905. Their tortillas are legendary.</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">📦</div>
+              <h3 className="font-semibold text-charcoal-900 mb-1">Ships Fresh</h3>
+              <p className="text-sm text-charcoal-600">We ship Mon-Wed with ice packs to ensure your tortillas arrive fresh.</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <p className="text-sm text-charcoal-600 mb-3">Want to learn more? Check out our guides:</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link href="/guides/tortilla-nutrition" className="text-sm text-sunset-600 hover:text-sunset-700 underline">Nutrition Facts</Link>
+              <span className="text-charcoal-300">|</span>
+              <Link href="/guides/how-to-store-tortillas" className="text-sm text-sunset-600 hover:text-sunset-700 underline">Storage Tips</Link>
+              <span className="text-charcoal-300">|</span>
+              <Link href="/guides/corn-vs-flour-tortillas" className="text-sm text-sunset-600 hover:text-sunset-700 underline">Corn vs Flour</Link>
+              <span className="text-charcoal-300">|</span>
+              <Link href="/guides" className="text-sm text-sunset-600 hover:text-sunset-700 underline">All Guides</Link>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section - Compact */}
         <details className="mt-10 bg-cream-50 rounded-xl p-5">
           <summary className="text-lg font-bold text-charcoal-950 cursor-pointer list-none flex justify-between items-center">

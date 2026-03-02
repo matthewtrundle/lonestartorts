@@ -56,13 +56,15 @@ export async function POST(req: NextRequest) {
           const random = Math.random().toString(36).substring(2, 4).toUpperCase();
           const orderNumber = `LST-${timestamp}${random}`;
 
-          // Extract line items (all are products now, shipping is separate)
-          const items = fullSession.line_items?.data.map((item) => ({
-            sku: item.price?.metadata?.sku || '',
-            name: item.description || '',
-            quantity: item.quantity || 0,
-            price: item.price?.unit_amount || 0,
-          })) || [];
+          // Extract line items (filter out tax line item, shipping is separate)
+          const items = fullSession.line_items?.data
+            .filter((item) => !item.description?.includes('Sales Tax'))
+            .map((item) => ({
+              sku: item.price?.metadata?.sku || '',
+              name: item.description || '',
+              quantity: item.quantity || 0,
+              price: item.price?.unit_amount || 0,
+            })) || [];
 
           // Calculate totals (amounts in cents)
           const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -70,7 +72,8 @@ export async function POST(req: NextRequest) {
           // Get shipping from Stripe session (now properly separated from line items)
           const shipping = fullSession.shipping_cost?.amount_total || 0;
 
-          const tax = Math.round(subtotal * 0.0825); // 8.25% Texas sales tax
+          // Get tax from metadata (set during checkout) or calculate as fallback
+          const tax = parseInt(fullSession.metadata?.taxAmount || '0', 10) || Math.round(subtotal * 0.0825);
           const total = session.amount_total || (subtotal + shipping + tax);
 
           // Extract shipping address from fullSession (not the basic event object)

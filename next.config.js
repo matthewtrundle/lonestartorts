@@ -45,6 +45,17 @@ const nextConfig = {
         destination: '/track',
         permanent: true,
       },
+      // Broken product links from guides -> shop page sections
+      {
+        source: '/products/corn-tortillas',
+        destination: '/shop#pantry',
+        permanent: false,
+      },
+      {
+        source: '/products/flour-tortillas',
+        destination: '/shop#bakery',
+        permanent: false,
+      },
     ];
   },
   async headers() {
