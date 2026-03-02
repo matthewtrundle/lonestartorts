@@ -31,7 +31,7 @@ export const bundles: ShopBundle[] = [
     id: 'texas-essentials',
     name: 'Texas Essentials',
     tagline: 'The perfect starter pack for Tex-Mex lovers',
-    image: '/images/bundles/taco-night-kit.png',
+    image: '/images/bundles/taco-night-kit.webp',
     bundlePrice: 12000, // $120 (0% discount)
     originalPrice: 12000, // $120 value
     contents: [
@@ -58,7 +58,7 @@ export const bundles: ShopBundle[] = [
     id: 'family-fiesta',
     name: 'Family Fiesta',
     tagline: 'Everything your family needs for authentic Tex-Mex nights',
-    image: '/images/bundles/breakfast-taco-box.png',
+    image: '/images/bundles/breakfast-taco-box.webp',
     bundlePrice: 23000, // $230 (5% discount)
     originalPrice: 24200, // $242 value
     contents: [
@@ -88,7 +88,7 @@ export const bundles: ShopBundle[] = [
     id: 'party-pack',
     name: 'Party Pack',
     tagline: 'Host the ultimate Texas-themed party',
-    image: '/images/bundles/fajita-fiesta.png',
+    image: '/images/bundles/fajita-fiesta.webp',
     bundlePrice: 41500, // $415 (10% discount)
     originalPrice: 45900, // $459 value
     isBestValue: true,
@@ -124,7 +124,7 @@ export const bundles: ShopBundle[] = [
     id: 'ultimate-texas',
     name: 'Ultimate Texas Experience',
     tagline: 'The complete Tex-Mex catering solution',
-    image: '/images/bundles/ultimate-texas-box.png',
+    image: '/images/bundles/ultimate-texas-box.webp',
     bundlePrice: 73500, // $735 (15% discount)
     originalPrice: 86400, // $864 value
     contents: [
