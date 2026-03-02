@@ -81,6 +81,7 @@ export interface CartItemData {
   name: string;
   price: number;
   quantity: number;
+  isBundle?: boolean;
 }
 
 export interface CartData {
@@ -112,6 +113,7 @@ export const trackAddToCart = (item: CartItemData) => {
     name: item.name,
     price: item.price,
     quantity: item.quantity,
+    isBundle: item.isBundle || false,
   });
 };
 
