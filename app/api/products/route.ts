@@ -11,6 +11,14 @@ export async function GET(request: NextRequest) {
   // Filter by product type if specified
   if (type === 'tortilla') {
     filteredProducts = products.filter(p => p.productType === 'tortilla');
+  } else if (type === 'extras') {
+    // Extras: chips, salsa, seasoning, sauce
+    filteredProducts = products.filter(p =>
+      p.productType === 'chips' ||
+      p.productType === 'salsa' ||
+      p.productType === 'seasoning' ||
+      p.productType === 'sauce'
+    );
   } else if (type === 'other') {
     filteredProducts = products.filter(p => p.productType !== 'tortilla');
   }
