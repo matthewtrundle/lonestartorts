@@ -14,9 +14,10 @@ export interface CartItem {
   name: string;
   price: number; // Price in cents
   quantity: number;
-  productType?: 'tortilla' | 'sauce' | 'wholesale'; // Product type for shipping calculation
+  productType?: 'tortilla' | 'sauce' | 'wholesale' | 'chips' | 'salsa' | 'seasoning'; // Product type for shipping calculation
   description?: string;
   image?: string;
+  bundleId?: string; // If part of a bundle, which bundle it belongs to
 }
 
 interface FreeShippingProgress {

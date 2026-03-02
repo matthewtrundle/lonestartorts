@@ -6,6 +6,8 @@ import { ProductCard } from '@/components/product/ProductCard';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { StickyCartBar } from '@/components/shop/StickyCartBar';
 import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
+import { FeaturedBundlesHero } from '@/components/shop/FeaturedBundlesHero';
+import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
@@ -93,6 +95,9 @@ function ShopContent() {
             <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
           </div>
 
+          {/* Featured Care Packages */}
+          <FeaturedBundlesHero />
+
           <div className="max-w-6xl mx-auto px-4 py-6">
             {/* Bakery Fresh Section */}
             <div className="mb-8">
@@ -113,6 +118,7 @@ function ShopContent() {
                     tortillaType={product.tortillaType}
                     isBestSeller={product.isBestSeller}
                     savingsPercent={product.savingsPercent}
+                    bundleOnly={product.bundleOnly}
                   />
                 ))}
               </div>
@@ -137,6 +143,7 @@ function ShopContent() {
                     tortillaType={product.tortillaType}
                     isBestSeller={product.isBestSeller}
                     savingsPercent={product.savingsPercent}
+                    bundleOnly={product.bundleOnly}
                   />
                 ))}
               </div>
@@ -161,6 +168,7 @@ function ShopContent() {
                     tortillaType={product.tortillaType}
                     isBestSeller={product.isBestSeller}
                     savingsPercent={product.savingsPercent}
+                    bundleOnly={product.bundleOnly}
                   />
                 ))}
               </div>
@@ -198,6 +206,9 @@ function ShopContent() {
           <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
         </div>
 
+        {/* Featured Care Packages */}
+        <FeaturedBundlesHero />
+
         <div className="max-w-6xl mx-auto px-4 py-6">
           {/* Bakery Fresh Section */}
           <div className="mb-8">
@@ -218,6 +229,7 @@ function ShopContent() {
                   tortillaType={product.tortillaType}
                   isBestSeller={product.isBestSeller}
                   savingsPercent={product.savingsPercent}
+                  bundleOnly={product.bundleOnly}
                 />
               ))}
             </div>
@@ -242,6 +254,7 @@ function ShopContent() {
                   tortillaType={product.tortillaType}
                   isBestSeller={product.isBestSeller}
                   savingsPercent={product.savingsPercent}
+                  bundleOnly={product.bundleOnly}
                 />
               ))}
             </div>
@@ -266,6 +279,7 @@ function ShopContent() {
                   tortillaType={product.tortillaType}
                   isBestSeller={product.isBestSeller}
                   savingsPercent={product.savingsPercent}
+                  bundleOnly={product.bundleOnly}
                 />
               ))}
             </div>
@@ -321,8 +335,11 @@ function ShopContent() {
               <br className="hidden md:block" />
               <span className="text-sunset-400">Shipped Nationwide</span>
             </h1>
-            <p className="text-sm md:text-lg text-white/90 mb-3 md:mb-5">
+            <p className="text-sm md:text-lg text-white/90 mb-2 md:mb-4">
               Authentic Texas tortillas delivered fresh to your door
+            </p>
+            <p className="text-[10px] md:text-xs text-white/60 mb-2">
+              *Product images are illustrative representations
             </p>
             {/* Free Shipping CTA */}
             <div className="inline-flex items-center gap-2 bg-sunset-600 text-white py-2 px-4 md:py-3 md:px-5 rounded-lg font-bold text-sm md:text-lg shadow-lg">
@@ -350,6 +367,9 @@ function ShopContent() {
         </div>
       </div>
 
+      {/* Featured Care Packages */}
+      <FeaturedBundlesHero />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
         {/* Section Header - Compact on mobile */}
         <div className="text-center mb-4 md:mb-5">
@@ -376,6 +396,7 @@ function ShopContent() {
                 tortillaType={product.tortillaType}
                 isBestSeller={product.isBestSeller}
                 savingsPercent={product.savingsPercent}
+                bundleOnly={product.bundleOnly}
               />
             ))}
           </div>
@@ -400,6 +421,7 @@ function ShopContent() {
                 tortillaType={product.tortillaType}
                 isBestSeller={product.isBestSeller}
                 savingsPercent={product.savingsPercent}
+                bundleOnly={product.bundleOnly}
               />
             ))}
           </div>
@@ -424,11 +446,17 @@ function ShopContent() {
                 tortillaType={product.tortillaType}
                 isBestSeller={product.isBestSeller}
                 savingsPercent={product.savingsPercent}
+                bundleOnly={product.bundleOnly}
               />
             ))}
           </div>
         </div>
+      </div>
 
+      {/* Tex-Mex Extras Section */}
+      <TexMexExtrasSection />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Best Value Banner - More prominent */}
         <div className="mt-10 bg-sunset-600 text-white rounded-xl p-6 shadow-lg">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">

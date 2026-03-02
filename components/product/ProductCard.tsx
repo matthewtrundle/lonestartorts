@@ -16,10 +16,11 @@ interface ProductCardProps {
   price: number;
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
-  productType?: 'tortilla' | 'sauce' | 'wholesale';
+  productType?: 'tortilla' | 'sauce' | 'wholesale' | 'chips' | 'salsa' | 'seasoning';
   tortillaType?: string;
   isBestSeller?: boolean;
   savingsPercent?: number;
+  bundleOnly?: boolean;
   onAddToOrder?: (sku: string) => void;
 }
 
@@ -35,6 +36,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   tortillaType,
   isBestSeller,
   savingsPercent,
+  bundleOnly,
   onAddToOrder,
 }) => {
   const { addItem } = useCart();
@@ -121,7 +123,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </span>
           </div>
         )}
+
+        {/* Bundle Only Badge */}
+        {bundleOnly && (
+          <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 z-10">
+            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-charcoal-800 text-white rounded-full shadow-lg">
+              Bundle Only
+            </span>
+          </div>
+        )}
       </div>
+
+      {/* Image disclaimer */}
+      <p className="text-[9px] text-gray-400 px-3 pt-1 md:px-5 md:pt-2">
+        *Image is illustrative
+      </p>
 
       {/* Product Details - Compact on mobile */}
       <div className="p-3 md:p-5 flex flex-col flex-grow">
@@ -153,57 +169,74 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Spacer to push bottom content down */}
         <div className="flex-grow" />
 
-        {/* Quantity Selector - Compact on mobile */}
-        <div className="flex items-center justify-between mb-2 md:mb-3 bg-gray-50 rounded-lg p-1.5 md:p-2">
-          <span className="text-[10px] md:text-xs font-semibold text-gray-600 uppercase tracking-wide">Qty</span>
-          <div className="flex items-center gap-0.5 md:gap-1">
-            <button
-              onClick={() => handleQuantityChange(-1)}
-              disabled={quantity <= 1}
-              className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
-              aria-label="Decrease quantity"
+        {/* Bundle Only - Show message instead of cart controls */}
+        {bundleOnly ? (
+          <div className="mt-2">
+            <div className="bg-charcoal-50 text-charcoal-700 py-3 px-3 rounded-lg text-center text-xs font-medium">
+              Available in our Care Packages
+            </div>
+            <a
+              href="#bundles"
+              className="mt-2 w-full inline-flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg bg-charcoal-800 text-white hover:bg-charcoal-700 transition-all"
             >
-              <Minus className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
-            <span className="text-base md:text-lg font-bold text-charcoal-950 w-8 md:w-10 text-center">
-              {quantity}
-            </span>
-            <button
-              onClick={() => handleQuantityChange(1)}
-              disabled={quantity >= 10}
-              className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
-              aria-label="Increase quantity"
-            >
-              <Plus className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
+              View Bundles
+            </a>
           </div>
-        </div>
+        ) : (
+          <>
+            {/* Quantity Selector - Compact on mobile */}
+            <div className="flex items-center justify-between mb-2 md:mb-3 bg-gray-50 rounded-lg p-1.5 md:p-2">
+              <span className="text-[10px] md:text-xs font-semibold text-gray-600 uppercase tracking-wide">Qty</span>
+              <div className="flex items-center gap-0.5 md:gap-1">
+                <button
+                  onClick={() => handleQuantityChange(-1)}
+                  disabled={quantity <= 1}
+                  className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+                  aria-label="Decrease quantity"
+                >
+                  <Minus className="w-4 h-4 md:w-5 md:h-5" />
+                </button>
+                <span className="text-base md:text-lg font-bold text-charcoal-950 w-8 md:w-10 text-center">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => handleQuantityChange(1)}
+                  disabled={quantity >= 10}
+                  className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+                  aria-label="Increase quantity"
+                >
+                  <Plus className="w-4 h-4 md:w-5 md:h-5" />
+                </button>
+              </div>
+            </div>
 
-        {/* Shipping Info */}
-        <div className={`mb-2 md:mb-3 py-1.5 md:py-2 px-2 md:px-3 rounded-lg text-center text-[10px] md:text-xs ${
-          shippingInfo.type === 'free'
-            ? 'bg-green-50 text-green-700 font-semibold'
-            : shippingInfo.type === 'progress'
-            ? 'bg-amber-50 text-amber-700'
-            : 'bg-gray-50 text-gray-600'
-        }`}>
-          {shippingInfo.type === 'free' ? (
-            <span>{formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping!</span>
-          ) : (
-            <span>{shippingInfo.message}</span>
-          )}
-        </div>
+            {/* Shipping Info */}
+            <div className={`mb-2 md:mb-3 py-1.5 md:py-2 px-2 md:px-3 rounded-lg text-center text-[10px] md:text-xs ${
+              shippingInfo.type === 'free'
+                ? 'bg-green-50 text-green-700 font-semibold'
+                : shippingInfo.type === 'progress'
+                ? 'bg-amber-50 text-amber-700'
+                : 'bg-gray-50 text-gray-600'
+            }`}>
+              {shippingInfo.type === 'free' ? (
+                <span>{formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping!</span>
+              ) : (
+                <span>{shippingInfo.message}</span>
+              )}
+            </div>
 
-        {/* CTA Button */}
-        <Button
-          variant="cart"
-          size="lg"
-          onClick={handleAddToCart}
-          className="w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
-        >
-          <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
-          Add to Cart
-        </Button>
+            {/* CTA Button */}
+            <Button
+              variant="cart"
+              size="lg"
+              onClick={handleAddToCart}
+              className="w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
+            >
+              <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
+              Add to Cart
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

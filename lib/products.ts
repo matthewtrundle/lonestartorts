@@ -24,12 +24,13 @@ export interface Product {
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
   category: string;
-  productType?: 'tortilla' | 'sauce' | 'wholesale'; // Distinguish between product types for shipping logic
+  productType?: 'tortilla' | 'sauce' | 'wholesale' | 'chips' | 'salsa' | 'seasoning'; // Distinguish between product types for shipping logic
   tortillaType?: string; // "Flour", "Corn", "Wheat", etc.
   isBestSeller?: boolean; // Show "Best Seller" badge
   savingsPercent?: number; // Show savings percentage (e.g., 15 for "15% OFF")
   collection?: 'bakery' | 'pantry' | 'texas-brands'; // Product collection for shop sections
   brand?: 'heb' | 'mission' | 'la-banderita'; // Brand identifier for Texas brands section
+  bundleOnly?: boolean; // Product only available in bundles (not sold standalone)
 }
 
 export const products: Product[] = [
@@ -238,6 +239,238 @@ export const products: Product[] = [
     price: 1200, // $12 per bottle
     tortillaCount: 0, // Not a tortilla product
     storage: 'refrigerated',
+    category: 'sauce',
+    productType: 'sauce',
+  },
+  // ============================================
+  // TEX-MEX EXTRAS - Chips, Salsas, Seasonings
+  // ============================================
+  {
+    sku: 'HEB-RED-SAUCE',
+    name: 'H-E-B That Red Sauce',
+    description: 'The perfect complement to That Green Sauce. Smoky, tangy, and irresistible on breakfast tacos.',
+    image: '/images/products/heb-red-sauce.webp',
+    price: 1200, // $12 per bottle
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'sauce',
+    productType: 'sauce',
+  },
+  {
+    sku: 'HEB-TEXAS-CHIPS',
+    name: 'H-E-B Texas-Shaped Tortilla Chips',
+    description: 'Crispy tortilla chips in the shape of Texas. Perfect for dipping or snacking with true Lone Star pride.',
+    image: '/images/products/heb-texas-chips.webp',
+    price: 1000, // $10 per bag
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'chips',
+    productType: 'chips',
+    bundleOnly: true, // High volume/low density - shipping economics
+  },
+  {
+    sku: 'HEB-BAKERY-CHIPS',
+    name: 'H-E-B Bakery Style Tortilla Chips',
+    description: 'Thick-cut bakery style chips with authentic restaurant taste. Sturdy enough for any salsa or queso.',
+    image: '/images/products/heb-bakery-chips.webp',
+    price: 1200, // $12 per bag
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'chips',
+    productType: 'chips',
+    bundleOnly: true, // High volume/low density - shipping economics
+  },
+  {
+    sku: 'HEB-SALSA-MILD',
+    name: 'H-E-B Restaurant Salsa - Mild',
+    description: 'Authentic restaurant-style salsa with fresh tomatoes, peppers, and cilantro. Mild heat, big flavor.',
+    image: '/images/products/heb-salsa-mild.webp',
+    price: 1000, // $10 per jar
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'salsa',
+    productType: 'salsa',
+  },
+  {
+    sku: 'HEB-SALSA-MEDIUM',
+    name: 'H-E-B Restaurant Salsa - Medium',
+    description: 'Restaurant-style salsa with the perfect balance of flavor and heat. A Texas kitchen staple.',
+    image: '/images/products/heb-salsa-medium.webp',
+    price: 1000, // $10 per jar
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'salsa',
+    productType: 'salsa',
+  },
+  {
+    sku: 'HEB-SALSA-HOT',
+    name: 'H-E-B Restaurant Salsa - Hot',
+    description: 'For those who like it hot. Authentic restaurant salsa with serious kick and bold flavor.',
+    image: '/images/products/heb-salsa-hot.webp',
+    price: 1000, // $10 per jar
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'salsa',
+    productType: 'salsa',
+  },
+  {
+    sku: 'HEB-FAJITA-SEASON',
+    name: 'H-E-B Fajita Seasoning',
+    description: 'The secret to perfect fajitas. Authentic Texas blend of spices for chicken, beef, or shrimp.',
+    image: '/images/products/heb-fajita-seasoning.webp',
+    price: 800, // $8 per packet
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'seasoning',
+    productType: 'seasoning',
+  },
+  {
+    sku: 'HEB-TACO-SEASON',
+    name: 'H-E-B Taco Seasoning',
+    description: 'Classic taco seasoning for authentic Tex-Mex flavor. No MSG, no artificial flavors.',
+    image: '/images/products/heb-taco-seasoning.webp',
+    price: 800, // $8 per packet
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'seasoning',
+    productType: 'seasoning',
+  },
+  // ============================================
+  // NEW PRODUCTS - Expanded Texas Favorites
+  // ============================================
+  {
+    sku: 'HEB-GREEN-SAUCE-MILD',
+    name: 'H-E-B That Green Sauce - Mild',
+    description: 'The legendary green sauce in a milder heat level. Same great jalapeño-poblano flavor, easier on the heat.',
+    image: '/images/products/heb-green-sauce-mild.webp',
+    price: 1200, // $12 per bottle
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'sauce',
+    productType: 'sauce',
+  },
+  {
+    sku: 'HEB-SALSA-SMOKY-CITRUS',
+    name: 'H-E-B Specialty Salsa - Smoky Citrus',
+    description: 'A unique blend of smoky chipotle and bright citrus. South Texas flavor in every bite.',
+    image: '/images/products/heb-salsa-smoky-citrus.webp',
+    price: 1000, // $10 per jar
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'salsa',
+    productType: 'salsa',
+  },
+  {
+    sku: 'HEB-SALSA-HABANERO',
+    name: 'H-E-B Specialty Salsa - Habanero',
+    description: 'For serious heat seekers. Fiery habanero salsa with authentic Texas attitude.',
+    image: '/images/products/heb-salsa-habanero.webp',
+    price: 1000, // $10 per jar
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'salsa',
+    productType: 'salsa',
+  },
+  {
+    sku: 'HEB-STREET-CORN-CHIPS',
+    name: 'H-E-B Mexican Street Corn Chips',
+    description: 'Inspired by elote! Roasted corn and smoky cheese flavor. Gluten-free.',
+    image: '/images/products/heb-street-corn-chips.webp',
+    price: 1000, // $10 per bag
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'chips',
+    productType: 'chips',
+    bundleOnly: true,
+  },
+  {
+    sku: 'HEB-JALAPENO-CHIPS',
+    name: 'H-E-B Spicy Jalapeño Chips',
+    description: 'Fire up your taste buds with these spicy jalapeño tortilla chips. Perfect with salsa or queso.',
+    image: '/images/products/heb-jalapeno-chips.webp',
+    price: 1000, // $10 per bag
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'chips',
+    productType: 'chips',
+    bundleOnly: true,
+  },
+  {
+    sku: 'HEB-TACO-CHIPS',
+    name: 'H-E-B Crunchy Taco Chips',
+    description: 'Tortilla chips seasoned with authentic taco flavor. Gluten-free snacking perfection.',
+    image: '/images/products/heb-taco-chips.webp',
+    price: 1000, // $10 per bag
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'chips',
+    productType: 'chips',
+    bundleOnly: true,
+  },
+  {
+    sku: 'HEB-SPICY-BBQ-CHIPS',
+    name: 'H-E-B Texas Corn Chips - Spicy BBQ',
+    description: 'Smoky barbecue meets Texas heat. Bold BBQ flavor with an extra kick.',
+    image: '/images/products/heb-spicy-bbq-chips.webp',
+    price: 1000, // $10 per bag
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'chips',
+    productType: 'chips',
+    bundleOnly: true,
+  },
+  {
+    sku: 'HEB-LONE-STARS',
+    name: 'H-E-B Lone Stars Cheddar Crackers',
+    description: 'Texas-shaped cheddar crackers. The iconic Lone Star snack that Texans grew up with.',
+    image: '/images/products/heb-lone-stars.webp',
+    price: 1000, // $10 per box
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'snacks',
+    productType: 'chips',
+  },
+  {
+    sku: 'HEB-PICA-PUFFS',
+    name: 'H-E-B Pica Puffs',
+    description: 'Spicy puffed corn snacks with a cult following. The Texas answer to hot chips.',
+    image: '/images/products/heb-pica-puffs.webp',
+    price: 1000, // $10 per bag
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'snacks',
+    productType: 'chips',
+  },
+  {
+    sku: 'HEB-BRISKET-RUB',
+    name: 'H-E-B Texas Originals Brisket Rub',
+    description: 'The authentic Texas brisket seasoning. Salt, pepper, and secret spices for perfect bark.',
+    image: '/images/products/heb-brisket-rub.webp',
+    price: 1000, // $10 per container
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'seasoning',
+    productType: 'seasoning',
+  },
+  {
+    sku: 'HEB-TEXAS-BBQ-SAUCE',
+    name: 'H-E-B Texas Style BBQ Sauce',
+    description: 'Robust Texas BBQ sauce with heat and black pepper. Not for the meek.',
+    image: '/images/products/heb-texas-bbq-sauce.webp',
+    price: 1000, // $10 per bottle
+    tortillaCount: 0,
+    storage: 'shelf_stable',
+    category: 'sauce',
+    productType: 'sauce',
+  },
+  {
+    sku: 'TERRY-BLACKS-BBQ',
+    name: "Terry Black's BBQ Sauce",
+    description: 'From the legendary Austin BBQ joint. Authentic pit-master flavor in every bottle.',
+    image: '/images/products/terry-blacks-bbq.webp',
+    price: 1200, // $12 per bottle
+    tortillaCount: 0,
+    storage: 'shelf_stable',
     category: 'sauce',
     productType: 'sauce',
   },
