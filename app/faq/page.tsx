@@ -1,9 +1,4 @@
-'use client';
-
-import Link from 'next/link';
-import { useLanguage } from '@/lib/language-context';
-
-// Note: Metadata moved to generateMetadata or handled via document head for client component
+import FAQContent from '@/components/faq/FAQContent';
 
 // Breadcrumb schema for better SERP display
 const breadcrumbSchema = {
@@ -36,7 +31,7 @@ const faqSchema = {
       name: 'Can I buy H-E-B tortillas online and have them shipped?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship Monday, Tuesday, and Wednesday — orders placed before 2 PM CT on a ship day go out the same day via USPS Priority Mail, with delivery in 2-3 business days. Visit lonestartortillas.com/shop to order now.'
+        text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship on Tuesdays — orders placed before 2 PM CT on Tuesday go out the same day via USPS Priority Mail, with delivery in 2-3 business days. Visit lonestartortillas.com/shop to order now.'
       }
     },
     {
@@ -52,7 +47,7 @@ const faqSchema = {
       name: 'Does anyone ship H-E-B tortillas nationwide?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship Monday, Tuesday, and Wednesday for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
+        text: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship on Tuesdays for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
       }
     },
     {
@@ -60,7 +55,7 @@ const faqSchema = {
       name: 'Where can I buy H-E-B tortillas if I don\'t live in Texas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Mon-Wed; orders before 2 PM CT on a ship day go out same-day.'
+        text: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Tuesdays; orders before 2 PM CT on Tuesday go out same-day.'
       }
     },
     {
@@ -124,7 +119,7 @@ const faqSchema = {
       name: 'How long does shipping take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We ship Monday, Tuesday, and Wednesday as part of our Freshness First Shipping program. Orders placed before 2 PM CT on a ship day go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
+        text: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before 2 PM CT on Tuesday go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
       }
     },
     {
@@ -214,6 +209,14 @@ const faqSchema = {
         '@type': 'Answer',
         text: 'Use a dry skillet over medium heat for 20-30 seconds per side. For multiple tortillas, wrap in damp paper towels and microwave for 30 seconds. You can also wrap in foil and warm in a 350°F oven for 10 minutes.'
       }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I call Lonestar Tortillas for customer support?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes! Call Maria, our friendly AI assistant, anytime 24/7. Maria can answer questions about products, prices, shipping, and orders. For complex issues, she will collect your information so our team can follow up. You can also text us at (737) 228-0037 or email howdy@lonestartortillas.com.'
+      }
     }
   ]
 };
@@ -224,7 +227,7 @@ const faqs = [
     questions: [
       {
         q: 'Can I buy H-E-B tortillas online and have them shipped?',
-        a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship Monday, Tuesday, and Wednesday — orders placed before 2 PM CT on a ship day go out the same day via USPS Priority Mail, with delivery in 2-3 business days.'
+        a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship on Tuesdays — orders placed before 2 PM CT on Tuesday go out the same day via USPS Priority Mail, with delivery in 2-3 business days.'
       },
       {
         q: 'Who sells H-E-B tortillas online?',
@@ -232,11 +235,11 @@ const faqs = [
       },
       {
         q: 'Does anyone ship H-E-B tortillas nationwide?',
-        a: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship Mon-Wed for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
+        a: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship on Tuesdays for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
       },
       {
         q: 'Where can I buy H-E-B tortillas if I don\'t live in Texas?',
-        a: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Mon-Wed; orders before 2 PM CT on a ship day go out same-day.'
+        a: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Tuesdays; orders before 2 PM CT on Tuesday go out same-day.'
       },
     ]
   },
@@ -270,7 +273,7 @@ const faqs = [
       },
       {
         q: 'How long does shipping take?',
-        a: 'We ship Monday, Tuesday, and Wednesday as part of our Freshness First Shipping program. Orders placed before 2 PM CT on a ship day go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
+        a: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before 2 PM CT on Tuesday go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
       },
       {
         q: 'How are the tortillas packaged for shipping?',
@@ -329,7 +332,11 @@ const faqs = [
       },
       {
         q: 'Do you offer bulk or wholesale pricing?',
-        a: 'For bulk orders or wholesale inquiries, please contact us at howdy@lonestartortilla.com. We\'re happy to discuss volume pricing for restaurants, food trucks, or large families who go through tortillas quickly!'
+        a: 'For bulk orders or wholesale inquiries, please contact us at howdy@lonestartortillas.com. We\'re happy to discuss volume pricing for restaurants, food trucks, or large families who go through tortillas quickly!'
+      },
+      {
+        q: 'Can I call for customer support?',
+        a: 'Yes! Call Maria, our friendly AI assistant, anytime 24/7. Maria can answer questions about products, prices, shipping, and orders. For complex issues, she\'ll collect your info so our team can follow up. You can also text us at (737) 228-0037 or email howdy@lonestartortillas.com.'
       }
     ]
   },
@@ -427,8 +434,6 @@ const faqs = [
 ];
 
 export default function FAQPage() {
-  const { t } = useLanguage();
-
   return (
     <>
       <script
@@ -440,149 +445,7 @@ export default function FAQPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-cream-50 via-masa-50 to-cream-100">
-        {/* Breadcrumbs */}
-        <nav className="container mx-auto px-8 py-6">
-          <ol className="flex items-center gap-2 text-sm text-charcoal-600">
-            <li><Link href="/" className="hover:text-sunset-500">{t('faq.breadcrumb.home')}</Link></li>
-            <li>/</li>
-            <li className="text-charcoal-950 font-medium">{t('faq.breadcrumb.faq')}</li>
-          </ol>
-        </nav>
-
-        {/* Hero Section */}
-        <section className="container mx-auto px-8 py-12">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h1 className="text-5xl lg:text-7xl font-display font-black text-charcoal-950 mb-6">
-              {t('faq.title')}
-            </h1>
-            <p className="text-xl text-charcoal-700 leading-relaxed">
-              {t('faq.heroText')}
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div className="max-w-5xl mx-auto mb-16">
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-2xl font-display font-bold text-charcoal-950 mb-4">{t('faq.jumpToSection')}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {faqs.map((section, idx) => (
-                  <a
-                    key={idx}
-                    href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="block p-4 bg-cream-50 hover:bg-sunset-100 rounded-lg transition-colors group"
-                  >
-                    <span className="font-bold text-charcoal-950 group-hover:text-sunset-600">
-                      {section.category} →
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* FAQ Sections */}
-          <div className="max-w-5xl mx-auto space-y-16">
-            {faqs.map((section, sectionIdx) => (
-              <div key={sectionIdx} id={section.category.toLowerCase().replace(/\s+/g, '-')}>
-                <h2 className="text-4xl font-display font-black text-charcoal-950 mb-8 pb-4 border-b-4 border-sunset-500">
-                  {section.category}
-                </h2>
-
-                <div className="space-y-6">
-                  {section.questions.map((faq, faqIdx) => (
-                    <div
-                      key={faqIdx}
-                      className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow p-8"
-                    >
-                      <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-start gap-3">
-                        <span className="flex-shrink-0 w-8 h-8 bg-sunset-500 text-cream-50 rounded-full flex items-center justify-center text-sm font-black">
-                          Q
-                        </span>
-                        {faq.q}
-                      </h3>
-                      <div className="ml-11 text-lg text-charcoal-700 leading-relaxed">
-                        <span className="font-bold text-masa-600">A: </span>
-                        {faq.a}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Still Have Questions CTA */}
-          <div className="max-w-4xl mx-auto mt-20">
-            <div className="bg-gradient-to-br from-sunset-500 to-sunset-600 rounded-2xl shadow-2xl p-12 text-center text-cream-50">
-              <h2 className="text-4xl font-display font-black mb-4">
-                {t('faq.stillHaveQuestions')}
-              </h2>
-              <p className="text-xl mb-8 opacity-90">
-                {t('faq.stillHaveQuestionsText')}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/contact"
-                  className="inline-block bg-cream-50 text-sunset-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors shadow-lg"
-                >
-                  {t('faq.contactUs')}
-                </Link>
-                <Link
-                  href="/returns"
-                  className="inline-block bg-transparent border-2 border-cream-50 text-cream-50 px-8 py-4 rounded-full font-bold text-lg hover:bg-cream-50/10 transition-colors"
-                >
-                  {t('faq.returnsRefunds')}
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Related Links */}
-          <div className="max-w-5xl mx-auto mt-16">
-            <h2 className="text-3xl font-display font-bold text-charcoal-950 mb-6 text-center">
-              {t('faq.exploreProducts')}
-            </h2>
-            <div className="grid md:grid-cols-4 gap-6">
-              <Link href="/products/corn-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-                <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  {t('faq.products.corn')}
-                </h3>
-                <p className="text-sm text-charcoal-600">{t('faq.products.cornDesc')}</p>
-              </Link>
-              <Link href="/products/flour-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-                <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  {t('faq.products.flour')}
-                </h3>
-                <p className="text-sm text-charcoal-600">{t('faq.products.flourDesc')}</p>
-              </Link>
-              <Link href="/products/butter-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-                <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  {t('faq.products.butter')}
-                </h3>
-                <p className="text-sm text-charcoal-600">{t('faq.products.butterDesc')}</p>
-              </Link>
-              <Link href="/products/specialty-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-                <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
-                  {t('faq.products.specialty')}
-                </h3>
-                <p className="text-sm text-charcoal-600">{t('faq.products.specialtyDesc')}</p>
-              </Link>
-            </div>
-          </div>
-
-          {/* SEO Content Block */}
-          <div className="max-w-4xl mx-auto mt-20 prose prose-lg">
-            <h2 className="text-3xl font-display font-bold text-charcoal-950">{t('faq.seo.title')}</h2>
-            <p className="text-charcoal-700">
-              {t('faq.seo.paragraph1')}
-            </p>
-            <p className="text-charcoal-700">
-              {t('faq.seo.paragraph2')}
-            </p>
-          </div>
-        </section>
-      </div>
+      <FAQContent faqs={faqs} />
     </>
   );
 }

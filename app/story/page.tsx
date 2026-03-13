@@ -1,12 +1,12 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
-import { useLanguage } from '@/lib/language-context'
+import StoryHeroText from '@/components/story/StoryHeroText'
+import StoryValuesTitle from '@/components/story/StoryValuesTitle'
+import StoryMissionText from '@/components/story/StoryMissionText'
+import StoryCtaText from '@/components/story/StoryCtaText'
 
 export default function StoryPage() {
-  const { t } = useLanguage();
   return (
     <ScrollAnimations>
         <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
@@ -69,50 +69,7 @@ export default function StoryPage() {
 
             {/* Hero Content */}
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              {/* Quality Badge */}
-              <div className="mb-6 reveal-text">
-                <span className="text-xs font-bold tracking-[0.4em] uppercase text-masa-600">
-                  {t('story.hero.badge') || 'Our Journey'}
-                </span>
-              </div>
-
-              {/* Main Title */}
-              <h1 className="mb-8">
-                <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black leading-[0.85] text-charcoal-950">
-                  {t('story.hero.title')}
-                </span>
-                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-light italic mt-4 text-sunset-600">
-                  {t('story.hero.subtitle')}
-                </span>
-              </h1>
-
-              {/* Divider */}
-              <div className="flex items-center justify-center gap-4 my-8">
-                <span className="block w-16 sm:w-20 h-px bg-charcoal-300"></span>
-                <span className="text-sunset-500 text-2xl">✦</span>
-                <span className="block w-16 sm:w-20 h-px bg-charcoal-300"></span>
-              </div>
-
-              {/* Description */}
-              <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-charcoal-700 leading-relaxed slide-left">
-                {t('story.hero.description')}
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-                <Link
-                  href="/shop"
-                  className="bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-8 sm:px-12 py-4 text-base sm:text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl"
-                >
-                  Shop Now
-                </Link>
-                <Link
-                  href="/craft"
-                  className="border-2 border-charcoal-950 text-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50 px-8 sm:px-12 py-4 text-base sm:text-lg font-bold tracking-wider uppercase transition-colors"
-                >
-                  {t('story.cta.whyHeb') || 'Why H-E-B?'}
-                </Link>
-              </div>
+              <StoryHeroText />
 
               {/* Scroll Indicator */}
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
@@ -222,9 +179,7 @@ export default function StoryPage() {
         {/* Values Section */}
         <section className="py-16 md:py-20 bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-12 md:mb-16 reveal-text">
-              {t('story.values.title')}
-            </h2>
+            <StoryValuesTitle />
 
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 max-w-5xl mx-auto">
               {[
@@ -277,15 +232,7 @@ export default function StoryPage() {
         <section className="py-16 md:py-20 bg-gradient-to-b from-cream-50 to-masa-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black mb-6 md:mb-8 magazine-text">
-                {t('story.mission.title')}
-              </h2>
-              <p className="text-xl sm:text-2xl md:text-3xl font-display italic text-masa-600 mb-6 md:mb-8">
-                {t('story.mission.quote')}
-              </p>
-              <p className="text-base sm:text-lg text-charcoal-700 mb-10 md:mb-12 leading-relaxed">
-                {t('story.mission.description')}
-              </p>
+              <StoryMissionText />
 
               <div className="grid grid-cols-3 gap-4 sm:gap-8 mt-10 md:mt-16">
                 {[
@@ -348,42 +295,7 @@ export default function StoryPage() {
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black mb-6 md:mb-8">
-              {t('story.cta.title')}
-            </h2>
-            <p className="text-lg sm:text-xl mb-8 md:mb-12 max-w-2xl mx-auto text-charcoal-700 leading-relaxed">
-              {t('story.cta.subtitle')}
-            </p>
-
-            {/* Primary CTA - Large and Prominent */}
-            <div className="mb-8">
-              <Link
-                href="/shop"
-                className="inline-block bg-sunset-500 text-cream-50 px-10 sm:px-16 py-5 sm:py-6 text-lg sm:text-2xl font-bold tracking-wide uppercase hover:bg-sunset-600 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
-              >
-                Shop Now
-              </Link>
-            </div>
-
-            {/* Secondary CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/craft"
-                className="inline-block border-2 border-charcoal-950 text-charcoal-950 px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold tracking-wide uppercase hover:bg-charcoal-950 hover:text-cream-50 transition-colors"
-              >
-                {t('story.cta.whyHeb') || 'Why H-E-B?'}
-              </Link>
-              <Link
-                href="/guides"
-                className="inline-block border-2 border-masa-600 text-masa-700 px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold tracking-wide uppercase hover:bg-masa-600 hover:text-cream-50 transition-colors"
-              >
-                View Guides
-              </Link>
-            </div>
-
-            <p className="text-xs sm:text-sm text-charcoal-500 mt-8 md:mt-10 tracking-wider uppercase">
-              {t('disclaimer.short')}
-            </p>
+            <StoryCtaText />
           </div>
         </section>
       </div>

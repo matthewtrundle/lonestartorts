@@ -1,10 +1,7 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { GiftForm } from '@/components/campaigns/GiftForm';
-import { CarePackageCard } from '@/components/campaigns/CarePackageCard';
-import { carePackageBundles } from '@/lib/care-packages';
+import { CarePackageBundlesGrid } from '@/components/campaigns/CarePackageBundlesGrid';
 import {
   Package,
   Plane,
@@ -148,10 +145,6 @@ export default function MilitaryCarePackagesPage() {
     },
   };
 
-  const scrollToForm = () => {
-    document.getElementById('gift-form')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <>
       <script
@@ -271,16 +264,8 @@ export default function MilitaryCarePackagesPage() {
               </p>
             </div>
 
-            {/* Bundle Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {carePackageBundles.map((bundle) => (
-                <CarePackageCard
-                  key={bundle.id}
-                  bundle={bundle}
-                  onSelect={scrollToForm}
-                />
-              ))}
-            </div>
+            {/* Bundle Cards Grid - Client Component */}
+            <CarePackageBundlesGrid />
 
             <div className="mt-8 text-center">
               <p className="text-charcoal-600 mb-2">

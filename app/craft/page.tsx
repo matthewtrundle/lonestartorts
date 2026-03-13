@@ -1,9 +1,7 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
-import { useLanguage } from '@/lib/language-context'
+import { CraftDisclaimerText } from '@/components/craft/CraftDisclaimerText'
 
 // SVG Icons as components
 const ShieldIcon = () => (
@@ -63,8 +61,6 @@ const SparklesIcon = () => (
 )
 
 export default function CraftPage() {
-  const { t } = useLanguage();
-
   const processSteps = [
     {
       step: '01',
@@ -355,7 +351,7 @@ export default function CraftPage() {
               </div>
 
               <p className="text-xs sm:text-sm text-cream-500 mt-8 tracking-wider uppercase">
-                {t('disclaimer.short')}
+                <CraftDisclaimerText />
               </p>
             </div>
           </section>
