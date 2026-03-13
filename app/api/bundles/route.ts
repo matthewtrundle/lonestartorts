@@ -23,6 +23,10 @@ export async function GET(request: NextRequest) {
         ...bundle,
         ...savings,
       },
+    }, {
+      headers: {
+        'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+      },
     });
   }
 
@@ -35,5 +39,9 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     success: true,
     bundles,
+  }, {
+    headers: {
+      'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+    },
   });
 }

@@ -21,90 +21,62 @@ export async function GET(req: NextRequest) {
     const last30Days = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
     const previous30Days = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000);
 
-    // Get all orders for calculations
+    // Get all metrics using aggregation queries instead of fetching all records
     const [
-      todayOrders,
-      last30DaysOrders,
-      previous30DaysOrders,
+      todayRevenueResult,
+      totalOrders30Days,
+      totalOrdersPrevious30Days,
       pendingOrders,
       processingOrders,
-      allOrders,
+      avgOrderValueResult,
+      topProducts,
     ] = await Promise.all([
-      // Today's orders
-      prisma.order.findMany({
+      // Today's revenue - aggregate instead of findMany
+      prisma.order.aggregate({
+        where: { createdAt: { gte: todayStart }, paymentStatus: 'SUCCEEDED' },
+        _sum: { total: true },
+      }),
+      // Last 30 days order count
+      prisma.order.count({ where: { createdAt: { gte: last30Days } } }),
+      // Previous 30 days order count (for trend)
+      prisma.order.count({ where: { createdAt: { gte: previous30Days, lt: last30Days } } }),
+      // Pending orders count
+      prisma.order.count({ where: { status: 'PENDING' } }),
+      // Processing orders count
+      prisma.order.count({ where: { status: 'PROCESSING' } }),
+      // Average order value
+      prisma.order.aggregate({
+        where: { paymentStatus: 'SUCCEEDED' },
+        _avg: { total: true },
+      }),
+      // Top products by quantity - use groupBy on OrderItem
+      prisma.orderItem.groupBy({
+        by: ['sku', 'name'],
         where: {
-          createdAt: { gte: todayStart },
-          paymentStatus: 'SUCCEEDED',
+          sku: { not: null, notIn: ['SHIPPING'] },
+          Order: { paymentStatus: 'SUCCEEDED' },
         },
-      }),
-      // Last 30 days
-      prisma.order.findMany({
-        where: {
-          createdAt: { gte: last30Days },
-        },
-        include: {
-          OrderItem: true,
-        },
-      }),
-      // Previous 30 days (for comparison)
-      prisma.order.findMany({
-        where: {
-          createdAt: {
-            gte: previous30Days,
-            lt: last30Days,
-          },
-        },
-      }),
-      // Pending orders
-      prisma.order.count({
-        where: { status: 'PENDING' },
-      }),
-      // Processing orders (to ship)
-      prisma.order.count({
-        where: { status: 'PROCESSING' },
-      }),
-      // All successful orders
-      prisma.order.findMany({
-        where: {
-          paymentStatus: 'SUCCEEDED',
-        },
-        include: {
-          OrderItem: true,
-        },
+        _sum: { quantity: true },
+        orderBy: { _sum: { quantity: 'desc' } },
+        take: 1,
       }),
     ]);
 
-    // Calculate metrics
-    const todayRevenue = todayOrders.reduce((sum, order) => sum + order.total, 0);
-    const totalOrders30Days = last30DaysOrders.length;
-    const totalOrdersPrevious30Days = previous30DaysOrders.length;
+    // Calculate metrics from aggregation results
+    const todayRevenue = todayRevenueResult._sum.total || 0;
 
     // Calculate order trend
     const orderTrend = totalOrdersPrevious30Days > 0
       ? ((totalOrders30Days - totalOrdersPrevious30Days) / totalOrdersPrevious30Days) * 100
       : 0;
 
-    // Calculate average order value
-    const avgOrderValue = allOrders.length > 0
-      ? allOrders.reduce((sum, order) => sum + order.total, 0) / allOrders.length
-      : 0;
+    // Average order value from aggregate
+    const avgOrderValue = avgOrderValueResult._avg.total || 0;
 
-    // Get top product from all orders
-    const productCounts: Record<string, { count: number; name: string }> = {};
-    allOrders.forEach((order) => {
-      const items = order.OrderItem;
-      items.forEach((item: any) => {
-        if (item.sku && item.sku !== 'SHIPPING') {
-          if (!productCounts[item.sku]) {
-            productCounts[item.sku] = { count: 0, name: item.name || item.sku };
-          }
-          productCounts[item.sku].count += item.quantity || 1;
-        }
-      });
-    });
-
-    const topProduct = Object.entries(productCounts)
-      .sort((a, b) => b[1].count - a[1].count)[0];
+    // Top product from groupBy result
+    const topProduct = topProducts[0]
+      ? { name: topProducts[0].name || topProducts[0].sku || '', count: topProducts[0]._sum.quantity || 0 }
+      : null;
 
     // Get recent orders (last 10) with feedback status
     const rawRecentOrders = await prisma.order.findMany({
@@ -175,8 +147,8 @@ export async function GET(req: NextRequest) {
         },
         topProduct: topProduct
           ? {
-              name: topProduct[1].name,
-              count: topProduct[1].count,
+              name: topProduct.name,
+              count: topProduct.count,
             }
           : null,
       },

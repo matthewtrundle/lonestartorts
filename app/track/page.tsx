@@ -57,7 +57,10 @@ export default function TrackOrderPage() {
         [searchType]: searchValue,
       });
 
-      const response = await fetch(`/api/webhook?${params}`);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+      const response = await fetch(`/api/webhook?${params}`, { signal: controller.signal });
+      clearTimeout(timeoutId);
       const data = await response.json();
 
       if (!response.ok) {

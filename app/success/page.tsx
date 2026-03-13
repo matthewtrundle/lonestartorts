@@ -67,8 +67,10 @@ function SuccessContent() {
     // Clear the cart immediately on successful order
     clearCart();
 
-    // Fetch order details using session ID
-    fetch(`/api/success?session_id=${sessionId}`)
+    // Fetch order details using session ID (with 8s timeout)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    fetch(`/api/success?session_id=${sessionId}`, { signal: controller.signal })
       .then(res => res.json())
       .then(data => {
         if (data.success && data.order) {
@@ -91,12 +93,6 @@ function SuccessContent() {
               'transaction_id': data.order.orderNumber,
             });
 
-            // Debug logging
-            console.log('Google Ads Purchase conversion fired:', {
-              send_to: 'AW-17804372077/yeE1COz1ptEbEO3Q5KlC',
-              transaction_id: data.order.orderNumber,
-              value: data.order.total / 100,
-            });
           }
 
           // Track conversion in TikTok Pixel
@@ -116,11 +112,6 @@ function SuccessContent() {
               currency: 'USD',
             });
 
-            console.log('TikTok CompletePayment conversion fired:', {
-              transaction_id: data.order.orderNumber,
-              value: data.order.total / 100,
-              contents: contents,
-            });
           }
         }
       })
@@ -128,6 +119,7 @@ function SuccessContent() {
         console.error('Error fetching order:', error);
       })
       .finally(() => {
+        clearTimeout(timeoutId);
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -252,7 +244,7 @@ function SuccessContent() {
                 <div>
                   <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Freshness First Shipping</p>
                   <p className="text-2xl md:text-3xl font-bold text-charcoal-950">Ships {orderDetails.estimatedShipDate}</p>
-                  <p className="text-sm text-charcoal-600 mt-1">We ship Mon–Wed for maximum freshness</p>
+                  <p className="text-sm text-charcoal-600 mt-1">We ship Tuesdays for maximum freshness</p>
                 </div>
               </div>
             </motion.div>

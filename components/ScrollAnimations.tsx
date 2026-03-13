@@ -47,13 +47,19 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
 
     gsap.ticker.lagSmoothing(0)
 
-    // Track cursor for interactive effects
+    // Track cursor for interactive effects - throttled with rAF
+    let mouseTicking = false
     const handleMouseMove = (e: MouseEvent) => {
-      cursorRef.current = { x: e.clientX, y: e.clientY }
+      if (mouseTicking) return
+      mouseTicking = true
+      requestAnimationFrame(() => {
+        cursorRef.current = { x: e.clientX, y: e.clientY }
 
-      // Update CSS variables for spotlight effects
-      document.documentElement.style.setProperty('--mouse-x', `${(e.clientX / window.innerWidth) * 100}%`)
-      document.documentElement.style.setProperty('--mouse-y', `${(e.clientY / window.innerHeight) * 100}%`)
+        // Update CSS variables for spotlight effects
+        document.documentElement.style.setProperty('--mouse-x', `${(e.clientX / window.innerWidth) * 100}%`)
+        document.documentElement.style.setProperty('--mouse-y', `${(e.clientY / window.innerHeight) * 100}%`)
+        mouseTicking = false
+      })
     }
     window.addEventListener('mousemove', handleMouseMove)
 
@@ -413,16 +419,22 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
       const content = area.querySelector('.magnetic-content')
 
       if (content) {
+        let magneticTicking = false
         area.addEventListener('mousemove', (e: MouseEvent) => {
-          const rect = area.getBoundingClientRect()
-          const x = e.clientX - rect.left - rect.width / 2
-          const y = e.clientY - rect.top - rect.height / 2
+          if (magneticTicking) return
+          magneticTicking = true
+          requestAnimationFrame(() => {
+            const rect = area.getBoundingClientRect()
+            const x = e.clientX - rect.left - rect.width / 2
+            const y = e.clientY - rect.top - rect.height / 2
 
-          gsap.to(content, {
-            x: x * 0.3,
-            y: y * 0.3,
-            duration: 0.4,
-            ease: 'power2.out',
+            gsap.to(content, {
+              x: x * 0.3,
+              y: y * 0.3,
+              duration: 0.4,
+              ease: 'power2.out',
+            })
+            magneticTicking = false
           })
         })
 

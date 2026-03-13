@@ -110,18 +110,15 @@ export async function GET(req: NextRequest) {
       errors: [] as string[],
     };
 
+    // Collect converted campaign IDs for batch update
+    const convertedCampaignIds: string[] = [];
+
     // Process each campaign
     for (const campaign of dueCampaigns) {
       try {
         // Check if lead has converted
         if (campaign.spinWheelEntry.used) {
-          await prisma.dripCampaignProgress.update({
-            where: { id: campaign.id },
-            data: {
-              status: 'CONVERTED',
-              convertedAt: campaign.spinWheelEntry.usedAt || now,
-            },
-          });
+          convertedCampaignIds.push(campaign.id);
           results.converted++;
           continue;
         }
@@ -221,6 +218,17 @@ export async function GET(req: NextRequest) {
           `Campaign ${campaign.id}: ${err instanceof Error ? err.message : 'Unknown error'}`
         );
       }
+    }
+
+    // Batch update all converted campaigns in a single query
+    if (convertedCampaignIds.length > 0) {
+      await prisma.dripCampaignProgress.updateMany({
+        where: { id: { in: convertedCampaignIds } },
+        data: {
+          status: 'CONVERTED',
+          convertedAt: now,
+        },
+      });
     }
 
     console.log(

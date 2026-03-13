@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.heb.com',
+      },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
@@ -62,7 +67,7 @@ const nextConfig = {
     return [
       {
         // Cache headers for static assets (1 year, immutable)
-        source: '/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif)',
+        source: '/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif|mp4|woff2)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
         ]
@@ -77,7 +82,7 @@ const nextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://js.stripe.com https://analytics.tiktok.com",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob: https://images.unsplash.com https://www.google.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com",
+              "img-src 'self' data: blob: https://images.heb.com https://images.unsplash.com https://www.google.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com",
               "font-src 'self' data: https://analytics.tiktok.com",
               "connect-src 'self' https://vercel.live https://api.stripe.com https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://analytics.tiktok.com https://ads.tiktok.com https://*.tiktokw.us",
               "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.googletagmanager.com https://bid.g.doubleclick.net",

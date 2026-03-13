@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
 import {
   calculateShipping,
   getFreeShippingProgress,
@@ -15,6 +15,7 @@ export const TAX_RATE = 0.0825; // 8.25%
 export interface CartItem {
   sku: string;
   name: string;
+  displayName?: string; // Display name with count (e.g., "H-E-B White Corn Tortillas - Texas Size 80 count")
   price: number; // Price in cents
   quantity: number;
   productType?: 'tortilla' | 'sauce' | 'wholesale' | 'chips' | 'salsa' | 'seasoning'; // Product type for shipping calculation
@@ -194,13 +195,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Calculate totals with flat-rate shipping
   // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
   // Shipping: $9.95 (1 pack), $19.95 (2+ packs), FREE on $80+
-  const itemCount = items.reduce((total, item) => total + item.quantity, 0);
-  const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const tax = Math.round(subtotal * TAX_RATE); // 8.25% Texas sales tax
-  const shipping = calculateShipping(items, subtotal);
-  const baseShipping = calculateBaseShipping(items); // What shipping would be without free threshold
-  const total = subtotal + tax + shipping;
-  const freeShippingProgress = getFreeShippingProgress(subtotal);
+  const { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress } = useMemo(() => {
+    const itemCount = items.reduce((total, item) => total + item.quantity, 0);
+    const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const tax = Math.round(subtotal * TAX_RATE); // 8.25% Texas sales tax
+    const shipping = calculateShipping(items, subtotal);
+    const baseShipping = calculateBaseShipping(items); // What shipping would be without free threshold
+    const total = subtotal + tax + shipping;
+    const freeShippingProgress = getFreeShippingProgress(subtotal);
+    return { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress };
+  }, [items]);
 
   const value: CartContextType = {
     items,

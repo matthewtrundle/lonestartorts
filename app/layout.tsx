@@ -145,7 +145,7 @@ const jsonLd = {
     height: 512
   },
   image: 'https://lonestartortillas.com/images/lonestar-logo.webp',
-  email: 'howdy@lonestartortilla.com',
+  email: 'howdy@lonestartortillas.com',
   foundingDate: '2020',
   founder: {
     '@type': 'Person',
@@ -162,7 +162,7 @@ const jsonLd = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    email: 'howdy@lonestartortilla.com',
+    email: 'howdy@lonestartortillas.com',
     availableLanguage: ['English', 'Spanish']
   },
   sameAs: [
@@ -228,7 +228,7 @@ const localBusinessSchema = {
   description: 'Independent reseller of authentic H-E-B tortillas, delivering Texas flavor nationwide.',
   image: 'https://lonestartortillas.com/images/lonestar-logo.webp',
   url: 'https://lonestartortillas.com',
-  email: 'howdy@lonestartortilla.com',
+  email: 'howdy@lonestartortillas.com',
   address: {
     '@type': 'PostalAddress',
     streetAddress: '',
@@ -296,6 +296,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://js.stripe.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://analytics.tiktok.com" />
+        <link rel="preconnect" href="https://images.heb.com" />
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         {/* JSON-LD Structured Data */}
@@ -318,9 +319,9 @@ export default function RootLayout({
         {/* Google Analytics 4 + Google Ads (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-70FJ1CXM7Y"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -331,7 +332,7 @@ export default function RootLayout({
         </Script>
 
         {/* TikTok Pixel */}
-        <Script id="tiktok-pixel" strategy="afterInteractive">
+        <Script id="tiktok-pixel" strategy="lazyOnload">
           {`
             !function (w, d, t) {
               w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(

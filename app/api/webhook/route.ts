@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
-// Products imported for reference if needed
-// import { getProductBySku } from '@/lib/products';
+import { getProductBySku, getDisplayName } from '@/lib/products';
 import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
 import { trackTikTokPurchase } from '@/lib/tiktok';
 import { recordDiscountUsage, AppliedRule } from '@/lib/discount-engine';
@@ -59,12 +58,20 @@ export async function POST(req: NextRequest) {
           // Extract line items (filter out tax line item, shipping is separate)
           const items = fullSession.line_items?.data
             .filter((item) => !item.description?.includes('Sales Tax'))
-            .map((item) => ({
-              sku: item.price?.metadata?.sku || '',
-              name: item.description || '',
-              quantity: item.quantity || 0,
-              price: item.price?.unit_amount || 0,
-            })) || [];
+            .map((item) => {
+              const sku = item.price?.metadata?.sku || '';
+              const name = item.description || '';
+              const product = getProductBySku(sku);
+              // Generate displayName with count for tortilla products
+              const displayName = product ? getDisplayName(product) : name;
+              return {
+                sku,
+                name,
+                displayName,
+                quantity: item.quantity || 0,
+                price: item.price?.unit_amount || 0,
+              };
+            }) || [];
 
           // Calculate totals (amounts in cents)
           const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -189,105 +196,105 @@ export async function POST(req: NextRequest) {
 
           console.log('Order saved to database:', order.id, order.orderNumber);
 
-          // Send order confirmation email to customer
-          const emailData = {
-            to: order.email,
-            orderNumber: order.orderNumber,
-            customerName: order.shippingName || 'Guest',
-            items: items,
-            subtotal: order.subtotal,
-            shipping: order.shipping,
-            tax: order.tax,
-            total: order.total,
-            shippingAddress: {
-              street: order.shippingAddress1 || undefined,
-              city: order.shippingCity || undefined,
-              state: order.shippingState || undefined,
-              zip: order.shippingZip || undefined,
-              country: order.shippingCountry || undefined,
-            },
-          };
-
-          try {
-            await sendOrderConfirmationEmail(emailData);
-            console.log('Order confirmation email sent:', order.orderNumber);
-          } catch (emailError) {
-            console.error('Failed to send confirmation email:', emailError);
-            // Don't fail the webhook - log for manual follow-up
-          }
-
-          // Send admin notification email
-          try {
-            await sendAdminOrderNotification(emailData);
-            console.log('Admin notification email sent:', order.orderNumber);
-          } catch (adminEmailError) {
-            console.error('Failed to send admin notification:', adminEmailError);
-            // Don't fail the webhook - log for manual follow-up
-          }
-
-          // Send Purchase event to TikTok Events API (server-side tracking)
-          try {
-            await trackTikTokPurchase({
+          // Fire-and-forget: emails, tracking, discount recording
+          // These run after we return 200 to Stripe to avoid timeout
+          const backgroundWork = async () => {
+            // Send order confirmation email to customer
+            const emailData = {
+              to: order.email,
               orderNumber: order.orderNumber,
-              email: order.email,
-              phone: order.shippingPhone || undefined,
-              value: order.total / 100, // Convert cents to dollars
-              currency: 'USD',
-              contents: items.map((item) => ({
-                content_id: item.sku,
-                content_type: 'product',
-                content_name: item.name,
-                quantity: item.quantity,
-                price: item.price / 100,
-              })),
-            });
-          } catch (tiktokError) {
-            console.error('Failed to send TikTok purchase event:', tiktokError);
-            // Don't fail the webhook - log for manual follow-up
-          }
+              customerName: order.shippingName || 'Guest',
+              items: items,
+              subtotal: order.subtotal,
+              shipping: order.shipping,
+              tax: order.tax,
+              total: order.total,
+              shippingAddress: {
+                street: order.shippingAddress1 || undefined,
+                city: order.shippingCity || undefined,
+                state: order.shippingState || undefined,
+                zip: order.shippingZip || undefined,
+                country: order.shippingCountry || undefined,
+              },
+            };
 
-          // Mark feedback coupon as used if applicable
-          const feedbackCouponCode = fullSession.metadata?.feedbackCouponCode;
-          if (feedbackCouponCode) {
             try {
-              await prisma.customerFeedback.update({
-                where: { couponCode: feedbackCouponCode },
-                data: {
-                  couponUsed: true,
-                  couponUsedAt: new Date(),
-                },
+              await sendOrderConfirmationEmail(emailData);
+              console.log('Order confirmation email sent:', order.orderNumber);
+            } catch (emailError) {
+              console.error('Failed to send confirmation email:', emailError);
+            }
+
+            // Send admin notification email
+            try {
+              await sendAdminOrderNotification(emailData);
+              console.log('Admin notification email sent:', order.orderNumber);
+            } catch (adminEmailError) {
+              console.error('Failed to send admin notification:', adminEmailError);
+            }
+
+            // Send Purchase event to TikTok Events API (server-side tracking)
+            try {
+              await trackTikTokPurchase({
+                orderNumber: order.orderNumber,
+                email: order.email,
+                phone: order.shippingPhone || undefined,
+                value: order.total / 100, // Convert cents to dollars
+                currency: 'USD',
+                contents: items.map((item) => ({
+                  content_id: item.sku,
+                  content_type: 'product',
+                  content_name: item.name,
+                  quantity: item.quantity,
+                  price: item.price / 100,
+                })),
               });
-              console.log('Feedback coupon marked as used:', feedbackCouponCode);
-            } catch (couponError) {
-              console.error('Failed to mark feedback coupon as used:', couponError);
-              // Don't fail the webhook - log for manual follow-up
+            } catch (tiktokError) {
+              console.error('Failed to send TikTok purchase event:', tiktokError);
             }
-          }
 
-          // Record new discount system usage if applicable
-          const newSystemDiscountId = fullSession.metadata?.newSystemDiscountId;
-          if (newSystemDiscountId) {
-            try {
-              const discountAmount = parseInt(fullSession.metadata?.newSystemDiscountAmount || '0', 10);
-              const rulesApplied = fullSession.metadata?.newSystemRulesApplied
-                ? JSON.parse(fullSession.metadata.newSystemRulesApplied) as AppliedRule[]
-                : [];
-
-              await recordDiscountUsage(
-                newSystemDiscountId,
-                customerEmail,
-                order.id,
-                order.orderNumber,
-                subtotal,
-                discountAmount,
-                rulesApplied
-              );
-              console.log('Discount usage recorded for:', newSystemDiscountId, 'order:', order.orderNumber);
-            } catch (discountError) {
-              console.error('Failed to record discount usage:', discountError);
-              // Don't fail the webhook - log for manual follow-up
+            // Mark feedback coupon as used if applicable
+            const feedbackCouponCode = fullSession.metadata?.feedbackCouponCode;
+            if (feedbackCouponCode) {
+              try {
+                await prisma.customerFeedback.update({
+                  where: { couponCode: feedbackCouponCode },
+                  data: {
+                    couponUsed: true,
+                    couponUsedAt: new Date(),
+                  },
+                });
+                console.log('Feedback coupon marked as used:', feedbackCouponCode);
+              } catch (couponError) {
+                console.error('Failed to mark feedback coupon as used:', couponError);
+              }
             }
-          }
+
+            // Record new discount system usage if applicable
+            const newSystemDiscountId = fullSession.metadata?.newSystemDiscountId;
+            if (newSystemDiscountId) {
+              try {
+                const discountAmount = parseInt(fullSession.metadata?.newSystemDiscountAmount || '0', 10);
+                const rulesApplied = fullSession.metadata?.newSystemRulesApplied
+                  ? JSON.parse(fullSession.metadata.newSystemRulesApplied) as AppliedRule[]
+                  : [];
+
+                await recordDiscountUsage(
+                  newSystemDiscountId,
+                  customerEmail,
+                  order.id,
+                  order.orderNumber,
+                  subtotal,
+                  discountAmount,
+                  rulesApplied
+                );
+                console.log('Discount usage recorded for:', newSystemDiscountId, 'order:', order.orderNumber);
+              } catch (discountError) {
+                console.error('Failed to record discount usage:', discountError);
+              }
+            }
+          };
+          backgroundWork().catch(err => console.error('Background work failed:', err));
 
         } catch (dbError) {
           console.error('Failed to save order to database:', dbError);

@@ -15,7 +15,9 @@ export default function HEBProductsPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/products?type=other')
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    fetch('/api/products?type=other', { signal: controller.signal })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -29,6 +31,7 @@ export default function HEBProductsPage() {
         setError('Unable to load products');
       })
       .finally(() => {
+        clearTimeout(timeoutId);
         setLoading(false);
       });
   }, []);

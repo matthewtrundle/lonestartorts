@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getNextShipDate, formatShipDate } from '@/lib/shipping-schedule';
+import { getProductBySku, getDisplayName } from '@/lib/products';
 
 export const dynamic = 'force-dynamic';
 
@@ -40,13 +41,23 @@ export async function GET(req: NextRequest) {
     const shipDate = getNextShipDate(new Date(order.createdAt));
     const estimatedShipDate = formatShipDate(shipDate);
 
+    // Add displayName to each item based on product data
+    const itemsWithDisplayName = order.OrderItem.map((item) => {
+      const product = item.sku ? getProductBySku(item.sku) : null;
+      const displayName = product ? getDisplayName(product) : item.name;
+      return {
+        ...item,
+        displayName,
+      };
+    });
+
     return NextResponse.json({
       success: true,
       order: {
         orderNumber: order.orderNumber,
         email: order.email,
         customerName: order.shippingName,
-        items: order.OrderItem,
+        items: itemsWithDisplayName,
         subtotal: order.subtotal,
         shipping: order.shipping,
         tax: order.tax,
