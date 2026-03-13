@@ -257,30 +257,6 @@ export const products: Product[] = [
     productType: 'sauce',
   },
   {
-    sku: 'HEB-TEXAS-CHIPS',
-    name: 'H-E-B Texas-Shaped Tortilla Chips',
-    description: 'Crispy tortilla chips in the shape of Texas. Perfect for dipping or snacking with true Lone Star pride.',
-    image: '/images/products/heb-texas-chips.webp',
-    price: 1000, // $10 per bag
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'chips',
-    productType: 'chips',
-    bundleOnly: true, // High volume/low density - shipping economics
-  },
-  {
-    sku: 'HEB-BAKERY-CHIPS',
-    name: 'H-E-B Bakery Style Tortilla Chips',
-    description: 'Thick-cut bakery style chips with authentic restaurant taste. Sturdy enough for any salsa or queso.',
-    image: '/images/products/heb-bakery-chips.webp',
-    price: 1200, // $12 per bag
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'chips',
-    productType: 'chips',
-    bundleOnly: true, // High volume/low density - shipping economics
-  },
-  {
     sku: 'HEB-SALSA-MILD',
     name: 'H-E-B Restaurant Salsa - Mild',
     description: 'Authentic restaurant-style salsa with fresh tomatoes, peppers, and cilantro. Mild heat, big flavor.',
@@ -370,76 +346,6 @@ export const products: Product[] = [
     storage: 'shelf_stable',
     category: 'salsa',
     productType: 'salsa',
-  },
-  {
-    sku: 'HEB-STREET-CORN-CHIPS',
-    name: 'H-E-B Mexican Street Corn Chips',
-    description: 'Inspired by elote! Roasted corn and smoky cheese flavor. Gluten-free.',
-    image: '/images/products/heb-street-corn-chips.webp',
-    price: 1000, // $10 per bag
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'chips',
-    productType: 'chips',
-    bundleOnly: true,
-  },
-  {
-    sku: 'HEB-JALAPENO-CHIPS',
-    name: 'H-E-B Spicy Jalapeño Chips',
-    description: 'Fire up your taste buds with these spicy jalapeño tortilla chips. Perfect with salsa or queso.',
-    image: '/images/products/heb-jalapeno-chips.webp',
-    price: 1000, // $10 per bag
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'chips',
-    productType: 'chips',
-    bundleOnly: true,
-  },
-  {
-    sku: 'HEB-TACO-CHIPS',
-    name: 'H-E-B Crunchy Taco Chips',
-    description: 'Tortilla chips seasoned with authentic taco flavor. Gluten-free snacking perfection.',
-    image: '/images/products/heb-taco-chips.webp',
-    price: 1000, // $10 per bag
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'chips',
-    productType: 'chips',
-    bundleOnly: true,
-  },
-  {
-    sku: 'HEB-SPICY-BBQ-CHIPS',
-    name: 'H-E-B Texas Corn Chips - Spicy BBQ',
-    description: 'Smoky barbecue meets Texas heat. Bold BBQ flavor with an extra kick.',
-    image: '/images/products/heb-spicy-bbq-chips.webp',
-    price: 1000, // $10 per bag
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'chips',
-    productType: 'chips',
-    bundleOnly: true,
-  },
-  {
-    sku: 'HEB-LONE-STARS',
-    name: 'H-E-B Lone Stars Cheddar Crackers',
-    description: 'Texas-shaped cheddar crackers. The iconic Lone Star snack that Texans grew up with.',
-    image: '/images/products/heb-lone-stars.webp',
-    price: 1000, // $10 per box
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'snacks',
-    productType: 'chips',
-  },
-  {
-    sku: 'HEB-PICA-PUFFS',
-    name: 'H-E-B Pica Puffs',
-    description: 'Spicy puffed corn snacks with a cult following. The Texas answer to hot chips.',
-    image: '/images/products/heb-pica-puffs.webp',
-    price: 1000, // $10 per bag
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'snacks',
-    productType: 'chips',
   },
   {
     sku: 'HEB-BRISKET-RUB',
@@ -542,6 +448,14 @@ export function getWholesaleProductBySku(sku: string) {
 // Helper function to get product by SKU
 export function getProductBySku(sku: string) {
   return products.find((p) => p.sku === sku);
+}
+
+// Generate display name with count for tortilla products
+export function getDisplayName(product: { name: string; tortillaCount?: number }): string {
+  if (product.tortillaCount && product.tortillaCount > 0) {
+    return `${product.name} ${product.tortillaCount} count`;
+  }
+  return product.name;
 }
 
 // Calculate shipping - FREE SHIPPING ON ALL ORDERS
