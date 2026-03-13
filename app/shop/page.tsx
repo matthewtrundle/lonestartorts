@@ -1,28 +1,14 @@
-'use client';
-
 import Image from 'next/image';
-import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
 import { ProductCard } from '@/components/product/ProductCard';
 import { StickyCartBar } from '@/components/shop/StickyCartBar';
 import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
 import { FeaturedBundlesHero } from '@/components/shop/FeaturedBundlesHero';
+import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
+import { SocialProofSection } from '@/components/shop/SocialProofSection';
+import { ShopFAQ } from '@/components/shop/ShopFAQ';
 import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
-import { useLanguage } from '@/lib/language-context';
 import { products as allProducts } from '@/lib/products';
-import { useSearchParams } from 'next/navigation';
-import { ProductGridSkeleton } from '@/components/product/ProductCardSkeleton';
-
-// Lazy-load below-fold sections to reduce initial bundle
-const TexMexExtrasSection = dynamic(
-  () => import('@/components/shop/TexMexExtrasSection').then(mod => ({ default: mod.TexMexExtrasSection })),
-  { ssr: false }
-);
-const SocialProofSection = dynamic(
-  () => import('@/components/shop/SocialProofSection').then(mod => ({ default: mod.SocialProofSection })),
-  { ssr: false }
-);
 
 // Filter tortilla products by collection at module level
 const bakeryProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'bakery');
@@ -85,233 +71,103 @@ const itemListSchema = {
   }))
 };
 
-// Wrap the main content to use useSearchParams
-function ShopContent() {
-  const { t } = useLanguage();
-  const searchParams = useSearchParams();
-  const isTikTok = searchParams.get('utm_source') === 'tiktok';
-  const isGoogleAds = searchParams.get('utm_source') === 'google' || searchParams.get('gclid') !== null;
+// Shared product grid component
+function ProductGrid({ products, cols = 3 }: { products: typeof bakeryProducts; cols?: 3 | 4 }) {
+  const gridClass = cols === 4
+    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6'
+    : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6';
 
-  // TikTok variant - ultra minimal for fast conversion (spin wheel disabled)
-  if (isTikTok) {
-    return (
-      <main className="min-h-screen bg-white pt-[100px]">
-          {/* Bold Free Shipping Banner for TikTok */}
-          <div className="bg-sunset-600 text-white py-4 px-4 text-center">
-            <p className="text-xl md:text-2xl font-bold">
-              FREE Shipping on ALL Orders
-            </p>
-            <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
-          </div>
+  return (
+    <div className={gridClass}>
+      {products.map((product) => (
+        <ProductCard
+          key={product.sku}
+          sku={product.sku}
+          name={product.name}
+          description={product.description}
+          image={product.image}
+          price={product.price}
+          tortillaCount={product.tortillaCount}
+          storage={product.storage}
+          productType={product.productType}
+          tortillaType={product.tortillaType}
+          isBestSeller={product.isBestSeller}
+          savingsPercent={product.savingsPercent}
+          bundleOnly={product.bundleOnly}
+        />
+      ))}
+    </div>
+  );
+}
 
-          {/* Featured Care Packages */}
-          <FeaturedBundlesHero />
+// Ad variant layout (TikTok / Google Ads) - simplified for conversion
+function AdVariantLayout() {
+  return (
+    <main className="min-h-screen bg-white pt-[100px]">
+      {/* Bold Free Shipping Banner */}
+      <div className="bg-sunset-600 text-white py-4 px-4 text-center">
+        <p className="text-xl md:text-2xl font-bold">
+          FREE Shipping on ALL Orders
+        </p>
+        <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
+      </div>
 
-          <div className="max-w-6xl mx-auto px-4 py-6">
-            {/* Bakery Fresh Section */}
-            <div className="mb-8">
-              <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
-              <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {bakeryProducts.map((product) => (
-                  <ProductCard
-                    key={product.sku}
-                    sku={product.sku}
-                    name={product.name}
-                    description={product.description}
-                    image={product.image}
-                    price={product.price}
-                    tortillaCount={product.tortillaCount}
-                    storage={product.storage}
-                    productType={product.productType}
-                    tortillaType={product.tortillaType}
-                    isBestSeller={product.isBestSeller}
-                    savingsPercent={product.savingsPercent}
-                    bundleOnly={product.bundleOnly}
-                  />
-                ))}
-              </div>
-            </div>
+      {/* Featured Care Packages */}
+      <FeaturedBundlesHero />
 
-            {/* Pantry Staples Section */}
-            <div className="mb-8">
-              <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
-              <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {pantryProducts.map((product) => (
-                  <ProductCard
-                    key={product.sku}
-                    sku={product.sku}
-                    name={product.name}
-                    description={product.description}
-                    image={product.image}
-                    price={product.price}
-                    tortillaCount={product.tortillaCount}
-                    storage={product.storage}
-                    productType={product.productType}
-                    tortillaType={product.tortillaType}
-                    isBestSeller={product.isBestSeller}
-                    savingsPercent={product.savingsPercent}
-                    bundleOnly={product.bundleOnly}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Texas-Born Favorites Section */}
-            <div>
-              <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
-              <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {texasBrandsProducts.map((product) => (
-                  <ProductCard
-                    key={product.sku}
-                    sku={product.sku}
-                    name={product.name}
-                    description={product.description}
-                    image={product.image}
-                    price={product.price}
-                    tortillaCount={product.tortillaCount}
-                    storage={product.storage}
-                    productType={product.productType}
-                    tortillaType={product.tortillaType}
-                    isBestSeller={product.isBestSeller}
-                    savingsPercent={product.savingsPercent}
-                    bundleOnly={product.bundleOnly}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Simple trust line */}
-            <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
-              <span className="flex items-center gap-1">
-                <Truck className="w-4 h-4" /> Freshness First Shipping
-              </span>
-              <span className="flex items-center gap-1">
-                <Shield className="w-4 h-4" /> Secure Checkout
-              </span>
-              <span className="flex items-center gap-1">
-                <Clock className="w-4 h-4" /> Ships Tuesdays
-              </span>
-            </div>
-          </div>
-
-          {/* Sticky Cart Bar - Critical for mobile checkout */}
-          <StickyCartBar />
-        </main>
-    );
-  }
-
-  // Google Ads variant - clean, conversion-focused
-  if (isGoogleAds) {
-    return (
-      <main className="min-h-screen bg-white pt-[100px]">
-        {/* Bold Free Shipping Banner for Google Ads */}
-        <div className="bg-sunset-600 text-white py-4 px-4 text-center">
-          <p className="text-xl md:text-2xl font-bold">
-            FREE Shipping on ALL Orders
-          </p>
-          <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        {/* Bakery Fresh Section */}
+        <div className="mb-8">
+          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
+          <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
+          <ProductGrid products={bakeryProducts} />
         </div>
 
-        {/* Featured Care Packages */}
-        <FeaturedBundlesHero />
-
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          {/* Bakery Fresh Section */}
-          <div className="mb-8">
-            <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
-            <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {bakeryProducts.map((product) => (
-                <ProductCard
-                  key={product.sku}
-                  sku={product.sku}
-                  name={product.name}
-                  description={product.description}
-                  image={product.image}
-                  price={product.price}
-                  tortillaCount={product.tortillaCount}
-                  storage={product.storage}
-                  productType={product.productType}
-                  tortillaType={product.tortillaType}
-                  isBestSeller={product.isBestSeller}
-                  savingsPercent={product.savingsPercent}
-                  bundleOnly={product.bundleOnly}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Pantry Staples Section */}
-          <div className="mb-8">
-            <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
-            <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {pantryProducts.map((product) => (
-                <ProductCard
-                  key={product.sku}
-                  sku={product.sku}
-                  name={product.name}
-                  description={product.description}
-                  image={product.image}
-                  price={product.price}
-                  tortillaCount={product.tortillaCount}
-                  storage={product.storage}
-                  productType={product.productType}
-                  tortillaType={product.tortillaType}
-                  isBestSeller={product.isBestSeller}
-                  savingsPercent={product.savingsPercent}
-                  bundleOnly={product.bundleOnly}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Texas-Born Favorites Section */}
-          <div>
-            <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
-            <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {texasBrandsProducts.map((product) => (
-                <ProductCard
-                  key={product.sku}
-                  sku={product.sku}
-                  name={product.name}
-                  description={product.description}
-                  image={product.image}
-                  price={product.price}
-                  tortillaCount={product.tortillaCount}
-                  storage={product.storage}
-                  productType={product.productType}
-                  tortillaType={product.tortillaType}
-                  isBestSeller={product.isBestSeller}
-                  savingsPercent={product.savingsPercent}
-                  bundleOnly={product.bundleOnly}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Simple trust line */}
-          <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
-            <span className="flex items-center gap-1">
-              <Truck className="w-4 h-4" /> Freshness First Shipping
-            </span>
-            <span className="flex items-center gap-1">
-              <Shield className="w-4 h-4" /> Secure Checkout
-            </span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-4 h-4" /> Ships Tuesdays
-            </span>
-          </div>
+        {/* Pantry Staples Section */}
+        <div className="mb-8">
+          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
+          <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
+          <ProductGrid products={pantryProducts} cols={4} />
         </div>
 
-        {/* Sticky Cart Bar - Critical for mobile checkout */}
-        <StickyCartBar />
-      </main>
-    );
+        {/* Texas-Born Favorites Section */}
+        <div>
+          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
+          <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
+          <ProductGrid products={texasBrandsProducts} />
+        </div>
+
+        {/* Simple trust line */}
+        <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
+          <span className="flex items-center gap-1">
+            <Truck className="w-4 h-4" /> Freshness First Shipping
+          </span>
+          <span className="flex items-center gap-1">
+            <Shield className="w-4 h-4" /> Secure Checkout
+          </span>
+          <span className="flex items-center gap-1">
+            <Clock className="w-4 h-4" /> Ships Tuesdays
+          </span>
+        </div>
+      </div>
+
+      {/* Sticky Cart Bar - Critical for mobile checkout */}
+      <StickyCartBar />
+    </main>
+  );
+}
+
+export default function ShopPage({
+  searchParams,
+}: {
+  searchParams: { utm_source?: string; gclid?: string };
+}) {
+  const isTikTok = searchParams.utm_source === 'tiktok';
+  const isGoogleAds = searchParams.utm_source === 'google' || searchParams.gclid != null;
+
+  // Ad variants - simplified layout
+  if (isTikTok || isGoogleAds) {
+    return <AdVariantLayout />;
   }
 
   // Main shop page - conversion-focused design
@@ -390,75 +246,21 @@ function ShopContent() {
         <div className="mb-10">
           <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
           <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {bakeryProducts.map((product) => (
-              <ProductCard
-                key={product.sku}
-                sku={product.sku}
-                name={product.name}
-                description={product.description}
-                image={product.image}
-                price={product.price}
-                tortillaCount={product.tortillaCount}
-                storage={product.storage}
-                productType={product.productType}
-                tortillaType={product.tortillaType}
-                isBestSeller={product.isBestSeller}
-                savingsPercent={product.savingsPercent}
-                bundleOnly={product.bundleOnly}
-              />
-            ))}
-          </div>
+          <ProductGrid products={bakeryProducts} />
         </div>
 
         {/* Pantry Staples */}
         <div className="mb-10">
           <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
           <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-            {pantryProducts.map((product) => (
-              <ProductCard
-                key={product.sku}
-                sku={product.sku}
-                name={product.name}
-                description={product.description}
-                image={product.image}
-                price={product.price}
-                tortillaCount={product.tortillaCount}
-                storage={product.storage}
-                productType={product.productType}
-                tortillaType={product.tortillaType}
-                isBestSeller={product.isBestSeller}
-                savingsPercent={product.savingsPercent}
-                bundleOnly={product.bundleOnly}
-              />
-            ))}
-          </div>
+          <ProductGrid products={pantryProducts} cols={4} />
         </div>
 
         {/* Texas-Born Favorites */}
         <div className="mb-10">
           <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
           <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {texasBrandsProducts.map((product) => (
-              <ProductCard
-                key={product.sku}
-                sku={product.sku}
-                name={product.name}
-                description={product.description}
-                image={product.image}
-                price={product.price}
-                tortillaCount={product.tortillaCount}
-                storage={product.storage}
-                productType={product.productType}
-                tortillaType={product.tortillaType}
-                isBestSeller={product.isBestSeller}
-                savingsPercent={product.savingsPercent}
-                bundleOnly={product.bundleOnly}
-              />
-            ))}
-          </div>
+          <ProductGrid products={texasBrandsProducts} />
         </div>
       </div>
 
@@ -510,7 +312,7 @@ function ShopContent() {
         {/* Contact - Compact */}
         <div className="mt-8 text-center text-sm text-gray-500">
           Questions? <a href="sms:+17372280037" className="text-sunset-600 hover:underline">(737) 228-0037</a>
-          {' • '}
+          {' \u2022 '}
           <a href="mailto:howdy@lonestartortillas.com" className="text-sunset-600 hover:underline">howdy@lonestartortillas.com</a>
         </div>
 
@@ -548,33 +350,8 @@ function ShopContent() {
           </div>
         </section>
 
-        {/* FAQ Section - Compact */}
-        <details className="mt-10 bg-cream-50 rounded-xl p-5">
-          <summary className="text-lg font-bold text-charcoal-950 cursor-pointer list-none flex justify-between items-center">
-            Frequently Asked Questions
-            <svg className="w-5 h-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div className="grid md:grid-cols-2 gap-4 mt-5">
-            <div className="bg-white rounded-lg p-4">
-              <p className="font-medium text-charcoal-950 text-sm">{t('shop.faq.shippingCostQ')}</p>
-              <p className="text-gray-600 text-sm mt-1">{t('shop.faq.shippingCostA')}</p>
-            </div>
-            <div className="bg-white rounded-lg p-4">
-              <p className="font-medium text-charcoal-950 text-sm">{t('shop.faq.arrivalQ')}</p>
-              <p className="text-gray-600 text-sm mt-1">{t('shop.faq.arrivalA')}</p>
-            </div>
-            <div className="bg-white rounded-lg p-4">
-              <p className="font-medium text-charcoal-950 text-sm">{t('shop.faq.refrigerationQ')}</p>
-              <p className="text-gray-600 text-sm mt-1">{t('shop.faq.refrigerationA')}</p>
-            </div>
-            <div className="bg-white rounded-lg p-4">
-              <p className="font-medium text-charcoal-950 text-sm">{t('shop.faq.paymentQ')}</p>
-              <p className="text-gray-600 text-sm mt-1">{t('shop.faq.paymentA')}</p>
-            </div>
-          </div>
-        </details>
+        {/* FAQ Section */}
+        <ShopFAQ />
       </div>
 
       {/* Social Proof */}
@@ -584,27 +361,5 @@ function ShopContent() {
       <StickyCartBar />
     </main>
     </>
-  );
-}
-
-export default function ShopPage() {
-  return (
-    <Suspense fallback={
-      <main className="min-h-screen bg-white pt-24 pb-24">
-        {/* Hero skeleton */}
-        <div className="bg-charcoal-950 h-48 mb-8" />
-
-        {/* Content skeleton */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="text-center mb-8">
-            <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-2 animate-pulse" />
-            <div className="h-4 bg-gray-200 rounded w-64 mx-auto animate-pulse" />
-          </div>
-          <ProductGridSkeleton count={6} />
-        </div>
-      </main>
-    }>
-      <ShopContent />
-    </Suspense>
   );
 }
