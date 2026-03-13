@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { LogoFull } from '@/components/ui/Logo'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
@@ -359,16 +358,13 @@ export default function HomeContent() {
                             }
                           }}
                         >
-                          <motion.div
-                            initial={{ scale: 0.9 }}
-                            animate={{ scale: [0.9, 1.05, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="bg-cream-50/90 backdrop-blur rounded-full p-6 shadow-2xl"
+                          <div
+                            className="bg-cream-50/90 backdrop-blur rounded-full p-6 shadow-2xl animate-pulse-scale"
                           >
                             <svg className="w-12 h-12 text-charcoal-950 ml-1" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M8 5v14l11-7z"/>
                             </svg>
-                          </motion.div>
+                          </div>
 
                           {/* Video Title Overlay */}
                           <div className="absolute bottom-0 left-0 right-0 p-6 text-cream-50">

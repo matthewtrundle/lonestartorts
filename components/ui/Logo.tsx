@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 interface LogoProps {
@@ -20,24 +19,9 @@ export function Logo({ className = '', animated = false, size = 'md', showTaglin
 
   const { width, height } = sizes[size];
 
-  const logoVariants = {
-    initial: { scale: 0.9, opacity: 0 },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
-    <motion.div
-      variants={animated ? logoVariants : undefined}
-      initial={animated ? 'initial' : undefined}
-      animate={animated ? 'animate' : undefined}
-      className={`relative ${className}`}
+    <div
+      className={`relative ${className} ${animated ? 'animate-scale-in' : ''}`}
       style={{ width, height }}
     >
       <Image
@@ -52,7 +36,7 @@ export function Logo({ className = '', animated = false, size = 'md', showTaglin
           clipPath: showTagline ? 'none' : 'inset(0 0 35% 0)'
         }}
       />
-    </motion.div>
+    </div>
   );
 }
 
@@ -76,24 +60,9 @@ export function LogoFull({
 
   const { width, height } = sizes[size];
 
-  const logoVariants = {
-    initial: { x: -20, opacity: 0 },
-    animate: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
-    <motion.div
-      variants={animated ? logoVariants : undefined}
-      initial={animated ? 'initial' : undefined}
-      animate={animated ? 'animate' : undefined}
-      className={`relative overflow-visible ${className}`}
+    <div
+      className={`relative overflow-visible ${className} ${animated ? 'animate-slide-right' : ''}`}
       style={{ width, height }}
     >
       <Image
@@ -104,11 +73,10 @@ export function LogoFull({
         className="object-contain"
         priority
         style={{
-          // Show the full logo including all text
           objectPosition: 'center center',
         }}
       />
-    </motion.div>
+    </div>
   );
 }
 
@@ -130,25 +98,9 @@ export function LogoWithTagline({
 
   const { width, height } = sizes[size];
 
-  const badgeVariants = {
-    initial: { scale: 0.8, opacity: 0, rotate: -5 },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.23, 1, 0.32, 1],
-      },
-    },
-  };
-
   return (
-    <motion.div
-      variants={animated ? badgeVariants : undefined}
-      initial={animated ? 'initial' : undefined}
-      animate={animated ? 'animate' : undefined}
-      className={`relative ${className}`}
+    <div
+      className={`relative ${className} ${animated ? 'animate-scale-in' : ''}`}
     >
       <div className="relative" style={{ width, height }}>
         <Image
@@ -164,7 +116,7 @@ export function LogoWithTagline({
           Independent reseller. Not affiliated with or endorsed by H-E-B®.
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -186,25 +138,9 @@ export function LogoBadge({
 
   const { container, padding } = sizes[size];
 
-  const badgeVariants = {
-    initial: { scale: 0.8, opacity: 0, rotate: -5 },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.23, 1, 0.32, 1],
-      },
-    },
-  };
-
   return (
-    <motion.div
-      variants={animated ? badgeVariants : undefined}
-      initial={animated ? 'initial' : undefined}
-      animate={animated ? 'animate' : undefined}
-      className={`relative ${container} ${className}`}
+    <div
+      className={`relative ${container} ${className} ${animated ? 'animate-scale-in' : ''}`}
     >
       {/* Wood Grain Background Effect */}
       <div
@@ -235,6 +171,6 @@ export function LogoBadge({
           priority
         />
       </div>
-    </motion.div>
+    </div>
   );
 }
