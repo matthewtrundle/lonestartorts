@@ -2,18 +2,27 @@
 
 import Image from 'next/image';
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { ProductCard } from '@/components/product/ProductCard';
-import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { StickyCartBar } from '@/components/shop/StickyCartBar';
 import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
 import { FeaturedBundlesHero } from '@/components/shop/FeaturedBundlesHero';
-import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/language-context';
 import { products as allProducts } from '@/lib/products';
 import { useSearchParams } from 'next/navigation';
 import { ProductGridSkeleton } from '@/components/product/ProductCardSkeleton';
+
+// Lazy-load below-fold sections to reduce initial bundle
+const TexMexExtrasSection = dynamic(
+  () => import('@/components/shop/TexMexExtrasSection').then(mod => ({ default: mod.TexMexExtrasSection })),
+  { ssr: false }
+);
+const SocialProofSection = dynamic(
+  () => import('@/components/shop/SocialProofSection').then(mod => ({ default: mod.SocialProofSection })),
+  { ssr: false }
+);
 
 // Filter tortilla products by collection at module level
 const bakeryProducts = allProducts.filter(p => p.productType === 'tortilla' && p.collection === 'bakery');
@@ -183,7 +192,7 @@ function ShopContent() {
                 <Shield className="w-4 h-4" /> Secure Checkout
               </span>
               <span className="flex items-center gap-1">
-                <Clock className="w-4 h-4" /> Ships Mon–Wed
+                <Clock className="w-4 h-4" /> Ships Tuesdays
               </span>
             </div>
           </div>
@@ -294,7 +303,7 @@ function ShopContent() {
               <Shield className="w-4 h-4" /> Secure Checkout
             </span>
             <span className="flex items-center gap-1">
-              <Clock className="w-4 h-4" /> Ships Mon–Wed
+              <Clock className="w-4 h-4" /> Ships Tuesdays
             </span>
           </div>
         </div>
@@ -522,7 +531,7 @@ function ShopContent() {
             <div className="text-center">
               <div className="text-3xl mb-2">📦</div>
               <h3 className="font-semibold text-charcoal-900 mb-1">Ships Fresh</h3>
-              <p className="text-sm text-charcoal-600">We ship Mon-Wed with ice packs to ensure your tortillas arrive fresh.</p>
+              <p className="text-sm text-charcoal-600">We ship Tuesdays to ensure your tortillas arrive fresh.</p>
             </div>
           </div>
           <div className="text-center">
