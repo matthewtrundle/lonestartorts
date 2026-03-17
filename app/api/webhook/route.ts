@@ -196,8 +196,7 @@ export async function POST(req: NextRequest) {
 
           console.log('Order saved to database:', order.id, order.orderNumber);
 
-          // Fire-and-forget: emails, tracking, discount recording
-          // These run after we return 200 to Stripe to avoid timeout
+          // Post-order tasks: emails, tracking, discount recording
           const backgroundWork = async () => {
             // Send order confirmation email to customer
             const emailData = {
@@ -294,7 +293,12 @@ export async function POST(req: NextRequest) {
               }
             }
           };
-          backgroundWork().catch(err => console.error('Background work failed:', err));
+          // Await background work so emails send before serverless function terminates
+          try {
+            await backgroundWork();
+          } catch (err) {
+            console.error('Background work failed:', err);
+          }
 
         } catch (dbError) {
           console.error('Failed to save order to database:', dbError);
