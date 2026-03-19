@@ -47,3 +47,5 @@ __pycache__/
 
 # Generated images
 /generated/*.webp
+# Git worktrees
+.worktrees/
