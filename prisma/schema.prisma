@@ -30,22 +30,72 @@ model Address {
 }
 
 model Customer {
-  id              String    @id
-  clerkUserId     String    @unique
-  email           String    @unique
-  firstName       String?
-  lastName        String?
-  lastLoginAt     DateTime?
-  signupSource    String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime
-  privateMetadata Json?
-  publicMetadata  Json?
-  Address         Address[]
-  Order           Order[]
+  id               String    @id
+  clerkUserId      String    @unique
+  email            String    @unique
+  passwordHash     String?
+  firstName        String?
+  lastName         String?
+  stripeCustomerId String?   @unique
+  lastLoginAt      DateTime?
+  signupSource     String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime
+  privateMetadata  Json?
+  publicMetadata   Json?
+  Address          Address[]
+  Order            Order[]
+  RetailSubscription RetailSubscription[]
 
   @@index([clerkUserId])
   @@index([email])
+  @@index([stripeCustomerId])
+}
+
+model RetailSubscription {
+  id                   String             @id @default(uuid())
+  customerId           String
+
+  // Stripe references
+  stripeSubscriptionId String?            @unique
+  stripePriceId        String?
+  stripeProductId      String?
+
+  // Subscription details
+  name                 String
+  status               SubscriptionStatus @default(ACTIVE)
+
+  // Billing cycle
+  interval             BillingInterval    @default(MONTHLY)
+  intervalCount        Int                @default(1)
+
+  // Dates
+  nextBillingDate      DateTime?
+  lastBilledAt         DateTime?
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+
+  // Items (JSON: array of {sku, name, quantity, unitPrice})
+  items                Json
+
+  // Totals in cents
+  subtotal             Int
+  shipping             Int                @default(0)
+  tax                  Int                @default(0)
+  total                Int
+
+  // Management
+  pausedUntil          DateTime?
+  cancelledAt          DateTime?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  // Relations
+  customer             Customer           @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([stripeSubscriptionId])
+  @@index([status])
 }
 
 model EmailLog {
