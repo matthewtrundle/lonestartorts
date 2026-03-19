@@ -314,12 +314,67 @@ export async function POST(req: NextRequest) {
         // Handle failed payment
         break;
 
-      // Wholesale invoice events
+      // Invoice events (retail subscriptions + wholesale)
       case 'invoice.paid':
         const paidInvoice = event.data.object as Stripe.Invoice;
         console.log('Invoice paid:', paidInvoice.id);
 
         try {
+          // Check if this is a retail subscription invoice
+          if (paidInvoice.subscription) {
+            const retailSub = await prisma.retailSubscription.findFirst({
+              where: { stripeSubscriptionId: paidInvoice.subscription as string },
+              include: { customer: { include: { Address: true } } },
+            });
+
+            if (retailSub) {
+              // Create an order for this billing cycle
+              const orderNumber = `LST-${Date.now().toString().slice(-6)}${Math.random().toString(36).substring(2, 4).toUpperCase()}`;
+              const items = retailSub.items as Array<{ sku: string; name: string; quantity: number; unitPrice: number }>;
+              const shippingAddress = retailSub.customer.Address[0];
+
+              await prisma.order.create({
+                data: {
+                  id: randomUUID(),
+                  orderNumber,
+                  customerId: retailSub.customerId,
+                  email: retailSub.customer.email,
+                  stripePaymentId: paidInvoice.payment_intent as string,
+                  subtotal: retailSub.subtotal,
+                  shipping: retailSub.shipping,
+                  tax: retailSub.tax,
+                  total: retailSub.total,
+                  paymentStatus: 'SUCCEEDED',
+                  status: 'PROCESSING',
+                  shippingName: [retailSub.customer.firstName, retailSub.customer.lastName].filter(Boolean).join(' '),
+                  shippingAddress1: shippingAddress?.street || '',
+                  shippingCity: shippingAddress?.city || '',
+                  shippingState: shippingAddress?.state || '',
+                  shippingZip: shippingAddress?.zip || '',
+                  shippingCountry: shippingAddress?.country || 'US',
+                  updatedAt: new Date(),
+                  OrderItem: {
+                    create: items.map(item => ({
+                      id: randomUUID(),
+                      sku: item.sku,
+                      name: item.name,
+                      quantity: item.quantity,
+                      price: item.unitPrice,
+                    })),
+                  },
+                },
+              });
+
+              await prisma.retailSubscription.update({
+                where: { id: retailSub.id },
+                data: { lastBilledAt: new Date() },
+              });
+
+              console.log('Retail subscription renewal order created:', orderNumber);
+              break;
+            }
+          }
+
           // Find matching wholesale order
           const paidOrder = await prisma.wholesaleOrder.findUnique({
             where: { stripeInvoiceId: paidInvoice.id },
@@ -400,7 +455,7 @@ export async function POST(req: NextRequest) {
         }
         break;
 
-      // Subscription events
+      // Subscription events (retail + wholesale)
       case 'customer.subscription.updated':
         const updatedSub = event.data.object as Stripe.Subscription;
         console.log('Subscription updated:', updatedSub.id);
@@ -415,15 +470,40 @@ export async function POST(req: NextRequest) {
             unpaid: 'PAST_DUE',
           };
 
-          await prisma.wholesaleSubscription.updateMany({
+          // Check if it's a retail subscription
+          const retailSubUpdate = await prisma.retailSubscription.findUnique({
             where: { stripeSubscriptionId: updatedSub.id },
-            data: {
-              status: (statusMap[updatedSub.status] || 'ACTIVE') as any,
-              nextBillingDate: updatedSub.current_period_end
-                ? new Date(updatedSub.current_period_end * 1000)
-                : null,
-            },
           });
+
+          if (retailSubUpdate) {
+            await prisma.retailSubscription.update({
+              where: { stripeSubscriptionId: updatedSub.id },
+              data: {
+                status: (statusMap[updatedSub.status] || 'ACTIVE') as any,
+                nextBillingDate: updatedSub.current_period_end
+                  ? new Date(updatedSub.current_period_end * 1000)
+                  : null,
+                currentPeriodStart: updatedSub.current_period_start
+                  ? new Date(updatedSub.current_period_start * 1000)
+                  : null,
+                currentPeriodEnd: updatedSub.current_period_end
+                  ? new Date(updatedSub.current_period_end * 1000)
+                  : null,
+              },
+            });
+            console.log('Retail subscription updated:', updatedSub.id);
+          } else {
+            // Wholesale subscription
+            await prisma.wholesaleSubscription.updateMany({
+              where: { stripeSubscriptionId: updatedSub.id },
+              data: {
+                status: (statusMap[updatedSub.status] || 'ACTIVE') as any,
+                nextBillingDate: updatedSub.current_period_end
+                  ? new Date(updatedSub.current_period_end * 1000)
+                  : null,
+              },
+            });
+          }
         } catch (subError) {
           console.error('Failed to update subscription:', subError);
         }
@@ -434,13 +514,29 @@ export async function POST(req: NextRequest) {
         console.log('Subscription deleted:', deletedSub.id);
 
         try {
-          await prisma.wholesaleSubscription.updateMany({
+          // Check if it's a retail subscription
+          const retailSubDelete = await prisma.retailSubscription.findUnique({
             where: { stripeSubscriptionId: deletedSub.id },
-            data: {
-              status: 'CANCELLED',
-              cancelledAt: new Date(),
-            },
           });
+
+          if (retailSubDelete) {
+            await prisma.retailSubscription.update({
+              where: { stripeSubscriptionId: deletedSub.id },
+              data: {
+                status: 'CANCELLED',
+                cancelledAt: new Date(),
+              },
+            });
+            console.log('Retail subscription cancelled:', deletedSub.id);
+          } else {
+            await prisma.wholesaleSubscription.updateMany({
+              where: { stripeSubscriptionId: deletedSub.id },
+              data: {
+                status: 'CANCELLED',
+                cancelledAt: new Date(),
+              },
+            });
+          }
         } catch (subError) {
           console.error('Failed to process subscription deletion:', subError);
         }
