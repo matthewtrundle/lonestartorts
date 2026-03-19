@@ -42,6 +42,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/subscribe" className="text-gray-400 hover:text-white transition-colors">
+                  Subscribe & Save
+                </Link>
+              </li>
+              <li>
                 <Link href="/buy-heb-tortillas-online" className="text-gray-400 hover:text-white transition-colors">
                   Buy H-E-B Online
                 </Link>
@@ -93,6 +98,11 @@ export function Footer() {
               <li>
                 <Link href="/story" className="text-gray-400 hover:text-white transition-colors">
                   Our Story
+                </Link>
+              </li>
+              <li>
+                <Link href="/account" className="text-gray-400 hover:text-white transition-colors">
+                  My Account
                 </Link>
               </li>
             </ul>

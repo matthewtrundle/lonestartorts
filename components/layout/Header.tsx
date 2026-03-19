@@ -141,6 +141,12 @@ export function Header() {
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
+            <Link href="/subscribe" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-sunset-600 transition-colors group-hover:text-sunset-700">
+                Subscribe
+              </span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+            </Link>
             <Link href="/shipping" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 Shipping
@@ -336,6 +342,20 @@ export function Header() {
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
               {t('nav.wholesale')}
+            </Link>
+            <Link
+              href="/subscribe"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 text-sunset-600 font-semibold hover:bg-sunset-50 rounded-lg transition-colors"
+            >
+              Subscribe & Save
+            </Link>
+            <Link
+              href="/account"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+            >
+              My Account
             </Link>
             <Link
               href="/story"
