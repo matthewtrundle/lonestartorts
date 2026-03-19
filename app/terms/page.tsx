@@ -139,7 +139,7 @@ export default function TermsOfServicePage() {
               </p>
               <ul className="list-none pl-0 text-charcoal-700 space-y-2 mb-4">
                 <li><strong>Email:</strong> howdy@lonestartortillas.com</li>
-                <li><strong>Text:</strong> (737) 228-0037</li>
+                <li><strong>Phone:</strong> (512) 894-6823</li>
                 <li><strong>Website:</strong> <Link href="/contact" className="text-sunset-600 hover:text-sunset-700">lonestartortillas.com/contact</Link></li>
               </ul>
 

@@ -53,7 +53,7 @@ export async function POST(
         state: 'TX',
         zip: '78701',
         country: 'US',
-        phone: '512-555-0100',
+        phone: '512-894-6823',
       },
       to_address: {
         name: order.shippingName,

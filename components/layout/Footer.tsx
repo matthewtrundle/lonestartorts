@@ -114,10 +114,18 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="sms:+17372280037"
+                  href="tel:+15128946823"
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
                 >
-                  <span>Text Us: (737) 228-0037</span>
+                  <span>Call Us: (512) 894-6823</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+15128946823"
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <span>Call Maria: (512) 894-6823</span>
                 </a>
               </li>
               <li>

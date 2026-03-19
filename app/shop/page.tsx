@@ -311,7 +311,7 @@ export default function ShopPage({
 
         {/* Contact - Compact */}
         <div className="mt-8 text-center text-sm text-gray-500">
-          Questions? <a href="sms:+17372280037" className="text-sunset-600 hover:underline">(737) 228-0037</a>
+          Questions? <a href="tel:+15128946823" className="text-sunset-600 hover:underline">(512) 894-6823</a>
           {' \u2022 '}
           <a href="mailto:howdy@lonestartortillas.com" className="text-sunset-600 hover:underline">howdy@lonestartortillas.com</a>
         </div>
