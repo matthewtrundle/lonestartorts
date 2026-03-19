@@ -17,10 +17,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No payment profile found' }, { status: 400 });
     }
 
-    const { items, interval, intervalCount, paymentMethodId } = await request.json();
+    const { items, interval, intervalCount } = await request.json();
 
-    if (!items?.length || !paymentMethodId) {
-      return NextResponse.json({ error: 'Items and payment method are required' }, { status: 400 });
+    if (!items?.length) {
+      return NextResponse.json({ error: 'Items are required' }, { status: 400 });
     }
 
     // Validate items against product catalog
@@ -44,8 +44,8 @@ export async function POST(request: NextRequest) {
     const total = subtotal + shipping + tax;
 
     // Create Stripe subscription
-    const stripeInterval = interval === 'biweekly' ? 'week' : interval === 'weekly' ? 'week' : 'month';
-    const stripeIntervalCount = interval === 'biweekly' ? 2 : intervalCount || 1;
+    const stripeInterval = (interval === 'biweekly' || interval === 'weekly') ? 'week' : 'month';
+    const stripeIntervalCount = interval === 'biweekly' ? 2 : interval === 'quarterly' ? 3 : intervalCount || 1;
 
     const result = await createRetailSubscription({
       stripeCustomerId: customer.stripeCustomerId,
@@ -53,7 +53,6 @@ export async function POST(request: NextRequest) {
       interval: stripeInterval,
       intervalCount: stripeIntervalCount,
       shipping: shipping + tax, // Include tax in Stripe price
-      paymentMethodId,
     });
 
     // Save to database
@@ -63,8 +62,8 @@ export async function POST(request: NextRequest) {
         stripeSubscriptionId: result.subscription.id,
         stripePriceId: result.price.id,
         stripeProductId: result.product.id,
-        name: `${interval === 'biweekly' ? 'Biweekly' : interval === 'weekly' ? 'Weekly' : 'Monthly'} Tortilla Subscription`,
-        status: 'ACTIVE',
+        name: `${interval === 'biweekly' ? 'Biweekly' : interval === 'weekly' ? 'Weekly' : interval === 'quarterly' ? 'Quarterly' : 'Monthly'} Tortilla Subscription`,
+        status: 'PAUSED', // Starts as PAUSED until first payment confirmed via webhook
         interval: mapStripeIntervalToDb(interval),
         intervalCount: stripeIntervalCount,
         nextBillingDate: new Date(result.subscription.current_period_end * 1000),

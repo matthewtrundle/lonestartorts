@@ -365,9 +365,18 @@ export async function POST(req: NextRequest) {
                 },
               });
 
+              // Retrieve the subscription to get updated billing period dates
+              const stripeSub = await stripe.subscriptions.retrieve(paidInvoice.subscription as string);
+
               await prisma.retailSubscription.update({
                 where: { id: retailSub.id },
-                data: { lastBilledAt: new Date() },
+                data: {
+                  status: 'ACTIVE',
+                  lastBilledAt: new Date(),
+                  nextBillingDate: new Date(stripeSub.current_period_end * 1000),
+                  currentPeriodStart: new Date(stripeSub.current_period_start * 1000),
+                  currentPeriodEnd: new Date(stripeSub.current_period_end * 1000),
+                },
               });
 
               console.log('Retail subscription renewal order created:', orderNumber);
@@ -401,6 +410,23 @@ export async function POST(req: NextRequest) {
         console.log('Invoice payment failed:', failedInvoice.id);
 
         try {
+          // Check if this is a retail subscription invoice
+          if (failedInvoice.subscription) {
+            const failedRetailSub = await prisma.retailSubscription.findFirst({
+              where: { stripeSubscriptionId: failedInvoice.subscription as string },
+            });
+
+            if (failedRetailSub) {
+              await prisma.retailSubscription.update({
+                where: { id: failedRetailSub.id },
+                data: { status: 'PAST_DUE' },
+              });
+              console.log('Retail subscription marked as past due:', failedRetailSub.id);
+              break;
+            }
+          }
+
+          // Wholesale invoice handling
           const failedOrder = await prisma.wholesaleOrder.findUnique({
             where: { stripeInvoiceId: failedInvoice.id },
           });
@@ -413,7 +439,6 @@ export async function POST(req: NextRequest) {
               },
             });
             console.log('Wholesale order marked as overdue:', failedOrder.orderNumber);
-            // TODO: Send payment failed notification
           }
         } catch (invoiceError) {
           console.error('Failed to process failed invoice:', invoiceError);

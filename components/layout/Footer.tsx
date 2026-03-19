@@ -43,7 +43,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/subscribe" className="text-gray-400 hover:text-white transition-colors">
-                  Subscribe & Save
+                  {t('nav.subscribeAndSave')}
                 </Link>
               </li>
               <li>
@@ -102,7 +102,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/account" className="text-gray-400 hover:text-white transition-colors">
-                  My Account
+                  {t('nav.myAccount')}
                 </Link>
               </li>
             </ul>

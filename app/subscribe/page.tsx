@@ -375,10 +375,11 @@ export default function SubscribePage() {
             </div>
 
             <button
-              onClick={() => setStep(isLoggedIn ? 'payment' : 'account')}
-              className="mt-6 px-6 py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 flex items-center gap-2"
+              onClick={() => isLoggedIn ? createSubscription() : setStep('account')}
+              disabled={loading}
+              className="mt-6 px-6 py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 disabled:opacity-50 flex items-center gap-2"
             >
-              {isLoggedIn ? 'Continue to Payment' : 'Create Account'} <ArrowRight className="w-5 h-5" />
+              {loading ? 'Setting up...' : isLoggedIn ? 'Continue to Payment' : 'Create Account'} <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         )}

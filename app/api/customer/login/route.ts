@@ -4,12 +4,13 @@ import { verifyPassword, setCustomerAuthCookie } from '@/lib/customer-auth';
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const { email: rawEmail, password } = await request.json();
 
-    if (!email || !password) {
+    if (!rawEmail || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
+    const email = rawEmail.toLowerCase().trim();
     const customer = await prisma.customer.findUnique({ where: { email } });
 
     if (!customer || !customer.passwordHash) {

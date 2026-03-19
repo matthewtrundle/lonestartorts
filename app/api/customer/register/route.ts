@@ -10,11 +10,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password, firstName, lastName } = await request.json();
+    const { email: rawEmail, password, firstName, lastName } = await request.json();
 
-    if (!email || !password) {
+    if (!rawEmail || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
+
+    const email = rawEmail.toLowerCase().trim();
 
     if (password.length < 8) {
       return NextResponse.json({ error: 'Password must be at least 8 characters' }, { status: 400 });
@@ -29,43 +31,55 @@ export async function POST(request: NextRequest) {
 
     const passwordHash = await hashPassword(password);
 
-    // Create Stripe customer
-    const stripeCustomer = await stripe.customers.create({
-      email,
-      name: [firstName, lastName].filter(Boolean).join(' ') || undefined,
-      metadata: { type: 'retail_subscription' },
-    });
+    // Reuse existing Stripe customer or create new one
+    let stripeCustomerId = existing?.stripeCustomerId;
+    if (!stripeCustomerId) {
+      const stripeCustomer = await stripe.customers.create({
+        email,
+        name: [firstName, lastName].filter(Boolean).join(' ') || undefined,
+        metadata: { type: 'retail_subscription' },
+      });
+      stripeCustomerId = stripeCustomer.id;
+    }
 
     let customer;
-    if (existing) {
-      // Upgrade guest account to full account
-      customer = await prisma.customer.update({
-        where: { email },
-        data: {
-          passwordHash,
-          firstName: firstName || existing.firstName,
-          lastName: lastName || existing.lastName,
-          stripeCustomerId: stripeCustomer.id,
-          signupSource: existing.signupSource === 'checkout' ? 'checkout_upgraded' : 'subscription',
-          lastLoginAt: new Date(),
-          updatedAt: new Date(),
-        },
-      });
-    } else {
-      customer = await prisma.customer.create({
-        data: {
-          id: randomUUID(),
-          clerkUserId: `sub_${Date.now()}_${Math.random().toString(36).substring(7)}`,
-          email,
-          passwordHash,
-          firstName: firstName || null,
-          lastName: lastName || null,
-          stripeCustomerId: stripeCustomer.id,
-          signupSource: 'subscription',
-          lastLoginAt: new Date(),
-          updatedAt: new Date(),
-        },
-      });
+    try {
+      if (existing) {
+        // Upgrade guest account to full account
+        customer = await prisma.customer.update({
+          where: { email },
+          data: {
+            passwordHash,
+            firstName: firstName || existing.firstName,
+            lastName: lastName || existing.lastName,
+            stripeCustomerId,
+            signupSource: existing.signupSource === 'checkout' ? 'checkout_upgraded' : 'subscription',
+            lastLoginAt: new Date(),
+            updatedAt: new Date(),
+          },
+        });
+      } else {
+        customer = await prisma.customer.create({
+          data: {
+            id: randomUUID(),
+            clerkUserId: `sub_${Date.now()}_${Math.random().toString(36).substring(7)}`,
+            email,
+            passwordHash,
+            firstName: firstName || null,
+            lastName: lastName || null,
+            stripeCustomerId,
+            signupSource: 'subscription',
+            lastLoginAt: new Date(),
+            updatedAt: new Date(),
+          },
+        });
+      }
+    } catch (dbError) {
+      // Clean up Stripe customer if DB write failed and we created a new one
+      if (!existing?.stripeCustomerId && stripeCustomerId) {
+        try { await stripe.customers.del(stripeCustomerId); } catch { /* best effort */ }
+      }
+      throw dbError;
     }
 
     await setCustomerAuthCookie(customer.id, customer.email);

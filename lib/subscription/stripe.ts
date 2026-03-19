@@ -17,7 +17,6 @@ interface CreateSubscriptionParams {
   interval: 'week' | 'month';
   intervalCount: number;
   shipping: number; // cents
-  paymentMethodId: string;
 }
 
 export async function createRetailSubscription({
@@ -26,18 +25,7 @@ export async function createRetailSubscription({
   interval,
   intervalCount,
   shipping,
-  paymentMethodId,
 }: CreateSubscriptionParams) {
-  // Attach payment method to customer
-  await stripe.paymentMethods.attach(paymentMethodId, {
-    customer: stripeCustomerId,
-  });
-
-  // Set as default payment method
-  await stripe.customers.update(stripeCustomerId, {
-    invoice_settings: { default_payment_method: paymentMethodId },
-  });
-
   // Calculate total per billing cycle
   const subtotal = items.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
   const total = subtotal + shipping;
@@ -113,8 +101,12 @@ export async function getCustomerSubscriptions(stripeCustomerId: string) {
 
 export function mapStripeIntervalToDb(interval: string): 'WEEKLY' | 'BIWEEKLY' | 'MONTHLY' | 'QUARTERLY' {
   switch (interval) {
+    case 'weekly':
     case 'week': return 'WEEKLY';
+    case 'biweekly': return 'BIWEEKLY';
+    case 'monthly':
     case 'month': return 'MONTHLY';
+    case 'quarterly': return 'QUARTERLY';
     default: return 'MONTHLY';
   }
 }
