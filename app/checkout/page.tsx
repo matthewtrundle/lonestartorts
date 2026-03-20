@@ -9,7 +9,7 @@ import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned } from '@/lib/analytics';
 
 import { Button } from '@/components/ui/button';
-import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle } from 'lucide-react';
+import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle, Star, Gift } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 import { WholesaleAuthGate } from '@/components/wholesale/WholesaleAuthGate';
 
@@ -26,11 +26,19 @@ export default function CheckoutPage() {
   const [checkingAuth, setCheckingAuth] = useState(false);
   const [wholesaleAuthError, setWholesaleAuthError] = useState<string | null>(null);
 
-  // Check if already logged in for wholesale orders
+  // Loyalty points state
+  const [loyaltyBalance, setLoyaltyBalance] = useState<number>(0);
+  const [loyaltyLoading, setLoyaltyLoading] = useState(false);
+  const [loyaltyRedeemLoading, setLoyaltyRedeemLoading] = useState(false);
+  const [loyaltyCode, setLoyaltyCode] = useState<string | null>(null);
+  const [customerEmail, setCustomerEmail] = useState<string | null>(null);
+
+  // Check if already logged in for wholesale orders + fetch loyalty data
   React.useEffect(() => {
     if (hasWholesaleItems && !wholesaleCustomer) {
       setCheckingAuth(true);
       setWholesaleAuthError(null);
+      setLoyaltyLoading(true);
       fetch('/api/customer/me')
         .then(res => res.ok ? res.json() : null)
         .then(data => {
@@ -39,9 +47,38 @@ export default function CheckoutPage() {
           } else if (data?.customer && !data.customer.isWholesale) {
             setWholesaleAuthError('Your account is not approved for wholesale ordering. Please register a new wholesale account below.');
           }
+          // Extract loyalty data
+          if (data?.customer?.email) {
+            setCustomerEmail(data.customer.email);
+          }
+          if (data?.loyaltyData) {
+            setLoyaltyBalance(data.loyaltyData.balance || 0);
+          }
         })
         .catch(() => {})
-        .finally(() => setCheckingAuth(false));
+        .finally(() => {
+          setCheckingAuth(false);
+          setLoyaltyLoading(false);
+        });
+    }
+  }, [hasWholesaleItems]);
+
+  // Fetch loyalty data for non-wholesale orders
+  React.useEffect(() => {
+    if (!hasWholesaleItems) {
+      setLoyaltyLoading(true);
+      fetch('/api/customer/me')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data?.customer?.email) {
+            setCustomerEmail(data.customer.email);
+          }
+          if (data?.loyaltyData) {
+            setLoyaltyBalance(data.loyaltyData.balance || 0);
+          }
+        })
+        .catch(() => {})
+        .finally(() => setLoyaltyLoading(false));
     }
   }, [hasWholesaleItems]);
 
@@ -107,9 +144,15 @@ export default function CheckoutPage() {
   // Calculate display total (with discount if applied)
   const isFreeShipping = discountApplied && discountType === 'free_shipping';
   const isPercentageDiscount = discountApplied && discountType === 'percentage';
+  const isFixedAmountDiscount = discountApplied && discountType === 'fixed_amount';
   const percentageDiscountValue = isPercentageDiscount ? Math.round(subtotal * (discountAmount / 100)) : 0;
+  const fixedDiscountValue = isFixedAmountDiscount ? discountAmount : 0;
   const displayShipping = isFreeShipping ? 0 : shipping;
-  const displaySubtotalAfterDiscount = isPercentageDiscount ? subtotal - percentageDiscountValue : subtotal;
+  const displaySubtotalAfterDiscount = isPercentageDiscount
+    ? subtotal - percentageDiscountValue
+    : isFixedAmountDiscount
+      ? Math.max(0, subtotal - fixedDiscountValue)
+      : subtotal;
   // Recalculate tax based on discounted subtotal
   const displayTax = Math.round(displaySubtotalAfterDiscount * 0.0825);
   const displayTotal = displaySubtotalAfterDiscount + displayTax + displayShipping;
@@ -170,6 +213,37 @@ export default function CheckoutPage() {
     setDiscountType(null);
     setDiscountAmount(0);
     setDiscountMessage('');
+    setLoyaltyCode(null);
+  };
+
+  // Redeem loyalty points
+  const handleLoyaltyRedeem = async () => {
+    setLoyaltyRedeemLoading(true);
+    try {
+      const response = await fetch('/api/customer/loyalty/redeem', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to redeem points');
+      }
+      // Auto-apply the loyalty discount code
+      setLoyaltyCode(data.code);
+      setDiscountCode(data.code);
+      if (customerEmail) {
+        setEmail(customerEmail);
+      }
+      setDiscountApplied(true);
+      setDiscountType('fixed_amount');
+      setDiscountAmount(data.value); // 500 cents
+      setDiscountMessage(`$5 loyalty reward applied! (${data.code})`);
+      setLoyaltyBalance(data.remainingBalance);
+    } catch (err) {
+      setDiscountError(err instanceof Error ? err.message : 'Failed to redeem loyalty points');
+    } finally {
+      setLoyaltyRedeemLoading(false);
+    }
   };
 
   const handleCheckout = async () => {
@@ -369,6 +443,12 @@ export default function CheckoutPage() {
                       <span className="font-medium">-{formatPrice(percentageDiscountValue)}</span>
                     </div>
                   )}
+                  {isFixedAmountDiscount && (
+                    <div className="flex justify-between items-center text-green-600">
+                      <span>Discount{loyaltyCode ? ' (Loyalty Reward)' : ''}</span>
+                      <span className="font-medium">-{formatPrice(fixedDiscountValue)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center">
                     <span className="text-charcoal-600">Shipping</span>
                     {subtotal >= 8000 || isFreeShipping ? (
@@ -464,6 +544,42 @@ export default function CheckoutPage() {
                     </div>
                   )}
                 </div>
+
+                {/* Loyalty Points Card */}
+                {!loyaltyLoading && loyaltyBalance >= 200 && (
+                  <div className="rounded-lg overflow-hidden border border-amber-200">
+                    <div className="bg-gradient-to-r from-amber-100 to-yellow-100 px-4 py-3">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Star className="w-4 h-4 text-amber-600 fill-amber-500" />
+                        <span className="text-sm font-semibold text-amber-900">
+                          You have {loyaltyBalance} points!
+                        </span>
+                      </div>
+                      <p className="text-xs text-amber-700">Use 200 points for $5 off</p>
+                    </div>
+                    <div className="px-4 py-3 bg-white">
+                      {discountApplied && !loyaltyCode ? (
+                        <p className="text-xs text-gray-500 text-center">
+                          Remove current discount to use points
+                        </p>
+                      ) : loyaltyCode ? (
+                        <div className="flex items-center gap-2 text-sm text-green-700">
+                          <Gift className="w-4 h-4" />
+                          <span className="font-medium">Loyalty reward applied!</span>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={handleLoyaltyRedeem}
+                          disabled={loyaltyRedeemLoading}
+                          className="w-full py-2 px-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-sm font-semibold rounded-md hover:from-amber-600 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                        >
+                          <Gift className="w-4 h-4" />
+                          {loyaltyRedeemLoading ? 'Applying...' : 'Apply $5 Reward'}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
 
                 {/* Trust Indicators */}
                 <div className="flex items-center justify-center gap-4 text-xs text-gray-500 pt-2">
