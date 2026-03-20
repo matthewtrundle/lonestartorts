@@ -124,9 +124,10 @@ export default function WholesalePage() {
                   <span className="text-sunset-300">Texas Tortillas, Shipped Nationwide</span>
                 </h1>
                 <p className="text-xl text-cream-200 mb-8">
-                  Premium H-E-B tortillas for your restaurant, food truck, or
-                  catering business. Volume discounts up to 25% off, weekly
-                  delivery, and free shipping on every order.
+                  Our full range of H-E-B tortillas for your restaurant, food
+                  truck, or catering business. Choose from 11 varieties with
+                  volume discounts up to 25% off, weekly delivery, and free
+                  shipping on every order.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a
@@ -175,9 +176,8 @@ export default function WholesalePage() {
                 Volume Pricing Tiers
               </h2>
               <p className="text-lg text-charcoal-700 max-w-2xl mx-auto">
-                Choose your monthly volume and save. Adjust quantity in
-                increments of 4 packs (80 tortillas). All tiers include free
-                shipping and weekly delivery options.
+                Choose your tier, then pick from our complete tortilla catalog.
+                All tiers include free shipping and weekly delivery options.
               </p>
             </div>
 
@@ -190,8 +190,7 @@ export default function WholesalePage() {
 
             <div className="mt-8 text-center space-y-3">
               <p className="text-charcoal-600">
-                Each pack contains 20 tortillas. Need a custom volume or mixed
-                varieties?
+                Pack sizes vary by product (10-80 tortillas per pack). Need a custom volume?
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a
@@ -423,10 +422,12 @@ export default function WholesalePage() {
                 </summary>
                 <div className="p-5 pt-0 border-t border-charcoal-200">
                   <p className="text-charcoal-700">
-                    We offer the full H-E-B tortilla range: flour tortillas
-                    (ideal for burritos, quesadillas, fajitas) and butter flour
-                    tortillas (the Texas favorite, perfect for breakfast tacos).
-                    Contact us for mixed variety orders.
+                    We offer the full H-E-B tortilla range — 11 varieties
+                    including bakery fresh flour, butter, and wheat tortillas,
+                    pantry staples like fajita flour, homestyle, and burrito
+                    grande, plus white corn, street taco corn, and Mi Tienda
+                    ready-to-cook tortillas. Mix and match any combination
+                    in your wholesale order.
                   </p>
                 </div>
               </details>

@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import './globals.css';
 import { CartProvider } from '@/lib/cart-context';
 import { LanguageProvider } from '@/lib/language-context';
+import { ToastProvider } from '@/components/ui/Toast';
 import { Footer } from '@/components/layout/Footer';
 import { HeaderWrapper } from '@/components/layout/HeaderWrapper';
 
@@ -349,20 +350,22 @@ export default function RootLayout({
 
         <LanguageProvider>
           <CartProvider>
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-white focus:text-charcoal-950 focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg focus:text-sm focus:font-medium"
-            >
-              Skip to main content
-            </a>
-            <CartSidebar />
-            <div className="min-h-screen flex flex-col">
-              <HeaderWrapper />
-              <main id="main-content" className="flex-grow">
-                {children}
-              </main>
-              <Footer />
-            </div>
+            <ToastProvider>
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-white focus:text-charcoal-950 focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg focus:text-sm focus:font-medium"
+              >
+                Skip to main content
+              </a>
+              <CartSidebar />
+              <div className="min-h-screen flex flex-col">
+                <HeaderWrapper />
+                <main id="main-content" className="flex-grow">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </ToastProvider>
           </CartProvider>
         </LanguageProvider>
       </body>

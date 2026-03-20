@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
+import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getRetailSkuFromWholesale, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
+import { getTierForPackCount, getWholesalePrice } from '@/lib/wholesale-tiers';
 
 // Texas sales tax rate
 const TAX_RATE = 0.0825; // 8.25%
@@ -37,14 +38,41 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
     }
 
-    // Build full items array with productType, sku, and price for shipping calculation
+    // Count total wholesale packs for tier determination
+    const totalWholesalePacks = items
+      .filter((item: { sku: string; quantity: number }) => isWholesaleProduct(item.sku))
+      .reduce((sum: number, item: { sku: string; quantity: number }) => sum + item.quantity, 0);
+
+    // Determine wholesale tier (if any wholesale items)
+    const wholesaleTier = totalWholesalePacks > 0 ? getTierForPackCount(totalWholesalePacks) : null;
+
+    // Validate minimum wholesale pack count
+    if (totalWholesalePacks > 0 && !wholesaleTier) {
+      return NextResponse.json({
+        error: 'Minimum 16 packs required for wholesale pricing. Please add more items or shop retail.'
+      }, { status: 400 });
+    }
+
+    // Build full items array with productType, sku, and server-validated price
     const fullItems = items.map((item: { sku: string; quantity: number; price?: number }) => {
       const product = getAnyProductBySku(item.sku);
       if (!product) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
       }
-      // Wholesale variety items use dynamic tier pricing from the cart
-      const price = (isWholesaleProduct(item.sku) && item.price) ? item.price : product.price;
+
+      let price = product.price;
+
+      // For wholesale items, compute server-side price from tier discount
+      if (isWholesaleProduct(item.sku) && wholesaleTier) {
+        const retailSku = getRetailSkuFromWholesale(item.sku);
+        if (retailSku) {
+          const retailProduct = getProductBySku(retailSku);
+          if (retailProduct) {
+            price = getWholesalePrice(retailProduct.price, wholesaleTier.discountPercent);
+          }
+        }
+      }
+
       return {
         quantity: item.quantity,
         productType: product.productType,
@@ -277,8 +305,9 @@ export async function POST(req: NextRequest) {
         throw new Error(`Invalid quantity for ${item.sku}`);
       }
 
-      // Wholesale variety items use dynamic tier pricing from the cart
-      const unitAmount = (isWholesaleProduct(item.sku) && item.price) ? item.price : product.price;
+      // Use server-validated price from fullItems (handles wholesale tier pricing)
+      const matchedFullItem = fullItems.find(fi => fi.sku === item.sku);
+      const unitAmount = matchedFullItem ? matchedFullItem.price : product.price;
 
       return {
         price_data: {

@@ -7,8 +7,6 @@ import {
   calculateBaseShipping,
   FREE_SHIPPING_THRESHOLD,
   products,
-  wholesaleProducts,
-  wholesaleVarietyProducts,
   isWholesaleProduct,
 } from '@/lib/products';
 
@@ -95,11 +93,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (stored) {
         const parsed = JSON.parse(stored);
         // Validate stored items against current catalog
-        const allSkus = new Set([
-          ...products.map(p => p.sku),
-          ...wholesaleProducts.map(p => p.sku),
-          ...wholesaleVarietyProducts.map(p => p.sku),
-        ]);
+        const allSkus = new Set(products.map(p => p.sku));
         const validItems = parsed.filter((item: CartItem) => allSkus.has(item.sku) || isWholesaleProduct(item.sku));
         setItems(validItems);
       }

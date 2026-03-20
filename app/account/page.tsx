@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Package, CreditCard, LogOut, Clock, Truck, Calendar, ExternalLink, Building2, ShoppingBag, Star, Gift } from 'lucide-react';
+import { Package, CreditCard, LogOut, Clock, Truck, Calendar, ExternalLink, Building2, ShoppingBag, Star, Gift, Copy, Check } from 'lucide-react';
 import SubscriptionCard from '@/components/account/SubscriptionCard';
 import { formatPrice } from '@/lib/utils';
+import { useToast } from '@/components/ui/Toast';
 
 interface Subscription {
   id: string;
@@ -92,6 +93,23 @@ const statusColors: Record<string, string> = {
   DELIVERED: 'bg-emerald-100 text-emerald-700',
 };
 
+const statusLabels: Record<string, string> = {
+  ACTIVE: 'Active',
+  PAUSED: 'Paused',
+  CANCELLED: 'Cancelled',
+  PAST_DUE: 'Past Due',
+  PROCESSING: 'Processing',
+  SHIPPED: 'Shipped',
+  DELIVERED: 'Delivered',
+  PENDING: 'Pending',
+  PAID: 'Paid',
+  FAILED: 'Failed',
+};
+
+function formatStatus(status: string): string {
+  return statusLabels[status] || status.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
 export default function AccountPage() {
   const router = useRouter();
   const [customer, setCustomer] = useState<CustomerData | null>(null);
@@ -99,6 +117,8 @@ export default function AccountPage() {
   const [portalLoading, setPortalLoading] = useState(false);
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemResult, setRedeemResult] = useState<{ code: string; expiresAt: string } | null>(null);
+  const [copied, setCopied] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     fetchCustomer();
@@ -129,7 +149,7 @@ export default function AccountPage() {
         window.location.href = data.url;
       }
     } catch {
-      alert('Failed to open subscription management. Please try again.');
+      showToast('Failed to open subscription management. Please try again.');
     } finally {
       setPortalLoading(false);
     }
@@ -146,13 +166,14 @@ export default function AccountPage() {
       const res = await fetch('/api/customer/loyalty/redeem', { method: 'POST' });
       const data = await res.json();
       if (!res.ok) {
-        alert(data.error || 'Failed to redeem points');
+        showToast(data.error || 'Failed to redeem points');
         return;
       }
       setRedeemResult({ code: data.code, expiresAt: data.expiresAt });
+      showToast('Points redeemed! Your discount code is ready.', 'success');
       fetchCustomer();
     } catch {
-      alert('Failed to redeem points');
+      showToast('Failed to redeem points');
     } finally {
       setRedeemLoading(false);
     }
@@ -278,7 +299,21 @@ export default function AccountPage() {
                   {redeemResult && (
                     <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
                       <p className="text-sm font-medium text-green-800 mb-1">Your discount code:</p>
-                      <code className="text-lg font-bold text-green-700">{redeemResult.code}</code>
+                      <div className="flex items-center gap-2">
+                        <code className="text-lg font-bold text-green-700">{redeemResult.code}</code>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(redeemResult.code);
+                            setCopied(true);
+                            showToast('Discount code copied!', 'success');
+                            setTimeout(() => setCopied(false), 2000);
+                          }}
+                          className="p-1.5 rounded-md hover:bg-green-100 text-green-600 transition-colors"
+                          aria-label="Copy discount code"
+                        >
+                          {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                        </button>
+                      </div>
                       <p className="text-xs text-green-600 mt-1">
                         Valid until {new Date(redeemResult.expiresAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                       </p>
@@ -329,7 +364,7 @@ export default function AccountPage() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${statusColors[order.status] || 'bg-gray-100 text-gray-600'}`}>
-                          {order.status}
+                          {formatStatus(order.status)}
                         </span>
                         <span className="font-medium text-charcoal-950">{formatPrice(order.total)}</span>
                       </div>
@@ -377,7 +412,7 @@ export default function AccountPage() {
                           </div>
                           <div className="flex items-center gap-3">
                             <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${statusColors[order.paymentStatus] || statusColors[order.orderStatus] || 'bg-gray-100 text-gray-600'}`}>
-                              {order.paymentStatus}
+                              {formatStatus(order.paymentStatus)}
                             </span>
                             <span className="font-medium text-charcoal-950">{formatPrice(order.total)}</span>
                           </div>
@@ -404,8 +439,8 @@ export default function AccountPage() {
             )}
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
+          {/* Sidebar — shows first on mobile for quick access */}
+          <div className="space-y-6 order-first md:order-none">
             {/* Quick Actions */}
             <div className="bg-white rounded-xl shadow-soft p-6">
               <h2 className="text-lg font-bold text-charcoal-950 mb-4">Quick Actions</h2>

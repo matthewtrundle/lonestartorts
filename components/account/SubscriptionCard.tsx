@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Calendar, Pause, Play, X, ChevronDown, ChevronUp, Truck } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { useToast } from '@/components/ui/Toast';
 
 interface SubscriptionItem {
   sku: string;
@@ -30,6 +31,13 @@ const statusColors: Record<string, string> = {
   PAST_DUE: 'bg-orange-100 text-orange-700',
 };
 
+const statusLabels: Record<string, string> = {
+  ACTIVE: 'Active',
+  PAUSED: 'Paused',
+  CANCELLED: 'Cancelled',
+  PAST_DUE: 'Past Due',
+};
+
 const shippingDayLabels: Record<string, string> = {
   '1st_tuesday': '1st Tuesday',
   '2nd_tuesday': '2nd Tuesday',
@@ -43,6 +51,7 @@ interface Props {
 }
 
 export default function SubscriptionCard({ subscription: sub, onUpdate }: Props) {
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [showConfirm, setShowConfirm] = useState<'pause' | 'cancel' | null>(null);
@@ -58,12 +67,12 @@ export default function SubscriptionCard({ subscription: sub, onUpdate }: Props)
       });
       if (!res.ok) {
         const err = await res.json();
-        alert(err.error || 'Failed to update subscription');
+        showToast(err.error || 'Failed to update subscription');
         return;
       }
       onUpdate();
     } catch {
-      alert('Failed to update subscription');
+      showToast('Failed to update subscription');
     } finally {
       setLoading(false);
       setShowConfirm(null);
@@ -82,7 +91,7 @@ export default function SubscriptionCard({ subscription: sub, onUpdate }: Props)
           <div className="flex items-center gap-3">
             <h3 className="font-semibold text-charcoal-950">{sub.name}</h3>
             <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold ${statusColors[sub.status] || 'bg-gray-100 text-gray-600'}`}>
-              {sub.status}
+              {statusLabels[sub.status] || sub.status}
             </span>
           </div>
           <div className="flex items-center gap-3">

@@ -40,7 +40,7 @@ export default function CustomerLoginPage() {
   };
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center bg-cream-50 px-4">
+    <div className="min-h-[70vh] flex items-center justify-center bg-cream-50 px-4 pt-24">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
@@ -99,6 +99,12 @@ export default function CustomerLoginPage() {
               {!loading && <ArrowRight className="w-5 h-5" />}
             </button>
           </form>
+
+          <div className="mt-4 text-right">
+            <Link href="/account/forgot-password" className="text-sm text-sunset-600 hover:text-sunset-700 font-medium">
+              Forgot your password?
+            </Link>
+          </div>
 
           <div className="mt-6 text-center space-y-3">
             <p className="text-sm text-charcoal-600">
