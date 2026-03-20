@@ -690,3 +690,191 @@ export function generateFeedbackThankYouEmail(data: FeedbackThankYouData): strin
 </body>
 </html>`;
 }
+
+interface SubscriptionRenewalData {
+  orderNumber: string;
+  customerName: string;
+  items: Array<{ name: string; quantity: number; price: number }>; // price in cents
+  subtotal: number; // cents
+  shipping: number; // cents
+  tax: number; // cents
+  total: number; // cents
+  estimatedShipDate: string;
+  nextBillingDate: string;
+}
+
+/**
+ * Generate Subscription Renewal Confirmation Email HTML
+ */
+export function generateSubscriptionRenewalEmail(data: SubscriptionRenewalData): string {
+  const {
+    orderNumber,
+    customerName,
+    items,
+    subtotal,
+    shipping,
+    tax,
+    total,
+    estimatedShipDate,
+    nextBillingDate,
+  } = data;
+
+  const orderDate = new Date().toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Order Confirmed - Lonestar Tortillas</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center; background: linear-gradient(135deg, #111827 0%, #292524 100%);">
+              <div style="margin-bottom: 24px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Subscription Order Confirmed</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Your recurring order has been placed and is being prepared.</p>
+            </td>
+          </tr>
+
+          <!-- Order Number & Date -->
+          <tr>
+            <td style="padding: 32px 32px 24px 32px; background-color: #fef3c7; border-bottom: 4px solid #d97706;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="vertical-align: top;">
+                    <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Order Number</p>
+                    <p style="margin: 0; font-size: 24px; font-weight: 700; color: #1c1917; font-family: monospace; letter-spacing: 1px;">${orderNumber}</p>
+                  </td>
+                  <td style="text-align: right; vertical-align: top;">
+                    <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Order Date</p>
+                    <p style="margin: 0; font-size: 15px; font-weight: 600; color: #1c1917;">${orderDate}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Tuesday Shipping Banner -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #ecfdf5; border-bottom: 1px solid #a7f3d0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="width: 48px; vertical-align: middle;">
+                    <div style="width: 40px; height: 40px; background-color: #10b981; border-radius: 50%; text-align: center; line-height: 40px;">
+                      <span style="color: #ffffff; font-size: 20px;">📦</span>
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle; padding-left: 12px;">
+                    <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #065f46;">Freshness First Shipping</p>
+                    <p style="margin: 0; font-size: 14px; color: #047857;">We ship on <strong>Tuesdays only</strong> so your tortillas spend the fewest days in transit. Your order ships <strong>${estimatedShipDate}</strong>.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Order Summary -->
+          <tr>
+            <td style="padding: 32px;">
+              <h2 style="margin: 0 0 24px 0; font-size: 20px; font-weight: 700; color: #111827;">Order Summary</h2>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                ${items.map((item, index) => `
+                <tr style="${index < items.length - 1 ? 'border-bottom: 1px solid #f5f5f4;' : ''}">
+                  <td style="padding: 16px 0;">
+                    <div style="font-weight: 600; font-size: 16px; color: #1c1917; margin-bottom: 4px;">${item.name}</div>
+                    <div style="font-size: 14px; color: #57534e;">Quantity: ${item.quantity}</div>
+                  </td>
+                  <td style="padding: 16px 0; text-align: right; font-size: 16px; font-weight: 600; color: #1c1917; white-space: nowrap;">$${((item.price * item.quantity) / 100).toFixed(2)}</td>
+                </tr>
+                `).join('')}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Totals -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-top: 2px solid #e7e5e4; padding-top: 20px;">
+                <tr>
+                  <td style="padding: 10px 0; font-size: 15px; color: #57534e;">Subtotal</td>
+                  <td style="padding: 10px 0; text-align: right; font-size: 15px; color: #1c1917; font-weight: 500;">$${(subtotal / 100).toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; font-size: 15px; color: #57534e;">Shipping</td>
+                  <td style="padding: 10px 0; text-align: right; font-size: 15px; color: #1c1917; font-weight: 500;">$${(shipping / 100).toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0 20px 0; font-size: 15px; color: #57534e; border-bottom: 2px solid #e7e5e4;">Tax</td>
+                  <td style="padding: 10px 0 20px 0; text-align: right; font-size: 15px; color: #1c1917; font-weight: 500; border-bottom: 2px solid #e7e5e4;">$${(tax / 100).toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 20px 0 0 0; font-size: 18px; font-weight: 700; color: #111827;">Total</td>
+                  <td style="padding: 20px 0 0 0; text-align: right; font-size: 24px; font-weight: 700; color: #d97706;">$${(total / 100).toFixed(2)}</td>
+                </tr>
+              </table>
+              <p style="margin: 16px 0 0 0; font-size: 15px; color: #57534e;">Next billing date: <strong style="color: #1c1917;">${nextBillingDate}</strong></p>
+            </td>
+          </tr>
+
+          <!-- CTA Buttons -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px; text-align: center;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
+                <tr>
+                  <td style="background-color: #111827; border-radius: 8px;">
+                    <a href="https://lonestartortillas.com/track" style="display: inline-block; padding: 16px 32px; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 700;">Track Your Order</a>
+                  </td>
+                  <td style="width: 16px;"></td>
+                  <td style="background-color: #d97706; border-radius: 8px;">
+                    <a href="https://lonestartortillas.com/account" style="display: inline-block; padding: 16px 32px; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 700;">Manage Subscription</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px; text-align: center; background-color: #111827;">
+              <div style="margin-bottom: 16px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 16px auto;">
+                <tr>
+                  <td style="background-color: #d97706; border-radius: 6px;">
+                    <a href="https://lonestartortillas.com/contact" style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600;">Questions? Contact Us</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Independent reseller • Not affiliated with or endorsed by H-E-B®
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}

@@ -459,6 +459,31 @@ export async function POST(req: NextRequest) {
                 console.error('Failed to award loyalty points for subscription:', loyaltyError);
               }
 
+              // Send subscription renewal confirmation email
+              try {
+                const { sendSubscriptionRenewalEmail } = await import('@/lib/email');
+                const { getNextShipDate, formatShipDate } = await import('@/lib/shipping-schedule');
+                const shipDate = getNextShipDate();
+                const estimatedShipDate = formatShipDate(shipDate);
+                const nextBillingDate = new Date(stripeSub.current_period_end * 1000)
+                  .toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+                await sendSubscriptionRenewalEmail({
+                  to: retailSub.customer.email,
+                  orderNumber,
+                  customerName: [retailSub.customer.firstName, retailSub.customer.lastName].filter(Boolean).join(' ') || 'Valued Customer',
+                  items: items.map(item => ({ name: item.name, quantity: item.quantity, price: item.unitPrice })),
+                  subtotal: retailSub.subtotal,
+                  shipping: retailSub.shipping,
+                  tax: retailSub.tax,
+                  total: retailSub.total,
+                  estimatedShipDate,
+                  nextBillingDate,
+                });
+              } catch (emailError) {
+                console.error('Failed to send subscription renewal email:', emailError);
+              }
+
               break;
             }
           }

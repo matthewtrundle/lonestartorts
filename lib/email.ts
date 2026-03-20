@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeedbackRequestEmail, generateFeedbackThankYouEmail } from './email-templates';
+import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeedbackRequestEmail, generateFeedbackThankYouEmail, generateSubscriptionRenewalEmail } from './email-templates';
 
 // Admin emails for order notifications
 const ADMIN_EMAILS = [
@@ -841,6 +841,81 @@ export async function sendContactFormEmail(props: {
   }
 }
 
+interface PasswordResetEmailProps {
+  to: string;
+  customerName: string;
+  resetToken: string;
+}
+
+/**
+ * Send password reset email
+ */
+export async function sendPasswordResetEmail(props: PasswordResetEmailProps) {
+  const { to, customerName, resetToken } = props;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://lonestartortillas.com';
+  const resetUrl = `${baseUrl}/account/reset-password?token=${resetToken}`;
+
+  try {
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Your Password - Lonestar Tortillas</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #fafaf9;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #fafaf9;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+          <tr>
+            <td style="padding: 40px 32px; text-align: center; border-bottom: 1px solid #e7e5e4;">
+              <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #1c1917;">Reset Your Password</h1>
+              <p style="margin: 0; font-size: 15px; color: #57534e;">Howdy ${customerName}, we received a request to reset your password.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 32px; text-align: center;">
+              <p style="margin: 0 0 24px 0; font-size: 14px; color: #57534e; line-height: 1.6;">Click the button below to set a new password. This link expires in 1 hour.</p>
+              <a href="${resetUrl}" style="display: inline-block; background-color: #d97706; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">Reset Password</a>
+              <p style="margin: 24px 0 0 0; font-size: 13px; color: #a8a29e;">If you didn't request this, you can safely ignore this email.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 24px 32px; text-align: center; background-color: #1c1917;">
+              <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</p>
+              <p style="margin: 0; font-size: 12px; color: #78716c;">Independent reseller &bull; Not affiliated with or endorsed by H-E-B&reg;</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `;
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to,
+      subject: 'Reset Your Password - Lonestar Tortillas',
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send password reset email:', error);
+      return { success: false, error };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending password reset email:', error);
+    return { success: false, error };
+  }
+}
+
 interface FeedbackRequestEmailProps {
   to: string;
   customerName: string;
@@ -924,6 +999,46 @@ export async function sendFeedbackThankYouEmail(props: FeedbackThankYouEmailProp
     return { success: true, data };
   } catch (error) {
     console.error('Error sending feedback thank you email:', error);
+    return { success: false, error };
+  }
+}
+
+interface SubscriptionRenewalEmailProps {
+  to: string;
+  orderNumber: string;
+  customerName: string;
+  items: Array<{ name: string; quantity: number; price: number }>;
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
+  estimatedShipDate: string;
+  nextBillingDate: string;
+}
+
+/**
+ * Send subscription renewal confirmation email
+ */
+export async function sendSubscriptionRenewalEmail(props: SubscriptionRenewalEmailProps) {
+  const html = generateSubscriptionRenewalEmail({ ...props });
+
+  try {
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: `Lonestar Tortillas <${fromEmail}>`,
+      to: [props.to],
+      subject: `Your subscription order ${props.orderNumber} is confirmed!`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send subscription renewal email:', error);
+      return { success: false, error };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending subscription renewal email:', error);
     return { success: false, error };
   }
 }
