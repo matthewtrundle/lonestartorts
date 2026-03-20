@@ -247,98 +247,43 @@ export const products: Product[] = [
   },
 ];
 
-// Wholesale products - tiered pricing with volume discounts
-// All wholesale orders include free shipping
-export const wholesaleProducts: Product[] = [
-  {
-    sku: 'WHOLESALE-TIER-STARTER',
-    name: 'Wholesale Starter Pack',
-    description: '10% wholesale discount - 20 tortillas per pack. Free shipping included.',
-    image: '/images/products/flour-tortillas-heb.webp',
-    price: 1800, // $18 per pack (10% off $20)
-    tortillaCount: 20,
-    storage: 'shelf_stable',
-    category: 'wholesale',
-    productType: 'wholesale',
-    tortillaType: 'Flour',
-  },
-  {
-    sku: 'WHOLESALE-TIER-BUSINESS',
-    name: 'Wholesale Business Pack',
-    description: '15% wholesale discount - 20 tortillas per pack. Free shipping included.',
-    image: '/images/products/flour-tortillas-heb.webp',
-    price: 1700, // $17 per pack (15% off $20)
-    tortillaCount: 20,
-    storage: 'shelf_stable',
-    category: 'wholesale',
-    productType: 'wholesale',
-    tortillaType: 'Flour',
-  },
-  {
-    sku: 'WHOLESALE-TIER-PROFESSIONAL',
-    name: 'Wholesale Professional Pack',
-    description: '20% wholesale discount - 20 tortillas per pack. Free shipping included.',
-    image: '/images/products/flour-tortillas-heb.webp',
-    price: 1600, // $16 per pack (20% off $20)
-    tortillaCount: 20,
-    storage: 'shelf_stable',
-    category: 'wholesale',
-    productType: 'wholesale',
-    tortillaType: 'Flour',
-  },
-  {
-    sku: 'WHOLESALE-TIER-ENTERPRISE',
-    name: 'Wholesale Enterprise Pack',
-    description: '25% wholesale discount - 20 tortillas per pack. Free shipping included.',
-    image: '/images/products/flour-tortillas-heb.webp',
-    price: 1500, // $15 per pack (25% off $20)
-    tortillaCount: 20,
-    storage: 'shelf_stable',
-    category: 'wholesale',
-    productType: 'wholesale',
-    tortillaType: 'Flour',
-  },
-];
+// Get all tortilla products (for wholesale product picker)
+export function getTortillaProducts(): Product[] {
+  return products.filter((p) => p.productType === 'tortilla');
+}
 
-// Dynamic wholesale products for self-service ordering (flour/butter varieties)
-// These use dynamic pricing from tier cards, so the cart item price is what matters.
-// The catalog entries provide metadata for checkout validation.
-export const wholesaleVarietyProducts: Product[] = [
-  {
-    sku: 'WHOLESALE-FLOUR',
-    name: 'Wholesale Flour Tortillas',
-    description: 'H-E-B Bakery Flour Tortillas - wholesale pricing. 20 tortillas per pack.',
-    image: '/images/products/flour-tortillas-heb.webp',
-    price: 1800, // Default price (Starter tier) - actual price comes from cart
-    tortillaCount: 20,
-    storage: 'shelf_stable',
-    category: 'wholesale',
-    productType: 'wholesale',
-    tortillaType: 'Flour',
-  },
-  {
-    sku: 'WHOLESALE-BUTTER',
-    name: 'Wholesale Butter Tortillas',
-    description: 'H-E-B Bakery Butter Tortillas - wholesale pricing. 20 tortillas per pack.',
-    image: '/images/products/butter-tortillas-heb.webp',
-    price: 1800, // Default price (Starter tier) - actual price comes from cart
-    tortillaCount: 20,
-    storage: 'shelf_stable',
-    category: 'wholesale',
-    productType: 'wholesale',
-    tortillaType: 'Butter',
-  },
-];
+// Generate wholesale SKU from retail SKU
+export function getWholesaleSku(retailSku: string): string {
+  return `WHOLESALE-${retailSku}`;
+}
+
+// Extract retail SKU from wholesale SKU, returns null if not a valid wholesale SKU
+export function getRetailSkuFromWholesale(wholesaleSku: string): string | null {
+  if (!wholesaleSku.startsWith('WHOLESALE-')) return null;
+  const retailSku = wholesaleSku.replace('WHOLESALE-', '');
+  const retailProduct = products.find((p) => p.sku === retailSku);
+  return retailProduct ? retailSku : null;
+}
 
 // Check if an item is a wholesale product
 export function isWholesaleProduct(sku: string): boolean {
   return sku.startsWith('WHOLESALE-');
 }
 
-// Get wholesale product by SKU
-export function getWholesaleProductBySku(sku: string) {
-  return wholesaleProducts.find((p) => p.sku === sku)
-    || wholesaleVarietyProducts.find((p) => p.sku === sku);
+// Get wholesale product by SKU — dynamically resolves from retail catalog
+// Returns a wholesale-typed copy of the retail product with WHOLESALE- prefix SKU
+export function getWholesaleProductBySku(sku: string): Product | undefined {
+  const retailSku = getRetailSkuFromWholesale(sku);
+  if (!retailSku) return undefined;
+  const retailProduct = products.find((p) => p.sku === retailSku);
+  if (!retailProduct) return undefined;
+  return {
+    ...retailProduct,
+    sku,
+    name: `Wholesale ${retailProduct.name}`,
+    productType: 'wholesale',
+    category: 'wholesale',
+  };
 }
 
 // Helper function to get product by SKU
@@ -405,4 +350,54 @@ export function getFreeShippingProgress(subtotal: number): {
     percentComplete,
     savedAmount,
   };
+}
+
+/**
+ * Get complementary product suggestions based on what was ordered.
+ * - If order has only tortillas → suggest sauces/salsas
+ * - If order has only sauces/salsas → suggest best-selling tortillas
+ * - If order has both → suggest items from categories not in order
+ * Returns up to 3 products.
+ */
+export function getComplementaryProducts(orderSkus: string[]): Product[] {
+  const orderedProducts = orderSkus
+    .map(sku => {
+      // Handle wholesale SKUs
+      const retailSku = sku.startsWith('WHOLESALE-') ? sku.replace('WHOLESALE-', '') : sku;
+      return products.find(p => p.sku === retailSku);
+    })
+    .filter(Boolean) as Product[];
+
+  const orderedTypes = new Set(orderedProducts.map(p => p.productType));
+  const orderedSkus = new Set(orderSkus.map(sku =>
+    sku.startsWith('WHOLESALE-') ? sku.replace('WHOLESALE-', '') : sku
+  ));
+
+  let suggestions: Product[] = [];
+
+  if (orderedTypes.has('tortilla') && !orderedTypes.has('sauce') && !orderedTypes.has('salsa')) {
+    // Ordered only tortillas → suggest sauces and salsas
+    suggestions = products.filter(p =>
+      (p.productType === 'sauce' || p.productType === 'salsa') && !orderedSkus.has(p.sku)
+    );
+  } else if (!orderedTypes.has('tortilla') && (orderedTypes.has('sauce') || orderedTypes.has('salsa'))) {
+    // Ordered only sauces/salsas → suggest best-selling tortillas
+    suggestions = products.filter(p =>
+      p.productType === 'tortilla' && p.isBestSeller && !orderedSkus.has(p.sku)
+    );
+    if (suggestions.length < 3) {
+      const more = products.filter(p =>
+        p.productType === 'tortilla' && !p.isBestSeller && !orderedSkus.has(p.sku)
+      );
+      suggestions = [...suggestions, ...more];
+    }
+  } else {
+    // Mixed order → suggest items from categories not in order
+    suggestions = products.filter(p => !orderedTypes.has(p.productType) && !orderedSkus.has(p.sku));
+    if (suggestions.length === 0) {
+      suggestions = products.filter(p => !orderedSkus.has(p.sku) && p.productType !== 'wholesale');
+    }
+  }
+
+  return suggestions.slice(0, 3);
 }
