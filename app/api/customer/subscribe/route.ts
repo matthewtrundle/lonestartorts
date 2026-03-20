@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { getAuthenticatedCustomer } from '@/lib/customer-auth';
 import { createRetailSubscription, mapStripeIntervalToDb } from '@/lib/subscription/stripe';
 import { getProductBySku } from '@/lib/products';
+import { sendNewSubscriptionEmail, sendAdminNewSubscriptionNotification } from '@/lib/email';
 
 const TAX_RATE = 0.0825;
 
@@ -63,7 +64,7 @@ export async function POST(request: NextRequest) {
         stripePriceId: result.price.id,
         stripeProductId: result.product.id,
         name: `${interval === 'biweekly' ? 'Biweekly' : interval === 'weekly' ? 'Weekly' : interval === 'quarterly' ? 'Quarterly' : 'Monthly'} Tortilla Subscription`,
-        status: 'PAUSED', // Starts as PAUSED until first payment confirmed via webhook
+        status: 'ACTIVE',
         interval: mapStripeIntervalToDb(interval),
         intervalCount: stripeIntervalCount,
         nextBillingDate: new Date(result.subscription.current_period_end * 1000),
@@ -77,6 +78,32 @@ export async function POST(request: NextRequest) {
         preferredShippingDay: preferredShippingDay || null,
       },
     });
+
+    // Send email notifications (non-blocking)
+    const intervalLabel = interval === 'biweekly' ? 'Every 2 weeks' : interval === 'weekly' ? 'Weekly' : interval === 'quarterly' ? 'Quarterly' : 'Monthly';
+    const nextBillingDate = new Date(result.subscription.current_period_end * 1000)
+      .toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const customerName = [customer.firstName, customer.lastName].filter(Boolean).join(' ') || 'Valued Customer';
+
+    const emailProps = {
+      to: customer.email,
+      customerName,
+      subscriptionName: subscription.name,
+      interval: intervalLabel,
+      items: validatedItems,
+      subtotal,
+      shipping,
+      tax,
+      total,
+      preferredShippingDay: preferredShippingDay || null,
+      nextBillingDate,
+    };
+
+    // Send both emails without blocking the response
+    Promise.all([
+      sendNewSubscriptionEmail(emailProps).catch(err => console.error('Failed to send subscription welcome email:', err)),
+      sendAdminNewSubscriptionNotification({ ...emailProps, customerEmail: customer.email }).catch(err => console.error('Failed to send admin subscription notification:', err)),
+    ]);
 
     return NextResponse.json({
       subscription: {

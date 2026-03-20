@@ -1042,3 +1042,272 @@ export async function sendSubscriptionRenewalEmail(props: SubscriptionRenewalEma
     return { success: false, error };
   }
 }
+
+interface NewSubscriptionEmailProps {
+  to: string;
+  customerName: string;
+  subscriptionName: string;
+  interval: string;
+  items: Array<{ name: string; quantity: number; unitPrice: number }>;
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
+  preferredShippingDay: string | null;
+  nextBillingDate: string;
+}
+
+/**
+ * Send welcome email to customer when they start a new subscription
+ */
+export async function sendNewSubscriptionEmail(props: NewSubscriptionEmailProps) {
+  const { to, customerName, subscriptionName, interval, items, subtotal, tax, total, preferredShippingDay, nextBillingDate } = props;
+
+  const shippingDayLabels: Record<string, string> = {
+    '1st_tuesday': '1st Tuesday of each month',
+    '2nd_tuesday': '2nd Tuesday of each month',
+    '3rd_tuesday': '3rd Tuesday of each month',
+    '4th_tuesday': '4th Tuesday of each month',
+  };
+
+  try {
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Your Subscription - Lonestar Tortillas</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #fafaf9;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #fafaf9;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center; background-color: #d97706;">
+              <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #ffffff; line-height: 1.2;">Welcome to Your Subscription!</h1>
+              <p style="margin: 0; font-size: 15px; color: #fef3c7;">Howdy ${customerName}, you're all set for fresh tortillas on repeat.</p>
+            </td>
+          </tr>
+
+          <!-- Subscription Details -->
+          <tr>
+            <td style="padding: 32px;">
+              <div style="padding: 24px; background-color: #fafaf9; border-radius: 8px; border: 1px solid #e7e5e4;">
+                <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #1c1917;">Your ${subscriptionName}</h2>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 14px; color: #78716c;">Frequency</td>
+                    <td style="padding: 8px 0; text-align: right; font-size: 14px; font-weight: 500; color: #1c1917;">${interval}</td>
+                  </tr>
+                  ${preferredShippingDay ? `
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 14px; color: #78716c;">Ships</td>
+                    <td style="padding: 8px 0; text-align: right; font-size: 14px; font-weight: 500; color: #1c1917;">${shippingDayLabels[preferredShippingDay] || preferredShippingDay}</td>
+                  </tr>
+                  ` : ''}
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 14px; color: #78716c;">Next Billing Date</td>
+                    <td style="padding: 8px 0; text-align: right; font-size: 14px; font-weight: 500; color: #1c1917;">${nextBillingDate}</td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Items -->
+          <tr>
+            <td style="padding: 0 32px 24px 32px;">
+              <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600; color: #1c1917;">What You'll Receive</h3>
+              ${items.map((item, index) => `
+              <div style="padding: 12px 16px; ${index < items.length - 1 ? 'border-bottom: 1px solid #e7e5e4;' : ''}">
+                <span style="font-size: 14px; color: #1c1917;"><strong>${item.quantity}x</strong> ${item.name}</span>
+                <span style="font-size: 14px; color: #57534e; float: right;">$${((item.unitPrice * item.quantity) / 100).toFixed(2)}</span>
+              </div>
+              `).join('')}
+            </td>
+          </tr>
+
+          <!-- Totals -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <div style="padding: 16px; background-color: #fafaf9; border-radius: 8px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td style="padding: 4px 0; font-size: 14px; color: #78716c;">Subtotal</td>
+                    <td style="padding: 4px 0; text-align: right; font-size: 14px; color: #57534e;">$${(subtotal / 100).toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 4px 0; font-size: 14px; color: #78716c;">Shipping</td>
+                    <td style="padding: 4px 0; text-align: right; font-size: 14px; color: #10b981; font-weight: 500;">FREE</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 4px 0; font-size: 14px; color: #78716c;">Tax</td>
+                    <td style="padding: 4px 0; text-align: right; font-size: 14px; color: #57534e;">$${(tax / 100).toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0 0 0; font-size: 16px; font-weight: 700; color: #1c1917; border-top: 1px solid #e7e5e4;">Total per cycle</td>
+                    <td style="padding: 8px 0 0 0; text-align: right; font-size: 16px; font-weight: 700; color: #1c1917; border-top: 1px solid #e7e5e4;">$${(total / 100).toFixed(2)}</td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Manage CTA -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px; text-align: center;">
+              <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://lonestartortillas.com'}/account" style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">Manage Your Subscription</a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px; text-align: center; background-color: #1c1917;">
+              <h3 style="margin: 0 0 4px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Independent reseller &bull; Not affiliated with or endorsed by H-E-B&reg;
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `;
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: `Lonestar Tortillas <${fromEmail}>`,
+      to: [to],
+      subject: `Welcome to your ${subscriptionName}!`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send new subscription email:', error);
+      return { success: false, error };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending new subscription email:', error);
+    return { success: false, error };
+  }
+}
+
+/**
+ * Send admin notification when a new subscription is created
+ */
+export async function sendAdminNewSubscriptionNotification(props: NewSubscriptionEmailProps & { customerEmail: string }) {
+  const { customerEmail, customerName, subscriptionName, interval, items, total, preferredShippingDay, nextBillingDate } = props;
+
+  const shippingDayLabels: Record<string, string> = {
+    '1st_tuesday': '1st Tuesday',
+    '2nd_tuesday': '2nd Tuesday',
+    '3rd_tuesday': '3rd Tuesday',
+    '4th_tuesday': '4th Tuesday',
+  };
+
+  try {
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Subscription - ${customerName}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #7c3aed; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">New Subscription Started!</h1>
+            </td>
+          </tr>
+
+          <!-- Details -->
+          <tr>
+            <td style="padding: 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Customer</h3>
+                    <p style="margin: 0 0 4px 0; font-size: 18px; font-weight: 600; color: #1c1917;">${customerName}</p>
+                    <p style="margin: 0; font-size: 14px; color: #57534e;">${customerEmail}</p>
+                  </td>
+                </tr>
+                <tr><td style="padding: 8px 0;"></td></tr>
+                <tr>
+                  <td style="padding: 16px; background-color: #fafaf9; border-radius: 8px;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Subscription Details</h3>
+                    <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 500; color: #1c1917;">${subscriptionName}</p>
+                    <p style="margin: 0 0 4px 0; font-size: 14px; color: #57534e;"><strong>Frequency:</strong> ${interval}</p>
+                    <p style="margin: 0 0 4px 0; font-size: 14px; color: #57534e;"><strong>Items:</strong> ${items.map(i => `${i.quantity}x ${i.name}`).join(', ')}</p>
+                    <p style="margin: 0 0 4px 0; font-size: 14px; color: #57534e;"><strong>Total/cycle:</strong> $${(total / 100).toFixed(2)}</p>
+                    ${preferredShippingDay ? `<p style="margin: 0 0 4px 0; font-size: 14px; color: #57534e;"><strong>Ship Day:</strong> ${shippingDayLabels[preferredShippingDay] || preferredShippingDay}</p>` : ''}
+                    <p style="margin: 0; font-size: 14px; color: #57534e;"><strong>Next Billing:</strong> ${nextBillingDate}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- View in Admin -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px; text-align: center;">
+              <a href="${process.env.NEXT_PUBLIC_BASE_URL || 'https://lonestartortillas.com'}/admin/subscriptions"
+                 style="display: inline-block; background-color: #1c1917; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+                View in Admin
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #fafaf9; text-align: center; border-top: 1px solid #e7e5e4;">
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Lonestar Tortillas Subscription Notification
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `;
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: ADMIN_EMAILS,
+      subject: `New Subscription: ${customerName} - ${subscriptionName} ($${(total / 100).toFixed(2)}/cycle)`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send admin subscription notification:', error);
+      return { success: false, error };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending admin subscription notification:', error);
+    return { success: false, error };
+  }
+}
