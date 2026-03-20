@@ -11,19 +11,11 @@ import {
 import { formatPrice } from '@/lib/utils';
 import { WholesaleTier } from '@/lib/wholesale-tiers';
 import { getTortillaProducts } from '@/lib/products';
-import { WholesaleAuthGate } from './WholesaleAuthGate';
 
 interface OrderTotals {
   wholesaleTotal: number;
   retailTotal: number;
   savings: number;
-}
-
-interface WholesaleCustomer {
-  id: string;
-  email: string;
-  firstName: string | null;
-  isWholesale: boolean;
 }
 
 interface WholesaleOrderSummaryProps {
@@ -33,9 +25,6 @@ interface WholesaleOrderSummaryProps {
   nextTier: WholesaleTier | null;
   totals: OrderTotals;
   onAddToCart: () => void;
-  customer: WholesaleCustomer | null;
-  authChecked?: boolean;
-  onAuthenticated: (customer: WholesaleCustomer) => void;
 }
 
 export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
@@ -45,11 +34,8 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
   nextTier,
   totals,
   onAddToCart,
-  customer,
-  onAuthenticated,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [showAuthGate, setShowAuthGate] = useState(false);
   const hasTier = currentTier !== null;
   const packsToMinimum = Math.max(0, 16 - totalPacks);
   const packsToNext = nextTier ? nextTier.packsPerMonth - totalPacks : 0;
@@ -62,71 +48,11 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
 
   const displayTotal = hasTier ? totals.wholesaleTotal : totals.retailTotal;
 
-  const isAuthenticated = !!customer;
-  const canAddToCart = hasTier && totalPacks > 0;
-
-  const handleCartClick = () => {
-    if (!canAddToCart) return;
-    if (isAuthenticated) {
-      onAddToCart();
-    } else {
-      setShowAuthGate(true);
-    }
-  };
-
-  // Render the action button area (shared between desktop and mobile)
-  const renderDesktopAction = () => {
-    if (totalPacks === 0) {
-      return (
-        <button
-          disabled
-          className="w-full flex items-center justify-center gap-2 bg-gray-300 text-gray-500 font-bold py-3.5 px-6 rounded-lg text-sm cursor-not-allowed"
-        >
-          Select Products to Continue
-        </button>
-      );
-    }
-    if (!hasTier) {
-      return (
-        <button
-          disabled
-          className="w-full flex items-center justify-center gap-2 bg-amber-500 text-white font-bold py-3.5 px-6 rounded-lg text-sm cursor-not-allowed"
-        >
-          <Lock className="w-4 h-4" />
-          Add {packsToMinimum} More to Unlock
-        </button>
-      );
-    }
-    if (showAuthGate && !isAuthenticated) {
-      return (
-        <div className="space-y-3">
-          <WholesaleAuthGate onAuthenticated={onAuthenticated} />
-        </div>
-      );
-    }
-    return (
-      <button
-        onClick={handleCartClick}
-        className="w-full flex items-center justify-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-bold py-3.5 px-6 rounded-lg text-sm transition-colors active:scale-[0.98]"
-      >
-        <ShoppingBag className="w-5 h-5" />
-        Add {totalPacks} Pack{totalPacks !== 1 ? 's' : ''} to Cart
-      </button>
-    );
-  };
-
   return (
     <>
       {/* Desktop Sidebar */}
       <div className="hidden lg:block">
         <div className="sticky top-28 bg-white rounded-xl border border-gray-200 shadow-lg p-6">
-          {/* Authenticated User Badge */}
-          {isAuthenticated && (
-            <div className="mb-3 text-xs text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5 font-medium">
-              Signed in as {customer!.firstName || customer!.email}
-            </div>
-          )}
-
           {/* Current Tier Badge */}
           <div className="mb-4">
             {currentTier ? (
@@ -217,22 +143,36 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
             <span className="font-medium">Free shipping on all wholesale orders</span>
           </div>
 
-          {/* Action Area */}
-          {renderDesktopAction()}
+          {/* Add to Cart Button */}
+          {totalPacks === 0 ? (
+            <button
+              disabled
+              className="w-full flex items-center justify-center gap-2 bg-gray-300 text-gray-500 font-bold py-3.5 px-6 rounded-lg text-sm cursor-not-allowed"
+            >
+              Select Products to Continue
+            </button>
+          ) : !hasTier ? (
+            <button
+              disabled
+              className="w-full flex items-center justify-center gap-2 bg-amber-500 text-white font-bold py-3.5 px-6 rounded-lg text-sm cursor-not-allowed"
+            >
+              <Lock className="w-4 h-4" />
+              Add {packsToMinimum} More to Unlock
+            </button>
+          ) : (
+            <button
+              onClick={onAddToCart}
+              className="w-full flex items-center justify-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-bold py-3.5 px-6 rounded-lg text-sm transition-colors active:scale-[0.98]"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              Add {totalPacks} Pack{totalPacks !== 1 ? 's' : ''} to Cart
+            </button>
+          )}
         </div>
       </div>
 
       {/* Mobile Bottom Bar */}
       <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden">
-        {/* Mobile Auth Gate - slides up above the bottom bar */}
-        {showAuthGate && !isAuthenticated && canAddToCart && (
-          <div className="bg-white border-t border-gray-200 px-4 py-4 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
-            <div className="max-w-lg mx-auto">
-              <WholesaleAuthGate onAuthenticated={onAuthenticated} />
-            </div>
-          </div>
-        )}
-
         <div className="bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] px-4 py-3">
           <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
             {/* Left: Pack count and total */}
@@ -270,11 +210,11 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
               </button>
             ) : (
               <button
-                onClick={handleCartClick}
+                onClick={onAddToCart}
                 className="flex-1 max-w-[200px] flex items-center justify-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-bold py-3 px-4 rounded-lg text-sm transition-colors active:scale-[0.98]"
               >
                 <ShoppingBag className="w-4 h-4" />
-                {showAuthGate && !isAuthenticated ? 'Sign In Above' : 'Add to Cart'}
+                Add to Cart
               </button>
             )}
           </div>

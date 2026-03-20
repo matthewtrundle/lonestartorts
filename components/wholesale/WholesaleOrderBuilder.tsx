@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useCart } from '@/lib/cart-context';
 import { getTortillaProducts, getWholesaleSku } from '@/lib/products';
 import {
@@ -13,32 +13,10 @@ import { WholesaleQuickStart } from './WholesaleQuickStart';
 import { WholesaleProductGrid } from './WholesaleProductGrid';
 import { WholesaleOrderSummary } from './WholesaleOrderSummary';
 
-interface WholesaleCustomer {
-  id: string;
-  email: string;
-  firstName: string | null;
-  isWholesale: boolean;
-}
-
 export const WholesaleOrderBuilder: React.FC = () => {
   const { addItem, setIsOpen } = useCart();
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [showCelebration, setShowCelebration] = useState(false);
-  const [customer, setCustomer] = useState<WholesaleCustomer | null>(null);
-  const [authChecked, setAuthChecked] = useState(false);
-
-  // Check if user is already authenticated on mount
-  useEffect(() => {
-    fetch('/api/customer/me')
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data?.customer) {
-          setCustomer(data.customer);
-        }
-      })
-      .catch(() => {})
-      .finally(() => setAuthChecked(true));
-  }, []);
 
   const tortillaProducts = useMemo(() => getTortillaProducts(), []);
 
@@ -82,12 +60,10 @@ export const WholesaleOrderBuilder: React.FC = () => {
       prevTierRef.current !== currentTierId &&
       prevTierRef.current !== null
     ) {
-      // Tier changed (upgraded)
       setShowCelebration(true);
       const timer = setTimeout(() => setShowCelebration(false), 2500);
       return () => clearTimeout(timer);
     }
-    // Also celebrate first tier unlock
     if (currentTierId && prevTierRef.current === null && totalPacks >= 16) {
       setShowCelebration(true);
       const timer = setTimeout(() => setShowCelebration(false), 2500);
@@ -113,7 +89,7 @@ export const WholesaleOrderBuilder: React.FC = () => {
     });
   };
 
-  const addItemsToCart = useCallback(() => {
+  const handleAddToCart = () => {
     if (!currentTier) return;
 
     for (const product of tortillaProducts) {
@@ -134,30 +110,8 @@ export const WholesaleOrderBuilder: React.FC = () => {
       }
     }
 
-    // Reset and open cart
     setQuantities({});
     setIsOpen(true);
-  }, [currentTier, quantities, tortillaProducts, addItem, setIsOpen]);
-
-  // When user authenticates via the auth gate, store customer and proceed to cart
-  const handleAuthenticated = useCallback(
-    (authedCustomer: WholesaleCustomer) => {
-      setCustomer(authedCustomer);
-      // Auto-add to cart after successful auth
-      addItemsToCart();
-    },
-    [addItemsToCart]
-  );
-
-  const handleAddToCart = () => {
-    if (!currentTier) return;
-
-    // If already authenticated, add directly
-    if (customer) {
-      addItemsToCart();
-    }
-    // If not authenticated, the summary component will show the auth gate
-    // (no-op here — the showAuthGate state is derived in summary)
   };
 
   return (
@@ -192,9 +146,6 @@ export const WholesaleOrderBuilder: React.FC = () => {
           nextTier={nextTier}
           totals={totals}
           onAddToCart={handleAddToCart}
-          customer={customer}
-          authChecked={authChecked}
-          onAuthenticated={handleAuthenticated}
         />
       </div>
     </div>
