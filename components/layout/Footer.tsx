@@ -117,15 +117,7 @@ export function Footer() {
                   href="tel:+15128946823"
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
                 >
-                  <span>Call Us: (512) 894-6823</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+15128946823"
-                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <span>Call Maria: (512) 894-6823</span>
+                  <span>(512) 894-6823</span>
                 </a>
               </li>
               <li>
