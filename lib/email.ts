@@ -6,6 +6,7 @@ const ADMIN_EMAILS = [
   'matthewtrundle@gmail.com',
   'allan.henslee@gmail.com',
   'allan@partyondelivery.com',
+  'howdy@lonestartortillas.com',
 ];
 
 // Lazy-load Resend client to avoid build-time initialization
@@ -266,7 +267,6 @@ export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailPr
       return { success: false, error };
     }
 
-    console.log('Order confirmation email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('Error sending order confirmation email:', error);
@@ -422,7 +422,6 @@ export async function sendOrderShippedEmail(props: OrderShippedEmailProps) {
       return { success: false, error };
     }
 
-    console.log('Order shipped email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('Error sending order shipped email:', error);
@@ -593,7 +592,6 @@ export async function sendAdminOrderNotification(props: OrderConfirmationEmailPr
       return { success: false, error };
     }
 
-    console.log('Admin notification email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('Error sending admin notification email:', error);
@@ -719,7 +717,6 @@ export async function sendWholesaleInquiryEmail(props: {
       return { success: false, error };
     }
 
-    console.log('Wholesale inquiry email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('Error sending wholesale inquiry email:', error);
@@ -837,7 +834,6 @@ export async function sendContactFormEmail(props: {
       return { success: false, error };
     }
 
-    console.log('Contact form email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('Error sending contact form email:', error);
@@ -881,7 +877,6 @@ export async function sendFeedbackRequestEmail(props: FeedbackRequestEmailProps)
       return { success: false, error };
     }
 
-    console.log('Feedback request email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('Error sending feedback request email:', error);
@@ -926,7 +921,6 @@ export async function sendFeedbackThankYouEmail(props: FeedbackThankYouEmailProp
       return { success: false, error };
     }
 
-    console.log('Feedback thank you email sent:', data);
     return { success: true, data };
   } catch (error) {
     console.error('Error sending feedback thank you email:', error);

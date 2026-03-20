@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Star, Copy, Check, Gift, AlertCircle } from 'lucide-react';
 
@@ -13,7 +13,15 @@ interface FeedbackData {
   couponCode?: string;
 }
 
-export default function FeedbackPage() {
+export default function FeedbackPageWrapper() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sunset-600" /></div>}>
+      <FeedbackPage />
+    </Suspense>
+  );
+}
+
+function FeedbackPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
   const initialRating = searchParams.get('rating');

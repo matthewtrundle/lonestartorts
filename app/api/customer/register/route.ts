@@ -10,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { email: rawEmail, password, firstName, lastName } = await request.json();
+    const { email: rawEmail, password, firstName, lastName, isWholesale, businessName, businessType } = await request.json();
 
     if (!rawEmail || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
@@ -31,18 +31,24 @@ export async function POST(request: NextRequest) {
 
     const passwordHash = await hashPassword(password);
 
+    // Validate wholesale fields
+    if (isWholesale && !businessName) {
+      return NextResponse.json({ error: 'Business name is required for wholesale accounts' }, { status: 400 });
+    }
+
     // Reuse existing Stripe customer or create new one
     let stripeCustomerId = existing?.stripeCustomerId;
     if (!stripeCustomerId) {
       const stripeCustomer = await stripe.customers.create({
         email,
         name: [firstName, lastName].filter(Boolean).join(' ') || undefined,
-        metadata: { type: 'retail_subscription' },
+        metadata: { type: isWholesale ? 'wholesale' : 'retail_subscription' },
       });
       stripeCustomerId = stripeCustomer.id;
     }
 
     let customer;
+    let wholesaleClient = null;
     try {
       if (existing) {
         // Upgrade guest account to full account
@@ -53,7 +59,8 @@ export async function POST(request: NextRequest) {
             firstName: firstName || existing.firstName,
             lastName: lastName || existing.lastName,
             stripeCustomerId,
-            signupSource: existing.signupSource === 'checkout' ? 'checkout_upgraded' : 'subscription',
+            signupSource: isWholesale ? 'wholesale' : (existing.signupSource === 'checkout' ? 'checkout_upgraded' : 'subscription'),
+            isWholesale: isWholesale || existing.isWholesale || false,
             lastLoginAt: new Date(),
             updatedAt: new Date(),
           },
@@ -68,10 +75,33 @@ export async function POST(request: NextRequest) {
             firstName: firstName || null,
             lastName: lastName || null,
             stripeCustomerId,
-            signupSource: 'subscription',
+            signupSource: isWholesale ? 'wholesale' : 'subscription',
+            isWholesale: isWholesale || false,
             lastLoginAt: new Date(),
             updatedAt: new Date(),
           },
+        });
+      }
+
+      // Create linked WholesaleClient if wholesale signup
+      if (isWholesale && !customer.wholesaleClientId) {
+        wholesaleClient = await prisma.wholesaleClient.create({
+          data: {
+            businessName: businessName,
+            contactName: [firstName, lastName].filter(Boolean).join(' ') || businessName,
+            email,
+            businessType: businessType || 'Other',
+            stripeCustomerId,
+            status: 'ACTIVE',
+            pricingTier: 'STANDARD',
+            paymentTerms: 'DUE_ON_RECEIPT',
+          },
+        });
+
+        // Link customer to wholesale client
+        customer = await prisma.customer.update({
+          where: { id: customer.id },
+          data: { wholesaleClientId: wholesaleClient.id },
         });
       }
     } catch (dbError) {
@@ -90,6 +120,7 @@ export async function POST(request: NextRequest) {
         email: customer.email,
         firstName: customer.firstName,
         lastName: customer.lastName,
+        isWholesale: customer.isWholesale,
       },
     });
   } catch (error) {

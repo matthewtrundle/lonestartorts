@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Package, CreditCard, Settings, LogOut, Clock, Truck, Calendar, ExternalLink } from 'lucide-react';
+import { Package, CreditCard, Settings, LogOut, Clock, Truck, Calendar, ExternalLink, Building2, ShoppingBag } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
 interface Subscription {
@@ -24,14 +24,41 @@ interface RecentOrder {
   createdAt: string;
 }
 
+interface WholesaleOrderItem {
+  name: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+}
+
+interface WholesaleOrder {
+  id: string;
+  orderNumber: string;
+  total: number;
+  paymentStatus: string;
+  orderStatus: string;
+  createdAt: string;
+  items: WholesaleOrderItem[];
+}
+
+interface WholesaleData {
+  businessName: string;
+  pricingTier: string;
+  paymentTerms: string;
+  status: string;
+  orders: WholesaleOrder[];
+}
+
 interface CustomerData {
   id: string;
   email: string;
   firstName: string | null;
   lastName: string | null;
   stripeCustomerId: string | null;
+  isWholesale?: boolean;
   subscriptions: Subscription[];
   recentOrders: RecentOrder[];
+  wholesale?: WholesaleData;
 }
 
 const statusColors: Record<string, string> = {
@@ -104,7 +131,7 @@ export default function AccountPage() {
 
   return (
     <div className="bg-cream-50 min-h-[70vh]">
-      <div className="max-w-4xl mx-auto px-4 py-10">
+      <div className="max-w-4xl mx-auto px-4 pt-24 pb-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -216,6 +243,70 @@ export default function AccountPage() {
                 </div>
               )}
             </div>
+
+            {/* Wholesale Orders */}
+            {customer.isWholesale && customer.wholesale && (
+              <div className="bg-white rounded-xl shadow-soft p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold text-charcoal-950 flex items-center gap-2">
+                    <Building2 className="w-5 h-5 text-sunset-600" />
+                    Wholesale Orders
+                  </h2>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-charcoal-700">{customer.wholesale.businessName}</p>
+                    <p className="text-xs text-charcoal-500">{customer.wholesale.pricingTier} tier &bull; {customer.wholesale.paymentTerms.replace(/_/g, ' ').toLowerCase()}</p>
+                  </div>
+                </div>
+
+                {customer.wholesale.orders.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-charcoal-500 mb-4">No wholesale orders yet</p>
+                    <Link
+                      href="/wholesale"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-sunset-600 text-white rounded-lg font-medium hover:bg-sunset-700"
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      Place Wholesale Order
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="divide-y divide-charcoal-100">
+                    {customer.wholesale.orders.map(order => (
+                      <div key={order.id} className="py-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <div>
+                            <p className="font-medium text-charcoal-950">{order.orderNumber}</p>
+                            <p className="text-sm text-charcoal-500">
+                              {new Date(order.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${statusColors[order.paymentStatus] || statusColors[order.orderStatus] || 'bg-gray-100 text-gray-600'}`}>
+                              {order.paymentStatus}
+                            </span>
+                            <span className="font-medium text-charcoal-950">{formatPrice(order.total)}</span>
+                          </div>
+                        </div>
+                        <div className="text-xs text-charcoal-500">
+                          {order.items.map((item, i) => (
+                            <span key={i}>{i > 0 ? ', ' : ''}{item.quantity}x {item.name}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="mt-4 pt-4 border-t border-charcoal-100">
+                  <Link
+                    href="/wholesale"
+                    className="text-sm text-sunset-600 hover:text-sunset-700 font-medium"
+                  >
+                    Place another wholesale order →
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}

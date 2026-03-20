@@ -51,8 +51,6 @@ export async function POST(req: NextRequest) {
       ? clientPrizeId
       : null;
 
-    console.log('Spin API - clientPrizeId:', clientPrizeId, 'valid:', !!prizeIdToUse, 'validIds:', validPrizeIds);
-
     const normalizedEmail = email.trim().toLowerCase();
 
     // Check if email has already spun (limit to once per email)
@@ -94,8 +92,6 @@ export async function POST(req: NextRequest) {
       : selectPrize();
     const code = generateCode(selectedPrize.id);
 
-    console.log('Spin API - Selected prize:', selectedPrize.id, selectedPrize.name, 'usedClientPrize:', !!prizeIdToUse);
-
     // Prize expires in 15 minutes
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
 
@@ -108,13 +104,6 @@ export async function POST(req: NextRequest) {
         expiresAt,
         utmSource: utmSource || 'tiktok',
       },
-    });
-
-    console.log('Spin wheel prize awarded:', {
-      email: normalizedEmail,
-      prize: selectedPrize.id,
-      code,
-      expiresAt,
     });
 
     return NextResponse.json({

@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { isAuthenticated } from '@/lib/auth';
 
 /**
  * GET /api/admin/feedback
  * Get all feedback entries with filtering and pagination
  */
 export async function GET(req: NextRequest) {
+  const authenticated = await isAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get('page') || '1');

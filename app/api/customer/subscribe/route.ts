@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No payment profile found' }, { status: 400 });
     }
 
-    const { items, interval, intervalCount } = await request.json();
+    const { items, interval, intervalCount, preferredShippingDay } = await request.json();
 
     if (!items?.length) {
       return NextResponse.json({ error: 'Items are required' }, { status: 400 });
@@ -74,6 +74,7 @@ export async function POST(request: NextRequest) {
         shipping,
         tax,
         total,
+        preferredShippingDay: preferredShippingDay || null,
       },
     });
 

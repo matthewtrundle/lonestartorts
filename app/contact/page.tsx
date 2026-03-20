@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import { ContactPageContent } from '@/components/contact/ContactPageContent';
+
+export const metadata: Metadata = {
+  title: 'Contact Us | Lonestar Tortillas',
+  description: 'Got questions about orders, shipping, or wholesale? Reach out to the Lonestar Tortillas team. We\'re happy to help.',
+};
 
 export default function ContactPage() {
   const structuredData = {

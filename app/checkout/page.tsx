@@ -9,8 +9,9 @@ import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
 import { Button } from '@/components/ui/button';
-import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake } from 'lucide-react';
+import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
+import { WholesaleAuthGate } from '@/components/wholesale/WholesaleAuthGate';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -18,6 +19,33 @@ export default function CheckoutPage() {
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Wholesale auth state
+  const hasWholesaleItems = items.some(item => item.productType === 'wholesale');
+  const [wholesaleCustomer, setWholesaleCustomer] = useState<{ id: string; email: string; firstName: string | null; isWholesale: boolean } | null>(null);
+  const [checkingAuth, setCheckingAuth] = useState(false);
+  const [wholesaleAuthError, setWholesaleAuthError] = useState<string | null>(null);
+
+  // Check if already logged in for wholesale orders
+  React.useEffect(() => {
+    if (hasWholesaleItems && !wholesaleCustomer) {
+      setCheckingAuth(true);
+      setWholesaleAuthError(null);
+      fetch('/api/customer/me')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data?.customer?.isWholesale) {
+            setWholesaleCustomer(data.customer);
+          } else if (data?.customer && !data.customer.isWholesale) {
+            setWholesaleAuthError('Your account is not approved for wholesale ordering. Please register a new wholesale account below.');
+          }
+        })
+        .catch(() => {})
+        .finally(() => setCheckingAuth(false));
+    }
+  }, [hasWholesaleItems]);
+
+  const wholesaleAuthReady = !hasWholesaleItems || !!wholesaleCustomer;
 
   // Discount code state
   const [email, setEmail] = useState('');
@@ -166,12 +194,15 @@ export default function CheckoutPage() {
           items: items.map((item) => ({
             sku: item.sku,
             quantity: item.quantity,
+            ...(item.productType === 'wholesale' && { price: item.price }),
           })),
           // Include discount info if applied
           ...(discountApplied && {
             email: email.trim().toLowerCase(),
             discountCode: discountCode.trim().toUpperCase(),
           }),
+          // Include customer ID for wholesale orders
+          ...(wholesaleCustomer && { customerId: wholesaleCustomer.id }),
         }),
       });
 
@@ -251,7 +282,7 @@ export default function CheckoutPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start gap-2">
                           <h3 className="font-semibold text-charcoal-950 text-base leading-tight">
-                            {item.name}
+                            {item.displayName || item.name}
                           </h3>
                           <p className="font-bold text-lg text-charcoal-950 flex-shrink-0">
                             {formatPrice(item.price * item.quantity)}
@@ -292,6 +323,34 @@ export default function CheckoutPage() {
                   ))}
                 </div>
               </div>
+
+              {/* Wholesale Auth Gate */}
+              {hasWholesaleItems && !wholesaleCustomer && !checkingAuth && (
+                <>
+                  {wholesaleAuthError && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                      <p className="text-sm text-red-700">{wholesaleAuthError}</p>
+                    </div>
+                  )}
+                  <WholesaleAuthGate
+                    onAuthenticated={(customer) => {
+                      setWholesaleAuthError(null);
+                      setWholesaleCustomer(customer);
+                    }}
+                  />
+                </>
+              )}
+
+              {/* Wholesale Auth Success */}
+              {hasWholesaleItems && wholesaleCustomer && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-green-900 text-sm">Wholesale account verified</p>
+                    <p className="text-green-700 text-xs">Signed in as {wholesaleCustomer.email}</p>
+                  </div>
+                </div>
+              )}
 
               {/* Freezing Tip */}
               <div className="bg-sky-50 border border-sky-200 rounded-lg p-4 flex items-start gap-3">
@@ -345,11 +404,11 @@ export default function CheckoutPage() {
                   variant="cart"
                   size="lg"
                   onClick={handleCheckout}
-                  disabled={isProcessing}
+                  disabled={isProcessing || !wholesaleAuthReady}
                   className="w-full rounded-lg uppercase flex items-center justify-center gap-2"
                 >
                   <Lock className="w-4 h-4" />
-                  {isProcessing ? 'Processing...' : 'Proceed to Payment'}
+                  {isProcessing ? 'Processing...' : !wholesaleAuthReady ? 'Sign In to Checkout' : 'Proceed to Payment'}
                 </Button>
 
                 {error && (

@@ -2,10 +2,11 @@ import { Badge } from '@/components/ui/badge';
 
 type OrderStatus = 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED' | 'REFUNDED';
 type PaymentStatus = 'PENDING' | 'PROCESSING' | 'SUCCEEDED' | 'FAILED' | 'REFUNDED';
+type SubscriptionStatus = 'ACTIVE' | 'PAUSED' | 'CANCELLED' | 'PAST_DUE';
 
 interface StatusBadgeProps {
-  status: OrderStatus | PaymentStatus;
-  type?: 'order' | 'payment';
+  status: OrderStatus | PaymentStatus | SubscriptionStatus | string;
+  type?: 'order' | 'payment' | 'subscription';
 }
 
 const statusConfig: Record<string, { label: string; className: string }> = {
@@ -41,6 +42,19 @@ const statusConfig: Record<string, { label: string; className: string }> = {
   },
   FAILED: {
     label: 'Failed',
+    className: 'bg-red-100 text-red-800 border-red-300',
+  },
+  // Subscription statuses
+  ACTIVE: {
+    label: 'Active',
+    className: 'bg-green-100 text-green-800 border-green-300',
+  },
+  PAUSED: {
+    label: 'Paused',
+    className: 'bg-amber-100 text-amber-800 border-amber-300',
+  },
+  PAST_DUE: {
+    label: 'Past Due',
     className: 'bg-red-100 text-red-800 border-red-300',
   },
 };

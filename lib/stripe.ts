@@ -11,7 +11,6 @@ export const getStripe = (): Promise<Stripe | null> => {
     const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 
     if (!key) {
-      console.error('Missing NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY');
       return Promise.resolve(null);
     }
 

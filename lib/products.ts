@@ -172,19 +172,6 @@ export const products: Product[] = [
     collection: 'pantry',
   },
   {
-    sku: 'HEB-MIXLA',
-    name: 'H-E-B Mixla Corn & Flour Blend Tortillas',
-    description: 'Best of both worlds - corn and flour blend. Flexible yet authentic taste.',
-    image: '/images/products/heb-mixla.webp',
-    price: 1500, // $15
-    tortillaCount: 24,
-    storage: 'shelf_stable',
-    category: 'corn',
-    productType: 'tortilla',
-    tortillaType: 'Corn & Flour',
-    collection: 'pantry',
-  },
-  {
     sku: 'HEB-MI-TIENDA',
     name: 'H-E-B Mi Tienda Ready to Cook Street Taco Flour Tortillas',
     description: 'Authentic ready-to-cook street taco tortillas from Mi Tienda. Cook fresh on your comal for that homemade taste. 50 count value pack.',
@@ -196,37 +183,6 @@ export const products: Product[] = [
     productType: 'tortilla',
     tortillaType: 'Flour',
     collection: 'pantry',
-  },
-  // ============================================
-  // TEXAS-BORN FAVORITES - Mission & La Banderita
-  // ============================================
-  {
-    sku: 'MISSION-SOFT-TACO',
-    name: 'Mission Soft Taco Flour Tortillas',
-    description: 'Super soft flour tortillas perfect for tacos and wraps. A Texas classic from San Antonio.',
-    image: '/images/products/mission-soft-taco-flour.webp',
-    price: 800, // $8
-    tortillaCount: 10,
-    storage: 'shelf_stable',
-    category: 'flour',
-    productType: 'tortilla',
-    tortillaType: 'Flour',
-    collection: 'texas-brands',
-    brand: 'mission',
-  },
-  {
-    sku: 'MISSION-WHITE-CORN',
-    name: 'Mission White Corn Tortillas',
-    description: 'Authentic white corn tortillas. Gluten-free and perfect for street tacos.',
-    image: '/images/products/mission-white-corn.webp',
-    price: 800, // $8
-    tortillaCount: 24,
-    storage: 'shelf_stable',
-    category: 'corn',
-    productType: 'tortilla',
-    tortillaType: 'Corn',
-    collection: 'texas-brands',
-    brand: 'mission',
   },
   // ============================================
   // SAUCES
@@ -289,97 +245,6 @@ export const products: Product[] = [
     category: 'salsa',
     productType: 'salsa',
   },
-  {
-    sku: 'HEB-FAJITA-SEASON',
-    name: 'H-E-B Fajita Seasoning',
-    description: 'The secret to perfect fajitas. Authentic Texas blend of spices for chicken, beef, or shrimp.',
-    image: '/images/products/heb-fajita-seasoning.webp',
-    price: 800, // $8 per packet
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'seasoning',
-    productType: 'seasoning',
-  },
-  {
-    sku: 'HEB-TACO-SEASON',
-    name: 'H-E-B Taco Seasoning',
-    description: 'Classic taco seasoning for authentic Tex-Mex flavor. No MSG, no artificial flavors.',
-    image: '/images/products/heb-taco-seasoning.webp',
-    price: 800, // $8 per packet
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'seasoning',
-    productType: 'seasoning',
-  },
-  // ============================================
-  // NEW PRODUCTS - Expanded Texas Favorites
-  // ============================================
-  {
-    sku: 'HEB-GREEN-SAUCE-MILD',
-    name: 'H-E-B That Green Sauce - Mild',
-    description: 'The legendary green sauce in a milder heat level. Same great jalapeño-poblano flavor, easier on the heat.',
-    image: '/images/products/heb-green-sauce-mild.webp',
-    price: 1200, // $12 per bottle
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'sauce',
-    productType: 'sauce',
-  },
-  {
-    sku: 'HEB-SALSA-SMOKY-CITRUS',
-    name: 'H-E-B Specialty Salsa - Smoky Citrus',
-    description: 'A unique blend of smoky chipotle and bright citrus. South Texas flavor in every bite.',
-    image: '/images/products/heb-salsa-smoky-citrus.webp',
-    price: 1000, // $10 per jar
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'salsa',
-    productType: 'salsa',
-  },
-  {
-    sku: 'HEB-SALSA-HABANERO',
-    name: 'H-E-B Specialty Salsa - Habanero',
-    description: 'For serious heat seekers. Fiery habanero salsa with authentic Texas attitude.',
-    image: '/images/products/heb-salsa-habanero.webp',
-    price: 1000, // $10 per jar
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'salsa',
-    productType: 'salsa',
-  },
-  {
-    sku: 'HEB-BRISKET-RUB',
-    name: 'H-E-B Texas Originals Brisket Rub',
-    description: 'The authentic Texas brisket seasoning. Salt, pepper, and secret spices for perfect bark.',
-    image: '/images/products/heb-brisket-rub.webp',
-    price: 1000, // $10 per container
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'seasoning',
-    productType: 'seasoning',
-  },
-  {
-    sku: 'HEB-TEXAS-BBQ-SAUCE',
-    name: 'H-E-B Texas Style BBQ Sauce',
-    description: 'Robust Texas BBQ sauce with heat and black pepper. Not for the meek.',
-    image: '/images/products/heb-texas-bbq-sauce.webp',
-    price: 1000, // $10 per bottle
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'sauce',
-    productType: 'sauce',
-  },
-  {
-    sku: 'TERRY-BLACKS-BBQ',
-    name: "Terry Black's BBQ Sauce",
-    description: 'From the legendary Austin BBQ joint. Authentic pit-master flavor in every bottle.',
-    image: '/images/products/terry-blacks-bbq.webp',
-    price: 1200, // $12 per bottle
-    tortillaCount: 0,
-    storage: 'shelf_stable',
-    category: 'sauce',
-    productType: 'sauce',
-  },
 ];
 
 // Wholesale products - tiered pricing with volume discounts
@@ -435,6 +300,36 @@ export const wholesaleProducts: Product[] = [
   },
 ];
 
+// Dynamic wholesale products for self-service ordering (flour/butter varieties)
+// These use dynamic pricing from tier cards, so the cart item price is what matters.
+// The catalog entries provide metadata for checkout validation.
+export const wholesaleVarietyProducts: Product[] = [
+  {
+    sku: 'WHOLESALE-FLOUR',
+    name: 'Wholesale Flour Tortillas',
+    description: 'H-E-B Bakery Flour Tortillas - wholesale pricing. 20 tortillas per pack.',
+    image: '/images/products/flour-tortillas-heb.webp',
+    price: 1800, // Default price (Starter tier) - actual price comes from cart
+    tortillaCount: 20,
+    storage: 'shelf_stable',
+    category: 'wholesale',
+    productType: 'wholesale',
+    tortillaType: 'Flour',
+  },
+  {
+    sku: 'WHOLESALE-BUTTER',
+    name: 'Wholesale Butter Tortillas',
+    description: 'H-E-B Bakery Butter Tortillas - wholesale pricing. 20 tortillas per pack.',
+    image: '/images/products/butter-tortillas-heb.webp',
+    price: 1800, // Default price (Starter tier) - actual price comes from cart
+    tortillaCount: 20,
+    storage: 'shelf_stable',
+    category: 'wholesale',
+    productType: 'wholesale',
+    tortillaType: 'Butter',
+  },
+];
+
 // Check if an item is a wholesale product
 export function isWholesaleProduct(sku: string): boolean {
   return sku.startsWith('WHOLESALE-');
@@ -442,7 +337,8 @@ export function isWholesaleProduct(sku: string): boolean {
 
 // Get wholesale product by SKU
 export function getWholesaleProductBySku(sku: string) {
-  return wholesaleProducts.find((p) => p.sku === sku);
+  return wholesaleProducts.find((p) => p.sku === sku)
+    || wholesaleVarietyProducts.find((p) => p.sku === sku);
 }
 
 // Helper function to get product by SKU

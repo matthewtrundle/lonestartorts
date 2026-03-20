@@ -102,7 +102,6 @@ export function GiftForm() {
       setIsSubmitted(true);
       setFormData(initialFormData);
     } catch (err) {
-      console.error('Gift form error:', err);
       setError('There was an error submitting your order. Please try again or email us directly.');
     } finally {
       setIsSubmitting(false);

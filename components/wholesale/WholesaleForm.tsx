@@ -84,7 +84,6 @@ export function WholesaleForm() {
       setIsSubmitted(true);
       setFormData(initialFormData);
     } catch (err) {
-      console.error('Wholesale form error:', err);
       setError('There was an error submitting your inquiry. Please try again or email us directly.');
     } finally {
       setIsSubmitting(false);

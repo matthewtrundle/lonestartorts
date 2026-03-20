@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { createWholesaleInvoice, sendInvoice } from '@/lib/wholesale/stripe';
+import { isAuthenticated } from '@/lib/auth';
 
 // Generate order number
 function generateOrderNumber(): string {
@@ -10,6 +11,11 @@ function generateOrderNumber(): string {
 }
 
 export async function GET(req: NextRequest) {
+  const authenticated = await isAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { searchParams } = new URL(req.url);
     const clientId = searchParams.get('clientId');
@@ -64,6 +70,11 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const authenticated = await isAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const body = await req.json();
     const { clientId, items, discount, shipping, customerNotes, internalNotes, autoSend } = body;

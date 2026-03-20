@@ -6,6 +6,10 @@ import {
   getFreeShippingProgress,
   calculateBaseShipping,
   FREE_SHIPPING_THRESHOLD,
+  products,
+  wholesaleProducts,
+  wholesaleVarietyProducts,
+  isWholesaleProduct,
 } from '@/lib/products';
 
 // Texas sales tax rate
@@ -90,7 +94,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const stored = localStorage.getItem(CART_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        setItems(parsed);
+        // Validate stored items against current catalog
+        const allSkus = new Set([
+          ...products.map(p => p.sku),
+          ...wholesaleProducts.map(p => p.sku),
+          ...wholesaleVarietyProducts.map(p => p.sku),
+        ]);
+        const validItems = parsed.filter((item: CartItem) => allSkus.has(item.sku) || isWholesaleProduct(item.sku));
+        setItems(validItems);
       }
       // Check if spin was already triggered this session
       const spinTriggered = sessionStorage.getItem(SPIN_TRIGGERED_KEY);

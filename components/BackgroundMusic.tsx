@@ -45,7 +45,7 @@ export function BackgroundMusic() {
       if (!isPlaying && audioRef.current) {
         audioRef.current.play()
           .then(() => setIsPlaying(true))
-          .catch(err => console.log('Audio play failed:', err))
+          .catch(() => {})
       }
     }
 
@@ -77,7 +77,7 @@ export function BackgroundMusic() {
     if (isMuted && !isPlaying && audioRef.current) {
       audioRef.current.play()
         .then(() => setIsPlaying(true))
-        .catch(err => console.log('Audio play failed:', err))
+        .catch(() => {})
     }
   }
 

@@ -360,5 +360,5 @@ export async function scheduleReports() {
   // - Node-cron
   // - GitHub Actions
 
-  console.log('Report scheduling should be implemented via cron job or task scheduler');
+  // Report scheduling should be implemented via cron job or task scheduler
 }

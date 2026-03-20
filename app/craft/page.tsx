@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
+
+export const metadata: Metadata = {
+  title: 'Our Craft | Lonestar Tortillas',
+  description: 'Discover how Lonestar Tortillas are made — premium ingredients, time-honored techniques, and a passion for authentic Texas flavor.',
+}
 import { CraftDisclaimerText } from '@/components/craft/CraftDisclaimerText'
 
 // SVG Icons as components

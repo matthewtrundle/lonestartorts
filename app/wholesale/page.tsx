@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { WholesaleForm } from '@/components/wholesale/WholesaleForm';
+
+export const metadata: Metadata = {
+  title: 'Wholesale Ordering | Lonestar Tortillas',
+  description: 'Partner with Lonestar Tortillas for wholesale pricing on premium Texas tortillas. Perfect for restaurants, caterers, and retailers.',
+};
 import { WholesaleTierCard } from '@/components/wholesale/WholesaleTierCard';
 import { wholesaleTiers } from '@/lib/wholesale-tiers';
 import {
@@ -127,7 +133,7 @@ export default function WholesalePage() {
                     href="#pricing"
                     className="inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-4 rounded-lg font-bold transition-colors"
                   >
-                    View Pricing Tiers
+                    Order Now — View Pricing
                   </a>
                   <a
                     href="#inquiry-form"
@@ -182,17 +188,25 @@ export default function WholesalePage() {
               ))}
             </div>
 
-            <div className="mt-8 text-center">
-              <p className="text-charcoal-600 mb-4">
+            <div className="mt-8 text-center space-y-3">
+              <p className="text-charcoal-600">
                 Each pack contains 20 tortillas. Need a custom volume or mixed
                 varieties?
               </p>
-              <a
-                href="#inquiry-form"
-                className="inline-flex items-center gap-2 text-sunset-600 hover:text-sunset-700 font-semibold underline underline-offset-4"
-              >
-                Request a Custom Quote
-              </a>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="#inquiry-form"
+                  className="inline-flex items-center gap-2 text-sunset-600 hover:text-sunset-700 font-semibold underline underline-offset-4"
+                >
+                  Request a Custom Quote
+                </a>
+                <Link
+                  href="/account/login"
+                  className="inline-flex items-center gap-2 text-charcoal-600 hover:text-charcoal-800 font-medium"
+                >
+                  Already have an account? Sign in →
+                </Link>
+              </div>
             </div>
           </div>
         </section>

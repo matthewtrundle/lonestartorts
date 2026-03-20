@@ -38,6 +38,7 @@ export default function SubscribePage() {
   const [step, setStep] = useState<Step>('products');
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [frequency, setFrequency] = useState('monthly');
+  const [shippingDay, setShippingDay] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -47,12 +48,32 @@ export default function SubscribePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [clientSecret, setClientSecret] = useState('');
 
+  // Restore state from sessionStorage on mount
   useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem('subscribe_state');
+      if (saved) {
+        const state = JSON.parse(saved);
+        if (state.selectedItems?.length) setSelectedItems(state.selectedItems);
+        if (state.frequency) setFrequency(state.frequency);
+        if (state.shippingDay) setShippingDay(state.shippingDay);
+        if (state.step && state.step !== 'payment') setStep(state.step);
+      }
+    } catch {}
     // Check if already logged in
     fetch('/api/customer/me').then(res => {
       if (res.ok) setIsLoggedIn(true);
     });
   }, []);
+
+  // Persist selections to sessionStorage
+  useEffect(() => {
+    if (selectedItems.length > 0) {
+      sessionStorage.setItem('subscribe_state', JSON.stringify({
+        selectedItems, frequency, shippingDay, step,
+      }));
+    }
+  }, [selectedItems, frequency, shippingDay, step]);
 
   const addItem = (product: typeof subscribableProducts[0]) => {
     const existing = selectedItems.find(i => i.sku === product.sku);
@@ -140,6 +161,7 @@ export default function SubscribePage() {
           items: selectedItems.map(i => ({ sku: i.sku, quantity: i.quantity })),
           interval: frequency,
           intervalCount: 1,
+          preferredShippingDay: shippingDay || undefined,
         }),
       });
 
@@ -345,6 +367,32 @@ export default function SubscribePage() {
               ))}
             </div>
 
+            {/* Pick Your Tuesday */}
+            <div className="mt-8 max-w-lg">
+              <h3 className="text-lg font-bold text-charcoal-950 mb-2">Pick Your Shipping Day</h3>
+              <p className="text-sm text-charcoal-500 mb-4">Choose which Tuesday of the month you&apos;d like your tortillas shipped.</p>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { id: '1st_tuesday', label: '1st Tuesday' },
+                  { id: '2nd_tuesday', label: '2nd Tuesday' },
+                  { id: '3rd_tuesday', label: '3rd Tuesday' },
+                  { id: '4th_tuesday', label: '4th Tuesday' },
+                ].map(day => (
+                  <button
+                    key={day.id}
+                    onClick={() => setShippingDay(day.id)}
+                    className={`p-4 rounded-xl border-2 text-center transition-colors ${
+                      shippingDay === day.id ? 'border-sunset-500 bg-sunset-50' : 'border-charcoal-200 bg-white hover:border-charcoal-300'
+                    }`}
+                  >
+                    <Calendar className="w-5 h-5 mx-auto mb-1 text-sunset-600" />
+                    <p className="font-semibold text-charcoal-950 text-sm">{day.label}</p>
+                    <p className="text-xs text-charcoal-500">of the month</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Summary */}
             <div className="mt-8 bg-white rounded-xl shadow-soft p-6 max-w-lg">
               <h3 className="font-semibold text-charcoal-950 mb-3">Your Subscription</h3>
@@ -363,6 +411,12 @@ export default function SubscribePage() {
                   <span className="text-charcoal-600">Shipping</span>
                   <span className="font-medium text-green-600">Free</span>
                 </div>
+                {shippingDay && (
+                  <div className="flex justify-between">
+                    <span className="text-charcoal-600">Ships on</span>
+                    <span className="font-medium">{shippingDay.replace('_', ' ').replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span className="text-charcoal-600">Tax (8.25%)</span>
                   <span className="font-medium">{formatPrice(tax)}</span>
@@ -433,6 +487,7 @@ export default function SubscribePage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="At least 8 characters"
                   required
+                  minLength={8}
                   className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
                 />
               </div>
@@ -456,6 +511,9 @@ export default function SubscribePage() {
         {/* Step 4: Payment (Stripe Elements) */}
         {step === 'payment' && clientSecret && (
           <div>
+            <button onClick={() => setStep('frequency')} className="flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6">
+              <ArrowLeft className="w-4 h-4" /> Back to schedule
+            </button>
             <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Payment Details</h2>
             <div className="max-w-lg">
               <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>

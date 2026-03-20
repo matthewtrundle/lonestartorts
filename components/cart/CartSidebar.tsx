@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
@@ -52,6 +53,8 @@ function ShippingDisplay({ hasWholesaleItems, freeShippingQualifies, shipping }:
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, baseShipping, total, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
   const { t } = useLanguage();
+  const router = useRouter();
+  const hasWholesaleItems = items.some(item => item.productType === 'wholesale');
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [didProceedToCheckout, setDidProceedToCheckout] = useState(false);
@@ -82,9 +85,6 @@ export function CartSidebar() {
     }
     setIsOpen(false);
   };
-
-  // Check if cart contains wholesale items
-  const hasWholesaleItems = items.some(item => item.sku.startsWith('WHOLESALE-'));
 
   // Discount code state
   const [email, setEmail] = useState('');
@@ -200,6 +200,13 @@ export function CartSidebar() {
   };
 
   const handleCheckout = async () => {
+    // Wholesale orders go through the checkout page for account gate
+    if (hasWholesaleItems) {
+      setIsOpen(false);
+      router.push('/checkout');
+      return;
+    }
+
     setIsProcessing(true);
     setError(null);
     setDidProceedToCheckout(true);
@@ -269,7 +276,6 @@ export function CartSidebar() {
         throw new Error(stripeError.message);
       }
     } catch (err) {
-      console.error('Checkout error:', err);
       setError(err instanceof Error ? err.message : 'An error occurred during checkout');
       setIsProcessing(false);
     }
@@ -358,7 +364,7 @@ export function CartSidebar() {
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start gap-2 mb-1">
                           <h3 className="text-sm font-medium leading-tight line-clamp-2">
-                            {item.name}
+                            {item.displayName || item.name}
                           </h3>
                           <button
                             onClick={() => removeItem(item.sku)}

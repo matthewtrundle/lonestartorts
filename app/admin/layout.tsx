@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { LogoFull } from '@/components/ui/Logo';
@@ -61,6 +61,7 @@ export default function AdminLayout({
   const navItems = [
     { href: '/admin', label: 'Dashboard', exact: true },
     { href: '/admin/orders', label: 'Orders' },
+    { href: '/admin/subscriptions', label: 'Subscriptions' },
     { href: '/admin/discounts', label: 'Discounts' },
     { href: '/admin/wholesale', label: 'Wholesale' },
     { href: '/admin/marketing', label: 'Marketing' },
@@ -122,7 +123,9 @@ export default function AdminLayout({
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {children}
+        <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sunset-600" /></div>}>
+          {children}
+        </Suspense>
       </main>
     </div>
   );

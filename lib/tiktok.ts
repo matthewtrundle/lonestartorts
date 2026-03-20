@@ -57,13 +57,6 @@ export async function trackTikTokPurchase(event: TikTokPurchaseEvent): Promise<b
       },
     };
 
-    console.log('TikTok Events API: Sending event', {
-      event: 'Purchase',
-      orderNumber: event.orderNumber,
-      value: event.value,
-      pixelId: TIKTOK_PIXEL_ID,
-    });
-
     const response = await fetch(TIKTOK_API_URL, {
       method: 'POST',
       headers: {
@@ -79,18 +72,7 @@ export async function trackTikTokPurchase(event: TikTokPurchaseEvent): Promise<b
 
     const result = await response.json();
 
-    console.log('TikTok Events API response:', {
-      status: response.status,
-      code: result.code,
-      message: result.message,
-    });
-
     if (response.ok && result.code === 0) {
-      console.log('TikTok Events API: Purchase event sent successfully', {
-        orderNumber: event.orderNumber,
-        value: event.value,
-        eventId,
-      });
       return true;
     } else {
       console.error('TikTok Events API error:', result);

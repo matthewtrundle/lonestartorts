@@ -1,12 +1,22 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X, ChevronDown, User, BookOpen, Newspaper, MapPin, UtensilsCrossed, Truck, MessageCircle, Info } from 'lucide-react';
+
+const resourceLinks = [
+  { href: '/craft', labelKey: 'nav.source', icon: Info, description: 'How we source our tortillas' },
+  { href: '/guides', labelKey: 'nav.guides', icon: BookOpen, description: 'Tips & storage guides' },
+  { href: '/recipes', labelKey: 'nav.recipes', icon: UtensilsCrossed, description: 'Tortilla recipes' },
+  { href: '/blog', labelKey: 'nav.blog', icon: Newspaper, description: 'Stories & updates' },
+  { href: '/locations', labelKey: 'nav.locations', icon: MapPin, description: 'Where to find us' },
+  { href: '/shipping', labelKey: 'nav.shipping', icon: Truck, description: 'Shipping info & rates' },
+  { href: '/contact', labelKey: 'nav.contact', icon: MessageCircle, description: 'Get in touch' },
+];
 
 export function Header() {
   const { itemCount, setIsOpen } = useCart();
@@ -14,6 +24,10 @@ export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
+  const resourcesRef = useRef<HTMLDivElement>(null);
+  const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Only offset the header on homepage where DisclaimerBanner is shown
   const isHomepage = pathname === '/';
@@ -27,7 +41,6 @@ export function Header() {
       const scrolled = window.scrollY > 30;
       setIsScrolled(scrolled);
 
-      // Also update class for any CSS that depends on it
       const header = document.getElementById('main-header');
       if (header) {
         if (scrolled) {
@@ -42,6 +55,17 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (resourcesRef.current && !resourcesRef.current.contains(e.target as Node)) {
+        setIsResourcesOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -54,18 +78,81 @@ export function Header() {
     };
   }, [isMobileMenuOpen]);
 
+  const handleResourcesEnter = () => {
+    if (resourcesTimeoutRef.current) {
+      clearTimeout(resourcesTimeoutRef.current);
+      resourcesTimeoutRef.current = null;
+    }
+    setIsResourcesOpen(true);
+  };
+
+  const handleResourcesLeave = () => {
+    resourcesTimeoutRef.current = setTimeout(() => {
+      setIsResourcesOpen(false);
+    }, 150);
+  };
+
   return (
     <>
     <header className={`shrink-header fixed ${isHomepage ? 'top-[28px]' : 'top-0'} left-0 right-0 z-[100] transition-all duration-300 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`} id="main-header">
 
       <div className="container mx-auto px-4 md:px-8 relative">
         <div className="header-content flex justify-between items-center py-1">
-          <Link href="/" className="logo-wrapper group relative">
-            <LogoFull
-              className="text-charcoal-950 transition-transform duration-300 group-hover:scale-105"
-              size="xs"
-            />
-          </Link>
+          {/* Left side: Logo + Resources */}
+          <div className="flex items-center gap-4">
+            <Link href="/" className="logo-wrapper group relative">
+              <LogoFull
+                className="text-charcoal-950 transition-transform duration-300 group-hover:scale-105"
+                size="xs"
+              />
+            </Link>
+
+            {/* Resources Dropdown - Far left, next to logo */}
+            <div
+              ref={resourcesRef}
+              className="relative hidden md:block"
+              onMouseEnter={handleResourcesEnter}
+              onMouseLeave={handleResourcesLeave}
+            >
+              <button
+                onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+                className="group relative flex items-center gap-1"
+              >
+                <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
+                  Resources
+                </span>
+                <ChevronDown className={`w-3.5 h-3.5 text-charcoal-500 transition-transform duration-200 ${isResourcesOpen ? 'rotate-180' : ''}`} />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+              </button>
+
+              {/* Dropdown Panel */}
+              <div
+                className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-charcoal-100 py-2 transition-all duration-200 ${
+                  isResourcesOpen
+                    ? 'opacity-100 translate-y-0 pointer-events-auto'
+                    : 'opacity-0 -translate-y-2 pointer-events-none'
+                }`}
+              >
+                {resourceLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsResourcesOpen(false)}
+                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-cream-50 transition-colors"
+                    >
+                      <Icon className="w-4 h-4 text-sunset-500 mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-sm font-medium text-charcoal-950">{t(link.labelKey)}</p>
+                        <p className="text-xs text-charcoal-500">{link.description}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
           {/* Mobile: Hamburger Menu + Cart */}
           <div className="flex md:hidden items-center gap-4">
@@ -97,65 +184,37 @@ export function Header() {
             </button>
           </div>
 
-          {/* Desktop Navigation - Premium styling */}
-          <nav className={`nav-items hidden md:flex items-center transition-all duration-300 ${isScrolled ? 'gap-4' : 'gap-5'}`}>
+          {/* Desktop Navigation - Right side */}
+          <nav className={`nav-items hidden md:flex items-center transition-all duration-300 ${isScrolled ? 'gap-3' : 'gap-4'}`}>
             <Link href="/shop" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.shop')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link href="/craft" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.source')}
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
-            </Link>
-            <Link href="/guides" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.guides')}
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
-            </Link>
-            <Link href="/recipes" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.recipes')}
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
-            </Link>
-            <Link href="/blog" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.blog')}
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
-            </Link>
-            <Link href="/locations" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.locations')}
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
-            </Link>
-            <Link href="/wholesale" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.wholesale')}
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
-            </Link>
+
+            {/* Tortilla divider */}
+            <svg className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
+            </svg>
+
             <Link href="/subscribe" className="group relative">
               <span className="text-sm font-medium tracking-wide text-sunset-600 transition-colors group-hover:text-sunset-700">
                 {t('nav.subscribe')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link href="/shipping" className="group relative">
+
+            {/* Tortilla divider */}
+            <svg className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
+            </svg>
+
+            <Link href="/wholesale" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.shipping')}
-              </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
-            </Link>
-            <Link href="/contact" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
-                {t('nav.contact')}
+                {t('nav.wholesale')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
@@ -164,11 +223,10 @@ export function Header() {
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium text-charcoal-700 hover:text-sunset-600 hover:bg-sunset-50 rounded-lg transition-colors border border-charcoal-200 hover:border-sunset-300"
-              aria-label={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+              aria-label={language === 'en' ? 'Cambiar a Espa\u00f1ol' : 'Switch to English'}
             >
               {language === 'en' ? (
                 <>
-                  {/* Mexican Flag for Spanish option */}
                   <svg className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
                     <rect width="10" height="20" fill="#006847"/>
                     <rect x="10" width="10" height="20" fill="#fff"/>
@@ -178,7 +236,6 @@ export function Header() {
                 </>
               ) : (
                 <>
-                  {/* US Flag for English option */}
                   <svg className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
                     <rect width="30" height="20" fill="#bf0a30"/>
                     <rect y="1.54" width="30" height="1.54" fill="#fff"/>
@@ -193,6 +250,14 @@ export function Header() {
                 </>
               )}
             </button>
+
+            {/* Account Link */}
+            <Link href="/account" className="group relative">
+              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
+                Account
+              </span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+            </Link>
 
             {/* Cart Icon */}
             <button
@@ -265,7 +330,7 @@ export function Header() {
                     <rect x="10" width="10" height="20" fill="#fff"/>
                     <rect x="20" width="10" height="20" fill="#ce1126"/>
                   </svg>
-                  <span>Cambiar a Español</span>
+                  <span>Cambiar a Espa&ntilde;ol</span>
                 </>
               ) : (
                 <>
@@ -293,55 +358,13 @@ export function Header() {
               {t('nav.shopNow')}
             </Link>
 
-            {/* Navigation Links */}
+            {/* Primary Links */}
             <Link
               href="/shop"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
               {t('nav.shop')}
-            </Link>
-            <Link
-              href="/craft"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
-            >
-              {t('nav.source')}
-            </Link>
-            <Link
-              href="/guides"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
-            >
-              {t('nav.guidesAndTips')}
-            </Link>
-            <Link
-              href="/recipes"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
-            >
-              {t('nav.recipes')}
-            </Link>
-            <Link
-              href="/blog"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
-            >
-              {t('nav.blogAndStories')}
-            </Link>
-            <Link
-              href="/locations"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
-            >
-              {t('nav.locations')}
-            </Link>
-            <Link
-              href="/wholesale"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
-            >
-              {t('nav.wholesale')}
             </Link>
             <Link
               href="/subscribe"
@@ -351,25 +374,55 @@ export function Header() {
               {t('nav.subscribeAndSave')}
             </Link>
             <Link
-              href="/account"
+              href="/wholesale"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
+              {t('nav.wholesale')}
+            </Link>
+            <Link
+              href="/account"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+            >
+              <User className="w-4 h-4" />
               {t('nav.myAccount')}
             </Link>
+
+            {/* Resources Section */}
+            <div className="pt-4 mt-2 border-t border-charcoal-100">
+              <button
+                onClick={() => setIsMobileResourcesOpen(!isMobileResourcesOpen)}
+                className="w-full flex items-center justify-between px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+              >
+                <span>Resources</span>
+                <ChevronDown className={`w-4 h-4 text-charcoal-500 transition-transform duration-200 ${isMobileResourcesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              <div className={`overflow-hidden transition-all duration-200 ${isMobileResourcesOpen ? 'max-h-96' : 'max-h-0'}`}>
+                {resourceLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-3 pl-8 pr-4 py-2.5 text-charcoal-700 hover:bg-cream-50 rounded-lg transition-colors"
+                    >
+                      <Icon className="w-4 h-4 text-sunset-500" />
+                      <span className="text-sm">{t(link.labelKey)}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Our Story */}
             <Link
               href="/story"
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
             >
               {t('nav.story')}
-            </Link>
-            <Link
-              href="/contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
-            >
-              {t('nav.contact')}
             </Link>
           </nav>
         </div>

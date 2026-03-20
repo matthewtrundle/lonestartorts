@@ -51,10 +51,10 @@ export const WholesaleTierCard: React.FC<WholesaleTierCardProps> = ({
     // Add flour packs
     if (flourPacks > 0) {
       addItem({
-        sku: 'HEB-FLOUR',
-        name: 'H-E-B Flour Tortillas',
+        sku: 'WHOLESALE-FLOUR',
+        name: 'Wholesale Flour Tortillas',
         price: tier.pricePerPack,
-        productType: 'tortilla',
+        productType: 'wholesale',
         description: `${tier.discountPercent}% wholesale discount - 20 tortillas per pack`,
         image: '/images/products/flour-tortillas-heb.webp',
       }, flourPacks);
@@ -63,10 +63,10 @@ export const WholesaleTierCard: React.FC<WholesaleTierCardProps> = ({
     // Add butter packs
     if (butterPacks > 0) {
       addItem({
-        sku: 'HEB-BUTTER',
-        name: 'H-E-B Butter Tortillas',
+        sku: 'WHOLESALE-BUTTER',
+        name: 'Wholesale Butter Tortillas',
         price: tier.pricePerPack,
-        productType: 'tortilla',
+        productType: 'wholesale',
         description: `${tier.discountPercent}% wholesale discount - 20 tortillas per pack`,
         image: '/images/products/butter-tortillas-heb.webp',
       }, butterPacks);

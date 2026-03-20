@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { isAuthenticated } from '@/lib/auth';
 
 /**
  * GET /api/admin/spin-leads
  * Get all spin wheel entries with filtering and pagination
  */
 export async function GET(req: NextRequest) {
+  const authenticated = await isAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get('page') || '1');
@@ -128,6 +134,11 @@ export async function GET(req: NextRequest) {
  * Export all emails as CSV
  */
 export async function POST(req: NextRequest) {
+  const authenticated = await isAuthenticated();
+  if (!authenticated) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const entries = await prisma.spinWheelEntry.findMany({
       orderBy: { createdAt: 'desc' },

@@ -5,7 +5,7 @@ import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, calculat
 // Texas sales tax rate
 const TAX_RATE = 0.0825; // 8.25%
 import { prisma } from '@/lib/prisma';
-import { validateDiscount, includesFreeShipping, recordDiscountUsage, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
+import { validateDiscount, includesFreeShipping, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
 import { getNextShipDate, getShipDateDisplay, formatShipDate } from '@/lib/shipping-schedule';
 
 // Helper to get any product by SKU (retail or wholesale)
@@ -31,22 +31,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
     }
 
-    const { items, email, discountCode } = await req.json();
+    const { items, email, discountCode, customerId } = await req.json();
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
     }
 
     // Build full items array with productType, sku, and price for shipping calculation
-    const fullItems = items.map((item: { sku: string; quantity: number }) => {
+    const fullItems = items.map((item: { sku: string; quantity: number; price?: number }) => {
       const product = getAnyProductBySku(item.sku);
       if (!product) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
       }
+      // Wholesale variety items use dynamic tier pricing from the cart
+      const price = (isWholesaleProduct(item.sku) && item.price) ? item.price : product.price;
       return {
         quantity: item.quantity,
         productType: product.productType,
-        price: product.price,
+        price,
         sku: item.sku,
       };
     });
@@ -76,11 +78,9 @@ export async function POST(req: NextRequest) {
     if (isWholesaleOrder) {
       freeShippingApplied = true;
       freeShippingReason = 'wholesale';
-      console.log(`Free shipping applied for wholesale order $${(subtotal / 100).toFixed(2)}`);
     } else if (subtotal >= FREE_SHIPPING_THRESHOLD) {
       freeShippingApplied = true;
       freeShippingReason = 'threshold';
-      console.log(`Free shipping applied for order $${(subtotal / 100).toFixed(2)} (threshold: $${(FREE_SHIPPING_THRESHOLD / 100).toFixed(2)})`);
     }
 
     // Calculate base shipping for display (what they would have paid)
@@ -137,7 +137,6 @@ export async function POST(req: NextRequest) {
           freeShippingReason = 'discount_code';
         }
 
-        console.log(`New system discount applied: ${normalizedCode}, type: ${discountResult.discount.type}, saving $${(discountAmount / 100).toFixed(2)}`);
       } else if (!discountResult.valid && discountResult.error === 'Invalid discount code') {
         // Not found in new system - fall through to legacy validation
 
@@ -152,7 +151,6 @@ export async function POST(req: NextRequest) {
             percentageDiscount = 10;
             discountAmount = Math.round(subtotal * 0.10); // 10% of subtotal
             feedbackCouponCode = normalizedCode;
-            console.log(`10% feedback discount applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
           }
         }
         // Check if code is valid first-order free shipping code
@@ -167,7 +165,6 @@ export async function POST(req: NextRequest) {
             shippingCost = 0;
             freeShippingApplied = true;
             freeShippingReason = 'discount_code';
-            console.log(`Free shipping applied for first order: ${normalizedEmail}`);
           }
         }
         // Check if it's a spin wheel prize code (SPIN-XXXXX format)
@@ -186,7 +183,6 @@ export async function POST(req: NextRequest) {
                 // 10% off up to $10 max (1000 cents)
                 percentageDiscount = 10;
                 discountAmount = Math.min(Math.round(subtotal * 0.10), 1000);
-                console.log(`10% off spin prize applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
                 break;
               case 'free_shipping':
                 // Free shipping
@@ -194,23 +190,19 @@ export async function POST(req: NextRequest) {
                   shippingCost = 0;
                   freeShippingApplied = true;
                   freeShippingReason = 'spin_prize';
-                  console.log(`Free shipping spin prize applied: ${normalizedCode}`);
                 }
                 break;
               case 'five_off':
                 // $5 off
                 discountAmount = 500;
-                console.log(`$5 off spin prize applied: ${normalizedCode}`);
                 break;
               case 'bonus_tortillas':
                 // 10 bonus tortillas - $5 value applied as discount
                 discountAmount = 500;
-                console.log(`Bonus tortillas spin prize applied: ${normalizedCode}`);
                 break;
               case 'free_sauce':
                 // Free sauce - $12 value applied as discount
                 discountAmount = 1200;
-                console.log(`Free sauce spin prize applied: ${normalizedCode}`);
                 break;
             }
 
@@ -248,12 +240,10 @@ export async function POST(req: NextRequest) {
               // 10% off
               percentageDiscount = 10;
               discountAmount = Math.round(subtotal * 0.10);
-              console.log(`Drip 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
               break;
             case '5OFF':
               // $5 off
               discountAmount = 500;
-              console.log(`Drip $5 off applied: ${normalizedCode}`);
               break;
             case 'FREESHIP':
               // Free shipping
@@ -261,7 +251,6 @@ export async function POST(req: NextRequest) {
                 shippingCost = 0;
                 freeShippingApplied = true;
                 freeShippingReason = 'drip_code';
-                console.log(`Drip free shipping applied: ${normalizedCode}`);
               }
               break;
           }
@@ -271,14 +260,13 @@ export async function POST(req: NextRequest) {
           percentageDiscount = 10;
           discountAmount = Math.round(subtotal * 0.10);
           utAlumniCode = normalizedCode;
-          console.log(`UT Alumni 10% off applied: ${normalizedCode}, saving $${(discountAmount / 100).toFixed(2)}`);
         }
       }
       // If the new system returned a different error (expired, used, etc.), don't apply any discount
     }
 
     // Create line items for Stripe with server-side validation
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: { sku: string; quantity: number }) => {
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item: { sku: string; quantity: number; price?: number }) => {
       const product = getAnyProductBySku(item.sku);
       if (!product) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
@@ -288,6 +276,9 @@ export async function POST(req: NextRequest) {
       if (!item.quantity || item.quantity < 1 || item.quantity > 99) {
         throw new Error(`Invalid quantity for ${item.sku}`);
       }
+
+      // Wholesale variety items use dynamic tier pricing from the cart
+      const unitAmount = (isWholesaleProduct(item.sku) && item.price) ? item.price : product.price;
 
       return {
         price_data: {
@@ -299,7 +290,7 @@ export async function POST(req: NextRequest) {
               sku: item.sku,
             },
           },
-          unit_amount: product.price,
+          unit_amount: unitAmount,
         },
         quantity: item.quantity,
       };
@@ -381,6 +372,28 @@ export async function POST(req: NextRequest) {
       return `Freshness First Shipping — Ships ${shipDateDisplay}`;
     };
 
+    // Wholesale order: verify customer and link Stripe customer
+    let stripeCustomerIdForSession: string | undefined;
+    let wholesaleClientId: string | undefined;
+    if (isWholesaleOrder) {
+      if (!customerId) {
+        return NextResponse.json({ error: 'Account required for wholesale orders. Please sign in or register.' }, { status: 400 });
+      }
+      const customer = await prisma.customer.findUnique({
+        where: { id: customerId },
+        include: { WholesaleClient: true },
+      });
+      if (!customer || !customer.isWholesale) {
+        return NextResponse.json({ error: 'Wholesale account required. Please register as a wholesale customer.' }, { status: 400 });
+      }
+      if (customer.stripeCustomerId) {
+        stripeCustomerIdForSession = customer.stripeCustomerId;
+      }
+      if (customer.WholesaleClient) {
+        wholesaleClientId = customer.WholesaleClient.id;
+      }
+    }
+
     // Create Stripe checkout session with shipping as actual shipping rate (not a line item)
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -392,6 +405,8 @@ export async function POST(req: NextRequest) {
       }),
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}`,
+      // Link to existing Stripe customer for wholesale orders
+      ...(stripeCustomerIdForSession && { customer: stripeCustomerIdForSession }),
       metadata: {
         disclaimer: 'Independent reseller. Not affiliated with or endorsed by H-E-B®.',
         shippingMethod: 'standard', // Simplified to single method
@@ -401,6 +416,8 @@ export async function POST(req: NextRequest) {
         taxAmount: taxAmount.toString(), // Sales tax amount
         isWholesaleOrder: isWholesaleOrder.toString(), // Track wholesale orders
         estimatedShipDate, // Freshness First ship date
+        ...(customerId && { customerId }),
+        ...(wholesaleClientId && { wholesaleClientId }),
         ...(freeShippingApplied && {
           freeShippingReason, // 'threshold', 'wholesale', 'discount_code', 'spin_prize', 'drip_code'
           freeShippingSavings: baseShippingCost.toString(),

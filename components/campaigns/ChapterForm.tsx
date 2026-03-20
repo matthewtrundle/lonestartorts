@@ -121,7 +121,6 @@ export function ChapterForm() {
       setIsSubmitted(true);
       setFormData(initialFormData);
     } catch (err) {
-      console.error('Chapter form error:', err);
       setError('There was an error submitting your inquiry. Please try again or email us directly.');
     } finally {
       setIsSubmitting(false);

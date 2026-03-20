@@ -112,7 +112,6 @@ export async function POST(req: NextRequest) {
                   updatedAt: new Date()
                 },
               });
-              console.log('Created guest customer:', customer.id);
             }
 
             customerId = customer.id;
@@ -145,7 +144,6 @@ export async function POST(req: NextRequest) {
                   updatedAt: new Date()
                 },
               });
-              console.log('Created shipping address for customer:', customer.id);
             }
           }
 
@@ -194,7 +192,49 @@ export async function POST(req: NextRequest) {
             },
           });
 
-          console.log('Order saved to database:', order.id, order.orderNumber);
+
+          // Create WholesaleOrder if this is a wholesale checkout
+          if (fullSession.metadata?.isWholesaleOrder === 'true' && fullSession.metadata?.wholesaleClientId) {
+            try {
+              const wsTimestamp = Date.now().toString().slice(-6);
+              const wsRandom = Math.random().toString(36).substring(2, 4).toUpperCase();
+              const wsOrderNumber = `WS-${wsTimestamp}${wsRandom}`;
+
+              await prisma.wholesaleOrder.create({
+                data: {
+                  orderNumber: wsOrderNumber,
+                  clientId: fullSession.metadata.wholesaleClientId,
+                  stripeInvoiceId: session.id,
+                  subtotal,
+                  shipping,
+                  tax,
+                  total,
+                  paymentStatus: 'PAID',
+                  paymentTerms: 'DUE_ON_RECEIPT',
+                  paidAt: new Date(),
+                  orderStatus: 'PENDING',
+                  shippingName: customerName,
+                  shippingAddress1: shippingAddr?.line1 || null,
+                  shippingAddress2: shippingAddr?.line2 || null,
+                  shippingCity: shippingAddr?.city || null,
+                  shippingState: shippingAddr?.state || null,
+                  shippingZip: shippingAddr?.postal_code || null,
+                  shippingCountry: shippingAddr?.country || null,
+                  items: {
+                    create: items.map((item) => ({
+                      sku: item.sku,
+                      name: item.name,
+                      quantity: item.quantity,
+                      unitPrice: item.price,
+                      totalPrice: item.price * item.quantity,
+                    })),
+                  },
+                },
+              });
+            } catch (wsError) {
+              console.error('Failed to create wholesale order:', wsError);
+            }
+          }
 
           // Post-order tasks: emails, tracking, discount recording
           const backgroundWork = async () => {
@@ -219,7 +259,6 @@ export async function POST(req: NextRequest) {
 
             try {
               await sendOrderConfirmationEmail(emailData);
-              console.log('Order confirmation email sent:', order.orderNumber);
             } catch (emailError) {
               console.error('Failed to send confirmation email:', emailError);
             }
@@ -227,7 +266,6 @@ export async function POST(req: NextRequest) {
             // Send admin notification email
             try {
               await sendAdminOrderNotification(emailData);
-              console.log('Admin notification email sent:', order.orderNumber);
             } catch (adminEmailError) {
               console.error('Failed to send admin notification:', adminEmailError);
             }
@@ -263,7 +301,6 @@ export async function POST(req: NextRequest) {
                     couponUsedAt: new Date(),
                   },
                 });
-                console.log('Feedback coupon marked as used:', feedbackCouponCode);
               } catch (couponError) {
                 console.error('Failed to mark feedback coupon as used:', couponError);
               }
@@ -287,7 +324,6 @@ export async function POST(req: NextRequest) {
                   discountAmount,
                   rulesApplied
                 );
-                console.log('Discount usage recorded for:', newSystemDiscountId, 'order:', order.orderNumber);
               } catch (discountError) {
                 console.error('Failed to record discount usage:', discountError);
               }
@@ -310,14 +346,12 @@ export async function POST(req: NextRequest) {
 
       case 'payment_intent.payment_failed':
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        console.error('Payment failed:', paymentIntent.id);
         // Handle failed payment
         break;
 
       // Invoice events (retail subscriptions + wholesale)
       case 'invoice.paid':
         const paidInvoice = event.data.object as Stripe.Invoice;
-        console.log('Invoice paid:', paidInvoice.id);
 
         try {
           // Check if this is a retail subscription invoice
@@ -379,7 +413,6 @@ export async function POST(req: NextRequest) {
                 },
               });
 
-              console.log('Retail subscription renewal order created:', orderNumber);
               break;
             }
           }
@@ -397,7 +430,6 @@ export async function POST(req: NextRequest) {
                 paidAt: new Date(),
               },
             });
-            console.log('Wholesale order marked as paid:', paidOrder.orderNumber);
             // TODO: Send payment confirmation email
           }
         } catch (invoiceError) {
@@ -407,7 +439,6 @@ export async function POST(req: NextRequest) {
 
       case 'invoice.payment_failed':
         const failedInvoice = event.data.object as Stripe.Invoice;
-        console.log('Invoice payment failed:', failedInvoice.id);
 
         try {
           // Check if this is a retail subscription invoice
@@ -421,7 +452,6 @@ export async function POST(req: NextRequest) {
                 where: { id: failedRetailSub.id },
                 data: { status: 'PAST_DUE' },
               });
-              console.log('Retail subscription marked as past due:', failedRetailSub.id);
               break;
             }
           }
@@ -438,7 +468,6 @@ export async function POST(req: NextRequest) {
                 paymentStatus: 'OVERDUE',
               },
             });
-            console.log('Wholesale order marked as overdue:', failedOrder.orderNumber);
           }
         } catch (invoiceError) {
           console.error('Failed to process failed invoice:', invoiceError);
@@ -447,7 +476,6 @@ export async function POST(req: NextRequest) {
 
       case 'invoice.finalized':
         const finalizedInvoice = event.data.object as Stripe.Invoice;
-        console.log('Invoice finalized:', finalizedInvoice.id);
 
         try {
           await prisma.wholesaleOrder.updateMany({
@@ -466,7 +494,6 @@ export async function POST(req: NextRequest) {
 
       case 'invoice.voided':
         const voidedInvoice = event.data.object as Stripe.Invoice;
-        console.log('Invoice voided:', voidedInvoice.id);
 
         try {
           await prisma.wholesaleOrder.updateMany({
@@ -483,7 +510,6 @@ export async function POST(req: NextRequest) {
       // Subscription events (retail + wholesale)
       case 'customer.subscription.updated':
         const updatedSub = event.data.object as Stripe.Subscription;
-        console.log('Subscription updated:', updatedSub.id);
 
         try {
           const statusMap: Record<string, string> = {
@@ -516,7 +542,6 @@ export async function POST(req: NextRequest) {
                   : null,
               },
             });
-            console.log('Retail subscription updated:', updatedSub.id);
           } else {
             // Wholesale subscription
             await prisma.wholesaleSubscription.updateMany({
@@ -536,7 +561,6 @@ export async function POST(req: NextRequest) {
 
       case 'customer.subscription.deleted':
         const deletedSub = event.data.object as Stripe.Subscription;
-        console.log('Subscription deleted:', deletedSub.id);
 
         try {
           // Check if it's a retail subscription
@@ -552,7 +576,6 @@ export async function POST(req: NextRequest) {
                 cancelledAt: new Date(),
               },
             });
-            console.log('Retail subscription cancelled:', deletedSub.id);
           } else {
             await prisma.wholesaleSubscription.updateMany({
               where: { stripeSubscriptionId: deletedSub.id },
@@ -568,7 +591,6 @@ export async function POST(req: NextRequest) {
         break;
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
     }
 
     return NextResponse.json({ received: true });

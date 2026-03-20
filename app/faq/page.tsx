@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import FAQContent from '@/components/faq/FAQContent';
+
+export const metadata: Metadata = {
+  title: 'FAQ | Lonestar Tortillas',
+  description: 'Frequently asked questions about Lonestar Tortillas — shipping, storage, ingredients, subscriptions, and more.',
+};
 
 // Breadcrumb schema for better SERP display
 const breadcrumbSchema = {
