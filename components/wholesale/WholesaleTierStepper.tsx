@@ -1,8 +1,87 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 import { wholesaleTiers, WholesaleTier } from '@/lib/wholesale-tiers';
+
+// Sub-component for each tier circle with hover tooltip
+const TierNode: React.FC<{
+  tier: WholesaleTier;
+  isCompleted: boolean;
+  isActive: boolean;
+  isFuture: boolean;
+}> = ({ tier, isCompleted, isActive, isFuture }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
+    <div className="relative z-10 flex flex-col items-center flex-1">
+      {/* Circle */}
+      <div
+        className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-500 cursor-pointer ${
+          isCompleted && !isActive
+            ? 'bg-green-500 border-green-500 text-white'
+            : isActive
+              ? 'bg-sunset-500 border-sunset-500 text-white ring-4 ring-sunset-200'
+              : 'bg-white border-gray-300 text-gray-400 hover:border-sunset-300'
+        }`}
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+      >
+        {isCompleted && !isActive ? (
+          <Check className="w-5 h-5" />
+        ) : (
+          <span className="text-sm font-bold">{tier.discountPercent}%</span>
+        )}
+      </div>
+
+      {/* Tooltip */}
+      {showTooltip && (
+        <div className="absolute top-full mt-8 left-1/2 -translate-x-1/2 w-56 bg-charcoal-950 text-white rounded-lg shadow-xl p-3 z-50 pointer-events-none">
+          {/* Arrow */}
+          <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-charcoal-950 rotate-45" />
+          <div className="relative z-10">
+            <p className="font-bold text-sm mb-1">
+              {tier.name} — {tier.discountPercent}% Off
+            </p>
+            <p className="text-xs text-gray-300 mb-2">{tier.description}</p>
+            <div className="text-xs text-gray-400 space-y-0.5">
+              <p>{tier.packsPerWeek} packs/week ({tier.packsPerMonth}/month)</p>
+              <p>Ideal for: {tier.idealFor}</p>
+            </div>
+            <div className="mt-2 pt-2 border-t border-white/10">
+              <ul className="text-xs text-gray-300 space-y-0.5">
+                {tier.features.slice(0, 3).map((f, i) => (
+                  <li key={i} className="flex items-start gap-1">
+                    <Check className="w-3 h-3 text-green-400 flex-shrink-0 mt-0.5" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Label */}
+      <span
+        className={`mt-2 text-sm font-semibold ${
+          isActive
+            ? 'text-sunset-600'
+            : isCompleted
+              ? 'text-green-600'
+              : 'text-gray-400'
+        }`}
+      >
+        {tier.name}
+      </span>
+
+      {/* Threshold */}
+      <span className={`text-xs ${isFuture ? 'text-gray-400' : 'text-gray-500'}`}>
+        {tier.packsPerMonth}+ packs
+      </span>
+    </div>
+  );
+};
 
 interface WholesaleTierStepperProps {
   totalPacks: number;
@@ -50,42 +129,13 @@ export const WholesaleTierStepper: React.FC<WholesaleTierStepperProps> = ({
             const isFuture = currentTierIndex < index;
 
             return (
-              <div key={tier.id} className="relative z-10 flex flex-col items-center flex-1">
-                {/* Circle */}
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${
-                    isCompleted && !isActive
-                      ? 'bg-green-500 border-green-500 text-white'
-                      : isActive
-                        ? 'bg-sunset-500 border-sunset-500 text-white ring-4 ring-sunset-200'
-                        : 'bg-white border-gray-300 text-gray-400'
-                  }`}
-                >
-                  {isCompleted && !isActive ? (
-                    <Check className="w-5 h-5" />
-                  ) : (
-                    <span className="text-sm font-bold">{tier.discountPercent}%</span>
-                  )}
-                </div>
-
-                {/* Label */}
-                <span
-                  className={`mt-2 text-sm font-semibold ${
-                    isActive
-                      ? 'text-sunset-600'
-                      : isCompleted
-                        ? 'text-green-600'
-                        : 'text-gray-400'
-                  }`}
-                >
-                  {tier.name}
-                </span>
-
-                {/* Threshold */}
-                <span className={`text-xs ${isFuture ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {tier.packsPerMonth}+ packs
-                </span>
-              </div>
+              <TierNode
+                key={tier.id}
+                tier={tier}
+                isCompleted={isCompleted}
+                isActive={isActive}
+                isFuture={isFuture}
+              />
             );
           })}
         </div>

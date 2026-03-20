@@ -9,6 +9,7 @@ import {
   wholesaleTiers,
 } from '@/lib/wholesale-tiers';
 import { WholesaleTierStepper } from './WholesaleTierStepper';
+import { WholesaleQuickStart } from './WholesaleQuickStart';
 import { WholesaleProductGrid } from './WholesaleProductGrid';
 import { WholesaleOrderSummary } from './WholesaleOrderSummary';
 
@@ -96,6 +97,10 @@ export const WholesaleOrderBuilder: React.FC = () => {
     prevTierRef.current = currentTierId;
   }, [currentTier, totalPacks]);
 
+  const applyPreset = (presetQuantities: Record<string, number>) => {
+    setQuantities(presetQuantities);
+  };
+
   const updateQuantity = (sku: string, delta: number) => {
     setQuantities((prev) => {
       const current = prev[sku] || 0;
@@ -168,6 +173,9 @@ export const WholesaleOrderBuilder: React.FC = () => {
 
       {/* Tier Stepper */}
       <WholesaleTierStepper totalPacks={totalPacks} currentTier={currentTier} />
+
+      {/* Quick Start Presets */}
+      <WholesaleQuickStart onApplyPreset={applyPreset} />
 
       {/* Product Grid + Sidebar Layout */}
       <div className="lg:grid lg:grid-cols-[1fr_340px] lg:gap-8">
