@@ -7,6 +7,29 @@ import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
 import { ArrowLeft, Package, Truck, CheckCircle, Circle, MessageSquare, Star } from 'lucide-react';
 
+// Auto-detect carrier from tracking number format
+function detectCarrier(trackingNumber: string): string | null {
+  const trimmed = trackingNumber.trim().toUpperCase();
+  if (!trimmed) return null;
+
+  // UPS: starts with 1Z + 16 alphanumeric (18 total)
+  if (/^1Z[A-Z0-9]{16}$/i.test(trimmed)) return 'UPS';
+
+  // FedEx: 12, 15, or 20 digits (all numeric)
+  if (/^\d{12}$/.test(trimmed) || /^\d{15}$/.test(trimmed) || /^\d{20}$/.test(trimmed)) return 'FedEx';
+
+  // USPS: 20-22 digit numeric
+  if (/^\d{20,22}$/.test(trimmed)) return 'USPS';
+
+  // USPS: 13 char international format (e.g., EJ123456780US)
+  if (/^[A-Z]{2}\d{9}[A-Z]{2}$/.test(trimmed)) return 'USPS';
+
+  // USPS: starts with 9400, 9200, 9300, 9500 (common USPS prefixes, 20+ digits)
+  if (/^9[2345]\d{18,20}$/.test(trimmed)) return 'USPS';
+
+  return null;
+}
+
 // Generate carrier-specific tracking URL
 function getTrackingUrl(carrier: string | null, trackingNumber: string): string {
   if (!carrier) return `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
@@ -386,8 +409,13 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
                     <input
                       type="text"
                       value={trackingNumber}
-                      onChange={(e) => setTrackingNumber(e.target.value)}
-                      placeholder="123456789"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setTrackingNumber(value);
+                        const detected = detectCarrier(value);
+                        if (detected) setCarrier(detected);
+                      }}
+                      placeholder="Enter tracking number (carrier auto-detects)"
                       className="w-full px-3 py-1.5 text-sm border border-charcoal-300 rounded focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
