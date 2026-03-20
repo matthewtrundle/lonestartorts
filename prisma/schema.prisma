@@ -448,6 +448,14 @@ model WholesaleClient {
   paymentTerms        PaymentTerms          @default(DUE_ON_RECEIPT)
   creditLimit         Int?
 
+  // Payment terms progression
+  paymentTermsLevel   String    @default("NEW")       // NEW, TRUSTED, ESTABLISHED, PREMIUM
+  termsAutoPromoted   Boolean   @default(true)         // false if admin manually overrode terms
+  onTimePaymentCount  Int       @default(0)
+  latePaymentCount    Int       @default(0)
+  termsLockedUntil    DateTime?                        // freeze promotions after late payment
+  lastTermsChange     DateTime?
+
   // Shipping address
   shippingName        String?
   shippingAddress1    String?
