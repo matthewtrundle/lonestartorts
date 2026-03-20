@@ -6,6 +6,7 @@ import { getProductBySku, getDisplayName } from '@/lib/products';
 import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
 import { trackTikTokPurchase } from '@/lib/tiktok';
 import { recordDiscountUsage, AppliedRule } from '@/lib/discount-engine';
+import { evaluateTermsPromotion, applyTermsDemotion } from '@/lib/wholesale/terms-progression';
 import { randomUUID } from 'crypto';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -501,6 +502,24 @@ export async function POST(req: NextRequest) {
                 paidAt: new Date(),
               },
             });
+
+            // Evaluate terms progression
+            try {
+              const promotion = await evaluateTermsPromotion(
+                paidOrder.clientId,
+                paidOrder.dueDate,
+                new Date(),
+              );
+              if (promotion.promoted) {
+                console.log(`Wholesale client ${paidOrder.clientId} promoted to ${promotion.newLevel}`);
+              }
+              if (promotion.requiresApproval) {
+                console.log(`Wholesale client ${paidOrder.clientId} eligible for ${promotion.newLevel} — requires admin approval`);
+              }
+            } catch (termsError) {
+              console.error('Failed to evaluate terms progression:', termsError);
+            }
+
             // TODO: Send payment confirmation email
           }
         } catch (invoiceError) {
@@ -539,6 +558,14 @@ export async function POST(req: NextRequest) {
                 paymentStatus: 'OVERDUE',
               },
             });
+
+            // Apply terms demotion
+            try {
+              await applyTermsDemotion(failedOrder.clientId);
+              console.log(`Wholesale client ${failedOrder.clientId} — late payment recorded`);
+            } catch (termsError) {
+              console.error('Failed to apply terms demotion:', termsError);
+            }
           }
         } catch (invoiceError) {
           console.error('Failed to process failed invoice:', invoiceError);
