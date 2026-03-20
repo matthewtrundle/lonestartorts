@@ -28,10 +28,16 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
         const discountRatio = bundle.bundlePrice / bundle.originalPrice;
         const discountedItemPrice = Math.round(product.price * discountRatio);
 
+        // Generate display name with count for tortilla products
+        const displayName = product.tortillaCount && product.tortillaCount > 0
+          ? `${product.name} ${product.tortillaCount} count`
+          : product.name;
+
         for (let i = 0; i < quantity; i++) {
           addItem({
             sku: product.sku,
             name: product.name,
+            displayName,
             price: discountedItemPrice,
             productType: product.productType,
             description: product.description,

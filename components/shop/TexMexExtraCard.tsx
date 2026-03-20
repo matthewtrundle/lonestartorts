@@ -57,6 +57,7 @@ export const TexMexExtraCard: React.FC<TexMexExtraCardProps> = ({ product }) => 
     addItem({
       sku: product.sku,
       name: product.name,
+      displayName: product.name, // Non-tortilla products don't need count
       price: product.price,
       productType: product.productType,
       description: product.description,

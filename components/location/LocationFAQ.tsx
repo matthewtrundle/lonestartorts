@@ -13,7 +13,7 @@ export function LocationFAQ({ city, state, faqs }: LocationFAQProps) {
   const defaultFAQs: FAQItem[] = [
     {
       question: `How long does shipping to ${city} take?`,
-      answer: `Orders to ${city}, ${state} typically arrive within 2-3 business days via USPS Priority Mail. We ship Monday through Friday, and orders placed before 2 PM CT ship the same day. During peak seasons, delivery may take an extra day.`
+      answer: `Orders to ${city}, ${state} typically arrive within 2-3 business days via USPS Priority Mail. We ship on Tuesdays, and orders placed before 2 PM CT ship the same day. During peak seasons, delivery may take an extra day.`
     },
     {
       question: `Are the tortillas fresh when they arrive in ${city}?`,

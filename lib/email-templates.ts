@@ -10,6 +10,7 @@
 
 interface OrderItem {
   name: string;
+  displayName?: string; // Display name with count (e.g., "H-E-B White Corn Tortillas - Texas Size 80 count")
   quantity: number;
   price: number; // in cents
 }
@@ -91,7 +92,7 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
                 </svg>
               </div>
               <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">Howdy, ${customerName}! Order Confirmed!</h1>
-              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Your premium Texas tortillas are headed your way. Get ready for some seriously good eats.</p>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Your premium Texas tortillas are on their way! We ship on Tuesdays for maximum freshness.</p>
             </td>
           </tr>
 
@@ -113,6 +114,25 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
             </td>
           </tr>
 
+          <!-- Tuesday Shipping Banner -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #ecfdf5; border-bottom: 1px solid #a7f3d0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="width: 48px; vertical-align: middle;">
+                    <div style="width: 40px; height: 40px; background-color: #10b981; border-radius: 50%; text-align: center; line-height: 40px;">
+                      <span style="color: #ffffff; font-size: 20px;">📦</span>
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle; padding-left: 12px;">
+                    <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #065f46;">Freshness First Shipping</p>
+                    <p style="margin: 0; font-size: 14px; color: #047857;">We ship on <strong>Tuesdays only</strong> so your tortillas spend the fewest days in transit.${estimatedShipDate ? ` Your order ships <strong>${estimatedShipDate}</strong>.` : ''}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
           <!-- Order Summary -->
           <tr>
             <td style="padding: 32px;">
@@ -121,7 +141,7 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
                 ${items.map((item, index) => `
                 <tr style="${index < items.length - 1 ? 'border-bottom: 1px solid #f5f5f4;' : ''}">
                   <td style="padding: 16px 0;">
-                    <div style="font-weight: 600; font-size: 16px; color: #1c1917; margin-bottom: 4px;">${item.name}</div>
+                    <div style="font-weight: 600; font-size: 16px; color: #1c1917; margin-bottom: 4px;">${item.displayName || item.name}</div>
                     <div style="font-size: 14px; color: #57534e;">Quantity: ${item.quantity}</div>
                   </td>
                   <td style="padding: 16px 0; text-align: right; font-size: 16px; font-weight: 600; color: #1c1917; white-space: nowrap;">$${((item.price * item.quantity) / 100).toFixed(2)}</td>
@@ -199,7 +219,7 @@ export function generateOrderConfirmationEmail(data: OrderConfirmationData): str
                         <div style="display: inline-block; width: 20px; height: 20px; background-color: #d97706; border-radius: 50%; text-align: center; line-height: 20px; margin-right: 8px; vertical-align: middle;">
                           <span style="color: #ffffff; font-weight: 700; font-size: 11px;">✓</span>
                         </div>
-                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">We ship Mon–Wed for maximum freshness</span>
+                        <span style="font-size: 14px; color: #57534e; line-height: 1.6;">We ship Tuesdays for maximum freshness</span>
                       </div>
                     </div>
                   </td>
@@ -331,7 +351,7 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
                     <tr>
                       <td style="vertical-align: middle;">
                         <span style="display: inline-block; background-color: #d97706; color: #ffffff; font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 6px; margin-right: 12px;">${item.quantity}x</span>
-                        <span style="font-size: 16px; color: #1c1917; font-weight: 600;">${item.name}</span>
+                        <span style="font-size: 16px; color: #1c1917; font-weight: 600;">${item.displayName || item.name}</span>
                       </td>
                     </tr>
                   </table>
@@ -348,6 +368,17 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
                 <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #111827;">When Will It Arrive?</h3>
                 <p style="margin: 0; font-size: 15px; color: #57534e; line-height: 1.7;">
                   Your tortillas should arrive within <strong style="color: #1c1917;">2-3 business days</strong>. Track your package anytime using the tracking number above — we'll get 'em to you safe and sound.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Tuesday Shipping Note -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <div style="padding: 16px 24px; background-color: #ecfdf5; border-radius: 8px; text-align: center;">
+                <p style="margin: 0; font-size: 14px; color: #065f46;">
+                  <strong>Freshness First:</strong> We ship on Tuesdays so your tortillas spend the fewest days in transit. Planning your next order? Place it before Tuesday 2 PM CT for same-week shipping!
                 </p>
               </div>
             </td>

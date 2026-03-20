@@ -2,11 +2,11 @@
  * Freshness First Shipping Schedule
  *
  * Single source of truth for all shipping logic.
- * We ship Monday, Tuesday, Wednesday only with a 2:00 PM CT cutoff.
+ * We ship Tuesday only with a 2:00 PM CT cutoff.
  */
 
-/** Monday=1, Tuesday=2, Wednesday=3 */
-export const SHIPPING_DAYS = [1, 2, 3] as const;
+/** Tuesday=2 */
+export const SHIPPING_DAYS = [2] as const;
 export const CUTOFF_HOUR = 14; // 2 PM
 export const TIMEZONE = 'America/Chicago';
 
@@ -149,11 +149,11 @@ export function getShippingMessage(now: Date = new Date()): ShippingMessage {
     };
   }
 
-  // Ships next ship day (Wed after 2PM, Thu-Sun)
+  // Ships next ship day (Tue after 2PM, Wed-Mon)
   return {
     type: 'ships-next-shipday',
     headline: `Freshness First — Ships ${shipDateFormatted}`,
-    subtext: `We ship Mon–Wed for maximum freshness`,
+    subtext: `We ship Tuesdays for maximum freshness`,
     shipDate,
     shipDateFormatted,
   };
@@ -162,19 +162,19 @@ export function getShippingMessage(now: Date = new Date()): ShippingMessage {
 /** Static info for shipping/FAQ pages */
 export function getShippingScheduleInfo() {
   return {
-    shipDays: 'Monday, Tuesday, and Wednesday',
+    shipDays: 'Tuesday',
     cutoffTime: '2:00 PM CT',
     deliveryTime: '2–3 business days after shipping',
     scheduleDescription:
-      'We ship Monday through Wednesday so your tortillas spend the fewest days in transit. No weekend warehouse sitting — just fresh Texas tortillas, delivered fast.',
+      'We ship on Tuesdays so your tortillas spend the fewest days in transit. No weekend warehouse sitting — just fresh Texas tortillas, delivered fast.',
     schedule: [
-      { day: 'Monday', canShip: true, note: 'Orders before 2 PM CT ship same day' },
+      { day: 'Monday', canShip: false, note: 'Orders ship Tuesday' },
       { day: 'Tuesday', canShip: true, note: 'Orders before 2 PM CT ship same day' },
-      { day: 'Wednesday', canShip: true, note: 'Orders before 2 PM CT ship same day' },
-      { day: 'Thursday', canShip: false, note: 'Orders ship next Monday' },
-      { day: 'Friday', canShip: false, note: 'Orders ship next Monday' },
-      { day: 'Saturday', canShip: false, note: 'Orders ship next Monday' },
-      { day: 'Sunday', canShip: false, note: 'Orders ship next Monday' },
+      { day: 'Wednesday', canShip: false, note: 'Orders ship next Tuesday' },
+      { day: 'Thursday', canShip: false, note: 'Orders ship next Tuesday' },
+      { day: 'Friday', canShip: false, note: 'Orders ship next Tuesday' },
+      { day: 'Saturday', canShip: false, note: 'Orders ship next Tuesday' },
+      { day: 'Sunday', canShip: false, note: 'Orders ship Tuesday' },
     ],
   };
 }

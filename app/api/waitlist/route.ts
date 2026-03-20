@@ -141,11 +141,12 @@ export async function POST(req: NextRequest) {
       }
 
       // Send notification to admin
-      if (ADMIN_EMAIL) {
+      const adminRecipients = [ADMIN_EMAIL, 'howdy@lonestartortillas.com'].filter(Boolean) as string[];
+      if (adminRecipients.length > 0) {
         try {
           await resend.emails.send({
             from: 'Lonestar Tortillas <noreply@lonestartortillas.com>',
-            to: ADMIN_EMAIL,
+            to: adminRecipients,
             subject: `New Waitlist Signup: ${email}`,
             html: `
               <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">

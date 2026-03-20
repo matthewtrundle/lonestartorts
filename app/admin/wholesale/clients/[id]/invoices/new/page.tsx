@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Plus, Trash2, Send, Save } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { products } from '@/lib/products';
 
 interface Client {
   id: string;
@@ -25,12 +26,22 @@ interface LineItem {
   unitPrice: number; // In cents
 }
 
-// Product catalog for quick add
-const productCatalog = [
-  { name: 'Flour Tortillas (20 pack)', sku: 'FLOUR-20', price: 899 },
-  { name: 'Corn Tortillas (30 pack)', sku: 'CORN-30', price: 699 },
-  { name: 'Butter Flour Tortillas (20 pack)', sku: 'BUTTER-20', price: 999 },
-];
+// Build product catalog from centralized products source
+const productCatalog = products
+  .filter(p => !p.bundleOnly)
+  .map(p => ({
+    name: p.tortillaCount > 0 ? `${p.name} (${p.tortillaCount} ct)` : p.name,
+    sku: p.sku,
+    price: p.price,
+    category: p.productType || 'other',
+  }));
+
+const categoryLabels: Record<string, string> = {
+  tortilla: 'Tortillas',
+  sauce: 'Sauces',
+  salsa: 'Salsas',
+  seasoning: 'Seasonings',
+};
 
 export default function CreateInvoicePage() {
   const params = useParams();
@@ -222,17 +233,26 @@ export default function CreateInvoicePage() {
           {/* Quick Add Products */}
           <div className="bg-white rounded-lg shadow p-5">
             <h2 className="font-semibold text-charcoal-950 mb-4">Quick Add Products</h2>
-            <div className="flex flex-wrap gap-2">
-              {productCatalog.map((product) => (
-                <button
-                  key={product.sku}
-                  onClick={() => addProductFromCatalog(product)}
-                  className="px-3 py-2 bg-charcoal-100 text-charcoal-700 rounded-lg hover:bg-charcoal-200 text-sm"
-                >
-                  {product.name} - {formatPrice(product.price)}
-                </button>
-              ))}
-            </div>
+            {Object.entries(categoryLabels).map(([cat, label]) => {
+              const catProducts = productCatalog.filter(p => p.category === cat);
+              if (catProducts.length === 0) return null;
+              return (
+                <div key={cat} className="mb-3">
+                  <p className="text-xs font-medium text-charcoal-500 uppercase tracking-wide mb-1.5">{label}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {catProducts.map((product) => (
+                      <button
+                        key={product.sku}
+                        onClick={() => addProductFromCatalog(product)}
+                        className="px-3 py-2 bg-charcoal-100 text-charcoal-700 rounded-lg hover:bg-charcoal-200 text-sm"
+                      >
+                        {product.name} - {formatPrice(product.price)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Line Items */}
