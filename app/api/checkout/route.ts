@@ -425,7 +425,7 @@ export async function POST(req: NextRequest) {
 
     // Create Stripe checkout session with shipping as actual shipping rate (not a line item)
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
+      payment_method_types: isWholesaleOrder ? ['card', 'us_bank_account'] : ['card'],
       line_items: lineItems,
       mode: 'payment',
       // Apply discount coupon if created
