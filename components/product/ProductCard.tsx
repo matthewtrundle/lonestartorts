@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Plus, Minus, ShoppingBag } from 'lucide-react';
+import { Plus, Minus, ShoppingBag, Check } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
 import { trackAddToCart } from '@/lib/analytics';
@@ -41,6 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [justAdded, setJustAdded] = useState(false);
 
   const storageLabel = storage === 'shelf_stable'
     ? 'Shelf Stable'
@@ -65,11 +66,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const handleAddToCart = () => {
+    // Generate display name with count for tortilla products
+    const displayName = tortillaCount > 0 ? `${name} ${tortillaCount} count` : name;
+
     // Add items to cart (loop for quantity)
     for (let i = 0; i < quantity; i++) {
       addItem({
         sku,
         name,
+        displayName,
         price,
         productType,
         description,
@@ -87,6 +92,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
     // Reset quantity to 1 after adding
     setQuantity(1);
+
+    // Show "Added!" feedback
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1500);
 
     // Call legacy callback if provided
     if (onAddToOrder) {
@@ -230,10 +239,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               variant="cart"
               size="lg"
               onClick={handleAddToCart}
-              className="w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
+              disabled={justAdded}
+              className={`w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-md hover:shadow-lg active:scale-[0.98] transition-all ${
+                justAdded ? 'bg-green-600 hover:bg-green-600' : ''
+              }`}
             >
-              <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
-              Add to Cart
+              {justAdded ? (
+                <>
+                  <Check className="w-4 h-4 md:w-5 md:h-5" />
+                  Added!
+                </>
+              ) : (
+                <>
+                  <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
+                  Add to Cart
+                </>
+              )}
             </Button>
           </>
         )}

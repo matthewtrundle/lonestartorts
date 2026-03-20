@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import { trackContactSubmit } from '@/lib/analytics';
 
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export function ReturnsForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,11 +15,45 @@ export function ReturnsForm() {
     reason: '',
     message: '',
   });
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const getFieldError = (field: string): string | null => {
+    if (!touched[field]) return null;
+    const value = formData[field as keyof typeof formData];
+    if (field === 'name' && !value.trim()) return 'Name is required';
+    if (field === 'email' && !value.trim()) return 'Email is required';
+    if (field === 'email' && value.trim() && !isValidEmail(value)) return 'Please enter a valid email';
+    if (field === 'orderNumber' && !value.trim()) return 'Order number is required';
+    if (field === 'reason' && !value) return 'Please select a reason';
+    if (field === 'message' && !value.trim()) return 'Please describe the issue';
+    return null;
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setTouched(prev => ({ ...prev, [e.target.name]: true }));
+  };
+
+  const requiredFields = ['name', 'email', 'orderNumber', 'reason', 'message'];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Touch all required fields
+    const allTouched: Record<string, boolean> = {};
+    requiredFields.forEach(f => { allTouched[f] = true; });
+    setTouched(allTouched);
+
+    // Check validation
+    const hasErrors = requiredFields.some(field => {
+      const value = formData[field as keyof typeof formData];
+      if (!value.trim()) return true;
+      if (field === 'email' && !isValidEmail(value)) return true;
+      return false;
+    });
+    if (hasErrors) return;
+
     setStatus('loading');
     setErrorMessage('');
 
@@ -53,6 +91,7 @@ ${formData.message}
 
       setStatus('success');
       setFormData({ name: '', email: '', orderNumber: '', reason: '', message: '' });
+      setTouched({});
     } catch (error) {
       setStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Failed to submit request');
@@ -64,6 +103,15 @@ ${formData.message}
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const inputClasses = (field: string) => {
+    const err = getFieldError(field);
+    return `w-full bg-white border rounded-lg px-4 py-3 text-charcoal-950 placeholder-charcoal-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
+      err
+        ? 'border-red-400 focus:ring-red-400'
+        : 'border-charcoal-300 focus:ring-sunset-500'
+    }`;
   };
 
   if (status === 'success') {
@@ -87,7 +135,7 @@ ${formData.message}
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-charcoal-700 mb-1">
@@ -100,9 +148,15 @@ ${formData.message}
             placeholder="Your name"
             value={formData.name}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className="w-full bg-white border border-charcoal-300 rounded-lg px-4 py-3 text-charcoal-950 placeholder-charcoal-400 focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent transition-all"
+            aria-describedby={getFieldError('name') ? 'ret-name-error' : undefined}
+            aria-invalid={!!getFieldError('name')}
+            className={inputClasses('name')}
           />
+          {getFieldError('name') && (
+            <p id="ret-name-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('name')}</p>
+          )}
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-charcoal-700 mb-1">
@@ -115,9 +169,15 @@ ${formData.message}
             placeholder="your@email.com"
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className="w-full bg-white border border-charcoal-300 rounded-lg px-4 py-3 text-charcoal-950 placeholder-charcoal-400 focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent transition-all"
+            aria-describedby={getFieldError('email') ? 'ret-email-error' : undefined}
+            aria-invalid={!!getFieldError('email')}
+            className={inputClasses('email')}
           />
+          {getFieldError('email') && (
+            <p id="ret-email-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('email')}</p>
+          )}
         </div>
       </div>
 
@@ -132,10 +192,17 @@ ${formData.message}
           placeholder="e.g., LST-ABC123"
           value={formData.orderNumber}
           onChange={handleChange}
+          onBlur={handleBlur}
           required
-          className="w-full bg-white border border-charcoal-300 rounded-lg px-4 py-3 text-charcoal-950 placeholder-charcoal-400 focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent transition-all"
+          aria-describedby={getFieldError('orderNumber') ? 'ret-order-error' : 'ret-order-hint'}
+          aria-invalid={!!getFieldError('orderNumber')}
+          className={inputClasses('orderNumber')}
         />
-        <p className="text-xs text-charcoal-500 mt-1">Found in your order confirmation email</p>
+        {getFieldError('orderNumber') ? (
+          <p id="ret-order-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('orderNumber')}</p>
+        ) : (
+          <p id="ret-order-hint" className="text-xs text-charcoal-500 mt-1">Found in your order confirmation email</p>
+        )}
       </div>
 
       <div>
@@ -147,8 +214,11 @@ ${formData.message}
           name="reason"
           value={formData.reason}
           onChange={handleChange}
+          onBlur={handleBlur}
           required
-          className="w-full bg-white border border-charcoal-300 rounded-lg px-4 py-3 text-charcoal-950 focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent transition-all"
+          aria-describedby={getFieldError('reason') ? 'ret-reason-error' : undefined}
+          aria-invalid={!!getFieldError('reason')}
+          className={inputClasses('reason')}
         >
           <option value="">Select a reason...</option>
           <option value="Damaged in shipping">Damaged in shipping</option>
@@ -158,6 +228,9 @@ ${formData.message}
           <option value="Changed my mind">Changed my mind</option>
           <option value="Other">Other</option>
         </select>
+        {getFieldError('reason') && (
+          <p id="ret-reason-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('reason')}</p>
+        )}
       </div>
 
       <div>
@@ -170,10 +243,16 @@ ${formData.message}
           placeholder="Please provide details about the issue. If damaged, describe the damage. Including photos in a follow-up email can help us resolve this faster."
           value={formData.message}
           onChange={handleChange}
+          onBlur={handleBlur}
           required
           rows={5}
-          className="w-full bg-white border border-charcoal-300 rounded-lg px-4 py-3 text-charcoal-950 placeholder-charcoal-400 focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent transition-all resize-none"
+          aria-describedby={getFieldError('message') ? 'ret-message-error' : undefined}
+          aria-invalid={!!getFieldError('message')}
+          className={`${inputClasses('message')} resize-none`}
         />
+        {getFieldError('message') && (
+          <p id="ret-message-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('message')}</p>
+        )}
       </div>
 
       {status === 'error' && (

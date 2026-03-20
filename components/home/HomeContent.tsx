@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -9,6 +10,22 @@ import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { ContactForm } from '@/components/ContactForm'
 import { trackVideoPlay } from '@/lib/analytics'
 import { useLanguage } from '@/lib/language-context'
+
+/** Safely renders text that may contain <strong> tags without dangerouslySetInnerHTML */
+function RichText({ text, className }: { text: string; className?: string }) {
+  const parts = text.split(/(<strong>.*?<\/strong>)/g);
+  return (
+    <p className={className}>
+      {parts.map((part, i) => {
+        const match = part.match(/^<strong>(.*?)<\/strong>$/);
+        if (match) {
+          return <strong key={i}>{match[1]}</strong>;
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>;
+      })}
+    </p>
+  );
+}
 
 // Lazy-load heavy animation components - not needed for initial render
 const ScrollAnimations = dynamic(
@@ -54,52 +71,6 @@ export default function HomeContent() {
           <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-radial from-masa-400/20 to-transparent blur-3xl" />
         </div>
 
-        
-        {/* Artistic Floating Navigation - Shows on scroll */}
-        <div className="fixed-nav-artistic fixed right-8 top-1/2 -translate-y-1/2 z-[150] opacity-0 pointer-events-none transition-all duration-700" id="floating-nav">
-          {/* Vertical navigation dots */}
-          <div className="flex flex-col items-center gap-6">
-            {/* Decorative line */}
-            <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
-
-            {/* Navigation items */}
-            <Link href="/shop" className="group relative w-12 h-12 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
-              <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
-              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Shop</span>
-            </Link>
-
-            <Link href="/craft" className="group relative w-12 h-12 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
-              <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
-              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Source</span>
-            </Link>
-
-            <Link href="/story" className="group relative w-12 h-12 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full border border-charcoal-300/30 group-hover:border-sunset-500/60 transition-all duration-300" />
-              <div className="w-2 h-2 rounded-full bg-charcoal-600 group-hover:bg-sunset-500 group-hover:scale-150 transition-all duration-300" />
-              <span className="absolute right-16 whitespace-nowrap text-sm font-medium tracking-wider uppercase text-charcoal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Story</span>
-            </Link>
-
-            {/* Decorative line */}
-            <div className="w-px h-20 bg-gradient-to-b from-transparent via-charcoal-400/30 to-transparent" />
-
-            {/* Shop button - emphasized */}
-            <Link href="/shop" className="group relative">
-              <div className="relative">
-                {/* Pulsing background */}
-                <div className="absolute inset-0 rounded-full bg-sunset-500 animate-pulse-slow blur-xl opacity-40" />
-                {/* Main button */}
-                <div className="relative bg-gradient-to-br from-sunset-500 to-sunset-600 text-cream-50 px-5 py-3 rounded-full font-bold text-sm tracking-wider uppercase shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110">
-                  <span className="relative z-10">Shop</span>
-                  {/* Rotating border effect */}
-                  <div className="absolute inset-0 rounded-full border-2 border-sunset-300/30 animate-spin-slow" />
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-
         {/* Floating Logo removed - main header logo now scales on scroll instead */}
 
         {/* Hero Section with Editorial Design */}
@@ -112,10 +83,9 @@ export default function HomeContent() {
               <div className="absolute inset-0 premium-grain-texture" />
             </div>
 
-            {/* Layer 2: Atmospheric gradients */}
-            <div className="absolute inset-0 parallax-layer" data-speed="0.2">
-              <div className="absolute top-[-50%] left-[-25%] w-[150%] h-[150%] bg-gradient-radial from-sunset-200/30 via-sunset-100/10 to-transparent blur-[100px] animate-float-slow" />
-              <div className="absolute bottom-[-50%] right-[-25%] w-[150%] h-[150%] bg-gradient-radial from-masa-200/20 via-masa-100/10 to-transparent blur-[120px] animate-float-slow-reverse" />
+            {/* Layer 2: Subtle atmospheric gradient */}
+            <div className="absolute inset-0">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-sunset-200/15 via-transparent to-transparent blur-[100px]" />
             </div>
 
             {/* Layer 3: Background Video - Lazy loaded */}
@@ -139,45 +109,10 @@ export default function HomeContent() {
               <div className="absolute inset-0 backdrop-blur-[0.5px]" />
             </div>
 
-            {/* Layer 4: Animated light rays */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="light-ray light-ray-1" />
-              <div className="light-ray light-ray-2" />
-              <div className="light-ray light-ray-3" />
-            </div>
+            {/* Light rays removed for performance */}
           </div>
 
-          {/* Floating Premium Elements */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Floating particles */}
-            <div className="particle particle-1" />
-            <div className="particle particle-2" />
-            <div className="particle particle-3" />
-            <div className="particle particle-4" />
-            <div className="particle particle-5" />
-
-            {/* Geometric decorations with animation */}
-            <div className="absolute top-[15%] left-[10%] float-element opacity-20">
-              <svg width="100" height="100" viewBox="0 0 100 100" className="text-sunset-300 rotate-slow">
-                <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="0.5" />
-              </svg>
-            </div>
-            <div className="absolute top-[25%] right-[8%] float-element opacity-15" style={{ animationDelay: '2s' }}>
-              <svg width="80" height="80" viewBox="0 0 80 80" className="text-masa-400">
-                <circle cx="40" cy="40" r="38" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="5 10" />
-              </svg>
-            </div>
-            <div className="absolute bottom-[20%] left-[5%] float-element opacity-10" style={{ animationDelay: '1s' }}>
-              <svg width="120" height="120" viewBox="0 0 120 120" className="text-charcoal-300">
-                <rect x="30" y="30" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="0.5" transform="rotate(30 60 60)" />
-              </svg>
-            </div>
-            <div className="absolute bottom-[35%] right-[15%] float-element opacity-20" style={{ animationDelay: '3s' }}>
-              <svg width="60" height="60" viewBox="0 0 60 60" className="text-sunset-400">
-                <path d="M30 10 L50 30 L30 50 L10 30 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
-              </svg>
-            </div>
-          </div>
+          {/* Decorative elements removed for cleaner hero */}
 
           {/* Hero Content */}
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-40">
@@ -194,21 +129,15 @@ export default function HomeContent() {
 
                 {/* Main Title - MASSIVE ARTISTIC IMPACT */}
                 <div className="mb-8 relative magnetic-text" data-magnetic-strength="20">
-                  {/* Premium text background effects */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="absolute w-[200%] h-[200%] bg-gradient-radial from-sunset-200/20 via-transparent to-transparent blur-[150px] animate-glow-pulse"></div>
-                    <div className="absolute w-[150%] h-[150%] bg-gradient-radial from-masa-300/15 via-transparent to-transparent blur-[100px] animate-glow-pulse-delayed"></div>
-                  </div>
-
                   {/* Main Hero Text - SEO-Optimized H1 (visually styled) */}
                   <h1 className="w-full">
                     {/* Visual "LONESTAR" - Part of H1 */}
-                    <span className="block text-[60px] sm:text-[100px] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.8] tracking-[-0.02em] text-charcoal-950 whitespace-nowrap">
+                    <span className="block text-[60px] sm:text-[100px] md:text-[120px] lg:text-[140px] xl:text-[160px] font-black leading-[0.8] tracking-[-0.02em] text-charcoal-950 whitespace-nowrap">
                       LONESTAR
                     </span>
 
                     {/* Visual "TORTILLAS" - Part of H1 */}
-                    <span className="block text-[40px] sm:text-[70px] md:text-[100px] lg:text-[130px] xl:text-[160px] font-light leading-[0.8] tracking-[0.03em] text-sunset-600 -mt-2 sm:-mt-4 md:-mt-8 lg:-mt-12 whitespace-nowrap">
+                    <span className="block text-[40px] sm:text-[70px] md:text-[90px] lg:text-[110px] xl:text-[130px] font-light leading-[0.8] tracking-[0.03em] text-sunset-600 -mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8 whitespace-nowrap">
                       TORTILLAS
                     </span>
 
@@ -399,9 +328,9 @@ export default function HomeContent() {
                 </div>
 
                 <div className="prose prose-lg max-w-none text-charcoal-800 space-y-4">
-                  <p className="leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.intro1') }} />
-                  <p className="leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.intro2') }} />
-                  <p className="leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.intro3') }} />
+                  <RichText text={t('about.intro1')} className="leading-relaxed" />
+                  <RichText text={t('about.intro2')} className="leading-relaxed" />
+                  <RichText text={t('about.intro3')} className="leading-relaxed" />
                 </div>
               </div>
 

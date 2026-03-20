@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,7 +9,7 @@ import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed } from '@/lib/analytics';
 import { getStripe } from '@/lib/stripe';
-import { X, Minus, Plus, ShoppingBag, Shield, Truck, RefreshCw, Lock, Tag, Check, ChevronDown, AlertCircle } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, Truck, Lock, Tag, Check, ChevronDown, AlertCircle } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
 import { MINIMUM_ORDER_AMOUNT } from '@/lib/products';
 import { getShippingMessage } from '@/lib/shipping-schedule';
@@ -413,9 +412,9 @@ export function CartSidebar() {
               )}
             </div>
 
-            {/* Footer with totals and checkout */}
+            {/* Footer with totals and checkout - sticky at bottom */}
             {items.length > 0 && (
-              <div className="border-t border-gray-200 p-3 bg-gray-50">
+              <div className="border-t border-gray-200 p-3 bg-gray-50 mt-auto sticky bottom-0">
                 {/* Free Shipping Progress */}
                 <FreeShippingProgress className="mb-2" compact />
 
@@ -450,17 +449,22 @@ export function CartSidebar() {
                         </div>
                       ) : (
                         <div className="space-y-2 mt-2">
-                          <input
-                            type="email"
-                            placeholder={t('cart.discount.email')}
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-2.5 py-1.5 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
-                          />
+                          <div>
+                            <input
+                              type="email"
+                              placeholder={t('cart.discount.email')}
+                              aria-label={t('cart.discount.email')}
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              className="w-full px-2.5 py-1.5 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                            />
+                            <p className="text-[10px] text-gray-400 mt-0.5">Used to verify your discount code</p>
+                          </div>
                           <div className="flex gap-2">
                             <input
                               type="text"
                               placeholder={t('cart.discount.enterCode')}
+                              aria-label={t('cart.discount.enterCode')}
                               value={discountCode}
                               onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
                               className="flex-1 px-2.5 py-1.5 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
@@ -523,21 +527,10 @@ export function CartSidebar() {
                   </div>
                 </div>
 
-                {/* Trust Badges - Hidden on desktop for compactness */}
-                <div className="mb-2 flex md:hidden justify-center gap-4 py-1.5 bg-white rounded-lg border border-gray-200">
-                  <div className="flex items-center gap-1.5">
-                    <Shield className="w-3.5 h-3.5 text-green-600" />
-                    <span className="text-[10px] font-medium text-charcoal-700">{t('cart.trust.secure')}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Truck className="w-3.5 h-3.5 text-blue-600" />
-                    <span className="text-[10px] font-medium text-charcoal-700">{t('cart.trust.fast')}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <RefreshCw className="w-3.5 h-3.5 text-orange-600" />
-                    <span className="text-[10px] font-medium text-charcoal-700">{t('cart.trust.guaranteed')}</span>
-                  </div>
-                </div>
+                {/* Trust Badges - Compact single line */}
+                <p className="mb-2 text-center text-[10px] text-charcoal-500 md:hidden">
+                  {t('cart.trust.secure')} &bull; {t('cart.trust.fast')} &bull; {t('cart.trust.guaranteed')}
+                </p>
 
                 {/* Minimum Order Message */}
                 {!meetsMinimumOrder && (

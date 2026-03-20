@@ -389,30 +389,58 @@ export function Header() {
               {t('nav.myAccount')}
             </Link>
 
-            {/* Resources Section */}
+            {/* Promoted resource links - direct access */}
             <div className="pt-4 mt-2 border-t border-charcoal-100">
+              <Link
+                href="/recipes"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+              >
+                <UtensilsCrossed className="w-4 h-4 text-sunset-500" />
+                {t('nav.recipes')}
+              </Link>
+              <Link
+                href="/guides"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+              >
+                <BookOpen className="w-4 h-4 text-sunset-500" />
+                {t('nav.guides')}
+              </Link>
+              <Link
+                href="/blog"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+              >
+                <Newspaper className="w-4 h-4 text-sunset-500" />
+                {t('nav.blog')}
+              </Link>
+
+              {/* More resources - collapsible */}
               <button
                 onClick={() => setIsMobileResourcesOpen(!isMobileResourcesOpen)}
-                className="w-full flex items-center justify-between px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+                className="w-full flex items-center justify-between px-4 py-3 text-charcoal-700 font-medium hover:bg-cream-50 rounded-lg transition-colors"
               >
-                <span>Resources</span>
+                <span className="text-sm">More</span>
                 <ChevronDown className={`w-4 h-4 text-charcoal-500 transition-transform duration-200 ${isMobileResourcesOpen ? 'rotate-180' : ''}`} />
               </button>
               <div className={`overflow-hidden transition-all duration-200 ${isMobileResourcesOpen ? 'max-h-96' : 'max-h-0'}`}>
-                {resourceLinks.map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-3 pl-8 pr-4 py-2.5 text-charcoal-700 hover:bg-cream-50 rounded-lg transition-colors"
-                    >
-                      <Icon className="w-4 h-4 text-sunset-500" />
-                      <span className="text-sm">{t(link.labelKey)}</span>
-                    </Link>
-                  );
-                })}
+                {resourceLinks
+                  .filter(link => !['/recipes', '/guides', '/blog'].includes(link.href))
+                  .map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-3 pl-8 pr-4 py-2.5 text-charcoal-700 hover:bg-cream-50 rounded-lg transition-colors"
+                      >
+                        <Icon className="w-4 h-4 text-sunset-500" />
+                        <span className="text-sm">{t(link.labelKey)}</span>
+                      </Link>
+                    );
+                  })}
               </div>
             </div>
 

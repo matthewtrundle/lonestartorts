@@ -46,11 +46,28 @@ const volumeOptions = [
   'Not sure yet',
 ];
 
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export function WholesaleForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const getFieldError = (field: string): string | null => {
+    if (!touched[field]) return null;
+    const value = formData[field as keyof FormData];
+    if (field === 'businessName' && !value.trim()) return 'Business name is required';
+    if (field === 'contactName' && !value.trim()) return 'Contact name is required';
+    if (field === 'email' && !value.trim()) return 'Email is required';
+    if (field === 'email' && value.trim() && !isValidEmail(value)) return 'Please enter a valid email';
+    if (field === 'businessType' && !value) return 'Please select a business type';
+    if (field === 'estimatedVolume' && !value) return 'Please select estimated volume';
+    return null;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -59,8 +76,29 @@ export function WholesaleForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setTouched(prev => ({ ...prev, [e.target.name]: true }));
+  };
+
+  const requiredFields = ['businessName', 'contactName', 'email', 'businessType', 'estimatedVolume'];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Touch all required fields
+    const allTouched: Record<string, boolean> = {};
+    requiredFields.forEach(f => { allTouched[f] = true; });
+    setTouched(allTouched);
+
+    // Check validation
+    const hasErrors = requiredFields.some(field => {
+      const value = formData[field as keyof FormData];
+      if (!value.trim()) return true;
+      if (field === 'email' && !isValidEmail(value)) return true;
+      return false;
+    });
+    if (hasErrors) return;
+
     setIsSubmitting(true);
     setError(null);
 
@@ -83,11 +121,21 @@ export function WholesaleForm() {
 
       setIsSubmitted(true);
       setFormData(initialFormData);
+      setTouched({});
     } catch (err) {
       setError('There was an error submitting your inquiry. Please try again or email us directly.');
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const inputClasses = (field: string) => {
+    const err = getFieldError(field);
+    return `w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent ${
+      err
+        ? 'border-red-400 focus:ring-red-400'
+        : 'border-charcoal-300 focus:ring-sunset-500'
+    }`;
   };
 
   if (isSubmitted) {
@@ -110,7 +158,7 @@ export function WholesaleForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-8">
+    <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-8" noValidate>
       {error && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
           {error}
@@ -129,10 +177,16 @@ export function WholesaleForm() {
             name="businessName"
             value={formData.businessName}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+            aria-describedby={getFieldError('businessName') ? 'ws-businessName-error' : undefined}
+            aria-invalid={!!getFieldError('businessName')}
+            className={inputClasses('businessName')}
             placeholder="Your restaurant or business name"
           />
+          {getFieldError('businessName') && (
+            <p id="ws-businessName-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('businessName')}</p>
+          )}
         </div>
 
         {/* Contact Name */}
@@ -146,10 +200,16 @@ export function WholesaleForm() {
             name="contactName"
             value={formData.contactName}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+            aria-describedby={getFieldError('contactName') ? 'ws-contactName-error' : undefined}
+            aria-invalid={!!getFieldError('contactName')}
+            className={inputClasses('contactName')}
             placeholder="Your name"
           />
+          {getFieldError('contactName') && (
+            <p id="ws-contactName-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('contactName')}</p>
+          )}
         </div>
 
         {/* Email */}
@@ -163,10 +223,16 @@ export function WholesaleForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+            aria-describedby={getFieldError('email') ? 'ws-email-error' : undefined}
+            aria-invalid={!!getFieldError('email')}
+            className={inputClasses('email')}
             placeholder="your@email.com"
           />
+          {getFieldError('email') && (
+            <p id="ws-email-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('email')}</p>
+          )}
         </div>
 
         {/* Phone */}
@@ -195,8 +261,11 @@ export function WholesaleForm() {
             name="businessType"
             value={formData.businessType}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent bg-white"
+            aria-describedby={getFieldError('businessType') ? 'ws-businessType-error' : undefined}
+            aria-invalid={!!getFieldError('businessType')}
+            className={`${inputClasses('businessType')} bg-white`}
           >
             <option value="">Select your business type</option>
             {businessTypes.map((type) => (
@@ -205,6 +274,9 @@ export function WholesaleForm() {
               </option>
             ))}
           </select>
+          {getFieldError('businessType') && (
+            <p id="ws-businessType-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('businessType')}</p>
+          )}
         </div>
 
         {/* Estimated Volume */}
@@ -217,8 +289,11 @@ export function WholesaleForm() {
             name="estimatedVolume"
             value={formData.estimatedVolume}
             onChange={handleChange}
+            onBlur={handleBlur}
             required
-            className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sunset-500 focus:border-transparent bg-white"
+            aria-describedby={getFieldError('estimatedVolume') ? 'ws-estimatedVolume-error' : undefined}
+            aria-invalid={!!getFieldError('estimatedVolume')}
+            className={`${inputClasses('estimatedVolume')} bg-white`}
           >
             <option value="">Select estimated volume</option>
             {volumeOptions.map((option) => (
@@ -227,6 +302,9 @@ export function WholesaleForm() {
               </option>
             ))}
           </select>
+          {getFieldError('estimatedVolume') && (
+            <p id="ws-estimatedVolume-error" className="text-red-500 text-xs mt-1" role="alert">{getFieldError('estimatedVolume')}</p>
+          )}
         </div>
       </div>
 
