@@ -1,8 +1,13 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ProductCard } from '@/components/product/ProductCard';
+
+export const metadata: Metadata = {
+  title: 'Shop Texas Tortillas | Lonestar Tortillas',
+  description: 'Browse and order premium Texas tortillas delivered straight to your door. Fresh flour and corn tortillas made the Lone Star way.',
+};
 import { StickyCartBar } from '@/components/shop/StickyCartBar';
 import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
-import { FeaturedBundlesHero } from '@/components/shop/FeaturedBundlesHero';
 import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { ShopFAQ } from '@/components/shop/ShopFAQ';
@@ -111,9 +116,6 @@ function AdVariantLayout() {
         </p>
         <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
       </div>
-
-      {/* Featured Care Packages */}
-      <FeaturedBundlesHero />
 
       <div className="max-w-6xl mx-auto px-4 py-6">
         {/* Bakery Fresh Section */}
@@ -231,9 +233,6 @@ export default function ShopPage({
           </div>
         </div>
       </div>
-
-      {/* Featured Care Packages */}
-      <FeaturedBundlesHero />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
         {/* Section Header - Compact on mobile */}
