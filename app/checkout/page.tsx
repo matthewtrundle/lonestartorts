@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned } from '@/lib/analytics';
-import { getStripe } from '@/lib/stripe';
+
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
@@ -213,18 +213,10 @@ export default function CheckoutPage() {
       }
 
       // Redirect to Stripe Checkout
-      const stripe = await getStripe();
-
-      if (!stripe) {
-        throw new Error('Failed to load Stripe');
-      }
-
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      });
-
-      if (stripeError) {
-        throw new Error(stripeError.message);
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL returned');
       }
     } catch (err) {
       console.error('Checkout error:', err);

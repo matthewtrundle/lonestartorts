@@ -8,7 +8,7 @@ import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed } from '@/lib/analytics';
-import { getStripe } from '@/lib/stripe';
+
 import { X, Minus, Plus, ShoppingBag, Truck, Lock, Tag, Check, ChevronDown, AlertCircle } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
 import { MINIMUM_ORDER_AMOUNT } from '@/lib/products';
@@ -261,18 +261,10 @@ export function CartSidebar() {
       }
 
       // Redirect to Stripe Checkout
-      const stripe = await getStripe();
-
-      if (!stripe) {
-        throw new Error('Failed to load Stripe');
-      }
-
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      });
-
-      if (stripeError) {
-        throw new Error(stripeError.message);
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL returned');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during checkout');
