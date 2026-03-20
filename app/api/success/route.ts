@@ -37,6 +37,38 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    // Fetch loyalty data and subscription status if customer is logged in
+    let loyaltyData = null;
+    let isSubscriptionOrder = false;
+
+    if (order.customerId) {
+      try {
+        const loyaltyAccount = await prisma.loyaltyAccount.findUnique({
+          where: { customerId: order.customerId },
+        });
+        if (loyaltyAccount) {
+          const pointsEarned = Math.floor(order.subtotal / 100) * 2;
+          loyaltyData = {
+            pointsEarned,
+            balance: loyaltyAccount.balance,
+            nextRedemptionAt: Math.max(0, 200 - loyaltyAccount.balance),
+          };
+        }
+      } catch (e) {
+        console.error('Failed to fetch loyalty data for success page:', e);
+      }
+
+      // Check if customer has an active subscription (indicates subscription order)
+      try {
+        const sub = await prisma.retailSubscription.findFirst({
+          where: { customerId: order.customerId, status: 'ACTIVE' },
+        });
+        isSubscriptionOrder = !!sub;
+      } catch (e) {
+        // Non-critical
+      }
+    }
+
     // Calculate estimated ship date from order creation time
     const shipDate = getNextShipDate(new Date(order.createdAt));
     const estimatedShipDate = formatShipDate(shipDate);
@@ -74,6 +106,9 @@ export async function GET(req: NextRequest) {
           zip: order.shippingZip,
           country: order.shippingCountry,
         },
+        customerId: order.customerId || null,
+        loyaltyData,
+        isSubscriptionOrder,
       },
     });
   } catch (error) {
