@@ -47,6 +47,38 @@ export async function GET() {
     }
   }
 
+  // Fetch loyalty data
+  let loyaltyData = null;
+  try {
+    const loyaltyAccount = await prisma.loyaltyAccount.findUnique({
+      where: { customerId: customer.id },
+      include: {
+        transactions: {
+          orderBy: { createdAt: 'desc' },
+          take: 5,
+        },
+      },
+    });
+    if (loyaltyAccount) {
+      loyaltyData = {
+        balance: loyaltyAccount.balance,
+        lifetimeEarned: loyaltyAccount.lifetimeEarned,
+        lifetimeRedeemed: loyaltyAccount.lifetimeRedeemed,
+        canRedeem: loyaltyAccount.balance >= 200,
+        nextRedemptionAt: Math.max(0, 200 - loyaltyAccount.balance),
+        recentTransactions: loyaltyAccount.transactions.map(t => ({
+          id: t.id,
+          type: t.type,
+          points: t.points,
+          description: t.description,
+          createdAt: t.createdAt,
+        })),
+      };
+    }
+  } catch (loyaltyError) {
+    console.error('Failed to fetch loyalty data:', loyaltyError);
+  }
+
   return NextResponse.json({
     customer: {
       id: customer.id,
@@ -61,6 +93,8 @@ export async function GET() {
         status: sub.status,
         interval: sub.interval,
         nextBillingDate: sub.nextBillingDate,
+        preferredShippingDay: sub.preferredShippingDay,
+        pausedUntil: sub.pausedUntil,
         items: sub.items,
         total: sub.total,
       })),
@@ -72,6 +106,7 @@ export async function GET() {
         createdAt: order.createdAt,
       })),
       ...(wholesaleData && { wholesale: wholesaleData }),
+      ...(loyaltyData && { loyalty: loyaltyData }),
     },
   });
 }

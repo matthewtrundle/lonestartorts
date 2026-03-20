@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Package, CreditCard, Settings, LogOut, Clock, Truck, Calendar, ExternalLink, Building2, ShoppingBag } from 'lucide-react';
+import { Package, CreditCard, LogOut, Clock, Truck, Calendar, ExternalLink, Building2, ShoppingBag, Star, Gift } from 'lucide-react';
+import SubscriptionCard from '@/components/account/SubscriptionCard';
 import { formatPrice } from '@/lib/utils';
 
 interface Subscription {
@@ -12,6 +13,8 @@ interface Subscription {
   status: string;
   interval: string;
   nextBillingDate: string | null;
+  preferredShippingDay?: string | null;
+  pausedUntil?: string | null;
   items: Array<{ sku: string; name: string; quantity: number; unitPrice: number }>;
   total: number;
 }
@@ -49,6 +52,23 @@ interface WholesaleData {
   orders: WholesaleOrder[];
 }
 
+interface LoyaltyTransaction {
+  id: string;
+  type: string;
+  points: number;
+  description: string;
+  createdAt: string;
+}
+
+interface LoyaltyData {
+  balance: number;
+  lifetimeEarned: number;
+  lifetimeRedeemed: number;
+  canRedeem: boolean;
+  nextRedemptionAt: number;
+  recentTransactions: LoyaltyTransaction[];
+}
+
 interface CustomerData {
   id: string;
   email: string;
@@ -59,6 +79,7 @@ interface CustomerData {
   subscriptions: Subscription[];
   recentOrders: RecentOrder[];
   wholesale?: WholesaleData;
+  loyalty?: LoyaltyData;
 }
 
 const statusColors: Record<string, string> = {
@@ -76,6 +97,8 @@ export default function AccountPage() {
   const [customer, setCustomer] = useState<CustomerData | null>(null);
   const [loading, setLoading] = useState(true);
   const [portalLoading, setPortalLoading] = useState(false);
+  const [redeemLoading, setRedeemLoading] = useState(false);
+  const [redeemResult, setRedeemResult] = useState<{ code: string; expiresAt: string } | null>(null);
 
   useEffect(() => {
     fetchCustomer();
@@ -117,6 +140,24 @@ export default function AccountPage() {
     router.push('/');
   };
 
+  const handleRedeem = async () => {
+    setRedeemLoading(true);
+    try {
+      const res = await fetch('/api/customer/loyalty/redeem', { method: 'POST' });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || 'Failed to redeem points');
+        return;
+      }
+      setRedeemResult({ code: data.code, expiresAt: data.expiresAt });
+      fetchCustomer();
+    } catch {
+      alert('Failed to redeem points');
+    } finally {
+      setRedeemLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -127,7 +168,7 @@ export default function AccountPage() {
 
   if (!customer) return null;
 
-  const activeSubscriptions = customer.subscriptions.filter(s => s.status === 'ACTIVE');
+  const activeSubscriptions = customer.subscriptions.filter(s => s.status !== 'CANCELLED');
 
   return (
     <div className="bg-cream-50 min-h-[70vh]">
@@ -162,17 +203,17 @@ export default function AccountPage() {
                   <button
                     onClick={handleManageSubscription}
                     disabled={portalLoading}
-                    className="text-sm text-sunset-600 hover:text-sunset-700 font-medium flex items-center gap-1"
+                    className="text-sm text-charcoal-500 hover:text-charcoal-700 font-medium flex items-center gap-1"
                   >
-                    <Settings className="w-4 h-4" />
-                    {portalLoading ? 'Opening...' : 'Manage'}
+                    <CreditCard className="w-4 h-4" />
+                    {portalLoading ? 'Opening...' : 'Manage Billing'}
                   </button>
                 )}
               </div>
 
-              {activeSubscriptions.length === 0 ? (
+              {customer.subscriptions.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="text-charcoal-500 mb-4">No active subscriptions</p>
+                  <p className="text-charcoal-500 mb-4">No subscriptions yet</p>
                   <Link
                     href="/subscribe"
                     className="inline-flex items-center gap-2 px-5 py-2.5 bg-sunset-600 text-white rounded-lg font-medium hover:bg-sunset-700"
@@ -181,35 +222,89 @@ export default function AccountPage() {
                   </Link>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  {activeSubscriptions.map(sub => (
-                    <div key={sub.id} className="border border-charcoal-100 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <div>
-                          <h3 className="font-semibold text-charcoal-950">{sub.name}</h3>
-                          <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold mt-1 ${statusColors[sub.status] || 'bg-gray-100 text-gray-600'}`}>
-                            {sub.status}
-                          </span>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-lg font-bold text-charcoal-950">{formatPrice(sub.total)}</p>
-                          <p className="text-xs text-charcoal-500">per {sub.interval.toLowerCase()}</p>
-                        </div>
-                      </div>
-                      <div className="text-sm text-charcoal-600 space-y-1">
-                        {(sub.items as Array<{ name: string; quantity: number }>).map((item, i) => (
-                          <p key={i}>{item.quantity}x {item.name}</p>
-                        ))}
-                      </div>
-                      {sub.nextBillingDate && (
-                        <div className="mt-3 pt-3 border-t border-charcoal-100 flex items-center gap-2 text-sm text-charcoal-500">
-                          <Calendar className="w-4 h-4" />
-                          Next delivery: {new Date(sub.nextBillingDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                        </div>
-                      )}
-                    </div>
+                <div className="space-y-3">
+                  {customer.subscriptions.map(sub => (
+                    <SubscriptionCard
+                      key={sub.id}
+                      subscription={sub}
+                      onUpdate={fetchCustomer}
+                    />
                   ))}
                 </div>
+              )}
+            </div>
+
+            {/* Loyalty Points */}
+            <div className="bg-white rounded-xl shadow-soft p-6">
+              <h2 className="text-lg font-bold text-charcoal-950 flex items-center gap-2 mb-4">
+                <Star className="w-5 h-5 text-sunset-600" />
+                Loyalty Points
+              </h2>
+
+              {!customer.loyalty ? (
+                <div className="text-center py-6">
+                  <p className="text-charcoal-500 mb-2">Start earning points with every order!</p>
+                  <p className="text-sm text-charcoal-400">Earn 2 points per $1 spent. Redeem 200 points for $5 off.</p>
+                </div>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <p className="text-3xl font-bold text-charcoal-950">{customer.loyalty.balance.toLocaleString()}</p>
+                      <p className="text-sm text-charcoal-500">points available</p>
+                    </div>
+                    {customer.loyalty.canRedeem ? (
+                      <button
+                        onClick={handleRedeem}
+                        disabled={redeemLoading}
+                        className="flex items-center gap-2 px-4 py-2.5 bg-sunset-600 text-white rounded-lg font-medium hover:bg-sunset-700"
+                      >
+                        <Gift className="w-4 h-4" />
+                        {redeemLoading ? 'Redeeming...' : 'Redeem $5 Off'}
+                      </button>
+                    ) : (
+                      <div className="text-right">
+                        <p className="text-sm text-charcoal-500">{customer.loyalty.nextRedemptionAt} more to redeem</p>
+                        <div className="w-32 bg-charcoal-100 rounded-full h-2 mt-1">
+                          <div
+                            className="bg-sunset-500 rounded-full h-2 transition-all"
+                            style={{ width: `${Math.min(100, ((200 - customer.loyalty.nextRedemptionAt) / 200) * 100)}%` }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {redeemResult && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                      <p className="text-sm font-medium text-green-800 mb-1">Your discount code:</p>
+                      <code className="text-lg font-bold text-green-700">{redeemResult.code}</code>
+                      <p className="text-xs text-green-600 mt-1">
+                        Valid until {new Date(redeemResult.expiresAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      </p>
+                    </div>
+                  )}
+
+                  {customer.loyalty.recentTransactions.length > 0 && (
+                    <div className="border-t border-charcoal-100 pt-3 mt-3">
+                      <p className="text-sm font-semibold text-charcoal-700 mb-2">Recent Activity</p>
+                      <div className="space-y-2">
+                        {customer.loyalty.recentTransactions.map(tx => (
+                          <div key={tx.id} className="flex items-center justify-between text-sm">
+                            <span className="text-charcoal-600">{tx.description}</span>
+                            <span className={`font-medium ${tx.points > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                              {tx.points > 0 ? '+' : ''}{tx.points}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mt-3 text-xs text-charcoal-400">
+                    Lifetime earned: {customer.loyalty.lifetimeEarned.toLocaleString()} pts &bull; Redeemed: {customer.loyalty.lifetimeRedeemed.toLocaleString()} pts
+                  </div>
+                </>
               )}
             </div>
 

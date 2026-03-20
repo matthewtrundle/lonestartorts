@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
 import { Search, Package, Calendar, Users } from 'lucide-react';
@@ -48,6 +48,10 @@ export default function AdminSubscriptionsPage() {
   const [statusFilter, setStatusFilter] = useState('all');
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState({ page: 1, perPage: 20, total: 0, pages: 1 });
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [confirmAction, setConfirmAction] = useState<{ id: string; action: string; name: string } | null>(null);
+  const [editShippingDay, setEditShippingDay] = useState<{ id: string; current: string | null } | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchSubscriptions();
@@ -71,6 +75,29 @@ export default function AdminSubscriptionsPage() {
       console.error('Error fetching subscriptions:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAction = async (id: string, action: string, extraData?: Record<string, string>) => {
+    setActionLoading(id);
+    try {
+      const response = await fetch(`/api/admin/subscriptions/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, ...extraData }),
+      });
+      if (!response.ok) {
+        const err = await response.json();
+        alert(err.error || 'Action failed');
+        return;
+      }
+      await fetchSubscriptions();
+    } catch {
+      alert('Failed to perform action');
+    } finally {
+      setActionLoading(null);
+      setConfirmAction(null);
+      setEditShippingDay(null);
     }
   };
 
@@ -211,11 +238,13 @@ export default function AdminSubscriptionsPage() {
                   <th className="text-left px-4 py-3 font-semibold text-charcoal-700">Next Billing</th>
                   <th className="text-right px-4 py-3 font-semibold text-charcoal-700">Total</th>
                   <th className="text-left px-4 py-3 font-semibold text-charcoal-700">Created</th>
+                  <th className="text-right px-4 py-3 font-semibold text-charcoal-700">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-charcoal-100">
                 {subscriptions.map(sub => (
-                  <tr key={sub.id} className="hover:bg-cream-50">
+                  <React.Fragment key={sub.id}>
+                  <tr className="hover:bg-cream-50 cursor-pointer" onClick={() => setExpandedId(expandedId === sub.id ? null : sub.id)}>
                     <td className="px-4 py-3">
                       <p className="font-medium text-charcoal-950">
                         {sub.customer.firstName || ''} {sub.customer.lastName || ''}
@@ -248,7 +277,67 @@ export default function AdminSubscriptionsPage() {
                     <td className="px-4 py-3 text-charcoal-500">
                       {formatDate(sub.createdAt)}
                     </td>
+                    <td className="px-4 py-3 text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        {sub.status === 'ACTIVE' && (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setConfirmAction({ id: sub.id, action: 'pause', name: 'Pause' }); }}
+                            disabled={actionLoading === sub.id}
+                            className="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200"
+                          >
+                            Pause
+                          </button>
+                        )}
+                        {sub.status === 'PAUSED' && (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); handleAction(sub.id, 'resume'); }}
+                            disabled={actionLoading === sub.id}
+                            className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200"
+                          >
+                            Resume
+                          </button>
+                        )}
+                        {(sub.status === 'ACTIVE' || sub.status === 'PAUSED') && (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setConfirmAction({ id: sub.id, action: 'cancel', name: 'Cancel' }); }}
+                            disabled={actionLoading === sub.id}
+                            className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200"
+                          >
+                            Cancel
+                          </button>
+                        )}
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setEditShippingDay({ id: sub.id, current: sub.preferredShippingDay }); }}
+                          disabled={actionLoading === sub.id}
+                          className="px-2 py-1 text-xs bg-charcoal-100 text-charcoal-700 rounded hover:bg-charcoal-200"
+                        >
+                          Ship Day
+                        </button>
+                      </div>
+                    </td>
                   </tr>
+                  {expandedId === sub.id && (
+                    <tr>
+                      <td colSpan={9} className="px-4 py-4 bg-cream-50 border-b border-charcoal-100">
+                        <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <p className="font-semibold text-charcoal-700 mb-2">Items</p>
+                            {(sub.items as SubscriptionItem[]).map((item, i) => (
+                              <p key={i} className="text-charcoal-600">{item.quantity}x {item.name} — {formatPrice(item.unitPrice)}</p>
+                            ))}
+                          </div>
+                          <div>
+                            <p className="font-semibold text-charcoal-700 mb-2">Pricing</p>
+                            <p className="text-charcoal-600">Subtotal: {formatPrice(sub.subtotal)}</p>
+                            <p className="text-charcoal-600">Shipping: {formatPrice(sub.shipping)}</p>
+                            <p className="text-charcoal-600">Tax: {formatPrice(sub.tax)}</p>
+                            <p className="font-semibold text-charcoal-950">Total: {formatPrice(sub.total)}</p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
@@ -280,6 +369,67 @@ export default function AdminSubscriptionsPage() {
           </div>
         )}
       </div>
+
+      {/* Confirm Action Modal */}
+      {confirmAction && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setConfirmAction(null)}>
+          <div className="bg-white rounded-xl p-6 max-w-sm w-full mx-4" onClick={e => e.stopPropagation()}>
+            <h3 className="text-lg font-bold text-charcoal-950 mb-2">{confirmAction.name} Subscription?</h3>
+            <p className="text-sm text-charcoal-600 mb-6">
+              {confirmAction.action === 'cancel'
+                ? 'This will cancel the subscription at the end of the current billing period. This cannot be undone.'
+                : 'This will pause the subscription for 30 days. You can resume it at any time.'}
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setConfirmAction(null)}
+                className="px-4 py-2 text-sm border border-charcoal-200 rounded-lg hover:bg-charcoal-50"
+              >
+                Go Back
+              </button>
+              <button
+                onClick={() => handleAction(confirmAction.id, confirmAction.action)}
+                disabled={!!actionLoading}
+                className={`px-4 py-2 text-sm text-white rounded-lg ${
+                  confirmAction.action === 'cancel' ? 'bg-red-600 hover:bg-red-700' : 'bg-yellow-600 hover:bg-yellow-700'
+                }`}
+              >
+                {actionLoading ? 'Processing...' : confirmAction.name}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Shipping Day Modal */}
+      {editShippingDay && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setEditShippingDay(null)}>
+          <div className="bg-white rounded-xl p-6 max-w-sm w-full mx-4" onClick={e => e.stopPropagation()}>
+            <h3 className="text-lg font-bold text-charcoal-950 mb-4">Update Shipping Day</h3>
+            <div className="space-y-2 mb-6">
+              {['1st_tuesday', '2nd_tuesday', '3rd_tuesday', '4th_tuesday'].map(day => (
+                <button
+                  key={day}
+                  onClick={() => handleAction(editShippingDay.id, 'update_shipping_day', { preferredShippingDay: day })}
+                  className={`w-full px-4 py-3 text-left rounded-lg border text-sm ${
+                    editShippingDay.current === day
+                      ? 'border-sunset-500 bg-sunset-50 text-sunset-700 font-medium'
+                      : 'border-charcoal-200 hover:bg-charcoal-50 text-charcoal-700'
+                  }`}
+                >
+                  {shippingDayLabels[day]}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setEditShippingDay(null)}
+              className="w-full px-4 py-2 text-sm border border-charcoal-200 rounded-lg hover:bg-charcoal-50"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

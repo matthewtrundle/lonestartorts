@@ -15,6 +15,36 @@ const stripe = stripeKey ? new Stripe(stripeKey, {
   apiVersion: '2025-02-24.acacia',
 }) : null;
 
+async function awardLoyaltyPoints(customerId: string, amountInCents: number, description: string, orderId?: string) {
+  const points = Math.floor(amountInCents / 100) * 2; // 2 points per dollar
+  if (points <= 0) return;
+
+  // Upsert loyalty account
+  const account = await prisma.loyaltyAccount.upsert({
+    where: { customerId },
+    create: {
+      customerId,
+      balance: points,
+      lifetimeEarned: points,
+    },
+    update: {
+      balance: { increment: points },
+      lifetimeEarned: { increment: points },
+    },
+  });
+
+  // Create transaction record
+  await prisma.loyaltyTransaction.create({
+    data: {
+      loyaltyAccountId: account.id,
+      type: 'EARN',
+      points,
+      description,
+      orderId,
+    },
+  });
+}
+
 export async function POST(req: NextRequest) {
   try {
     if (!stripe) {
@@ -336,6 +366,15 @@ export async function POST(req: NextRequest) {
             console.error('Background work failed:', err);
           }
 
+          // Award loyalty points for one-time orders
+          if (customerId) {
+            try {
+              await awardLoyaltyPoints(customerId, subtotal, `Order ${orderNumber}`, order.id);
+            } catch (loyaltyError) {
+              console.error('Failed to award loyalty points:', loyaltyError);
+            }
+          }
+
         } catch (dbError) {
           console.error('Failed to save order to database:', dbError);
           // Still return 200 to Stripe to avoid retries
@@ -412,6 +451,13 @@ export async function POST(req: NextRequest) {
                   currentPeriodEnd: new Date(stripeSub.current_period_end * 1000),
                 },
               });
+
+              // Award loyalty points for subscription renewal
+              try {
+                await awardLoyaltyPoints(retailSub.customerId, retailSub.subtotal, `Subscription renewal`, undefined);
+              } catch (loyaltyError) {
+                console.error('Failed to award loyalty points for subscription:', loyaltyError);
+              }
 
               break;
             }

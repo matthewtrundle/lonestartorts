@@ -110,3 +110,29 @@ export function mapStripeIntervalToDb(interval: string): 'WEEKLY' | 'BIWEEKLY' |
     default: return 'MONTHLY';
   }
 }
+
+export async function pauseSubscription(stripeSubscriptionId: string) {
+  return stripe.subscriptions.update(stripeSubscriptionId, {
+    pause_collection: {
+      behavior: 'void',
+    },
+  });
+}
+
+export async function resumeSubscription(stripeSubscriptionId: string) {
+  return stripe.subscriptions.update(stripeSubscriptionId, {
+    pause_collection: '',
+  });
+}
+
+export async function cancelSubscription(stripeSubscriptionId: string) {
+  return stripe.subscriptions.update(stripeSubscriptionId, {
+    cancel_at_period_end: true,
+  });
+}
+
+export async function reactivateSubscription(stripeSubscriptionId: string) {
+  return stripe.subscriptions.update(stripeSubscriptionId, {
+    cancel_at_period_end: false,
+  });
+}
