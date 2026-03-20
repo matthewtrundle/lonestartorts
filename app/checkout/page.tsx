@@ -9,9 +9,10 @@ import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned } from '@/lib/analytics';
 
 import { Button } from '@/components/ui/button';
-import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle, Star, Gift } from 'lucide-react';
+import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle, Star, Gift, FileText } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 import { WholesaleAuthGate } from '@/components/wholesale/WholesaleAuthGate';
+import WholesaleCheckoutSummary from '@/components/checkout/WholesaleCheckoutSummary';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -22,7 +23,19 @@ export default function CheckoutPage() {
 
   // Wholesale auth state
   const hasWholesaleItems = items.some(item => item.productType === 'wholesale');
-  const [wholesaleCustomer, setWholesaleCustomer] = useState<{ id: string; email: string; firstName: string | null; isWholesale: boolean } | null>(null);
+  const [wholesaleCustomer, setWholesaleCustomer] = useState<{
+    id: string;
+    email: string;
+    firstName: string | null;
+    isWholesale: boolean;
+    wholesale?: {
+      businessName: string;
+      paymentTerms: string;
+      paymentTermsLevel: string;
+      pricingTier: string;
+      discountPercent: number;
+    };
+  } | null>(null);
   const [checkingAuth, setCheckingAuth] = useState(false);
   const [wholesaleAuthError, setWholesaleAuthError] = useState<string | null>(null);
 
@@ -43,7 +56,16 @@ export default function CheckoutPage() {
         .then(res => res.ok ? res.json() : null)
         .then(data => {
           if (data?.customer?.isWholesale) {
-            setWholesaleCustomer(data.customer);
+            setWholesaleCustomer({
+              ...data.customer,
+              wholesale: data.customer.wholesale ? {
+                businessName: data.customer.wholesale.businessName,
+                paymentTerms: data.customer.wholesale.paymentTerms,
+                paymentTermsLevel: data.customer.wholesale.termsProgress?.currentLevel || 'NEW',
+                pricingTier: data.customer.wholesale.pricingTier,
+                discountPercent: data.customer.wholesale.discountPercent || 0,
+              } : undefined,
+            });
           } else if (data?.customer && !data.customer.isWholesale) {
             setWholesaleAuthError('Your account is not approved for wholesale ordering. Please register a new wholesale account below.');
           }
@@ -83,6 +105,7 @@ export default function CheckoutPage() {
   }, [hasWholesaleItems]);
 
   const wholesaleAuthReady = !hasWholesaleItems || !!wholesaleCustomer;
+  const isNetTerms = hasWholesaleItems && wholesaleCustomer?.wholesale?.paymentTerms && wholesaleCustomer.wholesale.paymentTerms !== 'DUE_ON_RECEIPT';
 
   // Discount code state
   const [email, setEmail] = useState('');
@@ -243,6 +266,40 @@ export default function CheckoutPage() {
       setDiscountError(err instanceof Error ? err.message : 'Failed to redeem loyalty points');
     } finally {
       setLoyaltyRedeemLoading(false);
+    }
+  };
+
+  const handleWholesalePlaceOrder = async () => {
+    setIsProcessing(true);
+    setError(null);
+    setDidProceedToPayment(true);
+
+    try {
+      const response = await fetch('/api/wholesale/place-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items.map(item => ({
+            sku: item.sku,
+            name: item.displayName || item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to place order');
+      }
+
+      clearCart();
+      router.push(`/wholesale/order-confirmed?order=${data.order.orderNumber}`);
+    } catch (err) {
+      console.error('Wholesale order error:', err);
+      setError(err instanceof Error ? err.message : 'An error occurred placing your order');
+      setIsProcessing(false);
     }
   };
 
@@ -407,15 +464,14 @@ export default function CheckoutPage() {
                 </>
               )}
 
-              {/* Wholesale Auth Success */}
+              {/* Wholesale Checkout Summary */}
               {hasWholesaleItems && wholesaleCustomer && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-green-900 text-sm">Wholesale account verified</p>
-                    <p className="text-green-700 text-xs">Signed in as {wholesaleCustomer.email}</p>
-                  </div>
-                </div>
+                <WholesaleCheckoutSummary
+                  businessName={wholesaleCustomer.wholesale?.businessName || 'Wholesale Account'}
+                  paymentTerms={wholesaleCustomer.wholesale?.paymentTerms || 'DUE_ON_RECEIPT'}
+                  paymentTermsLevel={wholesaleCustomer.wholesale?.paymentTermsLevel || 'NEW'}
+                  discountPercent={wholesaleCustomer.wholesale?.discountPercent || 0}
+                />
               )}
 
               {/* Freezing Tip */}
@@ -471,17 +527,30 @@ export default function CheckoutPage() {
                   </span>
                 </div>
 
-                {/* Checkout Button */}
-                <Button
-                  variant="cart"
-                  size="lg"
-                  onClick={handleCheckout}
-                  disabled={isProcessing || !wholesaleAuthReady}
-                  className="w-full rounded-lg uppercase flex items-center justify-center gap-2"
-                >
-                  <Lock className="w-4 h-4" />
-                  {isProcessing ? 'Processing...' : !wholesaleAuthReady ? 'Sign In to Checkout' : 'Proceed to Payment'}
-                </Button>
+                {/* Checkout / Place Order Button */}
+                {isNetTerms ? (
+                  <Button
+                    variant="cart"
+                    size="lg"
+                    onClick={handleWholesalePlaceOrder}
+                    disabled={isProcessing || !wholesaleAuthReady}
+                    className="w-full rounded-lg uppercase flex items-center justify-center gap-2"
+                  >
+                    <FileText className="w-4 h-4" />
+                    {isProcessing ? 'Placing Order...' : 'Place Order'}
+                  </Button>
+                ) : (
+                  <Button
+                    variant="cart"
+                    size="lg"
+                    onClick={handleCheckout}
+                    disabled={isProcessing || !wholesaleAuthReady}
+                    className="w-full rounded-lg uppercase flex items-center justify-center gap-2"
+                  >
+                    <Lock className="w-4 h-4" />
+                    {isProcessing ? 'Processing...' : !wholesaleAuthReady ? 'Sign In to Checkout' : 'Proceed to Payment'}
+                  </Button>
+                )}
 
                 {error && (
                   <div className="p-2 bg-red-50 border border-red-200 rounded text-xs text-red-800">
@@ -489,96 +558,100 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                {/* Discount Code - Collapsible */}
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
-                  <button
-                    onClick={() => setDiscountOpen(!discountOpen)}
-                    className="w-full flex items-center justify-between p-3 hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Tag className="w-4 h-4 text-sunset-600" />
-                      <span className="text-sm font-medium">
-                        {discountApplied ? 'Discount Applied' : 'Have a discount code?'}
-                      </span>
-                      {discountApplied && <Check className="w-4 h-4 text-green-600" />}
-                    </div>
-                    <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${discountOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {discountOpen && (
-                    <div className="px-3 pb-3 border-t border-gray-100">
-                      {discountApplied ? (
-                        <div className="flex items-center justify-between p-3 mt-2 bg-green-50 rounded text-sm">
-                          <span className="text-green-800 font-medium">{discountMessage}</span>
-                          <button onClick={handleRemoveDiscount} className="text-gray-400 hover:text-gray-600">
-                            <X className="w-4 h-4" />
-                          </button>
+                {!isNetTerms && (
+                  <>
+                    {/* Discount Code - Collapsible */}
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                      <button
+                        onClick={() => setDiscountOpen(!discountOpen)}
+                        className="w-full flex items-center justify-between p-3 hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Tag className="w-4 h-4 text-sunset-600" />
+                          <span className="text-sm font-medium">
+                            {discountApplied ? 'Discount Applied' : 'Have a discount code?'}
+                          </span>
+                          {discountApplied && <Check className="w-4 h-4 text-green-600" />}
                         </div>
-                      ) : (
-                        <div className="space-y-2 mt-2">
-                          <input
-                            type="email"
-                            placeholder="Email address"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
-                          />
-                          <div className="flex gap-2">
-                            <input
-                              type="text"
-                              placeholder="Discount code"
-                              value={discountCode}
-                              onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
-                              className="flex-1 px-3 py-2 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
-                            />
-                            <button
-                              onClick={handleApplyDiscount}
-                              disabled={isValidatingCode}
-                              className="px-4 py-2 bg-gray-900 text-white text-sm rounded hover:bg-gray-800 disabled:bg-gray-400"
-                            >
-                              {isValidatingCode ? '...' : 'Apply'}
-                            </button>
-                          </div>
-                          {discountError && <p className="text-sm text-red-600">{discountError}</p>}
+                        <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${discountOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {discountOpen && (
+                        <div className="px-3 pb-3 border-t border-gray-100">
+                          {discountApplied ? (
+                            <div className="flex items-center justify-between p-3 mt-2 bg-green-50 rounded text-sm">
+                              <span className="text-green-800 font-medium">{discountMessage}</span>
+                              <button onClick={handleRemoveDiscount} className="text-gray-400 hover:text-gray-600">
+                                <X className="w-4 h-4" />
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="space-y-2 mt-2">
+                              <input
+                                type="email"
+                                placeholder="Email address"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                              />
+                              <div className="flex gap-2">
+                                <input
+                                  type="text"
+                                  placeholder="Discount code"
+                                  value={discountCode}
+                                  onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
+                                  className="flex-1 px-3 py-2 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                                />
+                                <button
+                                  onClick={handleApplyDiscount}
+                                  disabled={isValidatingCode}
+                                  className="px-4 py-2 bg-gray-900 text-white text-sm rounded hover:bg-gray-800 disabled:bg-gray-400"
+                                >
+                                  {isValidatingCode ? '...' : 'Apply'}
+                                </button>
+                              </div>
+                              {discountError && <p className="text-sm text-red-600">{discountError}</p>}
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
-                  )}
-                </div>
 
-                {/* Loyalty Points Card */}
-                {!loyaltyLoading && loyaltyBalance >= 200 && (
-                  <div className="rounded-lg overflow-hidden border border-amber-200">
-                    <div className="bg-gradient-to-r from-amber-100 to-yellow-100 px-4 py-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Star className="w-4 h-4 text-amber-600 fill-amber-500" />
-                        <span className="text-sm font-semibold text-amber-900">
-                          You have {loyaltyBalance} points!
-                        </span>
-                      </div>
-                      <p className="text-xs text-amber-700">Use 200 points for $5 off</p>
-                    </div>
-                    <div className="px-4 py-3 bg-white">
-                      {discountApplied && !loyaltyCode ? (
-                        <p className="text-xs text-gray-500 text-center">
-                          Remove current discount to use points
-                        </p>
-                      ) : loyaltyCode ? (
-                        <div className="flex items-center gap-2 text-sm text-green-700">
-                          <Gift className="w-4 h-4" />
-                          <span className="font-medium">Loyalty reward applied!</span>
+                    {/* Loyalty Points Card */}
+                    {!loyaltyLoading && loyaltyBalance >= 200 && (
+                      <div className="rounded-lg overflow-hidden border border-amber-200">
+                        <div className="bg-gradient-to-r from-amber-100 to-yellow-100 px-4 py-3">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Star className="w-4 h-4 text-amber-600 fill-amber-500" />
+                            <span className="text-sm font-semibold text-amber-900">
+                              You have {loyaltyBalance} points!
+                            </span>
+                          </div>
+                          <p className="text-xs text-amber-700">Use 200 points for $5 off</p>
                         </div>
-                      ) : (
-                        <button
-                          onClick={handleLoyaltyRedeem}
-                          disabled={loyaltyRedeemLoading}
-                          className="w-full py-2 px-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-sm font-semibold rounded-md hover:from-amber-600 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
-                        >
-                          <Gift className="w-4 h-4" />
-                          {loyaltyRedeemLoading ? 'Applying...' : 'Apply $5 Reward'}
-                        </button>
-                      )}
-                    </div>
-                  </div>
+                        <div className="px-4 py-3 bg-white">
+                          {discountApplied && !loyaltyCode ? (
+                            <p className="text-xs text-gray-500 text-center">
+                              Remove current discount to use points
+                            </p>
+                          ) : loyaltyCode ? (
+                            <div className="flex items-center gap-2 text-sm text-green-700">
+                              <Gift className="w-4 h-4" />
+                              <span className="font-medium">Loyalty reward applied!</span>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={handleLoyaltyRedeem}
+                              disabled={loyaltyRedeemLoading}
+                              className="w-full py-2 px-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-sm font-semibold rounded-md hover:from-amber-600 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                            >
+                              <Gift className="w-4 h-4" />
+                              {loyaltyRedeemLoading ? 'Applying...' : 'Apply $5 Reward'}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 {/* Trust Indicators */}

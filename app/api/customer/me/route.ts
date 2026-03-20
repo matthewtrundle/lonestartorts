@@ -30,6 +30,7 @@ export async function GET() {
         businessName: wholesaleClient.businessName,
         pricingTier: wholesaleClient.pricingTier,
         paymentTerms: wholesaleClient.paymentTerms,
+        discountPercent: wholesaleClient.discountPercent,
         status: wholesaleClient.status,
         termsProgress,
         orders: wholesaleClient.orders.map(order => ({
