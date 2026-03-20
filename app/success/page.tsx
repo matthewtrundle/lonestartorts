@@ -1,13 +1,16 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { trackPurchase } from '@/lib/analytics';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
+import { getComplementaryProducts } from '@/lib/products';
+import { formatPrice } from '@/lib/utils';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Package, Truck, Mail, ArrowRight, MapPin, Calendar } from 'lucide-react';
+import { CheckCircle2, Package, Truck, Mail, ArrowRight, MapPin, Calendar, Star } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,6 +60,12 @@ function SuccessContent() {
   const [orderDetails, setOrderDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const { clearCart } = useCart();
+
+  const complementaryProducts = useMemo(() => {
+    if (!orderDetails?.items) return [];
+    const skus = orderDetails.items.map((item: any) => item.sku).filter(Boolean);
+    return getComplementaryProducts(skus);
+  }, [orderDetails]);
 
   useEffect(() => {
     if (!sessionId) {
@@ -364,6 +373,117 @@ function SuccessContent() {
               </p>
             </div>
           </motion.div>
+
+          {/* Loyalty Points Section */}
+          {orderDetails.loyaltyData && (
+            <motion.div variants={itemVariants}>
+              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl shadow-lg border border-amber-200/50 p-6 md:p-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md border border-amber-200">
+                    <Star className="w-7 h-7 text-amber-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-amber-600 uppercase tracking-wide">Loyalty Rewards</p>
+                    <p className="text-2xl md:text-3xl font-bold text-charcoal-950">You earned {orderDetails.loyaltyData.pointsEarned} points!</p>
+                    {orderDetails.loyaltyData.nextRedemptionAt > 0 ? (
+                      <p className="text-sm text-charcoal-600 mt-1">
+                        {orderDetails.loyaltyData.nextRedemptionAt} more points until your next $5 reward
+                      </p>
+                    ) : (
+                      <p className="text-sm text-green-600 font-semibold mt-1">
+                        You have enough points to redeem a $5 reward!
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {!orderDetails.loyaltyData && !orderDetails.customerId && (
+            <motion.div variants={itemVariants}>
+              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl shadow-lg border border-amber-200/50 p-6 md:p-8 text-center">
+                <div className="w-14 h-14 mx-auto bg-white rounded-full flex items-center justify-center shadow-md border border-amber-200 mb-4">
+                  <Star className="w-7 h-7 text-amber-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-charcoal-950 mb-2">Start Earning Rewards</h3>
+                <p className="text-charcoal-600 mb-4">
+                  Create an account to earn 2 points per $1 spent. Redeem 200 points for $5 off!
+                </p>
+                <Link
+                  href="/account/register"
+                  className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
+                >
+                  Create Account
+                </Link>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Smart Cross-Sell Section */}
+          {complementaryProducts.length > 0 && (
+            <motion.div variants={itemVariants}>
+              <div className="bg-white rounded-2xl shadow-lg border border-charcoal-100 p-6 md:p-8">
+                <h3 className="text-2xl font-bold text-charcoal-950 mb-1">Complete Your Kitchen</h3>
+                <p className="text-charcoal-600 mb-6">These pair perfectly with your order</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {complementaryProducts.map((product) => (
+                    <Link
+                      key={product.sku}
+                      href="/shop"
+                      className="flex items-center gap-4 p-4 rounded-xl border border-charcoal-100 hover:border-sunset-300 hover:shadow-md transition-all duration-300 group"
+                    >
+                      <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <Image
+                          src={product.image}
+                          alt={product.name}
+                          width={80}
+                          height={80}
+                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-charcoal-950 truncate">{product.name}</p>
+                        <p className="text-sunset-600 font-bold">{formatPrice(product.price)}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Subscription Pitch Section */}
+          {!orderDetails.isSubscriptionOrder && (
+            <motion.div variants={itemVariants}>
+              <div className="bg-gradient-to-r from-sunset-50 to-amber-50 rounded-2xl shadow-lg border border-sunset-200/50 p-6 md:p-8 text-center">
+                <h3 className="text-2xl md:text-3xl font-bold text-charcoal-950 mb-2">Never Run Out of Tortillas</h3>
+                <p className="text-charcoal-600 mb-6 max-w-xl mx-auto">
+                  Subscribe and get fresh tortillas delivered on your schedule. Free shipping on every delivery, cancel anytime.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-6 mb-6">
+                  <div className="flex items-center gap-2 text-charcoal-700">
+                    <Truck className="w-5 h-5 text-sunset-600" />
+                    <span className="text-sm font-medium">Free shipping always</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-charcoal-700">
+                    <Calendar className="w-5 h-5 text-sunset-600" />
+                    <span className="text-sm font-medium">Flexible schedule</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-charcoal-700">
+                    <CheckCircle2 className="w-5 h-5 text-sunset-600" />
+                    <span className="text-sm font-medium">Cancel anytime</span>
+                  </div>
+                </div>
+                <Link
+                  href="/subscribe"
+                  className="inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
+                >
+                  Start a Subscription
+                </Link>
+              </div>
+            </motion.div>
+          )}
 
           {/* Action Buttons */}
           <motion.div
