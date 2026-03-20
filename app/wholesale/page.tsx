@@ -7,8 +7,7 @@ export const metadata: Metadata = {
   title: 'Wholesale Ordering | Lonestar Tortillas',
   description: 'Partner with Lonestar Tortillas for wholesale pricing on premium Texas tortillas. Perfect for restaurants, caterers, and retailers.',
 };
-import { WholesaleTierCard } from '@/components/wholesale/WholesaleTierCard';
-import { wholesaleTiers } from '@/lib/wholesale-tiers';
+import { WholesaleOrderBuilder } from '@/components/wholesale/WholesaleOrderBuilder';
 import {
   Package,
   Truck,
@@ -90,7 +89,7 @@ export default function WholesalePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <main className="min-h-screen bg-cream-50 pt-24">
+      <main className="min-h-screen bg-cream-50 pt-24 pb-24 lg:pb-0">
         {/* Hero Section */}
         <section className="text-white py-16 md:py-24 overflow-hidden relative">
           {/* Background Image */}
@@ -134,7 +133,7 @@ export default function WholesalePage() {
                     href="#pricing"
                     className="inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-4 rounded-lg font-bold transition-colors"
                   >
-                    Order Now — View Pricing
+                    Build Your Order
                   </a>
                   <a
                     href="#inquiry-form"
@@ -168,25 +167,20 @@ export default function WholesalePage() {
           </div>
         </section>
 
-        {/* Pricing Tiers - Shop Style */}
+        {/* Build Your Order */}
         <section id="pricing" className="py-16 bg-cream-50 scroll-mt-24">
           <div className="container mx-auto px-4 md:px-8 max-w-7xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-charcoal-950 mb-4">
-                Volume Pricing Tiers
+                Build Your Wholesale Order
               </h2>
               <p className="text-lg text-charcoal-700 max-w-2xl mx-auto">
-                Choose your tier, then pick from our complete tortilla catalog.
-                All tiers include free shipping and weekly delivery options.
+                Pick your products below. Your discount tier unlocks automatically
+                as you add packs — the more you order, the more you save.
               </p>
             </div>
 
-            {/* Tier Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {wholesaleTiers.map((tier) => (
-                <WholesaleTierCard key={tier.id} tier={tier} />
-              ))}
-            </div>
+            <WholesaleOrderBuilder />
 
             <div className="mt-8 text-center space-y-3">
               <p className="text-charcoal-600">
