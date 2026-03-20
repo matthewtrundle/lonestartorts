@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedCustomer } from '@/lib/customer-auth';
 import { prisma } from '@/lib/prisma';
+import { getTermsProgress } from '@/lib/wholesale/terms-progression';
 
 export async function GET() {
   const customer = await getAuthenticatedCustomer();
@@ -24,11 +25,13 @@ export async function GET() {
     });
 
     if (wholesaleClient) {
+      const termsProgress = await getTermsProgress(wholesaleClient.id);
       wholesaleData = {
         businessName: wholesaleClient.businessName,
         pricingTier: wholesaleClient.pricingTier,
         paymentTerms: wholesaleClient.paymentTerms,
         status: wholesaleClient.status,
+        termsProgress,
         orders: wholesaleClient.orders.map(order => ({
           id: order.id,
           orderNumber: order.orderNumber,
@@ -36,6 +39,8 @@ export async function GET() {
           paymentStatus: order.paymentStatus,
           orderStatus: order.orderStatus,
           createdAt: order.createdAt,
+          dueDate: order.dueDate,
+          stripeInvoiceUrl: order.stripeInvoiceUrl,
           items: order.items.map(item => ({
             name: item.name,
             quantity: item.quantity,
