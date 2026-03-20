@@ -135,40 +135,42 @@ export const WholesaleQuickStart: React.FC<WholesaleQuickStartProps> = ({
         : 'Starter (10% off)';
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 md:p-6">
-      <div className="flex items-center gap-2 mb-1">
-        <SlidersHorizontal className="w-5 h-5 text-sunset-500" />
-        <h3 className="text-base font-bold text-charcoal-950">Quick Start</h3>
+    <div className="bg-white rounded-xl border border-gray-200 p-4">
+      <div className="flex items-center gap-2 mb-0.5">
+        <SlidersHorizontal className="w-4 h-4 text-sunset-500" />
+        <h3 className="text-sm font-bold text-charcoal-950">Quick Start</h3>
       </div>
-      <p className="text-sm text-gray-500 mb-4">
-        Pick a focus, set your volume, and we&apos;ll fill your cart with the right mix.
+      <p className="text-xs text-gray-500 mb-3">
+        Pick a focus, set your volume, and we&apos;ll fill your cart.
       </p>
 
       {/* Preset Buttons */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
         {presets.map((preset) => {
           const isActive = selectedPreset === preset.id;
           return (
             <button
               key={preset.id}
               onClick={() => handleSelect(preset.id)}
-              className={`group relative flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 transition-all text-center ${
+              className={`group flex items-center gap-2 p-2.5 rounded-lg border-2 transition-all ${
                 isActive
-                  ? 'border-sunset-500 bg-sunset-50 ring-1 ring-sunset-200'
+                  ? 'border-sunset-500 bg-sunset-50'
                   : 'border-gray-200 hover:border-sunset-300 hover:bg-gray-50'
               }`}
             >
               <preset.icon
-                className={`w-6 h-6 ${isActive ? 'text-sunset-600' : 'text-gray-400 group-hover:text-sunset-500'}`}
+                className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-sunset-600' : 'text-gray-400 group-hover:text-sunset-500'}`}
               />
-              <span
-                className={`text-sm font-semibold ${isActive ? 'text-sunset-700' : 'text-charcoal-800'}`}
-              >
-                {preset.label}
-              </span>
-              <span className="text-[11px] text-gray-500 leading-tight">
-                {preset.description}
-              </span>
+              <div className="text-left min-w-0">
+                <span
+                  className={`text-xs font-semibold block ${isActive ? 'text-sunset-700' : 'text-charcoal-800'}`}
+                >
+                  {preset.label}
+                </span>
+                <span className="text-[10px] text-gray-500 leading-tight block truncate">
+                  {preset.description}
+                </span>
+              </div>
             </button>
           );
         })}
@@ -176,7 +178,7 @@ export const WholesaleQuickStart: React.FC<WholesaleQuickStartProps> = ({
 
       {/* Volume Slider + Apply (only shown when preset is selected) */}
       {activePreset && (
-        <div className="bg-cream-50 rounded-lg p-4 space-y-3">
+        <div className="bg-cream-50 rounded-lg p-3 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-charcoal-800">Volume</span>
             <span className="text-sm font-bold text-sunset-600">

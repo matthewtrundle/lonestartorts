@@ -168,15 +168,14 @@ export default function WholesalePage() {
         </section>
 
         {/* Build Your Order */}
-        <section id="pricing" className="py-16 bg-cream-50 scroll-mt-24">
+        <section id="pricing" className="py-10 bg-cream-50 scroll-mt-24">
           <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-charcoal-950 mb-4">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-charcoal-950 mb-2">
                 Build Your Wholesale Order
               </h2>
-              <p className="text-lg text-charcoal-700 max-w-2xl mx-auto">
-                Pick your products below. Your discount tier unlocks automatically
-                as you add packs — the more you order, the more you save.
+              <p className="text-base text-charcoal-700 max-w-2xl mx-auto">
+                Pick your products below. Your discount tier unlocks automatically as you add packs.
               </p>
             </div>
 

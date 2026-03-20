@@ -52,7 +52,7 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
     <>
       {/* Desktop Sidebar */}
       <div className="hidden lg:block">
-        <div className="sticky top-28 bg-white rounded-xl border border-gray-200 shadow-lg p-6">
+        <div className="sticky top-28 bg-white rounded-xl border border-gray-200 shadow-lg p-5">
           {/* Current Tier Badge */}
           <div className="mb-4">
             {currentTier ? (

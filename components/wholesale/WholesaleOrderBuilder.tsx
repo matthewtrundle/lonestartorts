@@ -115,12 +115,12 @@ export const WholesaleOrderBuilder: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* Celebration Banner */}
       {showCelebration && currentTier && (
-        <div className="animate-pulse py-3 px-6 bg-green-50 border border-green-200 rounded-xl text-center">
+        <div className="animate-pulse py-2 px-4 bg-green-50 border border-green-200 rounded-lg text-center">
           <span className="text-sm font-bold text-green-700">
-            {currentTier.name} Tier Unlocked — {currentTier.discountPercent}% Off All Products!
+            {currentTier.name} Tier Unlocked — {currentTier.discountPercent}% Off!
           </span>
         </div>
       )}
@@ -131,8 +131,8 @@ export const WholesaleOrderBuilder: React.FC = () => {
       {/* Quick Start Presets */}
       <WholesaleQuickStart onApplyPreset={applyPreset} />
 
-      {/* Product Grid + Sidebar Layout */}
-      <div className="lg:grid lg:grid-cols-[1fr_340px] lg:gap-8">
+      {/* Product List + Sidebar Layout */}
+      <div className="lg:grid lg:grid-cols-[1fr_360px] lg:gap-6">
         <WholesaleProductGrid
           quantities={quantities}
           currentTier={currentTier}
