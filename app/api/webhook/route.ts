@@ -624,11 +624,18 @@ export async function POST(req: NextRequest) {
             where: { stripeSubscriptionId: updatedSub.id },
           });
 
+          // Determine effective status: if cancel_at_period_end is set, treat as CANCELLED
+          let effectiveStatus = statusMap[updatedSub.status] || 'ACTIVE';
+          if (updatedSub.cancel_at_period_end && updatedSub.status === 'active') {
+            effectiveStatus = 'CANCELLED';
+          }
+
           if (retailSubUpdate) {
             await prisma.retailSubscription.update({
               where: { stripeSubscriptionId: updatedSub.id },
               data: {
-                status: (statusMap[updatedSub.status] || 'ACTIVE') as any,
+                status: effectiveStatus as any,
+                ...(updatedSub.cancel_at_period_end && { cancelledAt: new Date() }),
                 nextBillingDate: updatedSub.current_period_end
                   ? new Date(updatedSub.current_period_end * 1000)
                   : null,
@@ -645,7 +652,8 @@ export async function POST(req: NextRequest) {
             await prisma.wholesaleSubscription.updateMany({
               where: { stripeSubscriptionId: updatedSub.id },
               data: {
-                status: (statusMap[updatedSub.status] || 'ACTIVE') as any,
+                status: effectiveStatus as any,
+                ...(updatedSub.cancel_at_period_end && { cancelledAt: new Date() }),
                 nextBillingDate: updatedSub.current_period_end
                   ? new Date(updatedSub.current_period_end * 1000)
                   : null,
