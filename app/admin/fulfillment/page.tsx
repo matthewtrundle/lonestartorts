@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
-import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart } from 'lucide-react';
+import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList } from 'lucide-react';
 
 interface FulfillmentOrder {
   id: string;
@@ -193,6 +193,29 @@ export default function FulfillmentPage() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
+  const handleDownloadShoppingList = () => {
+    const escapeCsv = (val: string) => {
+      if (val.includes(',') || val.includes('"') || val.includes('\n')) {
+        return `"${val.replace(/"/g, '""')}"`;
+      }
+      return val;
+    };
+    const header = ['Product Name', 'Quantity Needed', 'Number of Orders'];
+    const rows = skuAggregates.map((agg) => [
+      escapeCsv(agg.name),
+      String(agg.totalQuantity),
+      String(agg.orderCount),
+    ]);
+    const csv = [header.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `shopping-list-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -266,15 +289,24 @@ export default function FulfillmentPage() {
       {/* Items to Buy */}
       {skuAggregates.length > 0 && (
         <div className="bg-white rounded-lg shadow">
-          <button
-            onClick={() => setItemsToBuyOpen(!itemsToBuyOpen)}
-            className="w-full flex items-center justify-between p-4 text-left hover:bg-cream-50 transition-colors rounded-lg"
-          >
-            <h2 className="text-lg font-semibold text-charcoal-950">
-              Items to Buy ({skuAggregates.reduce((s, a) => s + a.totalQuantity, 0)} total)
-            </h2>
-            {itemsToBuyOpen ? <ChevronDown className="w-5 h-5 text-charcoal-400" /> : <ChevronRight className="w-5 h-5 text-charcoal-400" />}
-          </button>
+          <div className="flex items-center justify-between p-4">
+            <button
+              onClick={() => setItemsToBuyOpen(!itemsToBuyOpen)}
+              className="flex items-center gap-2 text-left hover:text-charcoal-700 transition-colors"
+            >
+              {itemsToBuyOpen ? <ChevronDown className="w-5 h-5 text-charcoal-400" /> : <ChevronRight className="w-5 h-5 text-charcoal-400" />}
+              <h2 className="text-lg font-semibold text-charcoal-950">
+                Items to Buy ({skuAggregates.reduce((s, a) => s + a.totalQuantity, 0)} total)
+              </h2>
+            </button>
+            <button
+              onClick={handleDownloadShoppingList}
+              className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-charcoal-700 bg-charcoal-100 rounded-lg hover:bg-charcoal-200 transition-colors"
+            >
+              <ClipboardList className="w-4 h-4" />
+              Download Shopping List
+            </button>
+          </div>
           {itemsToBuyOpen && (
             <div className="px-4 pb-4">
               <table className="w-full text-sm">
