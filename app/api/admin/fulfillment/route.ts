@@ -89,27 +89,28 @@ export async function GET() {
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
-    // Aggregate items by SKU
+    // Aggregate items by SKU (fall back to name as key when SKU is empty)
     const skuMap = new Map<string, { sku: string; name: string; totalQuantity: number; orderCount: number }>();
     for (const order of orders) {
-      const orderSkus = new Set<string>();
+      const orderKeys = new Set<string>();
       for (const item of order.items) {
-        if (!item.sku) continue;
-        const existing = skuMap.get(item.sku);
+        const key = item.sku || item.name;
+        if (!key) continue;
+        const existing = skuMap.get(key);
         if (existing) {
           existing.totalQuantity += item.quantity;
-          if (!orderSkus.has(item.sku)) {
+          if (!orderKeys.has(key)) {
             existing.orderCount += 1;
           }
         } else {
-          skuMap.set(item.sku, {
-            sku: item.sku,
+          skuMap.set(key, {
+            sku: item.sku || '-',
             name: item.name,
             totalQuantity: item.quantity,
             orderCount: 1,
           });
         }
-        orderSkus.add(item.sku);
+        orderKeys.add(key);
       }
     }
 

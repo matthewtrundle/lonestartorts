@@ -74,12 +74,35 @@ const SKU_WEIGHT_OZ: Record<string, number> = {
 const DEFAULT_WEIGHT_OZ = 32;
 
 /**
+ * Name-based weight lookup for orders where SKU is empty.
+ * Matches partial product name to approximate weight.
+ */
+const NAME_WEIGHT_PATTERNS: [RegExp, number][] = [
+  [/white corn.*texas|80.?count/i, 48],
+  [/mi tienda|50.?count/i, 40],
+  [/bakery.*flour|bakery.*butter/i, 32],
+  [/burrito grande/i, 24],
+  [/fajita|homestyle|butter.*shelf|butter flour/i, 24],
+  [/whole wheat|wheat/i, 20],
+  [/street taco/i, 16],
+  [/green sauce|red sauce/i, 20],
+  [/salsa/i, 24],
+];
+
+function getWeightByName(name: string): number {
+  for (const [pattern, weight] of NAME_WEIGHT_PATTERNS) {
+    if (pattern.test(name)) return weight;
+  }
+  return DEFAULT_WEIGHT_OZ;
+}
+
+/**
  * Calculate total weight in ounces for an order's items
  */
-export function calculateOrderWeightOz(items: { sku?: string | null; quantity: number }[]): number {
+export function calculateOrderWeightOz(items: { sku?: string | null; name?: string; quantity: number }[]): number {
   return items.reduce((total, item) => {
     const baseSku = item.sku?.replace('WHOLESALE-', '') || '';
-    const weight = SKU_WEIGHT_OZ[baseSku] || DEFAULT_WEIGHT_OZ;
+    const weight = (baseSku && SKU_WEIGHT_OZ[baseSku]) || (item.name ? getWeightByName(item.name) : DEFAULT_WEIGHT_OZ);
     return total + weight * item.quantity;
   }, 0);
 }
