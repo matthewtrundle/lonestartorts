@@ -4,7 +4,29 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
-import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList } from 'lucide-react';
+import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList, AlertTriangle } from 'lucide-react';
+
+// H-E-B per-order quantity limits (product name substring → max per order)
+const HEB_ORDER_LIMITS: Record<string, number> = {
+  'Bakery Butter': 10,
+  'Bakery Flour': 10,
+  'Bakery Wheat': 10,
+  'Burrito Grande': 20,
+  'Mi Tienda': 10,
+  'White Corn': 10,
+};
+
+function getHebLimit(productName: string): number | null {
+  for (const [key, limit] of Object.entries(HEB_ORDER_LIMITS)) {
+    if (productName.includes(key)) return limit;
+  }
+  return null;
+}
+
+function getOrdersNeeded(qty: number, limit: number | null): number {
+  if (!limit || qty <= limit) return 1;
+  return Math.ceil(qty / limit);
+}
 
 interface FulfillmentOrder {
   id: string;
@@ -200,12 +222,21 @@ export default function FulfillmentPage() {
       }
       return val;
     };
-    const header = ['Product Name', 'Quantity Needed', 'Number of Orders'];
-    const rows = skuAggregates.map((agg) => [
-      escapeCsv(agg.name),
-      String(agg.totalQuantity),
-      String(agg.orderCount),
-    ]);
+    const header = ['Product Name', 'Quantity Needed', 'HEB Limit/Order', 'Orders Needed', 'Notes'];
+    const rows = skuAggregates.map((agg) => {
+      const limit = getHebLimit(agg.name);
+      const ordersNeeded = getOrdersNeeded(agg.totalQuantity, limit);
+      const notes = limit && agg.totalQuantity > limit
+        ? `Over limit by ${agg.totalQuantity - limit} — need ${ordersNeeded} HEB orders`
+        : '';
+      return [
+        escapeCsv(agg.name),
+        String(agg.totalQuantity),
+        limit ? String(limit) : 'No limit',
+        String(ordersNeeded),
+        escapeCsv(notes),
+      ];
+    });
     const csv = [header.join(','), ...rows.map((r) => r.join(','))].join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
@@ -309,24 +340,69 @@ export default function FulfillmentPage() {
           </div>
           {itemsToBuyOpen && (
             <div className="px-4 pb-4">
+              {/* HEB orders needed summary */}
+              {(() => {
+                const maxOrders = Math.max(...skuAggregates.map((agg) => getOrdersNeeded(agg.totalQuantity, getHebLimit(agg.name))));
+                const flaggedItems = skuAggregates.filter((agg) => {
+                  const limit = getHebLimit(agg.name);
+                  return limit && agg.totalQuantity > limit;
+                });
+                if (flaggedItems.length > 0) {
+                  return (
+                    <div className="mb-3 p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+                      <div className="text-sm">
+                        <span className="font-semibold text-amber-800">
+                          {maxOrders} H-E-B orders needed
+                        </span>
+                        <span className="text-amber-700">
+                          {' '}&mdash; {flaggedItems.length} item{flaggedItems.length > 1 ? 's' : ''} exceed{flaggedItems.length === 1 ? 's' : ''} per-order limits
+                        </span>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-charcoal-200 text-left">
-                    <th className="pb-2 font-medium text-charcoal-600">SKU</th>
                     <th className="pb-2 font-medium text-charcoal-600">Product Name</th>
-                    <th className="pb-2 font-medium text-charcoal-600 text-right">Total Qty</th>
-                    <th className="pb-2 font-medium text-charcoal-600 text-right"># Orders</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Qty Needed</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">HEB Limit</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Orders</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right"># Customer Orders</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {skuAggregates.map((agg) => (
-                    <tr key={agg.sku} className="border-b border-charcoal-100 last:border-0">
-                      <td className="py-2 font-mono text-xs text-charcoal-500">{agg.sku}</td>
-                      <td className="py-2 text-charcoal-900">{agg.name}</td>
-                      <td className="py-2 text-right font-semibold text-charcoal-950">{agg.totalQuantity}</td>
-                      <td className="py-2 text-right text-charcoal-600">{agg.orderCount}</td>
-                    </tr>
-                  ))}
+                  {skuAggregates.map((agg) => {
+                    const limit = getHebLimit(agg.name);
+                    const ordersNeeded = getOrdersNeeded(agg.totalQuantity, limit);
+                    const overLimit = limit && agg.totalQuantity > limit;
+                    return (
+                      <tr key={agg.sku + agg.name} className={`border-b border-charcoal-100 last:border-0 ${overLimit ? 'bg-amber-50' : ''}`}>
+                        <td className="py-2 text-charcoal-900">
+                          {agg.name}
+                          {overLimit && (
+                            <span className="ml-2 inline-flex items-center gap-1 text-xs text-amber-700 font-medium">
+                              <AlertTriangle className="w-3 h-3" />
+                              Over by {agg.totalQuantity - limit!}
+                            </span>
+                          )}
+                        </td>
+                        <td className={`py-2 text-right font-semibold ${overLimit ? 'text-amber-700' : 'text-charcoal-950'}`}>
+                          {agg.totalQuantity}
+                        </td>
+                        <td className="py-2 text-right text-charcoal-500">
+                          {limit ?? '—'}
+                        </td>
+                        <td className={`py-2 text-right font-medium ${ordersNeeded > 1 ? 'text-amber-700' : 'text-charcoal-600'}`}>
+                          {ordersNeeded > 1 ? `${ordersNeeded} orders` : '1'}
+                        </td>
+                        <td className="py-2 text-right text-charcoal-600">{agg.orderCount}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
