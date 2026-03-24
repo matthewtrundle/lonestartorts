@@ -5,28 +5,7 @@ import { useRouter } from 'next/navigation';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
 import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList, AlertTriangle } from 'lucide-react';
-
-// H-E-B per-order quantity limits (product name substring → max per order)
-const HEB_ORDER_LIMITS: Record<string, number> = {
-  'Bakery Butter': 10,
-  'Bakery Flour': 10,
-  'Bakery Wheat': 10,
-  'Burrito Grande': 20,
-  'Mi Tienda': 10,
-  'White Corn': 10,
-};
-
-function getHebLimit(productName: string): number | null {
-  for (const [key, limit] of Object.entries(HEB_ORDER_LIMITS)) {
-    if (productName.includes(key)) return limit;
-  }
-  return null;
-}
-
-function getOrdersNeeded(qty: number, limit: number | null): number {
-  if (!limit || qty <= limit) return 1;
-  return Math.ceil(qty / limit);
-}
+import { getHebLimit, getOrdersNeeded } from '@/lib/inventory/constants';
 
 interface FulfillmentOrder {
   id: string;

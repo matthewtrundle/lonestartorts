@@ -62,6 +62,7 @@ export default function AdminLayout({
     { href: '/admin', label: 'Dashboard', exact: true },
     { href: '/admin/orders', label: 'Orders' },
     { href: '/admin/fulfillment', label: 'Fulfillment' },
+    { href: '/admin/inventory', label: 'Inventory' },
     { href: '/admin/subscriptions', label: 'Subscriptions' },
     { href: '/admin/discounts', label: 'Discounts' },
     { href: '/admin/wholesale', label: 'Wholesale' },
