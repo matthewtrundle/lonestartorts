@@ -46,7 +46,10 @@ interface ImportResult {
   updated: number;
   errors: { orderNumber: string; error: string }[];
   skipped: number;
-  debug?: { parsedRows: { orderNumber: string; trackingNumber: string; carrier: string }[] };
+  debug?: {
+    format: string;
+    parsedRows: { identifier: string; trackingNumber: string; carrier: string; matchedOrder?: string }[];
+  };
 }
 
 export default function FulfillmentPage() {
@@ -161,22 +164,29 @@ export default function FulfillmentPage() {
     }
 
     const headersLower = headers.map((h) => h.toLowerCase());
-    const orderKey = headers[headersLower.findIndex((h) => h.includes('order'))];
     const trackingKey = headers[headersLower.findIndex((h) => h.includes('tracking'))];
     const carrierKey = headers[headersLower.findIndex((h) => h.includes('carrier'))];
 
-    if (!orderKey || !trackingKey) {
-      console.warn('Could not find order/tracking columns in headers:', headers);
+    if (!trackingKey) {
+      console.warn('Could not find tracking column in headers:', headers);
       return;
     }
 
+    // Detect Pirate Ship format (has Recipient + Email but no Order Number)
+    const orderKey = headers[headersLower.findIndex((h) => h.includes('order'))];
+    const recipientKey = headers[headersLower.findIndex((h) => h === 'recipient')];
+    const emailKey = headers[headersLower.findIndex((h) => h === 'email')];
+    const isPirateShip = !orderKey && !!recipientKey;
+
     const preview = [];
     for (const row of dataRows) {
-      const orderNumber = (row[orderKey] || '').trim();
       const trackingNumber = (row[trackingKey] || '').trim();
-      if (orderNumber && trackingNumber) {
+      const identifier = isPirateShip
+        ? `${(row[recipientKey] || '').trim()} (${(row[emailKey] || '').trim()})`
+        : (row[orderKey] || '').trim();
+      if (identifier && trackingNumber) {
         preview.push({
-          orderNumber,
+          orderNumber: identifier,
           trackingNumber,
           carrier: carrierKey ? (row[carrierKey] || '').trim() || 'Auto-detect' : 'Auto-detect',
         });
@@ -548,7 +558,7 @@ export default function FulfillmentPage() {
                     <table className="w-full text-sm">
                       <thead className="bg-charcoal-50 sticky top-0">
                         <tr>
-                          <th className="px-3 py-2 text-left font-medium text-charcoal-600">Order #</th>
+                          <th className="px-3 py-2 text-left font-medium text-charcoal-600">Order # / Recipient</th>
                           <th className="px-3 py-2 text-left font-medium text-charcoal-600">Tracking #</th>
                           <th className="px-3 py-2 text-left font-medium text-charcoal-600">Carrier</th>
                         </tr>
@@ -598,12 +608,13 @@ export default function FulfillmentPage() {
                   {importResult.debug?.parsedRows && importResult.debug.parsedRows.length > 0 && (
                     <details className="text-xs">
                       <summary className="cursor-pointer text-charcoal-500 hover:text-charcoal-700">
-                        Debug: Show parsed rows ({importResult.debug.parsedRows.length})
+                        Debug: {importResult.debug.format === 'pirate-ship' ? 'Pirate Ship format' : 'Standard format'} — {importResult.debug.parsedRows.length} rows parsed
                       </summary>
                       <div className="mt-2 bg-charcoal-50 rounded-lg p-3 max-h-48 overflow-y-auto font-mono">
-                        {importResult.debug.parsedRows.map((row, i) => (
+                        {importResult.debug.parsedRows.map((row: any, i: number) => (
                           <div key={i} className="text-charcoal-600">
-                            {row.orderNumber || '(empty)'} → {row.trackingNumber || '(empty)'} [{row.carrier}]
+                            {row.identifier || '(empty)'} → {row.trackingNumber || '(empty)'} [{row.carrier}]
+                            {row.matchedOrder && <span className="text-green-600 ml-2">✓ {row.matchedOrder}</span>}
                           </div>
                         ))}
                       </div>
