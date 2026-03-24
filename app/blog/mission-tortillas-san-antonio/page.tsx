@@ -232,7 +232,7 @@ export default function MissionTortillasPage() {
                 </p>
 
                 <p>
-                  At Lonestar Tortillas, we ship both Mission and H-E-B tortillas nationwide with FREE shipping on all orders. Stock up on your favorites and taste what Texas tortillas are all about.
+                  At Lonestar Tortillas, we ship both Mission and H-E-B tortillas nationwide with FREE shipping on orders $60+. Stock up on your favorites and taste what Texas tortillas are all about.
                 </p>
               </div>
             </section>

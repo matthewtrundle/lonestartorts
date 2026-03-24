@@ -30,7 +30,7 @@ A Texas-sized upgrade! These ultra-rich flour tortillas get their luxurious text
 We get it – when you want authentic tortillas, you want them fresh. That’s why we ship from Texas to Chula Vista via 2-day expedited shipping (Monday-Wednesday orders only to ensure weekend freshness). Your tortillas arrive chilled and ready to enjoy or freeze for later.  
 
 **Shipping Details:**  
-- **Cost:** Flat rate $9.99 to all California addresses  
+- **Cost:** Flat $12.99 shipping on orders under $60, FREE shipping on orders $60+  
 - **Delivery Area:** All of Chula Vista (91910, 91911, 91913, 91914, 91915) plus surrounding areas like San Diego, National City, and even across the border in Tijuana  
 - **Regional Shipping:** Also available throughout California, Arizona, and Nevada  
 

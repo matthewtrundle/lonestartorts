@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'How long does tortilla delivery take to NYC?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We deliver authentic H-E-B tortillas to all five NYC boroughs in 2-3 business days via USPS Priority Mail. Orders placed by 2 PM CT ship same day.',
+        text: 'We deliver authentic H-E-B tortillas to all five NYC boroughs in 2-3 business days via USPS Priority Mail. Order by Monday 9 PM CT to ship Tuesday.',
       },
     },
     {
@@ -142,8 +142,8 @@ export default function NYCPage() {
             <h2 className="text-xl font-bold text-charcoal-950 mb-2">NYC Shipping Details</h2>
             <ul className="text-charcoal-700 space-y-2">
               <li><strong>Delivery Time:</strong> 2-3 business days via USPS Priority Mail</li>
-              <li><strong>Same-Day Shipping:</strong> Orders placed by 2 PM CT</li>
-              <li><strong>Free Shipping:</strong> On orders over $45</li>
+              <li><strong>Order Cutoff:</strong> Monday 9 PM CT</li>
+              <li><strong>Free Shipping:</strong> On orders $60+</li>
               <li><strong>Apartment Friendly:</strong> Ships to any residential address</li>
             </ul>
           </section>
@@ -163,7 +163,7 @@ export default function NYCPage() {
                 <div className="text-charcoal-600">Days to NYC</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <div className="text-3xl font-bold text-sunset-600">$45+</div>
+                <div className="text-3xl font-bold text-sunset-600">$60+</div>
                 <div className="text-charcoal-600">Free Shipping</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
@@ -201,7 +201,7 @@ export default function NYCPage() {
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="font-bold text-charcoal-950 mb-2">How long does delivery take to NYC?</h3>
-                <p className="text-charcoal-700">We deliver to all five boroughs in 2-3 business days via USPS Priority Mail. Orders placed by 2 PM CT ship the same day.</p>
+                <p className="text-charcoal-700">We deliver to all five boroughs in 2-3 business days via USPS Priority Mail. Order by Monday 9 PM CT to ship Tuesday.</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="font-bold text-charcoal-950 mb-2">Can I get tortillas delivered to my apartment building?</h3>

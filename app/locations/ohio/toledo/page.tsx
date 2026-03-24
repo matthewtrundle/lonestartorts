@@ -31,7 +31,7 @@ export default function ToledoPage() {
         </section>
         <section className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg mb-12">
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Toledo Shipping Details</h2>
-          <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 2-3 business days</li><li><strong>Free Shipping:</strong> On orders over $45</li></ul>
+          <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 2-3 business days</li><li><strong>Free Shipping:</strong> On orders $60+</li></ul>
         </section>
         <section className="my-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">Our Products</h2>

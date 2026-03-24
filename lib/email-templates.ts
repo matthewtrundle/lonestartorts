@@ -378,7 +378,7 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
             <td style="padding: 0 32px 32px 32px;">
               <div style="padding: 16px 24px; background-color: #ecfdf5; border-radius: 8px; text-align: center;">
                 <p style="margin: 0; font-size: 14px; color: #065f46;">
-                  <strong>Freshness First:</strong> We ship on Tuesdays so your tortillas spend the fewest days in transit. Planning your next order? Place it before Tuesday 2 PM CT for same-week shipping!
+                  <strong>Freshness First:</strong> We ship on Tuesdays so your tortillas spend the fewest days in transit. Planning your next order? Place it before Monday 9 PM CT to ship that Tuesday!
                 </p>
               </div>
             </td>

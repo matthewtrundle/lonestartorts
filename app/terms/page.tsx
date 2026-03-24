@@ -69,7 +69,7 @@ export default function TermsOfServicePage() {
               <ul className="list-disc pl-6 text-charcoal-700 space-y-2 mb-4">
                 <li><strong>Processing time:</strong> Orders are typically processed and shipped within 1-2 business days</li>
                 <li><strong>Delivery time:</strong> Standard shipping takes 3-5 business days; expedited options are available at checkout</li>
-                <li><strong>Free shipping:</strong> All orders qualify for free standard shipping (USPS Priority Mail)</li>
+                <li><strong>Shipping:</strong> FREE shipping on orders $60+ (USPS Priority Mail). Flat $12.99 shipping on orders under $60</li>
                 <li><strong>Tracking:</strong> You will receive a tracking number via email once your order ships</li>
               </ul>
               <p className="text-charcoal-700 mb-4">

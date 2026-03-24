@@ -1311,3 +1311,232 @@ export async function sendAdminNewSubscriptionNotification(props: NewSubscriptio
     return { success: false, error };
   }
 }
+
+/**
+ * Send welcome email to new wholesale customers with ordering instructions
+ */
+export async function sendWholesaleWelcomeEmail(props: {
+  to: string;
+  contactName: string;
+  businessName: string;
+}) {
+  const { to, contactName, businessName } = props;
+  const firstName = contactName.split(' ')[0] || contactName;
+
+  try {
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Lonestar Tortillas Wholesale</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 32px; background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%); text-align: center;">
+              <h1 style="margin: 0 0 8px 0; color: #ffffff; font-size: 26px; font-weight: 700;">Welcome to Lonestar Tortillas</h1>
+              <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 16px;">Your wholesale account is ready</p>
+            </td>
+          </tr>
+
+          <!-- Greeting -->
+          <tr>
+            <td style="padding: 32px 32px 16px 32px;">
+              <p style="margin: 0; font-size: 16px; color: #1c1917; line-height: 1.6;">
+                Hi ${firstName},
+              </p>
+              <p style="margin: 16px 0 0 0; font-size: 16px; color: #44403c; line-height: 1.6;">
+                Thanks for creating your wholesale account for <strong>${businessName}</strong>. You're all set to place your first order — here's how it works.
+              </p>
+            </td>
+          </tr>
+
+          <!-- How to Order -->
+          <tr>
+            <td style="padding: 16px 32px;">
+              <h2 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 700; color: #1c1917;">How to Place Your First Order</h2>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="padding: 12px 16px; background-color: #fff7ed; border-radius: 8px; margin-bottom: 8px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td style="width: 32px; vertical-align: top;">
+                          <div style="width: 24px; height: 24px; background-color: #ea580c; border-radius: 50%; color: #ffffff; font-size: 13px; font-weight: 700; text-align: center; line-height: 24px;">1</div>
+                        </td>
+                        <td style="font-size: 14px; color: #1c1917; line-height: 1.5;">Go to <a href="https://lonestartortillas.com/wholesale" style="color: #ea580c; font-weight: 600; text-decoration: none;">lonestartortillas.com/wholesale</a></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr><td style="height: 8px;"></td></tr>
+                <tr>
+                  <td style="padding: 12px 16px; background-color: #fff7ed; border-radius: 8px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td style="width: 32px; vertical-align: top;">
+                          <div style="width: 24px; height: 24px; background-color: #ea580c; border-radius: 50%; color: #ffffff; font-size: 13px; font-weight: 700; text-align: center; line-height: 24px;">2</div>
+                        </td>
+                        <td style="font-size: 14px; color: #1c1917; line-height: 1.5;">Sign in with your email and password</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr><td style="height: 8px;"></td></tr>
+                <tr>
+                  <td style="padding: 12px 16px; background-color: #fff7ed; border-radius: 8px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td style="width: 32px; vertical-align: top;">
+                          <div style="width: 24px; height: 24px; background-color: #ea580c; border-radius: 50%; color: #ffffff; font-size: 13px; font-weight: 700; text-align: center; line-height: 24px;">3</div>
+                        </td>
+                        <td style="font-size: 14px; color: #1c1917; line-height: 1.5;">Browse tortillas and add packs to your order (minimum 16 packs)</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr><td style="height: 8px;"></td></tr>
+                <tr>
+                  <td style="padding: 12px 16px; background-color: #fff7ed; border-radius: 8px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td style="width: 32px; vertical-align: top;">
+                          <div style="width: 24px; height: 24px; background-color: #ea580c; border-radius: 50%; color: #ffffff; font-size: 13px; font-weight: 700; text-align: center; line-height: 24px;">4</div>
+                        </td>
+                        <td style="font-size: 14px; color: #1c1917; line-height: 1.5;">Review your order and check out — done!</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Volume Pricing -->
+          <tr>
+            <td style="padding: 16px 32px;">
+              <h2 style="margin: 0 0 12px 0; font-size: 18px; font-weight: 700; color: #1c1917;">Volume Pricing</h2>
+              <p style="margin: 0 0 12px 0; font-size: 14px; color: #44403c;">The more you order, the bigger your discount:</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border: 1px solid #e7e5e4; border-radius: 8px; overflow: hidden;">
+                <tr style="background-color: #1c1917;">
+                  <td style="padding: 10px 16px; font-size: 12px; font-weight: 700; color: #ffffff; text-transform: uppercase;">Packs</td>
+                  <td style="padding: 10px 16px; font-size: 12px; font-weight: 700; color: #ffffff; text-transform: uppercase; text-align: right;">Discount</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #1c1917; border-bottom: 1px solid #f5f5f4;">16 – 50 packs</td>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #ea580c; font-weight: 600; text-align: right; border-bottom: 1px solid #f5f5f4;">5% off</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #1c1917; border-bottom: 1px solid #f5f5f4;">51 – 100 packs</td>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #ea580c; font-weight: 600; text-align: right; border-bottom: 1px solid #f5f5f4;">8% off</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #1c1917; border-bottom: 1px solid #f5f5f4;">101 – 250 packs</td>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #ea580c; font-weight: 600; text-align: right; border-bottom: 1px solid #f5f5f4;">12% off</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #1c1917;">251+ packs</td>
+                  <td style="padding: 10px 16px; font-size: 14px; color: #ea580c; font-weight: 600; text-align: right;">15% off</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Shipping & Payment -->
+          <tr>
+            <td style="padding: 16px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td style="width: 50%; vertical-align: top; padding-right: 12px;">
+                    <h3 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1c1917;">Shipping</h3>
+                    <p style="margin: 0; font-size: 13px; color: #44403c; line-height: 1.6;">
+                      Free shipping on all wholesale orders. We ship every <strong>Tuesday</strong> via USPS Priority Mail (2-3 day delivery). Order by Monday 9 PM CT to ship that Tuesday.
+                    </p>
+                  </td>
+                  <td style="width: 50%; vertical-align: top; padding-left: 12px;">
+                    <h3 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1c1917;">Payment Terms</h3>
+                    <p style="margin: 0; font-size: 13px; color: #44403c; line-height: 1.6;">
+                      First orders are paid at checkout (card or bank transfer). As you build history with us, you'll earn better terms — up to <strong>Net 30</strong>.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Storage -->
+          <tr>
+            <td style="padding: 16px 32px;">
+              <div style="padding: 16px; background-color: #fafaf9; border-radius: 8px; border-left: 4px solid #ea580c;">
+                <h3 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: #1c1917;">Storage Tips</h3>
+                <p style="margin: 0; font-size: 13px; color: #44403c; line-height: 1.6;">
+                  Shelf-stable — no refrigeration needed. Store in a cool, dry place. Best used within 6 months of delivery.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- CTA Button -->
+          <tr>
+            <td style="padding: 24px 32px;">
+              <a href="https://lonestartortillas.com/wholesale"
+                 style="display: block; text-align: center; background-color: #ea580c; color: #ffffff; padding: 16px 24px; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 16px;">
+                Place Your First Order
+              </a>
+            </td>
+          </tr>
+
+          <!-- Support -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <p style="margin: 0; font-size: 14px; color: #44403c; line-height: 1.6; text-align: center;">
+                Questions? Reply to this email or text Matt directly at <strong>949-734-0624</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #fafaf9; text-align: center; border-top: 1px solid #e7e5e4;">
+              <p style="margin: 0 0 4px 0; font-size: 14px; font-weight: 600; color: #1c1917;">Lonestar Tortillas</p>
+              <p style="margin: 0; font-size: 12px; color: #78716c;">Premium Texas Tortillas</p>
+              <p style="margin: 8px 0 0 0; font-size: 11px; color: #a8a29e;">
+                Independent reseller. Not affiliated with or endorsed by H-E-B&reg;.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `;
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to,
+      replyTo: 'howdy@lonestartortillas.com',
+      subject: `Welcome to Lonestar Tortillas Wholesale, ${firstName}!`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send wholesale welcome email:', error);
+      return { success: false, error };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending wholesale welcome email:', error);
+    return { success: false, error };
+  }
+}

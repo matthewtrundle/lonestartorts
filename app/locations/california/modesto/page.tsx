@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'How long does tortilla delivery take to Modesto?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We deliver authentic H-E-B tortillas to Modesto in 2-3 business days via USPS Priority Mail. Orders placed by 2 PM CT ship same day.',
+        text: 'We deliver authentic H-E-B tortillas to Modesto in 2-3 business days via USPS Priority Mail. Order by Monday 9 PM CT to ship Tuesday.',
       },
     },
     {
@@ -107,8 +107,8 @@ export default function ModestoPage() {
             <h2 className="text-xl font-bold text-charcoal-950 mb-2">Modesto Shipping Details</h2>
             <ul className="text-charcoal-700 space-y-2">
               <li><strong>Delivery Time:</strong> 2-3 business days via USPS Priority Mail</li>
-              <li><strong>Same-Day Shipping:</strong> Orders placed by 2 PM CT</li>
-              <li><strong>Free Shipping:</strong> On orders over $45</li>
+              <li><strong>Order Cutoff:</strong> Monday 9 PM CT</li>
+              <li><strong>Free Shipping:</strong> On orders $60+</li>
               <li><strong>Coverage:</strong> All Modesto and Stanislaus County ZIP codes</li>
             </ul>
           </section>
@@ -128,7 +128,7 @@ export default function ModestoPage() {
                 <div className="text-charcoal-600">Days to Modesto</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <div className="text-3xl font-bold text-sunset-600">$45+</div>
+                <div className="text-3xl font-bold text-sunset-600">$60+</div>
                 <div className="text-charcoal-600">Free Shipping</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">

@@ -390,7 +390,7 @@ export default function LocationsPage() {
             </h1>
             <p className="text-xl text-cream-100 max-w-3xl">
               Authentic Texas tortillas shipped to your door, anywhere in the United States.
-              Fast, reliable delivery with free shipping on orders over $45.
+              Fast, reliable delivery with free shipping on orders $60+.
             </p>
           </div>
         </header>
@@ -546,7 +546,7 @@ export default function LocationsPage() {
                   <ul className="space-y-3 text-charcoal-700">
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>
-                      <span><strong>Free Shipping:</strong> Orders over $45</span>
+                      <span><strong>Free Shipping:</strong> Orders $60+</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>

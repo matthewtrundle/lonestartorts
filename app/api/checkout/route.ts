@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getRetailSkuFromWholesale, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
+import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getRetailSkuFromWholesale, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE } from '@/lib/products';
 import { getTierForPackCount, getWholesalePrice } from '@/lib/wholesale-tiers';
 
 // Texas sales tax rate
@@ -87,17 +87,7 @@ export async function POST(req: NextRequest) {
     // Calculate subtotal for free shipping threshold check
     const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    // Check minimum order amount ($40)
-    if (subtotal < MINIMUM_ORDER_AMOUNT) {
-      const minAmount = (MINIMUM_ORDER_AMOUNT / 100).toFixed(2);
-      const currentAmount = (subtotal / 100).toFixed(2);
-      const remaining = ((MINIMUM_ORDER_AMOUNT - subtotal) / 100).toFixed(2);
-      return NextResponse.json({
-        error: `Minimum order amount is $${minAmount}. Your current subtotal is $${currentAmount}. Add $${remaining} more to checkout.`
-      }, { status: 400 });
-    }
-
-    // Calculate flat-rate shipping based on items and subtotal
+    // Calculate shipping based on subtotal ($12.99 flat, free on $60+)
     let shippingCost = calculateShipping(fullItems, subtotal);
     let freeShippingApplied = false;
     let freeShippingReason = '';
@@ -389,16 +379,15 @@ export async function POST(req: NextRequest) {
     // Build shipping display name - Freshness First branding
     const getShippingDisplayName = () => {
       if (freeShippingApplied) {
-        const savingsText = `You saved $${(baseShippingCost / 100).toFixed(2)}`;
         if (freeShippingReason === 'wholesale') {
           return `FREE Freshness First Shipping — Ships ${shipDateDisplay}`;
         } else if (freeShippingReason === 'threshold') {
-          return `FREE Freshness First Shipping — Ships ${shipDateDisplay} (${savingsText})`;
+          return `FREE Freshness First Shipping — Ships ${shipDateDisplay} (You saved $${(FLAT_SHIPPING_RATE / 100).toFixed(2)})`;
         } else {
           return `FREE Freshness First Shipping — Ships ${shipDateDisplay}`;
         }
       }
-      return `Freshness First Shipping — Ships ${shipDateDisplay}`;
+      return `Freshness First Shipping ($${(FLAT_SHIPPING_RATE / 100).toFixed(2)}) — Ships ${shipDateDisplay}`;
     };
 
     // Wholesale order: verify customer and link Stripe customer

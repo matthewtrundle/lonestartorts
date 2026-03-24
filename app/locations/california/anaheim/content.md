@@ -24,8 +24,8 @@ A Texas twist on the classic! These flour tortillas are enriched with real butte
 We deliver fresh tortillas to Anaheim zip codes (92801 to 92809) and all surrounding Orange County cities—including Santa Ana, Irvine, and Fullerton—within 2-3 business days. Orders placed by 2 PM CT Tuesday-Friday ship same-day via refrigerated courier.  
 
 **Shipping Costs**:  
-- $9.99 flat rate for orders under $50  
-- FREE shipping on orders over $50  
+- $12.99 flat rate for orders under $60
+- FREE shipping on orders $60+  
 
 We also ship throughout California (Los Angeles, San Diego, Fresno) and neighboring states like Arizona and Nevada! Need tortillas for a catering event or large family gathering? Our bulk orders (50+ packs) receive priority shipping. [Link to: /shipping-policy]  
 

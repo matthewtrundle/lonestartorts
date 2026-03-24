@@ -5,7 +5,7 @@ import { ShoppingBag, Truck, Shield, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Buy H-E-B Tortillas Online | Shipped Nationwide',
-  description: 'Buy authentic H-E-B tortillas online from Lonestar Tortillas. FREE shipping on all orders. We ship H-E-B Bakery Flour, Butter, and Wheat tortillas nationwide Tuesdays. Independent reseller.',
+  description: 'Buy authentic H-E-B tortillas online from Lonestar Tortillas. FREE shipping on orders $60+. We ship H-E-B Bakery Flour, Butter, and Wheat tortillas nationwide Tuesdays. Independent reseller.',
   keywords: [
     'buy H-E-B tortillas online',
     'H-E-B tortillas shipped nationwide',
@@ -163,7 +163,7 @@ export default function BuyHebTortillasOnlinePage() {
         name: 'Can I buy H-E-B tortillas online and have them shipped?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide with FREE shipping. We are an independent reseller based in Texas. We ship Tuesdays; orders before 2 PM CT on Tuesday go out same-day, with delivery in 2-3 business days.',
+          text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide with FREE shipping on orders $60+. We are an independent reseller based in Texas. We ship Tuesdays; orders before Monday 9 PM CT ship the following Tuesday, with delivery in 2-3 business days.',
         },
       },
       {
@@ -187,7 +187,7 @@ export default function BuyHebTortillasOnlinePage() {
         name: 'How much does it cost to ship H-E-B tortillas?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Shipping is FREE on all orders! We ship on Tuesdays as part of our Freshness First Shipping program. Orders before 2 PM CT on Tuesday go out same-day via USPS Priority Mail, arriving in 2-3 business days.',
+          text: 'Shipping is FREE on orders $60+. Orders under $60 ship for a flat $12.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
         },
       },
       {
@@ -398,7 +398,7 @@ export default function BuyHebTortillasOnlinePage() {
             {[
               {
                 q: 'Can I buy H-E-B tortillas online and have them shipped?',
-                a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide with FREE shipping. We are an independent reseller based in Texas. We ship Tuesdays; orders before 2 PM CT on Tuesday go out same-day, with delivery in 2-3 business days.',
+                a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide with FREE shipping on orders $60+. We are an independent reseller based in Texas. We ship Tuesdays; orders before Monday 9 PM CT ship the following Tuesday, with delivery in 2-3 business days.',
               },
               {
                 q: 'Where can I buy H-E-B tortillas outside of Texas?',
@@ -410,7 +410,7 @@ export default function BuyHebTortillasOnlinePage() {
               },
               {
                 q: 'How much does it cost to ship H-E-B tortillas?',
-                a: 'Shipping is FREE on all orders! We ship on Tuesdays as part of our Freshness First Shipping program. Orders before 2 PM CT on Tuesday go out same-day via USPS Priority Mail, arriving in 2-3 business days.',
+                a: 'Shipping is FREE on orders $60+. Orders under $60 ship for a flat $12.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
               },
               {
                 q: 'Are the H-E-B tortillas authentic?',

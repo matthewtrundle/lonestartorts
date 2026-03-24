@@ -28,7 +28,7 @@ const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Premium Texas Tortillas',
-  description: 'Shop authentic H-E-B tortillas and Texas-born brands shipped nationwide with free shipping.',
+  description: 'Shop authentic H-E-B tortillas and Texas-born brands shipped nationwide. FREE shipping on orders $60+.',
   numberOfItems: allTortillaProducts.length,
   itemListElement: allTortillaProducts.map((product, index) => ({
     '@type': 'ListItem',
@@ -53,7 +53,8 @@ const itemListSchema = {
           shippingRate: {
             '@type': 'MonetaryAmount',
             value: '0',
-            currency: 'USD'
+            currency: 'USD',
+            description: 'Free shipping on orders $60+. Flat $12.99 under $60.'
           },
           deliveryTime: {
             '@type': 'ShippingDeliveryTime',
@@ -112,7 +113,7 @@ function AdVariantLayout() {
       {/* Bold Free Shipping Banner */}
       <div className="bg-sunset-600 text-white py-4 px-4 text-center">
         <p className="text-xl md:text-2xl font-bold">
-          FREE Shipping on ALL Orders
+          FREE Shipping on Orders $60+
         </p>
         <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
       </div>
@@ -238,7 +239,7 @@ export default function ShopPage({
         {/* Section Header - Compact on mobile */}
         <div className="text-center mb-4 md:mb-5">
           <h2 className="text-xl md:text-3xl font-bold text-charcoal-950 mb-1">Shop Our Tortillas</h2>
-          <p className="text-sm md:text-base text-gray-600">Order 4+ packs for FREE shipping</p>
+          <p className="text-sm md:text-base text-gray-600">FREE shipping on orders $60+</p>
         </div>
 
         {/* Bakery Fresh Collection */}
@@ -271,9 +272,9 @@ export default function ShopPage({
         <div className="mt-10 bg-sunset-600 text-white rounded-xl p-6 shadow-lg">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
-              <h2 className="text-xl font-bold mb-1">Best Value: Order 4+ Packs</h2>
+              <h2 className="text-xl font-bold mb-1">Best Value: Order $60+</h2>
               <p className="text-sunset-100">
-                Get FREE shipping and save $22.65 on your order
+                Get FREE shipping on your order
               </p>
             </div>
             <div className="flex items-center gap-4 text-sm font-medium">

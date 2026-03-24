@@ -197,9 +197,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // Calculate totals with flat-rate shipping
-  // Pricing: $20 per pack (tortillas), $12 per bottle (sauce)
-  // Shipping: $9.95 (1 pack), $19.95 (2+ packs), FREE on $80+
+  // Calculate totals with shipping
+  // Shipping: FREE on orders $60+, flat $12.99 under $60
   const { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress } = useMemo(() => {
     const itemCount = items.reduce((total, item) => total + item.quantity, 0);
     const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);

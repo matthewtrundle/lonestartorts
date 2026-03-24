@@ -89,7 +89,7 @@ export default function FloridaPage() {
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Florida Shipping Information</h2>
           <ul className="text-charcoal-700 space-y-2">
             <li><strong>Delivery Time:</strong> 2-3 business days to most Florida cities</li>
-            <li><strong>Free Shipping:</strong> On orders over $45</li>
+            <li><strong>Free Shipping:</strong> On orders $60+</li>
             <li><strong>Coverage:</strong> All Florida ZIP codes</li>
           </ul>
         </div>
@@ -109,7 +109,7 @@ export default function FloridaPage() {
               <div className="p-4 bg-white border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
                   Orders to Florida typically arrive within 2-3 business days via USPS Priority Mail.
-                  We ship Monday through Friday, and orders placed before 2 PM CT ship the same day.
+                  We ship on Tuesdays, and order by Monday 9 PM CT to ship Tuesday.
                   During peak seasons like holidays, delivery may take an extra day.
                 </p>
               </div>
@@ -139,7 +139,7 @@ export default function FloridaPage() {
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
-                  Yes! We offer free shipping on orders over $45 to Florida and all other US states.
+                  Yes! We offer free shipping on orders $60+ to Florida and all other US states.
                   For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure
                   fast, reliable delivery to every address in Florida.
                 </p>

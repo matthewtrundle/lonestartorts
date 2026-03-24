@@ -91,7 +91,7 @@ const faqs = [
   {
     question: 'What if I just want tortillas for myself?',
     answer:
-      "No chapter, no problem! Head to our shop to order individual packs. Free shipping on all orders!",
+      "No chapter, no problem! Head to our shop to order individual packs. FREE shipping on orders $60+!",
   },
   {
     question: 'Do you ship to Alaska and Hawaii?',

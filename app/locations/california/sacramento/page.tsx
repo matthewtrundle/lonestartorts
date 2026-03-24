@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'How long does shipping take to Sacramento?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2–3 business days. We ship same-day if ordered by 12 PM CT!',
+        text: 'Most orders arrive in 2–3 business days. We ship same-day if ordered by Monday 9 PM CT!',
       },
     },
     {

@@ -43,14 +43,14 @@ export function ShipsTodayCountdown() {
           <Truck className="w-4 h-4 text-green-600 flex-shrink-0" />
           <div className="flex-1">
             <div className="text-sm font-semibold text-green-800">
-              Freshness First — Ships Today!
+              Freshness First — Ships Tomorrow!
             </div>
             <div className="flex items-center gap-1 mt-0.5">
               <Clock className="w-3 h-3 text-green-600" />
               <span className="font-mono text-base font-bold text-green-700">
                 {pad(countdown.hours)}:{pad(countdown.minutes)}:{pad(countdown.seconds)}
               </span>
-              <span className="text-xs text-green-600 ml-1">until 2 PM CT cutoff</span>
+              <span className="text-xs text-green-600 ml-1">until 9 PM CT cutoff</span>
             </div>
           </div>
         </div>

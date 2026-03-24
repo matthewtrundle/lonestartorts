@@ -41,8 +41,8 @@ export default function RochesterPage() {
             <h2 className="text-xl font-bold text-charcoal-950 mb-2">Rochester Shipping Details</h2>
             <ul className="text-charcoal-700 space-y-2">
               <li><strong>Delivery Time:</strong> 2-3 business days via USPS Priority Mail</li>
-              <li><strong>Same-Day Shipping:</strong> Orders placed by 2 PM CT</li>
-              <li><strong>Free Shipping:</strong> On orders over $45</li>
+              <li><strong>Order Cutoff:</strong> Monday 9 PM CT</li>
+              <li><strong>Free Shipping:</strong> On orders $60+</li>
             </ul>
           </section>
 

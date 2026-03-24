@@ -50,7 +50,7 @@ const howToSchema = {
       '@type': 'HowToStep',
       position: 5,
       name: 'Order your tortillas',
-      text: 'Order authentic H-E-B tortillas from Lonestar Tortillas with free shipping on all orders.'
+      text: 'Order authentic H-E-B tortillas from Lonestar Tortillas with FREE shipping on orders $60+.'
     }
   ]
 };

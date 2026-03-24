@@ -46,7 +46,7 @@ export default function MinnesotaPage() {
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg">
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Minnesota Shipping Details</h2>
-          <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 2-3 business days</li><li><strong>Free Shipping:</strong> On orders over $45</li><li><strong>Coverage:</strong> All Minnesota zip codes</li></ul>
+          <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 2-3 business days</li><li><strong>Free Shipping:</strong> On orders $60+</li><li><strong>Coverage:</strong> All Minnesota zip codes</li></ul>
         </div>
       </section>
       <section className="max-w-4xl mx-auto px-6 py-12">
@@ -61,7 +61,7 @@ export default function MinnesotaPage() {
                 </svg>
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
-                <p className="text-charcoal-700 leading-relaxed">Orders to Minnesota typically arrive within 2-3 business days via USPS Priority Mail. We ship Monday through Friday, and orders placed before 2 PM CT ship the same day.</p>
+                <p className="text-charcoal-700 leading-relaxed">Orders to Minnesota typically arrive within 2-3 business days via USPS Priority Mail. We ship on Tuesdays, and order by Monday 9 PM CT to ship Tuesday.</p>
               </div>
             </details>
             <details className="group border border-charcoal-200 rounded-lg overflow-hidden">
@@ -83,7 +83,7 @@ export default function MinnesotaPage() {
                 </svg>
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
-                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders over $45 to Minnesota and all other US states. Flat-rate shipping is $12.99 for smaller orders.</p>
+                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders $60+ to Minnesota and all other US states. Flat-rate shipping is $12.99 for smaller orders.</p>
               </div>
             </details>
             <details className="group border border-charcoal-200 rounded-lg overflow-hidden">

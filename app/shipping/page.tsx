@@ -28,7 +28,7 @@ const faqSchema = {
       name: 'Does Lonestar Tortillas ship H-E-B tortillas nationwide?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas ships authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping on all orders. We are an independent reseller based in Austin, Texas. Orders ship via USPS Priority Mail with 2-3 business day delivery.',
+        text: 'Yes. Lonestar Tortillas ships authentic H-E-B Bakery tortillas to all 50 US states. FREE shipping on orders $60+, or flat $12.99 shipping on smaller orders. We are an independent reseller based in Austin, Texas. Orders ship via USPS Priority Mail with 2-3 business day delivery.',
       },
     },
     {
@@ -36,7 +36,7 @@ const faqSchema = {
       name: 'How much does shipping cost for H-E-B tortillas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Shipping is FREE on all orders! We ship via USPS Priority Mail with 2-3 business day delivery.',
+        text: 'Shipping is FREE on orders $60+. Orders under $60 ship for a flat $12.99. We ship via USPS Priority Mail with 2-3 business day delivery.',
       },
     },
     {
@@ -44,7 +44,7 @@ const faqSchema = {
       name: 'What days does Lonestar Tortillas ship?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We ship on Tuesdays only as part of our Freshness First Shipping program. Orders placed before 2 PM CT on Tuesday go out the same day. Orders placed after 2 PM CT on Tuesday or on other days ship the following Tuesday. This schedule ensures your tortillas spend the fewest days in transit.',
+        text: 'We ship on Tuesdays only as part of our Freshness First Shipping program. Orders placed before Monday 9 PM CT ship the following Tuesday. Orders placed after Monday 9 PM CT ship the next Tuesday. This schedule ensures your tortillas spend the fewest days in transit.',
       },
     },
     {
@@ -52,7 +52,7 @@ const faqSchema = {
       name: 'How long does it take to receive H-E-B tortillas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We ship on Tuesdays. Orders placed before 2 PM CT on Tuesday go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.',
+        text: 'We ship on Tuesdays. Orders placed before Monday 9 PM CT ship the following day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.',
       },
     },
     {
@@ -87,7 +87,7 @@ const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Freshness First Shipping - H-E-B Tortillas Delivered Nationwide',
-  description: 'Lonestar Tortillas ships H-E-B tortillas to all 50 US states with FREE shipping. We ship Tuesdays for maximum freshness. 2-3 day delivery via USPS Priority Mail.',
+  description: 'Lonestar Tortillas ships H-E-B tortillas to all 50 US states. FREE shipping on orders $60+, flat $12.99 under $60. We ship Tuesdays for maximum freshness. 2-3 day delivery via USPS Priority Mail.',
   url: 'https://lonestartortillas.com/shipping',
   isPartOf: {
     '@type': 'WebSite',

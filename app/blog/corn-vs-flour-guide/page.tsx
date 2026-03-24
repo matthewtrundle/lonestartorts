@@ -280,7 +280,7 @@ export default function CornVsFlourGuidePage() {
             <div className="bg-gradient-to-r from-rust-600 to-sunset-600 text-cream-50 rounded-xl p-8 text-center mt-12">
               <h2 className="text-3xl font-bold mb-4">Ready to Taste the Difference?</h2>
               <p className="text-xl mb-6 text-cream-100">
-                Shop authentic Texas tortillas with FREE shipping on all orders
+                Shop authentic Texas tortillas with FREE shipping on orders $60+
               </p>
               <Link
                 href="/shop"

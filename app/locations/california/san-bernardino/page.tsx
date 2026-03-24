@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'How long does tortilla delivery take to San Bernardino?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We deliver authentic H-E-B tortillas to San Bernardino in 2-3 business days via USPS Priority Mail. Orders placed by 2 PM CT ship same day.',
+        text: 'We deliver authentic H-E-B tortillas to San Bernardino in 2-3 business days via USPS Priority Mail. Order by Monday 9 PM CT to ship Tuesday.',
       },
     },
     {
@@ -115,8 +115,8 @@ export default function SanBernardinoPage() {
             <h2 className="text-xl font-bold text-charcoal-950 mb-2">San Bernardino Shipping Details</h2>
             <ul className="text-charcoal-700 space-y-2">
               <li><strong>Delivery Time:</strong> 2-3 business days via USPS Priority Mail</li>
-              <li><strong>Same-Day Shipping:</strong> Orders placed by 2 PM CT</li>
-              <li><strong>Free Shipping:</strong> On orders over $45</li>
+              <li><strong>Order Cutoff:</strong> Monday 9 PM CT</li>
+              <li><strong>Free Shipping:</strong> On orders $60+</li>
               <li><strong>Coverage:</strong> All San Bernardino ZIP codes (92401-92427)</li>
             </ul>
           </section>
@@ -136,7 +136,7 @@ export default function SanBernardinoPage() {
                 <div className="text-charcoal-600">Days to San Bernardino</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <div className="text-3xl font-bold text-sunset-600">$45+</div>
+                <div className="text-3xl font-bold text-sunset-600">$60+</div>
                 <div className="text-charcoal-600">Free Shipping</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
@@ -174,7 +174,7 @@ export default function SanBernardinoPage() {
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="font-bold text-charcoal-950 mb-2">How long does delivery take to San Bernardino?</h3>
-                <p className="text-charcoal-700">We deliver to San Bernardino in 2-3 business days via USPS Priority Mail. Orders placed by 2 PM CT ship the same day.</p>
+                <p className="text-charcoal-700">We deliver to San Bernardino in 2-3 business days via USPS Priority Mail. Order by Monday 9 PM CT to ship Tuesday.</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="font-bold text-charcoal-950 mb-2">Do you deliver throughout the Inland Empire?</h3>

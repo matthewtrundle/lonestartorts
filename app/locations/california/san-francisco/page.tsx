@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'How long does shipping take to San Francisco?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2–3 business days via refrigerated shipping. We ship same-day if ordered by 2 PM CT.',
+        text: 'Most orders arrive in 2–3 business days via refrigerated shipping. We ship Tuesday if ordered by Monday 9 PM CT.',
       },
     },
     {

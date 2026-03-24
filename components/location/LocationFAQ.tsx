@@ -13,7 +13,7 @@ export function LocationFAQ({ city, state, faqs }: LocationFAQProps) {
   const defaultFAQs: FAQItem[] = [
     {
       question: `How long does shipping to ${city} take?`,
-      answer: `Orders to ${city}, ${state} typically arrive within 2-3 business days via USPS Priority Mail. We ship on Tuesdays, and orders placed before 2 PM CT ship the same day. During peak seasons, delivery may take an extra day.`
+      answer: `Orders to ${city}, ${state} typically arrive within 2-3 business days via USPS Priority Mail. We ship on Tuesdays — order by Monday 9 PM CT to make that week's shipment. During peak seasons, delivery may take an extra day.`
     },
     {
       question: `Are the tortillas fresh when they arrive in ${city}?`,
@@ -21,7 +21,7 @@ export function LocationFAQ({ city, state, faqs }: LocationFAQProps) {
     },
     {
       question: `Do you offer free shipping to ${city}?`,
-      answer: `Yes! We offer free shipping on orders over $45 to ${city} and all other destinations in ${state}. For smaller orders, shipping rates start at $7.99 and vary based on order size.`
+      answer: `Yes! We offer FREE shipping on orders $60+ to ${city} and all other destinations in ${state}. Orders under $60 ship for a flat $12.99.`
     },
     {
       question: `What types of tortillas can I order to ${city}?`,

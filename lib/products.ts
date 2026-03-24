@@ -1,18 +1,21 @@
 // Product catalog - centralized source of truth
 // Pricing: 4x markup on all products
-// Shipping: FREE on all orders (minimum order $40)
+// Shipping: FREE on orders $60+, flat $12.99 under $60
 
-// Minimum order amount in cents ($40)
-export const MINIMUM_ORDER_AMOUNT = 4000;
+// No minimum order amount (removed)
+export const MINIMUM_ORDER_AMOUNT = 0;
 
-// Legacy constants (kept for compatibility)
-export const FREE_SHIPPING_THRESHOLD = 0; // Free shipping on all orders
+// Free shipping threshold in cents ($60)
+export const FREE_SHIPPING_THRESHOLD = 6000;
 
-// Legacy shipping rates (not used - free shipping)
+// Flat shipping rate for orders under $60 ($12.99)
+export const FLAT_SHIPPING_RATE = 1299;
+
+// Legacy shipping rates (kept for reference)
 export const SHIPPING_RATES = {
-  small: 0,
-  large: 0,
-  sauce: 0,
+  small: 1299,
+  large: 1299,
+  sauce: 1299,
 };
 
 export interface Product {
@@ -299,35 +302,21 @@ export function getDisplayName(product: { name: string; tortillaCount?: number }
   return product.name;
 }
 
-// Calculate shipping - FREE SHIPPING ON ALL ORDERS
-// Policy: Free shipping on all orders (minimum order $40)
+// Calculate shipping - FREE on orders $60+, flat $12.99 under $60
 export function calculateShipping(
   items: { productType?: string; quantity: number; sku?: string }[],
   subtotal?: number
 ): number {
-  // FREE shipping on all orders
-  return 0;
+  if (subtotal !== undefined && subtotal >= FREE_SHIPPING_THRESHOLD) {
+    return 0;
+  }
+  return FLAT_SHIPPING_RATE;
 }
 
 // Calculate what shipping WOULD be without free shipping threshold
 // Used for showing "You're saving $X" messaging
-export function calculateBaseShipping(items: { productType?: string; quantity: number }[]): number {
-  const tortillaPacks = items
-    .filter(item => item.productType !== 'sauce')
-    .reduce((total, item) => total + item.quantity, 0);
-
-  const hasSauce = items.some(item => item.productType === 'sauce');
-
-  if (tortillaPacks > 0) {
-    // Flat rate: 1 pack = $9.95, 2+ packs = $19.95
-    return tortillaPacks === 1 ? SHIPPING_RATES.small : SHIPPING_RATES.large;
-  }
-
-  if (hasSauce) {
-    return SHIPPING_RATES.sauce;
-  }
-
-  return 0;
+export function calculateBaseShipping(_items: { productType?: string; quantity: number }[]): number {
+  return FLAT_SHIPPING_RATE;
 }
 
 // Free shipping progress helper
@@ -339,10 +328,12 @@ export function getFreeShippingProgress(subtotal: number): {
 } {
   const qualifies = subtotal >= FREE_SHIPPING_THRESHOLD;
   const amountRemaining = qualifies ? 0 : FREE_SHIPPING_THRESHOLD - subtotal;
-  const percentComplete = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100));
+  const percentComplete = FREE_SHIPPING_THRESHOLD > 0
+    ? Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100))
+    : 100;
 
-  // Estimate savings (based on large box shipping cost)
-  const savedAmount = qualifies ? SHIPPING_RATES.large : 0; // $19.95 for 2+ packs
+  // Savings = flat shipping rate when qualifying for free shipping
+  const savedAmount = qualifies ? FLAT_SHIPPING_RATE : 0;
 
   return {
     qualifies,

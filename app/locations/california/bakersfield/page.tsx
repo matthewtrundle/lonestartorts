@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'How long does shipping take to Bakersfield?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Orders ship same-day (if placed by 2 PM CT Tue) and arrive within 2 business days. Most Bakersfield customers receive orders Thursday/Friday.',
+        text: 'Orders ship Tuesday (if ordered by Monday 9 PM CT) and arrive within 2 business days. Most Bakersfield customers receive orders Thursday/Friday.',
       },
     },
     {

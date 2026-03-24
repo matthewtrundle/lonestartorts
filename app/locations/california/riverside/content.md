@@ -29,7 +29,7 @@ Our indulgent twist on a classic: flour tortillas enriched with real butter for 
 We deliver fresh tortillas throughout Riverside and the Inland Empire—including San Bernardino, Corona, and greater Los Angeles—within 2-3 business days. Orders ship via refrigerated carriers to ensure they arrive as fresh as the day they were made.  
 
 **Key Details**:  
-- **Cost**: Flat-rate shipping starts at $7.99. Free shipping on orders over $50.  
+- **Cost**: Flat $12.99 shipping on orders under $60. FREE shipping on orders $60+.  
 - **Delivery Area**: Covers all of Riverside County, plus nearby cities like Temecula, Redlands, and Ontario.  
 - **Frequency**: Set up weekly, biweekly, or monthly subscriptions to never run out.  
 

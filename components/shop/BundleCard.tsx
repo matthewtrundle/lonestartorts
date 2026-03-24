@@ -127,7 +127,7 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
 
         {/* Shipping Info */}
         <div className="mb-2 md:mb-3 py-1.5 md:py-2 px-2 md:px-3 rounded-lg text-center text-[10px] md:text-xs bg-green-50 text-green-700 font-semibold">
-          FREE shipping included!
+          FREE shipping on orders $60+
         </div>
 
         {/* CTA Button */}

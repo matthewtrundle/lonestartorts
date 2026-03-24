@@ -33,7 +33,7 @@ We know freshness is key, so we expedite every order from our Texas facility to 
 
 **Delivery Areas**: We serve all Oakland ZIP codes, including neighborhoods like Rockridge, Temescal, and Downtown. We also deliver throughout the Bay Area—Berkeley, San Francisco, San Jose, and beyond!  
 
-**Shipping Costs**: Flat-rate shipping starts at $9.99, with free shipping on orders over $75. Rest assured, your tortillas are packed in insulated coolers with ice packs to lock in freshness.  
+**Shipping Costs**: Flat $12.99 shipping on orders under $60, with FREE shipping on orders $60+. Rest assured, your tortillas are packed in insulated coolers with ice packs to lock in freshness.  
 
 **California-Wide & Beyond**: While we’re proud to serve Oakland, we also ship to Los Angeles, Sacramento, San Diego, and nearby states like Oregon and Nevada. Got friends in Portland or Reno craving real Texas tortillas? Spread the word!  
 

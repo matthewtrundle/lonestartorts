@@ -27,7 +27,7 @@ const faqSchema = {
       name: 'How long does shipping take to Los Angeles?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive within 2-3 business days. We ship same-day if ordered by 2 PM CT.',
+        text: 'Most orders arrive within 2-3 business days. We ship Tuesday if ordered by Monday 9 PM CT.',
       },
     },
     {
@@ -191,7 +191,7 @@ export default function LosAngelesPage() {
               <div>
                 <h3 className="font-bold text-charcoal-950 mb-2">Fast Delivery</h3>
                 <p className="text-charcoal-700">
-                  Orders placed by 2 PM CT ship same-day via refrigerated transit. Most Los Angeles addresses (including Long Beach, Anaheim, and San Diego) receive orders in 2-3 business days.
+                  Order by Monday 9 PM CT to ship Tuesday via refrigerated transit. Most Los Angeles addresses (including Long Beach, Anaheim, and San Diego) receive orders in 2-3 business days.
                 </p>
               </div>
               <div>
@@ -278,7 +278,7 @@ export default function LosAngelesPage() {
             <div className="space-y-4">
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2">How long does shipping take to Los Angeles?</h3>
-                <p className="text-charcoal-700">Most orders arrive within 2-3 business days. We ship same-day if ordered by 2 PM CT.</p>
+                <p className="text-charcoal-700">Most orders arrive within 2-3 business days. We ship Tuesday if ordered by Monday 9 PM CT.</p>
               </div>
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2">How should I store my tortillas?</h3>

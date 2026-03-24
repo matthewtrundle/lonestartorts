@@ -47,7 +47,7 @@ export default function ShippingPageContent() {
           </p>
 
           <p className="text-lg text-green-400 font-bold mb-8">
-            FREE Shipping on All Orders
+            FREE Shipping on Orders $60+
           </p>
 
           {mounted && shippingMsg && (
@@ -77,7 +77,7 @@ export default function ShippingPageContent() {
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
             <Calendar className="w-10 h-10 text-sunset-500 mx-auto mb-4" />
             <h3 className="font-bold text-charcoal-950 mb-2">Tuesday Shipping</h3>
-            <p className="text-gray-600 text-sm">Orders before 2 PM CT on Tuesday ship same day</p>
+            <p className="text-gray-600 text-sm">Order by Monday 9 PM CT to ship Tuesday</p>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
             <Truck className="w-10 h-10 text-sunset-500 mx-auto mb-4" />
@@ -131,11 +131,11 @@ export default function ShippingPageContent() {
             <div className="space-y-3 text-sm text-charcoal-700">
               <div className="flex items-start gap-2">
                 <ShieldCheck className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                <span><strong>Tuesday before 2 PM CT:</strong> Ships same day</span>
+                <span><strong>Monday before 9 PM CT:</strong> Ships Tuesday</span>
               </div>
               <div className="flex items-start gap-2">
                 <Clock className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                <span><strong>Tuesday after 2 PM CT – Monday:</strong> Ships next Tuesday</span>
+                <span><strong>Monday after 9 PM CT – Sunday:</strong> Ships next Tuesday</span>
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@ export default function ShippingPageContent() {
                 </li>
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-green-600" />
-                  Ships Tuesdays (2 PM CT cutoff for same-day)
+                  Ships Tuesdays (order by Monday 9 PM CT)
                 </li>
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-green-600" />
@@ -171,7 +171,7 @@ export default function ShippingPageContent() {
                 </li>
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-green-600" />
-                  FREE shipping on all orders
+                  FREE shipping on orders $60+
                 </li>
               </ul>
             </div>
@@ -218,11 +218,11 @@ export default function ShippingPageContent() {
               },
               {
                 q: 'How much does shipping cost?',
-                a: 'Shipping is FREE on all orders! We ship via USPS Priority Mail.',
+                a: 'Shipping is FREE on orders $60+. Orders under $60 ship for a flat $12.99. We ship via USPS Priority Mail.',
               },
               {
                 q: 'What days do you ship?',
-                a: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before 2 PM CT on Tuesday go out the same day. Orders placed after 2 PM CT on Tuesday or on other days ship the following Tuesday.',
+                a: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before Monday 9 PM CT ship the following Tuesday. Orders placed after Monday 9 PM CT ship the next Tuesday.',
               },
               {
                 q: 'How long does delivery take?',

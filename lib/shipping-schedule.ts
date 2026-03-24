@@ -2,12 +2,14 @@
  * Freshness First Shipping Schedule
  *
  * Single source of truth for all shipping logic.
- * We ship Tuesday only with a 2:00 PM CT cutoff.
+ * We ship Tuesday only with a Monday 9:00 PM CT cutoff.
  */
 
 /** Tuesday=2 */
 export const SHIPPING_DAYS = [2] as const;
-export const CUTOFF_HOUR = 14; // 2 PM
+/** Cutoff is the evening BEFORE ship day: Monday=1 at 9 PM (21:00) */
+export const CUTOFF_DAY = 1; // Monday (day before Tuesday)
+export const CUTOFF_HOUR = 21; // 9 PM
 export const TIMEZONE = 'America/Chicago';
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -48,24 +50,25 @@ export function isShipDay(dayOfWeek: number): boolean {
   return (SHIPPING_DAYS as readonly number[]).includes(dayOfWeek);
 }
 
-/** Is it before the 2 PM CT cutoff right now? */
+/** Is it before the Monday 9 PM CT cutoff right now? */
 export function isBeforeCutoff(now: Date = new Date()): boolean {
   const ct = getCentralTime(now);
-  return ct.hour < CUTOFF_HOUR;
+  return ct.dayOfWeek === CUTOFF_DAY && ct.hour < CUTOFF_HOUR;
 }
 
 /** Get the next ship date from a given time */
 export function getNextShipDate(now: Date = new Date()): Date {
   const ct = getCentralTime(now);
   const todayDow = ct.dayOfWeek;
-  const beforeCutoff = ct.hour < CUTOFF_HOUR;
 
-  // If today is a ship day and before cutoff, ships today
-  if (isShipDay(todayDow) && beforeCutoff) {
-    return new Date(ct.year, ct.month - 1, ct.day);
+  // If it's cutoff day (Monday) and before cutoff (9 PM), ships tomorrow (Tuesday)
+  if (todayDow === CUTOFF_DAY && ct.hour < CUTOFF_HOUR) {
+    const shipDate = new Date(ct.year, ct.month - 1, ct.day);
+    shipDate.setDate(shipDate.getDate() + 1); // Tomorrow = Tuesday
+    return shipDate;
   }
 
-  // Otherwise find the next ship day
+  // Otherwise find the next ship day (next Tuesday)
   let daysToAdd = 1;
   for (let i = 1; i <= 7; i++) {
     const nextDow = (todayDow + i) % 7;
@@ -93,10 +96,10 @@ export function getShipDateDisplay(now: Date = new Date()): string {
   return formatShipDate(getNextShipDate(now));
 }
 
-/** Get time remaining until 2 PM CT cutoff. Returns null if not a ship day or past cutoff. */
+/** Get time remaining until Monday 9 PM CT cutoff. Returns null if not cutoff day or past cutoff. */
 export function getTimeUntilCutoff(now: Date = new Date()): { hours: number; minutes: number; seconds: number } | null {
   const ct = getCentralTime(now);
-  if (!isShipDay(ct.dayOfWeek) || ct.hour >= CUTOFF_HOUR) {
+  if (ct.dayOfWeek !== CUTOFF_DAY || ct.hour >= CUTOFF_HOUR) {
     return null;
   }
   const totalSeconds = (CUTOFF_HOUR * 3600) - (ct.hour * 3600 + ct.minute * 60 + ct.second);
@@ -121,35 +124,21 @@ export interface ShippingMessage {
 export function getShippingMessage(now: Date = new Date()): ShippingMessage {
   const ct = getCentralTime(now);
   const todayDow = ct.dayOfWeek;
-  const beforeCutoff = ct.hour < CUTOFF_HOUR;
   const shipDate = getNextShipDate(now);
   const shipDateFormatted = formatShipDate(shipDate);
 
-  // Ships today: it's a ship day and before cutoff
-  if (isShipDay(todayDow) && beforeCutoff) {
+  // Cutoff day (Monday) before 9 PM — order now to ship tomorrow!
+  if (todayDow === CUTOFF_DAY && ct.hour < CUTOFF_HOUR) {
     return {
       type: 'ships-today',
-      headline: `Freshness First — Ships Today!`,
-      subtext: `Order by 2 PM CT for same-day shipping`,
+      headline: `Freshness First — Ships Tomorrow!`,
+      subtext: `Order by 9 PM CT tonight to ship tomorrow`,
       shipDate,
       shipDateFormatted,
     };
   }
 
-  // Ships tomorrow: it's a ship day after cutoff, and tomorrow is also a ship day
-  // (Mon after 2PM → Tue, Tue after 2PM → Wed)
-  const tomorrowDow = (todayDow + 1) % 7;
-  if (isShipDay(todayDow) && !beforeCutoff && isShipDay(tomorrowDow)) {
-    return {
-      type: 'ships-tomorrow',
-      headline: `Freshness First — Ships ${shipDateFormatted}`,
-      subtext: `Tomorrow's shipment for maximum freshness`,
-      shipDate,
-      shipDateFormatted,
-    };
-  }
-
-  // Ships next ship day (Tue after 2PM, Wed-Mon)
+  // Ships next Tuesday
   return {
     type: 'ships-next-shipday',
     headline: `Freshness First — Ships ${shipDateFormatted}`,
@@ -163,13 +152,13 @@ export function getShippingMessage(now: Date = new Date()): ShippingMessage {
 export function getShippingScheduleInfo() {
   return {
     shipDays: 'Tuesday',
-    cutoffTime: '2:00 PM CT',
+    cutoffTime: '9:00 PM CT Monday',
     deliveryTime: '2–3 business days after shipping',
     scheduleDescription:
       'We ship on Tuesdays so your tortillas spend the fewest days in transit. No weekend warehouse sitting — just fresh Texas tortillas, delivered fast.',
     schedule: [
-      { day: 'Monday', canShip: false, note: 'Orders ship Tuesday' },
-      { day: 'Tuesday', canShip: true, note: 'Orders before 2 PM CT ship same day' },
+      { day: 'Monday', canShip: false, note: 'Order by 9 PM CT to ship Tuesday' },
+      { day: 'Tuesday', canShip: true, note: 'Ship day' },
       { day: 'Wednesday', canShip: false, note: 'Orders ship next Tuesday' },
       { day: 'Thursday', canShip: false, note: 'Orders ship next Tuesday' },
       { day: 'Friday', canShip: false, note: 'Orders ship next Tuesday' },

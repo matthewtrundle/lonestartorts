@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'Can I buy H-E-B tortillas online and have them shipped?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship on Tuesdays — orders placed before 2 PM CT on Tuesday go out the same day via USPS Priority Mail, with delivery in 2-3 business days. Visit lonestartortillas.com/shop to order now.'
+        text: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping on orders $60+. We are an independent reseller based in Austin, Texas. We ship on Tuesdays — orders placed before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, with delivery in 2-3 business days. Visit lonestartortillas.com/shop to order now.'
       }
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'Does anyone ship H-E-B tortillas nationwide?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship on Tuesdays for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
+        text: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping on orders $60+. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship on Tuesdays for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
       }
     },
     {
@@ -61,7 +61,7 @@ const faqSchema = {
       name: 'Where can I buy H-E-B tortillas if I don\'t live in Texas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Tuesdays; orders before 2 PM CT on Tuesday go out same-day.'
+        text: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping on orders $60+. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Tuesdays; orders before Monday 9 PM CT ship the following Tuesday.'
       }
     },
     {
@@ -117,7 +117,7 @@ const faqSchema = {
       name: 'How much does shipping cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'FREE shipping on all orders! All orders are carefully packaged with insulation to ensure freshness during transit.'
+        text: 'FREE shipping on orders $60+ (flat $12.99 under $60)! All orders are carefully packaged with insulation to ensure freshness during transit.'
       }
     },
     {
@@ -125,7 +125,7 @@ const faqSchema = {
       name: 'How long does shipping take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before 2 PM CT on Tuesday go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
+        text: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before Monday 9 PM CT ship the following Tuesday. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
       }
     },
     {
@@ -233,19 +233,19 @@ const faqs = [
     questions: [
       {
         q: 'Can I buy H-E-B tortillas online and have them shipped?',
-        a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas. We ship on Tuesdays — orders placed before 2 PM CT on Tuesday go out the same day via USPS Priority Mail, with delivery in 2-3 business days.'
+        a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide to all 50 US states with FREE shipping on orders $60+. We are an independent reseller based in Austin, Texas. We ship on Tuesdays — orders placed before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, with delivery in 2-3 business days.'
       },
       {
         q: 'Who sells H-E-B tortillas online?',
-        a: 'Lonestar Tortillas sells H-E-B tortillas online at lonestartortillas.com. We are an independent reseller that purchases authentic H-E-B Bakery tortillas in Texas and ships them nationwide with FREE shipping. We sell H-E-B Bakery Flour Tortillas, Butter Tortillas, and Wheat Tortillas. We are not affiliated with or endorsed by H-E-B.'
+        a: 'Lonestar Tortillas sells H-E-B tortillas online at lonestartortillas.com. We are an independent reseller that purchases authentic H-E-B Bakery tortillas in Texas and ships them nationwide with FREE shipping on orders $60+. We sell H-E-B Bakery Flour Tortillas, Butter Tortillas, and Wheat Tortillas. We are not affiliated with or endorsed by H-E-B.'
       },
       {
         q: 'Does anyone ship H-E-B tortillas nationwide?',
-        a: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship on Tuesdays for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
+        a: 'Yes. Lonestar Tortillas ships authentic H-E-B tortillas nationwide to all 50 US states with FREE shipping on orders $60+. We are an independent reseller based in Texas. H-E-B Bakery tortillas are shelf-stable and ship well without refrigeration. We ship on Tuesdays for maximum freshness, with 2-3 business day delivery via USPS Priority Mail.'
       },
       {
         q: 'Where can I buy H-E-B tortillas if I don\'t live in Texas?',
-        a: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Tuesdays; orders before 2 PM CT on Tuesday go out same-day.'
+        a: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship authentic H-E-B Bakery tortillas to all 50 US states with FREE shipping on orders $60+. We are an independent reseller based in Austin, Texas, not affiliated with H-E-B. We ship Tuesdays; orders before Monday 9 PM CT ship the following Tuesday.'
       },
     ]
   },
@@ -275,11 +275,11 @@ const faqs = [
       },
       {
         q: 'How much does shipping cost?',
-        a: 'FREE shipping on all orders! All orders are carefully packaged with insulation to ensure freshness during transit.'
+        a: 'FREE shipping on orders $60+ (flat $12.99 under $60)! All orders are carefully packaged with insulation to ensure freshness during transit.'
       },
       {
         q: 'How long does shipping take?',
-        a: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before 2 PM CT on Tuesday go out the same day. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
+        a: 'We ship on Tuesdays as part of our Freshness First Shipping program. Orders placed before Monday 9 PM CT ship the following Tuesday. Delivery takes 2-3 business days to most US addresses via USPS Priority Mail. Alaska and Hawaii may take 4-7 business days.'
       },
       {
         q: 'How are the tortillas packaged for shipping?',
@@ -330,7 +330,7 @@ const faqs = [
     questions: [
       {
         q: 'How much do the tortillas cost?',
-        a: 'Pricing varies by product - check our shop page for current prices. All orders include FREE shipping!'
+        a: 'Pricing varies by product - check our shop page for current prices. FREE shipping on orders $60+, flat $12.99 under $60.'
       },
       {
         q: 'Do you offer subscriptions or recurring orders?',
