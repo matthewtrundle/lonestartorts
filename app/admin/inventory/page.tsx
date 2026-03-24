@@ -11,6 +11,7 @@ import {
   AlertTriangle,
   Thermometer,
   Archive,
+  ClipboardList,
 } from 'lucide-react';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -137,6 +138,25 @@ export default function InventoryPage() {
   const refrigeratedItems = adjustedProjections.filter((p) => p.storage === 'refrigerated' && p.totalProjectedQty > 0);
   const shelfStableItems = adjustedProjections.filter((p) => p.storage === 'shelf_stable' && p.totalProjectedQty > 0);
 
+  const handleDownloadShoppingList = () => {
+    const escapeCsv = (val: string) => (val.includes(',') || val.includes('"') ? `"${val.replace(/"/g, '""')}"` : val);
+    const header = ['Product', 'Storage', 'Confirmed', 'Projected', 'Total to Buy', 'HEB Limit', 'HEB Orders Needed'];
+    const rows = adjustedProjections
+      .filter((p) => p.totalProjectedQty > 0)
+      .map((p) => [
+        escapeCsv(p.name), p.storage, String(p.confirmedQty), String(p.projectedAdditionalQty),
+        String(p.netToBuy), p.hebLimit ? String(p.hebLimit) : 'No limit', String(p.hebOrdersNeeded),
+      ]);
+    const csv = [header.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `shopping-list-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -186,7 +206,7 @@ export default function InventoryPage() {
             <TrendingUp className="w-4 h-4" />
             <span className="text-xs font-medium uppercase">Growth Trend</span>
           </div>
-          <p className="text-2xl font-bold text-charcoal-950">
+          <p className={`text-2xl font-bold ${data.growthTrend > 0 ? 'text-green-600' : data.growthTrend < 0 ? 'text-red-600' : 'text-charcoal-950'}`}>
             {data.growthTrend > 0 ? '+' : ''}{data.growthTrend}%
           </p>
         </div>
@@ -202,6 +222,13 @@ export default function InventoryPage() {
             {pickupOpen ? <ChevronDown className="w-5 h-5 text-charcoal-400" /> : <ChevronRight className="w-5 h-5 text-charcoal-400" />}
             <h2 className="text-lg font-semibold text-charcoal-950">Pickup Schedule</h2>
           </div>
+        </button>
+        <button
+          onClick={(e) => { e.stopPropagation(); handleDownloadShoppingList(); }}
+          className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-charcoal-700 bg-charcoal-100 rounded-lg hover:bg-charcoal-200 transition-colors"
+        >
+          <ClipboardList className="w-4 h-4" />
+          Download Shopping List
         </button>
 
         {pickupOpen && (
@@ -385,9 +412,9 @@ function ItemTable({ items, showBuffer }: { items: SkuProjection[]; showBuffer: 
 
 function WeeklyTrendChart({ weeks }: { weeks: HistoricalWeek[] }) {
   const maxOrders = Math.max(...weeks.map((w) => w.orderCount), 1);
-  const chartHeight = 160;
-  const barWidth = 40;
-  const gap = 8;
+  const chartHeight = 200;
+  const barWidth = 48;
+  const gap = 10;
   const chartWidth = weeks.length * (barWidth + gap) - gap;
 
   return (
