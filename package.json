@@ -41,7 +41,8 @@
     "svix": "^1.81.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "web-vitals": "^5.1.0"
+    "web-vitals": "^5.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
