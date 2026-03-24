@@ -152,6 +152,14 @@ export default function AnalyticsPage() {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [orderSizeOpen, setOrderSizeOpen] = useState(true);
   const [shippingOpen, setShippingOpen] = useState(false);
+  const [importFile, setImportFile] = useState<File | null>(null);
+  const [importing, setImporting] = useState(false);
+  const [importResult, setImportResult] = useState<{
+    matched: number;
+    skipped: number;
+    unmatched: string[];
+    total: number;
+  } | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -559,6 +567,77 @@ export default function AnalyticsPage() {
                   </tbody>
                 </table>
               </div>
+            </div>
+
+            {/* ── Import Shipping Costs ─────────────────────────────────────── */}
+            <hr className="border-charcoal-200 my-6" />
+            <div>
+              <h3 className="font-semibold text-charcoal-800 mb-3">Import Shipping Costs</h3>
+              <p className="text-sm text-charcoal-500 mb-3">
+                Upload a Pirate Ship XLSX export to match shipping costs to orders.
+              </p>
+              <div className="flex items-center gap-3">
+                <input
+                  type="file"
+                  accept=".xlsx,.csv"
+                  onChange={(e) => {
+                    setImportFile(e.target.files?.[0] || null);
+                    setImportResult(null);
+                  }}
+                  className="block w-full text-sm text-charcoal-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+                <button
+                  disabled={!importFile || importing}
+                  onClick={async () => {
+                    if (!importFile) return;
+                    setImporting(true);
+                    setImportResult(null);
+                    try {
+                      const fd = new FormData();
+                      fd.append('file', importFile);
+                      const res = await fetch('/api/admin/analytics/import-shipping', {
+                        method: 'POST',
+                        body: fd,
+                      });
+                      if (!res.ok) {
+                        const err = await res.json();
+                        throw new Error(err.error || 'Import failed');
+                      }
+                      const result = await res.json();
+                      setImportResult(result);
+                      // Refetch analytics data
+                      fetchData();
+                    } catch (err: any) {
+                      setImportResult({ matched: 0, skipped: 0, unmatched: [err.message || 'Import failed'], total: 0 });
+                    } finally {
+                      setImporting(false);
+                    }
+                  }}
+                  className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 whitespace-nowrap"
+                >
+                  {importing ? 'Importing...' : 'Import'}
+                </button>
+              </div>
+              {importResult && (
+                <div className="mt-3 p-3 bg-cream-50 rounded-lg border border-charcoal-100 text-sm">
+                  <p className="text-charcoal-800">
+                    <span className="font-medium">{importResult.matched}</span> matched,{' '}
+                    <span className="font-medium">{importResult.skipped}</span> skipped,{' '}
+                    <span className="font-medium">{importResult.unmatched.length}</span> unmatched
+                    {' '}(of {importResult.total} labels)
+                  </p>
+                  {importResult.unmatched.length > 0 && (
+                    <div className="mt-2">
+                      <p className="text-charcoal-600 text-xs font-medium mb-1">Unmatched names:</p>
+                      <ul className="text-xs text-charcoal-500 list-disc list-inside">
+                        {importResult.unmatched.map((name, i) => (
+                          <li key={i}>{name}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         )}
