@@ -3,8 +3,84 @@ import { prisma } from '@/lib/prisma';
 import { isAuthenticated } from '@/lib/auth';
 import { detectCarrier } from '@/lib/shipping';
 import { sendOrderShippedEmail } from '@/lib/email';
+import * as XLSX from 'xlsx';
 
 export const dynamic = 'force-dynamic';
+
+// Parse CSV text properly, handling quoted fields
+function parseCSVLine(line: string): string[] {
+  const result: string[] = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (inQuotes) {
+      if (char === '"' && line[i + 1] === '"') {
+        current += '"';
+        i++;
+      } else if (char === '"') {
+        inQuotes = false;
+      } else {
+        current += char;
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true;
+      } else if (char === ',') {
+        result.push(current.trim());
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+  }
+  result.push(current.trim());
+  return result;
+}
+
+// Parse file into rows (supports both CSV and XLSX)
+async function parseFile(file: File): Promise<{ headers: string[]; rows: Record<string, string>[] }> {
+  const fileName = file.name.toLowerCase();
+  const isXlsx = fileName.endsWith('.xlsx') || fileName.endsWith('.xls');
+
+  if (isXlsx) {
+    const buffer = await file.arrayBuffer();
+    const workbook = XLSX.read(buffer, { type: 'array' });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const jsonRows: Record<string, string>[] = XLSX.utils.sheet_to_json(sheet, { raw: false });
+    const headers = jsonRows.length > 0 ? Object.keys(jsonRows[0]) : [];
+    return { headers, rows: jsonRows };
+  }
+
+  // CSV parsing
+  const text = await file.text();
+  const lines = text.split('\n').map((l) => l.trim()).filter(Boolean);
+  if (lines.length < 2) {
+    return { headers: [], rows: [] };
+  }
+
+  const headers = parseCSVLine(lines[0]);
+  const rows: Record<string, string>[] = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parseCSVLine(lines[i]);
+    const row: Record<string, string> = {};
+    headers.forEach((h, idx) => {
+      row[h] = cols[idx] || '';
+    });
+    rows.push(row);
+  }
+  return { headers, rows };
+}
+
+// Find column index by checking for keywords
+function findColumn(headers: string[], keywords: string[]): string | null {
+  const normalized = headers.map((h) => h.toLowerCase().trim());
+  for (const keyword of keywords) {
+    const match = normalized.findIndex((h) => h.includes(keyword));
+    if (match !== -1) return headers[match];
+  }
+  return null;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,44 +97,77 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    const text = await file.text();
-    const lines = text.split('\n').map((l) => l.trim()).filter(Boolean);
+    console.log('[import-tracking] File received:', {
+      name: file.name,
+      type: file.type,
+      size: file.size,
+    });
 
-    if (lines.length < 2) {
-      return NextResponse.json({ error: 'CSV must have a header row and at least one data row' }, { status: 400 });
-    }
+    const { headers, rows } = await parseFile(file);
 
-    // Parse header
-    const header = lines[0].split(',').map((h) => h.trim().toLowerCase());
-    const orderNumberIdx = header.findIndex((h) => h.includes('order'));
-    const trackingIdx = header.findIndex((h) => h.includes('tracking'));
-    const carrierIdx = header.findIndex((h) => h.includes('carrier'));
+    console.log('[import-tracking] Parsed file:', {
+      headerCount: headers.length,
+      headers,
+      rowCount: rows.length,
+      sampleRow: rows[0] || null,
+    });
 
-    if (orderNumberIdx === -1 || trackingIdx === -1) {
+    if (rows.length === 0) {
       return NextResponse.json(
-        { error: 'CSV must have "Order Number" and "Tracking Number" columns' },
+        { error: 'File must have a header row and at least one data row' },
         { status: 400 }
       );
     }
 
-    const results: { updated: number; errors: { orderNumber: string; error: string }[]; skipped: number } = {
+    // Find relevant columns
+    const orderCol = findColumn(headers, ['order']);
+    const trackingCol = findColumn(headers, ['tracking']);
+    const carrierCol = findColumn(headers, ['carrier']);
+
+    console.log('[import-tracking] Column mapping:', {
+      orderCol,
+      trackingCol,
+      carrierCol,
+      allHeaders: headers,
+    });
+
+    if (!orderCol || !trackingCol) {
+      return NextResponse.json(
+        {
+          error: `Could not find required columns. Need "Order" and "Tracking" columns. Found headers: [${headers.join(', ')}]`,
+        },
+        { status: 400 }
+      );
+    }
+
+    const results: {
+      updated: number;
+      errors: { orderNumber: string; error: string }[];
+      skipped: number;
+      debug: { parsedRows: { orderNumber: string; trackingNumber: string; carrier: string }[] };
+    } = {
       updated: 0,
       errors: [],
       skipped: 0,
+      debug: { parsedRows: [] },
     };
 
-    for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(',').map((c) => c.trim());
-      const orderNumber = cols[orderNumberIdx];
-      const trackingNumber = cols[trackingIdx];
-      const csvCarrier = carrierIdx !== -1 ? cols[carrierIdx] : '';
+    for (const row of rows) {
+      const orderNumber = (row[orderCol!] || '').trim();
+      const trackingNumber = (row[trackingCol!] || '').trim();
+      const csvCarrier = carrierCol ? (row[carrierCol] || '').trim() : '';
+
+      // Store parsed row for debug output
+      results.debug.parsedRows.push({ orderNumber, trackingNumber, carrier: csvCarrier || 'auto-detect' });
 
       if (!orderNumber || !trackingNumber) {
+        console.log('[import-tracking] Skipping row - missing data:', { orderNumber, trackingNumber, rawRow: row });
         results.skipped++;
         continue;
       }
 
       const carrier = csvCarrier || detectCarrier(trackingNumber) || 'USPS';
+      console.log('[import-tracking] Processing row:', { orderNumber, trackingNumber, carrier });
 
       try {
         if (orderNumber.startsWith('WS-')) {
@@ -69,7 +178,8 @@ export async function POST(req: NextRequest) {
           });
 
           if (!order) {
-            results.errors.push({ orderNumber, error: 'Order not found' });
+            console.log('[import-tracking] Wholesale order not found:', { orderNumber });
+            results.errors.push({ orderNumber, error: 'Wholesale order not found in database' });
             continue;
           }
 
@@ -105,7 +215,8 @@ export async function POST(req: NextRequest) {
           });
 
           if (!order) {
-            results.errors.push({ orderNumber, error: 'Order not found' });
+            console.log('[import-tracking] Retail order not found:', { orderNumber });
+            results.errors.push({ orderNumber, error: 'Retail order not found in database' });
             continue;
           }
 
@@ -137,9 +248,16 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    console.log('[import-tracking] Import complete:', {
+      updated: results.updated,
+      errors: results.errors.length,
+      skipped: results.skipped,
+      totalRows: rows.length,
+    });
+
     return NextResponse.json(results);
   } catch (error) {
-    console.error('Error importing tracking:', error);
+    console.error('[import-tracking] Fatal error:', error);
     return NextResponse.json({ error: 'Failed to import tracking data' }, { status: 500 });
   }
 }

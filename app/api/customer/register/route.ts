@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import { prisma } from '@/lib/prisma';
 import { hashPassword, setCustomerAuthCookie } from '@/lib/customer-auth';
+import { sendWholesaleWelcomeEmail } from '@/lib/email';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -103,6 +104,13 @@ export async function POST(request: NextRequest) {
           where: { id: customer.id },
           data: { wholesaleClientId: wholesaleClient.id },
         });
+
+        // Send wholesale welcome email (non-blocking)
+        sendWholesaleWelcomeEmail({
+          to: email,
+          contactName: [firstName, lastName].filter(Boolean).join(' ') || businessName,
+          businessName,
+        }).catch(err => console.error('Failed to send wholesale welcome email:', err));
       }
     } catch (dbError) {
       // Clean up Stripe customer if DB write failed and we created a new one

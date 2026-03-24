@@ -109,6 +109,28 @@ interface OrderSizeDist {
   avgMarginPct: number;
 }
 
+interface TrueCostRow {
+  range: string;
+  orderCount: number;
+  avgRevenue: number;
+  avgCogs: number;
+  avgShipping: number;
+  avgAdCost: number;
+  avgLabor: number;
+  avgPackaging: number;
+  avgItems: number;
+  netProfit: number;
+  netMarginPct: number;
+}
+
+interface CostConstants {
+  cacPerOrder: number;
+  laborPerOrder: number;
+  packagingPerShipment: number;
+  laborRate: number;
+  laborMinutesPerOrder: number;
+}
+
 interface AnalyticsData {
   overview: Overview;
   monthlyPnL: MonthlyPnLRow[];
@@ -117,6 +139,8 @@ interface AnalyticsData {
   growthMetrics: GrowthMetrics;
   shippingAnalysis: ShippingAnalysis;
   orderSizeDistribution: OrderSizeDist[];
+  trueCostAnalysis: TrueCostRow[];
+  costConstants: CostConstants;
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -197,7 +221,7 @@ export default function AnalyticsPage() {
     );
   }
 
-  const { overview, monthlyPnL, productBreakdown, customerInsights, growthMetrics, shippingAnalysis, orderSizeDistribution } = data;
+  const { overview, monthlyPnL, productBreakdown, customerInsights, growthMetrics, shippingAnalysis, trueCostAnalysis, costConstants } = data;
 
   // Compute growth % from monthly trend
   const trend = growthMetrics.monthlyTrend;
@@ -222,9 +246,6 @@ export default function AnalyticsPage() {
   const pnlTotalMargin = pnlTotals.revenue > 0 ? Math.round((pnlTotals.grossProfit / pnlTotals.revenue) * 1000) / 10 : 0;
   const pnlTotalAOV = pnlTotals.orderCount > 0 ? Math.round(pnlTotals.revenue / pnlTotals.orderCount) : 0;
 
-  // Order size: find most common bucket
-  const maxBucketCount = Math.max(...orderSizeDistribution.map((b) => b.orderCount), 0);
-
   return (
     <div className="space-y-6">
       {/* ── 1. Header ──────────────────────────────────────────────────────────── */}
@@ -234,7 +255,7 @@ export default function AnalyticsPage() {
       </div>
 
       {/* ── 2. Overview Cards ──────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="bg-white rounded-lg shadow p-4 border-l-4 border-green-400">
           <div className="flex items-center gap-2 text-green-600 mb-1">
             <DollarSign className="w-4 h-4" />
@@ -269,6 +290,15 @@ export default function AnalyticsPage() {
           <p className={`text-2xl font-bold ${marginColor(overview.grossMarginPct)}`}>
             {overview.grossMarginPct}%
           </p>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-4 border-l-4 border-red-400">
+          <div className="flex items-center gap-2 text-red-600 mb-1">
+            <Users className="w-4 h-4" />
+            <span className="text-xs font-medium uppercase">Cost/Conversion</span>
+          </div>
+          <p className="text-2xl font-bold text-charcoal-950">{fmt(costConstants.cacPerOrder)}</p>
+          <p className="text-xs text-charcoal-500 mt-1">Google Ads</p>
         </div>
       </div>
 
@@ -448,7 +478,7 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      {/* ── 8. Order Size Distribution ─────────────────────────────────────────── */}
+      {/* ── 8. True Cost Margin Analysis ──────────────────────────────────────── */}
       <div className="bg-white rounded-lg shadow">
         <button
           onClick={() => setOrderSizeOpen(!orderSizeOpen)}
@@ -456,43 +486,96 @@ export default function AnalyticsPage() {
         >
           <div className="flex items-center gap-2">
             {orderSizeOpen ? <ChevronDown className="w-5 h-5 text-charcoal-400" /> : <ChevronRight className="w-5 h-5 text-charcoal-400" />}
-            <h2 className="text-lg font-semibold text-charcoal-950">Order Size Distribution</h2>
+            <h2 className="text-lg font-semibold text-charcoal-950">True Cost Margin Analysis</h2>
           </div>
+          <span className="text-xs text-charcoal-500">by $5 increments</span>
         </button>
         {orderSizeOpen && (
           <div className="px-4 pb-4">
+            <div className="mb-3 p-3 bg-cream-50 rounded-lg border border-charcoal-100">
+              <p className="text-xs text-charcoal-600">
+                <span className="font-semibold">Cost assumptions:</span>{' '}
+                COGS = 25% of retail &bull;{' '}
+                Ad Cost = {fmt(costConstants.cacPerOrder)}/conversion (Google Ads) &bull;{' '}
+                Labor = {fmt(costConstants.laborRate)}/hr &times; {costConstants.laborMinutesPerOrder} min/order &bull;{' '}
+                Packaging = {fmt(costConstants.packagingPerShipment)}/shipment
+              </p>
+            </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-charcoal-200 text-left">
-                    <th className="pb-2 font-medium text-charcoal-600">Order Range</th>
+                    <th className="pb-2 font-medium text-charcoal-600">Bucket</th>
                     <th className="pb-2 font-medium text-charcoal-600 text-right">Orders</th>
-                    <th className="pb-2 font-medium text-charcoal-600 text-right">% of Total</th>
-                    <th className="pb-2 font-medium text-charcoal-600 text-right">Avg Total</th>
-                    <th className="pb-2 font-medium text-charcoal-600 text-right">Revenue</th>
-                    <th className="pb-2 font-medium text-charcoal-600 text-right">Avg Margin %</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Avg Rev</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">COGS</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Shipping</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Ad Cost</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Labor</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Pkg</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Net Profit</th>
+                    <th className="pb-2 font-medium text-charcoal-600 text-right">Net Margin</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {orderSizeDistribution.map((row) => {
-                    const pctOfTotal = overview.totalOrders > 0
-                      ? Math.round((row.orderCount / overview.totalOrders) * 1000) / 10
-                      : 0;
-                    const isMostCommon = row.orderCount === maxBucketCount;
+                  {trueCostAnalysis.map((row) => {
+                    const maxOrders = Math.max(...trueCostAnalysis.map((r) => r.orderCount));
+                    const isMostCommon = row.orderCount === maxOrders;
                     return (
                       <tr
                         key={row.range}
-                        className={`border-b border-charcoal-100 ${isMostCommon ? 'font-bold' : ''}`}
+                        className={`border-b border-charcoal-100 ${isMostCommon ? 'bg-cream-50 font-semibold' : ''} ${row.netProfit < 0 ? 'bg-red-50' : ''}`}
                       >
                         <td className="py-2 text-charcoal-900">{row.range}</td>
                         <td className="py-2 text-right text-charcoal-600">{row.orderCount}</td>
-                        <td className="py-2 text-right text-charcoal-600">{pctOfTotal}%</td>
-                        <td className="py-2 text-right text-charcoal-900">{fmt(row.avgTotal)}</td>
-                        <td className="py-2 text-right text-charcoal-900">{fmt(row.totalRevenue)}</td>
-                        <td className={`py-2 text-right ${marginColor(row.avgMarginPct)}`}>{row.avgMarginPct}%</td>
+                        <td className="py-2 text-right text-charcoal-900">{fmt(row.avgRevenue)}</td>
+                        <td className="py-2 text-right text-charcoal-600">{fmt(row.avgCogs)}</td>
+                        <td className="py-2 text-right text-charcoal-600">{fmt(row.avgShipping)}</td>
+                        <td className="py-2 text-right text-charcoal-600">{fmt(row.avgAdCost)}</td>
+                        <td className="py-2 text-right text-charcoal-600">
+                          {fmt(row.avgLabor)}
+                          <span className="text-[10px] text-charcoal-400 ml-1">({row.avgItems})</span>
+                        </td>
+                        <td className="py-2 text-right text-charcoal-600">{fmt(row.avgPackaging)}</td>
+                        <td className={`py-2 text-right font-medium ${row.netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          {row.netProfit < 0 ? '-' : ''}{fmt(Math.abs(row.netProfit))}
+                        </td>
+                        <td className={`py-2 text-right font-medium ${marginColor(row.netMarginPct)}`}>
+                          {row.netMarginPct}%
+                        </td>
                       </tr>
                     );
                   })}
+                  {/* Totals row */}
+                  {(() => {
+                    const totalOrders = trueCostAnalysis.reduce((s, r) => s + r.orderCount, 0);
+                    const weightedRev = trueCostAnalysis.reduce((s, r) => s + r.avgRevenue * r.orderCount, 0);
+                    const weightedCogs = trueCostAnalysis.reduce((s, r) => s + r.avgCogs * r.orderCount, 0);
+                    const weightedShip = trueCostAnalysis.reduce((s, r) => s + r.avgShipping * r.orderCount, 0);
+                    const weightedLabor = trueCostAnalysis.reduce((s, r) => s + r.avgLabor * r.orderCount, 0);
+                    const totalAdCost = totalOrders * (costConstants.cacPerOrder);
+                    const totalPkg = totalOrders * costConstants.packagingPerShipment;
+                    const totalRev = weightedRev;
+                    const totalCost = weightedCogs + weightedShip + totalAdCost + weightedLabor + totalPkg;
+                    const totalNet = totalRev - totalCost;
+                    const totalMargin = totalRev > 0 ? Math.round((totalNet / totalRev) * 1000) / 10 : 0;
+                    return (
+                      <tr className="border-t-2 border-charcoal-300 font-bold">
+                        <td className="py-2 text-charcoal-950">Total/Avg</td>
+                        <td className="py-2 text-right text-charcoal-950">{totalOrders}</td>
+                        <td className="py-2 text-right text-charcoal-950">{fmt(Math.round(totalRev / totalOrders))}</td>
+                        <td className="py-2 text-right text-charcoal-800">{fmt(Math.round(weightedCogs / totalOrders))}</td>
+                        <td className="py-2 text-right text-charcoal-800">{fmt(Math.round(weightedShip / totalOrders))}</td>
+                        <td className="py-2 text-right text-charcoal-800">{fmt(costConstants.cacPerOrder)}</td>
+                        <td className="py-2 text-right text-charcoal-800">{fmt(Math.round(weightedLabor / totalOrders))}</td>
+                        <td className="py-2 text-right text-charcoal-800">{fmt(costConstants.packagingPerShipment)}</td>
+                        <td className={`py-2 text-right ${totalNet >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          {totalNet < 0 ? '-' : ''}{fmt(Math.abs(Math.round(totalNet / totalOrders)))}
+                        </td>
+                        <td className={`py-2 text-right ${marginColor(totalMargin)}`}>{totalMargin}%</td>
+                      </tr>
+                    );
+                  })()}
                 </tbody>
               </table>
             </div>

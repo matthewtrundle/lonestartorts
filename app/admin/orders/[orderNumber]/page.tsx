@@ -36,7 +36,6 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
   const [updating, setUpdating] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState('');
   const [carrier, setCarrier] = useState('USPS');
-  const [generatingLabel, setGeneratingLabel] = useState(false);
   const [feedbackStatus, setFeedbackStatus] = useState<{
     hasFeedback: boolean;
     emailSentAt?: string;
@@ -201,41 +200,6 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
     }
   };
 
-  const generateShippingLabel = async () => {
-    if (!order) return;
-
-    if (!confirm('Generate shipping label via EasyPost? This will charge your EasyPost account.')) {
-      return;
-    }
-
-    setGeneratingLabel(true);
-    try {
-      const response = await fetch(`/api/admin/orders/${order.id}/label`, {
-        method: 'POST',
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Failed to generate label');
-      }
-
-      const data = await response.json();
-
-      // Open label in new tab
-      if (data.shipment?.labelUrl) {
-        window.open(data.shipment.labelUrl, '_blank');
-      }
-
-      await fetchOrder();
-      alert(
-        `Shipping label generated!\nTracking: ${data.shipment.trackingNumber}\nCarrier: ${data.shipment.carrier}\nRate: $${data.shipment.rate.rate} ${data.shipment.rate.currency.toUpperCase()}`
-      );
-    } catch (err: any) {
-      alert(err.message || 'Failed to generate shipping label');
-    } finally {
-      setGeneratingLabel(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -401,13 +365,6 @@ export default function OrderDetailPage({ params }: { params: { orderNumber: str
                   className="px-6 py-2 bg-charcoal-500 text-white text-sm rounded-lg hover:bg-charcoal-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                 >
                   Ship (No Email)
-                </button>
-                <button
-                  onClick={generateShippingLabel}
-                  disabled={generatingLabel || updating}
-                  className="px-6 py-2 bg-sunset-600 text-white text-sm rounded-lg hover:bg-sunset-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
-                >
-                  {generatingLabel ? 'Generating...' : 'Generate Label'}
                 </button>
               </div>
             )}

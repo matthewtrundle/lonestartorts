@@ -46,6 +46,7 @@ interface ImportResult {
   updated: number;
   errors: { orderNumber: string; error: string }[];
   skipped: number;
+  debug?: { parsedRows: { orderNumber: string; trackingNumber: string; carrier: string }[] };
 }
 
 export default function FulfillmentPage() {
@@ -131,24 +132,53 @@ export default function FulfillmentPage() {
     setImportFile(file);
     setImportResult(null);
 
-    // Parse preview
-    const text = await file.text();
-    const lines = text.split('\n').map((l) => l.trim()).filter(Boolean);
-    if (lines.length < 2) return;
+    const fileName = file.name.toLowerCase();
+    const isXlsx = fileName.endsWith('.xlsx') || fileName.endsWith('.xls');
 
-    const header = lines[0].split(',').map((h) => h.trim().toLowerCase());
-    const orderIdx = header.findIndex((h) => h.includes('order'));
-    const trackingIdx = header.findIndex((h) => h.includes('tracking'));
-    const carrierIdx = header.findIndex((h) => h.includes('carrier'));
+    let headers: string[] = [];
+    let dataRows: Record<string, string>[] = [];
+
+    if (isXlsx) {
+      // Parse XLSX using the xlsx library dynamically
+      const XLSX = await import('xlsx');
+      const buffer = await file.arrayBuffer();
+      const workbook = XLSX.read(buffer, { type: 'array' });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      dataRows = XLSX.utils.sheet_to_json(sheet, { raw: false });
+      headers = dataRows.length > 0 ? Object.keys(dataRows[0]) : [];
+    } else {
+      // Parse CSV
+      const text = await file.text();
+      const lines = text.split('\n').map((l) => l.trim()).filter(Boolean);
+      if (lines.length < 2) return;
+      headers = lines[0].split(',').map((h) => h.trim());
+      for (let i = 1; i < lines.length; i++) {
+        const cols = lines[i].split(',').map((c) => c.trim());
+        const row: Record<string, string> = {};
+        headers.forEach((h, idx) => { row[h] = cols[idx] || ''; });
+        dataRows.push(row);
+      }
+    }
+
+    const headersLower = headers.map((h) => h.toLowerCase());
+    const orderKey = headers[headersLower.findIndex((h) => h.includes('order'))];
+    const trackingKey = headers[headersLower.findIndex((h) => h.includes('tracking'))];
+    const carrierKey = headers[headersLower.findIndex((h) => h.includes('carrier'))];
+
+    if (!orderKey || !trackingKey) {
+      console.warn('Could not find order/tracking columns in headers:', headers);
+      return;
+    }
 
     const preview = [];
-    for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(',').map((c) => c.trim());
-      if (cols[orderIdx] && cols[trackingIdx]) {
+    for (const row of dataRows) {
+      const orderNumber = (row[orderKey] || '').trim();
+      const trackingNumber = (row[trackingKey] || '').trim();
+      if (orderNumber && trackingNumber) {
         preview.push({
-          orderNumber: cols[orderIdx],
-          trackingNumber: cols[trackingIdx],
-          carrier: carrierIdx !== -1 ? cols[carrierIdx] || 'Auto-detect' : 'Auto-detect',
+          orderNumber,
+          trackingNumber,
+          carrier: carrierKey ? (row[carrierKey] || '').trim() || 'Auto-detect' : 'Auto-detect',
         });
       }
     }
@@ -489,7 +519,7 @@ export default function FulfillmentPage() {
             <div className="p-6 border-b border-charcoal-200">
               <h2 className="text-xl font-bold text-charcoal-950">Import Tracking Numbers</h2>
               <p className="text-sm text-charcoal-600 mt-1">
-                Upload a CSV with Order Number, Tracking Number, and optional Carrier columns.
+                Upload a CSV or XLSX (Pirate Ship export) with Order Number, Tracking Number, and optional Carrier columns.
               </p>
             </div>
 
@@ -497,12 +527,12 @@ export default function FulfillmentPage() {
               {/* File upload */}
               <div>
                 <label className="block text-sm font-medium text-charcoal-700 mb-2">
-                  CSV File
+                  CSV or XLSX File
                 </label>
                 <input
                   ref={fileInputRef}
                   type="file"
-                  accept=".csv"
+                  accept=".csv,.xlsx,.xls"
                   onChange={handleFileChange}
                   className="block w-full text-sm text-charcoal-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                 />
@@ -564,6 +594,20 @@ export default function FulfillmentPage() {
                         </div>
                       ))}
                     </div>
+                  )}
+                  {importResult.debug?.parsedRows && importResult.debug.parsedRows.length > 0 && (
+                    <details className="text-xs">
+                      <summary className="cursor-pointer text-charcoal-500 hover:text-charcoal-700">
+                        Debug: Show parsed rows ({importResult.debug.parsedRows.length})
+                      </summary>
+                      <div className="mt-2 bg-charcoal-50 rounded-lg p-3 max-h-48 overflow-y-auto font-mono">
+                        {importResult.debug.parsedRows.map((row, i) => (
+                          <div key={i} className="text-charcoal-600">
+                            {row.orderNumber || '(empty)'} → {row.trackingNumber || '(empty)'} [{row.carrier}]
+                          </div>
+                        ))}
+                      </div>
+                    </details>
                   )}
                 </div>
               )}

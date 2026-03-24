@@ -39,6 +39,30 @@ function getOrderSizeBucket(totalCents: number): string {
 
 const BUCKET_ORDER = ['Under $40', '$40-59', '$60-79', '$80-99', '$100+'];
 
+// ─── Cost Constants ──────────────────────────────────────────────────────────
+const CAC_CENTS = 1269; // $12.69 avg cost per conversion (Google Ads)
+const LABOR_RATE_PER_HOUR = 2500; // $25/hr in cents
+const LABOR_MINUTES_PER_ORDER = 10; // 10 min to pack each order (flat, doesn't scale with items)
+const LABOR_PER_ORDER_CENTS = Math.round((LABOR_RATE_PER_HOUR * LABOR_MINUTES_PER_ORDER) / 60); // ~$4.17
+const PACKAGING_CENTS = 200; // $2.00 per shipment
+
+function getFiveIncrementBucket(totalCents: number): string {
+  if (totalCents < 2500) return 'Under $25';
+  const lower = Math.floor(totalCents / 500) * 5;
+  const upper = lower + 4;
+  if (lower >= 100) return '$100+';
+  return `$${lower}-${upper}`;
+}
+
+function getFiveIncrementBucketOrder(): string[] {
+  const buckets: string[] = ['Under $25'];
+  for (let i = 25; i < 100; i += 5) {
+    buckets.push(`$${i}-${i + 4}`);
+  }
+  buckets.push('$100+');
+  return buckets;
+}
+
 // ─── GET Handler ─────────────────────────────────────────────────────────────
 
 export async function GET(req: NextRequest) {
@@ -443,6 +467,75 @@ export async function GET(req: NextRequest) {
       };
     });
 
+    // ─── True Cost Margin Analysis ($5 increments) ────────────────────────────
+
+    const fiveBucketOrder = getFiveIncrementBucketOrder();
+    const fiveBucketMap = new Map<
+      string,
+      {
+        orderCount: number;
+        totalRevenue: number;
+        totalCogs: number;
+        totalShipping: number;
+        totalItems: number;
+      }
+    >();
+
+    for (const order of succeededOrders) {
+      const bucket = getFiveIncrementBucket(order.total);
+      const entry = fiveBucketMap.get(bucket) ?? {
+        orderCount: 0,
+        totalRevenue: 0,
+        totalCogs: 0,
+        totalShipping: 0,
+        totalItems: 0,
+      };
+      entry.orderCount += 1;
+      entry.totalRevenue += order.total;
+      entry.totalShipping += order.shippingCost ?? 0;
+
+      const items = itemsByOrder.get(order.id) ?? [];
+      for (const item of items) {
+        entry.totalCogs +=
+          getCogsPerUnit(item.sku, item.name, item.price) * item.quantity;
+        entry.totalItems += item.quantity;
+      }
+
+      fiveBucketMap.set(bucket, entry);
+    }
+
+    const trueCostAnalysis = fiveBucketOrder
+      .filter((b) => fiveBucketMap.has(b))
+      .map((range) => {
+        const d = fiveBucketMap.get(range)!;
+        const avgRevenue = Math.round(d.totalRevenue / d.orderCount);
+        const avgCogs = Math.round(d.totalCogs / d.orderCount);
+        const avgShipping = Math.round(d.totalShipping / d.orderCount);
+        const avgItems = d.totalItems / d.orderCount;
+        const avgLabor = LABOR_PER_ORDER_CENTS; // flat per order
+        const totalCostPerOrder =
+          avgCogs + avgShipping + CAC_CENTS + avgLabor + PACKAGING_CENTS;
+        const netProfit = avgRevenue - totalCostPerOrder;
+        const netMarginPct =
+          avgRevenue > 0
+            ? Math.round((netProfit / avgRevenue) * 1000) / 10
+            : 0;
+
+        return {
+          range,
+          orderCount: d.orderCount,
+          avgRevenue,
+          avgCogs,
+          avgShipping,
+          avgAdCost: CAC_CENTS,
+          avgLabor,
+          avgPackaging: PACKAGING_CENTS,
+          avgItems: Math.round(avgItems * 10) / 10,
+          netProfit,
+          netMarginPct,
+        };
+      });
+
     // ─── Response ─────────────────────────────────────────────────────────────
 
     return NextResponse.json({
@@ -480,6 +573,14 @@ export async function GET(req: NextRequest) {
         byOrderSize,
       },
       orderSizeDistribution,
+      trueCostAnalysis,
+      costConstants: {
+        cacPerOrder: CAC_CENTS,
+        laborPerOrder: LABOR_PER_ORDER_CENTS,
+        packagingPerShipment: PACKAGING_CENTS,
+        laborRate: LABOR_RATE_PER_HOUR,
+        laborMinutesPerOrder: LABOR_MINUTES_PER_ORDER,
+      },
     });
   } catch (error) {
     console.error('Error fetching analytics:', error);
