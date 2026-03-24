@@ -164,6 +164,7 @@ model Order {
   shippingCountry  String?
   shippingPhone    String?
   labelUrl         String?
+  shippingCost     Int?              // Actual shipping cost paid (cents), e.g. from Pirate Ship
   Customer         Customer?         @relation(fields: [customerId], references: [id])
   OrderItem        OrderItem[]
   CustomerFeedback CustomerFeedback?
