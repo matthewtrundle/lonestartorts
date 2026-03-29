@@ -320,9 +320,9 @@ export default function RootLayout({
         {/* Google Analytics 4 + Google Ads (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-70FJ1CXM7Y"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="lazyOnload">
+        <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

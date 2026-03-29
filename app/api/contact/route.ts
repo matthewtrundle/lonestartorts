@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendContactFormEmail } from '@/lib/email';
+import { captureLeadToCoreLinq } from '@/lib/corelinq';
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Send the contact form email
+    // Send the contact form email notification
     const result = await sendContactFormEmail({
       name,
       email,
@@ -38,6 +39,20 @@ export async function POST(req: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Capture lead to CoreLinq for AI inbox routing (non-blocking)
+    const nameParts = name.trim().split(/\s+/);
+    captureLeadToCoreLinq({
+      email,
+      firstName: nameParts[0] || name,
+      lastName: nameParts.slice(1).join(' ') || '',
+      subject: subject || 'Website Contact Form',
+      message,
+      leadType: 'contact',
+      leadSource: 'contact_form',
+    }).catch((err: unknown) => {
+      console.error('CoreLinq lead capture failed:', err);
+    });
 
     return NextResponse.json({
       success: true,

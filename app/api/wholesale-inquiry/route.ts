@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendWholesaleInquiryEmail } from '@/lib/email';
+import { captureLeadToCoreLinq } from '@/lib/corelinq';
 
 export async function POST(req: NextRequest) {
   try {
@@ -53,6 +54,25 @@ export async function POST(req: NextRequest) {
       console.error('Failed to send wholesale inquiry email:', result.error);
       // Don't fail the request - inquiry is saved, just email failed
     }
+
+    // Capture lead to CoreLinq for AI inbox routing (non-blocking)
+    captureLeadToCoreLinq({
+      email,
+      firstName: contactName.split(/\s+/)[0] || contactName,
+      lastName: contactName.split(/\s+/).slice(1).join(' ') || '',
+      phone: phone || undefined,
+      subject: 'Wholesale Inquiry',
+      message: `Business: ${businessName}\nType: ${businessType}\nEstimated Volume: ${estimatedVolume}${message ? `\n\n${message}` : ''}`,
+      leadType: 'wholesale',
+      leadSource: 'wholesale_form',
+      metadata: {
+        business_name: businessName,
+        business_type: businessType,
+        estimated_volume: estimatedVolume,
+      },
+    }).catch((err: unknown) => {
+      console.error('CoreLinq lead capture failed:', err);
+    });
 
     return NextResponse.json({
       success: true,

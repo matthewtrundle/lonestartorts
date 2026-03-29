@@ -94,9 +94,9 @@ function SuccessContent() {
 
           // Track conversion in Google Ads
           if (typeof window !== 'undefined' && (window as any).gtag) {
-            // Google Ads "Purchase" conversion action (label: yeE1COz1ptEbEO3Q5KlC)
+            // Google Ads "Website Purchase" conversion action (created 2026-03-29, replaces removed Purchase (1))
             (window as any).gtag('event', 'conversion', {
-              'send_to': 'AW-17804372077/yeE1COz1ptEbEO3Q5KlC',
+              'send_to': 'AW-17804372077/4O_4CKfWgpIcEO3Q5KlC',
               'value': data.order.total / 100,
               'currency': 'USD',
               'transaction_id': data.order.orderNumber,
