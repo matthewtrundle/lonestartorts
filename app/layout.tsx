@@ -16,6 +16,12 @@ const CartSidebar = dynamic(
   { ssr: false }
 );
 
+// Lazy load Maria AI chat widget
+const MariaWidget = dynamic(
+  () => import('@/components/chat/MariaWidget').then(mod => mod.MariaWidget),
+  { ssr: false }
+);
+
 // Optimized font loading with Next.js
 const inter = Inter({
   subsets: ['latin'],
@@ -298,6 +304,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://analytics.tiktok.com" />
         <link rel="preconnect" href="https://images.heb.com" />
+        <link rel="preconnect" href="https://unpkg.com" />
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         {/* JSON-LD Structured Data */}
@@ -368,6 +375,7 @@ export default function RootLayout({
             </ToastProvider>
           </CartProvider>
         </LanguageProvider>
+        <MariaWidget />
       </body>
     </html>
   );
