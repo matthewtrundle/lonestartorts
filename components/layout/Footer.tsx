@@ -134,6 +134,20 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <button
+                  onClick={() => {
+                    const widget = document.querySelector('elevenlabs-convai');
+                    if (widget?.shadowRoot) {
+                      const btn = widget.shadowRoot.querySelector('button');
+                      btn?.click();
+                    }
+                  }}
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+                >
+                  Chat with Maria
+                </button>
+              </li>
+              <li>
                 <Link href="/faq" className="text-gray-400 hover:text-white transition-colors">
                   FAQ
                 </Link>

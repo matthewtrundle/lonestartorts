@@ -11,6 +11,7 @@ import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
 import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { ShopFAQ } from '@/components/shop/ShopFAQ';
+import { MariaCTA } from '@/components/chat/MariaCTA';
 import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 import { products as allProducts } from '@/lib/products';
@@ -352,6 +353,15 @@ export default function ShopPage({
 
         {/* FAQ Section */}
         <ShopFAQ />
+
+        {/* Talk to Maria CTA */}
+        <div className="mt-12">
+          <MariaCTA
+            heading="Need help choosing?"
+            description="Maria can help you pick the perfect tortillas for your meal. Ask about products, prices, or shipping."
+            variant="banner"
+          />
+        </div>
       </div>
 
       {/* Social Proof */}

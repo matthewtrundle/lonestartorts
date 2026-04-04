@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import FAQContent from '@/components/faq/FAQContent';
+import { MariaCTA } from '@/components/chat/MariaCTA';
 
 export const metadata: Metadata = {
   title: 'FAQ | Lonestar Tortillas',
@@ -452,6 +453,17 @@ export default function FAQPage() {
       />
 
       <FAQContent faqs={faqs} />
+
+      {/* Talk to Maria CTA */}
+      <section className="py-12 px-4">
+        <div className="max-w-2xl mx-auto">
+          <MariaCTA
+            heading="Can't find your answer?"
+            description="Ask Maria directly — she knows everything about our products, shipping, and orders. Available 24/7 in English and Spanish."
+            variant="banner"
+          />
+        </div>
+      </section>
     </>
   );
 }

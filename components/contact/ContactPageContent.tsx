@@ -2,8 +2,9 @@
 
 import { ContactFormLight } from '@/components/ContactFormLight';
 import Link from 'next/link';
-import { MapPin, Clock, Phone, Mail } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
+import { MariaCTA } from '@/components/chat/MariaCTA';
 
 export function ContactPageContent() {
   const { t } = useLanguage();
@@ -102,6 +103,22 @@ export function ContactPageContent() {
                       </a>
                       <p className="text-sm text-charcoal-600 mt-1">
                         Our AI assistant is available 24/7 to answer questions about products, shipping, and orders.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-sunset-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MessageCircle className="w-6 h-6 text-sunset-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-charcoal-950">Chat with Maria</h3>
+                      <MariaCTA
+                        heading="Start a chat now"
+                        variant="inline"
+                      />
+                      <p className="text-sm text-charcoal-600 mt-1">
+                        Chat with Maria right here on the website — available in English and Spanish.
                       </p>
                     </div>
                   </div>
