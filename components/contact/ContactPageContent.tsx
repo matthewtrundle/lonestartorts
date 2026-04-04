@@ -2,7 +2,7 @@
 
 import { ContactFormLight } from '@/components/ContactFormLight';
 import Link from 'next/link';
-import { MapPin, Clock, Phone } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 
 export function ContactPageContent() {
@@ -66,6 +66,24 @@ export function ContactPageContent() {
                       <p className="text-charcoal-700">{t('contactPage.hoursValue')}</p>
                       <p className="text-sm text-charcoal-600 mt-1">
                         {t('contactPage.hoursNote')}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-sunset-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-6 h-6 text-sunset-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-charcoal-950">Email Us</h3>
+                      <a
+                        href="mailto:howdy@lonestartortillas.com"
+                        className="text-charcoal-700 hover:text-sunset-600 transition-colors"
+                      >
+                        howdy@lonestartortillas.com
+                      </a>
+                      <p className="text-sm text-charcoal-600 mt-1">
+                        We typically respond within 24 hours
                       </p>
                     </div>
                   </div>
