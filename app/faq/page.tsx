@@ -455,11 +455,24 @@ export default function FAQPage() {
       <FAQContent faqs={faqs} />
 
       {/* Talk to Maria CTA */}
-      <section className="py-12 px-4">
-        <div className="max-w-2xl mx-auto">
+      <section className="py-16 px-4 bg-gradient-to-b from-cream-50 to-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-sunset-100 text-sunset-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+            </span>
+            Available 24/7 in English &amp; Spanish
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-charcoal-950 mb-4">
+            Still have questions? Ask Maria.
+          </h2>
+          <p className="text-lg text-charcoal-600 mb-8 max-w-xl mx-auto">
+            Maria is our AI assistant who knows everything about our tortillas, shipping, and orders. Just click below to start a conversation.
+          </p>
           <MariaCTA
-            heading="Can't find your answer?"
-            description="Ask Maria directly — she knows everything about our products, shipping, and orders. Available 24/7 in English and Spanish."
+            heading="Talk to Maria"
+            description="Get instant answers about products, pricing, shipping, and more."
             variant="banner"
           />
         </div>

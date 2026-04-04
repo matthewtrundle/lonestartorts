@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
-import { ShoppingBag, Menu, X, ChevronDown, User, BookOpen, Newspaper, MapPin, UtensilsCrossed, Truck, MessageCircle, Info } from 'lucide-react';
+import { ShoppingBag, Menu, X, ChevronDown, User, BookOpen, Newspaper, MapPin, UtensilsCrossed, Truck, MessageCircle, Info, Sparkles } from 'lucide-react';
 
 const resourceLinks = [
   { href: '/craft', labelKey: 'nav.source', icon: Info, description: 'How we source our tortillas' },
@@ -91,6 +91,16 @@ export function Header() {
       setIsResourcesOpen(false);
     }, 150);
   };
+
+  const openMariaChat = () => {
+    const widget = document.querySelector('elevenlabs-convai');
+    if (widget?.shadowRoot) {
+      const btn = widget.shadowRoot.querySelector('button');
+      btn?.click();
+    }
+  };
+
+  const hasMariaWidget = !!process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID;
 
   return (
     <>
@@ -251,6 +261,24 @@ export function Header() {
               )}
             </button>
 
+            {/* Ask Maria AI Button */}
+            {hasMariaWidget && (
+              <button
+                onClick={openMariaChat}
+                className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sunset-200 bg-sunset-50 hover:bg-sunset-100 transition-all"
+                aria-label="Chat with Maria, our AI assistant"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-sunset-500" />
+                <span className="text-sm font-medium text-sunset-700 group-hover:text-sunset-800">
+                  Ask Maria
+                </span>
+                <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sunset-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-sunset-500" />
+                </span>
+              </button>
+            )}
+
             {/* Account Link */}
             <Link href="/account" className="group relative">
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
@@ -353,10 +381,25 @@ export function Header() {
             <Link
               href="/shop"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full bg-sunset-500 text-white px-6 py-4 rounded-lg font-semibold text-center tracking-wide uppercase hover:bg-sunset-600 transition-colors shadow-md mb-6"
+              className="w-full bg-sunset-500 text-white px-6 py-4 rounded-lg font-semibold text-center tracking-wide uppercase hover:bg-sunset-600 transition-colors shadow-md mb-2"
             >
               {t('nav.shopNow')}
             </Link>
+
+            {/* Ask Maria AI - Mobile */}
+            {hasMariaWidget && (
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setTimeout(openMariaChat, 300);
+                }}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg border-2 border-sunset-300 bg-sunset-50 hover:bg-sunset-100 transition-colors mb-4"
+              >
+                <Sparkles className="w-4 h-4 text-sunset-500" />
+                <span className="font-semibold text-sunset-700">Ask Maria</span>
+                <span className="text-xs text-sunset-500 font-normal">AI Assistant</span>
+              </button>
+            )}
 
             {/* Primary Links */}
             <Link
