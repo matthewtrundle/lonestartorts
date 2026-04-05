@@ -84,7 +84,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https://images.heb.com https://images.unsplash.com https://www.google.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com",
               "font-src 'self' data: https://analytics.tiktok.com",
-              "connect-src 'self' https://vercel.live https://api.stripe.com https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://analytics.tiktok.com https://ads.tiktok.com https://*.tiktokw.us wss://*.elevenlabs.io https://api.elevenlabs.io",
+              "connect-src 'self' https://vercel.live https://api.stripe.com https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://analytics.tiktok.com https://ads.tiktok.com https://*.tiktokw.us wss://*.elevenlabs.io https://api.elevenlabs.io https://*.elevenlabs.io",
               "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.googletagmanager.com https://bid.g.doubleclick.net https://*.elevenlabs.io",
               "media-src 'self' blob: data:",
             ].join("; "),
