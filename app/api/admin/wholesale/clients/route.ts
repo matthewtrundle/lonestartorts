@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { createStripeCustomer } from '@/lib/wholesale/stripe';
-import { PricingTier, PaymentTerms, ClientStatus } from '@prisma/client';
+import { PricingTier, PaymentTerms } from '@prisma/client';
 import { isAuthenticated } from '@/lib/auth';
 
 export async function GET(req: NextRequest) {
@@ -43,24 +43,27 @@ export async function GET(req: NextRequest) {
       prisma.wholesaleClient.count({ where }),
     ]);
 
-    // Calculate total revenue for each client
-    const clientsWithRevenue = await Promise.all(
-      clients.map(async (client) => {
-        const paidOrders = await prisma.wholesaleOrder.aggregate({
-          where: {
-            clientId: client.id,
-            paymentStatus: 'PAID',
-          },
-          _sum: {
-            total: true,
-          },
-        });
-        return {
-          ...client,
-          totalRevenue: paidOrders._sum.total || 0,
-        };
-      })
+    // Calculate total revenue for all clients in a single query
+    const clientIds = clients.map((client) => client.id);
+    const revenueByClient = await prisma.wholesaleOrder.groupBy({
+      by: ['clientId'],
+      where: {
+        clientId: { in: clientIds },
+        paymentStatus: 'PAID',
+      },
+      _sum: {
+        total: true,
+      },
+    });
+
+    const revenueMap = new Map(
+      revenueByClient.map((r) => [r.clientId, r._sum.total || 0])
     );
+
+    const clientsWithRevenue = clients.map((client) => ({
+      ...client,
+      totalRevenue: revenueMap.get(client.id) || 0,
+    }));
 
     return NextResponse.json({
       clients: clientsWithRevenue,

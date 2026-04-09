@@ -1,23 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Join the Pre-Sale Waitlist',
-  description: 'Be first to get authentic H-E-B tortillas delivered. Join our pre-sale waitlist for exclusive early access.',
-  alternates: {
-    canonical: 'https://lonestartortillas.com/pre-sale',
-  },
+  title: 'Join the Waitlist | Lonestar Tortillas',
+  description: 'Sign up for early access to Lonestar Tortillas. Be the first to order authentic H-E-B tortillas shipped nationwide.',
   openGraph: {
-    title: 'Join the Pre-Sale Waitlist',
-    description: 'Be first to get authentic H-E-B tortillas delivered. Join our pre-sale waitlist for exclusive early access.',
-    url: 'https://lonestartortillas.com/pre-sale',
-    type: 'website',
+    title: 'Join the Waitlist | Lonestar Tortillas',
+    description: 'Sign up for early access to Lonestar Tortillas. Be the first to order authentic H-E-B tortillas shipped nationwide.',
   },
 };
 
-export default function PreSaleLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PreSaleLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

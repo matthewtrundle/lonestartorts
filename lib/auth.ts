@@ -1,21 +1,50 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { compare } from 'bcryptjs';
+import { createHmac, timingSafeEqual } from 'crypto';
 import { prisma } from '@/lib/prisma';
 
 const AUTH_COOKIE_NAME = 'admin_auth';
 
-// Create auth token with user ID and role
-export function createAuthToken(userId: string, role: string): string {
-  const timestamp = Date.now();
-  const data = JSON.stringify({ userId, role, timestamp });
-  return Buffer.from(data).toString('base64');
+function getTokenSecret(): string {
+  const secret = process.env.AUTH_TOKEN_SECRET;
+  if (!secret && process.env.NODE_ENV === 'production') {
+    throw new Error('AUTH_TOKEN_SECRET environment variable is required in production');
+  }
+  return secret || 'dev-only-fallback-secret-do-not-use-in-production';
 }
 
-// Validate auth token
+function signPayload(payload: string): string {
+  return createHmac('sha256', getTokenSecret()).update(payload).digest('hex');
+}
+
+// Create auth token with user ID and role (HMAC-signed)
+export function createAuthToken(userId: string, role: string): string {
+  const timestamp = Date.now();
+  const payload = JSON.stringify({ userId, role, timestamp });
+  const encodedPayload = Buffer.from(payload).toString('base64');
+  const signature = signPayload(encodedPayload);
+  return `${encodedPayload}.${signature}`;
+}
+
+// Validate auth token (verifies HMAC signature)
 export function validateAuthToken(token: string): { userId: string; role: string } | null {
   try {
-    const decoded = Buffer.from(token, 'base64').toString();
+    const parts = token.split('.');
+    if (parts.length !== 2) return null;
+
+    const [encodedPayload, providedSignature] = parts;
+
+    // Verify signature using timing-safe comparison
+    const expectedSignature = signPayload(encodedPayload);
+    const sigBuffer = Buffer.from(providedSignature, 'utf8');
+    const expectedBuffer = Buffer.from(expectedSignature, 'utf8');
+
+    if (sigBuffer.length !== expectedBuffer.length) return null;
+    if (!timingSafeEqual(sigBuffer, expectedBuffer)) return null;
+
+    // Signature valid — decode payload
+    const decoded = Buffer.from(encodedPayload, 'base64').toString();
     const { userId, role, timestamp } = JSON.parse(decoded);
 
     // Check if token is not older than 24 hours
