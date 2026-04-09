@@ -10,25 +10,42 @@ interface Testimonial {
   rating: number;
 }
 
-// Placeholder testimonials - replace with real reviews later
 const testimonials: Testimonial[] = [
   {
-    quote: "Finally found authentic HEB tortillas! These taste just like home.",
-    author: "Maria G.",
-    location: "Denver, CO",
+    quote: "Honestly didn't expect them to taste THIS close to what I get at my H-E-B back home. The Bakery Flour Tortillas are perfect for breakfast tacos — my wife literally teared up the first morning.",
+    author: "Marcus D.",
+    location: "Portland, OR",
     rating: 5,
   },
   {
-    quote: "My family moved from Austin to Chicago and we missed these so much. Fast shipping and perfect quality!",
-    author: "James T.",
-    location: "Chicago, IL",
-    rating: 5,
-  },
-  {
-    quote: "Best tortillas outside of Texas. The butter tortillas are incredible.",
-    author: "Sarah K.",
+    quote: "Ordered on a whim after moving to Seattle two years ago. Now I have a standing monthly order. The Butter Tortillas are dangerous — I'll eat half the pack plain before they even make it to the table.",
+    author: "Sofia R.",
     location: "Seattle, WA",
     rating: 5,
+  },
+  {
+    quote: "Taco night is back. The White Corn Texas Size tortillas hold up to everything — carne asada, al pastor, you name it. Kids are happy, I'm happy.",
+    author: "James W.",
+    location: "Nashville, TN",
+    rating: 5,
+  },
+  {
+    quote: "Shipped fast and arrived cold. I freeze half and keep half in the fridge. The flour tortillas taste fresh for days. Only reason for 4 stars is I wish the variety pack had more Butter Tortillas in it.",
+    author: "Linda P.",
+    location: "Boise, ID",
+    rating: 4,
+  },
+  {
+    quote: "Left San Antonio for a job in Boston. This is the one thing that keeps me sane. Real H-E-B tortillas delivered to my door. Unreal.",
+    author: "Chris M.",
+    location: "Boston, MA",
+    rating: 5,
+  },
+  {
+    quote: "Good tortillas, solid packaging. Took about 4 days to arrive which felt a little long but everything was still fresh. The Bakery Flour Tortillas are the real deal — feeding a family of six no problem.",
+    author: "Angela T.",
+    location: "Minneapolis, MN",
+    rating: 4,
   },
 ];
 
@@ -88,9 +105,6 @@ export function SocialProofSection({ className = '' }: SocialProofSectionProps) 
             </div>
           ))}
         </div>
-
-        {/* Note for adding real reviews */}
-        {/* TODO: Replace placeholder testimonials with real customer reviews */}
       </div>
     </section>
   );

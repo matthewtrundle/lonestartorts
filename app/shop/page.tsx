@@ -12,7 +12,7 @@ import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { ShopFAQ } from '@/components/shop/ShopFAQ';
 import { MariaCTA } from '@/components/chat/MariaCTA';
-import { Truck, Shield, Clock, ArrowRight, Check } from 'lucide-react';
+import { Truck, Shield, Clock, ArrowRight, Check, RefreshCw, Calendar, Pause } from 'lucide-react';
 import Link from 'next/link';
 import { products as allProducts } from '@/lib/products';
 
@@ -287,6 +287,47 @@ export default function ShopPage({
                 <Check className="w-4 h-4" />
                 ~$1/tortilla
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Subscribe & Save Banner */}
+        <div className="mt-10 bg-gradient-to-r from-charcoal-950 to-charcoal-800 text-white rounded-xl p-6 md:p-8 shadow-lg">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+            <div className="flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 bg-sunset-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">
+                <RefreshCw className="w-3.5 h-3.5" />
+                Subscribe & Save
+              </div>
+              <h2 className="text-xl md:text-2xl font-bold mb-2">Never Run Out of Tortillas</h2>
+              <p className="text-charcoal-300 text-sm md:text-base mb-4">
+                Get your favorites delivered on a schedule you choose. Free shipping on every delivery, and you can change, pause, or cancel anytime.
+              </p>
+              <div className="grid grid-cols-2 gap-3 max-w-md mx-auto md:mx-0 mb-5">
+                <div className="flex items-center gap-2 text-sm text-charcoal-200">
+                  <Truck className="w-4 h-4 text-sunset-400 flex-shrink-0" />
+                  <span>Free shipping always</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-charcoal-200">
+                  <Calendar className="w-4 h-4 text-sunset-400 flex-shrink-0" />
+                  <span>Flexible schedule</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-charcoal-200">
+                  <Pause className="w-4 h-4 text-sunset-400 flex-shrink-0" />
+                  <span>Pause or skip deliveries</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-charcoal-200">
+                  <Check className="w-4 h-4 text-sunset-400 flex-shrink-0" />
+                  <span>Cancel anytime</span>
+                </div>
+              </div>
+              <Link
+                href="/subscribe"
+                className="inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] shadow-md"
+              >
+                Start a Subscription
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>

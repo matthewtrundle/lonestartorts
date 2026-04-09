@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Plus, Minus, ShoppingBag, Check } from 'lucide-react';
+import Link from 'next/link';
+import { Plus, Minus, ShoppingBag, Check, RefreshCw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
 import { trackAddToCart } from '@/lib/analytics';
@@ -42,10 +43,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
-
-  const storageLabel = storage === 'shelf_stable'
-    ? 'Shelf Stable'
-    : 'Keep Refrigerated';
 
   const getShippingInfo = () => {
     const itemTotal = price * quantity;
@@ -255,6 +252,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </>
               )}
             </Button>
+
+            {/* Subscribe & Save link */}
+            <Link
+              href="/subscribe"
+              className="mt-2 flex items-center justify-center gap-1.5 text-[10px] md:text-xs text-charcoal-500 hover:text-sunset-600 transition-colors font-medium"
+            >
+              <RefreshCw className="w-3 h-3" />
+              Subscribe & save — free shipping always
+            </Link>
           </>
         )}
       </div>

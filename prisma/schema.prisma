@@ -875,6 +875,7 @@ enum DiscountSource {
   DRIP_CAMPAIGN
   SYSTEM
   LOYALTY
+  REFERRAL
 }
 
 // ============================================
@@ -950,4 +951,24 @@ enum LoyaltyTransactionType {
   REDEEM
   EXPIRE
   ADJUST
+}
+
+// ===========================================
+// REFERRAL PROGRAM
+// ===========================================
+
+model Referral {
+  id              String    @id @default(cuid())
+  referrerEmail   String
+  referrerName    String
+  referralCode    String    @unique
+  refereeEmail    String?
+  refereeOrderId  String?
+  rewardAmount    Int       @default(1000) // reward in cents ($10)
+  rewardClaimed   Boolean   @default(false)
+  rewardClaimedAt DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@index([referrerEmail])
+  @@index([referralCode])
 }

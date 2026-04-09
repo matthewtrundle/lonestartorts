@@ -10,7 +10,7 @@ import { formatPrice } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Package, Truck, Mail, ArrowRight, MapPin, Calendar, Star } from 'lucide-react';
+import { CheckCircle2, Package, Truck, Mail, ArrowRight, MapPin, Calendar, Star, Gift, Copy, Check } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
@@ -59,6 +59,8 @@ function SuccessContent() {
   const sessionId = searchParams?.get('session_id');
   const [orderDetails, setOrderDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [referralCode, setReferralCode] = useState<string | null>(null);
+  const [referralCopied, setReferralCopied] = useState(false);
   const { clearCart } = useCart();
 
   const complementaryProducts = useMemo(() => {
@@ -121,6 +123,25 @@ function SuccessContent() {
               currency: 'USD',
             });
 
+          }
+
+          // Generate referral code for this customer
+          if (data.order.email && data.order.customerName) {
+            fetch('/api/referral', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: data.order.email,
+                name: data.order.customerName,
+              }),
+            })
+              .then(res => res.json())
+              .then(refData => {
+                if (refData.success && refData.referralCode) {
+                  setReferralCode(refData.referralCode);
+                }
+              })
+              .catch(err => console.error('Referral code generation failed:', err));
           }
         }
       })
@@ -416,6 +437,53 @@ function SuccessContent() {
                 >
                   Create Account
                 </Link>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Referral Program — Share & Earn */}
+          {referralCode && (
+            <motion.div variants={itemVariants}>
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl shadow-lg border border-purple-200/50 p-6 md:p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md border border-purple-200">
+                    <Gift className="w-7 h-7 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-purple-600 uppercase tracking-wide">Share & Earn</p>
+                    <p className="text-2xl md:text-3xl font-bold text-charcoal-950">Give $10, Get $10</p>
+                  </div>
+                </div>
+                <p className="text-charcoal-600 mb-5">
+                  Share your code with friends. When they place their first order, you both get $10 off.
+                </p>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <div className="flex-1 bg-white rounded-xl border-2 border-purple-200 px-5 py-3 flex items-center justify-between gap-3">
+                    <span className="font-['Space_Mono'] text-lg md:text-xl font-bold text-charcoal-950 tracking-wider select-all">
+                      {referralCode}
+                    </span>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(referralCode);
+                        setReferralCopied(true);
+                        setTimeout(() => setReferralCopied(false), 2000);
+                      }}
+                      className="flex items-center gap-1.5 text-sm font-semibold text-purple-600 hover:text-purple-800 transition-colors flex-shrink-0"
+                    >
+                      {referralCopied ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
