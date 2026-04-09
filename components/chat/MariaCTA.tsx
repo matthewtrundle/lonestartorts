@@ -8,22 +8,32 @@ interface MariaCTAProps {
   variant?: 'card' | 'inline' | 'banner';
 }
 
+function openRetellWidget() {
+  // Retell widget renders a floating button — find and click it
+  const retellBtn = document.querySelector('[id^="retell-widget"] button, .retell-widget button, iframe[src*="retell"]')
+    || document.querySelector('button[aria-label*="chat"], button[aria-label*="Chat"]');
+  if (retellBtn instanceof HTMLElement) {
+    retellBtn.click();
+    return;
+  }
+  // Fallback: try to find any Retell-created floating element
+  const floatingElements = document.querySelectorAll('div[style*="position: fixed"]');
+  for (const el of floatingElements) {
+    const btn = el.querySelector('button');
+    if (btn) {
+      btn.click();
+      return;
+    }
+  }
+}
+
 export function MariaCTA({
   heading = 'Chat with Maria',
   description = 'Our AI assistant can answer questions about products, shipping, and orders — available 24/7 in English and Spanish.',
   variant = 'card',
 }: MariaCTAProps) {
-  const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID;
+  const agentId = process.env.NEXT_PUBLIC_RETELL_AGENT_ID;
   if (!agentId) return null;
-
-  const handleClick = () => {
-    // Try to open the ElevenLabs widget by clicking its shadow DOM button
-    const widget = document.querySelector('elevenlabs-convai');
-    if (widget?.shadowRoot) {
-      const button = widget.shadowRoot.querySelector('button');
-      button?.click();
-    }
-  };
 
   if (variant === 'banner') {
     return (
@@ -34,7 +44,7 @@ export function MariaCTA({
         </div>
         <p className="text-sm text-charcoal-600 mb-4 max-w-md mx-auto">{description}</p>
         <button
-          onClick={handleClick}
+          onClick={openRetellWidget}
           className="inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors"
         >
           <MessageCircle className="w-4 h-4" />
@@ -47,7 +57,7 @@ export function MariaCTA({
   if (variant === 'inline') {
     return (
       <button
-        onClick={handleClick}
+        onClick={openRetellWidget}
         className="inline-flex items-center gap-2 text-sunset-600 hover:text-sunset-700 font-medium transition-colors"
       >
         <MessageCircle className="w-4 h-4" />
@@ -65,7 +75,7 @@ export function MariaCTA({
       <h3 className="text-xl font-bold text-charcoal-950 mb-2">{heading}</h3>
       <p className="text-charcoal-600 mb-6 max-w-sm mx-auto">{description}</p>
       <button
-        onClick={handleClick}
+        onClick={openRetellWidget}
         className="inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
       >
         <MessageCircle className="w-5 h-5" />

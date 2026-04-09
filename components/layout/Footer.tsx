@@ -136,10 +136,16 @@ export function Footer() {
               <li>
                 <button
                   onClick={() => {
-                    const widget = document.querySelector('elevenlabs-convai');
-                    if (widget?.shadowRoot) {
-                      const btn = widget.shadowRoot.querySelector('button');
-                      btn?.click();
+                    const retellBtn = document.querySelector('[id^="retell-widget"] button, .retell-widget button')
+                      || document.querySelector('button[aria-label*="chat"], button[aria-label*="Chat"]');
+                    if (retellBtn instanceof HTMLElement) {
+                      retellBtn.click();
+                      return;
+                    }
+                    const els = document.querySelectorAll('div[style*="position: fixed"]');
+                    for (const el of els) {
+                      const btn = el.querySelector('button');
+                      if (btn) { btn.click(); return; }
                     }
                   }}
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-1"

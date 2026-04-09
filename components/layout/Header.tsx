@@ -93,14 +93,20 @@ export function Header() {
   };
 
   const openMariaChat = () => {
-    const widget = document.querySelector('elevenlabs-convai');
-    if (widget?.shadowRoot) {
-      const btn = widget.shadowRoot.querySelector('button');
-      btn?.click();
+    const retellBtn = document.querySelector('[id^="retell-widget"] button, .retell-widget button')
+      || document.querySelector('button[aria-label*="chat"], button[aria-label*="Chat"]');
+    if (retellBtn instanceof HTMLElement) {
+      retellBtn.click();
+      return;
+    }
+    const floatingElements = document.querySelectorAll('div[style*="position: fixed"]');
+    for (const el of floatingElements) {
+      const btn = el.querySelector('button');
+      if (btn) { btn.click(); return; }
     }
   };
 
-  const hasMariaWidget = !!process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID;
+  const hasMariaWidget = !!process.env.NEXT_PUBLIC_RETELL_AGENT_ID;
 
   return (
     <>
