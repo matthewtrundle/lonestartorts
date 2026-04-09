@@ -29,9 +29,15 @@ const articleSchema = {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
   },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Lonestar Tortillas',
+    url: 'https://lonestartortillas.com',
+  },
   datePublished: '2025-11-04',
   dateModified: '2025-11-04',
   articleSection: 'Recipes & Culture',
+  mainEntityOfPage: 'https://lonestartortillas.com/blog/brisket-breakfast-burrito',
 };
 
 export default function BrisketBreakfastBurritoPage() {

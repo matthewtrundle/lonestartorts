@@ -3,8 +3,6 @@ import { prisma } from '@/lib/prisma';
 import { isAuthenticated } from '@/lib/auth';
 import { detectCarrier } from '@/lib/shipping';
 import { sendOrderShippedEmail } from '@/lib/email';
-import * as XLSX from 'xlsx';
-
 export const dynamic = 'force-dynamic';
 
 // Parse CSV text properly, handling quoted fields
@@ -44,6 +42,8 @@ async function parseFile(file: File): Promise<{ headers: string[]; rows: Record<
   const isXlsx = fileName.endsWith('.xlsx') || fileName.endsWith('.xls');
 
   if (isXlsx) {
+    const xlsxModule = await import('xlsx');
+    const XLSX = xlsxModule.default || xlsxModule;
     const buffer = await file.arrayBuffer();
     const workbook = XLSX.read(buffer, { type: 'array' });
     const sheet = workbook.Sheets[workbook.SheetNames[0]];

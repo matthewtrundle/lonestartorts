@@ -41,6 +41,7 @@ const articleSchema = {
   dateModified: '2026-02-03',
   articleSection: 'Recipes',
   mainEntityOfPage: 'https://lonestartortillas.com/blog/street-tacos-at-home',
+  image: 'https://lonestartortillas.com/images/blog/street-tacos-hero.webp',
 };
 
 const recipeSchema = {

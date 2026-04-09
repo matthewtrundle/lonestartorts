@@ -29,9 +29,16 @@ const articleSchema = {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
   },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Lonestar Tortillas',
+    url: 'https://lonestartortillas.com',
+  },
   datePublished: '2025-11-05',
   dateModified: '2025-11-05',
   articleSection: 'Business & Culture',
+  image: 'https://lonestartortillas.com/images/blog/colorado-bbq-hero.webp',
+  mainEntityOfPage: 'https://lonestartortillas.com/blog/colorado-bbq-transformation',
 };
 
 export default function ColoradoBBQTransformationPage() {

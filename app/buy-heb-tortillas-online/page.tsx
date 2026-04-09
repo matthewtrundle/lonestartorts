@@ -35,7 +35,7 @@ const products = [
     description: 'Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile.',
     price: 20.00,
     count: 20,
-    image: '/images/products/flour-tortillas-heb.png',
+    image: '/images/products/flour-tortillas-heb.webp',
   },
   {
     sku: 'HEB-BUTTER',
@@ -43,7 +43,7 @@ const products = [
     description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer.',
     price: 20.00,
     count: 20,
-    image: '/images/products/butter-tortillas-heb.png',
+    image: '/images/products/butter-tortillas-heb.webp',
   },
   {
     sku: 'HEB-WHEAT',
@@ -51,7 +51,7 @@ const products = [
     description: 'Whole wheat tortillas with wholesome grain flavor. Perfect for health-conscious meals without sacrificing taste.',
     price: 20.00,
     count: 20,
-    image: '/images/products/wheat-tortillas-heb.png',
+    image: '/images/products/wheat-tortillas-heb.webp',
   },
 ];
 

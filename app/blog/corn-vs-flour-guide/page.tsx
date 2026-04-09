@@ -42,6 +42,7 @@ const articleSchema = {
   dateModified: '2026-02-03',
   articleSection: 'Product Education',
   mainEntityOfPage: 'https://lonestartortillas.com/blog/corn-vs-flour-guide',
+  image: 'https://lonestartortillas.com/images/blog/corn-vs-flour-hero.webp',
 };
 
 export default function CornVsFlourGuidePage() {

@@ -54,12 +54,34 @@ const articleSchema = {
   totalTime: 'PT5M'
 };
 
+
+const blogArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Store Tortillas: Keep Them Fresh for Weeks | Lonestar Tortillas',
+  description: 'Complete guide to storing tortillas. Learn proper storage methods for corn and flour tortillas, freezing tips, and how to revive stale tortillas. Expert advice from Texas tortilla specialists.',
+  author: {
+    '@type': 'Organization',
+    name: 'Lonestar Tortillas',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Lonestar Tortillas',
+    url: 'https://lonestartortillas.com',
+  },
+  datePublished: '2025-10-24',
+  image: 'https://lonestartortillas.com/images/blog/tortilla-storage-hero.webp',
+  mainEntityOfPage: 'https://lonestartortillas.com/blog/how-to-store-tortillas',
+}
+
 export default function HowToStoreTortillasPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
-      <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
+      
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogArticleSchema) }} />
+<div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <header className="bg-charcoal-950 text-cream-50 py-12">
           <div className="container mx-auto px-6">
             <Breadcrumbs

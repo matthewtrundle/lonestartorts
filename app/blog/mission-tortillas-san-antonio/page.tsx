@@ -41,6 +41,7 @@ const articleSchema = {
   dateModified: '2026-02-03',
   articleSection: 'Brand Story',
   mainEntityOfPage: 'https://lonestartortillas.com/blog/mission-tortillas-san-antonio',
+  image: 'https://lonestartortillas.com/images/blog/mission-tortillas-hero.webp',
 };
 
 export default function MissionTortillasPage() {

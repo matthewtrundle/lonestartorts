@@ -96,11 +96,13 @@ function ProductGrid({ products, cols = 3 }: { products: typeof bakeryProducts; 
           price={product.price}
           tortillaCount={product.tortillaCount}
           storage={product.storage}
+          category={product.category}
           productType={product.productType}
           tortillaType={product.tortillaType}
           isBestSeller={product.isBestSeller}
           savingsPercent={product.savingsPercent}
           bundleOnly={product.bundleOnly}
+          brand={product.brand}
         />
       ))}
     </div>

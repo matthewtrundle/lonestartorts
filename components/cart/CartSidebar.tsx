@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
-import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed } from '@/lib/analytics';
+import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed, getGA4Category, type CartItemData } from '@/lib/analytics';
+import { getProductBySku } from '@/lib/products';
 
 import { X, Minus, Plus, ShoppingBag, Truck, Lock, Tag, Check, ChevronDown } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
@@ -206,10 +207,22 @@ export function CartSidebar() {
     setDidProceedToCheckout(true);
 
     try {
-      // Track begin checkout event
+      // Track begin checkout event with item-level data
+      const ga4Items: CartItemData[] = items.map((item) => {
+        const product = getProductBySku(item.sku);
+        return {
+          productId: item.sku,
+          name: item.name,
+          price: item.price / 100,
+          quantity: item.quantity,
+          category: getGA4Category(item.productType, product?.category),
+          brand: 'H-E-B',
+        };
+      });
       trackBeginCheckout({
         itemCount: items.length,
         cartTotal: displayTotal / 100,
+        items: ga4Items,
       });
 
       // Track InitiateCheckout for TikTok Pixel

@@ -100,10 +100,12 @@ export default function HEBProductsPage() {
                   price={product.price}
                   tortillaCount={product.tortillaCount}
                   storage={product.storage}
+                  category={product.category}
                   productType={product.productType}
                   tortillaType={product.tortillaType}
                   isBestSeller={product.isBestSeller}
                   savingsPercent={product.savingsPercent}
+                  brand={product.brand}
                 />
               ))}
             </div>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Plus, Minus, ShoppingBag, Check, RefreshCw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
-import { trackAddToCart } from '@/lib/analytics';
+import { trackAddToCart, getGA4Category } from '@/lib/analytics';
 import { Button } from '@/components/ui/button';
 
 interface ProductCardProps {
@@ -17,11 +17,13 @@ interface ProductCardProps {
   price: number;
   tortillaCount: number;
   storage: 'shelf_stable' | 'refrigerated';
+  category?: string;
   productType?: 'tortilla' | 'sauce' | 'wholesale' | 'chips' | 'salsa' | 'seasoning';
   tortillaType?: string;
   isBestSeller?: boolean;
   savingsPercent?: number;
   bundleOnly?: boolean;
+  brand?: string;
   onAddToOrder?: (sku: string) => void;
 }
 
@@ -33,11 +35,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   price,
   tortillaCount,
   storage,
+  category,
   productType,
   tortillaType,
   isBestSeller,
   savingsPercent,
   bundleOnly,
+  brand,
   onAddToOrder,
 }) => {
   const { addItem } = useCart();
@@ -84,6 +88,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       name,
       price: price / 100,
       quantity,
+      category: getGA4Category(productType, category),
+      brand: 'H-E-B',
     });
 
     // Reset quantity to 1 after adding

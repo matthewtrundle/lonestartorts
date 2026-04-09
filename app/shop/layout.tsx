@@ -30,7 +30,7 @@ const productSchemas = [
     name: 'H-E-B Bakery Flour Tortillas',
     description: 'Regular flour tortilla made fresh in the bakery section. Soft, wrap-friendly, very versatile. 20 tortillas per pack.',
     sku: 'HEB-FLOUR',
-    image: 'https://lonestartortillas.com/images/products/flour-tortillas-heb.png',
+    image: 'https://lonestartortillas.com/images/products/flour-tortillas-heb.webp',
     brand: { '@type': 'Brand', name: 'H-E-B' },
     manufacturer: { '@type': 'Organization', name: 'H-E-B Grocery Company' },
     offers: {
@@ -63,7 +63,7 @@ const productSchemas = [
     name: 'H-E-B Bakery Butter Tortillas',
     description: 'A flour tortilla with a buttery taste and aroma. Great for breakfast tacos or when you want something rich and softer. 20 tortillas per pack.',
     sku: 'HEB-BUTTER',
-    image: 'https://lonestartortillas.com/images/products/butter-tortillas-heb.png',
+    image: 'https://lonestartortillas.com/images/products/butter-tortillas-heb.webp',
     brand: { '@type': 'Brand', name: 'H-E-B' },
     manufacturer: { '@type': 'Organization', name: 'H-E-B Grocery Company' },
     offers: {
@@ -96,7 +96,7 @@ const productSchemas = [
     name: 'H-E-B Bakery Wheat Tortillas',
     description: 'Whole wheat tortillas with wholesome grain flavor. Perfect for health-conscious meals without sacrificing taste. 20 tortillas per pack.',
     sku: 'HEB-WHEAT',
-    image: 'https://lonestartortillas.com/images/products/wheat-tortillas-heb.png',
+    image: 'https://lonestartortillas.com/images/products/wheat-tortillas-heb.webp',
     brand: { '@type': 'Brand', name: 'H-E-B' },
     manufacturer: { '@type': 'Organization', name: 'H-E-B Grocery Company' },
     offers: {
@@ -129,7 +129,7 @@ const productSchemas = [
     name: 'H-E-B That Green Sauce',
     description: 'The legendary H-E-B That Green Sauce. Perfect for tacos, enchiladas, and everything in between.',
     sku: 'HEB-GREEN-SAUCE',
-    image: 'https://lonestartortillas.com/images/products/green-sauce-heb.png',
+    image: 'https://lonestartortillas.com/images/products/green-sauce-heb.webp',
     brand: { '@type': 'Brand', name: 'H-E-B' },
     manufacturer: { '@type': 'Organization', name: 'H-E-B Grocery Company' },
     offers: {

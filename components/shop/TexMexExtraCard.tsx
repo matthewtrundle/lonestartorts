@@ -7,7 +7,7 @@ import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
 import { Product } from '@/lib/products';
 import { Button } from '@/components/ui/button';
-import { trackAddToCart } from '@/lib/analytics';
+import { trackAddToCart, getGA4Category } from '@/lib/analytics';
 
 interface TexMexExtraCardProps {
   product: Product;
@@ -69,6 +69,8 @@ export const TexMexExtraCard: React.FC<TexMexExtraCardProps> = ({ product }) => 
       name: product.name,
       price: product.price / 100,
       quantity: 1,
+      category: getGA4Category(product.productType, product.category),
+      brand: 'H-E-B',
     });
   };
 

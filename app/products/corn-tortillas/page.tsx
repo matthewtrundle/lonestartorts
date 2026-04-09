@@ -43,7 +43,7 @@ export default function CornTortillasProductPage() {
       ratingValue: '4.9',
       reviewCount: '127',
     },
-    image: 'https://lonestartortillas.com/images/products/corn-tortillas.jpg',
+    image: 'https://lonestartortillas.com/images/products/corn-tortillas.webp',
     category: 'Food > Bakery > Bread & Bakery Products > Tortillas',
   };
 
@@ -174,7 +174,7 @@ export default function CornTortillasProductPage() {
               <div className="relative">
                 <div className="aspect-square rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/20 overflow-hidden relative">
                   <Image
-                    src="/images/products/corn-tortillas.jpg"
+                    src="/images/products/corn-tortillas.webp"
                     alt="H-E-B Corn Tortillas - Authentic Texas corn tortillas"
                     fill
                     className="object-cover"

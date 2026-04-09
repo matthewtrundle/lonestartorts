@@ -415,6 +415,180 @@ export function generateOrderShippedEmail(data: OrderShippedData): string {
 </html>`;
 }
 
+interface ShippingApologyData {
+  orderNumber: string;
+  customerName: string;
+  trackingNumber: string;
+  carrier: string;
+  deliveredDate: string;
+  couponCode: string;
+  trackingUrl?: string;
+}
+
+/**
+ * Generate Shipping Apology Email HTML
+ * Used for customers who never received their shipping notification
+ */
+export function generateShippingApologyEmail(data: ShippingApologyData): string {
+  const { orderNumber, customerName, trackingNumber, carrier, deliveredDate, couponCode, trackingUrl } = data;
+  const firstName = customerName.split(' ')[0];
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Owe You an Apology - Lonestar Tortillas</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f4;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f4;">
+    <tr>
+      <td style="padding: 32px 16px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 32px; text-align: center; background: linear-gradient(135deg, #111827 0%, #292524 100%);">
+              <div style="margin-bottom: 24px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h1 style="margin: 0 0 16px 0; font-size: 28px; font-weight: 700; color: #ffffff; line-height: 1.2;">We Owe You an Apology</h1>
+              <p style="margin: 0; font-size: 18px; color: #fafaf9; line-height: 1.6;">Hey ${firstName}, we dropped the ball and want to make it right.</p>
+            </td>
+          </tr>
+
+          <!-- Apology Body -->
+          <tr>
+            <td style="padding: 32px 32px 24px 32px;">
+              <p style="margin: 0 0 16px 0; font-size: 16px; color: #292524; line-height: 1.7;">
+                We had a hiccup with our email notification system when your order shipped on March 31st, and your shipping confirmation with tracking info never went out. We're truly sorry about that.
+              </p>
+              <p style="margin: 0; font-size: 16px; color: #292524; line-height: 1.7;">
+                The good news is your order has been <strong style="color: #059669;">confirmed delivered</strong>. Here are your details for your records:
+              </p>
+            </td>
+          </tr>
+
+          <!-- Delivery Confirmation Card -->
+          <tr>
+            <td style="padding: 0 32px 24px 32px;">
+              <div style="padding: 24px; background-color: #fef3c7; border-radius: 8px; border: 2px solid #d97706;">
+                <h2 style="margin: 0 0 20px 0; font-size: 18px; font-weight: 700; color: #111827; text-align: center;">Delivery Confirmed</h2>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td style="padding: 10px 0; text-align: left;">
+                      <span style="font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Order Number</span>
+                    </td>
+                    <td style="padding: 10px 0; text-align: right;">
+                      <span style="font-size: 16px; font-weight: 700; color: #1c1917; font-family: monospace; letter-spacing: 1px;">${orderNumber}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="padding: 6px 0; border-top: 1px solid #fcd34d;"></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 10px 0; text-align: left;">
+                      <span style="font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Carrier</span>
+                    </td>
+                    <td style="padding: 10px 0; text-align: right;">
+                      <span style="font-size: 16px; font-weight: 600; color: #1c1917;">${carrier}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="padding: 6px 0; border-top: 1px solid #fcd34d;"></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 10px 0; text-align: left;">
+                      <span style="font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Tracking Number</span>
+                    </td>
+                    <td style="padding: 10px 0; text-align: right;">
+                      <span style="font-size: 16px; font-weight: 700; color: #d97706; font-family: monospace; letter-spacing: 1px;">${trackingNumber}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="padding: 6px 0; border-top: 1px solid #fcd34d;"></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 10px 0; text-align: left;">
+                      <span style="font-size: 13px; font-weight: 600; color: #78350f; text-transform: uppercase; letter-spacing: 0.5px;">Delivered</span>
+                    </td>
+                    <td style="padding: 10px 0; text-align: right;">
+                      <span style="font-size: 16px; font-weight: 700; color: #059669;">${deliveredDate}</span>
+                    </td>
+                  </tr>
+                </table>
+                ${trackingUrl ? `
+                <div style="margin-top: 20px; text-align: center;">
+                  <a href="${trackingUrl}" style="display: inline-block; background-color: #111827; color: #ffffff; padding: 14px 36px; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 15px; box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2);">Track Package</a>
+                </div>
+                ` : ''}
+              </div>
+            </td>
+          </tr>
+
+          <!-- $10 Off Coupon Card -->
+          <tr>
+            <td style="padding: 0 32px 24px 32px;">
+              <div style="padding: 28px 24px; background: linear-gradient(135deg, #fef3c7 0%, #fff7ed 100%); border-radius: 12px; border: 2px dashed #d97706; text-align: center;">
+                <h3 style="margin: 0 0 8px 0; font-size: 20px; font-weight: 700; color: #92400e;">$10 Off Your Next Order</h3>
+                <p style="margin: 0 0 20px 0; font-size: 15px; color: #78350f; line-height: 1.5;">
+                  To make up for the missing notification, here's a little something from us:
+                </p>
+                <div style="display: inline-block; padding: 16px 32px; background-color: #ffffff; border-radius: 8px; border: 2px solid #d97706; margin-bottom: 16px;">
+                  <span style="font-size: 24px; font-weight: 700; color: #d97706; font-family: monospace; letter-spacing: 2px;">${couponCode}</span>
+                </div>
+                <p style="margin: 0; font-size: 14px; color: #78350f;">
+                  Use this code at checkout for <strong>$10 off</strong> your next order. Valid for 90 days.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Didn't Receive It? -->
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <div style="padding: 20px 24px; background-color: #fff7ed; border-radius: 8px; border-left: 4px solid #ea580c;">
+                <h3 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #111827;">Didn't receive your tortillas?</h3>
+                <p style="margin: 0; font-size: 14px; color: #57534e; line-height: 1.6;">
+                  If for any reason you haven't received your package, please reach out immediately and we'll make it right. Just reply to this email or <a href="https://lonestartortillas.com/contact" style="color: #d97706; font-weight: 600; text-decoration: underline;">contact us here</a>.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px; text-align: center; background-color: #111827;">
+              <div style="margin-bottom: 16px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#facc15" style="display: inline-block;">
+                  <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                </svg>
+              </div>
+              <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #ffffff;">Lonestar Tortillas</h3>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #a8a29e;">Premium Texas Tortillas</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto 16px auto;">
+                <tr>
+                  <td style="background-color: #d97706; border-radius: 6px;">
+                    <a href="https://lonestartortillas.com/contact" style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600;">Questions? Contact Us</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: 0; font-size: 12px; color: #78716c;">
+                Independent reseller • Not affiliated with or endorsed by H-E-B®
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
 interface FeedbackRequestData {
   orderNumber: string;
   customerName: string;

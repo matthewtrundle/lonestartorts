@@ -41,6 +41,7 @@ const articleSchema = {
   dateModified: '2026-02-03',
   articleSection: 'Recipes & Culture',
   mainEntityOfPage: 'https://lonestartortillas.com/blog/texas-breakfast-taco-guide',
+  image: 'https://lonestartortillas.com/images/blog/breakfast-taco-hero.webp',
 };
 
 export default function BreakfastTacoGuidePage() {

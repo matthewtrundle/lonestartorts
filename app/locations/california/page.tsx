@@ -42,9 +42,58 @@ const regions = [
   { name: 'Inland Empire', cities: ['Riverside', 'San Bernardino', 'Fontana', 'Moreno Valley'] },
 ]
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How long does shipping to California take?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Orders to California typically arrive within 2-3 business days via USPS Priority Mail. We ship on Tuesdays, and order by Monday 9 PM CT to ship Tuesday. During peak seasons like holidays, delivery may take an extra day.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are the tortillas fresh when they arrive in California?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes! Our H-E-B tortillas are shelf-stable, meaning they don\'t require refrigeration and maintain their freshness during shipping. They arrive soft, pliable, and ready to use. Each package has a 60-day shelf life from the date of production, so you can stock up without worrying about freshness.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you offer free shipping to California?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes! We offer free shipping on orders $60+ to California and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in California.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What types of H-E-B tortillas can I order to California?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We ship the full range of H-E-B tortillas to California: corn tortillas (perfect for tacos and enchiladas), flour tortillas (great for burritos and quesadillas), and butter tortillas (the rich, buttery Texas favorite that\'s perfect for breakfast tacos). All varieties ship fresh and arrive ready to enjoy.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why order H-E-B tortillas instead of buying local?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'H-E-B tortillas have a distinctive Texas taste that\'s simply not available outside of Texas stores. They\'re made with traditional recipes and quality ingredients that have made them a favorite for generations of Texans. If you\'ve visited Texas and fallen in love with these tortillas, now you can enjoy them at home in California. Many customers tell us it\'s a taste of Texas they can\'t find anywhere else.',
+      },
+    },
+  ],
+}
+
 export default function CaliforniaPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
       {/* Header */}
       <header className="bg-charcoal-950 text-cream-50 py-12">
         <div className="container mx-auto px-6 max-w-6xl">
@@ -257,5 +306,6 @@ export default function CaliforniaPage() {
         </p>
       </main>
     </div>
+    </>
   )
 }

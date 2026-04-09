@@ -65,7 +65,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="https://lonestartortillas.com/images/LeadAd.png" alt="Texas cowgirl with authentic H-E-B tortillas" style="width: 100%; height: auto; display: block;" />
+              <img src="https://lonestartortillas.com/images/LeadAd.webp" alt="Texas cowgirl with authentic H-E-B tortillas" style="width: 100%; height: auto; display: block;" />
             </td>
           </tr>
 
@@ -254,7 +254,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="https://lonestartortillas.com/images/image%20(14).png" alt="Texas cowgirl with authentic tortillas" style="width: 100%; height: auto; display: block;" />
+              <img src="https://lonestartortillas.com/images/image%20(14).webp" alt="Texas cowgirl with authentic tortillas" style="width: 100%; height: auto; display: block;" />
             </td>
           </tr>
 

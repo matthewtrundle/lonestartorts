@@ -51,11 +51,13 @@ export function RelatedProducts({
             price={product.price}
             tortillaCount={product.tortillaCount}
             storage={product.storage}
+            category={product.category}
             productType={product.productType}
             tortillaType={product.tortillaType}
             isBestSeller={product.isBestSeller}
             savingsPercent={product.savingsPercent}
             bundleOnly={product.bundleOnly}
+            brand={product.brand}
           />
         ))}
       </div>

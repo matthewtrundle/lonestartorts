@@ -66,6 +66,71 @@ const enhancedTrack = (eventName: string, properties: Record<string, unknown>) =
 };
 
 // ============================================
+// GA4 E-COMMERCE HELPERS
+// ============================================
+
+/** Map product type / category to a GA4-friendly category label */
+export const getGA4Category = (productType?: string, category?: string): string => {
+  if (productType === 'sauce') return 'Sauces';
+  if (productType === 'salsa') return 'Salsas';
+  if (productType === 'chips') return 'Chips';
+  if (productType === 'seasoning') return 'Seasonings';
+  if (productType === 'tortilla') {
+    if (category === 'flour') return 'Tortillas - Flour';
+    if (category === 'corn') return 'Tortillas - Corn';
+    if (category === 'wheat') return 'Tortillas - Wheat';
+    return 'Tortillas';
+  }
+  if (productType === 'wholesale') return 'Wholesale';
+  return category || 'Uncategorized';
+};
+
+/** Map brand identifier to display brand name */
+export const getGA4Brand = (brand?: string): string => {
+  if (brand === 'mission') return 'Mission';
+  if (brand === 'la-banderita') return 'La Banderita';
+  // Default: all products on this site are H-E-B products
+  return 'H-E-B';
+};
+
+/** GA4 item shape per Google's e-commerce spec */
+interface GA4Item {
+  item_id: string;
+  item_name: string;
+  item_category?: string;
+  item_brand?: string;
+  price: number;
+  quantity: number;
+}
+
+/** Convert product data to a GA4-compliant item object */
+const toGA4Item = (item: {
+  productId: string;
+  name: string;
+  price: number; // dollars
+  quantity: number;
+  category?: string;
+  brand?: string;
+}): GA4Item => ({
+  item_id: item.productId,
+  item_name: item.name,
+  item_category: item.category || 'Uncategorized',
+  item_brand: item.brand || 'H-E-B',
+  price: item.price,
+  quantity: item.quantity,
+});
+
+/** Fire a GA4 e-commerce event via gtag */
+const fireGA4EcommerceEvent = (
+  eventName: string,
+  params: Record<string, unknown>,
+) => {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', eventName, params);
+  }
+};
+
+// ============================================
 // E-COMMERCE EVENTS
 // ============================================
 
@@ -74,26 +139,30 @@ export interface ProductData {
   name: string;
   price: number;
   category?: string;
+  brand?: string;
 }
 
 export interface CartItemData {
   productId: string;
   name: string;
-  price: number;
+  price: number; // dollars
   quantity: number;
+  category?: string;
+  brand?: string;
   isBundle?: boolean;
 }
 
 export interface CartData {
   itemCount: number;
-  cartTotal: number;
+  cartTotal: number; // dollars
+  items?: CartItemData[];
 }
 
 export interface PurchaseData {
   orderId: string;
-  total: number;
+  total: number; // dollars
   itemCount: number;
-  items?: string; // JSON string of items for reference
+  items?: CartItemData[];
 }
 
 /** Track when a user views a product */
@@ -103,6 +172,13 @@ export const trackProductView = (product: ProductData) => {
     name: product.name,
     price: product.price,
     category: product.category || 'uncategorized',
+  });
+
+  // GA4 view_item event
+  fireGA4EcommerceEvent('view_item', {
+    currency: 'USD',
+    value: product.price,
+    items: [toGA4Item({ ...product, quantity: 1 })],
   });
 };
 
@@ -115,14 +191,35 @@ export const trackAddToCart = (item: CartItemData) => {
     quantity: item.quantity,
     isBundle: item.isBundle || false,
   });
+
+  // GA4 add_to_cart event
+  fireGA4EcommerceEvent('add_to_cart', {
+    currency: 'USD',
+    value: item.price * item.quantity,
+    items: [toGA4Item(item)],
+  });
 };
 
 /** Track when a user removes an item from cart */
-export const trackRemoveFromCart = (item: { productId: string; name: string; quantity: number }) => {
+export const trackRemoveFromCart = (item: {
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+  category?: string;
+  brand?: string;
+}) => {
   track('remove_from_cart', {
     productId: item.productId,
     name: item.name,
     quantity: item.quantity,
+  });
+
+  // GA4 remove_from_cart event
+  fireGA4EcommerceEvent('remove_from_cart', {
+    currency: 'USD',
+    value: item.price * item.quantity,
+    items: [toGA4Item(item)],
   });
 };
 
@@ -132,6 +229,15 @@ export const trackViewCart = (data: CartData) => {
     itemCount: data.itemCount,
     cartTotal: data.cartTotal,
   });
+
+  // GA4 view_cart event
+  if (data.items && data.items.length > 0) {
+    fireGA4EcommerceEvent('view_cart', {
+      currency: 'USD',
+      value: data.cartTotal,
+      items: data.items.map((item) => toGA4Item(item)),
+    });
+  }
 };
 
 /** Track when a user begins checkout */
@@ -140,6 +246,15 @@ export const trackBeginCheckout = (data: CartData) => {
     itemCount: data.itemCount,
     cartTotal: data.cartTotal,
   });
+
+  // GA4 begin_checkout event
+  if (data.items && data.items.length > 0) {
+    fireGA4EcommerceEvent('begin_checkout', {
+      currency: 'USD',
+      value: data.cartTotal,
+      items: data.items.map((item) => toGA4Item(item)),
+    });
+  }
 };
 
 /** Track completed purchase */
@@ -148,6 +263,16 @@ export const trackPurchase = (data: PurchaseData) => {
     orderId: data.orderId,
     total: data.total,
     itemCount: data.itemCount,
+  });
+
+  // GA4 purchase event
+  fireGA4EcommerceEvent('purchase', {
+    transaction_id: data.orderId,
+    currency: 'USD',
+    value: data.total,
+    items: data.items
+      ? data.items.map((item) => toGA4Item(item))
+      : [],
   });
 };
 

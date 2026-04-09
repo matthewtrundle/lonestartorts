@@ -2,7 +2,8 @@
 
 import { useEffect, useState, Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { trackPurchase } from '@/lib/analytics';
+import { trackPurchase, getGA4Category, type CartItemData } from '@/lib/analytics';
+import { getProductBySku } from '@/lib/products';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import { getComplementaryProducts } from '@/lib/products';
@@ -87,11 +88,27 @@ function SuccessContent() {
         if (data.success && data.order) {
           setOrderDetails(data.order);
 
-          // Track conversion in Vercel Analytics
+          // Build item-level data for GA4 purchase event
+          const ga4Items: CartItemData[] = data.order.items.map((item: any) => {
+            const product = item.sku ? getProductBySku(item.sku) : null;
+            return {
+              productId: item.sku || item.name,
+              name: item.name,
+              price: item.price / 100,
+              quantity: item.quantity,
+              category: product
+                ? getGA4Category(product.productType, product.category)
+                : 'Uncategorized',
+              brand: 'H-E-B',
+            };
+          });
+
+          // Track conversion in Vercel Analytics + GA4
           trackPurchase({
             orderId: data.order.orderNumber,
             total: data.order.total / 100, // Convert cents to dollars
             itemCount: data.order.items.length,
+            items: ga4Items,
           });
 
           // Track conversion in Google Ads

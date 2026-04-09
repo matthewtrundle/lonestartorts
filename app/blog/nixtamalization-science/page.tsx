@@ -29,9 +29,16 @@ const articleSchema = {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
   },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Lonestar Tortillas',
+    url: 'https://lonestartortillas.com',
+  },
   datePublished: '2025-10-24',
   dateModified: '2025-10-25',
   articleSection: 'Science & Tradition',
+  image: 'https://lonestartortillas.com/images/generated/blog-nixtamalization-science.webp',
+  mainEntityOfPage: 'https://lonestartortillas.com/blog/nixtamalization-science',
 };
 
 export default function NixtamalizationSciencePage() {

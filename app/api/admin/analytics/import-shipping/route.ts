@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAuthenticated } from '@/lib/auth';
-import * as XLSX from 'xlsx';
-
 export const dynamic = 'force-dynamic';
 
 // Typo corrections for customer names
@@ -34,7 +32,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    // Read XLSX
+    // Read XLSX (dynamically imported to avoid bundling 700KB+ in non-admin routes)
+    const xlsxModule = await import('xlsx');
+    const XLSX = xlsxModule.default || xlsxModule;
     const buffer = await file.arrayBuffer();
     const workbook = XLSX.read(buffer, { type: 'array' });
     const sheet = workbook.Sheets[workbook.SheetNames[0]];

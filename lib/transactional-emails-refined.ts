@@ -39,7 +39,7 @@ export const REFINED_ORDER_CONFIRMATION = `<!DOCTYPE html>
           <!-- Hero Image -->
           <tr>
             <td style="padding: 0;">
-              <img src="https://lonestartortillas.com/images/LeadAd.png" alt="Premium Texas Tortillas" style="width: 100%; height: auto; display: block; max-height: 200px; object-fit: cover;" />
+              <img src="https://lonestartortillas.com/images/LeadAd.webp" alt="Premium Texas Tortillas" style="width: 100%; height: auto; display: block; max-height: 200px; object-fit: cover;" />
             </td>
           </tr>
 

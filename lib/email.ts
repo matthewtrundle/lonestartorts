@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeedbackRequestEmail, generateFeedbackThankYouEmail, generateSubscriptionRenewalEmail } from './email-templates';
+import { generateOrderConfirmationEmail, generateOrderShippedEmail, generateFeedbackRequestEmail, generateFeedbackThankYouEmail, generateSubscriptionRenewalEmail, generateShippingApologyEmail } from './email-templates';
 
 // Admin emails for order notifications
 const ADMIN_EMAILS = [
@@ -1537,6 +1537,63 @@ export async function sendWholesaleWelcomeEmail(props: {
     return { success: true, data };
   } catch (error) {
     console.error('Error sending wholesale welcome email:', error);
+    return { success: false, error };
+  }
+}
+
+/**
+ * Send shipping apology email for missed shipping notifications
+ */
+export async function sendShippingApologyEmail(props: {
+  to: string;
+  orderNumber: string;
+  customerName: string;
+  trackingNumber: string;
+  carrier: string;
+  deliveredDate: string;
+  couponCode: string;
+}) {
+  const { to, orderNumber, customerName, trackingNumber, carrier, deliveredDate, couponCode } = props;
+
+  // Generate tracking URL based on carrier
+  let trackingUrl = '';
+  const normalizedCarrier = carrier.toLowerCase();
+  if (normalizedCarrier.includes('ups')) {
+    trackingUrl = `https://www.ups.com/track?tracknum=${trackingNumber}`;
+  } else if (normalizedCarrier.includes('usps')) {
+    trackingUrl = `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+  } else if (normalizedCarrier.includes('fedex')) {
+    trackingUrl = `https://www.fedex.com/fedextrack/?trknbr=${trackingNumber}`;
+  }
+
+  try {
+    const html = generateShippingApologyEmail({
+      orderNumber,
+      customerName,
+      trackingNumber,
+      carrier,
+      deliveredDate,
+      couponCode,
+      trackingUrl,
+    });
+
+    const resend = getResendClient();
+    const { data, error } = await resend.emails.send({
+      from: `Maria from Lonestar Tortillas <${process.env.RESEND_FROM_EMAIL || fromEmail}>`,
+      to,
+      replyTo: 'howdy@lonestartortillas.com',
+      subject: `An update on your order #${orderNumber} - Lonestar Tortillas`,
+      html,
+    });
+
+    if (error) {
+      console.error('Failed to send shipping apology email:', error);
+      return { success: false, error };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending shipping apology email:', error);
     return { success: false, error };
   }
 }

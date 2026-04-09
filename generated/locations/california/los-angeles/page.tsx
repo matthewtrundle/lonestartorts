@@ -21,7 +21,38 @@ const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
-
+    {
+      '@type': 'Question',
+      name: 'How long does shipping take to Los Angeles?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most orders arrive within 2-3 business days via USPS Priority Mail. We ship on Tuesdays — order by Monday 9 PM CT to make that week\'s shipment.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are the tortillas fresh when they arrive in Los Angeles?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes! Our H-E-B tortillas are shelf-stable and maintain freshness during shipping. They arrive soft, pliable, and ready to use with a 60-day shelf life from production.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you offer free shipping to Los Angeles?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes! We offer free shipping on orders $60+ to Los Angeles and all California destinations. Orders under $60 ship for a flat $12.99.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What types of H-E-B tortillas can I order to Los Angeles?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We ship the full range: corn tortillas (perfect for tacos and enchiladas), flour tortillas (great for burritos and quesadillas), and butter tortillas (the rich, buttery Texas favorite).',
+      },
+    },
   ],
 }
 

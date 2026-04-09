@@ -18,9 +18,50 @@ const cities = [
   { name: 'Clifton', slug: 'clifton', population: '89K', region: 'Passaic County' },
 ]
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How long does shipping to New Jersey take?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Orders to New Jersey typically arrive within 2-3 business days via USPS Priority Mail. We ship on Tuesdays, and order by Monday 9 PM CT to ship Tuesday.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Are the tortillas fresh when they arrive?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes! Our H-E-B tortillas are shelf-stable with a 60-day shelf life. They don\'t require refrigeration and arrive soft, pliable, and ready to use.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do you offer free shipping to New Jersey?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes! We offer free shipping on orders $60+ to New Jersey and all other US states. Flat-rate shipping is $12.99 for smaller orders.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What types of tortillas do you offer?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We ship corn tortillas, flour tortillas, and butter flour tortillas - the full H-E-B range. All varieties are authentic Texas-style and ship fresh to New Jersey.',
+      },
+    },
+  ],
+}
+
 export default function NewJerseyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
       <header className="bg-charcoal-950 text-cream-50 py-12">
         <div className="container mx-auto px-6 max-w-6xl">
           <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Locations', href: '/locations' }, { label: 'New Jersey' }]} className="mb-6 text-cream-300" />
@@ -107,5 +148,6 @@ export default function NewJerseyPage() {
         <p className="text-sm text-charcoal-500 italic">Independent reseller. Not affiliated with or endorsed by H-E-B.</p>
       </article>
     </div>
+    </>
   )
 }

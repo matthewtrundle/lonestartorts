@@ -29,9 +29,16 @@ const articleSchema = {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
   },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Lonestar Tortillas',
+    url: 'https://lonestartortillas.com',
+  },
   datePublished: '2025-11-05',
   dateModified: '2025-11-05',
   articleSection: 'Business & Culture',
+  image: 'https://lonestartortillas.com/images/blog/washington-bbq-hero.webp',
+  mainEntityOfPage: 'https://lonestartortillas.com/blog/washington-bbq-elevation',
 };
 
 export default function WashingtonBBQElevationPage() {

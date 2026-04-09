@@ -8,7 +8,7 @@ import { useCart } from '@/lib/cart-context';
 import { ShopBundle, getBundleSavings } from '@/lib/bundles';
 import { getProductBySku } from '@/lib/products';
 import { Button } from '@/components/ui/button';
-import { trackAddToCart } from '@/lib/analytics';
+import { trackAddToCart, getGA4Category } from '@/lib/analytics';
 
 interface BundleCardProps {
   bundle: ShopBundle;
@@ -53,6 +53,8 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
       name: bundle.name,
       price: bundle.bundlePrice / 100,
       quantity: 1,
+      category: 'Bundles',
+      brand: 'H-E-B',
       isBundle: true,
     });
   };

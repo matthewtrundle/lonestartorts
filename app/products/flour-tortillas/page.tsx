@@ -43,7 +43,7 @@ export default function FlourTortillasProductPage() {
       ratingValue: '4.8',
       reviewCount: '93',
     },
-    image: 'https://lonestartortillas.com/images/products/flour-tortillas.jpg',
+    image: 'https://lonestartortillas.com/images/products/flour-tortillas.webp',
     category: 'Food > Bakery > Bread & Bakery Products > Tortillas',
   };
 

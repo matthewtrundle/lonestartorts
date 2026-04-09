@@ -62,7 +62,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
     hero: {
       headline: 'Food Trucks, Ready to Up Your Game?',
       subhead: 'H-E-B® Tortillas Are Your Edge',
-      image: '/images/restaurants/food-trucks-hero.png',
+      image: '/images/restaurants/food-trucks-hero.webp',
       cta: 'Shop Restaurant-Grade Tortillas',
     },
     painPoints: [
@@ -102,7 +102,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
           icon: 'Truck',
         },
       ],
-      image: '/images/restaurants/food-trucks-product-in-use.png',
+      image: '/images/restaurants/food-trucks-product-in-use.webp',
     },
     trustSignals: [
       {
@@ -151,7 +151,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
     hero: {
       headline: 'BBQ Restaurants, Ready to Up Your Game?',
       subhead: 'H-E-B® Tortillas Are Your Edge',
-      image: '/images/restaurants/bbq-hero.png',
+      image: '/images/restaurants/bbq-hero.webp',
       cta: 'Shop Restaurant-Grade Tortillas',
     },
     painPoints: [
@@ -191,7 +191,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
           icon: 'Star',
         },
       ],
-      image: '/images/restaurants/bbq-product-in-use.png',
+      image: '/images/restaurants/bbq-product-in-use.webp',
     },
     trustSignals: [
       {
@@ -240,7 +240,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
     hero: {
       headline: 'Mexican Restaurants, Ready to Up Your Game?',
       subhead: 'H-E-B® Tortillas Are Your Edge',
-      image: '/images/restaurants/mexican-hero.png',
+      image: '/images/restaurants/mexican-hero.webp',
       cta: 'Shop Restaurant-Grade Tortillas',
     },
     painPoints: [
@@ -280,7 +280,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
           icon: 'Target',
         },
       ],
-      image: '/images/restaurants/mexican-product-in-use.png',
+      image: '/images/restaurants/mexican-product-in-use.webp',
     },
     trustSignals: [
       {
@@ -329,7 +329,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
     hero: {
       headline: 'Tex-Mex Restaurants, Ready to Up Your Game?',
       subhead: 'H-E-B® Tortillas Are Your Edge',
-      image: '/images/restaurants/tex-mex-hero.png',
+      image: '/images/restaurants/tex-mex-hero.webp',
       cta: 'Shop Restaurant-Grade Tortillas',
     },
     painPoints: [
@@ -369,7 +369,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
           icon: 'Award',
         },
       ],
-      image: '/images/restaurants/tex-mex-product-in-use.png',
+      image: '/images/restaurants/tex-mex-product-in-use.webp',
     },
     trustSignals: [
       {
@@ -418,7 +418,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
     hero: {
       headline: 'Taco Shops, Ready to Up Your Game?',
       subhead: 'H-E-B® Tortillas Are Your Edge',
-      image: '/images/restaurants/taco-shops-hero.png',
+      image: '/images/restaurants/taco-shops-hero.webp',
       cta: 'Shop Restaurant-Grade Tortillas',
     },
     painPoints: [
@@ -458,7 +458,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
           icon: 'Shield',
         },
       ],
-      image: '/images/restaurants/taco-shops-product-in-use.png',
+      image: '/images/restaurants/taco-shops-product-in-use.webp',
     },
     trustSignals: [
       {
@@ -507,7 +507,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
     hero: {
       headline: 'Caterers, Ready to Up Your Game?',
       subhead: 'H-E-B® Tortillas Are Your Edge',
-      image: '/images/restaurants/catering-hero.png',
+      image: '/images/restaurants/catering-hero.webp',
       cta: 'Shop Restaurant-Grade Tortillas',
     },
     painPoints: [
@@ -547,7 +547,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
           icon: 'Award',
         },
       ],
-      image: '/images/restaurants/catering-product-in-use.png',
+      image: '/images/restaurants/catering-product-in-use.webp',
     },
     trustSignals: [
       {
@@ -596,7 +596,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
     hero: {
       headline: 'Breakfast Spots, Ready to Up Your Game?',
       subhead: 'H-E-B® Tortillas Are Your Edge',
-      image: '/images/restaurants/breakfast-hero.png',
+      image: '/images/restaurants/breakfast-hero.webp',
       cta: 'Shop Restaurant-Grade Tortillas',
     },
     painPoints: [
@@ -636,7 +636,7 @@ export const restaurantContent: Record<string, RestaurantContent> = {
           icon: 'Star',
         },
       ],
-      image: '/images/restaurants/breakfast-product-in-use.png',
+      image: '/images/restaurants/breakfast-product-in-use.webp',
     },
     trustSignals: [
       {

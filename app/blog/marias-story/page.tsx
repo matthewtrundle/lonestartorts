@@ -29,9 +29,16 @@ const articleSchema = {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
   },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Lonestar Tortillas',
+    url: 'https://lonestartortillas.com',
+  },
   datePublished: '2025-10-24',
   dateModified: '2025-10-25',
   articleSection: 'People & Stories',
+  image: 'https://lonestartortillas.com/images/generated/blog-marias-story.webp',
+  mainEntityOfPage: 'https://lonestartortillas.com/blog/marias-story',
 };
 
 export default function MariasStoryPage() {

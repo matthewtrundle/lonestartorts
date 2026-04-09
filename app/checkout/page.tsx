@@ -6,7 +6,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
-import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned } from '@/lib/analytics';
+import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned, getGA4Category, type CartItemData } from '@/lib/analytics';
+import { getProductBySku } from '@/lib/products';
 
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle, Star, Gift, FileText } from 'lucide-react';
@@ -309,10 +310,22 @@ export default function CheckoutPage() {
     setDidProceedToPayment(true);
 
     try {
-      // Track begin checkout event
+      // Track begin checkout event with item-level data
+      const ga4Items: CartItemData[] = items.map((item) => {
+        const product = getProductBySku(item.sku);
+        return {
+          productId: item.sku,
+          name: item.name,
+          price: item.price / 100,
+          quantity: item.quantity,
+          category: getGA4Category(item.productType, product?.category),
+          brand: 'H-E-B',
+        };
+      });
       trackBeginCheckout({
         itemCount: items.length,
         cartTotal: displayTotal / 100,
+        items: ga4Items,
       });
 
       // Create Stripe checkout session
