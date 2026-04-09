@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { getAuthenticatedCustomer } from '@/lib/customer-auth';
 import { createRetailSubscription, mapStripeIntervalToDb } from '@/lib/subscription/stripe';
 import { getProductBySku } from '@/lib/products';
-import { sendNewSubscriptionEmail, sendAdminNewSubscriptionNotification } from '@/lib/email';
+// Emails are now sent from webhook handler after payment confirms
 
 const TAX_RATE = 0.0825;
 
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       shipping: shipping + tax, // Include tax in Stripe price
     });
 
-    // Save to database
+    // Save to database with INCOMPLETE status — webhook will activate after payment succeeds
     const subscription = await prisma.retailSubscription.create({
       data: {
         customerId: customer.id,
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
         stripePriceId: result.price.id,
         stripeProductId: result.product.id,
         name: `${interval === 'biweekly' ? 'Biweekly' : interval === 'weekly' ? 'Weekly' : interval === 'quarterly' ? 'Quarterly' : 'Monthly'} Tortilla Subscription`,
-        status: 'ACTIVE',
+        status: 'INCOMPLETE',
         interval: mapStripeIntervalToDb(interval),
         intervalCount: stripeIntervalCount,
         nextBillingDate: new Date(result.subscription.current_period_end * 1000),
@@ -79,31 +79,8 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Send email notifications (non-blocking)
-    const intervalLabel = interval === 'biweekly' ? 'Every 2 weeks' : interval === 'weekly' ? 'Weekly' : interval === 'quarterly' ? 'Quarterly' : 'Monthly';
-    const nextBillingDate = new Date(result.subscription.current_period_end * 1000)
-      .toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    const customerName = [customer.firstName, customer.lastName].filter(Boolean).join(' ') || 'Valued Customer';
-
-    const emailProps = {
-      to: customer.email,
-      customerName,
-      subscriptionName: subscription.name,
-      interval: intervalLabel,
-      items: validatedItems,
-      subtotal,
-      shipping,
-      tax,
-      total,
-      preferredShippingDay: preferredShippingDay || null,
-      nextBillingDate,
-    };
-
-    // Send both emails without blocking the response
-    Promise.all([
-      sendNewSubscriptionEmail(emailProps).catch(err => console.error('Failed to send subscription welcome email:', err)),
-      sendAdminNewSubscriptionNotification({ ...emailProps, customerEmail: customer.email }).catch(err => console.error('Failed to send admin subscription notification:', err)),
-    ]);
+    // NOTE: Welcome emails are sent from the webhook handler after payment succeeds,
+    // not here. This avoids sending emails for subscriptions that never get paid.
 
     return NextResponse.json({
       subscription: {

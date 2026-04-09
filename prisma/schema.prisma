@@ -679,6 +679,7 @@ enum WholesaleOrderStatus {
 }
 
 enum SubscriptionStatus {
+  INCOMPLETE
   ACTIVE
   PAUSED
   CANCELLED

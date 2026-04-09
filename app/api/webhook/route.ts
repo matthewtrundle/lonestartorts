@@ -538,10 +538,18 @@ export async function POST(req: NextRequest) {
             });
 
             if (failedRetailSub) {
+              // If first payment fails (INCOMPLETE), cancel it. Otherwise mark PAST_DUE.
+              const newStatus = failedRetailSub.status === 'INCOMPLETE' ? 'CANCELLED' : 'PAST_DUE';
               await prisma.retailSubscription.update({
                 where: { id: failedRetailSub.id },
-                data: { status: 'PAST_DUE' },
+                data: {
+                  status: newStatus,
+                  ...(newStatus === 'CANCELLED' && { cancelledAt: new Date() }),
+                },
               });
+              if (newStatus === 'CANCELLED') {
+                console.log(`Subscription ${failedRetailSub.stripeSubscriptionId} cancelled — first payment failed`);
+              }
               break;
             }
           }
