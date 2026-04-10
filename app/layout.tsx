@@ -16,9 +16,13 @@ const CartSidebar = dynamic(
   { ssr: false }
 );
 
-// Lazy load Maria AI chat widget
+// Lazy load Maria AI chat + voice widgets
 const MariaWidget = dynamic(
   () => import('@/components/chat/MariaWidget').then(mod => mod.MariaWidget),
+  { ssr: false }
+);
+const MariaVoiceCall = dynamic(
+  () => import('@/components/chat/MariaVoiceCall').then(mod => mod.MariaVoiceCall),
   { ssr: false }
 );
 
@@ -376,6 +380,7 @@ export default function RootLayout({
           </CartProvider>
         </LanguageProvider>
         <MariaWidget />
+        <MariaVoiceCall />
       </body>
     </html>
   );
