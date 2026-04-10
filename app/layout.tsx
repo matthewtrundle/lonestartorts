@@ -21,10 +21,7 @@ const MariaWidget = dynamic(
   () => import('@/components/chat/MariaWidget').then(mod => mod.MariaWidget),
   { ssr: false }
 );
-const MariaVoiceCall = dynamic(
-  () => import('@/components/chat/MariaVoiceCall').then(mod => mod.MariaVoiceCall),
-  { ssr: false }
-);
+// MariaVoiceCall is now integrated into the Header component
 
 // Optimized font loading with Next.js
 const inter = Inter({
@@ -380,7 +377,6 @@ export default function RootLayout({
           </CartProvider>
         </LanguageProvider>
         <MariaWidget />
-        <MariaVoiceCall />
       </body>
     </html>
   );

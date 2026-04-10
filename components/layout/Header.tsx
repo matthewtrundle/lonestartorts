@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
-import { ShoppingBag, Menu, X, ChevronDown, User, BookOpen, Newspaper, MapPin, UtensilsCrossed, Truck, MessageCircle, Info, Sparkles } from 'lucide-react';
+import { ShoppingBag, Menu, X, ChevronDown, User, BookOpen, Newspaper, MapPin, UtensilsCrossed, Truck, MessageCircle, Info, Phone } from 'lucide-react';
+import { MariaVoiceCall } from '@/components/chat/MariaVoiceCall';
 
 const resourceLinks = [
   { href: '/craft', labelKey: 'nav.source', icon: Info, description: 'How we source our tortillas' },
@@ -26,6 +27,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
+  const [isMariaOpen, setIsMariaOpen] = useState(false);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -90,20 +92,6 @@ export function Header() {
     resourcesTimeoutRef.current = setTimeout(() => {
       setIsResourcesOpen(false);
     }, 150);
-  };
-
-  const openMariaChat = () => {
-    const retellBtn = document.querySelector('[id^="retell-widget"] button, .retell-widget button')
-      || document.querySelector('button[aria-label*="chat"], button[aria-label*="Chat"]');
-    if (retellBtn instanceof HTMLElement) {
-      retellBtn.click();
-      return;
-    }
-    const floatingElements = document.querySelectorAll('div[style*="position: fixed"]');
-    for (const el of floatingElements) {
-      const btn = el.querySelector('button');
-      if (btn) { btn.click(); return; }
-    }
   };
 
   const hasMariaWidget = !!process.env.NEXT_PUBLIC_RETELL_AGENT_ID;
@@ -267,22 +255,25 @@ export function Header() {
               )}
             </button>
 
-            {/* Ask Maria AI Button */}
+            {/* Ask Maria AI Button + Dropdown */}
             {hasMariaWidget && (
-              <button
-                onClick={openMariaChat}
-                className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sunset-200 bg-sunset-50 hover:bg-sunset-100 transition-all"
-                aria-label="Chat with Maria, our AI assistant"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-sunset-500" />
-                <span className="text-sm font-medium text-sunset-700 group-hover:text-sunset-800">
-                  Ask Maria
-                </span>
-                <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sunset-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-sunset-500" />
-                </span>
-              </button>
+              <div className="relative">
+                <button
+                  onClick={() => setIsMariaOpen(!isMariaOpen)}
+                  className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sunset-200 bg-sunset-50 hover:bg-sunset-100 transition-all"
+                  aria-label="Talk to Maria, our AI assistant"
+                >
+                  <Phone className="w-3.5 h-3.5 text-sunset-500" />
+                  <span className="text-sm font-medium text-sunset-700 group-hover:text-sunset-800">
+                    Ask Maria
+                  </span>
+                  <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sunset-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-sunset-500" />
+                  </span>
+                </button>
+                <MariaVoiceCall isOpen={isMariaOpen} onClose={() => setIsMariaOpen(false)} />
+              </div>
             )}
 
             {/* Account Link */}
@@ -397,11 +388,11 @@ export function Header() {
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  setTimeout(openMariaChat, 300);
+                  setTimeout(() => setIsMariaOpen(true), 300);
                 }}
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg border-2 border-sunset-300 bg-sunset-50 hover:bg-sunset-100 transition-colors mb-4"
               >
-                <Sparkles className="w-4 h-4 text-sunset-500" />
+                <Phone className="w-4 h-4 text-sunset-500" />
                 <span className="font-semibold text-sunset-700">Ask Maria</span>
                 <span className="text-xs text-sunset-500 font-normal">AI Assistant</span>
               </button>
