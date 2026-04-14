@@ -88,7 +88,7 @@ Create a document with this content:
 # SHIPPING POLICY
 
 ## Key Points
-- FREE shipping on all orders (minimum $40 order)
+- FREE shipping on orders $80+ (flat $12.99 under $80)
 - Ships TUESDAYS ONLY (Freshness First program)
 - Cutoff: 2 PM Central Time for same-day Tuesday shipping
 - Orders placed after Tuesday 2 PM ship the following Tuesday
@@ -187,7 +187,7 @@ Escalation triggers:
 
 ALWAYS MENTION:
 - We ship Tuesdays only for freshness
-- Free shipping on all orders
+- Free shipping on orders $80+ (flat $12.99 under $80)
 - Visit lonestartortillas.com to order
 
 NEVER:
@@ -227,7 +227,7 @@ Set up these variables to collect during calls:
 
 ### Shipping Question
 ```
-"Great question! We ship on Tuesdays only - that's our Freshness First program. Order before 2 PM Central on Tuesday to ship same day. Delivery is usually 2-3 business days from there. And shipping is always free!"
+"Great question! We ship on Tuesdays only - that's our Freshness First program. Order before 2 PM Central on Tuesday to ship same day. Delivery is usually 2-3 business days from there. Shipping is FREE on orders $80 and up - orders under $80 ship for a flat $12.99."
 ```
 
 ### Email Collection

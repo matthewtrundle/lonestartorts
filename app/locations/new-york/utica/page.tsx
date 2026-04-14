@@ -38,7 +38,7 @@ export default function UticaPage() {
           <ul className="text-charcoal-700 space-y-2">
             <li><strong>Delivery Time:</strong> 2-3 business days via USPS Priority Mail</li>
             <li><strong>Order Cutoff:</strong> Monday 9 PM CT</li>
-            <li><strong>Free Shipping:</strong> On orders $60+</li>
+            <li><strong>Free Shipping:</strong> On orders $80+</li>
           </ul>
         </section>
         <section className="my-12">

@@ -91,7 +91,7 @@ export default function SchoolFundraiserPage() {
                   <ul className="space-y-1 text-charcoal-700 text-sm">
                     <li>Tortillas (400): ~$40</li>
                     <li>Proteins (20 lbs): ~$100</li>
-                    <li>Toppings/cheese: ~$60</li>
+                    <li>Toppings/cheese: ~$80</li>
                     <li>Supplies: ~$50</li>
                     <li className="font-bold pt-2 border-t">Total Cost: ~$250</li>
                   </ul>

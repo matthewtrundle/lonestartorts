@@ -38,7 +38,7 @@ We deliver fresh Texas tortillas to Sacramento in 2–3 business days via insula
 **Delivery Highlights:**  
 - **Sacramento Valley Coverage:** Serving Sacramento, Davis, Elk Grove, Roseville & surrounding areas  
 - **Central Valley Expansion:** Available in Stockton, Modesto, and Fresno  
-- **Flat-Rate Shipping:** $12.99 on orders under $60, FREE shipping on orders $60+  
+- **Flat-Rate Shipping:** $12.99 on orders under $80, FREE shipping on orders $80+  
 - **Multi-State Reach:** Also shipping to San Francisco, Reno, NV, and Portland, OR  
 
 Rest assured, our packaging is eco-friendly and temperature-controlled. [Link to: /shipping-policy]  

@@ -56,7 +56,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to New York?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $60+ to New York and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in New York.',
+        text: 'Yes! We offer free shipping on orders $80+ to New York and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in New York.',
       },
     },
     {
@@ -231,7 +231,7 @@ export default function NewYorkPage() {
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
-                  Yes! We offer free shipping on orders $60+ to New York and all other US states.
+                  Yes! We offer free shipping on orders $80+ to New York and all other US states.
                   For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure
                   fast, reliable delivery to every address in New York.
                 </p>

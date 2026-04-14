@@ -47,7 +47,7 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
         />
       </div>
       {!compact && (
-        <p className="text-[10px] text-amber-600 mt-1.5">Orders under $60 ship for $12.99</p>
+        <p className="text-[10px] text-amber-600 mt-1.5">Orders under $80 ship for $12.99</p>
       )}
     </div>
   );

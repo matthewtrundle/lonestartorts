@@ -43,7 +43,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to Georgia?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $60+ to Georgia and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Georgia.',
+        text: 'Yes! We offer free shipping on orders $80+ to Georgia and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Georgia.',
       },
     },
     {
@@ -95,7 +95,7 @@ export default function GeorgiaPage() {
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Georgia Shipping Information</h2>
           <ul className="text-charcoal-700 space-y-2">
             <li><strong>Delivery Time:</strong> 2-3 business days</li>
-            <li><strong>Free Shipping:</strong> On orders $60+</li>
+            <li><strong>Free Shipping:</strong> On orders $80+</li>
           </ul>
         </div>
         <p className="text-sm text-charcoal-500 italic">Independent reseller. Not affiliated with or endorsed by H-E-B.</p>
@@ -144,7 +144,7 @@ export default function GeorgiaPage() {
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
-                  Yes! We offer free shipping on orders $60+ to Georgia and all other US states.
+                  Yes! We offer free shipping on orders $80+ to Georgia and all other US states.
                   For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure
                   fast, reliable delivery to every address in Georgia.
                 </p>

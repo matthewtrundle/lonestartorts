@@ -29,7 +29,7 @@ Rich, flaky, and speckled with real butter, these are San Jose’s secret weapon
 
 We get it—when a tortilla craving hits, you don’t want to wait. That’s why we ship orders from Texas via 2-day air to all San Jose ZIP codes (and everywhere from Fremont to Santa Cruz!). Here’s what to expect:  
 
-- **Cost**: Flat $12.99 shipping on orders under $60. FREE shipping on orders $60+!  
+- **Cost**: Flat $12.99 shipping on orders under $80. FREE shipping on orders $80+!  
 - **Schedule**: Order by 2 PM CT Monday–Thursday for Friday delivery.  
 - **Freshness Guaranteed**: Tortillas arrive chilled with ice packs and stay fresh for 7 days refrigerated (or 3 months frozen).  
 

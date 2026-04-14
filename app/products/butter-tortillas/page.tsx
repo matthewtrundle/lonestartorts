@@ -97,7 +97,7 @@ export default function ButterTortillasPage() {
                   <span className="text-5xl font-black text-charcoal-950">$16.99</span>
                   <span className="text-lg text-charcoal-600">per package</span>
                 </div>
-                <p className="text-charcoal-600 mb-6">FREE shipping on orders $60+</p>
+                <p className="text-charcoal-600 mb-6">FREE shipping on orders $80+</p>
                 <Link href="/pre-sale" className="block w-full bg-sunset-500 hover:bg-sunset-600 text-cream-50 text-center px-8 py-4 rounded-full font-bold text-lg tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl">
                   Join Pre-Sale Waitlist
                 </Link>

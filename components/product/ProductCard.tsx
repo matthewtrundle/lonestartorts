@@ -51,7 +51,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const getShippingInfo = () => {
     const itemTotal = price * quantity;
     return {
-      message: 'FREE shipping on orders $60+',
+      message: 'FREE shipping on orders $80+',
       type: 'free' as const,
       totalWithShipping: itemTotal,
       shippingCost: 0,
@@ -230,7 +230,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 : 'bg-gray-50 text-gray-600'
             }`}>
               {shippingInfo.type === 'free' ? (
-                <span>{formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping on $60+</span>
+                <span>{formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping on $80+</span>
               ) : (
                 <span>{shippingInfo.message}</span>
               )}

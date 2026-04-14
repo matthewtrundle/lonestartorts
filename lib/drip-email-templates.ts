@@ -381,7 +381,7 @@ export function generateDripEmail4(data: DripEmailData): { subject: string; html
                 <ul style="margin: 0; padding-left: 20px; font-size: 15px; color: #57534e; line-height: 1.8;">
                   <li>Taco Tuesday is always around the corner</li>
                   <li>These tortillas freeze beautifully for later</li>
-                  <li>Free shipping on orders over $60</li>
+                  <li>Free shipping on orders over $80</li>
                   <li>This code won't last forever!</li>
                 </ul>
               </div>
@@ -538,7 +538,7 @@ export function generateDripEmail6(data: DripEmailData): { subject: string; html
                   <tr>
                     <td style="padding: 8px 0;">
                       <span style="color: #10b981; font-weight: bold;">&#10003;</span>
-                      <span style="margin-left: 8px; font-size: 15px; color: #1c1917;">Free shipping on orders over $60</span>
+                      <span style="margin-left: 8px; font-size: 15px; color: #1c1917;">Free shipping on orders over $80</span>
                     </td>
                   </tr>
                   <tr>

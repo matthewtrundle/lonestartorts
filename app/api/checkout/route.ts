@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
     // Calculate subtotal for free shipping threshold check
     const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    // Calculate shipping based on subtotal ($12.99 flat, free on $60+)
+    // Calculate shipping based on subtotal ($12.99 flat, free on $80+)
     let shippingCost = calculateShipping(fullItems, subtotal);
     let freeShippingApplied = false;
     let freeShippingReason = '';

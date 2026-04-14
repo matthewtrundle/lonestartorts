@@ -43,7 +43,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to Oregon?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $60+ to Oregon and all other US states. Flat-rate shipping is $12.99 for smaller orders.',
+        text: 'Yes! We offer free shipping on orders $80+ to Oregon and all other US states. Flat-rate shipping is $12.99 for smaller orders.',
       },
     },
     {
@@ -87,7 +87,7 @@ export default function OregonPage() {
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg">
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Oregon Shipping Details</h2>
-          <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 3-4 business days</li><li><strong>Free Shipping:</strong> On orders $60+</li><li><strong>Coverage:</strong> All Oregon zip codes</li></ul>
+          <ul className="text-charcoal-700 space-y-2"><li><strong>Delivery Time:</strong> 3-4 business days</li><li><strong>Free Shipping:</strong> On orders $80+</li><li><strong>Coverage:</strong> All Oregon zip codes</li></ul>
         </div>
       </section>
       <section className="max-w-4xl mx-auto px-6 py-12">
@@ -124,7 +124,7 @@ export default function OregonPage() {
                 </svg>
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
-                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders $60+ to Oregon and all other US states. Flat-rate shipping is $12.99 for smaller orders.</p>
+                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders $80+ to Oregon and all other US states. Flat-rate shipping is $12.99 for smaller orders.</p>
               </div>
             </details>
             <details className="group border border-charcoal-200 rounded-lg overflow-hidden">

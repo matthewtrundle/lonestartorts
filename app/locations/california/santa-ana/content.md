@@ -29,7 +29,7 @@ Indulge in Texas’ best-kept secret: H-E-B’s famous butter tortillas. Enriche
 
 ## Shipping to Santa Ana, California  
 
-We know you’re craving that Texas flavor ASAP—so we’ve perfected our shipping to get your tortillas to Santa Ana in just 2–3 business days! Orders placed by noon CT ship the same day, arriving fresh and ready to enjoy. We deliver throughout Orange County, including Anaheim, Irvine, and Long Beach, with flat $12.99 shipping on orders under $60 (FREE shipping on orders $60+).  
+We know you’re craving that Texas flavor ASAP—so we’ve perfected our shipping to get your tortillas to Santa Ana in just 2–3 business days! Orders placed by noon CT ship the same day, arriving fresh and ready to enjoy. We deliver throughout Orange County, including Anaheim, Irvine, and Long Beach, with flat $12.99 shipping on orders under $80 (FREE shipping on orders $80+).  
 
 Your tortillas arrive in insulated packaging with ice packs to lock in freshness. Once they’re in your kitchen, simply refrigerate or freeze them (we’ll share pro tips [here](/guides/how-to-store-tortillas)). And yes—we ship across California and to nearby states like Arizona and Nevada!  
 

@@ -188,7 +188,7 @@ export default function TailgatePartyPage() {
                     <td className="border px-4 py-3 text-center">40-50</td>
                     <td className="border px-4 py-3 text-center">5-6 lbs</td>
                     <td className="border px-4 py-3 text-center">2 lbs each</td>
-                    <td className="border px-4 py-3 text-center">$60-100</td>
+                    <td className="border px-4 py-3 text-center">$80-100</td>
                   </tr>
                   <tr className="hover:bg-green-50">
                     <td className="border px-4 py-3 font-medium">20 fans</td>

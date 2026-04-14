@@ -281,7 +281,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
               <div className="p-4 bg-cream-50 border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
                   Yes! Our multi-pack pricing provides built-in bulk discounts. The more you order,
-                  the more you save per pack. We also offer FREE shipping on orders $60+. For
+                  the more you save per pack. We also offer FREE shipping on orders $80+. For
                   high-volume restaurant accounts with recurring needs, <a href="/wholesale" className="text-sunset-600 font-semibold hover:text-sunset-700">visit our wholesale page</a> to
                   request custom pricing.
                 </p>

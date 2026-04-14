@@ -30,7 +30,7 @@ We know fresh tortillas wait for no one – that’s why we’ve perfected our C
 
 - **Delivery Areas**: Serving all San Diego ZIP codes plus neighboring cities like Oceanside, Carlsbad, and Escondido. We also ship throughout Southern California including Los Angeles, Anaheim, and Riverside.  
 - **Shipping Time**: Orders placed by 2 PM CT ship same-day via refrigerated transit. Most San Diego addresses receive orders in 2-3 business days.  
-- **Cost**: Flat $12.99 shipping on orders under $60. FREE shipping on orders $60+!  
+- **Cost**: Flat $12.99 shipping on orders under $80. FREE shipping on orders $80+!  
 - **Freshness Guaranteed**: Our eco-friendly cooler packs keep tortillas fresh from our Texas kitchen to your San Diego table.  
 
 Got friends craving real tortillas in Phoenix or Las Vegas? We ship throughout Arizona and Nevada too! [Link to: /shipping-info]  

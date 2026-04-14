@@ -54,7 +54,7 @@ Then say: "I've noted your information and someone from our team will reach out 
 
 ALWAYS MENTION:
 - We ship Tuesdays only for freshness
-- Free shipping on all orders (minimum $40)
+- Free shipping on orders $80+ (flat $12.99 under $80)
 - Visit lonestartortillas.com/shop to order
 
 NEVER:

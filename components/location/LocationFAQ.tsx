@@ -21,7 +21,7 @@ export function LocationFAQ({ city, state, faqs }: LocationFAQProps) {
     },
     {
       question: `Do you offer free shipping to ${city}?`,
-      answer: `Yes! We offer FREE shipping on orders $60+ to ${city} and all other destinations in ${state}. Orders under $60 ship for a flat $12.99.`
+      answer: `Yes! We offer FREE shipping on orders $80+ to ${city} and all other destinations in ${state}. Orders under $80 ship for a flat $12.99.`
     },
     {
       question: `What types of tortillas can I order to ${city}?`,

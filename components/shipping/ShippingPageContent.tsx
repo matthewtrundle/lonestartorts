@@ -47,7 +47,7 @@ export default function ShippingPageContent() {
           </p>
 
           <p className="text-lg text-green-400 font-bold mb-8">
-            FREE Shipping on Orders $60+
+            FREE Shipping on Orders $80+
           </p>
 
           {mounted && shippingMsg && (
@@ -171,7 +171,7 @@ export default function ShippingPageContent() {
                 </li>
                 <li className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-green-600" />
-                  FREE shipping on orders $60+
+                  FREE shipping on orders $80+
                 </li>
               </ul>
             </div>
@@ -218,7 +218,7 @@ export default function ShippingPageContent() {
               },
               {
                 q: 'How much does shipping cost?',
-                a: 'Shipping is FREE on orders $60+. Orders under $60 ship for a flat $12.99. We ship via USPS Priority Mail.',
+                a: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $12.99. We ship via USPS Priority Mail.',
               },
               {
                 q: 'What days do you ship?',

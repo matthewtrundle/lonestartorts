@@ -108,7 +108,7 @@ export default function MorenoValleyPage() {
             <ul className="text-charcoal-700 space-y-2">
               <li><strong>Delivery Time:</strong> 2-3 business days via USPS Priority Mail</li>
               <li><strong>Order Cutoff:</strong> Monday 9 PM CT</li>
-              <li><strong>Free Shipping:</strong> On orders $60+</li>
+              <li><strong>Free Shipping:</strong> On orders $80+</li>
               <li><strong>Coverage:</strong> All Moreno Valley ZIP codes (92551-92557)</li>
             </ul>
           </section>
@@ -117,7 +117,7 @@ export default function MorenoValleyPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Perfect for Growing Families</h2>
             <p className="text-charcoal-700 leading-relaxed mb-4">
-              Moreno Valley is known for its young, family-oriented population. Our tortillas are perfect for families who appreciate quality food and go through tortillas quickly. Stock up and save with free shipping on orders $60+.
+              Moreno Valley is known for its young, family-oriented population. Our tortillas are perfect for families who appreciate quality food and go through tortillas quickly. Stock up and save with free shipping on orders $80+.
             </p>
             <p className="text-charcoal-700 leading-relaxed mb-4">
               The Inland Empire's sunny weather is great for outdoor living, and our shelf-stable tortillas are designed to handle the climate. They ship safely without refrigeration and stay fresh for weeks after arrival.
@@ -128,7 +128,7 @@ export default function MorenoValleyPage() {
                 <div className="text-charcoal-600">Days to Moreno Valley</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <div className="text-3xl font-bold text-sunset-600">$60+</div>
+                <div className="text-3xl font-bold text-sunset-600">$80+</div>
                 <div className="text-charcoal-600">Free Shipping</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">

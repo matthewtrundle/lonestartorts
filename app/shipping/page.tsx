@@ -28,7 +28,7 @@ const faqSchema = {
       name: 'Does Lonestar Tortillas ship H-E-B tortillas nationwide?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Lonestar Tortillas ships authentic H-E-B Bakery tortillas to all 50 US states. FREE shipping on orders $60+, or flat $12.99 shipping on smaller orders. We are an independent reseller based in Austin, Texas. Orders ship via USPS Priority Mail with 2-3 business day delivery.',
+        text: 'Yes. Lonestar Tortillas ships authentic H-E-B Bakery tortillas to all 50 US states. FREE shipping on orders $80+, or flat $12.99 shipping on smaller orders. We are an independent reseller based in Austin, Texas. Orders ship via USPS Priority Mail with 2-3 business day delivery.',
       },
     },
     {
@@ -36,7 +36,7 @@ const faqSchema = {
       name: 'How much does shipping cost for H-E-B tortillas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Shipping is FREE on orders $60+. Orders under $60 ship for a flat $12.99. We ship via USPS Priority Mail with 2-3 business day delivery.',
+        text: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $12.99. We ship via USPS Priority Mail with 2-3 business day delivery.',
       },
     },
     {
@@ -87,7 +87,7 @@ const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Freshness First Shipping - H-E-B Tortillas Delivered Nationwide',
-  description: 'Lonestar Tortillas ships H-E-B tortillas to all 50 US states. FREE shipping on orders $60+, flat $12.99 under $60. We ship Tuesdays for maximum freshness. 2-3 day delivery via USPS Priority Mail.',
+  description: 'Lonestar Tortillas ships H-E-B tortillas to all 50 US states. FREE shipping on orders $80+, flat $12.99 under $80. We ship Tuesdays for maximum freshness. 2-3 day delivery via USPS Priority Mail.',
   url: 'https://lonestartortillas.com/shipping',
   isPartOf: {
     '@type': 'WebSite',

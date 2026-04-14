@@ -133,7 +133,7 @@ const shippingInfo = [
   },
   {
     type: 'International',
-    price: '$60-100',
+    price: '$80-100',
     time: '5-10 business days',
     description: 'Express international shipping',
   },

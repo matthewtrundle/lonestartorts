@@ -42,7 +42,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to Los Angeles?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $60+ to Los Angeles and all California destinations. Orders under $60 ship for a flat $12.99.',
+        text: 'Yes! We offer free shipping on orders $80+ to Los Angeles and all California destinations. Orders under $80 ship for a flat $12.99.',
       },
     },
     {

@@ -56,7 +56,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to Florida?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $60+ to Florida and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Florida.',
+        text: 'Yes! We offer free shipping on orders $80+ to Florida and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Florida.',
       },
     },
     {
@@ -138,7 +138,7 @@ export default function FloridaPage() {
           <h2 className="text-xl font-bold text-charcoal-950 mb-2">Florida Shipping Information</h2>
           <ul className="text-charcoal-700 space-y-2">
             <li><strong>Delivery Time:</strong> 2-3 business days to most Florida cities</li>
-            <li><strong>Free Shipping:</strong> On orders $60+</li>
+            <li><strong>Free Shipping:</strong> On orders $80+</li>
             <li><strong>Coverage:</strong> All Florida ZIP codes</li>
           </ul>
         </div>
@@ -188,7 +188,7 @@ export default function FloridaPage() {
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
-                  Yes! We offer free shipping on orders $60+ to Florida and all other US states.
+                  Yes! We offer free shipping on orders $80+ to Florida and all other US states.
                   For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure
                   fast, reliable delivery to every address in Florida.
                 </p>

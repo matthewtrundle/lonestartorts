@@ -198,7 +198,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   // Calculate totals with shipping
-  // Shipping: FREE on orders $60+, flat $12.99 under $60
+  // Shipping: FREE on orders $80+, flat $12.99 under $80
   const { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress } = useMemo(() => {
     const itemCount = items.reduce((total, item) => total + item.quantity, 0);
     const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);

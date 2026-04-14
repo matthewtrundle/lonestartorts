@@ -108,7 +108,7 @@ export default function FremontPage() {
             <ul className="text-charcoal-700 space-y-2">
               <li><strong>Delivery Time:</strong> 2-3 business days via USPS Priority Mail</li>
               <li><strong>Order Cutoff:</strong> Monday 9 PM CT</li>
-              <li><strong>Free Shipping:</strong> On orders $60+</li>
+              <li><strong>Free Shipping:</strong> On orders $80+</li>
               <li><strong>Coverage:</strong> All Fremont ZIP codes (94536-94539, 94555)</li>
             </ul>
           </section>
@@ -128,7 +128,7 @@ export default function FremontPage() {
                 <div className="text-charcoal-600">Days to Fremont</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <div className="text-3xl font-bold text-sunset-600">$60+</div>
+                <div className="text-3xl font-bold text-sunset-600">$80+</div>
                 <div className="text-charcoal-600">Free Shipping</div>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
