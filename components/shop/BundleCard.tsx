@@ -81,12 +81,14 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
           </div>
         )}
 
-        {/* Savings Badge */}
-        <div className="absolute top-2 right-2 md:top-3 md:right-3 z-10">
-          <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-green-100 text-green-700 rounded-full shadow-lg">
-            Save {savingsPercent}%
-          </span>
-        </div>
+        {/* Savings Badge — only when there's an actual discount */}
+        {savingsPercent > 0 && (
+          <div className="absolute top-2 right-2 md:top-3 md:right-3 z-10">
+            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-green-100 text-green-700 rounded-full shadow-lg">
+              Save {savingsPercent}%
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Bundle Details */}
@@ -119,12 +121,16 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
           <span className="text-lg md:text-2xl font-bold text-sunset-600">
             {formatPrice(bundle.bundlePrice)}
           </span>
-          <span className="text-xs md:text-sm text-gray-400 line-through">
-            {formatPrice(bundle.originalPrice)}
-          </span>
-          <span className="text-[10px] md:text-xs text-green-600 font-semibold">
-            Save {formatPrice(savingsAmount)}
-          </span>
+          {savingsAmount > 0 && (
+            <>
+              <span className="text-xs md:text-sm text-gray-400 line-through">
+                {formatPrice(bundle.originalPrice)}
+              </span>
+              <span className="text-[10px] md:text-xs text-green-600 font-semibold">
+                Save {formatPrice(savingsAmount)}
+              </span>
+            </>
+          )}
         </div>
 
         {/* Shipping Info */}

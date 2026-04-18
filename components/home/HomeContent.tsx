@@ -137,7 +137,7 @@ export default function HomeContent() {
                     </span>
 
                     {/* Visual "TORTILLAS" - Part of H1 */}
-                    <span className="block text-[40px] sm:text-[70px] md:text-[90px] lg:text-[110px] xl:text-[130px] font-light leading-[0.8] tracking-[0.03em] text-sunset-600 -mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8 whitespace-nowrap">
+                    <span className="block text-[40px] sm:text-[70px] md:text-[90px] lg:text-[110px] xl:text-[130px] font-light leading-[0.85] tracking-[0.03em] text-sunset-600 mt-1 sm:mt-1 md:mt-2 lg:mt-3 whitespace-nowrap">
                       TORTILLAS
                     </span>
 
@@ -164,9 +164,9 @@ export default function HomeContent() {
                   <span className="block w-20 h-px bg-charcoal-300"></span>
                 </div>
 
-                {/* Tagline - Bold Statement */}
-                <div className="mt-8 mb-12 max-w-4xl mx-auto text-center">
-                  <p className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight text-charcoal-950 mb-4 uppercase">
+                {/* Tagline - Editorial dek that supports the logotype */}
+                <div className="mt-8 mb-12 max-w-3xl mx-auto text-center">
+                  <p className="text-base md:text-lg lg:text-xl font-semibold tracking-[0.2em] text-charcoal-700 mb-3 uppercase">
                     {t('hero.tagline')}
                   </p>
                   <p className="text-lg md:text-xl lg:text-2xl font-light tracking-wider text-masa-700 italic">

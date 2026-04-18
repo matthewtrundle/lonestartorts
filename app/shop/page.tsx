@@ -12,7 +12,7 @@ import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { ShopFAQ } from '@/components/shop/ShopFAQ';
 import { MariaCTA } from '@/components/chat/MariaCTA';
-import { Truck, Shield, Clock, ArrowRight, Check, RefreshCw, Calendar, Pause } from 'lucide-react';
+import { Truck, Shield, Clock, ArrowRight, Check, RefreshCw, Calendar, Pause, Wheat, Star, Package } from 'lucide-react';
 import Link from 'next/link';
 import { products as allProducts } from '@/lib/products';
 
@@ -196,7 +196,9 @@ export default function ShopPage({
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-900/80 to-charcoal-800/60" />
+          {/* Shop treatment: warm, consumer/dinnertime mood — sunset-tinted duotone */}
+          <div className="absolute inset-0 bg-gradient-to-br from-charcoal-950/85 via-sunset-900/55 to-masa-800/50 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-charcoal-950/40" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
@@ -365,17 +367,23 @@ export default function ShopPage({
           <h2 className="text-xl md:text-2xl font-bold text-charcoal-950 mb-4 text-center">Why Texans Trust H-E-B Tortillas</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-6">
             <div className="text-center">
-              <div className="text-3xl mb-2">🌾</div>
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-masa-100 text-masa-700 mb-2">
+                <Wheat className="w-6 h-6" strokeWidth={1.75} />
+              </div>
               <h3 className="font-semibold text-charcoal-900 mb-1">Quality Ingredients</h3>
               <p className="text-sm text-charcoal-600">Simple recipes with no artificial preservatives in our bakery-fresh line.</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl mb-2">⭐</div>
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sunset-100 text-sunset-700 mb-2">
+                <Star className="w-6 h-6" strokeWidth={1.75} />
+              </div>
               <h3 className="font-semibold text-charcoal-900 mb-1">Texas Favorite</h3>
               <p className="text-sm text-charcoal-600">H-E-B has been a Texas staple since 1905. Their tortillas are legendary.</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl mb-2">📦</div>
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cream-200 text-charcoal-700 mb-2">
+                <Package className="w-6 h-6" strokeWidth={1.75} />
+              </div>
               <h3 className="font-semibold text-charcoal-900 mb-1">Ships Fresh</h3>
               <p className="text-sm text-charcoal-600">We ship Tuesdays to ensure your tortillas arrive fresh.</p>
             </div>

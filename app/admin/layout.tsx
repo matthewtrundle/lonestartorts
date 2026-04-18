@@ -216,7 +216,7 @@ export default function AdminLayout({
               <Link
                 href="/"
                 target="_blank"
-                className="text-sm text-charcoal-600 hover:text-charcoal-950 transition-colors"
+                className="text-sm text-charcoal-600 hover:text-charcoal-950 transition-colors whitespace-nowrap"
               >
                 View Site →
               </Link>

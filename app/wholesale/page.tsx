@@ -101,7 +101,9 @@ export default function WholesalePage() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-900/80 to-transparent" />
+            {/* Wholesale treatment: deep, operational mood — desaturated charcoal with subtle sunset accent left */}
+            <div className="absolute inset-0 bg-charcoal-950/75" />
+            <div className="absolute inset-0 bg-gradient-to-r from-sunset-900/35 via-charcoal-950/70 to-charcoal-950/90" />
           </div>
 
           {/* Texas star pattern overlay */}

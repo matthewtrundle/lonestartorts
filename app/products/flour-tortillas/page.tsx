@@ -138,8 +138,8 @@ export default function FlourTortillasProductPage() {
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
-                  🫓 Soft & Pillowy • Handcrafted • Premium
+                <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold tracking-[0.2em] uppercase mb-6">
+                  Soft & Pillowy • Handcrafted • Premium
                 </div>
 
                 <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
