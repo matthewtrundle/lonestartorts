@@ -63,6 +63,8 @@ const articleSchema = {
   author: {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
+    url: 'https://lonestartortillas.com',
+    logo: { '@type': 'ImageObject', url: 'https://lonestartortillas.com/images/lonestar-logo.webp' },
   },
   datePublished: '2025-10-17',
   dateModified: '2025-10-25',
