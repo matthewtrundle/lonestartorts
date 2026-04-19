@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ProductCard } from '@/components/product/ProductCard';
 
 export const metadata: Metadata = {
-  title: 'Shop Texas Tortillas | Lonestar Tortillas',
+  title: 'Shop Texas Tortillas',
   description: 'Browse and order premium Texas tortillas delivered straight to your door. Fresh flour and corn tortillas made the Lone Star way.',
 };
 import { StickyCartBar } from '@/components/shop/StickyCartBar';

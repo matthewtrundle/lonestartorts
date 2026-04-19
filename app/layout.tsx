@@ -36,9 +36,13 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lonestartortillas.com'),
-  alternates: {
-    canonical: './',
-  },
+  // NOTE: No root-level `alternates.canonical` — when set here, it's resolved
+  // against metadataBase and inherited by every child page that doesn't
+  // override it, which causes Google to treat hundreds of pages as
+  // duplicates of the homepage ("Crawled — currently not indexed").
+  // Each page that needs a canonical sets it explicitly in its own metadata;
+  // pages without one simply emit no canonical tag, which lets Google use
+  // the fetched URL (the correct behavior).
   title: {
     default: 'Lonestar Tortillas | HEB Tortillas Shipped Nationwide',
     template: '%s | Lonestar Tortillas'

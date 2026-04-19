@@ -1,4 +1,14 @@
+import type { Metadata } from 'next';
 import HomeContent from '@/components/home/HomeContent'
+
+// Homepage needs an explicit canonical because the root layout no longer
+// provides one (that previously caused every non-overriding page to
+// canonical to "/" — see comment in app/layout.tsx).
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://lonestartortillas.com/',
+  },
+};
 
 // Video schema for SEO - rendered server-side
 const videoSchema = {

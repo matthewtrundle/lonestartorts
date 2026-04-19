@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 
 export const metadata: Metadata = {
-  title: 'Our Story | Lonestar Tortillas',
+  title: 'Our Story',
   description: 'The story behind Lonestar Tortillas — how a love for authentic Texas tortillas became a mission to share them across the country.',
 }
 import StoryHeroText from '@/components/story/StoryHeroText'

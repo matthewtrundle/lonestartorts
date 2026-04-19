@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Order Confirmed | Lonestar Tortillas',
+  title: 'Order Confirmed',
   description: 'Your Lonestar Tortillas order has been confirmed. Thank you for your purchase!',
   robots: {
     index: false,

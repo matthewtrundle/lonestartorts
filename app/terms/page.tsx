@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Lonestar Tortillas',
+  title: 'Terms of Service',
   description: 'Terms of Service for Lonestar Tortillas - the terms and conditions governing your use of our website and purchases.',
 };
 

@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'The Ultimate Texas Breakfast Taco Guide | Lonestar Tortillas',
+  title: 'The Ultimate Texas Breakfast Taco Guide',
   description: 'Master the art of Texas breakfast tacos with our comprehensive guide. Recipes, tortilla pairings, and tips from Austin to San Antonio. Learn what makes a perfect breakfast taco.',
   keywords: 'Texas breakfast tacos, breakfast taco recipes, Austin breakfast tacos, San Antonio breakfast tacos, migas tacos, bacon egg cheese taco, best tortillas for breakfast tacos',
   alternates: {

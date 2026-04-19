@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sign In | Lonestar Tortillas',
+  title: 'Sign In',
   description: 'Sign in to your Lonestar Tortillas account to manage orders, subscriptions, and more.',
 };
 

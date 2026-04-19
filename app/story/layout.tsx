@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Our Story | Lonestar Tortillas',
+  title: 'Our Story',
   description: 'How Lonestar Tortillas brings authentic H-E-B tortillas from Texas to tortilla lovers nationwide.',
   alternates: {
     canonical: 'https://lonestartortillas.com/story',

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { WholesaleForm } from '@/components/wholesale/WholesaleForm';
 
 export const metadata: Metadata = {
-  title: 'Wholesale Ordering | Lonestar Tortillas',
+  title: 'Wholesale Ordering',
   description: 'Partner with Lonestar Tortillas for wholesale pricing on premium Texas tortillas. Perfect for restaurants, caterers, and retailers.',
 };
 import { WholesaleOrderBuilder } from '@/components/wholesale/WholesaleOrderBuilder';

@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Mission Tortillas: A San Antonio Legacy | Lonestar Tortillas',
+  title: 'Mission Tortillas: A San Antonio Legacy',
   description: 'Discover the story of Mission Foods, the San Antonio-born tortilla company that became a global brand. Learn why Mission tortillas are trusted by Texans and where to buy them online.',
   keywords: 'Mission tortillas, Mission Foods history, San Antonio tortillas, where to buy Mission tortillas, Mission soft taco tortillas, Mission corn tortillas, Texas tortilla brands',
   alternates: {

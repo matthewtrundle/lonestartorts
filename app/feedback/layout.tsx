@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Leave Feedback | Lonestar Tortillas',
+  title: 'Leave Feedback',
   description: 'Share your feedback about your Lonestar Tortillas order.',
   robots: {
     index: false,

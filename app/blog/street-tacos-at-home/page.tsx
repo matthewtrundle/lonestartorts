@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Street Tacos at Home: Master Taqueria Style | Lonestar Tortillas',
+  title: 'Street Tacos at Home: Master Taqueria Style',
   description: 'Learn to make authentic street tacos at home like a real taqueria. Complete recipes for carne asada, carnitas, and al pastor with traditional toppings and the right tortillas.',
   keywords: 'street tacos recipe, authentic street tacos, how to make street tacos, taqueria style tacos, carne asada tacos, carnitas recipe, al pastor at home, corn tortillas for tacos',
   alternates: {

@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'How to Store Tortillas: Keep Them Fresh for Weeks | Lonestar Tortillas',
+  title: 'How to Store Tortillas: Keep Them Fresh for Weeks',
   description: 'Complete guide to storing tortillas. Learn proper storage methods for corn and flour tortillas, freezing tips, and how to revive stale tortillas. Expert advice from Texas tortilla specialists.',
   keywords: 'how to store tortillas, freeze tortillas, tortilla storage, keep tortillas fresh, how long do tortillas last, refrigerate tortillas, tortilla shelf life',
   alternates: {

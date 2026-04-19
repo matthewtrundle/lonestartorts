@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Unsubscribe | Lonestar Tortillas',
+  title: 'Unsubscribe',
   description: 'Unsubscribe from Lonestar Tortillas promotional emails.',
   robots: {
     index: false,

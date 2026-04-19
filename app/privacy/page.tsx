@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Lonestar Tortillas',
+  title: 'Privacy Policy',
   description: 'Privacy Policy for Lonestar Tortillas - how we collect, use, and protect your personal information.',
 };
 

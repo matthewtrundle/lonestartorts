@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Hook \'Em Tortillas | UT Austin Alumni Tortilla Delivery | Lonestar Tortillas',
+  title: 'Hook \'Em Tortillas | UT Austin Alumni Tortilla Delivery',
   description: 'Texas Exes: get authentic H-E-B tortillas shipped anywhere in the US. Chapter bulk discounts up to 20% off. Perfect for watch parties, tailgates, and bringing Texas home.',
   alternates: {
     canonical: 'https://lonestartortillas.com/hook-em-tortillas',

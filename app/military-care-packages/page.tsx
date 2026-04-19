@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Military Care Packages | Send Texas Tortillas to Troops | Lonestar Tortillas',
+  title: 'Military Care Packages | Send Texas Tortillas to Troops',
   description: 'Send authentic H-E-B tortillas to service members worldwide. Ships to APO/FPO/DPO at domestic USPS rates. Shelf-stable, vacuum sealed, with optional handwritten note.',
   alternates: {
     canonical: 'https://lonestartortillas.com/military-care-packages',

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Package, Clock, ShieldCheck, RefreshCw } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Returns & Refunds | Lonestar Tortillas',
+  title: 'Returns & Refunds',
   description: 'Our hassle-free return policy. Request a refund or replacement within 7 days of delivery for any damaged, defective, or unsatisfactory products.',
   alternates: {
     canonical: 'https://lonestartortillas.com/returns',

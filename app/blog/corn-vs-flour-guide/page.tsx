@@ -7,7 +7,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 
 export const metadata: Metadata = {
-  title: 'Corn vs Flour vs Specialty: The Complete Tortilla Guide | Lonestar Tortillas',
+  title: 'Corn vs Flour vs Specialty: The Complete Tortilla Guide',
   description: 'Comprehensive guide comparing corn, flour, and specialty tortillas. Learn which tortilla is best for tacos, burritos, quesadillas, and more. Expert tips from Texas tortilla specialists.',
   keywords: 'corn vs flour tortillas, tortilla comparison, best tortilla for tacos, tortilla types, corn tortilla vs flour tortilla, specialty tortillas, mixla tortillas',
   alternates: {
