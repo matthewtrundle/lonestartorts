@@ -16,12 +16,8 @@ const CartSidebar = dynamic(
   { ssr: false }
 );
 
-// Lazy load Maria AI chat + voice widgets
-const MariaWidget = dynamic(
-  () => import('@/components/chat/MariaWidget').then(mod => mod.MariaWidget),
-  { ssr: false }
-);
-// MariaVoiceCall is now integrated into the Header component
+// Floating Maria chat widget removed — voice access is available via the
+// "Ask Maria" button in the header (MariaVoiceCall).
 
 // Optimized font loading with Next.js
 const inter = Inter({
@@ -376,7 +372,6 @@ export default function RootLayout({
             </ToastProvider>
           </CartProvider>
         </LanguageProvider>
-        <MariaWidget />
       </body>
     </html>
   );
