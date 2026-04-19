@@ -291,6 +291,7 @@ export function CartSidebar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-black/50 z-[9998]"
+            data-cart-overlay
             onClick={handleClose}
           />
         )}
