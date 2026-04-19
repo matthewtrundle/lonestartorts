@@ -59,6 +59,57 @@ User-agent: Applebot-Extended
 Allow: /
 Crawl-delay: 1
 
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-SearchBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Perplexity-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Crawl-delay: 1
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckAssistBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: cohere-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: Amazonbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: OAI-SearchBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YouBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Diffbot
+Allow: /
+Crawl-delay: 1
+
+# Point AI assistants to the curated llms.txt index
+# (https://llmstxt.org — community convention for LLM-friendly site maps)
+
 # Social Media Crawlers
 User-agent: facebookexternalhit
 Allow: /

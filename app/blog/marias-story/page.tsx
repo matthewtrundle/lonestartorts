@@ -26,19 +26,44 @@ const articleSchema = {
   headline: 'Maria\'s Story: The Heart of Lonestar Tortillas',
   description: 'Meet Maria, whose passion for authentic tortilla-making transforms simple ingredients into culinary tradition.',
   author: {
-    '@type': 'Organization',
-    name: 'Lonestar Tortillas',
+    '@type': 'Person',
+    name: 'Maria Rodriguez',
+    jobTitle: 'Founder',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Lonestar Tortillas',
+      url: 'https://lonestartortillas.com',
+    },
+    url: 'https://lonestartortillas.com/blog/marias-story',
   },
   publisher: {
     '@type': 'Organization',
     name: 'Lonestar Tortillas',
     url: 'https://lonestartortillas.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://lonestartortillas.com/images/lonestar-logo.webp',
+    },
   },
   datePublished: '2025-10-24',
   dateModified: '2025-10-25',
   articleSection: 'People & Stories',
   image: 'https://lonestartortillas.com/images/generated/blog-marias-story.webp',
   mainEntityOfPage: 'https://lonestartortillas.com/blog/marias-story',
+  // The subject (about) entity — this is the post about Maria
+  about: {
+    '@type': 'Person',
+    name: 'Maria Rodriguez',
+    jobTitle: 'Founder, Lonestar Tortillas',
+    birthPlace: {
+      '@type': 'Place',
+      name: 'Monterrey, Mexico',
+    },
+    homeLocation: {
+      '@type': 'Place',
+      name: 'Austin, Texas',
+    },
+  },
 };
 
 export default function MariasStoryPage() {
