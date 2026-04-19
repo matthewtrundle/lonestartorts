@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Allentown',
   description: 'Get authentic H-E-B Texas tortillas shipped to Allentown, Pennsylvania. Fast 2-3 day shipping to the Lehigh Valley.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/pennsylvania/allentown' },
+  robots: { index: false, follow: true },
 }
 
 export default function AllentownPage() {

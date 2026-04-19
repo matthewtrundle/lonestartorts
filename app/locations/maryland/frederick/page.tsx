@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Frederick',
   description: 'Get authentic H-E-B Texas tortillas shipped to Frederick, Maryland. Fast 2-3 day shipping to Western Maryland.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/maryland/frederick' },
+  robots: { index: false, follow: true },
 }
 
 export default function FrederickPage() {

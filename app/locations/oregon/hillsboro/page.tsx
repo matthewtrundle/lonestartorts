@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Hillsboro',
   description: 'Get authentic H-E-B Texas tortillas shipped to Hillsboro, Oregon. Fast 2-3 day shipping to Silicon Forest.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/oregon/hillsboro' },
+  robots: { index: false, follow: true },
 }
 
 export default function HillsboroPage() {

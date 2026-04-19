@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Tampa',
   description: 'Get authentic H-E-B Texas tortillas shipped to Tampa, Florida. Fast 2-3 day shipping to Tampa Bay.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/florida/tampa' },
+  robots: { index: false, follow: true },
 }
 
 export default function TampaPage() {

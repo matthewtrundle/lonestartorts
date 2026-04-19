@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Detroit',
   description: 'Get authentic H-E-B Texas tortillas shipped to Detroit, Michigan. Fast 2-3 day shipping to the Motor City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/michigan/detroit' },
+  robots: { index: false, follow: true },
 }
 
 export default function DetroitPage() {

@@ -101,7 +101,7 @@ export default function BlueCornTortillasPage() {
             <p className="text-xl text-cream-200 max-w-2xl">
               Discover the nutrition, flavor, and culinary uses of this heirloom corn variety.
             </p>
-            <LastUpdated date="November 26, 2025" className="mt-4" />
+            <LastUpdated date="2025-11-26" className="mt-4" />
           </div>
         </header>
 

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Savannah',
   description: 'Get authentic H-E-B Texas tortillas shipped to Savannah, Georgia. Fast 2-3 day shipping to the Hostess City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/georgia/savannah' },
+  robots: { index: false, follow: true },
 }
 
 export default function SavannahPage() {

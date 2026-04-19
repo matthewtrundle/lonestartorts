@@ -150,7 +150,7 @@ export default function HEBvsMissionPage() {
 
         {/* Main Content */}
         <article className="container mx-auto px-6 py-12 max-w-4xl">
-          <LastUpdated date="2025-02-04" />
+          <LastUpdated date="2026-04-18" />
 
           {/* Quick Answer Box - Featured Snippet Target */}
           <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">

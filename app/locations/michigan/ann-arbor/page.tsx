@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Ann Arbor',
   description: 'Get authentic H-E-B Texas tortillas shipped to Ann Arbor, Michigan. Fast 2-3 day shipping to Tree Town.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/michigan/ann-arbor' },
+  robots: { index: false, follow: true },
 }
 
 export default function AnnArborPage() {

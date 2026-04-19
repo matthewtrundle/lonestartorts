@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Bloomington',
   description: 'Get authentic H-E-B Texas tortillas shipped to Bloomington, Minnesota. Fast 2-3 day shipping to the Twin Cities Metro.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/minnesota/bloomington' },
+  robots: { index: false, follow: true },
 }
 
 export default function BloomingtonPage() {

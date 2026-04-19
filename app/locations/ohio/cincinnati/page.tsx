@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Cincinnati',
   description: 'Get authentic H-E-B Texas tortillas shipped to Cincinnati, Ohio. Fast 2-3 day shipping to the Queen City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/ohio/cincinnati' },
+  robots: { index: false, follow: true },
 }
 
 export default function CincinnatiPage() {

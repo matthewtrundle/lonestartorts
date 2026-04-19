@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Bowie',
   description: 'Get authentic H-E-B Texas tortillas shipped to Bowie, Maryland. Fast 2-3 day shipping to Prince George\'s County.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/maryland/bowie' },
+  robots: { index: false, follow: true },
 }
 
 export default function BowiePage() {

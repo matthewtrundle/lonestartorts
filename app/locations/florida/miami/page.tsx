@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Miami',
   description: 'Get authentic H-E-B Texas tortillas shipped to Miami, Florida. Fast 2-3 day shipping to the Magic City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/florida/miami' },
+  robots: { index: false, follow: true },
 }
 
 export default function MiamiPage() {

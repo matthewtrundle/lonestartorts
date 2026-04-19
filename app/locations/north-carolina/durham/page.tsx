@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Durham',
   description: 'Get authentic H-E-B Texas tortillas shipped to Durham, North Carolina. Fast 2-3 day shipping to the Bull City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/north-carolina/durham' },
+  robots: { index: false, follow: true },
 }
 
 export default function DurhamPage() {

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Salem',
   description: 'Get authentic H-E-B Texas tortillas shipped to Salem, Oregon. Fast 2-3 day shipping to the Cherry City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/oregon/salem' },
+  robots: { index: false, follow: true },
 }
 
 export default function SalemPage() {

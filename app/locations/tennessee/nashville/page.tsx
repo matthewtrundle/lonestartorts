@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Nashville',
   description: 'Get authentic H-E-B Texas tortillas shipped to Nashville, Tennessee. Fast 2-3 day shipping to Music City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/tennessee/nashville' },
+  robots: { index: false, follow: true },
 }
 
 export default function NashvillePage() {

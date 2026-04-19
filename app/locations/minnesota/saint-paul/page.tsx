@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Saint Paul',
   description: 'Get authentic H-E-B Texas tortillas shipped to Saint Paul, Minnesota. Fast 2-3 day shipping to the Capital City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/minnesota/saint-paul' },
+  robots: { index: false, follow: true },
 }
 
 export default function SaintPaulPage() {

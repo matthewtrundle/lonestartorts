@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Columbus',
   description: 'Get authentic H-E-B Texas tortillas shipped to Columbus, Ohio. Fast 2-3 day shipping.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/ohio/columbus' },
+  robots: { index: false, follow: true },
 }
 
 export default function ColumbusOHPage() {

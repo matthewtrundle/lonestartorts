@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Augusta',
   description: 'Get authentic H-E-B Texas tortillas shipped to Augusta, Georgia. Fast 2-3 day shipping.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/georgia/augusta' },
+  robots: { index: false, follow: true },
 }
 
 export default function AugustaPage() {

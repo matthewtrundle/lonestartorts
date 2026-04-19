@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Atlanta',
   description: 'Get authentic H-E-B Texas tortillas shipped to Atlanta, Georgia. Fast 2-3 day shipping to the ATL.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/georgia/atlanta' },
+  robots: { index: false, follow: true },
 }
 
 export default function AtlantaPage() {

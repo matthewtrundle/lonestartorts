@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Duluth',
   description: 'Get authentic H-E-B Texas tortillas shipped to Duluth, Minnesota. Fast 2-3 day shipping to the Zenith City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/minnesota/duluth' },
+  robots: { index: false, follow: true },
 }
 
 export default function DuluthPage() {

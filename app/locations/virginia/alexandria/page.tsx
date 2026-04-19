@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Alexandria',
   description: 'Get authentic H-E-B Texas tortillas shipped to Alexandria, Virginia. Fast 2-3 day shipping to Old Town and beyond.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/virginia/alexandria' },
+  robots: { index: false, follow: true },
 }
 
 export default function AlexandriaPage() {

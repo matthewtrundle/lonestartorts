@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Minneapolis',
   description: 'Get authentic H-E-B Texas tortillas shipped to Minneapolis, Minnesota. Fast 2-3 day shipping to the City of Lakes.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/minnesota/minneapolis' },
+  robots: { index: false, follow: true },
 }
 
 export default function MinneapolisPage() {

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Newark',
   description: 'Get authentic H-E-B Texas tortillas shipped to Newark, New Jersey. Fast 2-3 day shipping to the Brick City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/new-jersey/newark' },
+  robots: { index: false, follow: true },
 }
 
 export default function NewarkPage() {

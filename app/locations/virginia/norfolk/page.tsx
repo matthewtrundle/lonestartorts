@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Norfolk',
   description: 'Get authentic H-E-B Texas tortillas shipped to Norfolk, Virginia. Fast 2-3 day shipping to the Mermaid City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/virginia/norfolk' },
+  robots: { index: false, follow: true },
 }
 
 export default function NorfolkPage() {

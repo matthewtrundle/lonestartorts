@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Knoxville',
   description: 'Get authentic H-E-B Texas tortillas shipped to Knoxville, Tennessee. Fast 2-3 day shipping to the Marble City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/tennessee/knoxville' },
+  robots: { index: false, follow: true },
 }
 
 export default function KnoxvillePage() {

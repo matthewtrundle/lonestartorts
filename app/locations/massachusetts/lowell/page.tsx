@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Lowell',
   description: 'Get authentic H-E-B Texas tortillas shipped to Lowell, Massachusetts. Fast 2-3 day shipping to the Merrimack Valley.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/massachusetts/lowell' },
+  robots: { index: false, follow: true },
 }
 
 export default function LowellPage() {

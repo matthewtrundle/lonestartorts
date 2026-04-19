@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Clifton',
   description: 'Get authentic H-E-B Texas tortillas shipped to Clifton, New Jersey. Fast 2-3 day shipping to Passaic County.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/new-jersey/clifton' },
+  robots: { index: false, follow: true },
 }
 
 export default function CliftonPage() {

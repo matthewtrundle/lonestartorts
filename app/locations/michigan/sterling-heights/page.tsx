@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Sterling Heights',
   description: 'Get authentic H-E-B Texas tortillas shipped to Sterling Heights, Michigan. Fast 2-3 day shipping.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/michigan/sterling-heights' },
+  robots: { index: false, follow: true },
 }
 
 export default function SterlingHeightsPage() {

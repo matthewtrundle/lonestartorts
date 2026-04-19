@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Winston-Salem',
   description: 'Get authentic H-E-B Texas tortillas shipped to Winston-Salem, North Carolina. Fast 2-3 day shipping.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/north-carolina/winston-salem' },
+  robots: { index: false, follow: true },
 }
 
 export default function WinstonSalemPage() {

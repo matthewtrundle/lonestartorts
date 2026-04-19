@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Philadelphia',
   description: 'Get authentic H-E-B Texas tortillas shipped to Philadelphia, Pennsylvania. Fast 2-3 day shipping to the City of Brotherly Love.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/pennsylvania/philadelphia' },
+  robots: { index: false, follow: true },
 }
 
 export default function PhiladelphiaPage() {

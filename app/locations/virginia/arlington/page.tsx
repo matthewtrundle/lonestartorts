@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Arlington',
   description: 'Get authentic H-E-B Texas tortillas shipped to Arlington, Virginia. Fast 2-3 day shipping to Northern Virginia.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/virginia/arlington' },
+  robots: { index: false, follow: true },
 }
 
 export default function ArlingtonPage() {

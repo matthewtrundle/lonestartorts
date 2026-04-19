@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Virginia Beach',
   description: 'Get authentic H-E-B Texas tortillas shipped to Virginia Beach, Virginia. Fast 2-3 day shipping to the Resort City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/virginia/virginia-beach' },
+  robots: { index: false, follow: true },
 }
 
 export default function VirginiBeachPage() {

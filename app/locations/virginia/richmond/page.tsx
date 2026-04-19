@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Richmond',
   description: 'Get authentic H-E-B Texas tortillas shipped to Richmond, Virginia. Fast 2-3 day shipping to the River City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/virginia/richmond' },
+  robots: { index: false, follow: true },
 }
 
 export default function RichmondPage() {

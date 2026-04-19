@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Boston',
   description: 'Get authentic H-E-B Texas tortillas shipped to Boston, Massachusetts. Fast 2-3 day shipping to Beantown.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/massachusetts/boston' },
+  robots: { index: false, follow: true },
 }
 
 export default function BostonPage() {

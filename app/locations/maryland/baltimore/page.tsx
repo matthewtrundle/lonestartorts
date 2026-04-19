@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Baltimore',
   description: 'Get authentic H-E-B Texas tortillas shipped to Baltimore, Maryland. Fast 2-3 day shipping to Charm City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/maryland/baltimore' },
+  robots: { index: false, follow: true },
 }
 
 export default function BaltimorePage() {

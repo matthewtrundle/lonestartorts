@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Silver Spring',
   description: 'Get authentic H-E-B Texas tortillas shipped to Silver Spring, Maryland. Fast 2-3 day shipping to Montgomery County.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/maryland/silver-spring' },
+  robots: { index: false, follow: true },
 }
 
 export default function SilverSpringPage() {

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Paterson',
   description: 'Get authentic H-E-B Texas tortillas shipped to Paterson, New Jersey. Fast 2-3 day shipping to the Silk City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/new-jersey/paterson' },
+  robots: { index: false, follow: true },
 }
 
 export default function PatersonPage() {

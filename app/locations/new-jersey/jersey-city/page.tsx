@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Jersey City',
   description: 'Get authentic H-E-B Texas tortillas shipped to Jersey City, New Jersey. Fast 2-3 day shipping across the Hudson.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/new-jersey/jersey-city' },
+  robots: { index: false, follow: true },
 }
 
 export default function JerseyCityPage() {

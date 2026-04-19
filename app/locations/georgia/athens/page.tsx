@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Athens',
   description: 'Get authentic H-E-B Texas tortillas shipped to Athens, Georgia. Fast 2-3 day shipping to the Classic City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/georgia/athens' },
+  robots: { index: false, follow: true },
 }
 
 export default function AthensPage() {

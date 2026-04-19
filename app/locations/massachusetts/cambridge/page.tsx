@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Cambridge',
   description: 'Get authentic H-E-B Texas tortillas shipped to Cambridge, Massachusetts. Fast 2-3 day shipping to Harvard and MIT.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/massachusetts/cambridge' },
+  robots: { index: false, follow: true },
 }
 
 export default function CambridgePage() {

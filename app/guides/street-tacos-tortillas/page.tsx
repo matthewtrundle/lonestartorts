@@ -101,7 +101,7 @@ export default function StreetTacosTortillasPage() {
             <p className="text-xl text-cream-200 max-w-2xl">
               Learn the secrets to authentic taqueria-style tacos with the perfect tortillas.
             </p>
-            <LastUpdated date="November 26, 2025" className="mt-4" />
+            <LastUpdated date="2025-11-26" className="mt-4" />
           </div>
         </header>
 

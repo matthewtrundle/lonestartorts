@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Pittsburgh',
   description: 'Get authentic H-E-B Texas tortillas shipped to Pittsburgh, Pennsylvania. Fast 2-3 day shipping to the Steel City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/pennsylvania/pittsburgh' },
+  robots: { index: false, follow: true },
 }
 
 export default function PittsburghPage() {
