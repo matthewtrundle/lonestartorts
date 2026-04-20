@@ -150,6 +150,7 @@ model Order {
   updatedAt        DateTime
   shippedAt        DateTime?
   deliveredAt      DateTime?
+  shippedEmailSentAt DateTime?
   carrier          String?
   paymentStatus    PaymentStatus     @default(PENDING)
   stripePaymentId  String?
@@ -525,6 +526,7 @@ model WholesaleOrder {
   orderStatus         WholesaleOrderStatus     @default(PENDING)
   shippedAt           DateTime?
   deliveredAt         DateTime?
+  shippedEmailSentAt  DateTime?
   trackingNumber      String?
   carrier             String?
 

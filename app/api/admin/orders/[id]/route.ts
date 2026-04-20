@@ -132,14 +132,26 @@ export async function PATCH(
       carrier &&
       !skipEmail
     ) {
-      await sendOrderShippedEmail({
-        to: updatedOrder.email,
-        orderNumber: updatedOrder.orderNumber,
-        customerName: updatedOrder.shippingName || 'Customer',
-        trackingNumber,
-        carrier,
-        items: updatedOrder.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
-      });
+      try {
+        await sendOrderShippedEmail({
+          to: updatedOrder.email,
+          orderNumber: updatedOrder.orderNumber,
+          customerName: updatedOrder.shippingName || 'Customer',
+          trackingNumber,
+          carrier,
+          items: updatedOrder.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
+        });
+        // Mark notification as sent so admin dashboard can surface orders that are missing it
+        await prisma.order.update({
+          where: { id: updatedOrder.id },
+          data: { shippedEmailSentAt: new Date() },
+        });
+      } catch (emailError) {
+        console.error(
+          `Failed to send shipping email for order ${updatedOrder.orderNumber}:`,
+          emailError
+        );
+      }
     }
 
     return NextResponse.json({ order: updatedOrder });

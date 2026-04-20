@@ -254,14 +254,25 @@ export async function POST(req: NextRequest) {
             });
 
             if (sendEmails) {
-              await sendOrderShippedEmail({
-                to: order.email,
-                orderNumber: order.orderNumber,
-                customerName: order.shippingName || 'Customer',
-                trackingNumber,
-                carrier,
-                items: order.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
-              });
+              try {
+                await sendOrderShippedEmail({
+                  to: order.email,
+                  orderNumber: order.orderNumber,
+                  customerName: order.shippingName || 'Customer',
+                  trackingNumber,
+                  carrier,
+                  items: order.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
+                });
+                await prisma.order.update({
+                  where: { id: order.id },
+                  data: { shippedEmailSentAt: new Date() },
+                });
+              } catch (emailErr) {
+                console.error(
+                  `[import-tracking] Failed to send shipping email for ${order.orderNumber}:`,
+                  emailErr
+                );
+              }
             }
 
             console.log('[import-tracking] Matched retail order:', { email, orderNumber: order.orderNumber });
@@ -295,16 +306,27 @@ export async function POST(req: NextRequest) {
             });
 
             if (sendEmails && order.client.email) {
-              await sendOrderShippedEmail({
-                to: order.client.email,
-                orderNumber: order.orderNumber,
-                customerName: order.client.contactName,
-                trackingNumber,
-                carrier,
-                items: order.items
-                  .filter((item) => item.sku !== 'SHIPPING')
-                  .map((item) => ({ name: item.name, quantity: item.quantity, price: item.unitPrice })),
-              });
+              try {
+                await sendOrderShippedEmail({
+                  to: order.client.email,
+                  orderNumber: order.orderNumber,
+                  customerName: order.client.contactName,
+                  trackingNumber,
+                  carrier,
+                  items: order.items
+                    .filter((item) => item.sku !== 'SHIPPING')
+                    .map((item) => ({ name: item.name, quantity: item.quantity, price: item.unitPrice })),
+                });
+                await prisma.wholesaleOrder.update({
+                  where: { id: order.id },
+                  data: { shippedEmailSentAt: new Date() },
+                });
+              } catch (emailErr) {
+                console.error(
+                  `[import-tracking] Failed to send wholesale shipping email for ${order.orderNumber}:`,
+                  emailErr
+                );
+              }
             }
 
             console.log('[import-tracking] Matched wholesale order:', { email, orderNumber: order.orderNumber });
@@ -376,16 +398,27 @@ export async function POST(req: NextRequest) {
             });
 
             if (sendEmails && order.client.email) {
-              await sendOrderShippedEmail({
-                to: order.client.email,
-                orderNumber: order.orderNumber,
-                customerName: order.client.contactName,
-                trackingNumber,
-                carrier,
-                items: order.items
-                  .filter((item) => item.sku !== 'SHIPPING')
-                  .map((item) => ({ name: item.name, quantity: item.quantity, price: item.unitPrice })),
-              });
+              try {
+                await sendOrderShippedEmail({
+                  to: order.client.email,
+                  orderNumber: order.orderNumber,
+                  customerName: order.client.contactName,
+                  trackingNumber,
+                  carrier,
+                  items: order.items
+                    .filter((item) => item.sku !== 'SHIPPING')
+                    .map((item) => ({ name: item.name, quantity: item.quantity, price: item.unitPrice })),
+                });
+                await prisma.wholesaleOrder.update({
+                  where: { orderNumber },
+                  data: { shippedEmailSentAt: new Date() },
+                });
+              } catch (emailErr) {
+                console.error(
+                  `[import-tracking] Failed to send wholesale shipping email for ${orderNumber}:`,
+                  emailErr
+                );
+              }
             }
 
             results.updated++;
@@ -412,14 +445,25 @@ export async function POST(req: NextRequest) {
             });
 
             if (sendEmails) {
-              await sendOrderShippedEmail({
-                to: order.email,
-                orderNumber: order.orderNumber,
-                customerName: order.shippingName || 'Customer',
-                trackingNumber,
-                carrier,
-                items: order.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
-              });
+              try {
+                await sendOrderShippedEmail({
+                  to: order.email,
+                  orderNumber: order.orderNumber,
+                  customerName: order.shippingName || 'Customer',
+                  trackingNumber,
+                  carrier,
+                  items: order.OrderItem.filter((item) => item.sku !== 'SHIPPING'),
+                });
+                await prisma.order.update({
+                  where: { orderNumber },
+                  data: { shippedEmailSentAt: new Date() },
+                });
+              } catch (emailErr) {
+                console.error(
+                  `[import-tracking] Failed to send retail shipping email for ${orderNumber}:`,
+                  emailErr
+                );
+              }
             }
 
             results.updated++;

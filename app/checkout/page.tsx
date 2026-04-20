@@ -8,6 +8,7 @@ import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned, getGA4Category, type CartItemData } from '@/lib/analytics';
 import { getProductBySku } from '@/lib/products';
+import { getShippingMessage, getTimeUntilCutoff } from '@/lib/shipping-schedule';
 
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle, Star, Gift, FileText } from 'lucide-react';
@@ -21,6 +22,34 @@ export default function CheckoutPage() {
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Tuesday shipping callout — compute after mount to avoid SSR/client drift
+  const [shippingCallout, setShippingCallout] = useState<{
+    headline: string;
+    subtext: string;
+    isShipsTomorrow: boolean;
+    cutoff: { hours: number; minutes: number } | null;
+  } | null>(null);
+  React.useEffect(() => {
+    const update = () => {
+      const msg = getShippingMessage();
+      const cutoff = getTimeUntilCutoff();
+      setShippingCallout({
+        headline: msg.type === 'ships-tomorrow'
+          ? `Ships tomorrow — ${msg.shipDateFormatted}`
+          : `Ships ${msg.shipDateFormatted}`,
+        subtext: msg.type === 'ships-tomorrow'
+          ? 'We ship every Tuesday so your tortillas spend the fewest days in transit. Order before 9 PM CT tonight to go out tomorrow.'
+          : 'We ship once a week — every Tuesday — for maximum freshness. Your order goes out in the next batch.',
+        isShipsTomorrow: msg.type === 'ships-tomorrow',
+        cutoff: cutoff ? { hours: cutoff.hours, minutes: cutoff.minutes } : null,
+      });
+    };
+    update();
+    // Re-check every minute so the cutoff countdown stays accurate
+    const interval = setInterval(update, 60_000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Wholesale auth state
   const hasWholesaleItems = items.some(item => item.productType === 'wholesale');
@@ -485,6 +514,44 @@ export default function CheckoutPage() {
                   paymentTermsLevel={wholesaleCustomer.wholesale?.paymentTermsLevel || 'NEW'}
                   discountPercent={wholesaleCustomer.wholesale?.discountPercent || 0}
                 />
+              )}
+
+              {/* Tuesday Shipping Callout */}
+              {shippingCallout && (
+                <div
+                  className={`rounded-lg p-4 flex items-start gap-3 border ${
+                    shippingCallout.isShipsTomorrow
+                      ? 'bg-sunset-50 border-sunset-300'
+                      : 'bg-amber-50 border-amber-200'
+                  }`}
+                >
+                  <Truck
+                    className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                      shippingCallout.isShipsTomorrow ? 'text-sunset-600' : 'text-amber-700'
+                    }`}
+                  />
+                  <div className="flex-1">
+                    <p
+                      className={`font-semibold text-sm ${
+                        shippingCallout.isShipsTomorrow ? 'text-sunset-900' : 'text-amber-900'
+                      }`}
+                    >
+                      Freshness First Shipping — {shippingCallout.headline}
+                    </p>
+                    <p
+                      className={`text-xs mt-0.5 ${
+                        shippingCallout.isShipsTomorrow ? 'text-sunset-800' : 'text-amber-800'
+                      }`}
+                    >
+                      {shippingCallout.subtext}
+                    </p>
+                    {shippingCallout.cutoff && (
+                      <p className="text-xs mt-1 font-medium text-sunset-900">
+                        Cutoff in {shippingCallout.cutoff.hours}h {shippingCallout.cutoff.minutes}m
+                      </p>
+                    )}
+                  </div>
+                </div>
               )}
 
               {/* Freezing Tip */}

@@ -7,6 +7,7 @@ import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/em
 import { trackTikTokPurchase } from '@/lib/tiktok';
 import { recordDiscountUsage, AppliedRule } from '@/lib/discount-engine';
 import { evaluateTermsPromotion, applyTermsDemotion } from '@/lib/wholesale/terms-progression';
+import { getShipDateDisplay } from '@/lib/shipping-schedule';
 import { randomUUID } from 'crypto';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -286,6 +287,7 @@ export async function POST(req: NextRequest) {
                 zip: order.shippingZip || undefined,
                 country: order.shippingCountry || undefined,
               },
+              estimatedShipDate: getShipDateDisplay(),
             };
 
             try {

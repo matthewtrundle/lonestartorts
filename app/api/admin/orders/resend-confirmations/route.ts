@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAuthenticated } from '@/lib/auth';
 import { sendOrderConfirmationEmail } from '@/lib/email';
+import { getShipDateDisplay, formatShipDate } from '@/lib/shipping-schedule';
 
 export async function POST() {
   try {
@@ -52,6 +53,9 @@ export async function POST() {
             zip: order.shippingZip || undefined,
             country: order.shippingCountry || undefined,
           },
+          estimatedShipDate: order.shippedAt
+            ? formatShipDate(order.shippedAt)
+            : getShipDateDisplay(),
         });
         results.push({ orderNumber: order.orderNumber, email: order.email, status: 'sent' });
       } catch (err) {

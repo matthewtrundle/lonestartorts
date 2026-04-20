@@ -68,13 +68,69 @@ export default function FulfillmentPage() {
   const [showImportModal, setShowImportModal] = useState(false);
   const [importFile, setImportFile] = useState<File | null>(null);
   const [importPreview, setImportPreview] = useState<{ orderNumber: string; trackingNumber: string; carrier: string }[]>([]);
-  const [sendEmails, setSendEmails] = useState(false);
+  const [sendEmails, setSendEmails] = useState(true);
   const [importing, setImporting] = useState(false);
   const [importResult, setImportResult] = useState<ImportResult | null>(null);
 
+  // Missed notifications (orders marked SHIPPED/DELIVERED but no shipping email sent)
+  interface MissedNotification {
+    id: string;
+    type: 'retail' | 'wholesale';
+    orderNumber: string;
+    email: string;
+    customerName: string;
+    businessName?: string;
+    status: string;
+    shippedAt: string | null;
+    deliveredAt: string | null;
+    trackingNumber: string | null;
+    carrier: string | null;
+    total: number;
+  }
+  const [missedOpen, setMissedOpen] = useState(false);
+  const [missed, setMissed] = useState<{ retail: MissedNotification[]; wholesale: MissedNotification[] }>({
+    retail: [],
+    wholesale: [],
+  });
+  const [missedLoading, setMissedLoading] = useState(false);
+  const [sendingId, setSendingId] = useState<string | null>(null);
+
   useEffect(() => {
     fetchData();
+    fetchMissedNotifications();
   }, []);
+
+  const fetchMissedNotifications = async () => {
+    setMissedLoading(true);
+    try {
+      const res = await fetch('/api/admin/fulfillment/missed-notifications');
+      if (!res.ok) return;
+      const data = await res.json();
+      setMissed({ retail: data.retail || [], wholesale: data.wholesale || [] });
+    } catch (err) {
+      console.error('Error fetching missed notifications:', err);
+    } finally {
+      setMissedLoading(false);
+    }
+  };
+
+  const handleSendMissed = async (orderId: string, orderNumber: string) => {
+    if (!window.confirm(`Send shipping apology email + $10 coupon for ${orderNumber}?`)) return;
+    setSendingId(orderId);
+    try {
+      const res = await fetch(`/api/admin/fulfillment/missed-notifications/${orderId}/send`, {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to send');
+      alert(`Sent. Coupon: ${data.couponCode}`);
+      await fetchMissedNotifications();
+    } catch (err: any) {
+      alert(err.message || 'Failed to send notification');
+    } finally {
+      setSendingId(null);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -197,6 +253,20 @@ export default function FulfillmentPage() {
 
   const handleImport = async () => {
     if (!importFile) return;
+
+    // Safety gate: if the operator unchecked "Send shipping notifications", make them
+    // confirm. This is the SECOND time in 3 weeks that a Tuesday shipment went out
+    // without notifying customers. Default is now ON.
+    if (!sendEmails) {
+      const confirmed = window.confirm(
+        `You are about to mark ${
+          importPreview.length || 'these'
+        } orders as SHIPPED without sending any customer notification emails.\n\n` +
+          `This has caused two separate incidents already. Are you absolutely sure?`
+      );
+      if (!confirmed) return;
+    }
+
     setImporting(true);
     try {
       const formData = new FormData();
@@ -230,7 +300,7 @@ export default function FulfillmentPage() {
     setImportFile(null);
     setImportPreview([]);
     setImportResult(null);
-    setSendEmails(false);
+    setSendEmails(true);
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
@@ -335,6 +405,94 @@ export default function FulfillmentPage() {
           Import Tracking
         </button>
       </div>
+
+      {/* Missed Shipping Notifications — safety net. Any row here is an order marked
+          SHIPPED/DELIVERED without the customer receiving a tracking email. */}
+      {(missed.retail.length > 0 || missed.wholesale.length > 0 || missedLoading) && (
+        <div className="bg-white rounded-lg shadow border-l-4 border-red-500">
+          <button
+            onClick={() => setMissedOpen(!missedOpen)}
+            className="w-full flex items-center justify-between p-4 text-left hover:bg-red-50 transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              {missedOpen ? (
+                <ChevronDown className="w-5 h-5 text-red-500" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-red-500" />
+              )}
+              <AlertTriangle className="w-5 h-5 text-red-500" />
+              <h2 className="text-lg font-semibold text-charcoal-950">
+                Missed Shipping Notifications ({missed.retail.length + missed.wholesale.length})
+              </h2>
+            </div>
+            <span className="text-xs text-charcoal-600">
+              Orders shipped without customer email
+            </span>
+          </button>
+          {missedOpen && (
+            <div className="border-t border-charcoal-100 p-4">
+              {missed.retail.length === 0 && missed.wholesale.length === 0 ? (
+                <p className="text-sm text-charcoal-600">
+                  {missedLoading ? 'Loading…' : 'None — all shipped orders have notifications on file.'}
+                </p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left text-xs text-charcoal-600 uppercase border-b border-charcoal-200">
+                        <th className="py-2">Order</th>
+                        <th className="py-2">Customer</th>
+                        <th className="py-2">Status</th>
+                        <th className="py-2">Shipped</th>
+                        <th className="py-2">Tracking</th>
+                        <th className="py-2 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[...missed.retail, ...missed.wholesale].map((o) => (
+                        <tr key={o.id} className="border-b border-charcoal-100 last:border-0">
+                          <td className="py-2 font-mono text-xs">{o.orderNumber}</td>
+                          <td className="py-2">
+                            <div>{o.customerName}</div>
+                            <div className="text-xs text-charcoal-500">{o.email}</div>
+                          </td>
+                          <td className="py-2">
+                            <StatusBadge status={o.status} />
+                          </td>
+                          <td className="py-2 text-xs">
+                            {o.shippedAt ? new Date(o.shippedAt).toLocaleDateString() : '—'}
+                          </td>
+                          <td className="py-2 text-xs font-mono">
+                            {o.trackingNumber ? `${o.carrier} ${o.trackingNumber}` : '—'}
+                          </td>
+                          <td className="py-2 text-right">
+                            {o.type === 'retail' ? (
+                              <button
+                                onClick={() => handleSendMissed(o.id, o.orderNumber)}
+                                disabled={sendingId === o.id || !o.trackingNumber}
+                                className="inline-flex items-center gap-1 px-3 py-1 bg-red-600 text-white text-xs font-medium rounded hover:bg-red-700 disabled:opacity-50 transition-colors"
+                                title={
+                                  !o.trackingNumber
+                                    ? 'Add tracking before sending'
+                                    : 'Send apology email + $10 coupon'
+                                }
+                              >
+                                {sendingId === o.id ? 'Sending…' : 'Send apology'}
+                              </button>
+                            ) : (
+                              <span className="text-xs text-charcoal-500">Wholesale — manual</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Items to Buy */}
       {skuAggregates.length > 0 && (
@@ -575,15 +733,24 @@ export default function FulfillmentPage() {
                     </table>
                   </div>
 
-                  {/* Send emails checkbox */}
-                  <label className="flex items-center gap-2 mt-3 text-sm text-charcoal-700">
+                  {/* Send emails checkbox — defaults to ON. Unchecking triggers a confirmation
+                      modal on submit to prevent another missed-notification incident. */}
+                  <label className="flex items-start gap-2 mt-3 text-sm text-charcoal-700">
                     <input
                       type="checkbox"
                       checked={sendEmails}
                       onChange={(e) => setSendEmails(e.target.checked)}
-                      className="rounded border-charcoal-300"
+                      className="mt-0.5 rounded border-charcoal-300"
                     />
-                    Send shipping notification emails to customers
+                    <span>
+                      <span className="font-medium">Send shipping notifications (recommended)</span>
+                      {!sendEmails && (
+                        <span className="block text-xs text-red-600 mt-0.5">
+                          ⚠ Unchecking this will mark orders SHIPPED without emailing customers.
+                          You will be asked to confirm.
+                        </span>
+                      )}
+                    </span>
                   </label>
                 </div>
               )}
