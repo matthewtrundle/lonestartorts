@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAuthenticated } from '@/lib/auth';
-import { calculateOrderWeightOz, calculateDimensions } from '@/lib/shipping';
+import { calculateOrderWeightOz, calculateDimensions, fixedPackageWeightOz } from '@/lib/shipping';
 
 export const dynamic = 'force-dynamic';
 
@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
     for (const o of retailOrders) {
       const productItems = o.OrderItem.filter((i) => i.sku !== 'SHIPPING');
       const totalItemCount = productItems.reduce((s, i) => s + i.quantity, 0);
-      const weightOz = calculateOrderWeightOz(productItems);
+      const weightOz = fixedPackageWeightOz(totalItemCount) ?? calculateOrderWeightOz(productItems);
       const [length, width, height] = calculateDimensions(totalItemCount);
       const description = productItems.map((i) => `${i.name} x${i.quantity}`).join(', ');
 
@@ -78,7 +78,7 @@ export async function GET(req: NextRequest) {
 
     for (const o of wholesaleOrders) {
       const totalItemCount = o.items.reduce((s, i) => s + i.quantity, 0);
-      const weightOz = calculateOrderWeightOz(o.items);
+      const weightOz = fixedPackageWeightOz(totalItemCount) ?? calculateOrderWeightOz(o.items);
       const [length, width, height] = calculateDimensions(totalItemCount);
       const description = o.items.map((i) => `${i.name} x${i.quantity}`).join(', ');
 

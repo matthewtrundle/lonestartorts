@@ -112,7 +112,20 @@ export function calculateOrderWeightOz(items: { sku?: string | null; name?: stri
  * Returns [length, width, height] in inches.
  */
 export function calculateDimensions(totalItemCount: number): [number, number, number] {
-  if (totalItemCount <= 2) return [12, 12, 4];   // small flat rate
-  if (totalItemCount <= 5) return [12, 12, 8];   // medium box
-  return [16, 16, 12];                            // large box
+  if (totalItemCount <= 1) return [8, 8, 2];
+  if (totalItemCount === 2) return [8, 8, 4];
+  if (totalItemCount === 3) return [8, 8, 6];
+  if (totalItemCount === 4) return [8, 8, 8];
+  return [12, 12, 12];
+}
+
+/**
+ * Fixed package weight in oz for small orders. Returns null when no
+ * override applies and the per-SKU weight calculation should be used.
+ */
+export function fixedPackageWeightOz(totalItemCount: number): number | null {
+  if (totalItemCount === 2) return 48; // 3 lbs
+  if (totalItemCount === 3) return 72; // 4.5 lbs
+  if (totalItemCount === 4) return 96; // 6 lbs
+  return null;
 }
