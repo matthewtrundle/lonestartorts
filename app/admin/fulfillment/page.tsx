@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
-import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList, AlertTriangle } from 'lucide-react';
+import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList, AlertTriangle, Printer } from 'lucide-react';
 import { getHebLimit, getOrdersNeeded } from '@/lib/inventory/constants';
 
 interface FulfillmentOrder {
@@ -403,6 +403,13 @@ export default function FulfillmentPage() {
         >
           <Upload className="w-4 h-4" />
           Import Tracking
+        </button>
+        <button
+          onClick={() => window.open('/admin/fulfillment/print', '_blank')}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-charcoal-700 text-white text-sm font-medium rounded-lg hover:bg-charcoal-800 transition-colors"
+        >
+          <Printer className="w-4 h-4" />
+          Print Current Orders
         </button>
       </div>
 
