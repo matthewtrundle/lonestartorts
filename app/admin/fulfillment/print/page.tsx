@@ -85,14 +85,15 @@ export default function PrintFulfillmentPage() {
           body {
             background: white !important;
           }
-          .print-page {
-            page-break-after: always;
+          /* Keep each order intact; if it doesn't fit, start on the next page. */
+          .print-order {
+            break-inside: avoid;
+            page-break-inside: avoid;
           }
-          .print-page:last-child {
-            page-break-after: auto;
-          }
+          /* Production summary stays at top; orders flow below it. */
           .print-section {
-            page-break-after: always;
+            break-after: auto;
+            page-break-after: auto;
           }
         }
       `}</style>
@@ -161,7 +162,7 @@ export default function PrintFulfillmentPage() {
             fixedPackageWeightOz(totalItemCount) ?? calculateOrderWeightOz(order.items);
 
           return (
-            <section key={order.id} className="print-page mt-8 print:mt-0">
+            <section key={order.id} className="print-order mt-6 print:mt-4">
               <header className="border-b-2 border-black pb-2 mb-3">
                 <div className="flex justify-between items-start">
                   <div>
