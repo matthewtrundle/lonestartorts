@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Blue Corn Tortillas: Complete Guide',
@@ -206,12 +207,11 @@ export default function BlueCornTortillasPage() {
               </table>
             </div>
 
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg my-8">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-2">Cultural Heritage</h3>
+            <QuickAnswer title="Cultural Heritage" className="my-8">
               <p className="text-charcoal-700">
                 Blue corn has been cultivated by Hopi, Navajo, and other Pueblo peoples for over 1,000 years. For these communities, blue corn holds sacred significance and remains central to traditional ceremonies and daily meals. The nixtamalization process used to make masa was developed by indigenous peoples thousands of years ago.
               </p>
-            </div>
+            </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
               Best Uses for Blue Corn Tortillas

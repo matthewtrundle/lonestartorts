@@ -306,7 +306,7 @@ export default function SubscribePage() {
 
       <div className="max-w-4xl mx-auto px-4 pb-16">
         {error && (
-          <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+          <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
             {error}
           </div>
         )}
@@ -314,7 +314,7 @@ export default function SubscribePage() {
         {/* Step 1: Product Selection */}
         {step === 'products' && (
           <div>
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Choose Your Tortillas</h2>
+            <h2 className="font-display text-2xl font-bold text-charcoal-950 mb-6">Choose Your Tortillas</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {subscribableProducts.filter(p => p.productType === 'tortilla').map(product => {
                 const selected = selectedItems.find(i => i.sku === product.sku);
@@ -370,7 +370,7 @@ export default function SubscribePage() {
                   {subscribableProducts.filter(p => p.productType !== 'tortilla').map(product => {
                     const selected = selectedItems.find(i => i.sku === product.sku);
                     return (
-                      <div key={product.sku} className={`bg-white rounded-lg p-3 border-2 transition-colors ${selected ? 'border-sunset-500' : 'border-transparent shadow-soft'}`}>
+                      <div key={product.sku} className={`bg-white rounded-xl p-3 border-2 transition-colors ${selected ? 'border-sunset-500' : 'border-transparent shadow-soft'}`}>
                         <h4 className="font-medium text-charcoal-950 text-sm">{product.name}</h4>
                         <div className="flex items-center justify-between mt-2">
                           <span className="text-sm font-bold">{formatPrice(product.price)}</span>
@@ -435,7 +435,7 @@ export default function SubscribePage() {
             <button onClick={() => setStep('products')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
               <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to products
             </button>
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">How Often?</h2>
+            <h2 className="font-display text-2xl font-bold text-charcoal-950 mb-6">How Often?</h2>
             <div className="space-y-3 max-w-lg" role="radiogroup" aria-label="Delivery frequency">
               {frequencies.map(freq => (
                 <button
@@ -512,7 +512,7 @@ export default function SubscribePage() {
             <button onClick={() => setStep('frequency')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
               <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to schedule
             </button>
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-2 flex items-center gap-2">
+            <h2 className="font-display text-2xl font-bold text-charcoal-950 mb-2 flex items-center gap-2">
               <MapPin className="w-6 h-6 text-sunset-600" aria-hidden="true" />
               Where Should We Ship?
             </h2>
@@ -534,7 +534,7 @@ export default function SubscribePage() {
             <button onClick={() => setStep('address')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
               <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to shipping
             </button>
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-2">Create Your Account</h2>
+            <h2 className="font-display text-2xl font-bold text-charcoal-950 mb-2">Create Your Account</h2>
             <p className="text-charcoal-600 mb-6">You&apos;ll use this to manage your subscription, track orders, and update preferences.</p>
 
             <div className="max-w-lg space-y-4">
@@ -613,7 +613,7 @@ export default function SubscribePage() {
             <button onClick={() => setStep('address')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
               <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to shipping
             </button>
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Payment Details</h2>
+            <h2 className="font-display text-2xl font-bold text-charcoal-950 mb-6">Payment Details</h2>
             <div className="grid gap-8 lg:grid-cols-5">
               <div className="lg:col-span-3 bg-white rounded-xl shadow-soft p-6">
                 <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>

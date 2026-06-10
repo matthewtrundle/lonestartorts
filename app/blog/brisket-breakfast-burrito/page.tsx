@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Brisket Breakfast Burrito Recipe',
@@ -431,28 +432,7 @@ export default function BrisketBreakfastBurritoPage() {
               </div>
             </section>
 
-            <section className="mb-10">
-              <div className="bg-charcoal-950 text-cream-50 p-8 rounded-lg">
-                <h3 className="text-2xl font-bold mb-4">Get Authentic H-E-B® Tortillas Delivered</h3>
-                <p className="text-cream-200 mb-6">
-                  Ready to make the ultimate brisket breakfast burrito? Start with authentic H-E-B® butter flour tortillas, delivered to your door anywhere in America.
-                </p>
-                <div className="flex gap-4">
-                  <Link
-                    href="/shop"
-                    className="bg-sunset-500 hover:bg-sunset-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Shop Tortillas
-                  </Link>
-                  <Link
-                    href="/guides"
-                    className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-6 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    More Guides
-                  </Link>
-                </div>
-              </div>
-            </section>
+            <CTABanner variant="order" className="mb-10" />
           </div>
         </article>
       </div>

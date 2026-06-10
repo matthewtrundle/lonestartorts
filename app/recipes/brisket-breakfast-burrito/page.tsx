@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   alternates: {
@@ -511,26 +512,7 @@ export default function BrisketBreakfastBurritoRecipe() {
           </section>
 
           {/* CTA Section */}
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-xl text-center">
-            <h2 className="text-2xl font-bold mb-4">Ready for the Ultimate Breakfast Burrito?</h2>
-            <p className="text-cream-200 mb-6 max-w-2xl mx-auto">
-              You need authentic H-E-B® butter flour tortillas. They're the ONLY tortillas that can handle a fully-loaded brisket breakfast burrito without falling apart.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/shop"
-                className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
-              >
-                Shop H-E-B® Tortillas
-              </Link>
-              <Link
-                href="/blog/bbq-meets-tortillas"
-                className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-8 py-3 rounded-lg font-semibold transition-colors"
-              >
-                BBQ Guide
-              </Link>
-            </div>
-          </section>
+          <CTABanner variant="recipe" />
         </article>
       </div>
     </>

@@ -456,28 +456,28 @@ export default function CheckoutPage() {
                         <p className="text-sm text-charcoal-600 mb-2">{formatPrice(item.price)} each</p>
                         {/* Quantity Controls */}
                         <div className="flex items-center gap-3">
-                          <div className="flex items-center bg-gray-100 rounded p-0.5">
+                          <div className="flex items-center bg-charcoal-100 rounded p-0.5">
                             <button
                               onClick={() => updateQuantity(item.sku, item.quantity - 1)}
-                              className="w-7 h-7 flex items-center justify-center rounded bg-white hover:bg-gray-50 border border-gray-200"
+                              className="w-7 h-7 flex items-center justify-center rounded bg-white hover:bg-charcoal-50 border border-charcoal-200"
                               aria-label="Decrease quantity"
                             >
-                              <Minus className="w-3.5 h-3.5 text-gray-600" />
+                              <Minus className="w-3.5 h-3.5 text-charcoal-600" />
                             </button>
                             <span className="w-10 text-center text-sm font-semibold">
                               {item.quantity}
                             </span>
                             <button
                               onClick={() => updateQuantity(item.sku, item.quantity + 1)}
-                              className="w-7 h-7 flex items-center justify-center rounded bg-white hover:bg-gray-50 border border-gray-200"
+                              className="w-7 h-7 flex items-center justify-center rounded bg-white hover:bg-charcoal-50 border border-charcoal-200"
                               aria-label="Increase quantity"
                             >
-                              <Plus className="w-3.5 h-3.5 text-gray-600" />
+                              <Plus className="w-3.5 h-3.5 text-charcoal-600" />
                             </button>
                           </div>
                           <button
                             onClick={() => removeItem(item.sku)}
-                            className="text-gray-400 hover:text-red-600 transition-colors"
+                            className="text-charcoal-400 hover:text-red-600 transition-colors"
                             aria-label="Remove item"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -493,7 +493,7 @@ export default function CheckoutPage() {
               {hasWholesaleItems && !wholesaleCustomer && !checkingAuth && (
                 <>
                   {wholesaleAuthError && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
                       <p className="text-sm text-red-700">{wholesaleAuthError}</p>
                     </div>
                   )}
@@ -519,7 +519,7 @@ export default function CheckoutPage() {
               {/* Tuesday Shipping Callout */}
               {shippingCallout && (
                 <div
-                  className={`rounded-lg p-4 flex items-start gap-3 border ${
+                  className={`rounded-xl p-4 flex items-start gap-3 border ${
                     shippingCallout.isShipsTomorrow
                       ? 'bg-sunset-50 border-sunset-300'
                       : 'bg-amber-50 border-amber-200'
@@ -555,7 +555,7 @@ export default function CheckoutPage() {
               )}
 
               {/* Freezing Tip */}
-              <div className="bg-sky-50 border border-sky-200 rounded-lg p-4 flex items-start gap-3">
+              <div className="bg-sky-50 border border-sky-200 rounded-xl p-4 flex items-start gap-3">
                 <Snowflake className="w-5 h-5 text-sky-600 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium text-sky-900 text-sm">Stock up & freeze for 6+ months!</p>
@@ -641,11 +641,11 @@ export default function CheckoutPage() {
                 {!isNetTerms && (
                   <>
                     {/* Discount Code - Collapsible */}
-                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                    <div className="border border-charcoal-200 rounded-xl overflow-hidden">
                       <button
                         onClick={() => setDiscountOpen(!discountOpen)}
                         aria-expanded={discountOpen}
-                        className="w-full flex items-center justify-between p-3 hover:bg-gray-50 transition-colors"
+                        className="w-full flex items-center justify-between p-3 hover:bg-charcoal-50 transition-colors"
                       >
                         <div className="flex items-center gap-2">
                           <Tag className="w-4 h-4 text-sunset-600" />
@@ -654,14 +654,14 @@ export default function CheckoutPage() {
                           </span>
                           {discountApplied && <Check className="w-4 h-4 text-green-600" />}
                         </div>
-                        <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${discountOpen ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`w-5 h-5 text-charcoal-400 transition-transform ${discountOpen ? 'rotate-180' : ''}`} />
                       </button>
                       {discountOpen && (
-                        <div className="px-3 pb-3 border-t border-gray-100">
+                        <div className="px-3 pb-3 border-t border-charcoal-100">
                           {discountApplied ? (
                             <div className="flex items-center justify-between p-3 mt-2 bg-green-50 rounded text-sm">
                               <span className="text-green-800 font-medium">{discountMessage}</span>
-                              <button onClick={handleRemoveDiscount} aria-label="Remove discount" className="text-gray-400 hover:text-gray-600">
+                              <button onClick={handleRemoveDiscount} aria-label="Remove discount" className="text-charcoal-400 hover:text-charcoal-600">
                                 <X className="w-4 h-4" />
                               </button>
                             </div>
@@ -673,7 +673,7 @@ export default function CheckoutPage() {
                                 aria-label="Email address"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2"
+                                className="w-full px-3 py-2 border border-charcoal-200 rounded text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2"
                               />
                               <div className="flex gap-2">
                                 <input
@@ -682,12 +682,12 @@ export default function CheckoutPage() {
                                   aria-label="Discount code"
                                   value={discountCode}
                                   onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
-                                  className="flex-1 px-3 py-2 border border-gray-200 rounded text-sm uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2"
+                                  className="flex-1 px-3 py-2 border border-charcoal-200 rounded text-sm uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2"
                                 />
                                 <button
                                   onClick={handleApplyDiscount}
                                   disabled={isValidatingCode}
-                                  className="px-4 py-2 bg-gray-900 text-white text-sm rounded hover:bg-gray-800 disabled:bg-gray-400"
+                                  className="px-4 py-2 bg-charcoal-900 text-white text-sm rounded hover:bg-charcoal-800 disabled:bg-charcoal-400"
                                 >
                                   {isValidatingCode ? '...' : 'Apply'}
                                 </button>
@@ -701,7 +701,7 @@ export default function CheckoutPage() {
 
                     {/* Loyalty Points Card */}
                     {!loyaltyLoading && loyaltyBalance >= 200 && (
-                      <div className="rounded-lg overflow-hidden border border-amber-200">
+                      <div className="rounded-xl overflow-hidden border border-amber-200">
                         <div className="bg-gradient-to-r from-amber-100 to-yellow-100 px-4 py-3">
                           <div className="flex items-center gap-2 mb-1">
                             <Star className="w-4 h-4 text-amber-600 fill-amber-500" />
@@ -713,7 +713,7 @@ export default function CheckoutPage() {
                         </div>
                         <div className="px-4 py-3 bg-white">
                           {discountApplied && !loyaltyCode ? (
-                            <p className="text-xs text-gray-500 text-center">
+                            <p className="text-xs text-charcoal-500 text-center">
                               Remove current discount to use points
                             </p>
                           ) : loyaltyCode ? (
@@ -738,7 +738,7 @@ export default function CheckoutPage() {
                 )}
 
                 {/* Trust Indicators */}
-                <div className="flex items-center justify-center gap-4 text-xs text-gray-500 pt-2">
+                <div className="flex items-center justify-center gap-4 text-xs text-charcoal-500 pt-2">
                   <div className="flex items-center gap-1">
                     <ShieldCheck className="w-4 h-4 text-green-600" />
                     <span>Secure checkout</span>
@@ -750,7 +750,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Disclaimer */}
-                <p className="text-[10px] text-gray-600 text-center">
+                <p className="text-[10px] text-charcoal-600 text-center">
                   Not affiliated with H-E-B®
                 </p>
               </div>

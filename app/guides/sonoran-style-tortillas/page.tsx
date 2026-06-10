@@ -7,6 +7,7 @@ import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Sonoran Style Tortillas Guide',
@@ -181,12 +182,11 @@ export default function SonoranStyleTortillasPage() {
               Skilled tortilleras can stretch a ball of dough into a paper-thin disc in seconds, spinning and flipping the tortilla over their arms. This technique is what gives Sonoran tortillas their characteristic thinness while maintaining structural integrity.
             </p>
 
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg my-8">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-2">Regional History</h3>
+            <QuickAnswer title="Regional History" className="my-8">
               <p className="text-charcoal-700">
                 Sonoran flour tortillas developed in Northern Mexico where wheat thrived in the arid climate better than corn. Spanish colonizers introduced wheat, and local cooks adapted it into the tortilla tradition, creating a unique regional food that became the foundation for the modern burrito.
               </p>
-            </div>
+            </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
               Traditional Uses for Sonoran Tortillas

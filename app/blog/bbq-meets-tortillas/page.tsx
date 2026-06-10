@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Texas BBQ Meets H-E-B Tortillas',
@@ -286,28 +287,7 @@ export default function BBQMeetsTortillasPage() {
               </div>
             </section>
 
-            <section className="mb-10">
-              <div className="bg-charcoal-950 text-cream-50 p-8 rounded-lg">
-                <h3 className="text-2xl font-bold mb-4">Ready to Elevate Your BBQ?</h3>
-                <p className="text-cream-200 mb-6">
-                  Get authentic H-E-B® tortillas delivered to your door. Whether you&apos;re a professional pitmaster or a backyard BBQ enthusiast, we&apos;ve got you covered.
-                </p>
-                <div className="flex gap-4">
-                  <Link
-                    href="/shop"
-                    className="bg-sunset-500 hover:bg-sunset-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Shop Tortillas
-                  </Link>
-                  <Link
-                    href="/recipes"
-                    className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-6 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    View Recipes
-                  </Link>
-                </div>
-              </div>
-            </section>
+            <CTABanner variant="order" className="mb-10" />
           </div>
         </article>
       </div>

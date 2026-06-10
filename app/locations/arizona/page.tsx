@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { CTABanner } from '@/components/ui/CTABanner'
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Arizona',
@@ -197,11 +198,7 @@ export default function ArizonaPage() {
 
 
 
-        <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Arizona?</h2>
-          <p className="text-lg mb-6 text-cream-200">Order authentic H-E-B tortillas and experience the difference.</p>
-          <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
-        </section>
+        <CTABanner variant="location" />
 
         <p className="text-sm text-charcoal-500 italic mt-8 text-center">Independent reseller. Not affiliated with or endorsed by H-E-B.</p>
       </main>

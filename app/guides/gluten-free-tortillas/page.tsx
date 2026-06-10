@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { PanIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Gluten-Free Tortillas Guide',
@@ -99,12 +100,11 @@ export default function GlutenFreeTortillasPage() {
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <LastUpdated date="2025-10-25" />
 
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Yes, authentic corn tortillas are naturally gluten-free!</strong> Made from 100% corn masa, they're safe for celiac disease and gluten sensitivity. Always verify labels to ensure no wheat flour is added. Many brands also offer gluten-free flour-style tortillas using alternative flours like rice or almond.
             </p>
-          </div>
+          </QuickAnswer>
 
           <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Are Corn Tortillas Gluten-Free?</h2>

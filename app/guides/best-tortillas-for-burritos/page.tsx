@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Best Tortillas for Burritos Guide',
@@ -195,12 +196,11 @@ export default function BestTortillasForBurritosPage() {
               </div>
             </div>
 
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg my-8">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-2">Why Not Corn Tortillas?</h3>
+            <QuickAnswer title="Why Not Corn Tortillas?" className="my-8">
               <p className="text-charcoal-700">
                 While corn tortillas are perfect for tacos and enchiladas, they&apos;re not ideal for burritos. Corn tortillas are smaller (typically 6 inches), more brittle, and crack easily when folded around large fillings. They also absorb moisture faster, becoming soggy. For the occasional &quot;burrito&quot; craving with corn, try making enchiladas instead.
               </p>
-            </div>
+            </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
               How to Warm Tortillas for Burritos

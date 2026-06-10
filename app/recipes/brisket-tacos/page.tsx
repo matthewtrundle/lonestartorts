@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 import { PageViewTracker } from '@/components/analytics/PageViewTracker';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   alternates: {
@@ -499,26 +500,7 @@ export default function BrisketTacosRecipe() {
           </section>
 
           {/* CTA Section */}
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-xl text-center">
-            <h2 className="text-2xl font-bold mb-4">Ready to Make Perfect Brisket Tacos?</h2>
-            <p className="text-cream-200 mb-6 max-w-2xl mx-auto">
-              Get authentic H-E-B® flour tortillas delivered to your door. The only tortillas strong enough to handle real Texas brisket.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/shop"
-                className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
-              >
-                Shop Tortillas
-              </Link>
-              <Link
-                href="/blog/bbq-meets-tortillas"
-                className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-8 py-3 rounded-lg font-semibold transition-colors"
-              >
-                BBQ & Tortillas Guide
-              </Link>
-            </div>
-          </section>
+          <CTABanner variant="recipe" />
         </article>
       </div>
     </>

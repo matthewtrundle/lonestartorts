@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'How to Freeze & Defrost Tortillas | Sprouted, Corn, Flour Guide',
@@ -105,12 +106,11 @@ export default function HowToFreezeTortillasPage() {
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <LastUpdated date="2025-10-25" />
 
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Yes, you can freeze tortillas!</strong> Both corn and flour tortillas freeze excellently for 6-8 months. Place tortillas in a freezer-safe bag with parchment paper between each one, squeeze out air, seal tightly, and freeze. Thaw at room temperature for 30 minutes or warm directly from frozen on a skillet.
             </p>
-          </div>
+          </QuickAnswer>
 
           <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Freeze Tortillas?</h2>

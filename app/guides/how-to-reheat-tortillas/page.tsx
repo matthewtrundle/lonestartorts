@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { StarIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'How to Reheat Tortillas: 5 Methods',
@@ -78,14 +79,13 @@ export default function HowToReheatTortillasPage() {
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <LastUpdated date="2025-10-25" />
 
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Best method: Dry skillet/comal</strong> - Heat a dry pan over medium-high heat, place tortilla
               for 30 seconds per side until warm and slightly charred. For multiple tortillas, wrap in foil and heat
               in a 350°F oven for 10-15 minutes. Both methods produce authentic, soft, pliable tortillas.
             </p>
-          </div>
+          </QuickAnswer>
 
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-charcoal-700 leading-relaxed">

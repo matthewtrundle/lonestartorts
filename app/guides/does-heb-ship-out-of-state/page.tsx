@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Does H-E-B Ship Out of State? Yes — Here\'s How to Get H-E-B Tortillas Anywhere',
@@ -134,8 +135,7 @@ export default function DoesHebShipOutOfStatePage() {
           </p>
         </section>
 
-        <section className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg mb-10">
-          <h2 className="text-xl font-bold text-charcoal-950 mb-2">How it works</h2>
+        <QuickAnswer title="How it works" className="mb-10">
           <ol className="text-charcoal-700 space-y-2 list-decimal list-inside">
             <li>Order your tortillas online — flour, butter, corn, and wheat varieties</li>
             <li>We buy them fresh from H-E-B in Texas and pack them for transit</li>
@@ -148,7 +148,7 @@ export default function DoesHebShipOutOfStatePage() {
           >
             Shop H-E-B Tortillas
           </Link>
-        </section>
+        </QuickAnswer>
 
         <section className="mb-10">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Common questions</h2>

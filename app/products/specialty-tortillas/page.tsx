@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PageHero } from '@/components/ui/PageHero';
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { StepList } from '@/components/ui/StepList';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   alternates: {
@@ -33,31 +37,32 @@ export default function SpecialtyTortillasPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
-        <nav className="container mx-auto px-8 py-6">
-          <ol className="flex items-center gap-2 text-sm text-charcoal-600">
-            <li><Link href="/" className="hover:text-sunset-500">Home</Link></li>
-            <li>/</li>
-            <li><Link href="/shop" className="hover:text-sunset-500">Products</Link></li>
-            <li>/</li>
-            <li className="text-charcoal-950 font-medium">Specialty Tortillas</li>
-          </ol>
-        </nav>
+        <PageHero
+          eyebrow="Specialty H-E-B®"
+          title="H-E-B Specialty & Whole Wheat Tortillas"
+          sub="Unique • Healthy • Flavorful"
+          breadcrumbs={
+            <nav className="text-sm">
+              <ol className="flex items-center gap-2">
+                <li><Link href="/" className="hover:text-cream-50 transition">Home</Link></li>
+                <li>/</li>
+                <li><Link href="/shop" className="hover:text-cream-50 transition">Products</Link></li>
+                <li>/</li>
+                <li className="text-cream-50 font-medium">Specialty Tortillas</li>
+              </ol>
+            </nav>
+          }
+        />
 
         <section className="container mx-auto px-8 py-12">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="relative">
-              <div className="aspect-square relative rounded-2xl overflow-hidden bg-gradient-to-br from-lime-100 to-masa-100 shadow-2xl">
+              <div className="aspect-square relative rounded-2xl overflow-hidden bg-gradient-to-br from-lime-100 to-masa-100 shadow-large">
                 <Image src="/images/product-hero.webp" alt="H-E-B Specialty Tortillas - Whole wheat, spinach-herb, and flavored varieties delivered nationwide" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" priority />
               </div>
             </div>
 
             <div className="space-y-8">
-              <div>
-                <span className="inline-block px-4 py-2 bg-lime-600 text-cream-50 text-sm font-bold tracking-wider uppercase rounded-full mb-4">Specialty H-E-B®</span>
-                <h1 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mb-4">H-E-B Specialty & Whole Wheat Tortillas</h1>
-                <p className="text-2xl text-masa-600 font-light italic">Unique • Healthy • Flavorful</p>
-              </div>
-
               <div className="prose prose-lg max-w-none">
                 <p className="text-lg text-charcoal-700 leading-relaxed">
                   Explore beyond traditional with H-E-B® specialty tortillas. From wholesome whole wheat to vibrant spinach-herb and savory tomato-basil, these unique varieties add both nutrition and flavor to your favorite dishes.
@@ -95,7 +100,7 @@ export default function SpecialtyTortillasPage() {
                   <span className="text-lg text-charcoal-600">per package</span>
                 </div>
                 <p className="text-charcoal-600 mb-6">Variety rotating based on availability</p>
-                <Link href="/pre-sale" className="block w-full bg-sunset-500 hover:bg-sunset-600 text-cream-50 text-center px-8 py-4 rounded-full font-bold text-lg tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl">
+                <Link href="/pre-sale" className="block w-full bg-sunset-500 hover:bg-sunset-600 text-cream-50 text-center px-8 py-4 rounded-full font-bold text-lg tracking-wider uppercase transition-colors shadow-soft hover:shadow-medium">
                   Join Pre-Sale Waitlist
                 </Link>
               </div>
@@ -107,7 +112,7 @@ export default function SpecialtyTortillasPage() {
           </div>
 
           <div className="mt-20 max-w-4xl mx-auto">
-            <h2 className="text-4xl font-display font-black text-charcoal-950 mb-6">Discover Specialty Tortillas</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 mb-6">Discover Specialty Tortillas</h2>
             <div className="prose prose-lg max-w-none text-charcoal-700 space-y-4">
               <p>
                 H-E-B® specialty tortillas offer exciting alternatives to traditional flour and corn varieties. Whether you're looking for healthier whole wheat options or want to add visual flair with spinach-herb tortillas, these specialty varieties deliver both nutrition and flavor.
@@ -123,20 +128,55 @@ export default function SpecialtyTortillasPage() {
             <div className="mt-16">
               <h3 className="text-2xl font-display font-bold text-charcoal-950 mb-6">Build Your Perfect Mix</h3>
               <div className="grid md:grid-cols-3 gap-6">
-                <Link href="/products/corn-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+                <Link href="/products/corn-tortillas" className="group block bg-white rounded-xl p-6 shadow-soft hover:shadow-medium transition-shadow">
                   <h4 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors">Corn Tortillas →</h4>
                   <p className="text-charcoal-600 mt-2">Traditional corn tortillas for authentic tacos</p>
                 </Link>
-                <Link href="/products/flour-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+                <Link href="/products/flour-tortillas" className="group block bg-white rounded-xl p-6 shadow-soft hover:shadow-medium transition-shadow">
                   <h4 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors">Flour Tortillas →</h4>
                   <p className="text-charcoal-600 mt-2">Soft and versatile for burritos and wraps</p>
                 </Link>
-                <Link href="/products/butter-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+                <Link href="/products/butter-tortillas" className="group block bg-white rounded-xl p-6 shadow-soft hover:shadow-medium transition-shadow">
                   <h4 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors">Butter Tortillas →</h4>
                   <p className="text-charcoal-600 mt-2">Rich, buttery flavor for premium taste</p>
                 </Link>
               </div>
             </div>
+          </div>
+
+          {/* How it ships */}
+          <div className="mt-20 grid md:grid-cols-12 gap-8">
+            <div className="md:col-span-4">
+              <SectionHeader
+                eyebrow="Freshness First"
+                title="How it ships"
+                sub="From a Texas H-E-B to your door"
+              />
+            </div>
+            <div className="md:col-span-8">
+              <StepList
+                direction="vertical"
+                steps={[
+                  {
+                    title: 'Order by Monday night',
+                    description: 'Orders lock in for the weekly Tuesday shipment.',
+                  },
+                  {
+                    title: 'Packed fresh Tuesday morning',
+                    description: 'We buy your tortillas fresh and pack them for transit the same day.',
+                  },
+                  {
+                    title: 'At your door in 2–4 days',
+                    description: 'Shelf-stable in transit — 7-10 days fresh on the counter, months in the freezer.',
+                  },
+                ]}
+              />
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-16">
+            <CTABanner variant="order" />
           </div>
         </section>
       </div>

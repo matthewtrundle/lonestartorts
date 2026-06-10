@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Tortilla Ingredients Guide',
@@ -168,12 +169,11 @@ export default function TortillaIngredientsPage() {
               </li>
             </ul>
 
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg my-8">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-2">The Nixtamalization Process</h3>
+            <QuickAnswer title="The Nixtamalization Process" className="my-8">
               <p className="text-charcoal-700">
                 Nixtamalization was developed by Mesoamerican peoples over 3,500 years ago. Dried corn kernels are soaked and cooked in an alkaline solution (water mixed with calcium hydroxide or wood ash). This process removes the hull, softens the kernel, and causes chemical changes that make nutrients like niacin bioavailable—preventing deficiency diseases that affected populations eating untreated corn.
               </p>
-            </div>
+            </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
               Flour Tortilla Ingredients

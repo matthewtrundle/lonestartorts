@@ -7,6 +7,7 @@ import { BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'H-E-B vs Mission Tortillas: Which is Better?',
@@ -155,8 +156,7 @@ export default function HEBvsMissionPage() {
           <LastUpdated date="2026-04-18" />
 
           {/* Quick Answer Box - Featured Snippet Target */}
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>H-E-B tortillas are generally considered superior</strong> for taste and texture, made fresh
               in Texas with simple, clean ingredients. Mission tortillas offer wider availability but contain
@@ -166,7 +166,7 @@ export default function HEBvsMissionPage() {
                 shipped nationwide
               </Link>.
             </p>
-          </div>
+          </QuickAnswer>
 
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">

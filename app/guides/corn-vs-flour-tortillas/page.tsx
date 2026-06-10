@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Corn vs Flour Tortillas Guide',
@@ -70,12 +71,11 @@ export default function CornVsFlourPage() {
           <LastUpdated date="2025-10-25" />
 
           {/* Quick Answer */}
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Corn tortillas</strong> are made from masa (corn flour), are gluten-free, have fewer calories, and offer authentic flavor perfect for tacos and tostadas. <strong>Flour tortillas</strong> are made from wheat flour, are more pliable, hold more filling, and work best for burritos, wraps, and quesadillas. Choose corn for traditional Mexican dishes and healthier options; choose flour for versatility and ease of use.
             </p>
-          </div>
+          </QuickAnswer>
 
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-charcoal-700 leading-relaxed">

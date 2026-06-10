@@ -3,6 +3,7 @@ export const revalidate = 86400;
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Birthday Fiesta Party Guide - Mexican Theme Birthday Ideas',
@@ -62,12 +63,11 @@ export default function BirthdayFiestaPage() {
           <LastUpdated date="2025-12-25" />
 
           {/* Quick Answer */}
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>A fiesta birthday party</strong> combines colorful decorations (papel picado, sombreros, cacti), a build-your-own taco bar, festive music, and fun activities like piñatas. Plan 2-3 tacos per adult and 1-2 per child. Include kid-friendly mild options alongside spicier adult choices.
             </p>
-          </div>
+          </QuickAnswer>
 
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-charcoal-700 leading-relaxed">

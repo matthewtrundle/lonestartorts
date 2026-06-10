@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Homemade vs Store-Bought Tortillas',
@@ -169,12 +170,11 @@ export default function HomemadeVsStoreBoughtPage() {
         {/* Main Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Quick Answer */}
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg mb-12">
-            <h2 className="text-xl font-semibold text-sunset-900 mb-2">Quick Answer</h2>
+          <QuickAnswer className="mb-12">
             <p className="text-sunset-800">
               <strong>Homemade tortillas</strong> offer superior freshness, flavor, and texture but require 30-60 minutes of preparation time. <strong>Premium store-bought tortillas</strong> provide comparable quality with zero prep time, making them ideal for busy schedules. The best choice depends on your priorities: time vs. experience.
             </p>
-          </div>
+          </QuickAnswer>
 
           {/* Comparison Table */}
           <section className="mb-12">

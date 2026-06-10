@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Retirement Party Taco Bar Guide - Office Celebration Ideas',
@@ -66,12 +67,11 @@ export default function RetirementPartyPage() {
           <LastUpdated date="2025-12-30" />
 
           {/* Quick Answer */}
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>A retirement party taco bar</strong> creates a festive, casual atmosphere for celebrating a colleague's career milestone. Plan 2-3 tacos per person for a lunch gathering, set up in a conference room or break area, and budget $8-15/person. Add a themed cake and heartfelt speeches!
             </p>
-          </div>
+          </QuickAnswer>
 
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-charcoal-700 leading-relaxed">

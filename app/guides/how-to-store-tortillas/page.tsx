@@ -7,6 +7,7 @@ import { TacoIcon, BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'How to Store Tortillas',
@@ -122,15 +123,14 @@ export default function HowToStoreTortillasPage() {
           <LastUpdated date="2025-10-25" />
 
           {/* Quick Answer Box - Featured Snippet Target */}
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Store unopened tortillas at room temperature</strong> in a cool, dry pantry for 3-4 weeks.
               After opening, keep in an airtight container or resealable bag for 7-10 days. For longer storage,
               refrigerate (2-3 weeks) or freeze (up to 6 months). Shelf-stable H-E-B® tortillas don't require
               refrigeration until opened.
             </p>
-          </div>
+          </QuickAnswer>
 
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">

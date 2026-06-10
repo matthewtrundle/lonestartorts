@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'How to Make Fresh Tortillas',
@@ -110,12 +111,11 @@ export default function HowToMakeTortillasPage() {
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <LastUpdated date="2025-10-25" />
 
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
+          <QuickAnswer className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Flour tortillas:</strong> Mix 3 cups flour, 1 tsp salt, 1 tsp baking powder, 1/3 cup lard/shortening, and 1 cup warm water. Knead, rest 30 minutes, roll into thin circles, and cook 30-60 seconds per side on a hot griddle. <strong>Corn tortillas:</strong> Mix 2 cups masa harina with 1.5 cups warm water and a pinch of salt. Press into thin disks and cook 1 minute per side.
             </p>
-          </div>
+          </QuickAnswer>
 
           <section className="prose prose-lg max-w-none mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Why Make Tortillas at Home?</h2>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Pacific Northwest BBQ Meets Texas Tortillas',
@@ -374,16 +375,7 @@ export default function WashingtonBBQElevationPage() {
           </section>
 
           {/* CTA Section */}
-          <section className="mt-16 bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Start Your Washington BBQ Success Story</h2>
-            <p className="text-cream-100 mb-6 max-w-2xl mx-auto">
-              Join the Pacific Northwest BBQ revolution. Get the tortillas that Seattle, Tacoma, and Spokane customers love.
-            </p>
-            <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors text-lg">
-              Shop H-E-B® Tortillas
-            </Link>
-            <p className="text-cream-400 text-sm mt-4">Ships fresh from Seattle to Spokane and everywhere in between</p>
-          </section>
+          <CTABanner variant="order" className="mt-16" />
         </article>
       </div>
     </>

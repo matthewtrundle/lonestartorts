@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PageHero } from '@/components/ui/PageHero';
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { StepList } from '@/components/ui/StepList';
+import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Premium Corn Tortillas',
@@ -120,72 +125,53 @@ export default function CornTortillasProductPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-cream-50 to-sunset-50">
+      <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-sunset-600 to-sunset-700 text-white">
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            {/* Breadcrumb */}
-            <nav className="mb-8 text-sm">
-              <ol className="flex items-center space-x-2 text-white/80">
-                <li><Link href="/" className="hover:text-white transition">Home</Link></li>
+        <PageHero
+          size="lg"
+          eyebrow="Gluten-Free • Non-GMO • Handcrafted"
+          title="Premium Corn Tortillas"
+          sub="Authentic handcrafted corn tortillas made from traditional masa. Perfectly soft, naturally gluten-free, and bursting with genuine corn flavor."
+          breadcrumbs={
+            <nav className="text-sm">
+              <ol className="flex items-center space-x-2">
+                <li><Link href="/" className="hover:text-cream-50 transition">Home</Link></li>
                 <li>/</li>
-                <li><Link href="/shop" className="hover:text-white transition">Products</Link></li>
+                <li><Link href="/shop" className="hover:text-cream-50 transition">Products</Link></li>
                 <li>/</li>
-                <li className="text-white">Corn Tortillas</li>
+                <li className="text-cream-50">Corn Tortillas</li>
               </ol>
             </nav>
-
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold tracking-[0.2em] uppercase mb-6">
-                  Gluten-Free • Non-GMO • Handcrafted
-                </div>
-
-                <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
-                  Premium Corn Tortillas
-                </h1>
-
-                <p className="text-xl text-white/90 mb-8">
-                  Authentic handcrafted corn tortillas made from traditional masa.
-                  Perfectly soft, naturally gluten-free, and bursting with genuine corn flavor.
-                </p>
-
-                <div className="flex flex-wrap gap-4 mb-8">
-                  <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-lg">
-                    <div className="text-3xl font-bold">$5.99</div>
-                    <div className="text-sm text-white/80">12-pack</div>
-                  </div>
-
-                  <div className="bg-white/20 backdrop-blur-sm px-6 py-3 rounded-lg">
-                    <div className="text-2xl font-bold">⭐ 4.9</div>
-                    <div className="text-sm text-white/80">127 reviews</div>
-                  </div>
-                </div>
-
-                <Link
-                  href="/pre-sale"
-                  className="inline-block px-8 py-4 bg-white text-sunset-600 font-semibold rounded-lg hover:bg-cream-50 transition shadow-lg"
-                >
-                  Pre-Order Now →
-                </Link>
+          }
+          cta={{ label: 'Pre-Order Now →', href: '/pre-sale' }}
+        >
+          <div className="mt-8 grid lg:grid-cols-2 gap-12 items-center">
+            <div className="flex flex-wrap gap-4">
+              <div className="bg-white/10 px-6 py-3 rounded-lg">
+                <div className="text-3xl font-bold">$5.99</div>
+                <div className="text-sm text-cream-300">12-pack</div>
               </div>
 
-              <div className="relative">
-                <div className="aspect-square rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/20 overflow-hidden relative">
-                  <Image
-                    src="/images/products/corn-tortillas.webp"
-                    alt="H-E-B Corn Tortillas - Authentic Texas corn tortillas"
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
+              <div className="bg-white/10 px-6 py-3 rounded-lg">
+                <div className="text-2xl font-bold">⭐ 4.9</div>
+                <div className="text-sm text-cream-300">127 reviews</div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="aspect-square max-w-md rounded-2xl overflow-hidden relative">
+                <Image
+                  src="/images/products/corn-tortillas.webp"
+                  alt="H-E-B Corn Tortillas - Authentic Texas corn tortillas"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
-        </section>
+        </PageHero>
 
         {/* Product Details */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -194,7 +180,7 @@ export default function CornTortillasProductPage() {
             <div className="lg:col-span-2 space-y-12">
               {/* About */}
               <div>
-                <h2 className="text-3xl font-serif font-bold text-charcoal-900 mb-6">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 mb-6">
                   The Authentic Corn Tortilla Experience
                 </h2>
 
@@ -215,7 +201,7 @@ export default function CornTortillasProductPage() {
 
               {/* What Makes Them Special */}
               <div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal-900 mb-6">
+                <h3 className="font-display text-2xl font-bold text-charcoal-950 mb-6">
                   What Makes Our Corn Tortillas Special
                 </h3>
 
@@ -244,7 +230,7 @@ export default function CornTortillasProductPage() {
                   ].map((feature) => (
                     <div
                       key={feature.title}
-                      className="bg-white rounded-xl p-6 shadow-sm border border-charcoal-100"
+                      className="bg-white rounded-xl p-6 shadow-subtle border border-charcoal-100"
                     >
                       <div className="text-4xl mb-3">{feature.icon}</div>
                       <h4 className="font-semibold text-lg text-charcoal-900 mb-2">
@@ -258,7 +244,7 @@ export default function CornTortillasProductPage() {
 
               {/* Perfect For */}
               <div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal-900 mb-6">
+                <h3 className="font-display text-2xl font-bold text-charcoal-950 mb-6">
                   Perfect For
                 </h3>
 
@@ -287,12 +273,12 @@ export default function CornTortillasProductPage() {
 
               {/* FAQ */}
               <div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal-900 mb-6">
+                <h3 className="font-display text-2xl font-bold text-charcoal-950 mb-6">
                   Frequently Asked Questions
                 </h3>
 
-                <div className="space-y-4">
-                  {[
+                <FAQAccordion
+                  items={[
                     {
                       question: 'Are corn tortillas gluten-free?',
                       answer: 'Yes! Our corn tortillas are 100% gluten-free. They are made from pure masa (corn flour), water, and a touch of lime. Unlike flour tortillas which contain wheat, corn tortillas are naturally gluten-free and safe for those with celiac disease or gluten sensitivity.',
@@ -313,33 +299,15 @@ export default function CornTortillasProductPage() {
                       question: 'How do I heat corn tortillas?',
                       answer: 'For best results, heat tortillas on a dry skillet or comal over medium-high heat for 30-45 seconds per side until warm and pliable. You can also wrap them in damp paper towels and microwave for 30 seconds, or char them directly over a gas flame for a smoky flavor.',
                     },
-                  ].map((faq, index) => (
-                    <details
-                      key={index}
-                      className="bg-white rounded-lg border border-charcoal-200 p-6 group"
-                    >
-                      <summary className="font-semibold text-charcoal-900 cursor-pointer list-none flex justify-between items-center">
-                        {faq.question}
-                        <svg
-                          className="w-5 h-5 text-charcoal-400 group-open:rotate-180 transition-transform"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </summary>
-                      <p className="mt-4 text-charcoal-600 leading-relaxed">{faq.answer}</p>
-                    </details>
-                  ))}
-                </div>
+                  ]}
+                />
               </div>
             </div>
 
             {/* Sidebar */}
             <div className="space-y-8">
               {/* Product Info Card */}
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-charcoal-100 sticky top-8">
+              <div className="bg-white rounded-xl p-6 shadow-medium border border-charcoal-100 sticky top-8">
                 <h3 className="text-xl font-semibold text-charcoal-900 mb-4">
                   Product Information
                 </h3>
@@ -427,7 +395,7 @@ export default function CornTortillasProductPage() {
               </div>
 
               {/* Recipe Links */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-charcoal-100">
+              <div className="bg-white rounded-xl p-6 shadow-subtle border border-charcoal-100">
                 <h3 className="text-lg font-semibold text-charcoal-900 mb-4">
                   Try These Recipes
                 </h3>
@@ -456,22 +424,41 @@ export default function CornTortillasProductPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="bg-gradient-to-r from-sunset-600 to-rust-600 text-white py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl font-serif font-bold mb-4">
-              Ready to Experience Authentic Corn Tortillas?
-            </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Pre-order now and be among the first to taste the difference that handcrafted quality makes.
-            </p>
-            <Link
-              href="/pre-sale"
-              className="inline-block px-8 py-4 bg-white text-sunset-600 font-semibold rounded-lg hover:bg-cream-50 transition shadow-lg"
-            >
-              Pre-Order Corn Tortillas
-            </Link>
+        {/* How it ships */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <div className="grid md:grid-cols-12 gap-8">
+            <div className="md:col-span-4">
+              <SectionHeader
+                eyebrow="Freshness First"
+                title="How it ships"
+                sub="From a Texas H-E-B to your door"
+              />
+            </div>
+            <div className="md:col-span-8">
+              <StepList
+                direction="vertical"
+                steps={[
+                  {
+                    title: 'Order by Monday night',
+                    description: 'Orders lock in for the weekly Tuesday shipment.',
+                  },
+                  {
+                    title: 'Packed fresh Tuesday morning',
+                    description: 'We buy your tortillas fresh and pack them for transit the same day.',
+                  },
+                  {
+                    title: 'At your door in 2–4 days',
+                    description: 'Shelf-stable in transit — 7-10 days fresh on the counter, months in the freezer.',
+                  },
+                ]}
+              />
+            </div>
           </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <CTABanner variant="order" />
         </section>
       </div>
     </>

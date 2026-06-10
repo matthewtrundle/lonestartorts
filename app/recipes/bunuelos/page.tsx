@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BulletIcon } from '@/components/ui/Icons';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Bunuelos Recipe - Crispy Mexican Cinnamon Sugar Treats',
@@ -232,15 +233,8 @@ export default function BunuelosRecipe() {
           </div>
         </section>
 
-        <section className="bg-rust-600 text-cream-50 py-16">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">More Mexican Dessert Ideas</h2>
-            <p className="text-xl mb-8 text-cream-100">Try our other sweet tortilla recipes</p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/recipes" className="bg-cream-50 hover:bg-cream-100 text-charcoal-950 px-8 py-3 rounded-lg font-semibold transition-colors">Browse All Recipes</Link>
-              <Link href="/shop" className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-rust-600 text-cream-50 px-8 py-3 rounded-lg font-semibold transition-colors">Shop Tortillas</Link>
-            </div>
-          </div>
+        <section className="max-w-4xl mx-auto px-6 py-12">
+          <CTABanner variant="recipe" />
         </section>
       </main>
     </>

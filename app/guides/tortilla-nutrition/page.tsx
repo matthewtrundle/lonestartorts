@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'How Many Corn Tortillas Can You Eat a Day? Nutrition Facts',
@@ -99,12 +100,11 @@ export default function TortillaNutritionPage() {
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <LastUpdated date="2025-10-25" />
 
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Facts</h2>
+          <QuickAnswer title="Quick Facts" className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Corn tortilla (6-inch):</strong> ~52 calories, 11g carbs, 1.4g protein, 1.5g fiber. <strong>Flour tortilla (8-inch):</strong> ~146 calories, 24g carbs, 4g protein, 1.6g fiber. Corn tortillas are lower in calories and naturally gluten-free. Both can fit into a healthy, balanced diet.
             </p>
-          </div>
+          </QuickAnswer>
 
           <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Nutritional Comparison</h2>

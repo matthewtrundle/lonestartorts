@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Texas BBQ & Tortillas Guide',
@@ -60,11 +61,11 @@ export default function BBQTortillasGuidePage() {
         <main className="container mx-auto px-6 py-12 max-w-4xl">
           {/* Introduction */}
           <section className="mb-12">
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-8 rounded-r-lg mb-8">
+            <QuickAnswer className="mb-8">
               <p className="text-lg text-charcoal-800 leading-relaxed">
                 <strong>Let's be direct:</strong> You cannot make proper Texas BBQ tacos, wraps, or burritos without authentic H-E-B® tortillas. This isn't marketing—it's physics, tradition, and the hard-won wisdom of Texas pitmasters who've learned this lesson the expensive way.
               </p>
-            </div>
+            </QuickAnswer>
 
             <p className="text-charcoal-800 leading-relaxed mb-4">
               Texas BBQ and tortillas share a border, a history, and a deep culinary connection that goes back generations. When German and Czech immigrants brought smoking techniques to Central Texas in the 1800s, Mexican and Tejano communities were already masters of masa and flour tortillas. The fusion was inevitable—and extraordinary.

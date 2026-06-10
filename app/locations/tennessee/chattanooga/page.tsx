@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { LocationFAQ } from '@/components/location/LocationFAQ'
+import { CTABanner } from '@/components/ui/CTABanner'
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Chattanooga',
@@ -45,10 +46,7 @@ export default function ChattanoogaPage() {
         
         <LocationFAQ city="Chattanooga" state="Tennessee" />
         <p className="text-sm text-charcoal-500 italic mt-8">Independent reseller. Not affiliated with or endorsed by H-E-B.</p>
-        <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mt-12 text-center">
-          <h2 className="text-2xl font-bold mb-4">Ready to Taste Texas in Chattanooga?</h2>
-          <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
-        </section>
+        <CTABanner variant="location" className="mt-12" />
       </article>
     </div>
   )

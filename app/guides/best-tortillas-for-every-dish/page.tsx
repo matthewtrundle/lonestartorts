@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { TacoIcon, BurritoIcon, CheeseIcon, FlameIcon, PepperIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Best Tortillas for Every Dish',
@@ -99,12 +100,11 @@ export default function BestTortillasPage() {
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <LastUpdated date="2025-10-25" />
 
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Reference</h2>
+          <QuickAnswer title="Quick Reference" className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Use corn tortillas for:</strong> Street tacos, enchiladas, tostadas, taquitos, authentic Mexican dishes. <strong>Use flour tortillas for:</strong> Burritos, quesadillas, fajitas, soft tacos, wraps, Tex-Mex dishes. <strong>Either works for:</strong> Breakfast tacos, chimichangas.
             </p>
-          </div>
+          </QuickAnswer>
 
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">The Definitive Guide</h2>

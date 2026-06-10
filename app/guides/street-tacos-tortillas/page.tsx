@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Best Tortillas for Street Tacos',
@@ -180,12 +181,11 @@ export default function StreetTacosTortillasPage() {
               Corn tortillas provide the perfect base that doesn&apos;t compete with the main attraction: the meat. A quality flour tortilla has its place (burritos, quesadillas, Northern Mexican cuisine), but for street tacos, corn is king.
             </p>
 
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg my-8">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-2">Pro Tip: The Double-Stack Technique</h3>
+            <QuickAnswer title="Pro Tip: The Double-Stack Technique" className="my-8">
               <p className="text-charcoal-700">
                 Always use two tortillas per taco. Heat them together on a dry griddle for 30-45 seconds per side. The bottom tortilla catches any drips while the top stays intact. This is how every authentic taqueria serves their tacos.
               </p>
-            </div>
+            </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
               How to Warm Street Taco Tortillas

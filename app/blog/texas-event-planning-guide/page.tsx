@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { PageViewTracker } from '@/components/analytics/PageViewTracker';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'BBQ Event Planning: Taco Bars & Catering',
@@ -434,28 +435,7 @@ export default function TexasEventPlanningGuidePage() {
               </div>
             </section>
 
-            <section className="mb-10">
-              <div className="bg-charcoal-950 text-cream-50 p-8 rounded-lg">
-                <h3 className="text-2xl font-bold mb-4">Ready to Plan Your Event?</h3>
-                <p className="text-cream-200 mb-6">
-                  Get authentic H-E-B® tortillas delivered for your next event. Whether you&apos;re feeding 10 or 100, we&apos;ve got the quality tortillas that make BBQ events memorable.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    href="/shop"
-                    className="bg-sunset-500 hover:bg-sunset-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Shop for Events
-                  </Link>
-                  <Link
-                    href="/blog/bbq-meets-tortillas"
-                    className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-6 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    BBQ & Tortillas Guide
-                  </Link>
-                </div>
-              </div>
-            </section>
+            <CTABanner variant="order" className="mb-10" />
 
             <section className="mb-10">
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Related Guides</h2>

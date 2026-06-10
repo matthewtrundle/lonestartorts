@@ -7,6 +7,7 @@ import { TacoIcon, BurritoIcon, CheeseIcon, BulletIcon } from '@/components/ui/I
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   title: 'Tortilla Size Guide',
@@ -100,12 +101,11 @@ export default function TortillaSizesPage() {
         <article className="container mx-auto px-6 py-12 max-w-4xl">
           <LastUpdated date="2025-10-25" />
 
-          <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Reference</h2>
+          <QuickAnswer title="Quick Reference" className="mb-8">
             <p className="text-lg text-charcoal-800">
               <strong>Tacos:</strong> 6-inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Soft tacos/Wraps:</strong> 8-inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Quesadillas:</strong> 8-10 inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Burritos:</strong> 10-12 inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Fajitas:</strong> 8-inch <BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <strong>Enchiladas:</strong> 6-8 inch
             </p>
-          </div>
+          </QuickAnswer>
 
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Complete Size Breakdown</h2>

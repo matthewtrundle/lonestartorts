@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GuideCard } from '@/components/GuideCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
 
 export const metadata: Metadata = {
   alternates: {
@@ -286,10 +287,7 @@ export default function GuidesPage() {
         <main className="container mx-auto px-6 py-12 md:py-16 max-w-6xl">
           {/* Introduction */}
           <section className="mb-12">
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg">
-              <h2 className="text-2xl font-bold text-charcoal-950 mb-3">
-                Why Proper Tortilla Care Matters
-              </h2>
+            <QuickAnswer title="Why Proper Tortilla Care Matters">
               <p className="text-lg text-charcoal-800 leading-relaxed">
                 Quality tortillas deserve proper care. Whether you're storing authentic{' '}
                 <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
@@ -301,7 +299,7 @@ export default function GuidesPage() {
                 </Link>
                 , these guides will help you maintain their freshness, texture, and authentic taste for weeks.
               </p>
-            </div>
+            </QuickAnswer>
           </section>
 
           {/* Guides Grid */}
