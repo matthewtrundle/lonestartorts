@@ -148,11 +148,8 @@ export default function HookEmTortillasPage() {
 
           {/* Basketball pattern background */}
           <div className="absolute inset-0 opacity-15">
-            <div className="absolute top-1 left-[5%] text-4xl animate-bounce" style={{ animationDelay: '0s', animationDuration: '2s' }}>🏀</div>
-            <div className="absolute top-2 left-[25%] text-2xl animate-bounce" style={{ animationDelay: '0.3s', animationDuration: '2.5s' }}>🏀</div>
-            <div className="absolute bottom-1 right-[10%] text-3xl animate-bounce" style={{ animationDelay: '0.6s', animationDuration: '2.2s' }}>🏀</div>
-            <div className="absolute top-1/2 right-[30%] text-2xl animate-bounce" style={{ animationDelay: '0.9s', animationDuration: '2.8s' }}>🏀</div>
-            <div className="absolute bottom-2 left-[40%] text-xl animate-bounce" style={{ animationDelay: '1.2s', animationDuration: '2.3s' }}>🏀</div>
+            <div aria-hidden="true" className="absolute top-1 left-[5%] text-4xl animate-bounce" style={{ animationDelay: '0s', animationDuration: '2s' }}>🏀</div>
+            <div aria-hidden="true" className="absolute bottom-1 right-[10%] text-3xl animate-bounce" style={{ animationDelay: '0.6s', animationDuration: '2.2s' }}>🏀</div>
           </div>
 
           <div className="container mx-auto px-4 py-5 md:py-6 relative z-10">

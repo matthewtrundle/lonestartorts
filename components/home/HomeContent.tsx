@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
+import { Check } from 'lucide-react'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { trackVideoPlay } from '@/lib/analytics'
 import { useLanguage } from '@/lib/language-context'
@@ -416,19 +417,19 @@ export default function HomeContent() {
                   <h3 className="text-2xl font-bold text-charcoal-950 mb-4">{t('about.whyChoose')}</h3>
                   <ul className="space-y-3 text-charcoal-700">
                     <li className="flex items-start gap-3">
-                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.genuine.title')}</strong> {t('about.benefits.genuine.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.nationwide.title')}</strong> {t('about.benefits.nationwide.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.shelfStable.title')}</strong> {t('about.benefits.shelfStable.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-sunset-500 text-xl mt-1">✓</span>
+                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.authentic.title')}</strong> {t('about.benefits.authentic.text')}</span>
                     </li>
                   </ul>
@@ -482,14 +483,8 @@ export default function HomeContent() {
           </div>
         </section>
 
-        {/* Magazine Typography Section */}
+        {/* Magazine Typography Section — Editorial Offset */}
         <section className="relative py-20 bg-gradient-to-b from-masa-50 to-cream-100 overflow-hidden">
-          {/* Background gradient - removed video for performance */}
-          <div className="absolute inset-0 bg-gradient-to-br from-masa-100/50 via-cream-100/30 to-sunset-100/20 opacity-60" />
-
-          {/* Overlay for better readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-masa-50/80 to-cream-100/90" />
-
           <div className="container mx-auto px-8 relative z-10">
             <div className="grid lg:grid-cols-12 gap-12 items-center min-h-[80vh]">
               {/* Left Column - Large Typography */}
@@ -513,7 +508,7 @@ export default function HomeContent() {
               {/* Right Column - Editorial Text */}
               <div className="lg:col-span-5 space-y-6 slide-right">
                 <div className="flex items-center gap-4">
-                  <span className="text-sunset-500 text-6xl">✦</span>
+                  <span aria-hidden="true" className="block h-px w-12 bg-sunset-500" />
                   <div>
                     <p className="text-sm font-medium tracking-mega uppercase text-masa-700">Est. 2020</p>
                     <p className="text-2xl font-display">Texas Excellence</p>
@@ -602,9 +597,7 @@ export default function HomeContent() {
 
                     {/* Decorative element instead of button */}
                     <div className="flex items-center justify-center gap-4 mt-8">
-                      <span className="inline-block w-16 h-px bg-gradient-to-r from-transparent to-sunset-400" />
-                      <span className="text-sunset-400 text-2xl">✦</span>
-                      <span className="inline-block w-16 h-px bg-gradient-to-l from-transparent to-sunset-400" />
+                      <span className="inline-block w-32 h-px bg-gradient-to-r from-transparent via-sunset-400 to-transparent" />
                     </div>
                   </div>
                 </div>

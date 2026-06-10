@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ProductGrid } from '@/components/shop/ProductGrid';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Shop Texas Tortillas',
@@ -145,31 +146,42 @@ export default function ShopPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-5">
-        {/* Section Header - Compact on mobile */}
-        <div className="text-center mb-4 md:mb-5">
-          <h2 className="text-xl md:text-3xl font-bold text-charcoal-950 mb-1">Shop Our Tortillas</h2>
-          <p className="text-sm md:text-base text-gray-600">FREE shipping on orders $80+</p>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+        {/* Section Header — left-aligned editorial */}
+        <SectionHeader
+          eyebrow="The Lineup"
+          title="Shop Our Tortillas"
+          sub="FREE shipping on orders $80+"
+          className="mb-6 md:mb-8"
+        />
 
         {/* Bakery Fresh Collection */}
-        <div className="mb-10">
-          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
-          <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
+        <div className="mb-12">
+          <div className="flex items-baseline gap-3 mb-1">
+            <h3 className="font-display text-2xl font-bold text-charcoal-950">Bakery Fresh Collection</h3>
+            <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
+          </div>
+          <p className="text-sm text-charcoal-600 mb-4">Handcrafted daily. No preservatives.</p>
           <ProductGrid products={bakeryProducts} />
         </div>
 
         {/* Pantry Staples */}
-        <div className="mb-10">
-          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
-          <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
+        <div className="mb-12">
+          <div className="flex items-baseline gap-3 mb-1">
+            <h3 className="font-display text-2xl font-bold text-charcoal-950">Pantry Staples</h3>
+            <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
+          </div>
+          <p className="text-sm text-charcoal-600 mb-4">Shelf-stable Texas favorites</p>
           <ProductGrid products={pantryProducts} cols={4} />
         </div>
 
         {/* Texas-Born Favorites */}
-        <div className="mb-10">
-          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
-          <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
+        <div className="mb-12">
+          <div className="flex items-baseline gap-3 mb-1">
+            <h3 className="font-display text-2xl font-bold text-charcoal-950">Texas-Born Favorites</h3>
+            <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
+          </div>
+          <p className="text-sm text-charcoal-600 mb-4">Premium brands from the Lone Star State</p>
           <ProductGrid products={texasBrandsProducts} />
         </div>
       </div>
@@ -250,7 +262,7 @@ export default function ShopPage() {
             Shop Other H-E-B Products
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
-          <span className="hidden sm:block text-gray-300">|</span>
+          <span className="hidden sm:block text-charcoal-300">|</span>
           <Link
             href="/wholesale"
             className="inline-flex items-center gap-2 text-charcoal-700 hover:text-sunset-600 font-medium transition-colors group"
@@ -261,7 +273,7 @@ export default function ShopPage() {
         </div>
 
         {/* Contact - Compact */}
-        <div className="mt-8 text-center text-sm text-gray-500">
+        <div className="mt-8 text-center text-sm text-charcoal-500">
           Questions? <a href="tel:+15128946823" className="text-sunset-600 hover:underline">(512) 894-6823</a>
           {' \u2022 '}
           <a href="mailto:howdy@lonestartortillas.com" className="text-sunset-600 hover:underline">howdy@lonestartortillas.com</a>
