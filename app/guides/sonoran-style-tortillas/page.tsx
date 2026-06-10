@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Sonoran Style Tortillas Guide',
@@ -273,16 +274,7 @@ export default function SonoranStyleTortillasPage() {
           </p>
 
           {/* CTA Section */}
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mt-12 text-center">
-            <h2 className="text-2xl font-bold mb-4">Try Authentic Texas Flour Tortillas</h2>
-            <p className="text-cream-200 mb-6">Our H-E-B flour tortillas bring authentic Texas taste with the flexibility you need for burritos and wraps.</p>
-            <Link
-              href="/shop"
-              className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block"
-            >
-              Shop Flour Tortillas
-            </Link>
-          </section>
+          <CTABanner variant="guide" className="mt-12" />
 
           {/* Related Links */}
           <section className="mt-12">

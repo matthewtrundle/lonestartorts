@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'How Many Corn Tortillas Can You Eat a Day? Nutrition Facts',
@@ -233,15 +234,7 @@ export default function TortillaNutritionPage() {
             </div>
           </section>
 
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Choose Quality Tortillas</h2>
-            <p className="text-cream-100 mb-6">
-              Start with authentic, quality tortillas for the best nutrition and taste. Our H-E-B® tortillas use simple, quality ingredients. We offer <Link href="/shipping" className="text-sunset-400 hover:text-sunset-300 underline">convenient shipping</Link> across Texas.
-            </p>
-            <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-              Shop Tortillas
-            </Link>
-          </section>
+          <CTABanner variant="guide" />
         </article>
       </div>
     </>

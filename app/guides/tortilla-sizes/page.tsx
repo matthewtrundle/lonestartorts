@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { TacoIcon, BurritoIcon, CheeseIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
 import { RelatedProducts } from '@/components/guides/RelatedProducts';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Tortilla Size Guide',
@@ -271,15 +272,7 @@ export default function TortillaSizesPage() {
             </div>
           </section>
 
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Find the Right Size</h2>
-            <p className="text-cream-100 mb-6">
-              Shop our selection of <Link href="/products/corn-tortillas" className="text-sunset-400 hover:underline">corn</Link> and <Link href="/products/flour-tortillas" className="text-sunset-400 hover:underline">flour tortillas</Link> in all the standard sizes.
-            </p>
-            <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-              Shop Tortillas
-            </Link>
-          </section>
+          <CTABanner variant="guide" />
         </article>
       </div>
     </>

@@ -168,22 +168,11 @@ const config: Config = {
         '102': '1.02',
       },
       animation: {
-        // Sophisticated animations
-        'fade-in': 'fadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
-        'fade-up': 'fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1)',
-        'scale-in': 'scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
-        'slide-up': 'slideUp 1s cubic-bezier(0.22, 1, 0.36, 1)',
-        'slide-down': 'slideDown 1s cubic-bezier(0.22, 1, 0.36, 1)',
-        'slide-left': 'slideLeft 1s cubic-bezier(0.22, 1, 0.36, 1)',
+        // One entrance language (see DESIGN.md Motion): fade + rise, premium ease
+        'fade-in': 'fadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+        'fade-up': 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+        'scale-in': 'scaleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
         'slide-right': 'slideRight 1s cubic-bezier(0.22, 1, 0.36, 1)',
-        'rotate-in': 'rotateIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
-        'blur-in': 'blurIn 1.5s cubic-bezier(0.22, 1, 0.36, 1)',
-        'grain': 'grain 8s steps(10) infinite',
-        'shimmer': 'shimmer 3s linear infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'pulse-scale': 'pulseScale 2s ease-in-out infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         fadeIn: {
@@ -193,7 +182,7 @@ const config: Config = {
         fadeUp: {
           '0%': {
             opacity: '0',
-            transform: 'translateY(40px)',
+            transform: 'translateY(12px)',
           },
           '100%': {
             opacity: '1',
@@ -210,32 +199,6 @@ const config: Config = {
             transform: 'scale(1)',
           },
         },
-        slideUp: {
-          '0%': {
-            transform: 'translateY(100%)',
-          },
-          '100%': {
-            transform: 'translateY(0)',
-          },
-        },
-        slideDown: {
-          '0%': {
-            transform: 'translateY(-100%)',
-          },
-          '100%': {
-            transform: 'translateY(0)',
-          },
-        },
-        slideLeft: {
-          '0%': {
-            transform: 'translateX(100%)',
-            opacity: '0',
-          },
-          '100%': {
-            transform: 'translateX(0)',
-            opacity: '1',
-          },
-        },
         slideRight: {
           '0%': {
             transform: 'translateX(-100%)',
@@ -244,66 +207,6 @@ const config: Config = {
           '100%': {
             transform: 'translateX(0)',
             opacity: '1',
-          },
-        },
-        rotateIn: {
-          '0%': {
-            transform: 'rotate(-180deg) scale(0.5)',
-            opacity: '0',
-          },
-          '100%': {
-            transform: 'rotate(0) scale(1)',
-            opacity: '1',
-          },
-        },
-        blurIn: {
-          '0%': {
-            filter: 'blur(20px)',
-            opacity: '0',
-          },
-          '100%': {
-            filter: 'blur(0)',
-            opacity: '1',
-          },
-        },
-        grain: {
-          '0%, 100%': { transform: 'translate(0, 0)' },
-          '10%': { transform: 'translate(-5%, -10%)' },
-          '20%': { transform: 'translate(-15%, 5%)' },
-          '30%': { transform: 'translate(7%, -25%)' },
-          '40%': { transform: 'translate(-5%, 25%)' },
-          '50%': { transform: 'translate(-15%, 10%)' },
-          '60%': { transform: 'translate(15%, 0%)' },
-          '70%': { transform: 'translate(0%, 15%)' },
-          '80%': { transform: 'translate(3%, 35%)' },
-          '90%': { transform: 'translate(-10%, 10%)' },
-        },
-        shimmer: {
-          '0%': {
-            backgroundPosition: '-1000px 0',
-          },
-          '100%': {
-            backgroundPosition: '1000px 0',
-          },
-        },
-        float: {
-          '0%, 100%': {
-            transform: 'translateY(0)',
-          },
-          '50%': {
-            transform: 'translateY(-20px)',
-          },
-        },
-        pulseScale: {
-          '0%, 100%': { transform: 'scale(0.9)' },
-          '50%': { transform: 'scale(1.05)' },
-        },
-        glow: {
-          '0%': {
-            boxShadow: '0 0 5px rgba(241, 90, 14, 0.5), 0 0 20px rgba(241, 90, 14, 0.3)',
-          },
-          '100%': {
-            boxShadow: '0 0 20px rgba(241, 90, 14, 0.8), 0 0 40px rgba(241, 90, 14, 0.5)',
           },
         },
       },

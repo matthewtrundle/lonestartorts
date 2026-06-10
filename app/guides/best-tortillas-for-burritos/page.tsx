@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { TacoIcon, BulletIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Best Tortillas for Burritos Guide',
@@ -316,16 +317,7 @@ export default function BestTortillasForBurritosPage() {
           </p>
 
           {/* CTA Section */}
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mt-12 text-center">
-            <h2 className="text-2xl font-bold mb-4">Get Burrito-Ready Flour Tortillas</h2>
-            <p className="text-cream-200 mb-6">Our H-E-B flour tortillas are perfect for rolling restaurant-quality burritos at home.</p>
-            <Link
-              href="/shop"
-              className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block"
-            >
-              Shop Flour Tortillas
-            </Link>
-          </section>
+          <CTABanner variant="guide" className="mt-12" />
 
           {/* Related Links */}
           <section className="mt-12">

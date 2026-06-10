@@ -31,11 +31,6 @@ const ScrollAnimations = dynamic(
   { ssr: false }
 )
 
-const HeroInteractions = dynamic(
-  () => import('@/components/HeroInteractions').then(mod => ({ default: mod.HeroInteractions })),
-  { ssr: false }
-)
-
 export default function HomeContent() {
   const { t } = useLanguage();
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -147,36 +142,13 @@ export default function HomeContent() {
       <DisclaimerBanner />
 
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
-        {/* Background Music Player - Removed for now */}
-        {/* <BackgroundMusic /> */}
-
-        {/* Hero Interactions Handler */}
-        <HeroInteractions />
-        {/* Artistic background gradients */}
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-radial from-sunset-300/20 to-transparent blur-3xl" />
-          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-radial from-masa-400/20 to-transparent blur-3xl" />
-        </div>
-
-        {/* Floating Logo removed - main header logo now scales on scroll instead */}
-
         {/* Hero Section with Editorial Design */}
-        <section ref={heroSectionRef} className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden spotlight" id="hero-section">
-          {/* Multi-layer Parallax Background System */}
+        <section ref={heroSectionRef} className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden" id="hero-section">
+          {/* Hero background: base wash + lazy video with one legibility scrim */}
           <div className="absolute inset-0 hero-background-system">
-            {/* Layer 1: Deep background with texture */}
-            <div className="absolute inset-0 parallax-layer" data-speed="0.1">
-              <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-100/80 to-masa-50" />
-              <div className="absolute inset-0 premium-grain-texture" />
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-100/80 to-masa-50" />
 
-            {/* Layer 2: Subtle atmospheric gradient */}
-            <div className="absolute inset-0">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-sunset-200/15 via-transparent to-transparent blur-[100px]" />
-            </div>
-
-            {/* Layer 3: Background Video - Lazy loaded */}
-            <div className="absolute inset-0 parallax-layer" data-speed="0.3" data-rotation="2">
+            <div className="absolute inset-0 parallax-layer" data-speed="0.3">
               {/* Background Video - source mounts only when the hero is in
                   view and prefers-reduced-motion is off; the poster is the
                   LCP visual until then */}
@@ -195,16 +167,10 @@ export default function HomeContent() {
                 )}
               </video>
 
-              {/* Overlay gradients for better text readability */}
+              {/* Single legibility scrim */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream-50/40 to-cream-50/95" />
-              <div className="absolute inset-0 bg-gradient-to-t from-cream-50/50 via-transparent to-transparent" />
-              <div className="absolute inset-0 backdrop-blur-[0.5px]" />
             </div>
-
-            {/* Light rays removed for performance */}
           </div>
-
-          {/* Decorative elements removed for cleaner hero */}
 
           {/* Hero Content */}
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-40">
@@ -220,7 +186,7 @@ export default function HomeContent() {
                 </div>
 
                 {/* Main Title - MASSIVE ARTISTIC IMPACT */}
-                <div className="mb-8 relative magnetic-text" data-magnetic-strength="20">
+                <div className="mb-8 relative">
                   {/* Main Hero Text - SEO-Optimized H1 (visually styled) */}
                   <h1 className="w-full">
                     {/* Visual "LONESTAR" - Part of H1 */}
@@ -237,14 +203,10 @@ export default function HomeContent() {
                     <span className="sr-only">- Authentic H-E-B® Tortillas Delivered Nationwide</span>
                   </h1>
 
-                  {/* Premium decorative elements */}
-                  <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[90%]">
-                    <div className="h-[2px] bg-gradient-to-r from-transparent via-sunset-500 to-transparent animate-shimmer-slow" />
-                    <div className="h-[1px] bg-gradient-to-r from-transparent via-masa-400 to-transparent mt-[4px] animate-shimmer-slow-reverse" />
+                  {/* Single understated divider */}
+                  <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[60%]">
+                    <div className="h-[2px] bg-gradient-to-r from-transparent via-sunset-500 to-transparent" />
                   </div>
-
-                  {/* Invisible interaction area for magnetic effect */}
-                  <div className="absolute inset-0 magnetic-area pointer-events-auto" />
                 </div>
 
                 {/* Divider with Badge */}
@@ -402,7 +364,7 @@ export default function HomeContent() {
                           }}
                         >
                           <div
-                            className="bg-cream-50/90 backdrop-blur rounded-full p-6 shadow-2xl animate-pulse-scale"
+                            className="bg-cream-50/90 backdrop-blur rounded-full p-6 shadow-large"
                           >
                             <svg className="w-12 h-12 text-charcoal-950 ml-1" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M8 5v14l11-7z"/>
@@ -574,7 +536,6 @@ export default function HomeContent() {
 
         {/* Product Showcase with Horizontal Scroll */}
         <section className="horizontal-scroll min-h-[80vh] relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10 pt-20">
-          <div className="absolute inset-0 animated-gradient opacity-10" />
 
           <div className="horizontal-wrapper flex items-center">
             {[
@@ -656,7 +617,6 @@ export default function HomeContent() {
         <section className="min-h-screen flex flex-col lg:flex-row">
           {/* Left Side - Quote */}
           <div className="lg:w-1/2 bg-masa-100 flex items-center justify-center p-16 lg:p-24 relative overflow-hidden">
-            <div className="absolute inset-0 noise-subtle" />
             <div className="relative z-10 slide-right">
               <span className="text-9xl font-display text-masa-300 leading-none">"</span>
               <h3 className="text-4xl lg:text-5xl font-display leading-tight mt-6 mb-8 text-charcoal-900">

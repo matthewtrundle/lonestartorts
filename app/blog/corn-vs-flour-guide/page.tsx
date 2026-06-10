@@ -5,6 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Corn vs Flour vs Specialty: The Complete Tortilla Guide',
@@ -78,14 +81,12 @@ export default function CornVsFlourGuidePage() {
           <LastUpdated date="2026-02-03" />
 
           <div className="prose prose-lg max-w-none">
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 mb-8 rounded-r-lg">
-              <p className="text-lg text-charcoal-800">
-                <strong>Quick Answer:</strong> Use corn tortillas for authentic street tacos and enchiladas. Use flour tortillas for burritos, quesadillas, and breakfast tacos. Use specialty blends like Mixla when you want the best of both worlds.
-              </p>
-            </div>
+            <QuickAnswer className="mb-8">
+              Use corn tortillas for authentic street tacos and enchiladas. Use flour tortillas for burritos, quesadillas, and breakfast tacos. Use specialty blends like Mixla when you want the best of both worlds.
+            </QuickAnswer>
 
             <section className="mb-10">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-4">The Great Tortilla Debate</h2>
+              <SectionHeader title="The Great Tortilla Debate" />
               <div className="text-charcoal-800 space-y-4">
                 <p>
                   Walk into any Texas taqueria and you&apos;ll face the eternal question: corn or flour? It&apos;s not just a matter of taste—it&apos;s about tradition, texture, and the perfect marriage between tortilla and filling.
@@ -97,7 +98,7 @@ export default function CornVsFlourGuidePage() {
             </section>
 
             <section className="mb-10">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Corn Tortillas: The Authentic Choice</h2>
+              <SectionHeader title="Corn Tortillas: The Authentic Choice" />
               <div className="text-charcoal-800 space-y-4">
                 <p>
                   Corn tortillas are the original, dating back over 10,000 years to ancient Mesoamerica. Made from nixtamalized corn (masa), they offer an earthy, slightly sweet flavor that&apos;s unmistakably authentic.
@@ -128,7 +129,7 @@ export default function CornVsFlourGuidePage() {
             </section>
 
             <section className="mb-10">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Flour Tortillas: The Tex-Mex Essential</h2>
+              <SectionHeader title="Flour Tortillas: The Tex-Mex Essential" />
               <div className="text-charcoal-800 space-y-4">
                 <p>
                   Flour tortillas emerged in northern Mexico where wheat was more available than corn. They became the foundation of Tex-Mex cuisine and remain the tortilla of choice for many Texas dishes.
@@ -163,7 +164,7 @@ export default function CornVsFlourGuidePage() {
             </section>
 
             <section className="mb-10">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Specialty Tortillas: The Best of Both Worlds</h2>
+              <SectionHeader title="Specialty Tortillas: The Best of Both Worlds" />
               <div className="text-charcoal-800 space-y-4">
                 <p>
                   Can&apos;t decide between corn and flour? Specialty blend tortillas offer unique characteristics that combine the best of both—or introduce entirely new flavors.
@@ -196,7 +197,7 @@ export default function CornVsFlourGuidePage() {
             </section>
 
             <section className="mb-10">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Quick Reference: Which Tortilla for What?</h2>
+              <SectionHeader title="Quick Reference: Which Tortilla for What?" />
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse text-charcoal-800">
                   <thead>
@@ -248,7 +249,7 @@ export default function CornVsFlourGuidePage() {
             </section>
 
             <section className="mb-10">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Heating Tips for Best Results</h2>
+              <SectionHeader title="Heating Tips for Best Results" />
               <div className="text-charcoal-800 space-y-4">
                 <p>
                   No matter which tortilla you choose, proper heating is essential. A cold tortilla—even the best one—will disappoint.
@@ -271,7 +272,7 @@ export default function CornVsFlourGuidePage() {
             </section>
 
             <section className="mb-10">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-4">The Bottom Line</h2>
+              <SectionHeader title="The Bottom Line" />
               <div className="text-charcoal-800 space-y-4">
                 <p>
                   There&apos;s no single &quot;best&quot; tortilla—only the best tortilla for what you&apos;re making. Keep both corn and flour on hand, and you&apos;ll always be ready for whatever you&apos;re craving.
@@ -282,18 +283,7 @@ export default function CornVsFlourGuidePage() {
               </div>
             </section>
 
-            <div className="bg-gradient-to-r from-rust-600 to-sunset-600 text-cream-50 rounded-xl p-8 text-center mt-12">
-              <h2 className="text-3xl font-bold mb-4">Ready to Taste the Difference?</h2>
-              <p className="text-xl mb-6 text-cream-100">
-                Shop authentic Texas tortillas with FREE shipping on orders $80+
-              </p>
-              <Link
-                href="/shop"
-                className="inline-block bg-cream-50 hover:bg-cream-100 text-charcoal-950 px-8 py-3 rounded-lg font-semibold transition-colors"
-              >
-                Shop Tortillas Now
-              </Link>
-            </div>
+            <CTABanner variant="order" tone="warm" className="mt-12" />
           </div>
         </article>
       </div>

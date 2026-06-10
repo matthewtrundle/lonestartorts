@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'How to Freeze & Defrost Tortillas | Sprouted, Corn, Flour Guide',
@@ -305,15 +306,7 @@ export default function HowToFreezeTortillasPage() {
             </div>
           </section>
 
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Buy Tortillas in Bulk & Freeze</h2>
-            <p className="text-cream-100 mb-6">
-              Stock up on authentic H-E-B® tortillas and freeze them for months of delicious meals. <Link href="/guides/how-to-store-tortillas" className="text-sunset-400 hover:underline">See our complete storage guide</Link> for more tips.
-            </p>
-            <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-              Shop Tortillas
-            </Link>
-          </section>
+          <CTABanner variant="guide" />
 
           {/* Related Recipes */}
           <section className="mt-8">

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PanIcon } from '@/components/ui/Icons';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Gluten-Free Tortillas Guide',
@@ -267,15 +268,7 @@ export default function GlutenFreeTortillasPage() {
             </div>
           </section>
 
-          <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Shop Certified Gluten-Free Tortillas</h2>
-            <p className="text-cream-100 mb-6">
-              Our <Link href="/products/corn-tortillas" className="text-sunset-400 hover:underline">authentic corn tortillas</Link> are made from 100% corn masa—naturally gluten-free and delicious.
-            </p>
-            <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-              Shop Tortillas
-            </Link>
-          </section>
+          <CTABanner variant="guide" />
         </article>
       </div>
     </>

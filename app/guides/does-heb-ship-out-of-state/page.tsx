@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Does H-E-B Ship Out of State? Yes — Here\'s How to Get H-E-B Tortillas Anywhere',
@@ -203,15 +204,7 @@ export default function DoesHebShipOutOfStatePage() {
           Independent reseller. Not affiliated with or endorsed by H-E-B®.
         </p>
 
-        <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mt-12 text-center">
-          <h2 className="text-2xl font-bold mb-4">Miss H-E-B tortillas? We&apos;ve got you.</h2>
-          <Link
-            href="/shop"
-            className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block"
-          >
-            Shop All Tortillas
-          </Link>
-        </section>
+        <CTABanner variant="guide" className="mt-12" />
       </article>
     </div>
   );

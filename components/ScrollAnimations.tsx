@@ -18,7 +18,6 @@ if (typeof window !== 'undefined') {
  */
 export function ScrollAnimations({ children }: { children?: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
-  const cursorRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
 
   useEffect(() => {
     // Check for reduced motion preference
@@ -54,33 +53,10 @@ export function ScrollAnimations({ children }: { children?: React.ReactNode }) {
 
     gsap.ticker.lagSmoothing(0)
 
-    // Track cursor for interactive effects - throttled with rAF
-    let mouseTicking = false
-    const handleMouseMove = (e: MouseEvent) => {
-      if (mouseTicking) return
-      mouseTicking = true
-      requestAnimationFrame(() => {
-        cursorRef.current = { x: e.clientX, y: e.clientY }
-
-        // Update CSS variables for spotlight effects
-        document.documentElement.style.setProperty('--mouse-x', `${(e.clientX / window.innerWidth) * 100}%`)
-        document.documentElement.style.setProperty('--mouse-y', `${(e.clientY / window.innerHeight) * 100}%`)
-        mouseTicking = false
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-
     // Set up ScrollTrigger defaults for consistent behavior
     ScrollTrigger.defaults({
       markers: false, // Set to true for debugging
       toggleActions: 'play pause resume reverse',
-    })
-
-    // Hero text animations with sophisticated timing
-    const heroTimeline = gsap.timeline({
-      defaults: {
-        ease: 'power3.out',
-      },
     })
 
     // Hero reveal sequence
@@ -421,41 +397,6 @@ export function ScrollAnimations({ children }: { children?: React.ReactNode }) {
       })
     }
 
-    // Magnetic hover effect for interactive elements
-    document.querySelectorAll('.magnetic-area').forEach((area: any) => {
-      const content = area.querySelector('.magnetic-content')
-
-      if (content) {
-        let magneticTicking = false
-        area.addEventListener('mousemove', (e: MouseEvent) => {
-          if (magneticTicking) return
-          magneticTicking = true
-          requestAnimationFrame(() => {
-            const rect = area.getBoundingClientRect()
-            const x = e.clientX - rect.left - rect.width / 2
-            const y = e.clientY - rect.top - rect.height / 2
-
-            gsap.to(content, {
-              x: x * 0.3,
-              y: y * 0.3,
-              duration: 0.4,
-              ease: 'power2.out',
-            })
-            magneticTicking = false
-          })
-        })
-
-        area.addEventListener('mouseleave', () => {
-          gsap.to(content, {
-            x: 0,
-            y: 0,
-            duration: 0.6,
-            ease: 'elastic.out(1, 0.3)',
-          })
-        })
-      }
-    })
-
     // Text split animations for dramatic reveals
     document.querySelectorAll('.split-text').forEach((element: any) => {
       const text = element.textContent
@@ -508,7 +449,6 @@ export function ScrollAnimations({ children }: { children?: React.ReactNode }) {
     return () => {
       lenis.destroy()
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-      window.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
 

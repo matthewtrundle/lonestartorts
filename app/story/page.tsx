@@ -26,7 +26,6 @@ export default function StoryPage() {
               {/* Layer 1: Deep background with texture */}
               <div className="absolute inset-0 parallax-layer" data-speed="0.1">
                 <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-100/80 to-masa-50" />
-                <div className="absolute inset-0 premium-grain-texture" />
               </div>
 
               {/* Layer 2: Atmospheric gradients */}
@@ -50,21 +49,10 @@ export default function StoryPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-cream-50/50 via-transparent to-transparent" />
                 <div className="absolute inset-0 backdrop-blur-[0.5px]" />
               </div>
-
-              {/* Layer 4: Animated light rays */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="light-ray light-ray-1" />
-                <div className="light-ray light-ray-2" />
-                <div className="light-ray light-ray-3" />
-              </div>
             </div>
 
             {/* Floating Decorative Elements */}
-            <div className="absolute inset-0 pointer-events-none hidden md:block">
-              <div className="particle particle-1" />
-              <div className="particle particle-2" />
-              <div className="particle particle-3" />
-              <div className="absolute top-[15%] left-[10%] float-element opacity-20">
+            <div className="absolute inset-0 pointer-events-none hidden md:block">              <div className="absolute top-[15%] left-[10%] float-element opacity-20">
                 <svg width="80" height="80" viewBox="0 0 100 100" className="text-sunset-300 rotate-slow">
                   <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="0.5" />
                 </svg>

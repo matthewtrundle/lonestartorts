@@ -4,6 +4,9 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { CTABanner } from '@/components/ui/CTABanner';
+import { QuickAnswer } from '@/components/ui/QuickAnswer';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Wedding Taco Bar Guide - How to Plan the Perfect Reception',
@@ -74,12 +77,9 @@ export default function WeddingTacoBarPage() {
           <LastUpdated date="2025-12-30" />
 
           {/* Quick Answer */}
-          <div className="bg-pink-50 border-l-4 border-pink-500 p-6 mb-8 rounded-r-lg">
-            <h2 className="text-xl font-bold text-charcoal-950 mb-3">Quick Answer</h2>
-            <p className="text-lg text-charcoal-800">
-              <strong>A wedding taco bar</strong> is a crowd-pleasing, budget-friendly reception option that accommodates all dietary needs. Plan 3-4 tacos per guest, offer 2-3 protein options, and present everything elegantly with proper chafing dishes and signage. Cost ranges from $8-35 per person depending on DIY vs catered service.
-            </p>
-          </div>
+          <QuickAnswer className="mb-8">
+            <strong>A wedding taco bar</strong> is a crowd-pleasing, budget-friendly reception option that accommodates all dietary needs. Plan 3-4 tacos per guest, offer 2-3 protein options, and present everything elegantly with proper chafing dishes and signage. Cost ranges from $8-35 per person depending on DIY vs catered service.
+          </QuickAnswer>
 
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-charcoal-700 leading-relaxed">
@@ -89,7 +89,7 @@ export default function WeddingTacoBarPage() {
 
           {/* Why Taco Bars Work */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-pink-500 pb-2">Why Couples Choose Wedding Taco Bars</h2>
+            <SectionHeader title="Why Couples Choose Wedding Taco Bars" />
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500">
@@ -120,7 +120,7 @@ export default function WeddingTacoBarPage() {
 
           {/* Quantities Calculator */}
           <section className="mb-12 bg-white p-8 rounded-xl shadow-lg">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Wedding Taco Bar Quantities</h2>
+            <SectionHeader title="Wedding Taco Bar Quantities" />
 
             <div className="overflow-x-auto mb-6">
               <table className="w-full bg-cream-50 border-collapse">
@@ -180,7 +180,7 @@ export default function WeddingTacoBarPage() {
 
           {/* Menu Ideas */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-pink-500 pb-2">Wedding Taco Bar Menu Ideas</h2>
+            <SectionHeader title="Wedding Taco Bar Menu Ideas" />
 
             <div className="grid md:grid-cols-3 gap-6 mb-6">
               <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
@@ -235,7 +235,7 @@ export default function WeddingTacoBarPage() {
 
           {/* Setup Guide */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-pink-500 pb-2">How to Set Up Your Wedding Taco Bar</h2>
+            <SectionHeader title="How to Set Up Your Wedding Taco Bar" />
 
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-md">
@@ -282,7 +282,7 @@ export default function WeddingTacoBarPage() {
 
           {/* Timeline */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-pink-500 pb-2">Wedding Day Taco Bar Timeline</h2>
+            <SectionHeader title="Wedding Day Taco Bar Timeline" />
 
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="space-y-4">
@@ -316,7 +316,7 @@ export default function WeddingTacoBarPage() {
 
           {/* Cost Breakdown */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-pink-500 pb-2">Wedding Taco Bar Cost Comparison</h2>
+            <SectionHeader title="Wedding Taco Bar Cost Comparison" />
 
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-green-50 p-6 rounded-lg border-2 border-green-200">
@@ -364,7 +364,7 @@ export default function WeddingTacoBarPage() {
 
           {/* Pro Tips */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-pink-500 pb-2">Pro Tips for Wedding Taco Bars</h2>
+            <SectionHeader title="Pro Tips for Wedding Taco Bars" />
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-masa-50 p-6 rounded-lg">
@@ -388,7 +388,7 @@ export default function WeddingTacoBarPage() {
 
           {/* FAQ */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Frequently Asked Questions</h2>
+            <SectionHeader title="Frequently Asked Questions" />
 
             <div className="space-y-4">
               <div className="bg-cream-100 p-6 rounded-lg">
@@ -409,15 +409,7 @@ export default function WeddingTacoBarPage() {
           </section>
 
           {/* CTA */}
-          <section className="bg-gradient-to-r from-pink-500 to-rust-600 text-cream-50 p-8 rounded-xl">
-            <h2 className="text-2xl font-bold mb-4">Plan Your Dream Wedding Taco Bar</h2>
-            <p className="text-cream-200 mb-6">Get authentic Texas tortillas delivered for your special day.</p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/shop" className="bg-cream-50 hover:bg-cream-100 text-charcoal-950 px-6 py-3 rounded-lg font-semibold transition-colors">Shop Tortillas</Link>
-              <Link href="/tools/party-calculator" className="border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-6 py-3 rounded-lg font-semibold transition-colors">Party Calculator</Link>
-              <Link href="/wholesale" className="border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-6 py-3 rounded-lg font-semibold transition-colors">Wholesale for Events</Link>
-            </div>
-          </section>
+          <CTABanner variant="guide" tone="warm" />
         </article>
       </div>
     </>
