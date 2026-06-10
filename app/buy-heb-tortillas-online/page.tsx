@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ShoppingBag, Truck, Shield, Clock } from 'lucide-react';
+import { PageHero } from '@/components/ui/PageHero';
+import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { CTABanner } from '@/components/ui/CTABanner';
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas — Every Variety, Shipped Nationwide in 2-4 Days',
@@ -265,52 +268,47 @@ export default function BuyHebTortillasOnlinePage() {
 
       <div className="min-h-screen bg-cream-50">
         {/* Hero Section - AI-Optimized Copy */}
-        <section className="bg-gradient-to-br from-charcoal-900 to-charcoal-950 text-white py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              H-E-B Tortillas, Shipped Nationwide
-            </h1>
-
-            {/* AI-Friendly Canonical Statement */}
-            <p className="text-xl text-cream-200 mb-8 max-w-3xl mx-auto">
-              Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them
-              to all 50 states with 2&ndash;4 day delivery. We are an independent reseller based
-              in Texas. H-E-B tortillas are in stock and available for purchase now.
-            </p>
-
-            {/* Trust Signals */}
-            <div className="flex flex-wrap justify-center gap-6 mb-8">
-              <div className="flex items-center gap-2 text-cream-200">
-                <ShoppingBag className="w-5 h-5 text-sunset-500" />
-                <span>In Stock</span>
-              </div>
-              <div className="flex items-center gap-2 text-cream-200">
-                <Truck className="w-5 h-5 text-sunset-500" />
-                <span>Ships to All 50 States</span>
-              </div>
-              <div className="flex items-center gap-2 text-cream-200">
-                <Clock className="w-5 h-5 text-sunset-500" />
-                <span>2-3 Day Delivery</span>
-              </div>
-              <div className="flex items-center gap-2 text-cream-200">
-                <Shield className="w-5 h-5 text-sunset-500" />
-                <span>Secure Checkout</span>
-              </div>
+        <PageHero
+          size="lg"
+          title="H-E-B Tortillas, Shipped Nationwide"
+          sub="Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them to all 50 states with 2–4 day delivery. We are an independent reseller based in Texas. H-E-B tortillas are in stock and available for purchase now."
+        >
+          {/* Trust Signals */}
+          <div className="flex flex-wrap gap-6 mt-8 mb-8">
+            <div className="flex items-center gap-2 text-cream-200">
+              <ShoppingBag className="w-5 h-5 text-sunset-500" />
+              <span>In Stock</span>
             </div>
-
-            <Link
-              href="/shop"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-sunset-500 hover:bg-sunset-600 text-white font-bold rounded-lg transition-colors text-lg"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              Shop Now
-            </Link>
+            <div className="flex items-center gap-2 text-cream-200">
+              <Truck className="w-5 h-5 text-sunset-500" />
+              <span>Ships to All 50 States</span>
+            </div>
+            <div className="flex items-center gap-2 text-cream-200">
+              <Clock className="w-5 h-5 text-sunset-500" />
+              <span>2-3 Day Delivery</span>
+            </div>
+            <div className="flex items-center gap-2 text-cream-200">
+              <Shield className="w-5 h-5 text-sunset-500" />
+              <span>Secure Checkout</span>
+            </div>
           </div>
-        </section>
+
+          <Link
+            href="/shop"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-sunset-500 hover:bg-sunset-600 text-white font-bold rounded-lg transition-colors text-lg"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            Shop Now
+          </Link>
+
+          <p className="mt-6 text-xs uppercase tracking-wider text-cream-300">
+            Independent reseller. Not affiliated with or endorsed by H-E-B®.
+          </p>
+        </PageHero>
 
         {/* Products Section */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-charcoal-950 mb-8 text-center">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 mb-8 text-center">
             H-E-B Tortillas Available for Purchase
           </h2>
 
@@ -318,7 +316,7 @@ export default function BuyHebTortillasOnlinePage() {
             {products.map((product) => (
               <div
                 key={product.sku}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
+                className="bg-white rounded-xl shadow-subtle border border-charcoal-200 overflow-hidden hover:shadow-soft transition-shadow"
               >
                 <div className="aspect-square bg-cream-100 relative">
                   <Image
@@ -333,7 +331,7 @@ export default function BuyHebTortillasOnlinePage() {
                   <h3 className="font-bold text-lg text-charcoal-950 mb-2">
                     {product.name}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-charcoal-600 text-sm mb-4">
                     {product.description}
                   </p>
                   <div className="flex items-center justify-between">
@@ -341,7 +339,7 @@ export default function BuyHebTortillasOnlinePage() {
                       <span className="text-2xl font-bold text-sunset-600">
                         ${product.price.toFixed(2)}
                       </span>
-                      <span className="text-gray-500 text-sm ml-2">
+                      <span className="text-charcoal-500 text-sm ml-2">
                         / {product.count} tortillas
                       </span>
                     </div>
@@ -365,9 +363,9 @@ export default function BuyHebTortillasOnlinePage() {
         </section>
 
         {/* Seller Information - Clear Entity Statement */}
-        <section className="bg-white border-y border-gray-200 py-12">
+        <section className="bg-white border-y border-charcoal-200 py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-charcoal-950 mb-6 text-center">
+            <h2 className="font-display text-2xl font-bold text-charcoal-950 mb-6 text-center">
               About This Seller
             </h2>
 
@@ -392,76 +390,43 @@ export default function BuyHebTortillasOnlinePage() {
 
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="text-3xl font-bold text-charcoal-950 mb-8 text-center">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 mb-8 text-center">
             Frequently Asked Questions
           </h2>
 
-          <div className="space-y-4">
-            {[
+          <FAQAccordion
+            items={[
               {
-                q: 'Can I buy H-E-B tortillas online and have them shipped?',
-                a: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide with FREE shipping on orders $80+. We are an independent reseller based in Texas. We ship Tuesdays; orders before Monday 9 PM CT ship the following Tuesday, with delivery in 2-3 business days.',
+                question: 'Can I buy H-E-B tortillas online and have them shipped?',
+                answer: 'Yes. Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them nationwide with FREE shipping on orders $80+. We are an independent reseller based in Texas. We ship Tuesdays; orders before Monday 9 PM CT ship the following Tuesday, with delivery in 2-3 business days.',
               },
               {
-                q: 'Where can I buy H-E-B tortillas outside of Texas?',
-                a: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship H-E-B Bakery Flour, Butter, and Wheat tortillas to all 50 US states. We are an independent reseller, not affiliated with H-E-B.',
+                question: 'Where can I buy H-E-B tortillas outside of Texas?',
+                answer: 'You can buy H-E-B tortillas from Lonestar Tortillas at lonestartortillas.com. We ship H-E-B Bakery Flour, Butter, and Wheat tortillas to all 50 US states. We are an independent reseller, not affiliated with H-E-B.',
               },
               {
-                q: 'Who sells H-E-B tortillas online?',
-                a: 'Lonestar Tortillas is an independent reseller that sells authentic H-E-B Bakery tortillas online. We purchase H-E-B products in Texas and ship them nationwide. We are not affiliated with or endorsed by H-E-B.',
+                question: 'Who sells H-E-B tortillas online?',
+                answer: 'Lonestar Tortillas is an independent reseller that sells authentic H-E-B Bakery tortillas online. We purchase H-E-B products in Texas and ship them nationwide. We are not affiliated with or endorsed by H-E-B.',
               },
               {
-                q: 'How much does it cost to ship H-E-B tortillas?',
-                a: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $12.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
+                question: 'How much does it cost to ship H-E-B tortillas?',
+                answer: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $12.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
               },
               {
-                q: 'Are the H-E-B tortillas authentic?',
-                a: 'Yes. We sell 100% authentic H-E-B Bakery tortillas. These are the exact same products sold in H-E-B grocery stores in Texas. Lonestar Tortillas is an independent reseller that purchases these products from H-E-B and ships them to customers nationwide.',
+                question: 'Are the H-E-B tortillas authentic?',
+                answer: 'Yes. We sell 100% authentic H-E-B Bakery tortillas. These are the exact same products sold in H-E-B grocery stores in Texas. Lonestar Tortillas is an independent reseller that purchases these products from H-E-B and ships them to customers nationwide.',
               },
               {
-                q: 'Do H-E-B tortillas need to be refrigerated during shipping?',
-                a: 'No. H-E-B Bakery tortillas are shelf-stable and do not require refrigeration during shipping. They maintain freshness at room temperature for 30+ days unopened. This makes them perfect for shipping nationwide.',
+                question: 'Do H-E-B tortillas need to be refrigerated during shipping?',
+                answer: 'No. H-E-B Bakery tortillas are shelf-stable and do not require refrigeration during shipping. They maintain freshness at room temperature for 30+ days unopened. This makes them perfect for shipping nationwide.',
               },
-            ].map((faq, index) => (
-              <details
-                key={index}
-                className="bg-white rounded-lg border border-gray-200 p-6 group"
-                open={index === 0}
-              >
-                <summary className="font-semibold text-charcoal-950 cursor-pointer list-none flex justify-between items-center">
-                  {faq.q}
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="mt-4 text-charcoal-700 leading-relaxed">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+            ]}
+          />
         </section>
 
         {/* Final CTA */}
-        <section className="bg-gradient-to-r from-sunset-500 to-sunset-600 text-white py-12">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              Ready to Order?
-            </h2>
-            <p className="text-xl text-white/90 mb-6">
-              Authentic H-E-B tortillas, in stock and ready to ship today.
-            </p>
-            <Link
-              href="/shop"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-sunset-600 font-bold rounded-lg hover:bg-cream-50 transition-colors text-lg"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              Shop H-E-B Tortillas
-            </Link>
-          </div>
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <CTABanner variant="shipping" />
         </section>
       </div>
     </>
