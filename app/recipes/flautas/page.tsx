@@ -92,6 +92,7 @@ export default function FlautasRecipe() {
               src="/images/recipes/flautas.webp"
               alt="Crispy Chicken Flautas"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

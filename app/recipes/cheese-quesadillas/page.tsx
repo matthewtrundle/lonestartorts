@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { CheeseIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/cheese-quesadillas',
+  },
   title: 'Classic Cheese Quesadillas Recipe',
   description: 'Learn how to make perfect cheese quesadillas with our easy recipe. Crispy outside, melted cheese inside. Ready in just 10 minutes with simple ingredients!',
   keywords: 'cheese quesadillas recipe, how to make quesadillas, easy quesadilla recipe, quick lunch recipe, quesadilla variations, melted cheese tortilla',
@@ -146,6 +149,7 @@ export default function CheeseQuesadillasRecipe() {
               src="/images/recipes/cheese-quesadillas.webp"
               alt="Golden crispy cheese quesadilla cut into wedges with melted cheese"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

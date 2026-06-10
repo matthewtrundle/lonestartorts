@@ -22,6 +22,7 @@ export function RestaurantHero({ headline, subhead, image, cta }: RestaurantHero
           src={image}
           alt={headline}
           fill
+          sizes="100vw"
           className="object-cover opacity-60"
           priority
         />

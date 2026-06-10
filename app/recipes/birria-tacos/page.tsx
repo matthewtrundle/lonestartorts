@@ -175,6 +175,7 @@ export default function BirriaRecipe() {
               src="/images/recipes/birria-tacos.webp"
               alt="Birria Tacos with Consomé"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

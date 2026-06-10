@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Check, Minus, Plus, Truck, Calendar, Shield, ArrowRight, ArrowLeft } from 'lucide-react';
-import { products } from '@/lib/products';
-import { formatPrice } from '@/lib/utils';
+import { Check, Minus, Plus, Truck, Calendar, Shield, ArrowRight, ArrowLeft, MapPin } from 'lucide-react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import AddressForm from '@/components/account/AddressForm';
+import { products } from '@/lib/products';
+import { formatPrice } from '@/lib/utils';
+import type { AddressFields } from '@/lib/address-validation';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -23,7 +25,16 @@ const frequencies = [
   { id: 'quarterly', label: 'Every 3 Months', description: 'Stock up and save on shipping' },
 ];
 
-type Step = 'products' | 'frequency' | 'account' | 'payment';
+const shippingDayLabels: Record<string, string> = {
+  '1st_tuesday': '1st Tuesday',
+  '2nd_tuesday': '2nd Tuesday',
+  '3rd_tuesday': '3rd Tuesday',
+  '4th_tuesday': '4th Tuesday',
+};
+
+type Step = 'products' | 'frequency' | 'address' | 'account' | 'payment';
+
+const RESTORABLE_STEPS: Step[] = ['products', 'frequency', 'address', 'account'];
 
 interface SelectedItem {
   sku: string;
@@ -33,12 +44,16 @@ interface SelectedItem {
   image: string;
 }
 
+const focusRing =
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2';
+
 export default function SubscribePage() {
   const router = useRouter();
   const [step, setStep] = useState<Step>('products');
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [frequency, setFrequency] = useState('monthly');
   const [shippingDay, setShippingDay] = useState('');
+  const [address, setAddress] = useState<AddressFields | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -57,7 +72,8 @@ export default function SubscribePage() {
         if (state.selectedItems?.length) setSelectedItems(state.selectedItems);
         if (state.frequency) setFrequency(state.frequency);
         if (state.shippingDay) setShippingDay(state.shippingDay);
-        if (state.step && state.step !== 'payment') setStep(state.step);
+        if (state.address) setAddress(state.address);
+        if (state.step && RESTORABLE_STEPS.includes(state.step)) setStep(state.step);
       }
     } catch {}
     // Check if already logged in
@@ -70,10 +86,10 @@ export default function SubscribePage() {
   useEffect(() => {
     if (selectedItems.length > 0) {
       sessionStorage.setItem('subscribe_state', JSON.stringify({
-        selectedItems, frequency, shippingDay, step,
+        selectedItems, frequency, shippingDay, address, step,
       }));
     }
-  }, [selectedItems, frequency, shippingDay, step]);
+  }, [selectedItems, frequency, shippingDay, address, step]);
 
   const addItem = (product: typeof subscribableProducts[0]) => {
     const existing = selectedItems.find(i => i.sku === product.sku);
@@ -102,10 +118,37 @@ export default function SubscribePage() {
   const subtotal = selectedItems.reduce((sum, i) => sum + i.quantity * i.unitPrice, 0);
   const tax = Math.round(subtotal * 0.0825);
   const total = subtotal + tax;
+  const frequencyLabel = frequencies.find(f => f.id === frequency)?.label ?? 'Monthly';
+
+  // Step indicator: account step only shows for guests
+  const stepFlow: Array<{ id: Step; label: string }> = [
+    { id: 'products', label: 'Choose Items' },
+    { id: 'frequency', label: 'Schedule' },
+    { id: 'address', label: 'Shipping' },
+    ...(isLoggedIn ? [] : [{ id: 'account' as Step, label: 'Account' }]),
+    { id: 'payment', label: 'Payment' },
+  ];
+  const currentStepIndex = Math.max(0, stepFlow.findIndex(s => s.id === step));
+
+  const handleAddressSubmit = async (fields: AddressFields) => {
+    setAddress(fields);
+    setError('');
+    if (isLoggedIn) {
+      await createSubscription(fields);
+    } else {
+      setStep('account');
+    }
+  };
 
   const handleAccountStep = async () => {
+    if (!address) {
+      setError('Please add your shipping address first.');
+      setStep('address');
+      return;
+    }
+
     if (isLoggedIn) {
-      await createSubscription();
+      await createSubscription(address);
       return;
     }
 
@@ -141,7 +184,7 @@ export default function SubscribePage() {
       }
 
       setIsLoggedIn(true);
-      await createSubscription();
+      await createSubscription(address);
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -149,11 +192,26 @@ export default function SubscribePage() {
     }
   };
 
-  const createSubscription = async () => {
+  const createSubscription = async (shippingAddress: AddressFields) => {
     setLoading(true);
     setError('');
 
     try {
+      // Save the shipping address first — fulfillment ships to this address.
+      // Blocks the subscription if the address is missing or invalid.
+      const addressRes = await fetch('/api/customer/address', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(shippingAddress),
+      });
+
+      if (!addressRes.ok) {
+        const addressData = await addressRes.json().catch(() => ({}));
+        setError(addressData.error || 'We could not save your shipping address. Please check it and try again.');
+        setStep('address');
+        return;
+      }
+
       const res = await fetch('/api/customer/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -183,6 +241,13 @@ export default function SubscribePage() {
     }
   };
 
+  const handlePaymentSuccess = () => {
+    try {
+      sessionStorage.removeItem('subscribe_state');
+    } catch {}
+    router.push('/account?subscribed=true');
+  };
+
   return (
     <div className="bg-cream-50 min-h-screen">
       {/* Hero */}
@@ -196,15 +261,15 @@ export default function SubscribePage() {
           </p>
           <div className="flex items-center justify-center gap-8 mt-8 text-sm">
             <div className="flex items-center gap-2">
-              <Truck className="w-5 h-5 text-sunset-500" />
+              <Truck className="w-5 h-5 text-sunset-500" aria-hidden="true" />
               Free Shipping
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-sunset-500" />
+              <Calendar className="w-5 h-5 text-sunset-500" aria-hidden="true" />
               Flexible Schedule
             </div>
             <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-sunset-500" />
+              <Shield className="w-5 h-5 text-sunset-500" aria-hidden="true" />
               Cancel Anytime
             </div>
           </div>
@@ -212,29 +277,36 @@ export default function SubscribePage() {
       </div>
 
       {/* Progress Steps */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
-        <div className="flex items-center justify-center gap-2 text-sm">
-          {(['products', 'frequency', 'account', 'payment'] as Step[]).map((s, i) => (
-            <div key={s} className="flex items-center gap-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                step === s ? 'bg-sunset-600 text-white' :
-                (['products', 'frequency', 'account', 'payment'].indexOf(step) > i) ? 'bg-green-500 text-white' :
-                'bg-charcoal-200 text-charcoal-500'
-              }`}>
-                {(['products', 'frequency', 'account', 'payment'].indexOf(step) > i) ? <Check className="w-4 h-4" /> : i + 1}
-              </div>
-              <span className={`hidden sm:inline ${step === s ? 'text-charcoal-950 font-medium' : 'text-charcoal-500'}`}>
-                {s === 'products' ? 'Choose Items' : s === 'frequency' ? 'Schedule' : s === 'account' ? 'Account' : 'Payment'}
-              </span>
-              {i < 3 && <div className="w-8 h-px bg-charcoal-300" />}
-            </div>
-          ))}
-        </div>
-      </div>
+      <nav aria-label="Subscription progress" className="max-w-4xl mx-auto px-4 py-6">
+        <ol className="flex items-center justify-center gap-2 text-sm">
+          {stepFlow.map((s, i) => {
+            const isDone = i < currentStepIndex;
+            const isCurrent = step === s.id;
+            return (
+              <li key={s.id} className="flex items-center gap-2" aria-current={isCurrent ? 'step' : undefined}>
+                <span
+                  aria-hidden="true"
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                    isCurrent ? 'bg-sunset-600 text-white' :
+                    isDone ? 'bg-green-500 text-white' :
+                    'bg-charcoal-200 text-charcoal-500'
+                  }`}
+                >
+                  {isDone ? <Check className="w-4 h-4" /> : i + 1}
+                </span>
+                <span className={`sr-only sm:not-sr-only ${isCurrent ? 'text-charcoal-950 font-medium' : 'text-charcoal-500'}`}>
+                  {s.label}
+                </span>
+                {i < stepFlow.length - 1 && <span aria-hidden="true" className="w-6 h-px bg-charcoal-300" />}
+              </li>
+            );
+          })}
+        </ol>
+      </nav>
 
       <div className="max-w-4xl mx-auto px-4 pb-16">
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+          <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
             {error}
           </div>
         )}
@@ -249,7 +321,7 @@ export default function SubscribePage() {
                 return (
                   <div key={product.sku} className={`bg-white rounded-xl p-4 border-2 transition-colors ${selected ? 'border-sunset-500' : 'border-transparent shadow-soft'}`}>
                     <div className="aspect-square relative mb-3 rounded-lg overflow-hidden bg-charcoal-50">
-                      <Image src={product.image} alt={product.name} fill className="object-cover" />
+                      <Image src={product.image} alt={product.name} fill sizes="(max-width: 640px) 50vw, 200px" className="object-cover" />
                     </div>
                     <h3 className="font-semibold text-charcoal-950 text-sm">{product.name}</h3>
                     {product.tortillaCount > 0 && (
@@ -259,18 +331,27 @@ export default function SubscribePage() {
                       <span className="font-bold text-charcoal-950">{formatPrice(product.price)}</span>
                       {selected ? (
                         <div className="flex items-center gap-2">
-                          <button onClick={() => updateQuantity(product.sku, -1)} className="w-8 h-8 rounded-full bg-charcoal-100 flex items-center justify-center hover:bg-charcoal-200">
-                            <Minus className="w-4 h-4" />
+                          <button
+                            onClick={() => updateQuantity(product.sku, -1)}
+                            aria-label={`Decrease ${product.name} quantity`}
+                            className={`w-8 h-8 rounded-full bg-charcoal-100 flex items-center justify-center hover:bg-charcoal-200 ${focusRing}`}
+                          >
+                            <Minus className="w-4 h-4" aria-hidden="true" />
                           </button>
-                          <span className="font-bold w-6 text-center">{selected.quantity}</span>
-                          <button onClick={() => updateQuantity(product.sku, 1)} className="w-8 h-8 rounded-full bg-sunset-100 flex items-center justify-center hover:bg-sunset-200 text-sunset-700">
-                            <Plus className="w-4 h-4" />
+                          <span className="font-bold w-6 text-center" aria-live="polite">{selected.quantity}</span>
+                          <button
+                            onClick={() => updateQuantity(product.sku, 1)}
+                            aria-label={`Increase ${product.name} quantity`}
+                            className={`w-8 h-8 rounded-full bg-sunset-100 flex items-center justify-center hover:bg-sunset-200 text-sunset-700 ${focusRing}`}
+                          >
+                            <Plus className="w-4 h-4" aria-hidden="true" />
                           </button>
                         </div>
                       ) : (
                         <button
                           onClick={() => addItem(product)}
-                          className="px-3 py-1.5 bg-sunset-600 text-white rounded-lg text-sm font-medium hover:bg-sunset-700"
+                          aria-label={`Add ${product.name}`}
+                          className={`px-3 py-1.5 bg-sunset-600 text-white rounded-lg text-sm font-medium hover:bg-sunset-700 ${focusRing}`}
                         >
                           Add
                         </button>
@@ -295,16 +376,28 @@ export default function SubscribePage() {
                           <span className="text-sm font-bold">{formatPrice(product.price)}</span>
                           {selected ? (
                             <div className="flex items-center gap-1">
-                              <button onClick={() => updateQuantity(product.sku, -1)} className="w-6 h-6 rounded-full bg-charcoal-100 flex items-center justify-center text-xs">
-                                <Minus className="w-3 h-3" />
+                              <button
+                                onClick={() => updateQuantity(product.sku, -1)}
+                                aria-label={`Decrease ${product.name} quantity`}
+                                className={`w-6 h-6 rounded-full bg-charcoal-100 flex items-center justify-center text-xs ${focusRing}`}
+                              >
+                                <Minus className="w-3 h-3" aria-hidden="true" />
                               </button>
-                              <span className="text-sm font-bold w-4 text-center">{selected.quantity}</span>
-                              <button onClick={() => updateQuantity(product.sku, 1)} className="w-6 h-6 rounded-full bg-sunset-100 flex items-center justify-center text-xs text-sunset-700">
-                                <Plus className="w-3 h-3" />
+                              <span className="text-sm font-bold w-4 text-center" aria-live="polite">{selected.quantity}</span>
+                              <button
+                                onClick={() => updateQuantity(product.sku, 1)}
+                                aria-label={`Increase ${product.name} quantity`}
+                                className={`w-6 h-6 rounded-full bg-sunset-100 flex items-center justify-center text-xs text-sunset-700 ${focusRing}`}
+                              >
+                                <Plus className="w-3 h-3" aria-hidden="true" />
                               </button>
                             </div>
                           ) : (
-                            <button onClick={() => addItem(product)} className="text-xs px-2 py-1 bg-sunset-600 text-white rounded font-medium hover:bg-sunset-700">
+                            <button
+                              onClick={() => addItem(product)}
+                              aria-label={`Add ${product.name}`}
+                              className={`text-xs px-2 py-1 bg-sunset-600 text-white rounded font-medium hover:bg-sunset-700 ${focusRing}`}
+                            >
                               Add
                             </button>
                           )}
@@ -326,9 +419,9 @@ export default function SubscribePage() {
                   </div>
                   <button
                     onClick={() => setStep('frequency')}
-                    className="px-6 py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 flex items-center gap-2"
+                    className={`px-6 py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 flex items-center gap-2 ${focusRing}`}
                   >
-                    Choose Schedule <ArrowRight className="w-5 h-5" />
+                    Choose Schedule <ArrowRight className="w-5 h-5" aria-hidden="true" />
                   </button>
                 </div>
               </div>
@@ -339,16 +432,18 @@ export default function SubscribePage() {
         {/* Step 2: Frequency Selection */}
         {step === 'frequency' && (
           <div>
-            <button onClick={() => setStep('products')} className="flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6">
-              <ArrowLeft className="w-4 h-4" /> Back to products
+            <button onClick={() => setStep('products')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to products
             </button>
             <h2 className="text-2xl font-bold text-charcoal-950 mb-6">How Often?</h2>
-            <div className="space-y-3 max-w-lg">
+            <div className="space-y-3 max-w-lg" role="radiogroup" aria-label="Delivery frequency">
               {frequencies.map(freq => (
                 <button
                   key={freq.id}
                   onClick={() => setFrequency(freq.id)}
-                  className={`w-full text-left p-5 rounded-xl border-2 transition-colors ${
+                  role="radio"
+                  aria-checked={frequency === freq.id}
+                  className={`w-full text-left p-5 rounded-xl border-2 transition-colors ${focusRing} ${
                     frequency === freq.id ? 'border-sunset-500 bg-sunset-50' : 'border-charcoal-200 bg-white hover:border-charcoal-300'
                   }`}
                 >
@@ -357,7 +452,7 @@ export default function SubscribePage() {
                       <p className="font-semibold text-charcoal-950">{freq.label}</p>
                       <p className="text-sm text-charcoal-500 mt-0.5">{freq.description}</p>
                     </div>
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                    <div aria-hidden="true" className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
                       frequency === freq.id ? 'border-sunset-500 bg-sunset-500' : 'border-charcoal-300'
                     }`}>
                       {frequency === freq.id && <Check className="w-4 h-4 text-white" />}
@@ -371,22 +466,19 @@ export default function SubscribePage() {
             <div className="mt-8 max-w-lg">
               <h3 className="text-lg font-bold text-charcoal-950 mb-2">Pick Your Shipping Day</h3>
               <p className="text-sm text-charcoal-500 mb-4">Choose which Tuesday of the month you&apos;d like your tortillas shipped.</p>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { id: '1st_tuesday', label: '1st Tuesday' },
-                  { id: '2nd_tuesday', label: '2nd Tuesday' },
-                  { id: '3rd_tuesday', label: '3rd Tuesday' },
-                  { id: '4th_tuesday', label: '4th Tuesday' },
-                ].map(day => (
+              <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Shipping day">
+                {Object.entries(shippingDayLabels).map(([id, label]) => (
                   <button
-                    key={day.id}
-                    onClick={() => setShippingDay(day.id)}
-                    className={`p-4 rounded-xl border-2 text-center transition-colors ${
-                      shippingDay === day.id ? 'border-sunset-500 bg-sunset-50' : 'border-charcoal-200 bg-white hover:border-charcoal-300'
+                    key={id}
+                    onClick={() => setShippingDay(id)}
+                    role="radio"
+                    aria-checked={shippingDay === id}
+                    className={`p-4 rounded-xl border-2 text-center transition-colors ${focusRing} ${
+                      shippingDay === id ? 'border-sunset-500 bg-sunset-50' : 'border-charcoal-200 bg-white hover:border-charcoal-300'
                     }`}
                   >
-                    <Calendar className="w-5 h-5 mx-auto mb-1 text-sunset-600" />
-                    <p className="font-semibold text-charcoal-950 text-sm">{day.label}</p>
+                    <Calendar className="w-5 h-5 mx-auto mb-1 text-sunset-600" aria-hidden="true" />
+                    <p className="font-semibold text-charcoal-950 text-sm">{label}</p>
                     <p className="text-xs text-charcoal-500">of the month</p>
                   </button>
                 ))}
@@ -394,55 +486,53 @@ export default function SubscribePage() {
             </div>
 
             {/* Summary */}
-            <div className="mt-8 bg-white rounded-xl shadow-soft p-6 max-w-lg">
-              <h3 className="font-semibold text-charcoal-950 mb-3">Your Subscription</h3>
-              <div className="space-y-2 text-sm">
-                {selectedItems.map(item => (
-                  <div key={item.sku} className="flex justify-between">
-                    <span className="text-charcoal-600">{item.quantity}x {item.name}</span>
-                    <span className="font-medium">{formatPrice(item.quantity * item.unitPrice)}</span>
-                  </div>
-                ))}
-                <div className="pt-2 border-t border-charcoal-100 flex justify-between">
-                  <span className="text-charcoal-600">Subtotal</span>
-                  <span className="font-medium">{formatPrice(subtotal)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-charcoal-600">Shipping</span>
-                  <span className="font-medium text-green-600">Free</span>
-                </div>
-                {shippingDay && (
-                  <div className="flex justify-between">
-                    <span className="text-charcoal-600">Ships on</span>
-                    <span className="font-medium">{shippingDay.replace('_', ' ').replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
-                  </div>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-charcoal-600">Tax (8.25%)</span>
-                  <span className="font-medium">{formatPrice(tax)}</span>
-                </div>
-                <div className="pt-2 border-t border-charcoal-200 flex justify-between text-base">
-                  <span className="font-bold text-charcoal-950">Total per delivery</span>
-                  <span className="font-bold text-sunset-600">{formatPrice(total)}</span>
-                </div>
-              </div>
+            <div className="mt-8 max-w-lg">
+              <OrderSummary
+                items={selectedItems}
+                frequencyLabel={frequencyLabel}
+                shippingDay={shippingDay}
+                subtotal={subtotal}
+                tax={tax}
+                total={total}
+              />
             </div>
 
             <button
-              onClick={() => isLoggedIn ? createSubscription() : setStep('account')}
-              disabled={loading}
-              className="mt-6 px-6 py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 disabled:opacity-50 flex items-center gap-2"
+              onClick={() => setStep('address')}
+              className={`mt-6 px-6 py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 flex items-center gap-2 ${focusRing}`}
             >
-              {loading ? 'Setting up...' : isLoggedIn ? 'Continue to Payment' : 'Create Account'} <ArrowRight className="w-5 h-5" />
+              Continue to Shipping <ArrowRight className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
         )}
 
-        {/* Step 3: Account Creation */}
+        {/* Step 3: Shipping Address */}
+        {step === 'address' && (
+          <div>
+            <button onClick={() => setStep('frequency')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to schedule
+            </button>
+            <h2 className="text-2xl font-bold text-charcoal-950 mb-2 flex items-center gap-2">
+              <MapPin className="w-6 h-6 text-sunset-600" aria-hidden="true" />
+              Where Should We Ship?
+            </h2>
+            <p className="text-charcoal-600 mb-6">Every delivery ships free to this address. You can update it anytime from your account.</p>
+            <div className="max-w-lg">
+              <AddressForm
+                initial={address}
+                submitLabel={isLoggedIn ? 'Continue to Payment' : 'Continue'}
+                loading={loading}
+                onSubmit={handleAddressSubmit}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Step 4: Account Creation */}
         {step === 'account' && !isLoggedIn && (
           <div>
-            <button onClick={() => setStep('frequency')} className="flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6">
-              <ArrowLeft className="w-4 h-4" /> Back
+            <button onClick={() => setStep('address')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to shipping
             </button>
             <h2 className="text-2xl font-bold text-charcoal-950 mb-2">Create Your Account</h2>
             <p className="text-charcoal-600 mb-6">You&apos;ll use this to manage your subscription, track orders, and update preferences.</p>
@@ -450,54 +540,63 @@ export default function SubscribePage() {
             <div className="max-w-lg space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">First Name</label>
+                  <label htmlFor="account-first-name" className="block text-sm font-medium text-charcoal-700 mb-1">First Name</label>
                   <input
+                    id="account-first-name"
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                    autoComplete="given-name"
+                    className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus:border-sunset-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-charcoal-700 mb-1">Last Name</label>
+                  <label htmlFor="account-last-name" className="block text-sm font-medium text-charcoal-700 mb-1">Last Name</label>
                   <input
+                    id="account-last-name"
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                    autoComplete="family-name"
+                    className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus:border-sunset-500"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-charcoal-700 mb-1">Email</label>
+                <label htmlFor="account-email" className="block text-sm font-medium text-charcoal-700 mb-1">Email</label>
                 <input
+                  id="account-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   required
-                  className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                  autoComplete="email"
+                  className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus:border-sunset-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-charcoal-700 mb-1">Password</label>
+                <label htmlFor="account-password" className="block text-sm font-medium text-charcoal-700 mb-1">Password</label>
                 <input
+                  id="account-password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="At least 8 characters"
                   required
                   minLength={8}
-                  className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:ring-2 focus:ring-sunset-500 focus:border-transparent"
+                  autoComplete="new-password"
+                  className="w-full px-4 py-3 border border-charcoal-300 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus:border-sunset-500"
                 />
               </div>
 
               <button
                 onClick={handleAccountStep}
                 disabled={loading || !email || !password}
-                className="w-full py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                aria-busy={loading || undefined}
+                className={`w-full py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${focusRing}`}
               >
-                {loading ? 'Setting up...' : 'Continue to Payment'} <ArrowRight className="w-5 h-5" />
+                {loading ? 'Setting up...' : 'Continue to Payment'} <ArrowRight className="w-5 h-5" aria-hidden="true" />
               </button>
 
               <p className="text-center text-sm text-charcoal-500">
@@ -508,20 +607,52 @@ export default function SubscribePage() {
           </div>
         )}
 
-        {/* Step 4: Payment (Stripe Elements) */}
+        {/* Step 5: Payment (Stripe Elements) */}
         {step === 'payment' && clientSecret && (
           <div>
-            <button onClick={() => setStep('frequency')} className="flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6">
-              <ArrowLeft className="w-4 h-4" /> Back to schedule
+            <button onClick={() => setStep('address')} className={`flex items-center gap-1 text-sm text-charcoal-500 hover:text-charcoal-700 mb-6 rounded ${focusRing}`}>
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to shipping
             </button>
             <h2 className="text-2xl font-bold text-charcoal-950 mb-6">Payment Details</h2>
-            <div className="max-w-lg">
-              <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
-                <PaymentForm
-                  onSuccess={() => router.push('/account?subscribed=true')}
-                  onError={(msg) => setError(msg)}
+            <div className="grid gap-8 lg:grid-cols-5">
+              <div className="lg:col-span-3 bg-white rounded-xl shadow-soft p-6">
+                <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
+                  <PaymentForm
+                    shipping={address}
+                    onSuccess={handlePaymentSuccess}
+                    onError={(msg) => setError(msg)}
+                  />
+                </Elements>
+              </div>
+              <aside className="lg:col-span-2 space-y-4">
+                <OrderSummary
+                  items={selectedItems}
+                  frequencyLabel={frequencyLabel}
+                  shippingDay={shippingDay}
+                  subtotal={subtotal}
+                  tax={tax}
+                  total={total}
                 />
-              </Elements>
+                {address && (
+                  <div className="bg-white rounded-xl shadow-soft p-6">
+                    <h3 className="font-semibold text-charcoal-950 mb-2 flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-sunset-600" aria-hidden="true" />
+                      Ships To
+                    </h3>
+                    <address className="not-italic text-sm text-charcoal-600 leading-relaxed">
+                      <p>{address.firstName} {address.lastName}</p>
+                      <p>{address.street}{address.street2 ? `, ${address.street2}` : ''}</p>
+                      <p>{address.city}, {address.state} {address.zip}</p>
+                    </address>
+                    <button
+                      onClick={() => setStep('address')}
+                      className={`mt-2 text-sm font-medium text-sunset-600 hover:text-sunset-700 rounded ${focusRing}`}
+                    >
+                      Edit address
+                    </button>
+                  </div>
+                )}
+              </aside>
             </div>
           </div>
         )}
@@ -530,7 +661,71 @@ export default function SubscribePage() {
   );
 }
 
-function PaymentForm({ onSuccess, onError }: { onSuccess: () => void; onError: (msg: string) => void }) {
+function OrderSummary({
+  items,
+  frequencyLabel,
+  shippingDay,
+  subtotal,
+  tax,
+  total,
+}: {
+  items: SelectedItem[];
+  frequencyLabel: string;
+  shippingDay: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+}) {
+  return (
+    <div className="bg-white rounded-xl shadow-soft p-6">
+      <h3 className="font-semibold text-charcoal-950 mb-3">Your Subscription</h3>
+      <div className="space-y-2 text-sm">
+        {items.map(item => (
+          <div key={item.sku} className="flex justify-between gap-3">
+            <span className="text-charcoal-600">{item.quantity}x {item.name}</span>
+            <span className="font-medium whitespace-nowrap">{formatPrice(item.quantity * item.unitPrice)}</span>
+          </div>
+        ))}
+        <div className="pt-2 border-t border-charcoal-100 flex justify-between">
+          <span className="text-charcoal-600">Delivery</span>
+          <span className="font-medium">{frequencyLabel}</span>
+        </div>
+        {shippingDay && (
+          <div className="flex justify-between">
+            <span className="text-charcoal-600">Ships on</span>
+            <span className="font-medium">{shippingDayLabels[shippingDay] ?? shippingDay} of the month</span>
+          </div>
+        )}
+        <div className="flex justify-between">
+          <span className="text-charcoal-600">Subtotal</span>
+          <span className="font-medium">{formatPrice(subtotal)}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-charcoal-600">Shipping</span>
+          <span className="font-medium text-green-600">Free</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-charcoal-600">Tax (8.25%)</span>
+          <span className="font-medium">{formatPrice(tax)}</span>
+        </div>
+        <div className="pt-2 border-t border-charcoal-200 flex justify-between text-base">
+          <span className="font-bold text-charcoal-950">Total per delivery</span>
+          <span className="font-bold text-sunset-600">{formatPrice(total)}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PaymentForm({
+  shipping,
+  onSuccess,
+  onError,
+}: {
+  shipping: AddressFields | null;
+  onSuccess: () => void;
+  onError: (msg: string) => void;
+}) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -545,6 +740,21 @@ function PaymentForm({ onSuccess, onError }: { onSuccess: () => void; onError: (
       elements,
       confirmParams: {
         return_url: `${window.location.origin}/account?subscribed=true`,
+        // Attach the shipping address to the Stripe payment as well
+        ...(shipping && {
+          shipping: {
+            name: `${shipping.firstName} ${shipping.lastName}`.trim(),
+            phone: shipping.phone || undefined,
+            address: {
+              line1: shipping.street,
+              line2: shipping.street2 || undefined,
+              city: shipping.city,
+              state: shipping.state,
+              postal_code: shipping.zip,
+              country: 'US',
+            },
+          },
+        }),
       },
     });
 
@@ -563,10 +773,14 @@ function PaymentForm({ onSuccess, onError }: { onSuccess: () => void; onError: (
       <button
         type="submit"
         disabled={!stripe || loading}
-        className="w-full py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 disabled:opacity-50"
+        aria-busy={loading || undefined}
+        className={`w-full py-3 bg-sunset-600 text-white rounded-lg font-semibold hover:bg-sunset-700 disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
       >
         {loading ? 'Processing...' : 'Start Subscription'}
       </button>
+      <p className="text-xs text-charcoal-400 text-center">
+        Secure payment via Stripe. Cancel or pause anytime from your account.
+      </p>
     </form>
   );
 }

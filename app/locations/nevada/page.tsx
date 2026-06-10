@@ -77,7 +77,7 @@ export default function NevadaPage() {
           <p className="text-xl text-cream-200 max-w-3xl">Authentic H-E-B tortillas shipped directly to the Silver State. From Las Vegas to Reno, we bring the taste of Texas to Nevada.</p>
         </div>
       </header>
-      <section className="max-w-6xl mx-auto px-6 py-8"><div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg"><Image src="/images/generated/hero-tortillas.webp" alt="Fresh tortillas delivered to Nevada" fill className="object-cover" priority /></div></section>
+      <section className="max-w-6xl mx-auto px-6 py-8"><div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg"><Image src="/images/generated/hero-tortillas.webp" alt="Fresh tortillas delivered to Nevada" fill sizes="(max-width: 1152px) 100vw, 1152px" className="object-cover" priority /></div></section>
       <section className="container mx-auto px-6 py-12 max-w-6xl">
         <h2 className="text-3xl font-bold text-charcoal-950 mb-8">Cities We Serve in Nevada</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">

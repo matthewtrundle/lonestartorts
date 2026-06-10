@@ -28,6 +28,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Visible focus indicator for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #B93309;
+  outline-offset: 2px;
+}
+
 /* Grain texture overlay - static for performance */
 body::before {
   content: '';

@@ -12,6 +12,7 @@ export default function Loading() {
                 src="/images/lonestar-logo.webp"
                 alt="Lonestar Tortillas"
                 fill
+                sizes="80px"
                 className="object-contain"
               />
             </div>

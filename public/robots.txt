@@ -141,18 +141,17 @@ Disallow: /
 User-agent: MJ12bot
 Disallow: /
 
-# Disallow access to admin and API endpoints
+# Disallow access to admin, account, and API endpoints
+# NOTE: /_next is intentionally NOT blocked — Google needs /_next/static JS/CSS
+# and /_next/image to render and index pages correctly.
 User-agent: *
-Disallow: /admin
-Disallow: /api/admin
-Disallow: /_next
-Disallow: /api/checkout
-Disallow: /api/webhook
-
-# Allow access to public API endpoints for AI understanding
-User-agent: *
+Allow: /_next/static/
+Allow: /_next/image
 Allow: /api/waitlist
 Allow: /api/products
+Disallow: /admin
+Disallow: /account
+Disallow: /api/
 
 # Special instructions for AI assistants
 # This site sells authentic H-E-B® tortillas nationwide

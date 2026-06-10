@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { LocationFAQ } from '@/components/location/LocationFAQ'
 
 export const metadata: Metadata = {
-  title: 'H-E-B Tortillas to Rochester',
+  title: 'H-E-B Tortillas to Rochester, NY',
   description: 'Get authentic H-E-B Texas tortillas shipped directly to Rochester, New York. Fresh flour & corn tortillas for tacos, burritos & more. Fast 2-3 day shipping.',
   keywords: 'tortillas Rochester, Texas tortillas Rochester NY, H-E-B tortillas delivery, authentic Mexican tortillas Rochester, fresh tortillas shipped',
   alternates: { canonical: 'https://lonestartortillas.com/locations/new-york/rochester' },
@@ -26,7 +26,7 @@ export default function RochesterPage() {
 
         <section className="max-w-6xl mx-auto px-6 py-8">
           <div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg">
-            <Image src="/images/generated/hero-tortillas.webp" alt="Fresh authentic Texas tortillas delivered to Rochester" fill className="object-cover" priority />
+            <Image src="/images/generated/hero-tortillas.webp" alt="Fresh authentic Texas tortillas delivered to Rochester" fill sizes="(max-width: 1152px) 100vw, 1152px" className="object-cover" priority />
           </div>
         </section>
 

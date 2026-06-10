@@ -54,7 +54,7 @@ export default function ButterTortillasPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="relative">
               <div className="aspect-square relative rounded-2xl overflow-hidden bg-gradient-to-br from-masa-100 to-cream-200 shadow-2xl">
-                <Image src="/images/flour-tortillas.webp" alt="H-E-B Premium Butter Flour Tortillas - Rich buttery Texas tortillas delivered nationwide" fill className="object-cover" priority />
+                <Image src="/images/flour-tortillas.webp" alt="H-E-B Premium Butter Flour Tortillas - Rich buttery Texas tortillas delivered nationwide" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" priority />
               </div>
             </div>
 

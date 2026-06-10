@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/subscribe',
+  },
   title: 'Subscribe & Save',
   description: 'Subscribe to Lonestar Tortillas and save on every order. Fresh premium Texas tortillas delivered on your schedule.',
 };

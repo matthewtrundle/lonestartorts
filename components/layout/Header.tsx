@@ -2,12 +2,18 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import { ShoppingBag, Menu, X, ChevronDown, User, BookOpen, Newspaper, MapPin, UtensilsCrossed, Truck, MessageCircle, Info, Phone } from 'lucide-react';
-import { MariaVoiceCall } from '@/components/chat/MariaVoiceCall';
+
+// Lazy-load the voice call widget (retell/livekit SDK ~200KB) only when first opened
+const MariaVoiceCall = dynamic(
+  () => import('@/components/chat/MariaVoiceCall').then((mod) => mod.MariaVoiceCall),
+  { ssr: false }
+);
 
 const resourceLinks = [
   { href: '/craft', labelKey: 'nav.source', icon: Info, description: 'How we source our tortillas' },
@@ -28,8 +34,17 @@ export function Header() {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
   const [isMariaOpen, setIsMariaOpen] = useState(false);
+  const [hasMariaOpened, setHasMariaOpened] = useState(false);
   const resourcesRef = useRef<HTMLDivElement>(null);
+  const resourcesButtonRef = useRef<HTMLButtonElement>(null);
   const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Only mount the voice call widget after it has been opened at least once
+  useEffect(() => {
+    if (isMariaOpen) {
+      setHasMariaOpened(true);
+    }
+  }, [isMariaOpen]);
 
   // Only offset the header on homepage where DisclaimerBanner is shown
   const isHomepage = pathname === '/';
@@ -117,9 +132,19 @@ export function Header() {
               className="relative hidden md:block"
               onMouseEnter={handleResourcesEnter}
               onMouseLeave={handleResourcesLeave}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape' && isResourcesOpen) {
+                  setIsResourcesOpen(false);
+                  resourcesButtonRef.current?.focus();
+                }
+              }}
             >
               <button
+                ref={resourcesButtonRef}
                 onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+                aria-expanded={isResourcesOpen}
+                aria-haspopup="true"
+                aria-controls="resources-menu"
                 className="group relative flex items-center gap-1"
               >
                 <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
@@ -131,6 +156,10 @@ export function Header() {
 
               {/* Dropdown Panel */}
               <div
+                id="resources-menu"
+                // React 18 needs ''/undefined for inert; types expect boolean
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                inert={(!isResourcesOpen ? '' : undefined) as any}
                 className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-charcoal-100 py-2 transition-all duration-200 ${
                   isResourcesOpen
                     ? 'opacity-100 translate-y-0 pointer-events-auto'
@@ -164,11 +193,11 @@ export function Header() {
             <button
               onClick={() => setIsOpen(true)}
               className="relative p-2 hover:bg-charcoal-100/50 rounded-full transition-colors"
-              aria-label="Open cart"
+              aria-label={`Open cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
             >
               <ShoppingBag className="w-6 h-6 text-charcoal-950" />
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                <span aria-hidden="true" className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
                   {itemCount}
                 </span>
               )}
@@ -178,7 +207,9 @@ export function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 hover:bg-charcoal-100/50 rounded-full transition-colors"
-              aria-label="Toggle menu"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6 text-charcoal-950" />
@@ -198,20 +229,20 @@ export function Header() {
             </Link>
 
             {/* Tortilla divider */}
-            <svg className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="12" cy="12" r="10" />
               <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
             </svg>
 
             <Link href="/subscribe" className="group relative">
-              <span className="text-sm font-medium tracking-wide text-sunset-600 transition-colors group-hover:text-sunset-700">
+              <span className="text-sm font-medium tracking-wide text-sunset-700 transition-colors group-hover:text-sunset-800">
                 {t('nav.subscribe')}
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
             </Link>
 
             {/* Tortilla divider */}
-            <svg className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="12" cy="12" r="10" />
               <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
             </svg>
@@ -231,7 +262,7 @@ export function Header() {
             >
               {language === 'en' ? (
                 <>
-                  <svg className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
+                  <svg aria-hidden="true" focusable="false" className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
                     <rect width="10" height="20" fill="#006847"/>
                     <rect x="10" width="10" height="20" fill="#fff"/>
                     <rect x="20" width="10" height="20" fill="#ce1126"/>
@@ -240,7 +271,7 @@ export function Header() {
                 </>
               ) : (
                 <>
-                  <svg className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
+                  <svg aria-hidden="true" focusable="false" className="w-5 h-4 rounded-sm overflow-hidden" viewBox="0 0 30 20">
                     <rect width="30" height="20" fill="#bf0a30"/>
                     <rect y="1.54" width="30" height="1.54" fill="#fff"/>
                     <rect y="4.62" width="30" height="1.54" fill="#fff"/>
@@ -262,6 +293,8 @@ export function Header() {
                   onClick={() => setIsMariaOpen(!isMariaOpen)}
                   className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sunset-200 bg-sunset-50 hover:bg-sunset-100 transition-all"
                   aria-label="Talk to Maria, our AI assistant"
+                  aria-expanded={isMariaOpen}
+                  aria-haspopup="true"
                 >
                   <Phone className="w-3.5 h-3.5 text-sunset-500" />
                   <span className="text-sm font-medium text-sunset-700 group-hover:text-sunset-800">
@@ -272,7 +305,9 @@ export function Header() {
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-sunset-500" />
                   </span>
                 </button>
-                <MariaVoiceCall isOpen={isMariaOpen} onClose={() => setIsMariaOpen(false)} />
+                {hasMariaOpened && (
+                  <MariaVoiceCall isOpen={isMariaOpen} onClose={() => setIsMariaOpen(false)} />
+                )}
               </div>
             )}
 
@@ -288,11 +323,11 @@ export function Header() {
             <button
               onClick={() => setIsOpen(true)}
               className="relative p-2 hover:bg-sunset-50 rounded-lg transition-colors"
-              aria-label="Open cart"
+              aria-label={`Open cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
             >
               <ShoppingBag className="w-5 h-5 text-charcoal-950" />
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-600 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-md">
+                <span aria-hidden="true" className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-600 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-md">
                   {itemCount}
                 </span>
               )}
@@ -321,6 +356,11 @@ export function Header() {
 
       {/* Menu Panel - Outside header to avoid stacking context issues */}
       <div
+        id="mobile-menu"
+        aria-hidden={!isMobileMenuOpen}
+        // React 18 needs ''/undefined for inert; types expect boolean
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        inert={(!isMobileMenuOpen ? '' : undefined) as any}
         className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm z-[9999] bg-white shadow-2xl transition-transform duration-300 ease-out md:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
@@ -459,12 +499,20 @@ export function Header() {
               {/* More resources - collapsible */}
               <button
                 onClick={() => setIsMobileResourcesOpen(!isMobileResourcesOpen)}
+                aria-expanded={isMobileResourcesOpen}
+                aria-controls="mobile-more-menu"
                 className="w-full flex items-center justify-between px-4 py-3 text-charcoal-700 font-medium hover:bg-cream-50 rounded-lg transition-colors"
               >
                 <span className="text-sm">More</span>
                 <ChevronDown className={`w-4 h-4 text-charcoal-500 transition-transform duration-200 ${isMobileResourcesOpen ? 'rotate-180' : ''}`} />
               </button>
-              <div className={`overflow-hidden transition-all duration-200 ${isMobileResourcesOpen ? 'max-h-96' : 'max-h-0'}`}>
+              <div
+                id="mobile-more-menu"
+                // React 18 needs ''/undefined for inert; types expect boolean
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                inert={(!isMobileResourcesOpen ? '' : undefined) as any}
+                className={`overflow-hidden transition-all duration-200 ${isMobileResourcesOpen ? 'max-h-96' : 'max-h-0'}`}
+              >
                 {resourceLinks
                   .filter(link => !['/recipes', '/guides', '/blog'].includes(link.href))
                   .map((link) => {

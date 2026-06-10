@@ -2,9 +2,9 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 
-// Import translations
+// English ships in the bundle (default locale); Spanish is lazy-loaded on
+// demand so every visitor doesn't pay for both locales up front.
 import en from '@/translations/en.json';
-import es from '@/translations/es.json';
 
 export type Language = 'en' | 'es';
 
@@ -22,10 +22,17 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const LANGUAGE_STORAGE_KEY = 'lonestar-language';
 
-const translations: Record<Language, Translations> = {
+const translations: Partial<Record<Language, Translations>> = {
   en,
-  es,
 };
+
+async function loadTranslations(lang: Language): Promise<void> {
+  if (translations[lang]) return;
+  if (lang === 'es') {
+    const es = await import('@/translations/es.json');
+    translations.es = es.default as Translations;
+  }
+}
 
 // Helper function to get nested translation value
 function getNestedValue(obj: Translations, path: string): string {
@@ -52,8 +59,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY) as Language | null;
-      if (stored === 'en' || stored === 'es') {
+      if (stored === 'en') {
         setLanguageState(stored);
+      } else if (stored === 'es') {
+        loadTranslations('es').then(() => setLanguageState('es'));
       }
     } catch (error) {
       console.error('Failed to load language from localStorage:', error);
@@ -75,12 +84,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [language, isHydrated]);
 
   const setLanguage = useCallback((lang: Language) => {
-    setLanguageState(lang);
+    // Switch only once the locale's strings are available so t() never
+    // renders raw keys mid-load.
+    loadTranslations(lang)
+      .then(() => setLanguageState(lang))
+      .catch((error) => {
+        console.error(`Failed to load ${lang} translations:`, error);
+      });
   }, []);
 
-  // Translation function
+  // Translation function (falls back to English if the locale isn't loaded)
   const t = useCallback((key: string): string => {
-    return getNestedValue(translations[language], key);
+    const table = translations[language] ?? translations.en!;
+    return getNestedValue(table, key);
   }, [language]);
 
   const value: LanguageContextType = {

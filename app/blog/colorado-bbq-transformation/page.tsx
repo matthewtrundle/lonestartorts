@@ -77,6 +77,7 @@ export default function ColoradoBBQTransformationPage() {
               src="/images/blog/colorado-bbq-hero.webp"
               alt="Colorado BBQ restaurant serving brisket tacos with Rocky Mountains visible through windows"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

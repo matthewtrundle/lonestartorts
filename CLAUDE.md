@@ -66,7 +66,7 @@ ALLOW_REFRIGERATED=false
 
 ## Image Generation Tool
 **Path**: /Users/mattrundle/Documents/image-generator-tool
-**API Key**: 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
+**API Key**: set `OPENROUTER_API_KEY` in `.env.local` (never commit keys to this file)
 
 ## Project Status
 - Project Initialized: ✓

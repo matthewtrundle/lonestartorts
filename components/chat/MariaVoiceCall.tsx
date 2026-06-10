@@ -6,8 +6,6 @@ import { RetellWebClient } from 'retell-client-js-sdk';
 
 type CallStatus = 'idle' | 'connecting' | 'active';
 
-const retellClient = new RetellWebClient();
-
 interface MariaVoiceCallProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,7 +17,17 @@ export function MariaVoiceCall({ isOpen, onClose }: MariaVoiceCallProps) {
   const [agentTalking, setAgentTalking] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
 
+  // Lazy-initialize the Retell client on first use (avoids instantiating at module scope)
+  const retellClientRef = useRef<RetellWebClient | null>(null);
+  const getRetellClient = useCallback(() => {
+    if (!retellClientRef.current) {
+      retellClientRef.current = new RetellWebClient();
+    }
+    return retellClientRef.current;
+  }, []);
+
   useEffect(() => {
+    const retellClient = getRetellClient();
     retellClient.on('call_started', () => setStatus('active'));
     retellClient.on('call_ended', () => setStatus('idle'));
     retellClient.on('agent_start_talking', () => setAgentTalking(true));
@@ -32,7 +40,7 @@ export function MariaVoiceCall({ isOpen, onClose }: MariaVoiceCallProps) {
     return () => {
       retellClient.stopCall();
     };
-  }, []);
+  }, [getRetellClient]);
 
   // Close panel on outside click (but not during active call)
   useEffect(() => {
@@ -46,6 +54,20 @@ export function MariaVoiceCall({ isOpen, onClose }: MariaVoiceCallProps) {
     return () => document.removeEventListener('mousedown', handleClick);
   }, [isOpen, status, onClose]);
 
+  // Close panel on Escape and return focus to the trigger (but not during active call)
+  useEffect(() => {
+    if (!isOpen || status === 'active') return;
+    const triggerEl = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        triggerEl?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, status, onClose]);
+
   const startCall = useCallback(async () => {
     setStatus('connecting');
     try {
@@ -53,7 +75,7 @@ export function MariaVoiceCall({ isOpen, onClose }: MariaVoiceCallProps) {
       if (!res.ok) throw new Error('Failed to create call');
       const { access_token } = await res.json();
 
-      await retellClient.startCall({
+      await getRetellClient().startCall({
         accessToken: access_token,
         sampleRate: 24000,
       });
@@ -61,22 +83,22 @@ export function MariaVoiceCall({ isOpen, onClose }: MariaVoiceCallProps) {
       console.error('Failed to start call:', error);
       setStatus('idle');
     }
-  }, []);
+  }, [getRetellClient]);
 
   const endCall = useCallback(() => {
-    retellClient.stopCall();
+    getRetellClient().stopCall();
     setStatus('idle');
     setAgentTalking(false);
-  }, []);
+  }, [getRetellClient]);
 
   const toggleMute = useCallback(() => {
     if (isMuted) {
-      retellClient.unmute();
+      getRetellClient().unmute();
     } else {
-      retellClient.mute();
+      getRetellClient().mute();
     }
     setIsMuted(!isMuted);
-  }, [isMuted]);
+  }, [isMuted, getRetellClient]);
 
   const openChat = useCallback(() => {
     onClose();

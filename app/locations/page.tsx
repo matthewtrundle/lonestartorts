@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/locations',
+  },
   title: 'H-E-B Tortillas Nationwide Delivery',
   description: 'Get authentic H-E-B® tortillas delivered anywhere in the United States. Fast shipping to NYC, LA, Chicago, Seattle, Denver, and all major cities. Order Texas tortillas online today!',
   keywords: 'H-E-B tortillas nationwide, tortilla delivery USA, H-E-B tortillas shipping, Texas tortillas delivered, buy H-E-B tortillas online, tortilla shipping nationwide',

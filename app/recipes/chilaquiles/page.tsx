@@ -133,6 +133,7 @@ export default function ChilaquilesRecipe() {
               src="/images/recipes/chilaquiles.webp"
               alt="Mexican Chilaquiles"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

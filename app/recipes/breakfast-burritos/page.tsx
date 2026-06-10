@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { BurritoIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/breakfast-burritos',
+  },
   title: 'Bean & Cheese Breakfast Burritos',
   description: 'Hearty bean and cheese breakfast burritos with scrambled eggs, refried beans, and melted cheese. Learn how to make the perfect breakfast burrito in 20 minutes!',
   keywords: 'breakfast burrito recipe, bean and cheese burrito, easy breakfast burrito, refried beans breakfast, how to make breakfast burritos',
@@ -148,6 +151,7 @@ export default function BreakfastBurritosRecipe() {
               src="/images/recipes/breakfast-burritos.webp"
               alt="Hearty breakfast burrito with eggs, beans, and melted cheese"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

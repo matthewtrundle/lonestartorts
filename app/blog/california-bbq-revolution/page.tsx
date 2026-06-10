@@ -77,6 +77,7 @@ export default function CaliforniaBBQRevolutionPage() {
               src="/images/blog/california-bbq-hero.webp"
               alt="California BBQ restaurant with modern fusion tacos featuring brisket on authentic tortillas"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

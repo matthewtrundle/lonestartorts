@@ -64,7 +64,7 @@ function ToastItem({ toast, onDismiss }: { toast: Toast; onDismiss: (id: string)
         <CheckCircle className="w-4 h-4 flex-shrink-0" />
       )}
       <p className="flex-1">{toast.message}</p>
-      <button onClick={() => onDismiss(toast.id)} className="flex-shrink-0 hover:opacity-70">
+      <button onClick={() => onDismiss(toast.id)} aria-label="Dismiss notification" className="flex-shrink-0 hover:opacity-70">
         <X className="w-4 h-4" />
       </button>
     </div>

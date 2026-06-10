@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { ContactPageContent } from '@/components/contact/ContactPageContent';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/contact',
+  },
   title: 'Contact Us',
   description: 'Got questions about orders, shipping, or wholesale? Reach out to the Lonestar Tortillas team. We\'re happy to help.',
 };

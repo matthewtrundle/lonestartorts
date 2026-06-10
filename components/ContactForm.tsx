@@ -83,7 +83,7 @@ export function ContactForm() {
 
   const fieldClasses = (field: string) => {
     const error = getFieldError(field);
-    return `bg-charcoal-800 border rounded-lg px-3 py-2 text-sm text-cream-50 placeholder-cream-500 focus:outline-none transition-colors ${
+    return `bg-charcoal-800 border rounded-lg px-3 py-2 text-sm text-cream-50 placeholder-cream-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 transition-colors ${
       error
         ? 'border-red-500 focus:border-red-400'
         : 'border-charcoal-700 focus:border-sunset-500'
@@ -113,7 +113,11 @@ export function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-3" noValidate>
       <div className="grid grid-cols-2 gap-3">
         <div>
+          <label htmlFor="contact-name" className="block text-xs text-cream-300 mb-1">
+            {t('forms.name')}
+          </label>
           <input
+            id="contact-name"
             type="text"
             name="name"
             aria-label={t('forms.name')}
@@ -131,7 +135,11 @@ export function ContactForm() {
           )}
         </div>
         <div>
+          <label htmlFor="contact-email" className="block text-xs text-cream-300 mb-1">
+            {t('forms.email')}
+          </label>
           <input
+            id="contact-email"
             type="email"
             name="email"
             aria-label={t('forms.email')}
@@ -149,22 +157,32 @@ export function ContactForm() {
           )}
         </div>
       </div>
-      <select
-        name="subject"
-        aria-label={t('forms.topics.select')}
-        value={formData.subject}
-        onChange={handleChange}
-        className="w-full bg-charcoal-800 border border-charcoal-700 rounded-lg px-3 py-2 text-sm text-cream-50 focus:outline-none focus:border-sunset-500 transition-colors"
-      >
-        <option value="">{t('forms.topics.select')}...</option>
-        <option value="Order Question">{t('forms.topics.order')}</option>
-        <option value="Shipping Inquiry">{t('forms.topics.shipping')}</option>
-        <option value="Product Question">{t('forms.topics.product')}</option>
-        <option value="Wholesale/Bulk">{t('forms.topics.wholesale')}</option>
-        <option value="General">{t('forms.topics.other')}</option>
-      </select>
       <div>
+        <label htmlFor="contact-subject" className="block text-xs text-cream-300 mb-1">
+          {t('forms.subject')}
+        </label>
+        <select
+          id="contact-subject"
+          name="subject"
+          aria-label={t('forms.topics.select')}
+          value={formData.subject}
+          onChange={handleChange}
+          className="w-full bg-charcoal-800 border border-charcoal-700 rounded-lg px-3 py-2 text-sm text-cream-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus:border-sunset-500 transition-colors"
+        >
+          <option value="">{t('forms.topics.select')}...</option>
+          <option value="Order Question">{t('forms.topics.order')}</option>
+          <option value="Shipping Inquiry">{t('forms.topics.shipping')}</option>
+          <option value="Product Question">{t('forms.topics.product')}</option>
+          <option value="Wholesale/Bulk">{t('forms.topics.wholesale')}</option>
+          <option value="General">{t('forms.topics.other')}</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="contact-message" className="block text-xs text-cream-300 mb-1">
+          {t('forms.message')}
+        </label>
         <textarea
+          id="contact-message"
           name="message"
           aria-label={t('forms.placeholders.message')}
           aria-describedby={messageError ? 'contact-message-error' : undefined}

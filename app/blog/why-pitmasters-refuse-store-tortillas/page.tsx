@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/blog/why-pitmasters-refuse-store-tortillas',
+  },
   title: 'Why Pitmasters Refuse Store-Bought Tortillas',
   description: 'Texas pitmasters reveal why they refuse to use cheap store-bought tortillas. Real stories of business losses, customer complaints, and the day they switched to H-E-B® tortillas.',
   keywords: 'Texas pitmasters tortillas, H-E-B tortillas restaurant, BBQ restaurant tortillas, pitmaster interviews, authentic tortillas, professional BBQ, restaurant quality tortillas',
@@ -81,6 +84,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
                 src="/images/blog/pitmaster-interview-hero.webp"
                 alt="Texas pitmaster with brisket tacos"
                 fill
+                sizes="(max-width: 1152px) 100vw, 1152px"
                 className="object-cover"
                 priority
               />

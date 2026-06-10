@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/tacos-al-pastor',
+  },
   title: 'Tacos Al Pastor | Authentic Street Tacos',
   description: 'Authentic Mexican tacos al pastor with marinated pork and pineapple. Learn how to make restaurant-quality street tacos at home in 45 minutes!',
   keywords: 'tacos al pastor recipe, mexican street tacos, al pastor pork, pineapple pork tacos, authentic mexican tacos, how to make al pastor',
@@ -162,6 +165,7 @@ export default function TacosAlPastorRecipe() {
               src="/images/recipes/tacos-al-pastor.webp"
               alt="Authentic tacos al pastor with marinated pork and pineapple"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

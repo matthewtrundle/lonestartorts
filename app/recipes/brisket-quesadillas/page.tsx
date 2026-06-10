@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/brisket-quesadillas',
+  },
   title: 'Crispy Brisket Quesadillas Recipe',
   description: 'Transform leftover brisket into crispy, cheesy quesadillas with H-E-B® flour tortillas. Quick 15-minute recipe that turns BBQ into comfort food perfection.',
   keywords: 'brisket quesadillas, BBQ quesadillas, leftover brisket recipe, H-E-B tortillas quesadillas, Texas quesadillas',

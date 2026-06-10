@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/fish-tacos',
+  },
   title: 'Baja Fish Tacos Recipe',
   description: 'Authentic Baja-style fish tacos with crispy beer-battered fish, cabbage slaw, and creamy sauce. Learn how to make restaurant-quality fish tacos at home.',
   keywords: 'fish tacos recipe, baja fish tacos, beer battered fish tacos, crispy fish tacos, how to make fish tacos, authentic fish tacos',
@@ -167,6 +170,7 @@ export default function FishTacosRecipe() {
               src="/images/recipes/fish-tacos.webp"
               alt="Crispy beer-battered fish tacos with cabbage slaw"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

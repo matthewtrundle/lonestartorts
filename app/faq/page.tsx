@@ -3,6 +3,9 @@ import FAQContent from '@/components/faq/FAQContent';
 import { MariaCTA } from '@/components/chat/MariaCTA';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/faq',
+  },
   title: 'FAQ',
   description: 'Frequently asked questions about Lonestar Tortillas — shipping, storage, ingredients, subscriptions, and more.',
 };

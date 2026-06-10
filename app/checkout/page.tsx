@@ -403,7 +403,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="min-h-screen bg-cream-50 pt-24 pb-12">
+    <div className="min-h-screen bg-cream-50 pt-24 pb-12">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Page Header */}
           <div className="mb-6">
@@ -633,7 +633,7 @@ export default function CheckoutPage() {
                 )}
 
                 {error && (
-                  <div className="p-2 bg-red-50 border border-red-200 rounded text-xs text-red-800">
+                  <div className="p-2 bg-red-50 border border-red-200 rounded text-xs text-red-800" role="alert">
                     {error}
                   </div>
                 )}
@@ -644,6 +644,7 @@ export default function CheckoutPage() {
                     <div className="border border-gray-200 rounded-lg overflow-hidden">
                       <button
                         onClick={() => setDiscountOpen(!discountOpen)}
+                        aria-expanded={discountOpen}
                         className="w-full flex items-center justify-between p-3 hover:bg-gray-50 transition-colors"
                       >
                         <div className="flex items-center gap-2">
@@ -660,7 +661,7 @@ export default function CheckoutPage() {
                           {discountApplied ? (
                             <div className="flex items-center justify-between p-3 mt-2 bg-green-50 rounded text-sm">
                               <span className="text-green-800 font-medium">{discountMessage}</span>
-                              <button onClick={handleRemoveDiscount} className="text-gray-400 hover:text-gray-600">
+                              <button onClick={handleRemoveDiscount} aria-label="Remove discount" className="text-gray-400 hover:text-gray-600">
                                 <X className="w-4 h-4" />
                               </button>
                             </div>
@@ -669,17 +670,19 @@ export default function CheckoutPage() {
                               <input
                                 type="email"
                                 placeholder="Email address"
+                                aria-label="Email address"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                                className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2"
                               />
                               <div className="flex gap-2">
                                 <input
                                   type="text"
                                   placeholder="Discount code"
+                                  aria-label="Discount code"
                                   value={discountCode}
                                   onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
-                                  className="flex-1 px-3 py-2 border border-gray-200 rounded text-sm uppercase focus:outline-none focus:ring-1 focus:ring-sunset-500"
+                                  className="flex-1 px-3 py-2 border border-gray-200 rounded text-sm uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2"
                                 />
                                 <button
                                   onClick={handleApplyDiscount}
@@ -689,7 +692,7 @@ export default function CheckoutPage() {
                                   {isValidatingCode ? '...' : 'Apply'}
                                 </button>
                               </div>
-                              {discountError && <p className="text-sm text-red-600">{discountError}</p>}
+                              {discountError && <p className="text-sm text-red-600" role="alert">{discountError}</p>}
                             </div>
                           )}
                         </div>
@@ -747,13 +750,13 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Disclaimer */}
-                <p className="text-[10px] text-gray-400 text-center">
+                <p className="text-[10px] text-gray-600 text-center">
                   Not affiliated with H-E-B®
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </main>
+      </div>
   );
 }

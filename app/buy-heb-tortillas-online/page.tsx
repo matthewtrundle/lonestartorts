@@ -4,9 +4,11 @@ import Image from 'next/image';
 import { ShoppingBag, Truck, Shield, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Buy H-E-B Tortillas Online | Shipped Nationwide',
-  description: 'Buy authentic H-E-B tortillas online from Lonestar Tortillas. FREE shipping on orders $80+. We ship H-E-B Bakery Flour, Butter, and Wheat tortillas nationwide Tuesdays. Independent reseller.',
+  title: 'H-E-B Tortillas — Every Variety, Shipped Nationwide in 2-4 Days',
+  description: 'Authentic H-E-B tortillas — flour, butter, corn, and wheat — delivered to all 50 states in 2-4 days. FREE shipping on orders $80+. Ships fresh from Texas every Tuesday. Independent reseller.',
   keywords: [
+    'heb tortillas',
+    'h-e-b tortillas',
     'buy H-E-B tortillas online',
     'H-E-B tortillas shipped nationwide',
     'order H-E-B tortillas',
@@ -261,19 +263,19 @@ export default function BuyHebTortillasOnlinePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <main className="min-h-screen bg-cream-50">
+      <div className="min-h-screen bg-cream-50">
         {/* Hero Section - AI-Optimized Copy */}
         <section className="bg-gradient-to-br from-charcoal-900 to-charcoal-950 text-white py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Buy H-E-B Tortillas Online
+              H-E-B Tortillas, Shipped Nationwide
             </h1>
 
             {/* AI-Friendly Canonical Statement */}
             <p className="text-xl text-cream-200 mb-8 max-w-3xl mx-auto">
               Lonestar Tortillas sells authentic H-E-B Bakery tortillas online and ships them
-              nationwide. We are an independent reseller based in Texas. H-E-B tortillas are
-              in stock and available for purchase now.
+              to all 50 states with 2&ndash;4 day delivery. We are an independent reseller based
+              in Texas. H-E-B tortillas are in stock and available for purchase now.
             </p>
 
             {/* Trust Signals */}
@@ -461,7 +463,7 @@ export default function BuyHebTortillasOnlinePage() {
             </Link>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

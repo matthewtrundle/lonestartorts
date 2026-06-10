@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/chicken-fajitas',
+  },
   title: 'Grilled Chicken Fajitas Recipe',
   description: 'Restaurant-quality chicken fajitas at home! Marinated grilled chicken with sizzling peppers and onions. Learn how to make authentic fajitas in 30 minutes.',
   keywords: 'chicken fajitas recipe, grilled chicken fajitas, how to make fajitas, tex-mex fajitas, easy fajita recipe, homemade fajitas',
@@ -154,6 +157,7 @@ export default function ChickenFajitasRecipe() {
               src="/images/recipes/chicken-fajitas.webp"
               alt="Sizzling chicken fajitas with colorful peppers and onions"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

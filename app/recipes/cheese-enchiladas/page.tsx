@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/cheese-enchiladas',
+  },
   title: 'Classic Cheese Enchiladas Recipe',
   description: 'Learn how to make authentic cheese enchiladas with homemade red sauce. Easy step-by-step recipe for classic Mexican enchiladas rojas ready in 45 minutes.',
   keywords: 'cheese enchiladas recipe, enchiladas rojas, red sauce enchiladas, how to make enchiladas, easy enchiladas, mexican enchiladas',
@@ -161,6 +164,7 @@ export default function CheeseEnchiladasRecipe() {
               src="/images/recipes/cheese-enchiladas.webp"
               alt="Cheese enchiladas with red sauce and melted cheese"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

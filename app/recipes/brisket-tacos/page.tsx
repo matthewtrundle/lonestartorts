@@ -5,6 +5,9 @@ import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/brisket-tacos',
+  },
   title: 'Texas Smoked Brisket Tacos Recipe',
   description: 'Learn to make authentic Texas BBQ brisket tacos with H-E-B® flour tortillas. Perfect for using leftover brisket or fresh-smoked meat. Quick, easy, and packed with flavor.',
   keywords: 'brisket tacos recipe, Texas BBQ tacos, smoked brisket tacos, H-E-B tortillas brisket, leftover brisket recipe, BBQ tacos',

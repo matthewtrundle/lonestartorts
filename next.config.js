@@ -21,6 +21,8 @@ const nextConfig = {
     // Optimize for common device sizes
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    // Product/location images never change — cache optimized renditions for 31 days
+    minimumCacheTTL: 2678400,
   },
   env: {
     ALLOW_REFRIGERATED: process.env.ALLOW_REFRIGERATED || 'false',
@@ -50,16 +52,21 @@ const nextConfig = {
         destination: '/track',
         permanent: true,
       },
-      // Broken product links from guides -> shop page sections
+      // Legacy city pages -> /locations hierarchy (mirrors chicago/denver)
       {
-        source: '/products/corn-tortillas',
-        destination: '/shop#pantry',
-        permanent: false,
+        source: '/seattle',
+        destination: '/locations/washington/seattle',
+        permanent: true,
       },
       {
-        source: '/products/flour-tortillas',
-        destination: '/shop#bakery',
-        permanent: false,
+        source: '/los-angeles',
+        destination: '/locations/california/los-angeles',
+        permanent: true,
+      },
+      {
+        source: '/new-york',
+        destination: '/locations/new-york/new-york-city',
+        permanent: true,
       },
     ];
   },
@@ -73,24 +80,16 @@ const nextConfig = {
         ]
       },
       {
-        // Apply these headers to all routes
-        source: '/:path*',
+        // Keep private surfaces out of search engines (robots.txt Disallow
+        // alone does not prevent indexing of linked URLs)
+        source: '/(admin|account)/:path*',
         headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' blob: https://vercel.live https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://js.stripe.com https://analytics.tiktok.com https://dashboard.retellai.com https://cdn.jsdelivr.net",
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob: https://images.heb.com https://images.unsplash.com https://www.google.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com",
-              "font-src 'self' data: https://analytics.tiktok.com",
-              "connect-src 'self' https://vercel.live https://api.stripe.com https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://analytics.tiktok.com https://ads.tiktok.com https://*.tiktokw.us https://api.retellai.com wss://*.retellai.com https://*.retellai.com https://*.livekit.cloud wss://*.livekit.cloud",
-              "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.googletagmanager.com https://bid.g.doubleclick.net https://*.retellai.com https://vercel.live",
-              "media-src 'self' blob: data:",
-            ].join("; "),
-          },
-        ],
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow' }
+        ]
       },
+      // NOTE: Content-Security-Policy is defined ONCE in vercel.json (the
+      // newer, more complete policy). Do not re-add it here — two sources of
+      // truth caused them to drift.
     ];
   },
 };

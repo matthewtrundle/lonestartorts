@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Savannah',
   description: 'Get authentic H-E-B Texas tortillas shipped to Savannah, Georgia. Fast 2-3 day shipping to the Hostess City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/georgia/savannah' },
-  robots: { index: false, follow: true },
 }
 
 export default function SavannahPage() {
@@ -22,7 +21,7 @@ export default function SavannahPage() {
           <Link href="/shop" className="mt-6 inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors">Shop Now</Link>
         </div>
       </header>
-      <section className="max-w-6xl mx-auto px-6 py-8"><div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg"><Image src="/images/generated/hero-tortillas.webp" alt="Fresh tortillas delivered to Savannah" fill className="object-cover" priority /></div></section>
+      <section className="max-w-6xl mx-auto px-6 py-8"><div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg"><Image src="/images/generated/hero-tortillas.webp" alt="Fresh tortillas delivered to Savannah" fill sizes="(max-width: 1152px) 100vw, 1152px" className="object-cover" priority /></div></section>
       <article className="container mx-auto px-6 py-12 max-w-4xl">
         <section className="prose prose-lg max-w-none mb-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Savannah Loves Texas Tortillas</h2>

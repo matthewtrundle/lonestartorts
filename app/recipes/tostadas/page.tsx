@@ -73,6 +73,7 @@ export default function TostadasRecipe() {
               src="/images/recipes/tostadas.webp"
               alt="Mexican Chicken Tostadas"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

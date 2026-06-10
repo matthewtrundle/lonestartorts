@@ -77,6 +77,7 @@ export default function TexasTortillaTraditionsPage() {
               src="/images/generated/blog-texas-tortilla-traditions.webp"
               alt="Traditional Texas-Mexican cooking with tortillas on comal"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

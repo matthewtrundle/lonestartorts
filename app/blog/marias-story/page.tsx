@@ -99,6 +99,7 @@ export default function MariasStoryPage() {
               src="/images/generated/blog-marias-story.webp"
               alt="Grandmother hands making traditional tortillas in Mexican kitchen"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

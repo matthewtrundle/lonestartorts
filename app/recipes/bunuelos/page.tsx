@@ -100,6 +100,7 @@ export default function BunuelosRecipe() {
               src="/images/recipes/bunuelos.webp"
               alt="Mexican Bunuelos"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

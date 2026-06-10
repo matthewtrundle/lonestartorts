@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { AttributionTracker } from '@/components/AttributionTracker';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import './globals.css';
@@ -85,7 +86,7 @@ export const metadata: Metadata = {
     siteName: 'Lonestar Tortillas',
     images: [
       {
-        url: '/images/lonestar-logo.webp',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Lonestar Tortillas - Premium Texas Tortillas',
@@ -93,13 +94,19 @@ export const metadata: Metadata = {
     ],
     locale: 'en_US',
     type: 'website',
+    videos: [
+      {
+        url: 'https://lonestartortillas.com/Taste%20of%20Texas_compressed.mp4',
+        type: 'video/mp4',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Lonestar Tortillas - H-E-B® Tortillas Delivered',
     description: 'Authentic Texas tortillas delivered nationwide. Those who know, know H-E-B®.',
     creator: '@lonestartortillas',
-    images: ['/images/lonestar-logo.webp'],
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -209,14 +216,6 @@ const websiteSchema = {
   },
   potentialAction: [
     {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://lonestartortillas.com/search?q={search_term_string}'
-      },
-      'query-input': 'required name=search_term_string'
-    },
-    {
       '@type': 'BuyAction',
       target: {
         '@type': 'EntryPoint',
@@ -297,7 +296,6 @@ export default function RootLayout({
 
         {/* Additional Open Graph Tags */}
         <meta property="og:locale:alternate" content="es_US" />
-        <meta property="og:video" content="https://lonestartortillas.com/Taste%20of%20Texas_compressed.mp4" />
 
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -355,6 +353,8 @@ export default function RootLayout({
 
         {/* Vercel Analytics */}
         <Analytics />
+        {/* First-touch attribution cookie (read at checkout) */}
+        <AttributionTracker />
 
         <LanguageProvider>
           <CartProvider>

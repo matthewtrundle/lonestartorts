@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { ProductCard } from '@/components/product/ProductCard';
+import { ProductGrid } from '@/components/shop/ProductGrid';
 
 export const metadata: Metadata = {
   title: 'Shop Texas Tortillas',
@@ -12,7 +12,7 @@ import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { ShopFAQ } from '@/components/shop/ShopFAQ';
 import { MariaCTA } from '@/components/chat/MariaCTA';
-import { Truck, Shield, Clock, ArrowRight, Check, RefreshCw, Calendar, Pause, Wheat, Star, Package } from 'lucide-react';
+import { Truck, Shield, ArrowRight, Check, RefreshCw, Calendar, Pause, Wheat, Star, Package } from 'lucide-react';
 import Link from 'next/link';
 import { products as allProducts } from '@/lib/products';
 
@@ -78,104 +78,9 @@ const itemListSchema = {
   }))
 };
 
-// Shared product grid component
-function ProductGrid({ products, cols = 3 }: { products: typeof bakeryProducts; cols?: 3 | 4 }) {
-  const gridClass = cols === 4
-    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6'
-    : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6';
-
-  return (
-    <div className={gridClass}>
-      {products.map((product) => (
-        <ProductCard
-          key={product.sku}
-          sku={product.sku}
-          name={product.name}
-          description={product.description}
-          image={product.image}
-          price={product.price}
-          tortillaCount={product.tortillaCount}
-          storage={product.storage}
-          category={product.category}
-          productType={product.productType}
-          tortillaType={product.tortillaType}
-          isBestSeller={product.isBestSeller}
-          savingsPercent={product.savingsPercent}
-          bundleOnly={product.bundleOnly}
-          brand={product.brand}
-        />
-      ))}
-    </div>
-  );
-}
-
-// Ad variant layout (TikTok / Google Ads) - simplified for conversion
-function AdVariantLayout() {
-  return (
-    <main className="min-h-screen bg-white pt-[100px]">
-      {/* Bold Free Shipping Banner */}
-      <div className="bg-sunset-600 text-white py-4 px-4 text-center">
-        <p className="text-xl md:text-2xl font-bold">
-          FREE Shipping on Orders $80+
-        </p>
-        <p className="text-sm opacity-90 mt-1">Authentic H-E-B® tortillas delivered to your door</p>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        {/* Bakery Fresh Section */}
-        <div className="mb-8">
-          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h3>
-          <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
-          <ProductGrid products={bakeryProducts} />
-        </div>
-
-        {/* Pantry Staples Section */}
-        <div className="mb-8">
-          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h3>
-          <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
-          <ProductGrid products={pantryProducts} cols={4} />
-        </div>
-
-        {/* Texas-Born Favorites Section */}
-        <div>
-          <h3 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h3>
-          <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
-          <ProductGrid products={texasBrandsProducts} />
-        </div>
-
-        {/* Simple trust line */}
-        <div className="mt-6 text-center text-sm text-gray-500 flex items-center justify-center gap-4 flex-wrap">
-          <span className="flex items-center gap-1">
-            <Truck className="w-4 h-4" /> Freshness First Shipping
-          </span>
-          <span className="flex items-center gap-1">
-            <Shield className="w-4 h-4" /> Secure Checkout
-          </span>
-          <span className="flex items-center gap-1">
-            <Clock className="w-4 h-4" /> Ships Tuesdays
-          </span>
-        </div>
-      </div>
-
-      {/* Sticky Cart Bar - Critical for mobile checkout */}
-      <StickyCartBar />
-    </main>
-  );
-}
-
-export default function ShopPage({
-  searchParams,
-}: {
-  searchParams: { utm_source?: string; gclid?: string };
-}) {
-  const isTikTok = searchParams.utm_source === 'tiktok';
-  const isGoogleAds = searchParams.utm_source === 'google' || searchParams.gclid != null;
-
-  // Ad variants - simplified layout
-  if (isTikTok || isGoogleAds) {
-    return <AdVariantLayout />;
-  }
-
+// Ad traffic (utm_source=tiktok|google, gclid) is rewritten to /shop/ad by
+// middleware so this page never reads searchParams and stays fully static.
+export default function ShopPage() {
   // Main shop page - conversion-focused design
   return (
     <>
@@ -183,7 +88,7 @@ export default function ShopPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      <main className="min-h-screen bg-white pb-24 md:pb-0">
+      <div className="min-h-screen bg-white pb-24 md:pb-0">
       {/* Hero Section - Compact on mobile, proper spacing on desktop */}
       <section className="text-white pt-24 pb-6 md:pt-24 md:pb-8 overflow-hidden relative">
         {/* Background Image */}
@@ -391,13 +296,13 @@ export default function ShopPage({
           <div className="text-center">
             <p className="text-sm text-charcoal-600 mb-3">Want to learn more? Check out our guides:</p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Link href="/guides/tortilla-nutrition" className="text-sm text-sunset-600 hover:text-sunset-700 underline">Nutrition Facts</Link>
+              <Link href="/guides/tortilla-nutrition" className="text-sm text-sunset-700 hover:text-sunset-800 underline">Nutrition Facts</Link>
               <span className="text-charcoal-300">|</span>
-              <Link href="/guides/how-to-store-tortillas" className="text-sm text-sunset-600 hover:text-sunset-700 underline">Storage Tips</Link>
+              <Link href="/guides/how-to-store-tortillas" className="text-sm text-sunset-700 hover:text-sunset-800 underline">Storage Tips</Link>
               <span className="text-charcoal-300">|</span>
-              <Link href="/guides/corn-vs-flour-tortillas" className="text-sm text-sunset-600 hover:text-sunset-700 underline">Corn vs Flour</Link>
+              <Link href="/guides/corn-vs-flour-tortillas" className="text-sm text-sunset-700 hover:text-sunset-800 underline">Corn vs Flour</Link>
               <span className="text-charcoal-300">|</span>
-              <Link href="/guides" className="text-sm text-sunset-600 hover:text-sunset-700 underline">All Guides</Link>
+              <Link href="/guides" className="text-sm text-sunset-700 hover:text-sunset-800 underline">All Guides</Link>
             </div>
           </div>
         </section>
@@ -420,7 +325,7 @@ export default function ShopPage({
 
       {/* Sticky Cart Bar - Mobile only */}
       <StickyCartBar />
-    </main>
+    </div>
     </>
   );
 }

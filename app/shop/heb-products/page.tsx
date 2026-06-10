@@ -1,43 +1,23 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ArrowLeft, Truck, Shield } from 'lucide-react';
-import { useLanguage } from '@/lib/language-context';
+import { products } from '@/lib/products';
 
-import type { Product } from '@/lib/products';
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: 'Other H-E-B Products — Salsas, Sauces & Texas Favorites',
+  description:
+    'Texas favorites beyond tortillas — authentic H-E-B salsas, sauces, seasonings, and more, shipped nationwide. Ships with tortilla orders or $12.99 alone.',
+  alternates: { canonical: '/shop/heb-products' },
+};
 
 export default function HEBProductsPage() {
-  const { t } = useLanguage();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
-    fetch('/api/products?type=other', { signal: controller.signal })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setProducts(data.products);
-        } else {
-          setError('Failed to load products');
-        }
-      })
-      .catch((err) => {
-        console.error('Error fetching products:', err);
-        setError('Unable to load products');
-      })
-      .finally(() => {
-        clearTimeout(timeoutId);
-        setLoading(false);
-      });
-  }, []);
+  const otherProducts = products.filter((p) => p.productType !== 'tortilla');
 
   return (
-    <main className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-cream-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-36">
           {/* Back Link */}
           <Link
@@ -60,37 +40,20 @@ export default function HEBProductsPage() {
             {/* Trust Signals */}
             <div className="flex justify-center gap-6 mb-6">
               <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Shield className="w-5 h-5 text-green-600" />
+                <Shield className="w-5 h-5 text-green-600" aria-hidden="true" />
                 <span>Authentic H-E-B Products</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Truck className="w-5 h-5 text-blue-600" />
+                <Truck className="w-5 h-5 text-blue-600" aria-hidden="true" />
                 <span>Ships with tortilla orders or $12.99 alone</span>
               </div>
             </div>
           </div>
 
-          {/* Loading State */}
-          {loading && (
-            <div className="text-center py-8">
-              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-sunset-orange border-r-transparent"></div>
-              <p className="mt-4 text-gray-600">{t('common.loading')}</p>
-            </div>
-          )}
-
-          {/* Error State */}
-          {error && (
-            <div className="text-center py-8">
-              <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-                <p className="text-red-700">{error}</p>
-              </div>
-            </div>
-          )}
-
           {/* Products Grid */}
-          {!loading && !error && products.length > 0 && (
+          {otherProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8 max-w-4xl mx-auto">
-              {products.map((product) => (
+              {otherProducts.map((product) => (
                 <ProductCard
                   key={product.sku}
                   sku={product.sku}
@@ -109,17 +72,14 @@ export default function HEBProductsPage() {
                 />
               ))}
             </div>
-          )}
-
-          {/* Empty State */}
-          {!loading && !error && products.length === 0 && (
+          ) : (
             <div className="text-center py-12">
               <p className="text-gray-600 text-lg mb-4">More H-E-B products coming soon!</p>
               <Link
                 href="/shop"
                 className="inline-flex items-center gap-2 bg-sunset-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-sunset-700 transition-colors"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                 Shop Tortillas
               </Link>
             </div>
@@ -137,11 +97,11 @@ export default function HEBProductsPage() {
               href="/shop"
               className="inline-flex items-center gap-2 bg-sunset-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-sunset-700 transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               Shop Tortillas
             </Link>
           </div>
         </div>
-      </main>
+      </div>
   );
 }

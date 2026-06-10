@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/brisket-breakfast-burrito',
+  },
   title: 'Brisket Breakfast Burrito Recipe with H-E-B® Tortillas',
   description: 'The ultimate Texas breakfast: smoked brisket, scrambled eggs, cheese, and crispy potatoes wrapped in authentic H-E-B® flour tortillas. Perfect for using leftover brisket!',
   keywords: 'brisket breakfast burrito, Texas breakfast, smoked brisket breakfast, H-E-B tortillas breakfast, leftover brisket recipe',

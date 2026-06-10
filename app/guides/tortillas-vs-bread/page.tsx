@@ -2,6 +2,7 @@ export const revalidate = 86400;
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { RelatedProducts } from '@/components/guides/RelatedProducts';
 
 export const metadata: Metadata = {
   title: 'Tortillas vs Bread: Which Is Healthier? Complete Comparison',
@@ -305,6 +306,13 @@ export default function TortillasVsBreadGuide() {
         </section>
 
         <section className="bg-rust-600 text-cream-50 py-16">
+          <RelatedProducts
+            title="Make the switch to tortillas"
+            description="Try authentic H-E-B flour, butter, and wheat tortillas — shipped nationwide."
+            productSkus={['HEB-FLOUR', 'HEB-BUTTER', 'HEB-WHEAT']}
+            ctaText="Shop Tortillas"
+          />
+
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Try Healthier Tortillas?</h2>
             <p className="text-xl mb-8 text-cream-100">Get premium Texas tortillas delivered to your door</p>

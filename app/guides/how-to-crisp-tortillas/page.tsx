@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { RelatedProducts } from '@/components/guides/RelatedProducts';
 
 export const metadata: Metadata = {
   title: 'How to Crisp & Toast Tortillas',
@@ -208,6 +209,13 @@ export default function HowToCrispTortillasPage() {
               </div>
             </div>
           </section>
+
+          <RelatedProducts
+            title="Crisping starts with quality corn tortillas"
+            description="H-E-B corn tortillas crisp beautifully — get them delivered fresh to your door."
+            productSkus={['HEB-WHITE-CORN', 'HEB-STREET-TACO', 'HEB-MI-TIENDA']}
+            ctaText="Shop Tortillas"
+          />
 
           <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg text-center">
             <h2 className="text-2xl font-bold mb-4">Start with Quality Tortillas</h2>

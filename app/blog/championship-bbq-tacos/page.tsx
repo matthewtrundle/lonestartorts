@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/blog/championship-bbq-tacos',
+  },
   title: 'Championship BBQ Tacos Secrets',
   description: 'Competition BBQ champions reveal why authentic H-E-B® tortillas are essential for winning. Learn the techniques, standards, and presentation secrets that earn perfect scores.',
   keywords: 'competition BBQ tacos, championship BBQ, H-E-B tortillas competition, BBQ judging, winning brisket tacos, competition pitmaster tips, BBQ taco presentation',
@@ -81,6 +84,7 @@ export default function ChampionshipBBQTacosPage() {
                 src="/images/blog/championship-bbq-hero.webp"
                 alt="Championship BBQ competition tacos on judges table"
                 fill
+                sizes="(max-width: 1152px) 100vw, 1152px"
                 className="object-cover"
                 priority
               />

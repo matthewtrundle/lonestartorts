@@ -76,6 +76,7 @@ export default function NixtamalizationSciencePage() {
               src="/images/generated/blog-nixtamalization-science.webp"
               alt="Corn kernels and masa in the nixtamalization process"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

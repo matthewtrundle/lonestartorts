@@ -9,7 +9,14 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
-export function ScrollAnimations({ children }: { children: React.ReactNode }) {
+/**
+ * Effect-only animation controller (gsap + Lenis). Render it self-closing
+ * (`<ScrollAnimations />`) as a sibling of the content it animates — children
+ * are optional and only kept for legacy pages that still wrap content.
+ * Its useEffect queries the DOM after the whole tree has committed, so
+ * sibling content is guaranteed to be mounted before selectors run.
+ */
+export function ScrollAnimations({ children }: { children?: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
   const cursorRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
 
@@ -505,5 +512,5 @@ export function ScrollAnimations({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  return <>{children}</>
+  return children ? <>{children}</> : null
 }

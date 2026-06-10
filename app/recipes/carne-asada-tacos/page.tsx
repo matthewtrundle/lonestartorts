@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/carne-asada-tacos',
+  },
   title: 'Authentic Carne Asada Tacos Recipe',
   description: 'Learn to make authentic Mexican carne asada tacos with marinated grilled steak. Simple marinade, quick grilling, and served street-style on corn tortillas.',
   keywords: 'carne asada recipe, grilled steak tacos, authentic carne asada, mexican steak tacos, how to make carne asada, carne asada marinade',
@@ -168,6 +171,7 @@ export default function CarneAsadaTacosRecipe() {
               src="/images/recipes/carne-asada-tacos.webp"
               alt="Grilled carne asada tacos with charred steak and cilantro"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

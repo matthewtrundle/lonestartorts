@@ -97,6 +97,7 @@ export default function SopesRecipe() {
               src="/images/recipes/sopes.webp"
               alt="Mexican Sopes"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

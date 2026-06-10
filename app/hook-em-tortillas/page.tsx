@@ -203,6 +203,7 @@ export default function HookEmTortillasPage() {
               src="/images/campaigns/hero-hook-em.webp"
               alt="Texas sunset skyline"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />

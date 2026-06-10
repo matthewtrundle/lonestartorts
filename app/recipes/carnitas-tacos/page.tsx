@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { TacoIcon, ChefIcon, BulletIcon } from '@/components/ui/Icons';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes/carnitas-tacos',
+  },
   title: 'Slow-Cooked Carnitas Tacos Recipe',
   description: 'Authentic Mexican carnitas recipe with tender, slow-cooked pork. Learn how to make restaurant-quality carnitas tacos at home with simple ingredients and traditional techniques.',
   keywords: 'carnitas recipe, authentic carnitas, slow cooked pork tacos, mexican carnitas, pork tacos recipe, how to make carnitas',
@@ -163,6 +166,7 @@ export default function CarnitasTacosRecipe() {
               src="/images/recipes/carnitas-tacos.webp"
               alt="Tender carnitas tacos with crispy pork and fresh toppings"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

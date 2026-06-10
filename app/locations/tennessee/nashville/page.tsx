@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Nashville',
   description: 'Get authentic H-E-B Texas tortillas shipped to Nashville, Tennessee. Fast 2-3 day shipping to Music City.',
   alternates: { canonical: 'https://lonestartortillas.com/locations/tennessee/nashville' },
-  robots: { index: false, follow: true },
 }
 
 export default function NashvillePage() {
@@ -22,7 +21,7 @@ export default function NashvillePage() {
           <Link href="/shop" className="mt-6 inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors">Shop Now</Link>
         </div>
       </header>
-      <section className="max-w-6xl mx-auto px-6 py-8"><div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg"><Image src="/images/generated/hero-tortillas.webp" alt="Fresh tortillas delivered to Nashville" fill className="object-cover" priority /></div></section>
+      <section className="max-w-6xl mx-auto px-6 py-8"><div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg"><Image src="/images/generated/hero-tortillas.webp" alt="Fresh tortillas delivered to Nashville" fill sizes="(max-width: 1152px) 100vw, 1152px" className="object-cover" priority /></div></section>
       <article className="container mx-auto px-6 py-12 max-w-4xl">
         <section className="prose prose-lg max-w-none mb-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Nashville Loves Texas Tortillas</h2>

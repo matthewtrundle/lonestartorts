@@ -208,6 +208,17 @@ export async function POST(req: NextRequest) {
               paymentStatus: 'SUCCEEDED',
               stripePaymentId: session.id || null,
 
+              // First-touch attribution (threaded from the lst_attr cookie
+              // through checkout session metadata)
+              landingPath: fullSession.metadata?.attrLandingPath || null,
+              referrer: fullSession.metadata?.attrReferrer || null,
+              utmSource: fullSession.metadata?.attrUtmSource || null,
+              utmMedium: fullSession.metadata?.attrUtmMedium || null,
+              utmCampaign: fullSession.metadata?.attrUtmCampaign || null,
+              firstVisitAt: fullSession.metadata?.attrFirstVisitAt
+                ? new Date(parseInt(fullSession.metadata.attrFirstVisitAt))
+                : null,
+
               updatedAt: new Date(),
 
               // Create order items
@@ -339,6 +350,31 @@ export async function POST(req: NextRequest) {
               }
             }
 
+            // Mark spin wheel prize as used now that payment completed
+            // (checkout intentionally defers this so abandoned sessions don't burn codes)
+            const spinPrizeCode = fullSession.metadata?.spinPrizeCode;
+            if (spinPrizeCode) {
+              try {
+                const spinEntry = await prisma.spinWheelEntry.update({
+                  where: { code: spinPrizeCode },
+                  data: { used: true, usedAt: new Date() },
+                });
+
+                await prisma.dripCampaignProgress.updateMany({
+                  where: {
+                    spinWheelEntryId: spinEntry.id,
+                    status: 'ACTIVE',
+                  },
+                  data: {
+                    status: 'CONVERTED',
+                    convertedAt: new Date(),
+                  },
+                });
+              } catch (spinError) {
+                console.error('Failed to mark spin prize as used:', spinError);
+              }
+            }
+
             // Record new discount system usage if applicable
             const newSystemDiscountId = fullSession.metadata?.newSystemDiscountId;
             if (newSystemDiscountId) {
@@ -404,42 +440,16 @@ export async function POST(req: NextRequest) {
             });
 
             if (retailSub) {
-              // Create an order for this billing cycle
-              const orderNumber = `LST-${Date.now().toString().slice(-6)}${Math.random().toString(36).substring(2, 4).toUpperCase()}`;
+              // Create the fulfillment order for this billing cycle.
+              // Idempotent (keyed on the invoice's payment intent) and shared
+              // with the daily reconciliation cron, so a replayed event or a
+              // cron catch-up never duplicates an order.
+              const { ensureOrderForPaidInvoice } = await import('@/lib/subscription/order-sync');
               const items = retailSub.items as Array<{ sku: string; name: string; quantity: number; unitPrice: number }>;
-              const shippingAddress = retailSub.customer.Address[0];
-
-              await prisma.order.create({
-                data: {
-                  id: randomUUID(),
-                  orderNumber,
-                  customerId: retailSub.customerId,
-                  email: retailSub.customer.email,
-                  stripePaymentId: paidInvoice.payment_intent as string,
-                  subtotal: retailSub.subtotal,
-                  shipping: retailSub.shipping,
-                  tax: retailSub.tax,
-                  total: retailSub.total,
-                  paymentStatus: 'SUCCEEDED',
-                  status: 'PROCESSING',
-                  shippingName: [retailSub.customer.firstName, retailSub.customer.lastName].filter(Boolean).join(' '),
-                  shippingAddress1: shippingAddress?.street || '',
-                  shippingCity: shippingAddress?.city || '',
-                  shippingState: shippingAddress?.state || '',
-                  shippingZip: shippingAddress?.zip || '',
-                  shippingCountry: shippingAddress?.country || 'US',
-                  updatedAt: new Date(),
-                  OrderItem: {
-                    create: items.map(item => ({
-                      id: randomUUID(),
-                      sku: item.sku,
-                      name: item.name,
-                      quantity: item.quantity,
-                      price: item.unitPrice,
-                    })),
-                  },
-                },
-              });
+              const { orderNumber, created } = await ensureOrderForPaidInvoice(stripe, retailSub, paidInvoice);
+              if (!created) {
+                console.log(`Order ${orderNumber} already exists for invoice ${paidInvoice.id} — skipping duplicate`);
+              }
 
               // Retrieve the subscription to get updated billing period dates
               const stripeSub = await stripe.subscriptions.retrieve(paidInvoice.subscription as string);
@@ -455,7 +465,9 @@ export async function POST(req: NextRequest) {
                 },
               });
 
-              // Award loyalty points for subscription renewal
+              // Award loyalty points for subscription renewal (only for a
+              // newly created order — replays/duplicates skip this)
+              if (created) {
               try {
                 await awardLoyaltyPoints(retailSub.customerId, retailSub.subtotal, `Subscription renewal`, undefined);
               } catch (loyaltyError) {
@@ -485,6 +497,7 @@ export async function POST(req: NextRequest) {
                 });
               } catch (emailError) {
                 console.error('Failed to send subscription renewal email:', emailError);
+              }
               }
 
               break;

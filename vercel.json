@@ -14,6 +14,10 @@
     {
       "path": "/api/cron/daily-intelligence",
       "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/subscription-reconcile",
+      "schedule": "0 13 * * *"
     }
   ],
   "functions": {
@@ -30,6 +34,9 @@
       "maxDuration": 60
     },
     "app/api/cron/daily-intelligence/route.ts": {
+      "maxDuration": 120
+    },
+    "app/api/cron/subscription-reconcile/route.ts": {
       "maxDuration": 120
     }
   },

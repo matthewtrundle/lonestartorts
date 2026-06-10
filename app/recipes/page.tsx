@@ -4,6 +4,9 @@ import { RecipeCard } from '@/components/RecipeCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/recipes',
+  },
   title: 'Tortilla Recipes | Tacos, Quesadillas & More',
   description: 'Discover authentic Texas tortilla recipes. From breakfast tacos to quesadillas, learn how to make delicious meals with H-E-B® tortillas. Easy, quick, and family-friendly.',
   keywords: 'tortilla recipes, breakfast taco recipe, texas recipes, quesadilla recipe, authentic mexican recipes, H-E-B tortilla recipes, easy tortilla meals, taco recipes',

@@ -98,6 +98,7 @@ export default function NachosRecipe() {
               src="/images/recipes/nachos.webp"
               alt="Loaded Nachos Supreme"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

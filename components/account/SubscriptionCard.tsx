@@ -83,9 +83,11 @@ export default function SubscriptionCard({ subscription: sub, onUpdate }: Props)
   return (
     <div className="border border-charcoal-100 rounded-lg overflow-hidden">
       {/* Header */}
-      <div
-        className="p-4 cursor-pointer hover:bg-cream-50"
+      <button
+        type="button"
+        className="w-full text-left p-4 cursor-pointer hover:bg-cream-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sunset-500"
         onClick={() => setExpanded(!expanded)}
+        aria-expanded={expanded}
       >
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
@@ -122,7 +124,7 @@ export default function SubscriptionCard({ subscription: sub, onUpdate }: Props)
             Paused until {new Date(sub.pausedUntil).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
           </div>
         )}
-      </div>
+      </button>
 
       {/* Expanded Actions */}
       {expanded && (

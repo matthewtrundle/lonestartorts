@@ -171,6 +171,7 @@ export default function TortillaSoupRecipe() {
               src="/images/recipes/tortilla-soup.webp"
               alt="Authentic Chicken Tortilla Soup"
               fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"
               priority
             />

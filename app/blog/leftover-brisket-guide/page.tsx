@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/blog/leftover-brisket-guide',
+  },
   title: 'Leftover Brisket: 7 Days of Meals',
   description: 'Transform leftover brisket into a week of incredible meals. Storage tips, reheating methods, and creative recipes using H-E-B® tortillas. Never waste brisket again.',
   keywords: 'leftover brisket recipes, brisket meal prep, how to store brisket, reheat brisket, brisket tacos, brisket breakfast, H-E-B tortillas, brisket quesadillas',
@@ -81,6 +84,7 @@ export default function LeftoverBrisketGuidePage() {
                 src="/images/blog/leftover-brisket-hero.webp"
                 alt="Leftover brisket transformed into multiple meals"
                 fill
+                sizes="(max-width: 1152px) 100vw, 1152px"
                 className="object-cover"
                 priority
               />

@@ -146,7 +146,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Image disclaimer */}
-      <p className="text-[9px] text-gray-400 px-3 pt-1 md:px-5 md:pt-2">
+      <p className="text-[9px] text-gray-600 px-3 pt-1 md:px-5 md:pt-2">
         *Image is illustrative
       </p>
 
@@ -258,6 +258,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </>
               )}
             </Button>
+
+            {/* Screen reader announcement for add-to-cart feedback */}
+            <span className="sr-only" role="status" aria-live="polite">
+              {justAdded ? `${name} added to cart` : ''}
+            </span>
 
             {/* Subscribe & Save link */}
             <Link

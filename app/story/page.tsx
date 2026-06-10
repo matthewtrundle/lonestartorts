@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { ScrollAnimations } from '@/components/ScrollAnimations'
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/story',
+  },
   title: 'Our Story',
   description: 'The story behind Lonestar Tortillas — how a love for authentic Texas tortillas became a mission to share them across the country.',
 }

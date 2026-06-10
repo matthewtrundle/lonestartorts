@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Package, CreditCard, Star, Gift, Truck, Copy, Check } from 'lucide-react';
+import AddressCard from '@/components/account/AddressCard';
 import SubscriptionCard from '@/components/account/SubscriptionCard';
 import { formatPrice } from '@/lib/utils';
 import { useToast } from '@/components/ui/Toast';
@@ -149,6 +150,9 @@ export default function PersonalTab({
           </div>
         )}
       </div>
+
+      {/* Shipping Address */}
+      <AddressCard />
 
       {/* Loyalty Points */}
       <div className="bg-white rounded-xl shadow-soft p-6">

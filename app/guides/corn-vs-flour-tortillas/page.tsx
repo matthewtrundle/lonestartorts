@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { LastUpdated } from '@/components/seo/LastUpdated';
+import { RelatedProducts } from '@/components/guides/RelatedProducts';
 
 export const metadata: Metadata = {
   title: 'Corn vs Flour Tortillas Guide',
@@ -374,6 +375,13 @@ export default function CornVsFlourPage() {
           </section>
 
           {/* Final Recommendation */}
+          <RelatedProducts
+            title="Try both and decide for yourself"
+            description="Authentic H-E-B corn and flour tortillas, delivered to your door."
+            productSkus={['HEB-WHITE-CORN', 'HEB-FLOUR', 'HEB-BUTTER']}
+            ctaText="Shop Tortillas"
+          />
+
           <section className="bg-charcoal-950 text-cream-50 p-8 rounded-lg mb-12">
             <h2 className="text-2xl font-bold mb-4">Our Recommendation</h2>
             <p className="text-lg leading-relaxed mb-4">

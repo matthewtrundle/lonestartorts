@@ -172,21 +172,21 @@ export function Footer() {
       <div className="border-t border-charcoal-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-xs">
+            <p className="text-gray-400 text-xs">
               © {currentYear} Lonestar Tortillas. All rights reserved.
             </p>
-            <div className="flex items-center gap-4 text-xs text-gray-500">
-              <Link href="/privacy" className="hover:text-gray-400 transition-colors">
+            <div className="flex items-center gap-4 text-xs text-gray-400">
+              <Link href="/privacy" className="hover:text-gray-300 transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-gray-400 transition-colors">
+              <Link href="/terms" className="hover:text-gray-300 transition-colors">
                 Terms of Service
               </Link>
             </div>
           </div>
 
           {/* HEB Disclaimer */}
-          <p className="mt-4 text-[10px] text-gray-600 text-center max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-4 text-xs text-gray-400 text-center max-w-3xl mx-auto leading-relaxed">
             H-E-B® is a registered trademark of H-E-B, LP. Lone Star Tortillas is an independent
             reseller and is not affiliated with or endorsed by H-E-B. All H-E-B products are
             purchased from retail locations and resold under nominative fair use principles.

@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { WholesaleForm } from '@/components/wholesale/WholesaleForm';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/wholesale',
+  },
   title: 'Wholesale Ordering',
   description: 'Partner with Lonestar Tortillas for wholesale pricing on premium Texas tortillas. Perfect for restaurants, caterers, and retailers.',
 };
@@ -98,6 +101,7 @@ export default function WholesalePage() {
               src="/images/campaigns/hero-hook-em.webp"
               alt="Texas sunset skyline"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />

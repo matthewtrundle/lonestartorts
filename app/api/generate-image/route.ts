@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateImage, recipePrompts } from '@/lib/image-generation';
+import { isAuthenticated } from '@/lib/auth';
 
 /**
  * API Route for generating images using OpenRouter
@@ -23,6 +24,11 @@ import { generateImage, recipePrompts } from '@/lib/image-generation';
 
 export async function POST(request: NextRequest) {
   try {
+    const authenticated = await isAuthenticated();
+    if (!authenticated) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const body = await request.json();
     const { recipe, custom, width, height, style } = body;
 

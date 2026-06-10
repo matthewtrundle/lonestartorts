@@ -37,11 +37,19 @@ export async function generateMetadata({ params }: RestaurantPageProps): Promise
     title: content.seo.title,
     description: content.seo.description,
     keywords: content.seo.keywords,
+    alternates: {
+      canonical: `/restaurants/${params.type}`,
+    },
     openGraph: {
       title: content.seo.title,
       description: content.seo.description,
       images: [content.hero.image],
       type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: content.seo.title,
+      description: content.seo.description,
     },
   };
 }

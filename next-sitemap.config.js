@@ -6,18 +6,28 @@ module.exports = {
   changefreq: 'weekly',
   priority: 0.7,
   sitemapSize: 5000,
+  // Don't stamp every URL with build time — Google ignores lastmod when it
+  // claims everything changed on every deploy.
+  autoLastmod: false,
 
   // Exclude admin, API, and private routes from sitemap
   exclude: [
     '/admin',
     '/admin/*',
     '/api/*',
+    '/account',
+    '/account/*', // auth/account pages - noindexed
     '/page-backup',
     '/page-previous',
     '/checkout',
     '/success',
+    '/shop/ad', // ad-traffic variant of /shop, served via middleware rewrite
+
     '/chicago',  // redirects to /locations/illinois/chicago
     '/denver',   // redirects to /locations/colorado/denver
+    '/seattle',  // redirects to /locations/washington/seattle
+    '/los-angeles', // redirects to /locations/california/los-angeles
+    '/new-york', // redirects to /locations/new-york/new-york-city
     '/maria-story', // redirects to /blog/marias-story
     '/order',    // redirects to /track
     '/track',    // utility page - order tracking
@@ -33,7 +43,6 @@ module.exports = {
         loc: path,
         changefreq: 'weekly',
         priority: 1.0,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -43,7 +52,6 @@ module.exports = {
         loc: path,
         changefreq: 'daily',
         priority: 0.9,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -53,7 +61,6 @@ module.exports = {
         loc: path,
         changefreq: 'weekly',
         priority: 0.8,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -63,7 +70,6 @@ module.exports = {
         loc: path,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -73,7 +79,6 @@ module.exports = {
         loc: path,
         changefreq: 'monthly',
         priority: 0.8,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -83,7 +88,6 @@ module.exports = {
         loc: path,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -93,7 +97,6 @@ module.exports = {
         loc: path,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -103,7 +106,6 @@ module.exports = {
         loc: path,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
       };
     }
 
@@ -112,7 +114,6 @@ module.exports = {
       loc: path,
       changefreq: config.changefreq,
       priority: config.priority,
-      lastmod: new Date().toISOString(),
     };
   },
 

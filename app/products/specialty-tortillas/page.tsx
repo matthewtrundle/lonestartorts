@@ -3,6 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/products/specialty-tortillas',
+  },
   title: 'H-E-B® Specialty Tortillas',
   description: 'Discover H-E-B® specialty tortillas including whole wheat, spinach-herb, and tomato-basil varieties. Healthy, flavorful options delivered nationwide!',
   keywords: 'H-E-B specialty tortillas, whole wheat tortillas, spinach herb tortillas, flavored tortillas, healthy tortillas online',
@@ -44,7 +47,7 @@ export default function SpecialtyTortillasPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="relative">
               <div className="aspect-square relative rounded-2xl overflow-hidden bg-gradient-to-br from-lime-100 to-masa-100 shadow-2xl">
-                <Image src="/images/product-hero.webp" alt="H-E-B Specialty Tortillas - Whole wheat, spinach-herb, and flavored varieties delivered nationwide" fill className="object-cover" priority />
+                <Image src="/images/product-hero.webp" alt="H-E-B Specialty Tortillas - Whole wheat, spinach-herb, and flavored varieties delivered nationwide" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" priority />
               </div>
             </div>
 

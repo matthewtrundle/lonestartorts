@@ -6,6 +6,9 @@ import { GuideCard } from '@/components/GuideCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/guides',
+  },
   title: 'Tortilla Guides & Tips',
   description: 'Expert guides on storing, reheating, and choosing tortillas. Learn how to keep your H-E-B® tortillas fresh, compare corn vs flour, and master authentic Texas techniques.',
   keywords: 'tortilla storage guide, how to reheat tortillas, corn vs flour tortillas, tortilla tips, H-E-B tortilla guide, keeping tortillas fresh, tortilla techniques',
@@ -17,6 +20,19 @@ export const metadata: Metadata = {
 };
 
 const guides = [
+  {
+    title: 'Does H-E-B Ship Out of State?',
+    description: 'H-E-B doesn’t ship outside Texas — but you can still get authentic H-E-B tortillas delivered to all 50 states in 2-4 days. Here’s exactly how.',
+    href: '/guides/does-heb-ship-out-of-state',
+    readTime: '4 min read',
+    category: 'Shipping',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+      </svg>
+    ),
+  },
   {
     title: 'How to Store Tortillas',
     description: 'Learn the best ways to store tortillas for maximum freshness. Room temperature, refrigeration, freezing methods, and shelf life explained.',

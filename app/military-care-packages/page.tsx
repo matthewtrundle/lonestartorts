@@ -175,6 +175,7 @@ export default function MilitaryCarePackagesPage() {
               src="/images/campaigns/hero-military-care.webp"
               alt="Patriotic Texas theme"
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />

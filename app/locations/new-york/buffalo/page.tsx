@@ -28,7 +28,7 @@ export default function BuffaloPage() {
 
         <section className="max-w-6xl mx-auto px-6 py-8">
           <div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg">
-            <Image src="/images/generated/hero-tortillas.webp" alt="Fresh authentic Texas tortillas delivered to Buffalo" fill className="object-cover" priority />
+            <Image src="/images/generated/hero-tortillas.webp" alt="Fresh authentic Texas tortillas delivered to Buffalo" fill sizes="(max-width: 1152px) 100vw, 1152px" className="object-cover" priority />
           </div>
         </section>
 

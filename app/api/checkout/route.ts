@@ -6,6 +6,7 @@ import { getTierForPackCount, getWholesalePrice } from '@/lib/wholesale-tiers';
 // Texas sales tax rate
 const TAX_RATE = 0.0825; // 8.25%
 import { prisma } from '@/lib/prisma';
+import { getAuthenticatedCustomer } from '@/lib/customer-auth';
 import { validateDiscount, includesFreeShipping, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
 import { getNextShipDate, getShipDateDisplay, formatShipDate } from '@/lib/shipping-schedule';
 
@@ -32,7 +33,33 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
     }
 
-    const { items, email, discountCode, customerId } = await req.json();
+    const { items, email, discountCode } = await req.json();
+
+    // Derive customer identity from the session cookie — never trust a
+    // client-supplied customerId for pricing or order attribution.
+    const sessionCustomer = await getAuthenticatedCustomer();
+    const customerId = sessionCustomer?.id;
+
+    // First-touch attribution captured by AttributionTracker on first visit
+    let attribution: Record<string, string> = {};
+    try {
+      const attrCookie = req.cookies.get('lst_attr')?.value;
+      if (attrCookie) {
+        const parsed = JSON.parse(decodeURIComponent(attrCookie));
+        const clamp = (v: unknown) => (typeof v === 'string' ? v.slice(0, 200) : undefined);
+        attribution = {
+          ...(clamp(parsed.lp) && { attrLandingPath: clamp(parsed.lp)! }),
+          ...(clamp(parsed.ref) && { attrReferrer: clamp(parsed.ref)! }),
+          ...(clamp(parsed.us) && { attrUtmSource: clamp(parsed.us)! }),
+          ...(clamp(parsed.um) && { attrUtmMedium: clamp(parsed.um)! }),
+          ...(clamp(parsed.uc) && { attrUtmCampaign: clamp(parsed.uc)! }),
+          ...(parsed.g === 1 && !parsed.us && { attrUtmSource: 'google' }),
+          ...(typeof parsed.ts === 'number' && { attrFirstVisitAt: String(parsed.ts) }),
+        };
+      }
+    } catch {
+      // best-effort only
+    }
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
@@ -224,28 +251,9 @@ export async function POST(req: NextRequest) {
                 break;
             }
 
-            // Mark spin entry as used
-            await prisma.spinWheelEntry.update({
-              where: { code: normalizedCode },
-              data: { used: true, usedAt: new Date() },
-            });
-
-            // Mark any associated drip campaign as converted
-            try {
-              await prisma.dripCampaignProgress.updateMany({
-                where: {
-                  spinWheelEntryId: spinEntry.id,
-                  status: 'ACTIVE',
-                },
-                data: {
-                  status: 'CONVERTED',
-                  convertedAt: new Date(),
-                },
-              });
-            } catch (dripError) {
-              // Non-critical, just log
-              console.error('Failed to update drip campaign:', dripError);
-            }
+            // NOTE: the prize is marked as used in the Stripe webhook once
+            // payment actually completes — marking it here would burn the
+            // code on abandoned checkouts.
           }
         }
         // Check if it's a drip campaign code (DRIP-* format)
@@ -427,6 +435,7 @@ export async function POST(req: NextRequest) {
       ...(stripeCustomerIdForSession && { customer: stripeCustomerIdForSession }),
       metadata: {
         disclaimer: 'Independent reseller. Not affiliated with or endorsed by H-E-B®.',
+        ...attribution, // first-touch attribution → persisted on Order in webhook
         shippingMethod: 'standard', // Simplified to single method
         shippingCost: shippingCost.toString(), // Store for webhook reference
         baseShippingCost: baseShippingCost.toString(), // What shipping would have been

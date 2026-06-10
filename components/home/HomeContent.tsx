@@ -4,10 +4,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
-import { LogoFull } from '@/components/ui/Logo'
+import { useEffect, useRef, useState } from 'react'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
-import { ContactForm } from '@/components/ContactForm'
 import { trackVideoPlay } from '@/lib/analytics'
 import { useLanguage } from '@/lib/language-context'
 
@@ -42,8 +40,92 @@ export default function HomeContent() {
   const { t } = useLanguage();
   const [currentVideo, setCurrentVideo] = useState(0);
 
+  // Respect prefers-reduced-motion for all autoplaying media
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  // Hero background video: deferred until hero is in view (and motion is OK)
+  const heroSectionRef = useRef<HTMLElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [heroVideoActive, setHeroVideoActive] = useState(false);
+  const [heroVideoPaused, setHeroVideoPaused] = useState(false);
+
+  // Video carousel: only play while the section is in view (and motion is OK)
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const carouselVideoRef = useRef<HTMLVideoElement>(null);
+  const [carouselInView, setCarouselInView] = useState(false);
+
+  useEffect(() => {
+    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
+
+  // Mount the hero video source only once the hero is visible and the user
+  // hasn't requested reduced motion. The poster image stays as the LCP visual.
+  useEffect(() => {
+    const section = heroSectionRef.current;
+    if (!section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        setHeroVideoActive(true);
+        observer.disconnect();
+      }
+    });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // Once the <source> is mounted, load and start the hero video.
+  useEffect(() => {
+    if (!heroVideoActive) return;
+    const video = heroVideoRef.current;
+    if (!video) return;
+    video.load();
+    video.play().catch(() => {
+      // Autoplay can be blocked; the poster remains visible.
+    });
+  }, [heroVideoActive]);
+
+  const toggleHeroVideo = () => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+      setHeroVideoPaused(false);
+    } else {
+      video.pause();
+      setHeroVideoPaused(true);
+    }
+  };
+
+  // Observe the carousel section to start/stop playback with visibility.
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setCarouselInView(entries.some((entry) => entry.isIntersecting));
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Play/pause the current carousel video based on visibility + motion pref.
+  // currentVideo is a dependency because the <video> remounts on change (key).
+  useEffect(() => {
+    const video = carouselVideoRef.current;
+    if (!video || reducedMotion) return;
+    if (carouselInView) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [carouselInView, currentVideo, reducedMotion]);
+
   const videos = [
-    { src: '/tiks/Taste of Texas_compressed.mp4', title: 'Taste of Texas' },
+    { src: '/Taste of Texas_compressed.mp4', title: 'Taste of Texas' },
     { src: '/tiks/H-E-B Tortillas_ Ride With Us_compressed.mp4', title: 'Ride With Us' },
     { src: '/tiks/Texan Tortilla Secret_compressed.mp4', title: 'Texan Secret' }
   ];
@@ -55,7 +137,12 @@ export default function HomeContent() {
   };
 
   return (
-    <ScrollAnimations>
+    <>
+      {/* Effect-only animation controller — rendered as a sibling so the
+          content below server-renders (it previously wrapped everything via
+          an ssr:false dynamic import, which shipped empty HTML) */}
+      <ScrollAnimations />
+
       {/* HEB Disclaimer - Homepage only */}
       <DisclaimerBanner />
 
@@ -74,7 +161,7 @@ export default function HomeContent() {
         {/* Floating Logo removed - main header logo now scales on scroll instead */}
 
         {/* Hero Section with Editorial Design */}
-        <section className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden spotlight" id="hero-section">
+        <section ref={heroSectionRef} className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden spotlight" id="hero-section">
           {/* Multi-layer Parallax Background System */}
           <div className="absolute inset-0 hero-background-system">
             {/* Layer 1: Deep background with texture */}
@@ -90,17 +177,22 @@ export default function HomeContent() {
 
             {/* Layer 3: Background Video - Lazy loaded */}
             <div className="absolute inset-0 parallax-layer" data-speed="0.3" data-rotation="2">
-              {/* Background Video - uses preload="none" for performance */}
+              {/* Background Video - source mounts only when the hero is in
+                  view and prefers-reduced-motion is off; the poster is the
+                  LCP visual until then */}
               <video
-                autoPlay
+                ref={heroVideoRef}
                 muted
                 loop
                 playsInline
                 preload="none"
                 poster="/images/hero-banner.webp"
+                aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover opacity-30"
               >
-                <source src="/hero-background_compressed.mp4" type="video/mp4" />
+                {heroVideoActive && (
+                  <source src="/hero-background-loop.mp4" type="video/mp4" />
+                )}
               </video>
 
               {/* Overlay gradients for better text readability */}
@@ -193,9 +285,29 @@ export default function HomeContent() {
 
           </div>
 
+          {/* Background video pause/play toggle (WCAG 2.2.2) */}
+          {heroVideoActive && (
+            <button
+              type="button"
+              onClick={toggleHeroVideo}
+              aria-label={heroVideoPaused ? 'Play background video' : 'Pause background video'}
+              className="absolute bottom-6 right-6 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-charcoal-950/40 text-cream-50 backdrop-blur-sm transition-colors hover:bg-charcoal-950/60 focus:outline-none focus:ring-2 focus:ring-sunset-500"
+            >
+              {heroVideoPaused ? (
+                <svg className="h-4 w-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              ) : (
+                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                </svg>
+              )}
+            </button>
+          )}
+
           {/* Decorative bottom wave */}
           <div className="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 120" className="w-full h-20 text-cream-50">
+            <svg viewBox="0 0 1440 120" className="w-full h-20 text-cream-50" aria-hidden="true">
               <path fill="currentColor" d="M0,96L48,90.7C96,85,192,75,288,74.7C384,75,480,85,576,90.7C672,96,768,96,864,90.7C960,85,1056,75,1152,74.7C1248,75,1344,85,1392,90.7L1440,96L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" />
             </svg>
           </div>
@@ -273,9 +385,11 @@ export default function HomeContent() {
                         </video>
 
                         {/* Custom Play Button Overlay */}
-                        <div
+                        <button
+                          type="button"
                           id="video-play-overlay"
-                          className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent cursor-pointer transition-opacity duration-300"
+                          aria-label="Play video: Maria's Story"
+                          className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent cursor-pointer transition-opacity duration-300 text-left"
                           onClick={() => {
                             const video = document.getElementById('maria-video') as HTMLVideoElement;
                             const overlay = document.getElementById('video-play-overlay');
@@ -300,7 +414,7 @@ export default function HomeContent() {
                             <p className="font-bold text-lg">{t('founder.videoTitle')}</p>
                             <p className="text-sm opacity-80">{t('founder.videoSubtitle')}</p>
                           </div>
-                        </div>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -507,7 +621,7 @@ export default function HomeContent() {
                       <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cream-200/10 shadow-2xl">
                         <Image
                           src={product.img}
-                          alt={product.title}
+                          alt=""
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
                         />
@@ -555,15 +669,16 @@ export default function HomeContent() {
           </div>
 
           {/* Right Side - Video Carousel */}
-          <div className="lg:w-1/2 relative h-[600px] lg:h-auto bg-charcoal-950 flex items-center justify-center p-8">
+          <div ref={carouselRef} className="lg:w-1/2 relative h-[600px] lg:h-auto bg-charcoal-950 flex items-center justify-center p-8">
             <div className="relative w-full max-w-md mx-auto">
-              {/* Video Container */}
+              {/* Video Container - playback starts via IntersectionObserver
+                  when the section is in view (no autoPlay attribute) */}
               <div className="relative aspect-[9/16] bg-charcoal-900 rounded-2xl overflow-hidden shadow-2xl">
                 <video
                   key={currentVideo}
+                  ref={carouselVideoRef}
                   className="absolute inset-0 w-full h-full object-cover"
                   controls
-                  autoPlay
                   muted
                   loop
                   playsInline
@@ -582,7 +697,7 @@ export default function HomeContent() {
 
                 {/* Video Navigation Dots */}
                 <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-                  {videos.map((_, index) => (
+                  {videos.map((video, index) => (
                     <button
                       key={index}
                       onClick={() => handleVideoChange(index)}
@@ -591,7 +706,8 @@ export default function HomeContent() {
                           ? 'w-8 bg-cream-50'
                           : 'bg-cream-50/50 hover:bg-cream-50/70'
                       }`}
-                      aria-label={`Go to video ${index + 1}`}
+                      aria-label={`Play video ${index + 1}: ${video.title}`}
+                      aria-current={currentVideo === index ? 'true' : undefined}
                     />
                   ))}
                 </div>
@@ -895,7 +1011,7 @@ export default function HomeContent() {
                     <p className="text-charcoal-700 leading-relaxed mb-6">
                       Keep your tortillas fresh for weeks with proper storage. Learn room temperature, refrigeration, and freezing methods.
                     </p>
-                    <span className="text-sunset-600 font-semibold group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
+                    <span className="text-sunset-700 font-semibold group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
                       Read Guide
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -1102,84 +1218,9 @@ export default function HomeContent() {
           </div>
         </section>
 
-        {/* Premium Footer */}
-        <footer className="bg-charcoal-950 border-t border-masa-800/20 py-16 relative overflow-hidden">
-          <div className="absolute inset-0 noise-subtle opacity-20" />
-
-          <div className="container mx-auto px-8 relative z-10">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-              {/* Logo and Description */}
-              <div>
-                <LogoFull className="text-cream-50 mb-6" />
-                <p className="text-cream-300 leading-relaxed mb-4">
-                  {t('footer.description')}
-                </p>
-                <div className="space-y-2 text-cream-400 text-sm">
-                  <p>{t('contact.email')}</p>
-                  <p>{t('contact.location')}</p>
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">{t('footer.quickLinks')}</h4>
-                <div className="space-y-2">
-                  <Link href="/shop" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Shop All Products</Link>
-                  <Link href="/locations" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Delivery Locations</Link>
-                  <Link href="/guides" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Guides & Tips</Link>
-                  <Link href="/recipes" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Recipes</Link>
-                  <Link href="/blog" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Blog</Link>
-                  <Link href="/track" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Track Order</Link>
-                  <Link href="/faq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">FAQ</Link>
-                  <Link href="/story" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Story</Link>
-                  <Link href="/craft" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Our Source</Link>
-                </div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">{t('footer.popularCities')}</h4>
-                <div className="space-y-2">
-                  <Link href="/los-angeles" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Los Angeles</Link>
-                  <Link href="/new-york" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">New York</Link>
-                  <Link href="/seattle" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Seattle</Link>
-                </div>
-              </div>
-
-              {/* Products */}
-              <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">{t('footer.products')}</h4>
-                <div className="space-y-2">
-                  <Link href="/products/corn-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Corn Tortillas</Link>
-                  <Link href="/products/flour-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Flour Tortillas</Link>
-                  <Link href="/products/butter-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Butter Tortillas</Link>
-                  <Link href="/products/specialty-tortillas" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Specialty Varieties</Link>
-                </div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4 mt-6">{t('footer.forRestaurants')}</h4>
-                <div className="space-y-2">
-                  <Link href="/restaurants/food-trucks" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Food Trucks</Link>
-                  <Link href="/restaurants/bbq" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">BBQ Restaurants</Link>
-                  <Link href="/restaurants/mexican" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Mexican Restaurants</Link>
-                  <Link href="/restaurants/tex-mex" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Tex-Mex</Link>
-                  <Link href="/restaurants/taco-shops" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Taco Shops</Link>
-                  <Link href="/restaurants/catering" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Catering</Link>
-                  <Link href="/restaurants/breakfast" className="block text-cream-400 hover:text-sunset-400 transition-colors text-sm">Breakfast &amp; Brunch</Link>
-                </div>
-              </div>
-
-              {/* Contact Form */}
-              <div>
-                <h4 className="text-cream-50 font-bold text-sm tracking-wider uppercase mb-4">{t('footer.contactUs')}</h4>
-                <ContactForm />
-              </div>
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="border-t border-masa-800/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-cream-500">{t('footer.copyright')}</p>
-              <p className="text-xs text-cream-600 tracking-wider uppercase text-center">
-                {t('disclaimer.short')}
-              </p>
-            </div>
-          </div>
-        </footer>
+        {/* Footer removed: the root layout renders <Footer /> right after this
+            component — the duplicate created two contentinfo landmarks */}
       </div>
-    </ScrollAnimations>
+    </>
   )
 }
