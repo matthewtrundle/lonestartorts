@@ -60,7 +60,7 @@ export function PageHero({
         {cta && (
           <Link
             href={cta.href}
-            className="mt-6 inline-block rounded-lg bg-sunset-500 px-8 py-3 font-bold text-white transition-colors hover:bg-sunset-600"
+            className="mt-6 inline-block rounded-lg bg-sunset-600 px-8 py-3 font-bold text-white transition-colors hover:bg-sunset-700"
           >
             {cta.label}
           </Link>

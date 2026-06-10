@@ -17,7 +17,7 @@ interface CategoryTab {
 const categoryTabs: CategoryTab[] = [
   { id: 'all', label: 'All', color: 'bg-gray-100 text-gray-700', activeColor: 'bg-charcoal-900 text-white' },
   { id: 'chips', label: 'Chips', color: 'bg-amber-50 text-amber-700', activeColor: 'bg-amber-500 text-white' },
-  { id: 'salsa', label: 'Salsas', color: 'bg-sunset-50 text-sunset-700', activeColor: 'bg-sunset-500 text-white' },
+  { id: 'salsa', label: 'Salsas', color: 'bg-sunset-50 text-sunset-700', activeColor: 'bg-sunset-600 text-white' },
   { id: 'seasoning', label: 'Seasonings', color: 'bg-lime-50 text-lime-700', activeColor: 'bg-lime-600 text-white' },
   { id: 'sauce', label: 'Sauces', color: 'bg-red-50 text-red-700', activeColor: 'bg-red-500 text-white' },
 ];

@@ -181,7 +181,7 @@ export default function HomeContent() {
               <div className="text-center">
                 {/* Small Quality Badge */}
                 <div className="mb-8 reveal-text">
-                  <span className="text-xs font-bold tracking-[0.4em] uppercase text-masa-600">
+                  <span className="text-xs font-bold tracking-[0.4em] uppercase text-masa-700">
                     {t('hero.badge')}
                   </span>
                 </div>
@@ -499,7 +499,7 @@ export default function HomeContent() {
                   <span className="block text-5xl md:text-6xl lg:text-7xl font-display font-black leading-[0.9] mt-4">
                     TRADITION
                   </span>
-                  <span className="block text-3xl md:text-4xl lg:text-5xl font-display italic font-light text-masa-600 mt-3">
+                  <span className="block text-3xl md:text-4xl lg:text-5xl font-display italic font-light text-masa-700 mt-3">
                     makes
                   </span>
                 </h2>
@@ -892,7 +892,7 @@ export default function HomeContent() {
                   style: 'Shelf-Stable • 30-Day Fresh',
                   badge: 'Best Seller',
                   gradient: 'bg-gradient-to-br from-masa-100 to-masa-200',
-                  accent: 'text-masa-600',
+                  accent: 'text-masa-700',
                   shadow: 'shadow-masa'
                 },
                 {
@@ -978,18 +978,18 @@ export default function HomeContent() {
               <div className="group bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
                 <Link href="/guides/how-to-reheat-tortillas" className="block">
                   <div className="p-8">
-                    <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-masa-100 text-masa-600 group-hover:bg-masa-600 group-hover:text-white transition-all duration-300">
+                    <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-masa-100 text-masa-700 group-hover:bg-masa-600 group-hover:text-white transition-all duration-300">
                       <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-masa-600 transition-colors">
+                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-masa-700 transition-colors">
                       How to Reheat Tortillas
                     </h3>
                     <p className="text-charcoal-700 leading-relaxed mb-6">
                       Warm tortillas to perfection every time. Master stovetop, microwave, and oven techniques for soft, pliable results.
                     </p>
-                    <span className="text-masa-600 font-semibold group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
+                    <span className="text-masa-700 font-semibold group-hover:translate-x-2 inline-flex items-center gap-2 transition-transform">
                       Read Guide
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

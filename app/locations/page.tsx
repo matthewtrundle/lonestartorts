@@ -572,7 +572,7 @@ export default function LocationsPage() {
           {/* CTA Section */}
           <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
- Ready to Order?
+ Texas flavor, wherever you are
 </h2>
             <p className="text-xl mb-8 text-cream-100 max-w-2xl mx-auto">
               Get authentic H-E-B® tortillas delivered to your door. Shop our full selection of corn, flour, and butter tortillas.

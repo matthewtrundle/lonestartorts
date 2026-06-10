@@ -24,7 +24,7 @@ const config: Config = {
           300: '#FBAC5D',
           400: '#F97F2B',
           500: '#F15A0E',
-          600: '#E04207',
+          600: '#D63F06', // darkened from #E04207 so white text passes WCAG AA (4.59:1)
           700: '#B93309',
           800: '#942A0F',
           900: '#792510',
@@ -102,7 +102,7 @@ const config: Config = {
         },
         // Semantic tokens for shadcn/cva primitives (button.tsx, badge.tsx)
         primary: {
-          DEFAULT: '#E04207', // sunset-600
+          DEFAULT: '#D63F06', // sunset-600
           dark: '#B93309',    // sunset-700
           foreground: '#FFFFFF',
         },

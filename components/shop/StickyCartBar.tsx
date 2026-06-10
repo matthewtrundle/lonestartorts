@@ -58,7 +58,7 @@ export function StickyCartBar() {
 
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 px-5 py-3 rounded-lg font-semibold transition-colors min-h-[48px] bg-sunset-500 hover:bg-sunset-600 text-white"
+          className="flex items-center gap-2 px-5 py-3 rounded-lg font-semibold transition-colors min-h-[48px] bg-sunset-600 hover:bg-sunset-700 text-white"
         >
           Checkout
           <ArrowRight className="w-4 h-4" />

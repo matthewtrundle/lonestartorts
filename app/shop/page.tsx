@@ -195,16 +195,16 @@ export default function ShopPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
               <h2 className="text-xl font-bold mb-1">Best Value: Order $80+</h2>
-              <p className="text-sunset-100">
+              <p className="text-white">
                 Get FREE shipping on your order
               </p>
             </div>
             <div className="flex items-center gap-4 text-sm font-medium">
-              <div className="flex items-center gap-1.5 bg-white/20 px-3 py-1.5 rounded-full">
+              <div className="flex items-center gap-1.5 bg-charcoal-950/25 px-3 py-1.5 rounded-full">
                 <Check className="w-4 h-4" />
                 80+ tortillas
               </div>
-              <div className="flex items-center gap-1.5 bg-white/20 px-3 py-1.5 rounded-full">
+              <div className="flex items-center gap-1.5 bg-charcoal-950/25 px-3 py-1.5 rounded-full">
                 <Check className="w-4 h-4" />
                 ~$1/tortilla
               </div>
@@ -244,7 +244,7 @@ export default function ShopPage() {
               </div>
               <Link
                 href="/subscribe"
-                className="inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] shadow-md"
+                className="inline-flex items-center gap-2 bg-sunset-700 hover:bg-sunset-800 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] shadow-soft"
               >
                 Start a Subscription
                 <ArrowRight className="w-4 h-4" />

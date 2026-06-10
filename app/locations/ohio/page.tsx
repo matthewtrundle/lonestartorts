@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { CTABanner } from '@/components/ui/CTABanner'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 
@@ -187,11 +188,8 @@ export default function OhioPage() {
         </section>
 
 
-      <section className="bg-charcoal-950 text-cream-50 py-12">
-        <div className="container mx-auto px-6 max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Order?</h2>
-          <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
-        </div>
+      <section className="container mx-auto px-6 max-w-4xl py-12">
+        <CTABanner variant="location" />
       </section>
     </div>
     </>

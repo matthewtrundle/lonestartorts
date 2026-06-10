@@ -229,7 +229,7 @@ export default function IllinoisPage() {
 
       <section className="bg-charcoal-950 text-cream-50 py-12">
         <div className="container mx-auto px-6 max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Order?</h2>
+          <h2 className="text-3xl font-bold mb-4">Bring Texas home to Illinois</h2>
           <p className="text-cream-200 mb-6">Get authentic Texas tortillas delivered anywhere in Illinois.</p>
           <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors inline-block">Shop All Tortillas</Link>
         </div>

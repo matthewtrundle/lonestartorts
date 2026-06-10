@@ -37,7 +37,7 @@ export function SectionHeader({
         <p
           className={cn(
             'text-sm font-bold uppercase tracking-widest mb-2',
-            onDark ? 'text-sunset-400' : 'text-sunset-600'
+            onDark ? 'text-sunset-400' : 'text-sunset-700'
           )}
         >
           {eyebrow}

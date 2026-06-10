@@ -55,7 +55,7 @@ export function CTABanner({
         className={cn(
           'mt-6 inline-block rounded-lg px-8 py-3 font-bold transition-colors',
           tone === 'dark'
-            ? 'bg-sunset-500 text-white hover:bg-sunset-600'
+            ? 'bg-sunset-600 text-white hover:bg-sunset-700'
             : 'bg-white text-rust-700 hover:bg-cream-100'
         )}
       >

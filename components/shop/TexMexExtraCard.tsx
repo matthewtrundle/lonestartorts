@@ -104,7 +104,7 @@ export const TexMexExtraCard: React.FC<TexMexExtraCardProps> = ({ product }) => 
       </div>
 
       {/* Image disclaimer */}
-      <p className="text-[8px] text-gray-400 px-3 pt-1">
+      <p className="text-[9px] text-charcoal-600 px-3 pt-1">
         *Image is illustrative
       </p>
 
