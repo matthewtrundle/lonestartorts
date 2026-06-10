@@ -255,7 +255,7 @@ export default function RecipesPage() {
               Browse by Meal Type
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-sunrise-100 to-sunset-100 p-8 rounded-lg shadow-md">
+              <div className="bg-gradient-to-br from-sunset-100 to-sunset-100 p-8 rounded-lg shadow-md">
                 <div className="text-4xl mb-4">🌅</div>
                 <h3 className="text-2xl font-bold text-charcoal-950 mb-3">Breakfast</h3>
                 <p className="text-charcoal-700 mb-4">

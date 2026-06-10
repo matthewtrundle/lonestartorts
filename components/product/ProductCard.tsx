@@ -106,9 +106,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="group relative bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-sunset-500 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+    <div className="group relative bg-white rounded-xl overflow-hidden border border-charcoal-200 hover:border-sunset-500 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
       {/* Image Container - Shorter on mobile */}
-      <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+      <div className="aspect-[4/3] relative overflow-hidden bg-charcoal-100">
         <Image
           src={image}
           alt={name}
@@ -120,7 +120,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Best Seller Badge */}
         {isBestSeller && (
           <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
-            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-sunset-600 text-white rounded-full shadow-lg">
+            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-sunset-600 text-white rounded-full shadow-medium">
               Best Seller
             </span>
           </div>
@@ -129,7 +129,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Savings Badge */}
         {savingsPercent && savingsPercent >= 10 && (
           <div className="absolute top-2 right-2 md:top-3 md:right-3 z-10">
-            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-green-600 text-white rounded-full shadow-lg">
+            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-green-600 text-white rounded-full shadow-medium">
               {savingsPercent}% OFF
             </span>
           </div>
@@ -138,7 +138,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Bundle Only Badge */}
         {bundleOnly && (
           <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 z-10">
-            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-charcoal-800 text-white rounded-full shadow-lg">
+            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-charcoal-800 text-white rounded-full shadow-medium">
               Bundle Only
             </span>
           </div>
@@ -146,7 +146,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Image disclaimer */}
-      <p className="text-[9px] text-gray-600 px-3 pt-1 md:px-5 md:pt-2">
+      <p className="text-[9px] text-charcoal-600 px-3 pt-1 md:px-5 md:pt-2">
         *Image is illustrative
       </p>
 
@@ -164,7 +164,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] md:text-xs text-gray-500">
+          <div className="flex items-center gap-1.5 text-[10px] md:text-xs text-charcoal-500">
             {tortillaType && <span>{tortillaType}</span>}
             {tortillaType && tortillaCount > 0 && <span>•</span>}
             {tortillaCount > 0 && <span>{tortillaCount} tortillas</span>}
@@ -173,7 +173,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Description - Hidden on mobile for compactness */}
-        <p className="hidden md:block text-sm text-gray-600 leading-relaxed line-clamp-2 min-h-[2.5rem] mb-4">
+        <p className="hidden md:block text-sm text-charcoal-600 leading-relaxed line-clamp-2 min-h-[2.5rem] mb-4">
           {description}
         </p>
 
@@ -196,13 +196,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         ) : (
           <>
             {/* Quantity Selector - Compact on mobile */}
-            <div className="flex items-center justify-between mb-2 md:mb-3 bg-gray-50 rounded-lg p-1.5 md:p-2">
-              <span className="text-[10px] md:text-xs font-semibold text-gray-600 uppercase tracking-wide">Qty</span>
+            <div className="flex items-center justify-between mb-2 md:mb-3 bg-cream-50 rounded-lg p-1.5 md:p-2">
+              <span className="text-[10px] md:text-xs font-semibold text-charcoal-600 uppercase tracking-wide">Qty</span>
               <div className="flex items-center gap-0.5 md:gap-1">
                 <button
                   onClick={() => handleQuantityChange(-1)}
                   disabled={quantity <= 1}
-                  className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+                  className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-charcoal-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
                   aria-label="Decrease quantity"
                 >
                   <Minus className="w-4 h-4 md:w-5 md:h-5" />
@@ -213,7 +213,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 <button
                   onClick={() => handleQuantityChange(1)}
                   disabled={quantity >= 10}
-                  className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-gray-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+                  className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-lg bg-white border border-charcoal-300 hover:border-sunset-500 hover:bg-sunset-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
                   aria-label="Increase quantity"
                 >
                   <Plus className="w-4 h-4 md:w-5 md:h-5" />
@@ -227,7 +227,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 ? 'bg-green-50 text-green-700 font-semibold'
                 : shippingInfo.type === 'progress'
                 ? 'bg-amber-50 text-amber-700'
-                : 'bg-gray-50 text-gray-600'
+                : 'bg-cream-50 text-charcoal-600'
             }`}>
               {shippingInfo.type === 'free' ? (
                 <span>{formatPrice(shippingInfo.totalWithShipping)} total • FREE shipping on $80+</span>
@@ -242,7 +242,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               size="lg"
               onClick={handleAddToCart}
               disabled={justAdded}
-              className={`w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-md hover:shadow-lg active:scale-[0.98] transition-all ${
+              className={`w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-soft hover:shadow-medium active:scale-[0.98] transition-all ${
                 justAdded ? 'bg-green-600 hover:bg-green-600' : ''
               }`}
             >

@@ -60,9 +60,9 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
   };
 
   return (
-    <div className="group relative bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-sunset-500 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+    <div className="group relative bg-white rounded-xl overflow-hidden border border-charcoal-200 hover:border-sunset-500 shadow-soft hover:shadow-medium transition-all duration-300 flex flex-col h-full">
       {/* Image Container */}
-      <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+      <div className="aspect-[4/3] relative overflow-hidden bg-charcoal-100">
         <Image
           src={bundle.image}
           alt={bundle.name}
@@ -74,7 +74,7 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
         {/* Best Value Badge */}
         {bundle.isBestValue && (
           <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-sunset-600 text-white rounded-full shadow-lg">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-sunset-600 text-white rounded-full shadow-medium">
               <Star className="w-3 h-3 fill-current" />
               Best Value
             </span>
@@ -84,7 +84,7 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
         {/* Savings Badge — only when there's an actual discount */}
         {savingsPercent > 0 && (
           <div className="absolute top-2 right-2 md:top-3 md:right-3 z-10">
-            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-green-100 text-green-700 rounded-full shadow-lg">
+            <span className="inline-block px-2 py-0.5 md:px-2.5 md:py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase bg-green-100 text-green-700 rounded-full shadow-medium">
               Save {savingsPercent}%
             </span>
           </div>
@@ -98,7 +98,7 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
           <h3 className="text-sm md:text-lg font-bold leading-snug text-charcoal-950 group-hover:text-sunset-600 transition-colors">
             {bundle.name}
           </h3>
-          <p className="text-[10px] md:text-xs text-gray-500 mt-0.5">
+          <p className="text-[10px] md:text-xs text-charcoal-500 mt-0.5">
             {bundle.tagline}
           </p>
         </div>
@@ -106,7 +106,7 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
         {/* Contents List */}
         <ul className="space-y-1 md:space-y-1.5 mb-3 md:mb-4">
           {bundle.features.slice(0, 4).map((feature, index) => (
-            <li key={index} className="flex items-start gap-1.5 md:gap-2 text-[10px] md:text-xs text-gray-600">
+            <li key={index} className="flex items-start gap-1.5 md:gap-2 text-[10px] md:text-xs text-charcoal-600">
               <Check className="w-3 h-3 md:w-4 md:h-4 text-green-600 flex-shrink-0 mt-0.5" />
               <span>{feature}</span>
             </li>
@@ -123,7 +123,7 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
           </span>
           {savingsAmount > 0 && (
             <>
-              <span className="text-xs md:text-sm text-gray-400 line-through">
+              <span className="text-xs md:text-sm text-charcoal-300 line-through">
                 {formatPrice(bundle.originalPrice)}
               </span>
               <span className="text-[10px] md:text-xs text-green-600 font-semibold">
@@ -143,7 +143,7 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
           variant="cart"
           size="lg"
           onClick={handleAddBundle}
-          className="w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
+          className="w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-soft hover:shadow-medium active:scale-[0.98] transition-all"
         >
           <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
           Add Bundle to Cart

@@ -9,6 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // ── Design rules (see DESIGN.md) ─────────────────────────────────
+      // Radius: pill = rounded-full · buttons/inputs = rounded-lg ·
+      //         cards = rounded-xl · modals/heroes = rounded-2xl
+      // Shadows: use the custom scale (subtle/soft/medium/large), not
+      //          stock shadow-md/lg/2xl, in new code.
+      // Gradients: stick to the canonical set documented in DESIGN.md.
       colors: {
         // Texas Sunset Palette - Rich, warm, sophisticated
         sunset: {
@@ -77,6 +83,33 @@ const config: Config = {
           700: '#C8926A',
           800: '#A67557',
           900: '#86614A',
+        },
+        // Rust & Terracotta - Warm clay between sunset and masa.
+        // 600 is the workhorse (text/buttons/gradient starts): darker and
+        // browner than sunset-600 so the two read as related, distinct hues.
+        rust: {
+          50: '#FBF4F0',
+          100: '#F5E3D8',
+          200: '#EAC5B0',
+          300: '#DC9F80',
+          400: '#CB7351',
+          500: '#B95430',
+          600: '#A14224',
+          700: '#84361F',
+          800: '#6C2E1E',
+          900: '#59281C',
+          950: '#311208',
+        },
+        // Semantic tokens for shadcn/cva primitives (button.tsx, badge.tsx)
+        primary: {
+          DEFAULT: '#E04207', // sunset-600
+          dark: '#B93309',    // sunset-700
+          foreground: '#FFFFFF',
+        },
+        ring: '#F15A0E',      // sunset-500
+        accent: {
+          DEFAULT: '#FAF5EA', // cream-200
+          foreground: '#1A1A1A',
         },
       },
       fontFamily: {

@@ -1118,7 +1118,7 @@ export default function HomeContent() {
                     {/* Content Side */}
                     <div className="p-10 flex flex-col justify-center">
                       <div className="mb-4">
-                        <span className="inline-block bg-sunrise-100 text-sunrise-700 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
+                        <span className="inline-block bg-sunset-100 text-sunset-700 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
                           Breakfast
                         </span>
                       </div>

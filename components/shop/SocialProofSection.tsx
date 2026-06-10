@@ -64,20 +64,20 @@ export function SocialProofSection({ className = '' }: SocialProofSectionProps) 
               <Users className="w-5 h-5 text-sunset-600" />
               <span className="text-3xl font-bold text-charcoal-950">500+</span>
             </div>
-            <p className="text-sm text-gray-600">Happy Texas Expats</p>
+            <p className="text-sm text-charcoal-600">Happy Texas Expats</p>
           </div>
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 mb-2">
               <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
               <span className="text-3xl font-bold text-charcoal-950">4.9</span>
             </div>
-            <p className="text-sm text-gray-600">Average Rating</p>
+            <p className="text-sm text-charcoal-600">Average Rating</p>
           </div>
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 mb-2">
               <span className="text-3xl font-bold text-charcoal-950">48</span>
             </div>
-            <p className="text-sm text-gray-600">States Served</p>
+            <p className="text-sm text-charcoal-600">States Served</p>
           </div>
         </div>
 
@@ -89,7 +89,7 @@ export function SocialProofSection({ className = '' }: SocialProofSectionProps) 
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 relative"
+              className="bg-white rounded-lg p-6 shadow-sm border border-charcoal-100 relative"
             >
               <Quote className="absolute top-4 right-4 w-8 h-8 text-sunset-100" />
               <div className="flex gap-0.5 mb-4">
@@ -97,10 +97,10 @@ export function SocialProofSection({ className = '' }: SocialProofSectionProps) 
                   <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                 ))}
               </div>
-              <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
+              <p className="text-charcoal-700 mb-4 italic">"{testimonial.quote}"</p>
               <div className="text-sm">
                 <p className="font-semibold text-charcoal-950">{testimonial.author}</p>
-                <p className="text-gray-500">{testimonial.location}</p>
+                <p className="text-charcoal-500">{testimonial.location}</p>
               </div>
             </div>
           ))}

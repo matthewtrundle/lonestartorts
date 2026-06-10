@@ -16,7 +16,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-xl font-bold mb-4">Lonestar Tortillas</h3>
-            <p className="text-gray-400 text-sm max-w-md">
+            <p className="text-charcoal-300 text-sm max-w-md">
               Bringing authentic H-E-B bakery tortillas to Texas expats nationwide.
               Same-day shipping, shelf-stable for weeks.
             </p>
@@ -27,27 +27,27 @@ export function Footer() {
             <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-white border-b border-charcoal-800 pb-2">Shop</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/shop" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/shop" className="text-charcoal-300 hover:text-white transition-colors">
                   Tortillas
                 </Link>
               </li>
               <li>
-                <Link href="/shop/heb-products" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/shop/heb-products" className="text-charcoal-300 hover:text-white transition-colors">
                   H-E-B Products
                 </Link>
               </li>
               <li>
-                <Link href="/wholesale" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/wholesale" className="text-charcoal-300 hover:text-white transition-colors">
                   Wholesale
                 </Link>
               </li>
               <li>
-                <Link href="/subscribe" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/subscribe" className="text-charcoal-300 hover:text-white transition-colors">
                   {t('nav.subscribeAndSave')}
                 </Link>
               </li>
               <li>
-                <Link href="/buy-heb-tortillas-online" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/buy-heb-tortillas-online" className="text-charcoal-300 hover:text-white transition-colors">
                   Buy H-E-B Online
                 </Link>
               </li>
@@ -59,22 +59,22 @@ export function Footer() {
             <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-white border-b border-charcoal-800 pb-2">Resources</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/guides" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/guides" className="text-charcoal-300 hover:text-white transition-colors">
                   Tortilla Guides
                 </Link>
               </li>
               <li>
-                <Link href="/recipes" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/recipes" className="text-charcoal-300 hover:text-white transition-colors">
                   Recipes
                 </Link>
               </li>
               <li>
-                <Link href="/tools/party-calculator" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/tools/party-calculator" className="text-charcoal-300 hover:text-white transition-colors">
                   Party Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/shipping" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/shipping" className="text-charcoal-300 hover:text-white transition-colors">
                   Shipping Info
                 </Link>
               </li>
@@ -86,22 +86,22 @@ export function Footer() {
             <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-white border-b border-charcoal-800 pb-2">Programs</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/hook-em-tortillas" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/hook-em-tortillas" className="text-charcoal-300 hover:text-white transition-colors">
                   Hook 'em Tortillas
                 </Link>
               </li>
               <li>
-                <Link href="/military-care-packages" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/military-care-packages" className="text-charcoal-300 hover:text-white transition-colors">
                   Military Care Packages
                 </Link>
               </li>
               <li>
-                <Link href="/story" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/story" className="text-charcoal-300 hover:text-white transition-colors">
                   Our Story
                 </Link>
               </li>
               <li>
-                <Link href="/account" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/account" className="text-charcoal-300 hover:text-white transition-colors">
                   {t('nav.myAccount')}
                 </Link>
               </li>
@@ -115,7 +115,7 @@ export function Footer() {
               <li>
                 <a
                   href="tel:+15128946823"
-                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                  className="text-charcoal-300 hover:text-white transition-colors flex items-center gap-2"
                 >
                   <span>(512) 894-6823</span>
                 </a>
@@ -123,13 +123,13 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:howdy@lonestartortillas.com"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-charcoal-300 hover:text-white transition-colors"
                 >
                   howdy@lonestartortillas.com
                 </a>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/contact" className="text-charcoal-300 hover:text-white transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -148,18 +148,18 @@ export function Footer() {
                       if (btn) { btn.click(); return; }
                     }
                   }}
-                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+                  className="text-charcoal-300 hover:text-white transition-colors flex items-center gap-1"
                 >
                   Chat with Maria
                 </button>
               </li>
               <li>
-                <Link href="/faq" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/faq" className="text-charcoal-300 hover:text-white transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/returns" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/returns" className="text-charcoal-300 hover:text-white transition-colors">
                   Returns & Refunds
                 </Link>
               </li>
@@ -172,21 +172,21 @@ export function Footer() {
       <div className="border-t border-charcoal-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-xs">
+            <p className="text-charcoal-300 text-xs">
               © {currentYear} Lonestar Tortillas. All rights reserved.
             </p>
-            <div className="flex items-center gap-4 text-xs text-gray-400">
-              <Link href="/privacy" className="hover:text-gray-300 transition-colors">
+            <div className="flex items-center gap-4 text-xs text-charcoal-300">
+              <Link href="/privacy" className="hover:text-charcoal-300 transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-gray-300 transition-colors">
+              <Link href="/terms" className="hover:text-charcoal-300 transition-colors">
                 Terms of Service
               </Link>
             </div>
           </div>
 
           {/* HEB Disclaimer */}
-          <p className="mt-4 text-xs text-gray-400 text-center max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-4 text-xs text-charcoal-300 text-center max-w-3xl mx-auto leading-relaxed">
             H-E-B® is a registered trademark of H-E-B, LP. Lone Star Tortillas is an independent
             reseller and is not affiliated with or endorsed by H-E-B. All H-E-B products are
             purchased from retail locations and resold under nominative fair use principles.

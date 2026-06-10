@@ -49,3 +49,6 @@ __pycache__/
 /generated/*.webp
 # Git worktrees
 .worktrees/
+
+# UI overhaul screenshot evidence
+/screenshots/
