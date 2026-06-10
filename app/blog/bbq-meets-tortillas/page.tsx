@@ -173,7 +173,7 @@ export default function BBQMeetsTortillasPage() {
                 </div>
 
                 <div className="bg-masa-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌶️ Burnt Ends Quesadilla (Butter Tortillas)</h3>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌶 Burnt Ends Quesadilla (Butter Tortillas)</h3>
                   <p>
                     Crispy brisket burnt ends with melted cheddar between two{' '}
                     <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
@@ -184,7 +184,7 @@ export default function BBQMeetsTortillasPage() {
                 </div>
 
                 <div className="bg-masa-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-3">🔥 Smoked Sausage Breakfast Burrito (Flour Tortillas)</h3>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-3">Smoked Sausage Breakfast Burrito (Flour Tortillas)</h3>
                   <p>
                     House-made smoked sausage, scrambled eggs, cheese, and salsa wrapped in a large H-E-B® flour tortilla. The perfect way to start a pitmaster&apos;s day.
                   </p>

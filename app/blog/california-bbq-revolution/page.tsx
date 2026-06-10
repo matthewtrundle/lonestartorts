@@ -116,8 +116,8 @@ export default function CaliforniaBBQRevolutionPage() {
 
             <section className="mb-10">
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4 pb-2 border-b-4 border-sunset-500">
-                Case Study 1: Smoke & Seoul BBQ (Oakland)
-              </h2>
+ Case Study 1: Smoke & Seoul BBQ (Oakland)
+</h2>
 
               <div className="bg-masa-50 p-6 rounded-lg mb-6">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3">The Challenge</h3>
@@ -180,8 +180,8 @@ export default function CaliforniaBBQRevolutionPage() {
 
             <section className="mb-10">
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4 pb-2 border-b-4 border-sunset-500">
-                Case Study 2: Venice Beach Smoke Co. (Los Angeles)
-              </h2>
+ Case Study 2: Venice Beach Smoke Co. (Los Angeles)
+</h2>
 
               <div className="bg-masa-50 p-6 rounded-lg mb-6">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3">The Challenge</h3>
@@ -237,8 +237,8 @@ export default function CaliforniaBBQRevolutionPage() {
 
             <section className="mb-10">
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4 pb-2 border-b-4 border-sunset-500">
-                Case Study 3: North Park Smoke (San Diego)
-              </h2>
+ Case Study 3: North Park Smoke (San Diego)
+</h2>
 
               <div className="bg-masa-50 p-6 rounded-lg mb-6">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3">The Challenge</h3>

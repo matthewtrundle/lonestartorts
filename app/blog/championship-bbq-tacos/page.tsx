@@ -67,8 +67,8 @@ export default function ChampionshipBBQTacosPage() {
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-display">
-              The Secret to Championship BBQ Tacos: Why Winners Use H-E-B® Tortillas
-            </h1>
+ The Secret to Championship BBQ Tacos: Why Winners Use H-E-B® Tortillas
+</h1>
 
             <p className="text-xl text-cream-100 leading-relaxed">
               Competition BBQ champions reveal the critical role tortillas play in winning grand championships. Learn why H-E-B® tortillas are essential equipment for every serious competitor.
@@ -111,8 +111,8 @@ export default function ChampionshipBBQTacosPage() {
           {/* Section 1: Judging Standards */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              What BBQ Judges Look For in Taco Presentation
-            </h2>
+ What BBQ Judges Look For in Taco Presentation
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               Understanding competition judging is critical. At sanctioned BBQ competitions (KCBS, IBCA, Lone Star Circuit), judges score on four criteria:
@@ -122,7 +122,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Appearance */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">👁️</span>
+<span className="text-2xl">👁️</span>
                   Appearance (9.0 Points Possible)
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -139,7 +139,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Texture */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">🤲</span>
+<span className="text-2xl">🤲</span>
                   Texture/Tenderness (9.0 Points Possible)
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -156,7 +156,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Taste */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">👅</span>
+<span className="text-2xl">👅</span>
                   Taste (9.0 Points Possible)
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -173,7 +173,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Overall */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">⭐</span>
+<span className="text-2xl">⭐</span>
                   Overall Impression (9.0 Points Possible)
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -221,8 +221,8 @@ export default function ChampionshipBBQTacosPage() {
           {/* Section 2: Champion Interviews */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Champions Speak: Why They Choose H-E-B® Tortillas
-            </h2>
+ Champions Speak: Why They Choose H-E-B® Tortillas
+</h2>
 
             <div className="space-y-8">
               {/* Champion 1 */}
@@ -335,8 +335,8 @@ export default function ChampionshipBBQTacosPage() {
           {/* Section 3: Competition Day Protocol */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Championship-Level Competition Day Protocol
-            </h2>
+ Championship-Level Competition Day Protocol
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               Based on interviews with 15+ grand champions, here's the standard competition-day protocol for taco preparation:
@@ -346,7 +346,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Pre-Competition */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">1</span>
+<span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">1</span>
                   Pre-Competition (Night Before)
                 </h3>
                 <ul className="space-y-2 text-charcoal-800 ml-10">
@@ -372,7 +372,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Morning Setup */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">2</span>
+<span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">2</span>
                   Morning Setup (Turn-In Minus 4 Hours)
                 </h3>
                 <ul className="space-y-2 text-charcoal-800 ml-10">
@@ -394,7 +394,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Final Prep */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">3</span>
+<span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">3</span>
                   Final Prep (Turn-In Minus 30 Minutes)
                 </h3>
                 <ul className="space-y-2 text-charcoal-800 ml-10">
@@ -416,7 +416,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Assembly */}
               <div className="bg-white p-6 rounded-lg shadow-md border-2 border-sunset-500">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">4</span>
+<span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">4</span>
                   Assembly (Turn-In Minus 8-10 Minutes) — CRITICAL
                 </h3>
                 <ul className="space-y-2 text-charcoal-800 ml-10">
@@ -446,7 +446,7 @@ export default function ChampionshipBBQTacosPage() {
               {/* Turn-In */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">5</span>
+<span className="bg-sunset-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">5</span>
                   Turn-In (Exactly On Time)
                 </h3>
                 <ul className="space-y-2 text-charcoal-800 ml-10">
@@ -480,12 +480,12 @@ export default function ChampionshipBBQTacosPage() {
           {/* Section 4: Common Mistakes */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Competition Mistakes That Cost Championships
-            </h2>
+ Competition Mistakes That Cost Championships
+</h2>
 
             <div className="space-y-4">
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Using Grocery Store Budget Tortillas</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Using Grocery Store Budget Tortillas</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Mistake:</strong> Thinking judges won't notice the difference between authentic H-E-B® and cheap store brands.
                 </p>
@@ -495,7 +495,7 @@ export default function ChampionshipBBQTacosPage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Assembling Tacos Too Early</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Assembling Tacos Too Early</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Mistake:</strong> Assembling tacos 20-30 minutes before turn-in to "get ahead."
                 </p>
@@ -505,7 +505,7 @@ export default function ChampionshipBBQTacosPage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Not Practicing Assembly Timing</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Not Practicing Assembly Timing</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Mistake:</strong> Showing up to first competition without practicing assembly process.
                 </p>
@@ -515,7 +515,7 @@ export default function ChampionshipBBQTacosPage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Forgetting Backup Tortillas</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Forgetting Backup Tortillas</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Mistake:</strong> Bringing only one package to competition.
                 </p>
@@ -525,7 +525,7 @@ export default function ChampionshipBBQTacosPage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Overfilling Tacos</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Overfilling Tacos</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Mistake:</strong> Thinking more brisket = higher score. Loading 6-8 oz per taco.
                 </p>
@@ -539,8 +539,8 @@ export default function ChampionshipBBQTacosPage() {
           {/* Championship Checklist */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Your Competition Day Checklist
-            </h2>
+ Your Competition Day Checklist
+</h2>
 
             <div className="bg-gradient-to-r from-sunset-100 to-masa-100 p-8 rounded-lg">
               <h3 className="text-xl font-bold text-charcoal-950 mb-4">Print this checklist for competition day:</h3>

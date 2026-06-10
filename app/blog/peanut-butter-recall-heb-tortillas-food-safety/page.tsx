@@ -81,8 +81,8 @@ export default function PeanutButterRecallHebTortillasFoodSafetyPage() {
                 <span>6 min read</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-                Peanut Butter Recall 2024: Why H-E-B Tortillas Remain Your Safest Choice
-              </h1>
+ Peanut Butter Recall 2024: Why H-E-B Tortillas Remain Your Safest Choice
+</h1>
               <p className="text-lg text-cream-200 max-w-2xl">
                 Recent peanut butter recalls highlight food safety concerns, but H-E-B tortillas maintain perfect safety records through rigorous quality control standards.
               </p>

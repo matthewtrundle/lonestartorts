@@ -152,8 +152,8 @@ export default function CarneAsadaTacosRecipe() {
               <span>Carne Asada Tacos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Carne Asada Tacos Recipe
-            </h1>
+ Authentic Carne Asada Tacos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Perfectly grilled, marinated steak tacos served street-style
             </p>
@@ -461,13 +461,13 @@ export default function CarneAsadaTacosRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What is the best cut of beef for carne asada?
-              </h3>
+ What is the best cut of beef for carne asada?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Skirt steak is the most traditional and authentic choice for carne asada—it's what you'll find at taquerías throughout Mexico. It has incredible beefy flavor and a loose grain that soaks up marinade beautifully. Flank steak is a close second and slightly more widely available. It's a bit leaner and has a tighter grain, but still makes excellent carne asada. Both cuts MUST be sliced against the grain after cooking to be tender. Avoid lean cuts like sirloin or tenderloin—they don't have the right texture or flavor for authentic carne asada.
               </p>
@@ -475,8 +475,8 @@ export default function CarneAsadaTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How long should I marinate carne asada?
-              </h3>
+ How long should I marinate carne asada?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The sweet spot is 4-6 hours for the best flavor penetration without over-tenderizing. At minimum, marinate for 2 hours—anything less and you won't get much flavor beyond the surface. You can go up to 12 hours maximum, but don't exceed that. The citrus acids in the marinade will start to break down the meat fibers too much, making the texture mushy instead of tender. If you're really in a pinch, even 30 minutes of marinating will add some flavor, though it won't be as deeply seasoned. Always marinate in the refrigerator, never at room temperature.
               </p>
@@ -484,8 +484,8 @@ export default function CarneAsadaTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make carne asada without a grill?
-              </h3>
+ Can I make carne asada without a grill?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! While grilling gives you that authentic smoky char, you can make excellent carne asada using a cast-iron skillet or grill pan. Heat the pan over high heat until it's smoking hot. Pat the marinated steak very dry, then sear for 3-4 minutes per side for medium-rare. Don't move it around—let it develop a crust. You can also broil it in your oven: place the steak on a broiler pan 4-6 inches from the heat source and broil for 4-5 minutes per side. The key to any method is high heat and not overcooking. You want that caramelized crust with a juicy, pink interior.
               </p>
@@ -493,8 +493,8 @@ export default function CarneAsadaTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Should I use corn or flour tortillas for carne asada tacos?
-              </h3>
+ Should I use corn or flour tortillas for carne asada tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Authentic carne asada tacos use small <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline">corn tortillas</Link>, typically 6 inches in diameter. This is the traditional street taco style you'll find throughout Mexico. Double-stack them (use two tortillas per taco) to prevent them from falling apart and to get that authentic experience. Warm the tortillas on the grill or a dry skillet until they're pliable with some charred spots—this adds flavor and makes them easier to fold. While flour tortillas work if that's what you prefer, corn is the authentic choice and complements the grilled beef flavor better.
               </p>
@@ -502,8 +502,8 @@ export default function CarneAsadaTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Why is slicing against the grain important?
-              </h3>
+ Why is slicing against the grain important?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Slicing against the grain is absolutely critical for tender carne asada. The "grain" refers to the direction that the muscle fibers run through the meat. When you slice against (perpendicular to) these fibers, you're shortening them, which makes each bite much more tender and easier to chew. If you slice with the grain (parallel to the fibers), you're leaving long, tough strands that are chewy and difficult to eat, no matter how perfectly you cooked the meat. Look closely at the cooked steak—you'll see lines running through it. Slice perpendicular to those lines at a slight angle, cutting thin strips about 1/4-inch thick. This one technique makes all the difference!
               </p>
@@ -518,8 +518,8 @@ export default function CarneAsadaTacosRecipe() {
             <Link href="/recipes/carnitas-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Slow-Cooked Carnitas Tacos
-                </h3>
+ Slow-Cooked Carnitas Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Tender pork with crispy edges, slow-cooked to perfection
                 </p>
@@ -528,8 +528,8 @@ export default function CarneAsadaTacosRecipe() {
             <Link href="/recipes/chicken-fajitas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Sizzling Chicken Fajitas
-                </h3>
+ Sizzling Chicken Fajitas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Restaurant-quality fajitas with peppers and onions
                 </p>
@@ -538,8 +538,8 @@ export default function CarneAsadaTacosRecipe() {
             <Link href="/guides/how-to-reheat-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  How to Reheat Tortillas
-                </h3>
+ How to Reheat Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Master the best methods for warming tortillas perfectly
                 </p>

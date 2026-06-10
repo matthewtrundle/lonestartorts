@@ -132,8 +132,8 @@ export default function BreakfastBurritosRecipe() {
               <span>Breakfast Burritos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Bean & Cheese Breakfast Burritos Recipe
-            </h1>
+ Bean & Cheese Breakfast Burritos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Hearty, filling breakfast burritos ready in 20 minutes
             </p>
@@ -379,13 +379,13 @@ export default function BreakfastBurritosRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What size tortillas are best for breakfast burritos?
-              </h3>
+ What size tortillas are best for breakfast burritos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Use large 10-inch or 12-inch <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link> specifically labeled as "burrito size." They need to be big enough to hold all the filling and still have room to fold in the sides. Regular 8-inch tortillas are too small and will result in overstuffed, hard-to-roll burritos. Burrito-size tortillas are thicker and sturdier, designed specifically to hold generous fillings without tearing. You can find them in most grocery stores near the regular tortillas.
               </p>
@@ -393,8 +393,8 @@ export default function BreakfastBurritosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make breakfast burritos ahead of time?
-              </h3>
+ Can I make breakfast burritos ahead of time?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! Breakfast burritos are perfect for meal prep and make-ahead breakfasts. Assemble them fully (but skip the toasting step), then wrap each burrito tightly in foil or plastic wrap. Refrigerate for up to 3 days, or freeze for up to 3 months. To reheat from the fridge: unwrap and microwave for 1-2 minutes. To reheat from frozen: microwave for 2-3 minutes (flip halfway through), or wrap in foil and bake at 350°F for 20-25 minutes. Many people make a batch of 10-12 burritos on Sunday for easy grab-and-go breakfasts all week!
               </p>
@@ -402,8 +402,8 @@ export default function BreakfastBurritosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How do you fold a burrito so it doesn't fall apart?
-              </h3>
+ How do you fold a burrito so it doesn't fall apart?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Proper folding technique is crucial! First, don't overfill—leave 2 inches of space on the sides and 3 inches at the top/bottom. Place filling in a horizontal line across the center. Fold in the left and right sides about 2 inches over the filling—these become your sealed ends. Then fold the bottom edge up and over the filling, tucking it tightly underneath. Continue rolling away from you, keeping tension as you roll. The key is that initial tight tuck—it creates the structure. Also, always use a warm, pliable tortilla. Cold tortillas crack and won't seal properly. Practice makes perfect!
               </p>
@@ -411,8 +411,8 @@ export default function BreakfastBurritosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What else can I add to bean and cheese breakfast burritos?
-              </h3>
+ What else can I add to bean and cheese breakfast burritos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The possibilities are endless! Popular additions include cooked bacon or breakfast sausage for meat lovers, crispy hash browns or diced breakfast potatoes for extra heartiness, sautéed bell peppers and onions for vegetables, sliced avocado or guacamole for creaminess, jalapeños or green chiles for heat, and different salsas (verde, roja, or pico de gallo) for flavor. You can also swap the refried beans for black beans, add chorizo for authentic Mexican flavor, or include spinach or kale for a healthier version. Just remember: don't overfill or the burrito becomes difficult to roll and eat!
               </p>
@@ -420,8 +420,8 @@ export default function BreakfastBurritosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What's the difference between a breakfast burrito and a breakfast taco?
-              </h3>
+ What's the difference between a breakfast burrito and a breakfast taco?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 A breakfast burrito uses a large flour tortilla (10-12 inches) and is completely rolled and closed, making it portable and easy to eat on the go. It typically has more filling and multiple ingredients. A <Link href="/recipes/breakfast-tacos" className="text-rust-600 hover:underline">breakfast taco</Link> uses a smaller tortilla (6-8 inches), is folded in half like a taco (open at the top), and usually has fewer, simpler ingredients. Breakfast tacos are eaten with both hands and are messier, while burritos are wrapped and can be eaten one-handed. In Texas, breakfast tacos are more common in San Antonio and South Texas, while breakfast burritos are popular everywhere!
               </p>
@@ -436,8 +436,8 @@ export default function BreakfastBurritosRecipe() {
             <Link href="/recipes/breakfast-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Texas-Style Breakfast Tacos
-                </h3>
+ Texas-Style Breakfast Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Quick and easy breakfast tacos with eggs and bacon
                 </p>
@@ -446,8 +446,8 @@ export default function BreakfastBurritosRecipe() {
             <Link href="/recipes/cheese-quesadillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Classic Cheese Quesadillas
-                </h3>
+ Classic Cheese Quesadillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Simple, crispy quesadillas ready in 10 minutes
                 </p>
@@ -456,8 +456,8 @@ export default function BreakfastBurritosRecipe() {
             <Link href="/guides/how-to-store-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  How to Store Tortillas
-                </h3>
+ How to Store Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Keep your tortillas fresh with proper storage
                 </p>

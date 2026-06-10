@@ -100,8 +100,8 @@ export default function StreetTacosTortillasPage() {
               <span>Street Tacos Tortillas</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Best Tortillas for Street Tacos
-            </h1>
+ Best Tortillas for Street Tacos
+</h1>
             <p className="text-xl text-cream-200 max-w-2xl">
               Learn the secrets to authentic taqueria-style tacos with the perfect tortillas.
             </p>
@@ -130,7 +130,7 @@ export default function StreetTacosTortillasPage() {
             </p>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6 flex items-center gap-3">
-              <TacoIcon className="w-8 h-8 text-sunset-500" />
+<TacoIcon className="w-8 h-8 text-sunset-500" />
               What Makes Street Taco Tortillas Special
             </h2>
 
@@ -170,8 +170,8 @@ export default function StreetTacosTortillasPage() {
             </ul>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Why Corn Tortillas for Street Tacos?
-            </h2>
+ Why Corn Tortillas for Street Tacos?
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               There&apos;s a reason street vendors across Mexico have used corn tortillas for generations. The masa (corn dough) is made through nixtamalization—a process that gives corn tortillas their distinctive flavor and nutritional benefits.
@@ -188,8 +188,8 @@ export default function StreetTacosTortillasPage() {
             </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              How to Warm Street Taco Tortillas
-            </h2>
+ How to Warm Street Taco Tortillas
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               The warming method makes a huge difference. Cold corn tortillas will crack and crumble. Properly warmed tortillas become soft, pliable, and slightly charred—exactly how they should be.
@@ -211,8 +211,8 @@ export default function StreetTacosTortillasPage() {
             </ol>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Classic Street Taco Fillings
-            </h2>
+ Classic Street Taco Fillings
+</h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white p-6 rounded-lg shadow-md border border-charcoal-100">
@@ -235,8 +235,8 @@ export default function StreetTacosTortillasPage() {
 
             {/* FAQ Section */}
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Frequently Asked Questions
-            </h2>
+ Frequently Asked Questions
+</h2>
 
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm border border-charcoal-100">

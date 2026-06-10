@@ -101,8 +101,8 @@ export default function SonoranStyleTortillasPage() {
               <span>Sonoran Style Tortillas</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Sonoran Style Tortillas
-            </h1>
+ Sonoran Style Tortillas
+</h1>
             <p className="text-xl text-cream-200 max-w-2xl">
               Discover the thin, stretchy flour tortillas that define Northern Mexican cuisine.
             </p>
@@ -131,7 +131,7 @@ export default function SonoranStyleTortillasPage() {
             </p>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6 flex items-center gap-3">
-              <TacoIcon className="w-8 h-8 text-sunset-500" />
+<TacoIcon className="w-8 h-8 text-sunset-500" />
               What Defines Sonoran Style Tortillas
             </h2>
 
@@ -171,8 +171,8 @@ export default function SonoranStyleTortillasPage() {
             </ul>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              The Sobaquera Technique
-            </h2>
+ The Sobaquera Technique
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               The name &quot;sobaquera&quot; comes from &quot;sobaco&quot; (armpit in Spanish), referring to the traditional technique where tortilla makers stretch the dough over their forearms. This method has been passed down through generations in Sonoran families.
@@ -189,8 +189,8 @@ export default function SonoranStyleTortillasPage() {
             </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Traditional Uses for Sonoran Tortillas
-            </h2>
+ Traditional Uses for Sonoran Tortillas
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               The large size and flexibility of Sonoran tortillas make them ideal for specific dishes:
@@ -216,8 +216,8 @@ export default function SonoranStyleTortillasPage() {
             </div>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              How to Work with Sonoran Style Tortillas
-            </h2>
+ How to Work with Sonoran Style Tortillas
+</h2>
 
             <ol className="space-y-4 mb-8 list-decimal list-inside">
               <li className="text-charcoal-700 leading-relaxed">
@@ -245,8 +245,8 @@ export default function SonoranStyleTortillasPage() {
 
             {/* FAQ Section */}
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Frequently Asked Questions
-            </h2>
+ Frequently Asked Questions
+</h2>
 
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm border border-charcoal-100">

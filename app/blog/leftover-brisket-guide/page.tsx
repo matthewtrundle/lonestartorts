@@ -67,8 +67,8 @@ export default function LeftoverBrisketGuidePage() {
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-display">
-              The Ultimate Guide to Leftover Brisket: 7 Days of Meals with H-E-B® Tortillas
-            </h1>
+ The Ultimate Guide to Leftover Brisket: 7 Days of Meals with H-E-B® Tortillas
+</h1>
 
             <p className="text-xl text-cream-100 leading-relaxed">
               You smoked a 12-pound brisket. Now you have 8 pounds left. Don't let it go to waste. Transform it into a week of incredible meals using H-E-B® tortillas and these pro techniques.
@@ -115,8 +115,8 @@ export default function LeftoverBrisketGuidePage() {
           {/* Section 1: Storage */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Proper Storage: The Foundation
-            </h2>
+ Proper Storage: The Foundation
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               <strong>Critical rule:</strong> Brisket quality degrades FAST if stored improperly. Follow these exact steps:
@@ -126,7 +126,7 @@ export default function LeftoverBrisketGuidePage() {
               {/* Immediate Storage */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="text-2xl">🕐</span>
+<span className="text-2xl">🕐</span>
                   Immediate Storage (Within 2 Hours of Cooking)
                 </h3>
 
@@ -164,7 +164,7 @@ export default function LeftoverBrisketGuidePage() {
               {/* Refrigerator Storage */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="text-2xl">❄️</span>
+<span className="text-2xl">❄️</span>
                   Refrigerator Storage (Short-Term: 3-5 Days)
                 </h3>
 
@@ -197,7 +197,7 @@ export default function LeftoverBrisketGuidePage() {
               {/* Freezer Storage */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-center gap-2">
-                  <span className="text-2xl">🧊</span>
+<span className="text-2xl">🧊</span>
                   Freezer Storage (Long-Term: 2-3 Months)
                 </h3>
 
@@ -233,7 +233,7 @@ export default function LeftoverBrisketGuidePage() {
             </div>
 
             <div className="bg-gradient-to-r from-rust-100 to-sunset-100 p-6 rounded-lg mt-8">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-3">⚠️ Warning Signs: Don't Eat If...</h3>
+              <h3 className="text-xl font-bold text-charcoal-950 mb-3">⚠ Warning Signs: Don't Eat If...</h3>
               <ul className="space-y-2 text-sm text-charcoal-800">
                 <li className="flex items-start gap-2">
                   <span className="text-red-600 font-bold">✗</span>
@@ -262,8 +262,8 @@ export default function LeftoverBrisketGuidePage() {
           {/* Section 2: Reheating */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Reheating Techniques: Keep It Moist
-            </h2>
+ Reheating Techniques: Keep It Moist
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               <strong>The challenge:</strong> Brisket dries out when reheated improperly. Here are four proven methods ranked by quality:
@@ -387,8 +387,8 @@ export default function LeftoverBrisketGuidePage() {
           {/* Section 3: 7-Day Meal Plan */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              7 Days of Brisket Meals with H-E-B® Tortillas
-            </h2>
+ 7 Days of Brisket Meals with H-E-B® Tortillas
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-8">
               Here's a complete week of meals using that leftover brisket. Each meal takes 15-30 minutes max and showcases H-E-B® tortillas in different applications.
@@ -579,8 +579,8 @@ export default function LeftoverBrisketGuidePage() {
           {/* Section 4: Meal Prep Strategy */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Sunday Meal Prep Strategy
-            </h2>
+ Sunday Meal Prep Strategy
+</h2>
 
             <div className="bg-gradient-to-r from-sunset-100 to-masa-100 p-8 rounded-lg">
               <p className="text-lg text-charcoal-800 mb-6">

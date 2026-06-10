@@ -138,8 +138,8 @@ export default function ChickenFajitasRecipe() {
               <span>Chicken Fajitas</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Grilled Chicken Fajitas Recipe
-            </h1>
+ Grilled Chicken Fajitas Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Sizzling, restaurant-quality fajitas in 30 minutes
             </p>
@@ -405,13 +405,13 @@ export default function ChickenFajitasRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What tortillas are best for chicken fajitas?
-              </h3>
+ What tortillas are best for chicken fajitas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Flour tortillas are the traditional and best choice for fajitas. Use 8-inch or 10-inch <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link>—they're soft, pliable, and sturdy enough to hold all the filling without breaking or falling apart. Always warm them before serving for the best texture and flavor. You can warm them individually on a comal or griddle, wrap them in foil and heat in the oven, or microwave wrapped in a damp paper towel for 30 seconds.
               </p>
@@ -419,8 +419,8 @@ export default function ChickenFajitasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How long should I marinate chicken for fajitas?
-              </h3>
+ How long should I marinate chicken for fajitas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 For best results, marinate chicken for at least 15 minutes—this gives the flavors time to penetrate and starts to tenderize the meat. Ideally, marinate for 2-4 hours for maximum flavor and tenderness. You can marinate up to 24 hours in the refrigerator, but don't go longer as the lime juice can start to "cook" the chicken and make the texture mushy. If you're really in a rush, even a quick 15-minute marinade while you prep the vegetables makes a noticeable difference!
               </p>
@@ -428,8 +428,8 @@ export default function ChickenFajitasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make chicken fajitas without a grill?
-              </h3>
+ Can I make chicken fajitas without a grill?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! A cast-iron skillet or grill pan on the stovetop works perfectly and is actually what many restaurants use. The key is cooking over high heat to get that characteristic char and smoky flavor. Make sure your skillet is screaming hot before adding the chicken and vegetables—this is what creates those delicious caramelized bits. A cast-iron skillet retains heat best and gives the most authentic results. You can also use an outdoor grill if you have one, cooking the chicken and vegetables over direct high heat.
               </p>
@@ -437,8 +437,8 @@ export default function ChickenFajitasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What toppings go with chicken fajitas?
-              </h3>
+ What toppings go with chicken fajitas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Classic fajita toppings include sour cream, guacamole or sliced avocado, salsa (red or green) or pico de gallo, shredded cheese (cheddar or Mexican blend), fresh cilantro, and lime wedges. Other popular additions include pickled jalapeños for heat, black beans for protein, Mexican rice, shredded lettuce, and sliced radishes. The beauty of fajitas is that everyone can customize their own! Set out a variety of toppings and let people build their perfect fajita.
               </p>
@@ -446,8 +446,8 @@ export default function ChickenFajitasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I prep fajitas ahead of time?
-              </h3>
+ Can I prep fajitas ahead of time?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! You can prep components ahead to make dinner faster. Slice the chicken and marinate up to 24 hours ahead. Slice the peppers and onions and store in an airtight container for up to 2 days. Prep all your toppings ahead too. When ready to serve, just cook the vegetables and chicken—it takes less than 15 minutes. You can also cook everything ahead and reheat, though the chicken won't be quite as juicy. Fajitas are great for meal prep and leftovers reheat well in a hot skillet!
               </p>
@@ -462,8 +462,8 @@ export default function ChickenFajitasRecipe() {
             <Link href="/recipes/carnitas-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Slow-Cooked Carnitas Tacos
-                </h3>
+ Slow-Cooked Carnitas Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Tender, crispy pork carnitas with authentic Mexican flavor
                 </p>
@@ -472,8 +472,8 @@ export default function ChickenFajitasRecipe() {
             <Link href="/recipes/cheese-quesadillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Classic Cheese Quesadillas
-                </h3>
+ Classic Cheese Quesadillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Simple, crispy quesadillas ready in just 10 minutes
                 </p>
@@ -482,8 +482,8 @@ export default function ChickenFajitasRecipe() {
             <Link href="/guides/how-to-reheat-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  How to Reheat Tortillas
-                </h3>
+ How to Reheat Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Learn the best methods for warming tortillas perfectly
                 </p>

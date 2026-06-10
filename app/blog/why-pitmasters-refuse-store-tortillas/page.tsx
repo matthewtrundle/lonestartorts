@@ -67,8 +67,8 @@ export default function PitmastersRefuseStoreTortillasPage() {
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-display">
-              Why Texas Pitmasters Refuse to Use Store-Bought Tortillas
-            </h1>
+ Why Texas Pitmasters Refuse to Use Store-Bought Tortillas
+</h1>
 
             <p className="text-xl text-cream-100 leading-relaxed">
               We asked 10 Texas pitmasters a simple question: "Why don't you use cheap store-bought tortillas?" Their answers reveal expensive lessons learned, lost customers, and the day they switched to H-E-B® tortillas for good.
@@ -111,8 +111,8 @@ export default function PitmastersRefuseStoreTortillasPage() {
           {/* Section 1: The Financial Reality */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-rust-600">
-              "Cheap Tortillas Are Actually Expensive"
-            </h2>
+ "Cheap Tortillas Are Actually Expensive"
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               The math seems simple: Store-bought tortillas cost $0.08 per unit. H-E-B® tortillas cost $0.22 per unit. You could save $0.14 per taco! But here's what actually happens:
@@ -196,8 +196,8 @@ export default function PitmastersRefuseStoreTortillasPage() {
           {/* Section 2: Pitmaster Stories */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-rust-600">
-              10 Pitmasters, 10 Stories, 1 Conclusion
-            </h2>
+ 10 Pitmasters, 10 Stories, 1 Conclusion
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-8">
               These aren't paid testimonials. These are real pitmasters who learned expensive lessons. Names and locations are real. Stories are unedited.
@@ -357,8 +357,8 @@ export default function PitmastersRefuseStoreTortillasPage() {
           {/* Section 3: What Makes H-E-B Different */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-rust-600">
-              What Pitmasters Say Makes H-E-B® Different
-            </h2>
+ What Pitmasters Say Makes H-E-B® Different
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               When we asked pitmasters to explain WHY H-E-B® tortillas work better, they got technical. Here's what they said:
@@ -367,7 +367,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
             <div className="space-y-6">
               <div className="bg-gradient-to-r from-sunset-50 to-masa-50 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">💧</span>
+<span className="text-2xl">💧</span>
                   They Handle Fat & Moisture
                 </h3>
                 <p className="text-charcoal-800 text-sm leading-relaxed mb-3">
@@ -377,7 +377,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
 
               <div className="bg-gradient-to-r from-masa-50 to-cream-100 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">💪</span>
+<span className="text-2xl">💪</span>
                   They Don't Tear Under Load
                 </h3>
                 <p className="text-charcoal-800 text-sm leading-relaxed mb-3">
@@ -387,7 +387,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
 
               <div className="bg-gradient-to-r from-rust-50 to-sunset-50 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">🎨</span>
+<span className="text-2xl">🎨</span>
                   They Look Professional
                 </h3>
                 <p className="text-charcoal-800 text-sm leading-relaxed mb-3">
@@ -397,7 +397,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
 
               <div className="bg-gradient-to-r from-cream-100 to-sunset-50 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">👅</span>
+<span className="text-2xl">👅</span>
                   They Taste Like Real Tortillas
                 </h3>
                 <p className="text-charcoal-800 text-sm leading-relaxed mb-3">
@@ -407,7 +407,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
 
               <div className="bg-gradient-to-r from-sunset-50 to-rust-50 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">✅</span>
+<span className="text-2xl">✅</span>
                   They're Consistent
                 </h3>
                 <p className="text-charcoal-800 text-sm leading-relaxed mb-3">
@@ -420,8 +420,8 @@ export default function PitmastersRefuseStoreTortillasPage() {
           {/* Section 4: The Bottom Line */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-rust-600">
-              The Bottom Line: What Every Pitmaster Says
-            </h2>
+ The Bottom Line: What Every Pitmaster Says
+</h2>
 
             <div className="bg-gradient-to-r from-charcoal-100 to-masa-50 p-8 rounded-lg">
               <p className="text-lg text-charcoal-800 leading-relaxed mb-6">
@@ -464,8 +464,8 @@ export default function PitmastersRefuseStoreTortillasPage() {
           {/* Section 5: For New Pitmasters */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-rust-600">
-              Advice for New Pitmasters
-            </h2>
+ Advice for New Pitmasters
+</h2>
 
             <div className="bg-gradient-to-r from-sunset-100 to-masa-100 p-8 rounded-lg">
               <p className="text-lg text-charcoal-800 mb-6">
@@ -475,7 +475,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
               <div className="space-y-4">
                 <div className="bg-white p-5 rounded-lg">
                   <h3 className="font-bold text-charcoal-950 mb-2 flex items-center gap-2">
-                    <span className="text-rust-600">1.</span>
+<span className="text-rust-600">1.</span>
                     Don't Even Try Cheap Tortillas
                   </h3>
                   <p className="text-charcoal-800 text-sm">
@@ -485,7 +485,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
 
                 <div className="bg-white p-5 rounded-lg">
                   <h3 className="font-bold text-charcoal-950 mb-2 flex items-center gap-2">
-                    <span className="text-rust-600">2.</span>
+<span className="text-rust-600">2.</span>
                     Budget for Quality Tortillas
                   </h3>
                   <p className="text-charcoal-800 text-sm">
@@ -495,7 +495,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
 
                 <div className="bg-white p-5 rounded-lg">
                   <h3 className="font-bold text-charcoal-950 mb-2 flex items-center gap-2">
-                    <span className="text-rust-600">3.</span>
+<span className="text-rust-600">3.</span>
                     Your Tortilla IS Your Brand
                   </h3>
                   <p className="text-charcoal-800 text-sm">
@@ -505,7 +505,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
 
                 <div className="bg-white p-5 rounded-lg">
                   <h3 className="font-bold text-charcoal-950 mb-2 flex items-center gap-2">
-                    <span className="text-rust-600">4.</span>
+<span className="text-rust-600">4.</span>
                     Build Relationships With Suppliers
                   </h3>
                   <p className="text-charcoal-800 text-sm">

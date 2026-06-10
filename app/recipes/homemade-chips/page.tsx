@@ -77,8 +77,8 @@ export default function HomemadeChipsRecipe() {
               <span>Homemade Tortilla Chips</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Homemade Tortilla Chips Recipe
-            </h1>
+ Homemade Tortilla Chips Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Crispy, golden, and better than any bag you'll ever buy
             </p>
@@ -130,7 +130,7 @@ export default function HomemadeChipsRecipe() {
         <section className="max-w-4xl mx-auto px-6 py-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-rust-50 p-6 rounded-lg border-l-4 border-rust-500">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-3">🔥 Fried Method</h3>
+              <h3 className="text-xl font-bold text-charcoal-950 mb-3">Fried Method</h3>
               <ul className="text-charcoal-700 space-y-2">
                 <li>• Crispiest results, restaurant-quality</li>
                 <li>• Best for nachos and dipping</li>
@@ -140,7 +140,7 @@ export default function HomemadeChipsRecipe() {
               </ul>
             </div>
             <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
-              <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌡️ Baked Method</h3>
+              <h3 className="text-xl font-bold text-charcoal-950 mb-3">Baked Method</h3>
               <ul className="text-charcoal-700 space-y-2">
                 <li>• Lighter and healthier option</li>
                 <li>• Easier cleanup</li>
@@ -382,8 +382,8 @@ export default function HomemadeChipsRecipe() {
             <Link href="/recipes/tortilla-soup" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Tortilla Soup Topping
-                </h3>
+ Tortilla Soup Topping
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Top your soup with crispy strips
                 </p>
@@ -392,8 +392,8 @@ export default function HomemadeChipsRecipe() {
             <Link href="/recipes/chilaquiles" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Chilaquiles
-                </h3>
+ Chilaquiles
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Simmer in salsa for breakfast
                 </p>
@@ -402,8 +402,8 @@ export default function HomemadeChipsRecipe() {
             <Link href="/recipes/nachos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Loaded Nachos
-                </h3>
+ Loaded Nachos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Build the ultimate nacho platter
                 </p>

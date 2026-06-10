@@ -194,7 +194,7 @@ export default function TexasTortillaTraditionsPage() {
                   </div>
 
                   <div className="bg-charcoal-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-charcoal-950 mb-2">🏙️ Houston (East Texas)</h4>
+                    <h4 className="font-bold text-charcoal-950 mb-2">🏙 Houston (East Texas)</h4>
                     <p className="text-sm">Most diverse tortilla culture. Vietnamese-Texan fusion (bánh mì tacos), Houston&apos;s massive Mexican and Central American communities, and international influences.</p>
                   </div>
 

@@ -129,8 +129,8 @@ export default function BrisketTacosRecipe() {
               </div>
 
               <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
-                Texas Smoked Brisket Tacos
-              </h1>
+ Texas Smoked Brisket Tacos
+</h1>
 
               <p className="text-xl text-cream-100 mb-8">
                 The ultimate way to use leftover brisket (or an excuse to smoke one). Juicy, smoky, tender beef on authentic H-E-B® tortillas with tangy pickled onions.
@@ -192,7 +192,7 @@ export default function BrisketTacosRecipe() {
           {/* Ingredients */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 flex items-center gap-3">
-              <ChefIcon className="w-8 h-8 text-sunset-500" />
+<ChefIcon className="w-8 h-8 text-sunset-500" />
               Ingredients
             </h2>
 
@@ -258,7 +258,7 @@ export default function BrisketTacosRecipe() {
             </div>
 
             <div className="mt-6 bg-masa-50 p-6 rounded-lg">
-              <h4 className="font-bold text-charcoal-950 mb-2">🔥 Pro Tip: The Brisket</h4>
+              <h4 className="font-bold text-charcoal-950 mb-2">Pro Tip: The Brisket</h4>
               <p className="text-charcoal-800 text-sm">
                 Don't have leftover brisket? You can buy brisket by the pound from most Texas BBQ joints. Ask for extra fatty brisket if available—it makes the best tacos. Or use this as your excuse to smoke a whole brisket this weekend!
               </p>
@@ -383,7 +383,7 @@ export default function BrisketTacosRecipe() {
               </div>
 
               <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">🌮 Why H-E-B® Flour Tortillas Matter</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Why H-E-B® Flour Tortillas Matter</h3>
                 <p className="text-charcoal-700 text-sm">
                   Brisket is heavy, juicy, and full of rendered fat. Cheap tortillas will tear and fall apart. H-E-B®{' '}
                   <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline">
@@ -398,7 +398,7 @@ export default function BrisketTacosRecipe() {
               </div>
 
               <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">🔥 The Beef Broth Trick</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">The Beef Broth Trick</h3>
                 <p className="text-charcoal-700 text-sm">
                   Reheating brisket in beef broth instead of a microwave is game-changing. It rehydrates the meat and adds extra flavor. The reduced broth becomes a delicious jus that soaks into the tortilla.
                 </p>
@@ -430,7 +430,7 @@ export default function BrisketTacosRecipe() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-sunset-500">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌶️ Spicy Brisket Tacos</h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌶 Spicy Brisket Tacos</h3>
                 <p className="text-charcoal-700 text-sm">
                   Add diced jalapeños to the brisket while reheating. Top with sliced fresh jalapeños, hot sauce, or make a spicy crema by mixing sour cream with hot sauce and lime.
                 </p>
@@ -470,8 +470,8 @@ export default function BrisketTacosRecipe() {
               <Link href="/recipes/breakfast-tacos" className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-charcoal-950 group-hover:text-sunset-600 mb-2">
-                    Breakfast Tacos →
-                  </h3>
+ Breakfast Tacos →
+</h3>
                   <p className="text-charcoal-700 text-sm">Use brisket for breakfast too</p>
                   <span className="text-sunset-500 text-xs font-semibold mt-2 inline-block">15 min</span>
                 </div>
@@ -480,8 +480,8 @@ export default function BrisketTacosRecipe() {
               <Link href="/recipes/carnitas-tacos" className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-charcoal-950 group-hover:text-sunset-600 mb-2">
-                    Carnitas Tacos →
-                  </h3>
+ Carnitas Tacos →
+</h3>
                   <p className="text-charcoal-700 text-sm">Another great meat option</p>
                   <span className="text-sunset-500 text-xs font-semibold mt-2 inline-block">3 hours</span>
                 </div>
@@ -490,8 +490,8 @@ export default function BrisketTacosRecipe() {
               <Link href="/recipes/cheese-quesadillas" className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-charcoal-950 group-hover:text-sunset-600 mb-2">
-                    Brisket Quesadillas →
-                  </h3>
+ Brisket Quesadillas →
+</h3>
                   <p className="text-charcoal-700 text-sm">Add brisket to this recipe</p>
                   <span className="text-sunset-500 text-xs font-semibold mt-2 inline-block">20 min</span>
                 </div>

@@ -152,8 +152,8 @@ export default function TortillaSoupRecipe() {
               <span>Tortilla Soup</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Chicken Tortilla Soup Recipe
-            </h1>
+ Authentic Chicken Tortilla Soup Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Rich, flavorful, and loaded with crispy tortilla strips
             </p>
@@ -436,13 +436,13 @@ export default function TortillaSoupRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What tortillas are best for tortilla soup?
-              </h3>
+ What tortillas are best for tortilla soup?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline">Corn tortillas</Link> are the traditional and best choice for tortilla soup. They have an authentic corn flavor that complements the rich broth and fry up perfectly crispy. Day-old or slightly stale corn tortillas work even better because they have less moisture and fry up crispier.
               </p>
@@ -450,8 +450,8 @@ export default function TortillaSoupRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How long does tortilla soup last in the fridge?
-              </h3>
+ How long does tortilla soup last in the fridge?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Tortilla soup (without the crispy strips and toppings) lasts 3-4 days refrigerated in an airtight container. The flavor actually improves after a day as the spices meld. Store the crispy tortilla strips separately in a paper bag at room temperature. Reheat the soup on the stovetop and add fresh toppings when serving.
               </p>
@@ -459,8 +459,8 @@ export default function TortillaSoupRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can you freeze tortilla soup?
-              </h3>
+ Can you freeze tortilla soup?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! Freeze tortilla soup (without toppings) for up to 3 months in freezer-safe containers. Leave some room at the top for expansion. Thaw overnight in the refrigerator and reheat on the stovetop. Make fresh tortilla strips and add toppings when serving for the best texture and flavor.
               </p>
@@ -468,8 +468,8 @@ export default function TortillaSoupRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What's the difference between tortilla soup and chicken tortilla soup?
-              </h3>
+ What's the difference between tortilla soup and chicken tortilla soup?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 They're essentially the same thing! "Tortilla soup" (sopa de tortilla) traditionally includes chicken as the protein. The name refers to the crispy tortilla strips that top the soup. Some variations use vegetable broth and beans for a vegetarian version, but the classic always includes chicken.
               </p>
@@ -514,8 +514,8 @@ export default function TortillaSoupRecipe() {
             <Link href="/recipes/homemade-chips" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Homemade Tortilla Chips
-                </h3>
+ Homemade Tortilla Chips
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Use the same technique to make perfect chips
                 </p>
@@ -524,8 +524,8 @@ export default function TortillaSoupRecipe() {
             <Link href="/recipes/chilaquiles" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Chilaquiles Recipe
-                </h3>
+ Chilaquiles Recipe
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Another delicious way to use corn tortillas
                 </p>
@@ -534,8 +534,8 @@ export default function TortillaSoupRecipe() {
             <Link href="/products/corn-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Shop Corn Tortillas
-                </h3>
+ Shop Corn Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Get authentic H-E-B corn tortillas delivered
                 </p>

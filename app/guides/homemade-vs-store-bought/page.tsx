@@ -159,8 +159,8 @@ export default function HomemadeVsStoreBoughtPage() {
               </ol>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Homemade vs Store-Bought Tortillas
-            </h1>
+ Homemade vs Store-Bought Tortillas
+</h1>
             <p className="text-xl text-sunset-100">
               The complete guide to choosing between homemade and store-bought tortillas
             </p>
@@ -179,8 +179,8 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* Comparison Table */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-900 mb-6">
-              Quick Comparison
-            </h2>
+ Quick Comparison
+</h2>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse bg-white rounded-lg shadow-sm overflow-hidden">
                 <thead>
@@ -239,14 +239,14 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* Cost Analysis */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-900 mb-6">
-              Cost Breakdown
-            </h2>
+ Cost Breakdown
+</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Homemade Costs */}
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-xl font-semibold text-sunset-600 mb-4">
-                  Homemade Tortillas
-                </h3>
+ Homemade Tortillas
+</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-charcoal-700">Masa harina (2 lbs)</span>
@@ -274,8 +274,8 @@ export default function HomemadeVsStoreBoughtPage() {
               {/* Store-Bought Costs */}
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-xl font-semibold text-masa-600 mb-4">
-                  Premium Store-Bought
-                </h3>
+ Premium Store-Bought
+</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-charcoal-700">Lonestar Tortillas (10-pack)</span>
@@ -329,14 +329,14 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* Time Investment */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-900 mb-6">
-              Time Investment Comparison
-            </h2>
+ Time Investment Comparison
+</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Homemade Timeline */}
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-xl font-semibold text-sunset-600 mb-4">
-                  Homemade Process (Corn Tortillas)
-                </h3>
+ Homemade Process (Corn Tortillas)
+</h3>
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <div className="bg-sunset-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
@@ -392,8 +392,8 @@ export default function HomemadeVsStoreBoughtPage() {
               {/* Store-Bought Timeline */}
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-xl font-semibold text-masa-600 mb-4">
-                  Store-Bought Process
-                </h3>
+ Store-Bought Process
+</h3>
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <div className="bg-masa-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
@@ -438,14 +438,14 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* Quality & Taste */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-900 mb-6">
-              Quality & Taste Comparison
-            </h2>
+ Quality & Taste Comparison
+</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Homemade Quality */}
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-xl font-semibold text-sunset-600 mb-4">
-                  Homemade Tortillas
-                </h3>
+ Homemade Tortillas
+</h3>
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-charcoal-900 mb-2">Advantages</h4>
@@ -499,8 +499,8 @@ export default function HomemadeVsStoreBoughtPage() {
               {/* Store-Bought Quality */}
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-xl font-semibold text-masa-600 mb-4">
-                  Premium Store-Bought
-                </h3>
+ Premium Store-Bought
+</h3>
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-charcoal-900 mb-2">Advantages</h4>
@@ -556,14 +556,14 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* When to Choose Each */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-900 mb-6">
-              When to Choose Each Option
-            </h2>
+ When to Choose Each Option
+</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Choose Homemade */}
               <div className="bg-gradient-to-br from-sunset-50 to-sunset-100 rounded-lg p-6 border-2 border-sunset-300">
                 <h3 className="text-2xl font-bold text-sunset-900 mb-4">
-                  Choose Homemade When:
-                </h3>
+ Choose Homemade When:
+</h3>
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="text-sunset-600 font-bold mr-3 text-xl">→</span>
@@ -607,8 +607,8 @@ export default function HomemadeVsStoreBoughtPage() {
               {/* Choose Store-Bought */}
               <div className="bg-gradient-to-br from-masa-50 to-masa-100 rounded-lg p-6 border-2 border-masa-300">
                 <h3 className="text-2xl font-bold text-masa-900 mb-4">
-                  Choose Store-Bought When:
-                </h3>
+ Choose Store-Bought When:
+</h3>
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="text-masa-600 font-bold mr-3 text-xl">→</span>
@@ -655,8 +655,8 @@ export default function HomemadeVsStoreBoughtPage() {
           <section className="mb-12">
             <div className="bg-gradient-to-br from-charcoal-800 to-charcoal-900 text-white rounded-xl p-8">
               <h2 className="text-3xl font-bold mb-4">
-                The Best of Both Worlds
-              </h2>
+ The Best of Both Worlds
+</h2>
               <p className="text-lg text-charcoal-100 mb-6">
                 You don't have to choose just one option. Many tortilla lovers use a hybrid approach:
               </p>
@@ -686,13 +686,13 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* FAQ Section */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-900 mb-6">
-              Frequently Asked Questions
-            </h2>
+ Frequently Asked Questions
+</h2>
             <div className="space-y-6">
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
-                  Are homemade tortillas better than store-bought?
-                </h3>
+ Are homemade tortillas better than store-bought?
+</h3>
                 <p className="text-charcoal-700">
                   Homemade tortillas are generally fresher and more flavorful, with better texture and no preservatives. However, they require time and effort. Premium store-bought tortillas like Lonestar can offer comparable quality with the convenience of being ready to use. The "better" choice depends on your priorities: if you value the experience and have time, homemade wins. If you value convenience and consistency, premium store-bought is excellent.
                 </p>
@@ -700,8 +700,8 @@ export default function HomemadeVsStoreBoughtPage() {
 
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
-                  How much money do you save making your own tortillas?
-                </h3>
+ How much money do you save making your own tortillas?
+</h3>
                 <p className="text-charcoal-700">
                   Homemade tortillas cost about $0.15-0.25 per tortilla compared to $0.50-0.75 for premium store-bought. For a batch of 30 tortillas, that's $6 vs $18-22 in ingredients alone—saving $12-16 per batch. However, this doesn't account for time investment (60 minutes) or equipment costs ($45-90 initial investment). If you value your time at $20/hour, each batch costs $20 in time plus $6 in ingredients = $26 total, making the per-tortilla cost about $0.87 when time is factored in. For regular weekly use, homemade becomes economical after 3-5 batches once equipment is paid off.
                 </p>
@@ -709,8 +709,8 @@ export default function HomemadeVsStoreBoughtPage() {
 
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
-                  How long do homemade tortillas stay fresh?
-                </h3>
+ How long do homemade tortillas stay fresh?
+</h3>
                 <p className="text-charcoal-700">
                   Homemade tortillas stay fresh for 2-3 days at room temperature when stored in an airtight container or resealable bag. Refrigerated, they last 5-7 days. For longer storage, freeze them for up to 3 months by separating with parchment paper and storing in a freezer bag. Store-bought tortillas with preservatives can last 2-4 weeks refrigerated, making them more convenient for occasional use.
                 </p>
@@ -718,8 +718,8 @@ export default function HomemadeVsStoreBoughtPage() {
 
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
-                  What equipment do I need to make tortillas at home?
-                </h3>
+ What equipment do I need to make tortillas at home?
+</h3>
                 <p className="text-charcoal-700 mb-3">
                   For <strong>corn tortillas</strong>, you'll need:
                 </p>
@@ -746,8 +746,8 @@ export default function HomemadeVsStoreBoughtPage() {
 
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
-                  Can you taste the difference between homemade and store-bought tortillas?
-                </h3>
+ Can you taste the difference between homemade and store-bought tortillas?
+</h3>
                 <p className="text-charcoal-700">
                   Yes, when comparing homemade to budget store-bought tortillas, the difference is dramatic—homemade have better texture, corn flavor, and freshness. However, when comparing homemade to <em>premium</em> store-bought tortillas (like Lonestar), the gap narrows significantly. Premium brands use traditional methods, quality ingredients, and make fresh batches daily, delivering results that rival homemade while saving you an hour of prep time.
                 </p>
@@ -755,8 +755,8 @@ export default function HomemadeVsStoreBoughtPage() {
 
               <div className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100">
                 <h3 className="text-lg font-semibold text-charcoal-900 mb-2">
-                  Is making tortillas at home hard?
-                </h3>
+ Is making tortillas at home hard?
+</h3>
                 <p className="text-charcoal-700">
                   Corn tortillas are relatively easy but require practice to master thickness and cooking temperature. Expect your first 2-3 batches to have imperfect results—some may crack, tear, or cook unevenly. Flour tortillas are more forgiving but require good rolling technique. With practice, the process becomes meditative and rewarding. If you're short on time or don't enjoy cooking, premium store-bought tortillas deliver excellent results without the learning curve.
                 </p>
@@ -768,8 +768,8 @@ export default function HomemadeVsStoreBoughtPage() {
           <section className="mb-12">
             <div className="bg-gradient-to-br from-sunset-500 to-rust-500 text-white rounded-xl p-8">
               <h2 className="text-3xl font-bold mb-4">
-                Our Verdict
-              </h2>
+ Our Verdict
+</h2>
               <div className="text-lg space-y-4">
                 <p>
                   Both homemade and premium store-bought tortillas have their place in a well-stocked kitchen. The right choice depends on your lifestyle, cooking frequency, and personal values.
@@ -793,8 +793,8 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* Call to Action */}
           <section className="bg-gradient-to-r from-masa-500 to-masa-600 text-white rounded-xl p-8 text-center">
             <h2 className="text-3xl font-bold mb-4">
-              Experience Premium Handcrafted Tortillas
-            </h2>
+ Experience Premium Handcrafted Tortillas
+</h2>
             <p className="text-xl text-masa-100 mb-6 max-w-2xl mx-auto">
               Skip the prep time and enjoy authentic, handcrafted tortillas made fresh daily. Lonestar brings traditional quality to your table with zero effort.
             </p>
@@ -817,16 +817,16 @@ export default function HomemadeVsStoreBoughtPage() {
           {/* Related Content */}
           <section className="mt-12">
             <h2 className="text-2xl font-bold text-charcoal-900 mb-6">
-              Related Guides & Recipes
-            </h2>
+ Related Guides & Recipes
+</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
                 href="/guides/how-to-freeze-tortillas"
                 className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100 hover:border-sunset-300 hover:shadow-md transition"
               >
                 <h3 className="font-semibold text-sunset-600 mb-2">
-                  How to Freeze Tortillas
-                </h3>
+ How to Freeze Tortillas
+</h3>
                 <p className="text-sm text-charcoal-600">
                   Complete guide to freezing and thawing tortillas for maximum freshness
                 </p>
@@ -836,8 +836,8 @@ export default function HomemadeVsStoreBoughtPage() {
                 className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100 hover:border-sunset-300 hover:shadow-md transition"
               >
                 <h3 className="font-semibold text-sunset-600 mb-2">
-                  How to Reheat Tortillas
-                </h3>
+ How to Reheat Tortillas
+</h3>
                 <p className="text-sm text-charcoal-600">
                   5 methods to perfectly warm your tortillas every time
                 </p>
@@ -847,8 +847,8 @@ export default function HomemadeVsStoreBoughtPage() {
                 className="bg-white rounded-lg shadow-sm p-6 border border-charcoal-100 hover:border-sunset-300 hover:shadow-md transition"
               >
                 <h3 className="font-semibold text-sunset-600 mb-2">
-                  Carne Asada Tacos Recipe
-                </h3>
+ Carne Asada Tacos Recipe
+</h3>
                 <p className="text-sm text-charcoal-600">
                   Authentic street-style tacos with marinated grilled steak
                 </p>

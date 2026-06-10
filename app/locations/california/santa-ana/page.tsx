@@ -85,8 +85,8 @@ export default function SantaAnaPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Texas Tortillas Delivered to Santa Ana
-            </h1>
+ Authentic Texas Tortillas Delivered to Santa Ana
+</h1>
             <p className="text-xl text-cream-200 max-w-3xl">
               Get fresh H-E-B tortillas shipped directly to your door in Santa Ana, California. Experience the authentic taste of Texas.
             </p>

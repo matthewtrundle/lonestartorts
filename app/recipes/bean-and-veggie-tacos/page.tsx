@@ -150,8 +150,8 @@ export default function BeanVeggieTacosRecipe() {
               <span>Bean & Veggie Tacos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Vegetarian Bean & Veggie Tacos Recipe
-            </h1>
+ Vegetarian Bean & Veggie Tacos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Hearty, flavorful meatless tacos everyone will love
             </p>
@@ -466,13 +466,13 @@ export default function BeanVeggieTacosRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Are bean and veggie tacos healthy?
-              </h3>
+ Are bean and veggie tacos healthy?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes, these tacos are incredibly healthy! Black beans are nutritional powerhouses—loaded with protein (about 15g per cup), fiber (15g per cup), iron, magnesium, and folate. They're also low in fat and calories. The roasted vegetables provide vitamins A and C, antioxidants, and more fiber. Corn tortillas are naturally gluten-free and lower in calories than flour tortillas. Together, you get a complete, balanced meal that's naturally low in saturated fat, high in plant-based nutrition, and will keep you full for hours. Even better: skip the cheese and sour cream for a lighter version, or use Greek yogurt instead of sour cream for added protein. These tacos prove that healthy eating doesn't mean sacrificing flavor!
               </p>
@@ -480,8 +480,8 @@ export default function BeanVeggieTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I use pinto beans instead of black beans?
-              </h3>
+ Can I use pinto beans instead of black beans?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! Pinto beans work just as well as black beans in this recipe—they have similar texture and cook the same way. In fact, pinto beans are traditional in many Mexican dishes. You can also try kidney beans (heartier and firmer), white beans (creamier and milder), or even chickpeas for a different texture and flavor. For extra convenience, use refried beans (canned or homemade) straight from the can—just heat them up with some spices and you're done. Or get creative and use a mix of different beans for variety in both texture and appearance. The cooking method and seasonings work with any beans you choose!
               </p>
@@ -489,8 +489,8 @@ export default function BeanVeggieTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How do you make vegetarian tacos taste meaty and satisfying?
-              </h3>
+ How do you make vegetarian tacos taste meaty and satisfying?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The secret is layers of flavor and varied textures. First: bold, generous seasoning—use plenty of cumin, smoked paprika, and chili powder. These spices add depth and that "umami" savory quality. Second: proper cooking technique. Roasting vegetables until they're charred creates caramelization that adds sweetness and complexity. Mashing some beans while leaving others whole creates a texture contrast that mimics ground meat. Third: richness from fats—avocado, cheese, sour cream add satisfaction. Fourth: umami boosters like a splash of soy sauce in the beans or nutritional yeast for cheesy flavor. Finally: don't skip the toppings! Creamy, crunchy, tangy elements create a complete sensory experience. Even meat-lovers won't miss the meat!
               </p>
@@ -498,8 +498,8 @@ export default function BeanVeggieTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make these tacos vegan?
-              </h3>
+ Can I make these tacos vegan?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! These tacos are super easy to make vegan. The base recipe—beans, roasted vegetables, and corn tortillas—is already completely plant-based. Just choose vegan toppings: skip the cheese and sour cream, or use vegan alternatives. Vegan sour cream or cashew cream work beautifully (make cashew cream by blending soaked cashews with lime juice, garlic, and water until smooth). Load up on avocado or guacamole for creaminess. Nutritional yeast sprinkled on top adds a cheesy, umami flavor. The tacos are still incredibly flavorful and satisfying without any animal products. Many people actually prefer the lighter, fresher taste of the vegan version!
               </p>
@@ -507,8 +507,8 @@ export default function BeanVeggieTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I meal prep these tacos?
-              </h3>
+ Can I meal prep these tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes, these are excellent for meal prep! Make the seasoned beans and roasted vegetables ahead and store them separately in airtight containers in the refrigerator for up to 4 days. When you're ready to eat, reheat the beans in a skillet with a splash of water and warm the vegetables in the oven or skillet. Prep your toppings ahead too—dice onions and tomatoes, chop cilantro, slice avocado (toss with lime to prevent browning). Store each component separately for best results. Assemble the tacos fresh when you're ready to eat—this keeps the tortillas from getting soggy. The beans actually taste even better the next day as the flavors meld. You can also freeze the cooked beans for up to 3 months. Warm tortillas fresh each time for best texture.
               </p>
@@ -523,8 +523,8 @@ export default function BeanVeggieTacosRecipe() {
             <Link href="/recipes/cheese-quesadillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Classic Cheese Quesadillas
-                </h3>
+ Classic Cheese Quesadillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Simple, crispy quesadillas ready in 10 minutes
                 </p>
@@ -533,8 +533,8 @@ export default function BeanVeggieTacosRecipe() {
             <Link href="/recipes/breakfast-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Texas Breakfast Tacos
-                </h3>
+ Texas Breakfast Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Quick morning tacos with eggs and cheese
                 </p>
@@ -543,8 +543,8 @@ export default function BeanVeggieTacosRecipe() {
             <Link href="/guides/tortilla-nutrition" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Tortilla Nutrition Guide
-                </h3>
+ Tortilla Nutrition Guide
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Complete nutritional breakdown and health benefits
                 </p>

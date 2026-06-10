@@ -109,8 +109,8 @@ export default function DoesHebShipOutOfStatePage() {
             className="mb-6 text-cream-300"
           />
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Does H-E-B Ship Out of State?
-          </h1>
+ Does H-E-B Ship Out of State?
+</h1>
           <p className="text-xl text-cream-200 max-w-3xl">
             Short answer: H-E-B doesn&apos;t — but you can still get authentic H-E-B tortillas
             delivered to all 50 states in 2&ndash;4 days. Here&apos;s how.

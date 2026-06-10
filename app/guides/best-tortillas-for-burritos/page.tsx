@@ -100,8 +100,8 @@ export default function BestTortillasForBurritosPage() {
               <span>Best Tortillas for Burritos</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Best Tortillas for Burritos
-            </h1>
+ Best Tortillas for Burritos
+</h1>
             <p className="text-xl text-cream-200 max-w-2xl">
               Master the art of the perfect burrito with the right tortillas and techniques.
             </p>
@@ -130,7 +130,7 @@ export default function BestTortillasForBurritosPage() {
             </p>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6 flex items-center gap-3">
-              <TacoIcon className="w-8 h-8 text-sunset-500" />
+<TacoIcon className="w-8 h-8 text-sunset-500" />
               What Makes a Great Burrito Tortilla
             </h2>
 
@@ -170,8 +170,8 @@ export default function BestTortillasForBurritosPage() {
             </ul>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Tortilla Size Guide by Burrito Type
-            </h2>
+ Tortilla Size Guide by Burrito Type
+</h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white p-6 rounded-lg shadow-md border border-charcoal-100">
@@ -203,8 +203,8 @@ export default function BestTortillasForBurritosPage() {
             </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              How to Warm Tortillas for Burritos
-            </h2>
+ How to Warm Tortillas for Burritos
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               Cold tortillas crack. Always warm your tortillas before rolling burritos:
@@ -226,8 +226,8 @@ export default function BestTortillasForBurritosPage() {
             </ol>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Perfect Burrito Rolling Technique
-            </h2>
+ Perfect Burrito Rolling Technique
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               The difference between a burrito that holds together and one that falls apart is all in the folding:
@@ -252,8 +252,8 @@ export default function BestTortillasForBurritosPage() {
             </ol>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Common Burrito Tortilla Mistakes
-            </h2>
+ Common Burrito Tortilla Mistakes
+</h2>
 
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3">
@@ -288,8 +288,8 @@ export default function BestTortillasForBurritosPage() {
 
             {/* FAQ Section */}
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Frequently Asked Questions
-            </h2>
+ Frequently Asked Questions
+</h2>
 
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm border border-charcoal-100">

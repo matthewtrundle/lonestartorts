@@ -158,8 +158,8 @@ export default function BirriaRecipe() {
               <span>Birria Tacos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Birria Tacos Recipe
-            </h1>
+ Authentic Birria Tacos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Tender braised beef, crispy cheese-crusted tortillas, and rich consomé for dipping
             </p>
@@ -519,8 +519,8 @@ export default function BirriaRecipe() {
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What is birria?
-              </h3>
+ What is birria?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Birria is a traditional Mexican stew originating from Jalisco, Mexico. It was traditionally made with goat, but beef has become more common in the US. The meat is braised in a rich, spiced chile sauce called consomé until fall-apart tender. The dish can be served as a stew or used to make the viral birria tacos (quesabirria).
               </p>
@@ -528,8 +528,8 @@ export default function BirriaRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What makes birria tacos red?
-              </h3>
+ What makes birria tacos red?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The signature red color comes from the dried guajillo and ancho chiles in the consomé. When you dip the <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline">corn tortillas</Link> in the consomé before griddling, they absorb the red-orange chile sauce and develop that iconic color as they crisp up.
               </p>
@@ -537,8 +537,8 @@ export default function BirriaRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can you make birria in advance?
-              </h3>
+ Can you make birria in advance?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely—birria actually tastes better the next day! Make the braised meat and consomé up to 3 days ahead and refrigerate. The fat will solidify on top, making it easy to remove if desired. Reheat before assembling tacos. You can also freeze birria for up to 3 months.
               </p>
@@ -546,8 +546,8 @@ export default function BirriaRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What's the difference between birria tacos and quesabirria?
-              </h3>
+ What's the difference between birria tacos and quesabirria?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 They're essentially the same thing! "Quesabirria" emphasizes the cheese (queso), while "birria tacos" or "tacos de birria" is the more traditional name. Both refer to consomé-dipped tortillas filled with birria meat and cheese, griddled until crispy, and served with consomé for dipping.
               </p>
@@ -562,8 +562,8 @@ export default function BirriaRecipe() {
             <Link href="/recipes/carne-asada-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Carne Asada Tacos
-                </h3>
+ Carne Asada Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Classic grilled steak street tacos
                 </p>
@@ -572,8 +572,8 @@ export default function BirriaRecipe() {
             <Link href="/recipes/carnitas-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Carnitas Tacos
-                </h3>
+ Carnitas Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Crispy slow-cooked pork tacos
                 </p>
@@ -582,8 +582,8 @@ export default function BirriaRecipe() {
             <Link href="/products/corn-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Shop Corn Tortillas
-                </h3>
+ Shop Corn Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Get authentic H-E-B corn tortillas delivered
                 </p>

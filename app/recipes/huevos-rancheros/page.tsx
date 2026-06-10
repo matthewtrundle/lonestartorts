@@ -85,8 +85,8 @@ export default function HuevosRancherosRecipe() {
               <span>Huevos Rancheros</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Huevos Rancheros Recipe
-            </h1>
+ Authentic Huevos Rancheros Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Ranch-style eggs on crispy tortillas with homemade ranchero sauce
             </p>

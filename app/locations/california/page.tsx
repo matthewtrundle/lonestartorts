@@ -107,8 +107,8 @@ export default function CaliforniaPage() {
             className="mb-6 text-cream-300"
           />
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Texas Tortillas Delivered to California
-          </h1>
+ Texas Tortillas Delivered to California
+</h1>
           <p className="text-xl text-cream-200 max-w-3xl">
             Authentic H-E-B tortillas shipped fresh to all California cities. From LA to San Francisco, we've got the Golden State covered.
           </p>
@@ -137,8 +137,8 @@ export default function CaliforniaPage() {
           {regions.map((region) => (
             <div key={region.name} className="mb-8">
               <h3 className="text-xl font-bold text-charcoal-950 mb-4 border-b border-charcoal-200 pb-2">
-                {region.name}
-              </h3>
+ {region.name}
+</h3>
               <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {cities
                   .filter((city) => region.cities.includes(city.name))
@@ -149,8 +149,8 @@ export default function CaliforniaPage() {
                       className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-charcoal-100 group"
                     >
                       <h4 className="font-bold text-charcoal-950 group-hover:text-sunset-600">
-                        {city.name} →
-                      </h4>
+ {city.name} →
+</h4>
                       <p className="text-sm text-charcoal-600">{city.population} population</p>
                     </Link>
                   ))}

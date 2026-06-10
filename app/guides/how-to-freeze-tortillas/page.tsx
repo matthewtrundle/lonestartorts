@@ -255,7 +255,7 @@ export default function HowToFreezeTortillasPage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-masa-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌽 <Link href="/products/corn-tortillas" className="hover:text-sunset-600 transition-colors">Corn Tortillas</Link></h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌽<Link href="/products/corn-tortillas" className="hover:text-sunset-600 transition-colors">Corn Tortillas</Link></h3>
                 <ul className="space-y-2 text-charcoal-800 text-sm">
                   <li><strong>Freeze very well</strong> - Less moisture means less ice crystal formation</li>
                   <li><strong>May become slightly brittle</strong> - Warm gently to restore flexibility</li>
@@ -265,7 +265,7 @@ export default function HowToFreezeTortillasPage() {
               </div>
 
               <div className="bg-sunset-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌾 <Link href="/products/flour-tortillas" className="hover:text-sunset-600 transition-colors">Flour Tortillas</Link></h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌾<Link href="/products/flour-tortillas" className="hover:text-sunset-600 transition-colors">Flour Tortillas</Link></h3>
                 <ul className="space-y-2 text-charcoal-800 text-sm">
                   <li><strong>Freeze excellently</strong> - Higher fat content protects texture</li>
                   <li><strong>Stay pliable when thawed</strong> - More forgiving than corn</li>
@@ -280,27 +280,27 @@ export default function HowToFreezeTortillasPage() {
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Common Freezing Mistakes to Avoid</h2>
             <div className="space-y-4">
               <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Not Removing Air from Bags</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Not Removing Air from Bags</h3>
                 <p className="text-charcoal-800 text-sm">Air causes freezer burn and ice crystals. Always press out excess air before sealing.</p>
               </div>
 
               <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Skipping Separation</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Skipping Separation</h3>
                 <p className="text-charcoal-800 text-sm">Without parchment paper, tortillas freeze together in one solid block. You'll have to thaw the entire package.</p>
               </div>
 
               <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Freezing Already-Stale Tortillas</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Freezing Already-Stale Tortillas</h3>
                 <p className="text-charcoal-800 text-sm">Freezing doesn't improve quality - only preserves it. Freeze fresh tortillas for best results.</p>
               </div>
 
               <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Refreezing After Thawing</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Refreezing After Thawing</h3>
                 <p className="text-charcoal-800 text-sm">Once thawed, use within a week. Don't refreeze - texture and quality deteriorate significantly.</p>
               </div>
 
               <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Not Labeling Bags</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Not Labeling Bags</h3>
                 <p className="text-charcoal-800 text-sm">Date your bags! After 8 months, quality declines. Know what you have and when it was frozen.</p>
               </div>
             </div>

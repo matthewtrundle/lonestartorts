@@ -50,8 +50,8 @@ export default function BBQTortillasGuidePage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-display">
-              The Complete Guide to Texas BBQ & H-E-B® Tortillas
-            </h1>
+ The Complete Guide to Texas BBQ & H-E-B® Tortillas
+</h1>
             <p className="text-xl text-cream-100 leading-relaxed">
               Master the art of pairing Texas BBQ with authentic H-E-B® tortillas. This comprehensive guide covers everything from brisket tacos to pulled pork wraps—and why real tortillas are essential for BBQ perfection.
             </p>
@@ -110,8 +110,8 @@ export default function BBQTortillasGuidePage() {
           {/* Section 1: The Science */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Why H-E-B® Tortillas Are Engineered for BBQ
-            </h2>
+ Why H-E-B® Tortillas Are Engineered for BBQ
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               Texas BBQ is uniquely demanding on tortillas. Here's why:
@@ -121,7 +121,7 @@ export default function BBQTortillasGuidePage() {
               {/* Fat Absorption */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">💧</span>
+<span className="text-2xl">💧</span>
                   Fat & Moisture Management
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -135,7 +135,7 @@ export default function BBQTortillasGuidePage() {
               {/* Tensile Strength */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">💪</span>
+<span className="text-2xl">💪</span>
                   Tensile Strength Under Load
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -149,7 +149,7 @@ export default function BBQTortillasGuidePage() {
               {/* Heat Tolerance */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">🔥</span>
+<span className="text-2xl">🔥</span>
                   Heat Tolerance & Flexibility
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -163,7 +163,7 @@ export default function BBQTortillasGuidePage() {
               {/* Flavor Neutrality */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">👅</span>
+<span className="text-2xl">👅</span>
                   Flavor Compatibility
                 </h3>
                 <p className="text-charcoal-800 leading-relaxed mb-3">
@@ -179,8 +179,8 @@ export default function BBQTortillasGuidePage() {
           {/* Section 2: Complete Pairing Guide */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Complete BBQ & Tortilla Pairing Guide
-            </h2>
+ Complete BBQ & Tortilla Pairing Guide
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               Not all BBQ meats pair the same way with tortillas. Here's what works best based on fat content, texture, and traditional pairings:
@@ -337,8 +337,8 @@ export default function BBQTortillasGuidePage() {
           {/* Section 3: Professional Handling */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Professional Handling & Storage for Food Service
-            </h2>
+ Professional Handling & Storage for Food Service
+</h2>
 
             <p className="text-charcoal-800 leading-relaxed mb-6">
               For restaurants, food trucks, and catering operations, proper tortilla handling is critical for consistency and food safety:
@@ -347,7 +347,7 @@ export default function BBQTortillasGuidePage() {
             <div className="space-y-6">
               {/* Storage */}
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-4">📦 Storage</h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-4">Storage</h3>
                 <ul className="space-y-3 text-charcoal-800">
                   <li className="flex items-start gap-3">
                     <span className="text-sunset-600 font-bold mt-1">•</span>
@@ -372,7 +372,7 @@ export default function BBQTortillasGuidePage() {
 
               {/* Warming */}
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-4">🔥 Warming Techniques</h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-4">Warming Techniques</h3>
                 <ul className="space-y-3 text-charcoal-800">
                   <li className="flex items-start gap-3">
                     <span className="text-sunset-600 font-bold mt-1">1.</span>
@@ -397,7 +397,7 @@ export default function BBQTortillasGuidePage() {
 
               {/* Assembly */}
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold text-charcoal-950 mb-4">🌮 Assembly Best Practices</h3>
+                <h3 className="text-xl font-bold text-charcoal-950 mb-4">Assembly Best Practices</h3>
                 <ul className="space-y-3 text-charcoal-800">
                   <li className="flex items-start gap-3">
                     <span className="text-sunset-600 font-bold mt-1">→</span>
@@ -431,8 +431,8 @@ export default function BBQTortillasGuidePage() {
           {/* Section 4: Pro Tips from Pitmasters */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Pro Tips from Texas Pitmasters
-            </h2>
+ Pro Tips from Texas Pitmasters
+</h2>
 
             <div className="space-y-6">
               <div className="bg-gradient-to-r from-rust-50 to-sunset-50 p-6 rounded-lg border-l-4 border-rust-600">
@@ -485,12 +485,12 @@ export default function BBQTortillasGuidePage() {
           {/* Section 5: Common Mistakes */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              7 Mistakes That Cost Restaurants Thousands
-            </h2>
+ 7 Mistakes That Cost Restaurants Thousands
+</h2>
 
             <div className="space-y-4">
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Mistake #1: Buying Cheap Tortillas to Save Money</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Mistake #1: Buying Cheap Tortillas to Save Money</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Cost:</strong> A 30-40% failure rate on loaded tacos. If you're selling 100 brisket tacos per day at $8 each, that's $240/day in waste = $87,600/year.
                 </p>
@@ -500,7 +500,7 @@ export default function BBQTortillasGuidePage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Mistake #2: Not Warming Tortillas Properly</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Mistake #2: Not Warming Tortillas Properly</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Cost:</strong> Cold or improperly warmed tortillas tear easily and taste bad. Customer complaints and negative reviews.
                 </p>
@@ -510,7 +510,7 @@ export default function BBQTortillasGuidePage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Mistake #3: Overfilling Tacos & Burritos</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Mistake #3: Overfilling Tacos & Burritos</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Cost:</strong> Overfilled tacos look impressive but fall apart. Creates messy eating experience and negative reviews.
                 </p>
@@ -520,7 +520,7 @@ export default function BBQTortillasGuidePage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Mistake #4: Using Old or Improperly Stored Tortillas</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Mistake #4: Using Old or Improperly Stored Tortillas</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Cost:</strong> Dry, cracked tortillas that crack when folded. Poor quality perception.
                 </p>
@@ -530,7 +530,7 @@ export default function BBQTortillasGuidePage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Mistake #5: Wrong Tortilla Size for Application</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Mistake #5: Wrong Tortilla Size for Application</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Cost:</strong> 6-inch tortillas for burritos = torn wraps. 12-inch for tacos = excessive wrapper.
                 </p>
@@ -540,7 +540,7 @@ export default function BBQTortillasGuidePage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Mistake #6: Ignoring Moisture Barriers</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Mistake #6: Ignoring Moisture Barriers</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Cost:</strong> Saucy BBQ directly on tortilla = soggy mess in 2 minutes.
                 </p>
@@ -550,7 +550,7 @@ export default function BBQTortillasGuidePage() {
               </div>
 
               <div className="bg-white p-5 rounded-lg shadow-md border-l-4 border-red-500">
-                <h3 className="font-bold text-charcoal-950 mb-2">❌ Mistake #7: Pre-Assembling Tacos Too Far in Advance</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Mistake #7: Pre-Assembling Tacos Too Far in Advance</h3>
                 <p className="text-charcoal-800 text-sm mb-2">
                   <strong>The Cost:</strong> Even H-E-B® tortillas can't hold up to 30+ minutes of hot meat contact. Pre-assembled tacos become soggy.
                 </p>
@@ -564,8 +564,8 @@ export default function BBQTortillasGuidePage() {
           {/* Section 6: The Business Case */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              The Business Case for H-E-B® Tortillas
-            </h2>
+ The Business Case for H-E-B® Tortillas
+</h2>
 
             <div className="bg-gradient-to-r from-sunset-100 to-masa-100 p-8 rounded-lg mb-6">
               <h3 className="text-2xl font-bold text-charcoal-950 mb-4">Real Cost Analysis</h3>
@@ -605,8 +605,8 @@ export default function BBQTortillasGuidePage() {
           {/* Recipes & Resources */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 pb-2 border-b-4 border-sunset-500">
-              Try These BBQ + Tortilla Recipes
-            </h2>
+ Try These BBQ + Tortilla Recipes
+</h2>
 
             <div className="grid md:grid-cols-3 gap-6">
               <Link href="/recipes/brisket-tacos" className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">

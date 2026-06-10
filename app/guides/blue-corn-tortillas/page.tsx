@@ -100,8 +100,8 @@ export default function BlueCornTortillasPage() {
               <span>Blue Corn Tortillas</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Blue Corn Tortillas
-            </h1>
+ Blue Corn Tortillas
+</h1>
             <p className="text-xl text-cream-200 max-w-2xl">
               Discover the nutrition, flavor, and culinary uses of this heirloom corn variety.
             </p>
@@ -130,7 +130,7 @@ export default function BlueCornTortillasPage() {
             </p>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6 flex items-center gap-3">
-              <TacoIcon className="w-8 h-8 text-sunset-500" />
+<TacoIcon className="w-8 h-8 text-sunset-500" />
               What Makes Blue Corn Special
             </h2>
 
@@ -170,8 +170,8 @@ export default function BlueCornTortillasPage() {
             </ul>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Nutritional Comparison: Blue vs Yellow Corn
-            </h2>
+ Nutritional Comparison: Blue vs Yellow Corn
+</h2>
 
             <div className="bg-white rounded-lg shadow-md border border-charcoal-100 overflow-hidden mb-8">
               <table className="w-full">
@@ -214,8 +214,8 @@ export default function BlueCornTortillasPage() {
             </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Best Uses for Blue Corn Tortillas
-            </h2>
+ Best Uses for Blue Corn Tortillas
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               Blue corn tortillas work well in most applications where you&apos;d use yellow corn tortillas, but they particularly shine in certain dishes:
@@ -241,8 +241,8 @@ export default function BlueCornTortillasPage() {
             </div>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              How to Store Blue Corn Tortillas
-            </h2>
+ How to Store Blue Corn Tortillas
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               Blue corn tortillas should be stored the same way as yellow corn tortillas:
@@ -265,8 +265,8 @@ export default function BlueCornTortillasPage() {
 
             {/* FAQ Section */}
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Frequently Asked Questions
-            </h2>
+ Frequently Asked Questions
+</h2>
 
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm border border-charcoal-100">

@@ -111,8 +111,8 @@ export default function BreakfastTacosRecipe() {
               <span>Breakfast Tacos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Texas-Style Breakfast Tacos Recipe
-            </h1>
+ Texas-Style Breakfast Tacos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Authentic, easy, and ready in 15 minutes
             </p>
@@ -325,13 +325,13 @@ export default function BreakfastTacosRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What tortillas are best for breakfast tacos?
-              </h3>
+ What tortillas are best for breakfast tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Flour tortillas are the traditional choice for Texas-style breakfast tacos. They're soft, pliable, and hold up well with eggs and fillings. Our <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">Lonestar flour tortillas</Link> or <Link href="/products/butter-tortillas" className="text-rust-600 hover:underline">butter tortillas</Link> work perfectly. Corn tortillas can be used, but they're less traditional for breakfast tacos in Texas.
               </p>
@@ -339,8 +339,8 @@ export default function BreakfastTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How long does it take to make breakfast tacos?
-              </h3>
+ How long does it take to make breakfast tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Breakfast tacos take about 15 minutes total—5 minutes prep and 10 minutes cooking time. They're a quick and easy breakfast option perfect for busy mornings. You can prep ingredients the night before to make it even faster.
               </p>
@@ -348,8 +348,8 @@ export default function BreakfastTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make breakfast tacos ahead of time?
-              </h3>
+ Can I make breakfast tacos ahead of time?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 While breakfast tacos are best fresh, you can prep components ahead. Cook bacon and store in the fridge. Chop toppings the night before. Scramble eggs fresh in the morning for best texture. You can also make full tacos, wrap in foil, and reheat—they won't be quite as good as fresh, but still tasty!
               </p>
@@ -357,8 +357,8 @@ export default function BreakfastTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What's the difference between a breakfast taco and a breakfast burrito?
-              </h3>
+ What's the difference between a breakfast taco and a breakfast burrito?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 A breakfast taco is smaller, typically made with a 6-inch tortilla, folded in half (like a taco), and meant to be eaten with your hands. A breakfast burrito uses a larger tortilla (8-10 inches), is rolled closed, and often has more fillings including beans and potatoes. Breakfast tacos are a Texas staple—simple, quick, and perfect for on-the-go.
               </p>
@@ -373,8 +373,8 @@ export default function BreakfastTacosRecipe() {
             <Link href="/guides/how-to-reheat-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  How to Reheat Tortillas
-                </h3>
+ How to Reheat Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Learn the best methods for warming tortillas to perfection
                 </p>
@@ -383,8 +383,8 @@ export default function BreakfastTacosRecipe() {
             <Link href="/guides/how-to-store-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  How to Store Tortillas
-                </h3>
+ How to Store Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Keep your tortillas fresh with proper storage techniques
                 </p>
@@ -393,8 +393,8 @@ export default function BreakfastTacosRecipe() {
             <Link href="/products/flour-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Shop Flour Tortillas
-                </h3>
+ Shop Flour Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Get authentic H-E-B flour tortillas delivered nationwide
                 </p>

@@ -69,8 +69,8 @@ export default function NYCPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Texas Tortillas Delivered to NYC
-            </h1>
+ Authentic Texas Tortillas Delivered to NYC
+</h1>
             <p className="text-xl text-cream-200 max-w-3xl">
               Get fresh H-E-B tortillas shipped directly to your door anywhere in New York City. All five boroughs served with fast 2-3 day delivery.
             </p>

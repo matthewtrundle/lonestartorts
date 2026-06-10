@@ -274,8 +274,8 @@ export default function GuidesPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-5xl md:text-6xl font-bold mb-4 font-display">
-              Tortilla Guides & Tips
-            </h1>
+ Tortilla Guides & Tips
+</h1>
             <p className="text-xl text-cream-100 max-w-3xl">
               Master the art of tortillas with our expert guides. Learn proper storage, reheating techniques,
               and how to choose the perfect tortilla for any dish.
@@ -305,8 +305,8 @@ export default function GuidesPage() {
           {/* Guides Grid */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-              All Guides
-            </h2>
+ All Guides
+</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {guides.map((guide) => (
                 <GuideCard
@@ -325,8 +325,8 @@ export default function GuidesPage() {
           {/* Categories */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-              Browse by Category
-            </h2>
+ Browse by Category
+</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-white p-6 rounded-lg shadow-md border border-charcoal-100">
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3">Storage Tips</h3>
@@ -424,8 +424,8 @@ export default function GuidesPage() {
           {/* CTA Section */}
           <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Try Authentic Texas Tortillas?
-            </h2>
+ Ready to Try Authentic Texas Tortillas?
+</h2>
             <p className="text-xl mb-8 text-cream-100 max-w-2xl mx-auto">
               Get authentic H-E-B® tortillas delivered to your door. Fresh, shelf-stable, and ready for your kitchen.
             </p>

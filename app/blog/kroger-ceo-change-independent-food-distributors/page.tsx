@@ -81,8 +81,8 @@ export default function KrogerCeoChangeIndependentFoodDistributorsPage() {
                 <span>6 min read</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-                Kroger CEO Change: What Independent Food Distributors Need to Know
-              </h1>
+ Kroger CEO Change: What Independent Food Distributors Need to Know
+</h1>
               <p className="text-lg text-cream-200 max-w-2xl">
                 Kroger\'s new CEO brings Walmart experience to America\'s largest supermarket chain. Here\'s what independent food distributors need to know about the changing retail landscape.
               </p>

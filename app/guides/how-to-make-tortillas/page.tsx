@@ -86,8 +86,8 @@ export default function HowToMakeTortillasPage() {
               ← Back to Guides
             </Link>
             <h1 className="text-4xl md:text-5xl font-bold mt-2">
-              How to Make Fresh Tortillas at Home
-            </h1>
+ How to Make Fresh Tortillas at Home
+</h1>
             <p className="text-cream-300 mt-4 text-lg">
               Master the art of making homemade flour and corn tortillas from scratch
             </p>

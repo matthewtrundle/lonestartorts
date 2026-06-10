@@ -148,8 +148,8 @@ export default function ShrimpTacosRecipe() {
               <span>Shrimp Tacos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Spicy Grilled Shrimp Tacos Recipe
-            </h1>
+ Spicy Grilled Shrimp Tacos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Quick, flavorful shrimp tacos ready in 20 minutes
             </p>
@@ -435,13 +435,13 @@ export default function ShrimpTacosRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How do you keep shrimp from getting rubbery?
-              </h3>
+ How do you keep shrimp from getting rubbery?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The number one cause of rubbery shrimp is overcooking. Shrimp cook incredibly fast—we're talking 2-3 minutes per side over high heat. They're done as soon as they turn pink and opaque. A good visual cue: properly cooked shrimp curl into a loose "C" shape. Overcooked shrimp curl tightly into an "O" shape. Pull them from the heat at the "C" stage! They'll continue cooking slightly from residual heat. Another tip: buy larger shrimp (large or extra-large), which are more forgiving and easier to not overcook compared to tiny shrimp. Finally, make sure your pan is screaming hot before adding the shrimp—this lets you cook them quickly without overdoing it.
               </p>
@@ -449,8 +449,8 @@ export default function ShrimpTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I use frozen shrimp for tacos?
-              </h3>
+ Can I use frozen shrimp for tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! In fact, most "fresh" shrimp at the grocery store were previously frozen anyway. Frozen shrimp work perfectly for tacos—just make sure to thaw them properly first. The best method is overnight in the refrigerator. For a quicker thaw, place the frozen shrimp in a colander and run cold water over them for 5-10 minutes, tossing occasionally. Once thawed, pat them very dry with paper towels before seasoning—excess moisture prevents good browning. Buy already peeled and deveined frozen shrimp to save time. They'll work just as well as "fresh" and are often better quality since they're flash-frozen right on the boat.
               </p>
@@ -458,8 +458,8 @@ export default function ShrimpTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What size shrimp is best for tacos?
-              </h3>
+ What size shrimp is best for tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Large shrimp (31-40 count per pound) or extra-large (21-30 count per pound) are ideal for shrimp tacos. This size gives you 3-4 shrimp per taco, which is perfect—substantial enough to be satisfying without being too much. They're also easier to not overcook compared to smaller shrimp. The "count" refers to how many shrimp are in a pound—so 31-40 means there are 31 to 40 shrimp per pound. Lower numbers mean bigger shrimp. If you use medium shrimp (41-50), you'll need 5-6 per taco. Avoid tiny salad shrimp or popcorn shrimp—they overcook in seconds and get lost among the toppings. Go for large or extra-large!
               </p>
@@ -467,8 +467,8 @@ export default function ShrimpTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make shrimp tacos without a grill?
-              </h3>
+ Can I make shrimp tacos without a grill?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! A grill gives you nice char marks and smoky flavor, but a stovetop works just as well. Use a large cast-iron skillet or grill pan over high heat—cast iron is especially good because it holds heat well and creates excellent searing. You can also use a regular heavy-bottomed skillet. The key is getting the pan very hot before adding the shrimp. You can even broil the shrimp: arrange them on a baking sheet and broil 4-6 inches from the heat source for 2-3 minutes per side. For maximum ease, cook them right in a skillet—the results are just as delicious as grilled, and you get the same caramelized, slightly charred flavor that makes these tacos amazing.
               </p>
@@ -476,8 +476,8 @@ export default function ShrimpTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make the components ahead of time?
-              </h3>
+ Can I make the components ahead of time?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! The cabbage slaw can be made up to 4 hours ahead and refrigerated—it actually benefits from sitting as the flavors meld. The cilantro lime crema can be made a day ahead and stored covered in the fridge (give it a good stir before serving). You can season the shrimp up to 30 minutes ahead, but don't let them sit longer or the acid from the lime will start to "cook" them. Cook the shrimp right before serving—they only take 5 minutes and are best hot. If you must cook them ahead, don't overcook them, let them cool completely, then refrigerate. Reheat gently in a hot skillet for 1-2 minutes just before serving, though they're definitely best cooked fresh.
               </p>
@@ -492,8 +492,8 @@ export default function ShrimpTacosRecipe() {
             <Link href="/recipes/fish-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Baja Fish Tacos
-                </h3>
+ Baja Fish Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Crispy beer-battered fish with tangy slaw and creamy sauce
                 </p>
@@ -502,8 +502,8 @@ export default function ShrimpTacosRecipe() {
             <Link href="/recipes/carne-asada-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Carne Asada Tacos
-                </h3>
+ Carne Asada Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Perfectly grilled, marinated steak tacos
                 </p>
@@ -512,8 +512,8 @@ export default function ShrimpTacosRecipe() {
             <Link href="/guides/how-to-reheat-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  How to Reheat Tortillas
-                </h3>
+ How to Reheat Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Master the best methods for warming tortillas
                 </p>
@@ -524,8 +524,8 @@ export default function ShrimpTacosRecipe() {
             <Link href="/recipes/tacos-al-pastor" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Tacos Al Pastor
-                </h3>
+ Tacos Al Pastor
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Authentic Mexican street tacos with pineapple-marinated pork
                 </p>
@@ -534,8 +534,8 @@ export default function ShrimpTacosRecipe() {
             <Link href="/faq" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Frequently Asked Questions
-                </h3>
+ Frequently Asked Questions
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Get answers about shipping, storage, and more
                 </p>

@@ -196,8 +196,8 @@ export default function RecipesPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-5xl md:text-6xl font-bold mb-4 font-display">
-              Authentic Texas Tortilla Recipes & Cooking Guides
-            </h1>
+ Authentic Texas Tortilla Recipes & Cooking Guides
+</h1>
             <p className="text-xl text-cream-100 max-w-3xl">
               Discover authentic Texas recipes that showcase the versatility of quality tortillas.
               From quick breakfast tacos to elaborate dinner spreads, we've got you covered.
@@ -211,8 +211,8 @@ export default function RecipesPage() {
           <section className="mb-12">
             <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg">
               <h2 className="text-2xl font-bold text-charcoal-950 mb-3">
-                Authentic Texas Tortilla Recipes
-              </h2>
+ Authentic Texas Tortilla Recipes
+</h2>
               <p className="text-lg text-charcoal-800 leading-relaxed">
                 These recipes celebrate the authentic taste of Texas using quality{' '}
                 <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
@@ -230,8 +230,8 @@ export default function RecipesPage() {
           {/* Featured Recipes */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-              Featured Recipes
-            </h2>
+ Featured Recipes
+</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {recipes.map((recipe) => (
                 <RecipeCard
@@ -252,8 +252,8 @@ export default function RecipesPage() {
           {/* Categories */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-              Browse by Meal Type
-            </h2>
+ Browse by Meal Type
+</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-gradient-to-br from-sunset-100 to-sunset-100 p-8 rounded-lg shadow-md">
                 <div className="text-4xl mb-4">🌅</div>
@@ -351,8 +351,8 @@ export default function RecipesPage() {
           {/* CTA Section */}
           <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Start Cooking?
-            </h2>
+ Ready to Start Cooking?
+</h2>
             <p className="text-xl mb-8 text-cream-100 max-w-2xl mx-auto">
               Get authentic H-E-B® tortillas delivered to your door. Perfect for all these recipes and more.
             </p>

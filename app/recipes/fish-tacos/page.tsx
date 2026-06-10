@@ -151,8 +151,8 @@ export default function FishTacosRecipe() {
               <span>Fish Tacos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Baja Fish Tacos Recipe
-            </h1>
+ Baja Fish Tacos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Crispy beer-battered fish with tangy slaw and creamy sauce
             </p>
@@ -452,13 +452,13 @@ export default function FishTacosRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What is the best fish for fish tacos?
-              </h3>
+ What is the best fish for fish tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The best fish for tacos is firm, white, flaky fish with mild flavor. Cod is the classic choice—it's what you'll find in authentic Baja fish tacos. It has perfect texture, stays firm when fried, and has a mild sweet flavor that pairs perfectly with the toppings. Mahi-mahi is excellent if you want slightly more flavor and firmer texture. Tilapia is budget-friendly and works well. Halibut is premium but fantastic. Avoid oily fish like salmon, mackerel, or tuna—their strong flavors clash with the traditional toppings, and they don't have the right flaky texture. Whatever you choose, make sure it's fresh (not fishy smelling) and sustainable.
               </p>
@@ -466,8 +466,8 @@ export default function FishTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make fish tacos without frying?
-              </h3>
+ Can I make fish tacos without frying?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! While fried is traditional Baja-style, grilled fish tacos are delicious and healthier. Season fish fillets with cumin, chili powder, garlic powder, paprika, salt, and lime juice. Grill over medium-high heat for 3-4 minutes per side until the fish flakes easily with a fork. You can also bake at 400°F for 12-15 minutes, or use an air fryer at 400°F for 10-12 minutes. For a crispy coating without deep frying, try a panko crust: coat fish in flour, then egg, then panko breadcrumbs mixed with spices, and pan-fry in a few tablespoons of oil until golden. It won't be quite as light and crispy as beer-battered, but it's still excellent.
               </p>
@@ -475,8 +475,8 @@ export default function FishTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What makes Baja fish tacos authentic?
-              </h3>
+ What makes Baja fish tacos authentic?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Authentic Baja fish tacos have specific characteristics: (1) Beer-battered and deep-fried white fish, golden and crispy. (2) Served in small corn tortillas, usually doubled up. (3) Topped with shredded cabbage—not lettuce! The cabbage provides crunch and stays crisp longer. (4) A white creamy sauce (crema) drizzled on top, often with lime and hot sauce. (5) Simple toppings: maybe pico de gallo, cilantro, and lime wedges. (6) The key is contrast: hot crispy fish, cool crunchy slaw, creamy sauce, and bright lime. That's it. No cheese, no guacamole, no rice—just pure, simple perfection. These originated in Ensenada, Baja California, and that's the classic style.
               </p>
@@ -484,8 +484,8 @@ export default function FishTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Why is my fish batter not crispy?
-              </h3>
+ Why is my fish batter not crispy?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Common causes of soggy batter: (1) Fish wasn't dry—pat it completely dry with paper towels before battering. (2) Oil temperature too low—if below 365°F, the batter absorbs oil and gets greasy instead of crispy. Use a thermometer and maintain 375°F. (3) Overcrowding the pot—too much fish drops the temperature and creates steam instead of frying. Fry in small batches. (4) Beer or batter too warm—use cold beer and make batter right before frying. (5) Wrong batter consistency—it should coat the spoon but not be too thick. (6) Not draining properly—use a wire rack, not paper towels that trap steam. Get these right and you'll have perfectly crispy batter every time!
               </p>
@@ -493,8 +493,8 @@ export default function FishTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make the components ahead of time?
-              </h3>
+ Can I make the components ahead of time?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes, with some limitations. The cabbage slaw can be made 2-4 hours ahead and refrigerated—it actually benefits from sitting as the flavors meld. The crema sauce can be made a day ahead and stored covered in the fridge. Cut the fish and keep it refrigerated (covered) up to 2 hours before cooking. However, the batter should be made right before frying for best results—the carbonation from the beer helps create that light, crispy texture. Most importantly, fry the fish right before serving. Fried fish doesn't stay crispy more than 10-15 minutes. You can keep it warm in a 200°F oven on a wire rack, but it's always best fresh from the oil. Plan your timing so the fish goes straight from fryer to taco to mouth!
               </p>
@@ -509,8 +509,8 @@ export default function FishTacosRecipe() {
             <Link href="/recipes/carne-asada-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Carne Asada Tacos
-                </h3>
+ Carne Asada Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Perfectly grilled, marinated steak tacos served street-style
                 </p>
@@ -519,8 +519,8 @@ export default function FishTacosRecipe() {
             <Link href="/recipes/breakfast-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Texas Breakfast Tacos
-                </h3>
+ Texas Breakfast Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Quick morning tacos with eggs, bacon, and cheese
                 </p>
@@ -529,8 +529,8 @@ export default function FishTacosRecipe() {
             <Link href="/guides/best-tortillas-for-every-dish" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Best Tortillas for Every Dish
-                </h3>
+ Best Tortillas for Every Dish
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Choose the perfect tortilla for any recipe
                 </p>

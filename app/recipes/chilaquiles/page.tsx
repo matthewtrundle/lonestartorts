@@ -114,8 +114,8 @@ export default function ChilaquilesRecipe() {
               <span>Chilaquiles</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Mexican Chilaquiles Recipe
-            </h1>
+ Authentic Mexican Chilaquiles Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Crispy tortilla chips in salsa with eggs, cheese, and crema
             </p>
@@ -349,13 +349,13 @@ export default function ChilaquilesRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What are chilaquiles?
-              </h3>
+ What are chilaquiles?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Chilaquiles are a traditional Mexican breakfast dish made from fried <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline">corn tortilla</Link> chips (called totopos) simmered briefly in red or green salsa. They're topped with eggs, cheese, crema, onions, and cilantro. It's one of the most beloved Mexican breakfast dishes.
               </p>
@@ -363,8 +363,8 @@ export default function ChilaquilesRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Should chilaquiles be crunchy or soft?
-              </h3>
+ Should chilaquiles be crunchy or soft?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The perfect chilaquiles should have a balance of textures—the edges and some chips should stay slightly crunchy while the centers absorb salsa and soften. This texture contrast is what makes them special. Don't let them simmer too long or they'll become completely soggy.
               </p>
@@ -372,8 +372,8 @@ export default function ChilaquilesRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I use store-bought tortilla chips?
-              </h3>
+ Can I use store-bought tortilla chips?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes, but homemade chips are better! Store-bought chips work in a pinch—look for thick-cut restaurant-style chips rather than thin, crispy ones. The thicker chips hold up better to the salsa. Just avoid flavored chips.
               </p>
@@ -381,8 +381,8 @@ export default function ChilaquilesRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What's the difference between chilaquiles and nachos?
-              </h3>
+ What's the difference between chilaquiles and nachos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 While both use tortilla chips, chilaquiles are simmered in salsa which softens them and infuses them with flavor. Nachos are baked dry with toppings added on top. Chilaquiles are a breakfast dish; nachos are a snack or appetizer. Different dishes, different purposes!
               </p>
@@ -397,8 +397,8 @@ export default function ChilaquilesRecipe() {
             <Link href="/recipes/huevos-rancheros" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Huevos Rancheros
-                </h3>
+ Huevos Rancheros
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Fried eggs on crispy tortillas with ranchero sauce
                 </p>
@@ -407,8 +407,8 @@ export default function ChilaquilesRecipe() {
             <Link href="/recipes/breakfast-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Breakfast Tacos
-                </h3>
+ Breakfast Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Classic Texas-style breakfast tacos
                 </p>
@@ -417,8 +417,8 @@ export default function ChilaquilesRecipe() {
             <Link href="/products/corn-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Shop Corn Tortillas
-                </h3>
+ Shop Corn Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Get authentic H-E-B corn tortillas delivered
                 </p>

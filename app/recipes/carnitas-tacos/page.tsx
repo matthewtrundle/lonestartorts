@@ -147,8 +147,8 @@ export default function CarnitasTacosRecipe() {
               <span>Carnitas Tacos</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Slow-Cooked Carnitas Tacos Recipe
-            </h1>
+ Slow-Cooked Carnitas Tacos Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Authentic Mexican pork tacos with crispy, tender carnitas
             </p>
@@ -428,13 +428,13 @@ export default function CarnitasTacosRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What cut of pork is best for carnitas?
-              </h3>
+ What cut of pork is best for carnitas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Pork shoulder (also called pork butt or Boston butt) is hands-down the best cut for carnitas. It has the perfect balance of meat and fat, which creates incredibly tender, juicy carnitas with amazing flavor. The fat renders slowly during the long cooking time, basting the meat and keeping it moist. Don't use lean cuts like pork loin—they'll dry out and won't have the same rich flavor or tender texture.
               </p>
@@ -442,8 +442,8 @@ export default function CarnitasTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How do you get carnitas crispy?
-              </h3>
+ How do you get carnitas crispy?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The secret is the two-step cooking process. First, slow-cook the pork until it's fall-apart tender. Then—and this is crucial—shred the meat and pan-fry it in a screaming hot skillet with a little reserved cooking liquid. The key is letting it sit undisturbed for 3-4 minutes so the bottom caramelizes and gets crispy. Flip and repeat on the other side. This creates the perfect contrast: crispy, crunchy edges with tender, juicy meat inside. It's what separates good carnitas from great carnitas.
               </p>
@@ -451,8 +451,8 @@ export default function CarnitasTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What tortillas should I use for carnitas tacos?
-              </h3>
+ What tortillas should I use for carnitas tacos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Authentic carnitas tacos are traditionally served on small <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline">corn tortillas</Link>, typically 6 inches. Double up the tortillas (use two per taco) for structural integrity and authentic street taco style—this prevents them from falling apart when you pile on the carnitas. Warm them on a comal or dry skillet until pliable with some charred spots. While flour tortillas work too, corn tortillas are the traditional choice that pairs best with the rich pork.
               </p>
@@ -460,8 +460,8 @@ export default function CarnitasTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make carnitas in a slow cooker or Instant Pot?
-              </h3>
+ Can I make carnitas in a slow cooker or Instant Pot?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! For a slow cooker: brown the pork on the stovetop first (don't skip this!), then transfer everything to the slow cooker. Cook on low for 8 hours or high for 4-5 hours. For an Instant Pot: brown using the sauté function, then pressure cook on high for 45-60 minutes with natural release. Regardless of method, always finish by shredding the meat and crisping it in a hot skillet. That final step is essential for authentic texture and flavor—it's what makes carnitas carnitas!
               </p>
@@ -469,8 +469,8 @@ export default function CarnitasTacosRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I freeze leftover carnitas?
-              </h3>
+ Can I freeze leftover carnitas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! Carnitas freeze beautifully. Let the shredded pork cool completely, then portion it into freezer bags or containers along with some of the cooking liquid (this prevents freezer burn and keeps it moist). Freeze for up to 3 months. To reheat: thaw overnight in the fridge, then crisp up in a hot skillet with a splash of the reserved liquid. You can also reheat from frozen in a covered pan over medium-low heat, adding liquid as needed. Many people say carnitas taste even better after freezing and reheating!
               </p>
@@ -485,8 +485,8 @@ export default function CarnitasTacosRecipe() {
             <Link href="/recipes/breakfast-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Texas-Style Breakfast Tacos
-                </h3>
+ Texas-Style Breakfast Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Quick and easy breakfast tacos with eggs, bacon, and cheese
                 </p>
@@ -495,8 +495,8 @@ export default function CarnitasTacosRecipe() {
             <Link href="/recipes/cheese-quesadillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Classic Cheese Quesadillas
-                </h3>
+ Classic Cheese Quesadillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Simple, crispy quesadillas ready in just 10 minutes
                 </p>
@@ -505,8 +505,8 @@ export default function CarnitasTacosRecipe() {
             <Link href="/guides/corn-vs-flour-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Corn vs Flour Tortillas
-                </h3>
+ Corn vs Flour Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Learn when to use each type of tortilla
                 </p>

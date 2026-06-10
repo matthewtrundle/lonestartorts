@@ -95,8 +95,8 @@ export default function LosAngelesPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Texas Tortillas Delivered to Los Angeles
-            </h1>
+ Authentic Texas Tortillas Delivered to Los Angeles
+</h1>
             <p className="text-xl text-cream-200 max-w-3xl">
               Get fresh H-E-B tortillas shipped directly to your door in Los Angeles, California. Experience the authentic taste of Texas.
             </p>
@@ -136,8 +136,8 @@ export default function LosAngelesPage() {
           {/* Why Texas Tortillas */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-sunset-500 pb-2">
-              Why Los Angeles Residents Choose Texas Tortillas
-            </h2>
+ Why Los Angeles Residents Choose Texas Tortillas
+</h2>
             <div className="prose prose-lg max-w-none text-charcoal-700">
               <p>
                 In a city bursting with incredible Mexican food, Los Angeles residents know quality when they taste it—and that's exactly why they're turning to Texas tortillas. While LA's local tortillerias offer great options, there's something uniquely irresistible about Texas-style tortillas. Made with H-E-B's original recipes (the same ones you'd find in stores across Texas), our tortillas boast a distinct flavor profile and texture perfected over decades.
@@ -210,8 +210,8 @@ export default function LosAngelesPage() {
           {/* LA Food Scene */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-sunset-500 pb-2">
-              Los Angeles's Mexican Food Scene
-            </h2>
+ Los Angeles's Mexican Food Scene
+</h2>
             <div className="prose prose-lg max-w-none text-charcoal-700">
               <p>
                 From the iconic birria tacos of Boyle Heights to the innovative Mexican-Korean fusion of Kogi BBQ trucks, Los Angeles has one of the world's most vibrant Mexican food landscapes. Yet even in this culinary paradise, home cooks and chefs alike seek authentic foundations—the building blocks that let quality ingredients shine. That's where Texas tortillas make their mark.

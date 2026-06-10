@@ -264,8 +264,8 @@ export default function BlogPage() {
                     </div>
 
                     <h2 className="text-2xl font-bold text-charcoal-950 mb-3 hover:text-sunset-600 transition-colors">
-                      {post.title}
-                    </h2>
+ {post.title}
+</h2>
 
                     <p className="text-charcoal-700 mb-4 text-sm leading-relaxed">
                       {post.excerpt}

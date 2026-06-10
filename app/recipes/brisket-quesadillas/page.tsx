@@ -108,8 +108,8 @@ export default function BrisketQuesadillasRecipe() {
               </div>
 
               <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
-                Crispy Brisket Quesadillas
-              </h1>
+ Crispy Brisket Quesadillas
+</h1>
 
               <p className="text-xl text-cream-100 mb-8">
                 The absolute best way to use leftover brisket. Crispy on the outside, loaded with melted cheese and smoky beef on the inside. Ready in 15 minutes.
@@ -167,7 +167,7 @@ export default function BrisketQuesadillasRecipe() {
           {/* Ingredients */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 flex items-center gap-3">
-              <ChefIcon className="w-8 h-8 text-sunset-500" />
+<ChefIcon className="w-8 h-8 text-sunset-500" />
               Ingredients
             </h2>
 
@@ -342,7 +342,7 @@ export default function BrisketQuesadillasRecipe() {
 
             <div className="space-y-4">
               <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">🔥 Temperature is Everything</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Temperature is Everything</h3>
                 <p className="text-charcoal-700 text-sm">
                   Medium heat is non-negotiable. High heat burns the tortilla before the cheese melts. Low heat makes a limp, pale quesadilla. Medium gives you that perfect golden crust with melted, gooey cheese.
                 </p>
@@ -356,7 +356,7 @@ export default function BrisketQuesadillasRecipe() {
               </div>
 
               <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">📦 Don't Overstuff</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">Don't Overstuff</h3>
                 <p className="text-charcoal-700 text-sm">
                   More filling ≠ better quesadilla. Overstuffed quesadillas don't seal properly, cheese oozes out, and they're impossible to flip. Stick to 2-3 oz brisket and 2/3 cup cheese per quesadilla. Trust the process.
                 </p>
@@ -370,7 +370,7 @@ export default function BrisketQuesadillasRecipe() {
               </div>
 
               <div className="bg-white p-4 rounded-lg">
-                <h3 className="font-bold text-charcoal-950 mb-2">🌶️ Add Heat Strategically</h3>
+                <h3 className="font-bold text-charcoal-950 mb-2">🌶 Add Heat Strategically</h3>
                 <p className="text-charcoal-700 text-sm">
                   If using jalapeños, pickled work better than fresh—they're already soft and won't create crunchy pockets that break the seal. Fresh jalapeños need to be sliced very thin.
                 </p>
@@ -454,8 +454,8 @@ export default function BrisketQuesadillasRecipe() {
               <Link href="/recipes/brisket-tacos" className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-charcoal-950 group-hover:text-sunset-600 mb-2">
-                    Brisket Tacos →
-                  </h3>
+ Brisket Tacos →
+</h3>
                   <p className="text-charcoal-700 text-sm">Classic brisket tacos</p>
                   <span className="text-sunset-500 text-xs font-semibold mt-2 inline-block">25 min</span>
                 </div>
@@ -464,8 +464,8 @@ export default function BrisketQuesadillasRecipe() {
               <Link href="/recipes/brisket-breakfast-burrito" className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-charcoal-950 group-hover:text-sunset-600 mb-2">
-                    Breakfast Burrito →
-                  </h3>
+ Breakfast Burrito →
+</h3>
                   <p className="text-charcoal-700 text-sm">Morning brisket magic</p>
                   <span className="text-sunset-500 text-xs font-semibold mt-2 inline-block">35 min</span>
                 </div>
@@ -474,8 +474,8 @@ export default function BrisketQuesadillasRecipe() {
               <Link href="/recipes/cheese-quesadillas" className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-charcoal-950 group-hover:text-sunset-600 mb-2">
-                    Classic Quesadillas →
-                  </h3>
+ Classic Quesadillas →
+</h3>
                   <p className="text-charcoal-700 text-sm">The original recipe</p>
                   <span className="text-sunset-500 text-xs font-semibold mt-2 inline-block">15 min</span>
                 </div>

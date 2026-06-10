@@ -203,7 +203,7 @@ export default function CornVsFlourPage() {
             </div>
 
             <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
-              <h3 className="font-bold text-green-900 mb-3">🏆 Nutritional Winner: Corn Tortillas</h3>
+              <h3 className="font-bold text-green-900 mb-3">Nutritional Winner: Corn Tortillas</h3>
               <p className="text-green-800">
                 Corn tortillas win on almost every nutritional metric - fewer calories, less fat, more fiber, lower sodium, and they're gluten-free. They're also considered a whole grain, providing more nutrients and minerals like magnesium and phosphorus.
               </p>

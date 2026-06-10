@@ -146,8 +146,8 @@ export default function TacosAlPastorRecipe() {
               <span>Tacos Al Pastor</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Street-Style Tacos Al Pastor Recipe
-            </h1>
+ Street-Style Tacos Al Pastor Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Authentic Mexican street tacos with pineapple-marinated pork
             </p>
@@ -423,13 +423,13 @@ export default function TacosAlPastorRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What does al pastor mean?
-              </h3>
+ What does al pastor mean?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 "Al pastor" literally translates to "in the style of the shepherd" in Spanish. The name comes from the cooking method where meat is stacked on a vertical rotisserie spit (called a trompo), similar to how shepherds would cook lamb. The dish was created by Lebanese immigrants who brought shawarma techniques to Mexico in the early 1900s. Mexican cooks adapted it using local ingredients—pork instead of lamb, Mexican chiles instead of Middle Eastern spices, and adding pineapple for that signature sweet-savory combination. Today, tacos al pastor are one of Mexico's most iconic street foods, especially popular in Mexico City.
               </p>
@@ -437,8 +437,8 @@ export default function TacosAlPastorRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What cut of pork is best for tacos al pastor?
-              </h3>
+ What cut of pork is best for tacos al pastor?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Pork shoulder (also called pork butt or Boston butt) is the traditional and best cut for tacos al pastor. It has the perfect balance of meat and fat, which creates juicy, flavorful results that don't dry out during cooking. The marbling melts during cooking, keeping everything moist and delicious. For best results, slice the pork as thin as possible—about 1/4-inch thick. Pro tip: partially freeze the pork for 30 minutes before slicing to make it much easier to get thin, even slices. Avoid using lean cuts like pork loin, as they'll dry out and won't have the same rich flavor.
               </p>
@@ -446,8 +446,8 @@ export default function TacosAlPastorRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make tacos al pastor without a vertical spit?
-              </h3>
+ Can I make tacos al pastor without a vertical spit?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! While traditional al pastor is cooked on a vertical spit (trompo) at taco stands, you can make excellent tacos al pastor at home without any special equipment. This recipe is specifically designed for home cooking using a cast-iron skillet, grill pan, or outdoor grill. The key is cooking over very high heat to get those characteristic charred edges while keeping the interior juicy. The marinade provides all the authentic flavors, and grilling the pineapple separately gives you that caramelized sweetness. Many would argue that home-cooked al pastor in a screaming hot cast-iron skillet rivals the street-cart version!
               </p>
@@ -455,8 +455,8 @@ export default function TacosAlPastorRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Why is pineapple used in tacos al pastor?
-              </h3>
+ Why is pineapple used in tacos al pastor?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Pineapple serves multiple purposes in al pastor. First, it provides a sweet, tangy contrast to the savory, spicy chile-marinated pork—that sweet-savory-spicy combination is addictive. Second, pineapple contains bromelain, a natural enzyme that helps tenderize the meat when it marinates. Third, traditionally a whole pineapple is placed on top of the vertical meat spit, and its juices slowly drip down onto the pork as it cooks, continuously basting and flavoring the meat. When grilled or roasted, the pineapple caramelizes beautifully, concentrating its sweetness and adding a slight smokiness. Those chunks of charred pineapple on top of your taco are what make al pastor truly special and different from other tacos.
               </p>
@@ -464,8 +464,8 @@ export default function TacosAlPastorRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Where can I find achiote paste and dried chiles?
-              </h3>
+ Where can I find achiote paste and dried chiles?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Achiote paste (also called recado rojo) and dried guajillo and ancho chiles are available at most Mexican grocery stores, Latin markets, and increasingly in the international aisle of regular supermarkets. You can also easily order them online. Achiote paste is a brick-red seasoning paste made from annatto seeds, spices, and vinegar—it gives al pastor its distinctive color and earthy flavor. If you absolutely can't find it, you can substitute with 2 teaspoons paprika and 1/2 teaspoon turmeric (though the flavor won't be quite the same). For the dried chiles, guajillo provides fruity heat while ancho adds sweetness and depth. Don't substitute with chili powder—the flavor is completely different!
               </p>
@@ -480,8 +480,8 @@ export default function TacosAlPastorRecipe() {
             <Link href="/recipes/carnitas-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Slow-Cooked Carnitas Tacos
-                </h3>
+ Slow-Cooked Carnitas Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Another authentic Mexican pork taco with crispy edges
                 </p>
@@ -490,8 +490,8 @@ export default function TacosAlPastorRecipe() {
             <Link href="/recipes/breakfast-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Texas-Style Breakfast Tacos
-                </h3>
+ Texas-Style Breakfast Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Quick and easy breakfast tacos ready in 15 minutes
                 </p>
@@ -500,8 +500,8 @@ export default function TacosAlPastorRecipe() {
             <Link href="/guides/street-tacos-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Best Tortillas for Street Tacos
-                </h3>
+ Best Tortillas for Street Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Why small corn tortillas are essential for authentic tacos
                 </p>
@@ -512,8 +512,8 @@ export default function TacosAlPastorRecipe() {
             <Link href="/guides/corn-vs-flour-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Corn vs Flour Tortillas
-                </h3>
+ Corn vs Flour Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Learn when to use each type of tortilla
                 </p>
@@ -522,8 +522,8 @@ export default function TacosAlPastorRecipe() {
             <Link href="/faq" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Frequently Asked Questions
-                </h3>
+ Frequently Asked Questions
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Get answers about shipping, storage, and more
                 </p>

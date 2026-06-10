@@ -145,8 +145,8 @@ export default function CheeseEnchiladasRecipe() {
               <span>Cheese Enchiladas</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Classic Cheese Enchiladas Recipe
-            </h1>
+ Classic Cheese Enchiladas Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Authentic enchiladas rojas with homemade red sauce
             </p>
@@ -442,13 +442,13 @@ export default function CheeseEnchiladasRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Do you use corn or flour tortillas for enchiladas?
-              </h3>
+ Do you use corn or flour tortillas for enchiladas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Authentic Mexican enchiladas always use <Link href="/products/corn-tortillas" className="text-rust-600 hover:underline">corn tortillas</Link>, typically 6 inches in diameter. Corn tortillas are traditional for several good reasons: they hold their structure better when soaked in sauce and baked, they don't get as mushy as flour tortillas, and their earthy corn flavor complements enchilada sauce perfectly. Flour tortillas can work in a pinch, but they tend to get soggy and lose their texture. They're also not traditional. For authentic, delicious enchiladas that hold together beautifully, always use corn tortillas. Just make sure to soften them before rolling so they don't crack!
               </p>
@@ -456,8 +456,8 @@ export default function CheeseEnchiladasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How do you keep enchiladas from getting soggy?
-              </h3>
+ How do you keep enchiladas from getting soggy?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Several key techniques prevent soggy enchiladas: (1) Don't oversoak the tortillas—just warm them enough to make them pliable, not waterlogged. Quick dip in sauce or microwave in damp towels. (2) Roll them tightly so less sauce seeps inside the roll. (3) Place seam-side down so they don't unroll and absorb too much sauce. (4) Don't drown them in sauce—use just enough to coat them. (5) Bake uncovered so steam can escape instead of making them soggy. (6) Use day-old tortillas if possible—they're sturdier than fresh ones. (7) Let them rest 5 minutes after baking to firm up. Follow these tips and your enchiladas will have perfect texture every time!
               </p>
@@ -465,8 +465,8 @@ export default function CheeseEnchiladasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make enchiladas ahead of time?
-              </h3>
+ Can I make enchiladas ahead of time?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Yes! Enchiladas are perfect make-ahead food. Assemble them completely (sauce, cheese, everything), cover the baking dish tightly with aluminum foil, and refrigerate for up to 24 hours before baking. When ready to bake, you can bake straight from the fridge—just add 5-10 minutes to the baking time since they're starting cold. For longer storage, you can freeze assembled unbaked enchiladas for up to 3 months. Wrap the baking dish tightly in plastic wrap, then aluminum foil. To bake from frozen: thaw overnight in the refrigerator first, then bake as directed. Or bake directly from frozen, adding 15-20 minutes to the baking time and covering with foil for the first half of baking. The sauce and filling also freeze separately!
               </p>
@@ -474,8 +474,8 @@ export default function CheeseEnchiladasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What is the difference between enchiladas and burritos?
-              </h3>
+ What is the difference between enchiladas and burritos?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 They're completely different dishes! Enchiladas use small corn tortillas (6 inches), are rolled around a simple filling (usually just cheese, meat, or beans), covered completely in sauce, topped with cheese, and baked in the oven. They're served hot, smothered in sauce, on a plate with a fork and knife. Burritos use large flour tortillas (10-12 inches), are stuffed with many ingredients (rice, beans, meat, cheese, sour cream, salsa, lettuce, etc.), and are NOT covered in sauce or baked—they're wrapped up and served as-is, meant to be eaten with your hands like a wrap. Burritos are portable; enchiladas are not. Think of it this way: burritos are lunch on-the-go, enchiladas are a sit-down dinner!
               </p>
@@ -483,8 +483,8 @@ export default function CheeseEnchiladasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I use canned enchilada sauce?
-              </h3>
+ Can I use canned enchilada sauce?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 You can, but I really recommend making it from scratch—it's so much better and takes only 15 minutes! Canned enchilada sauce is convenient but often tastes bland, one-dimensional, or overly salty. Homemade sauce has deeper flavor, better spice balance, and fresher taste. Plus, you control the heat level and seasoning. That said, if you're in a pinch, canned sauce works. Buy two 10-ounce cans (you'll need about 2.5 cups total). Look for brands with simple ingredients and good reviews. To improve canned sauce: simmer it for a few minutes with extra cumin, a pinch of oregano, and a squeeze of lime juice. Add a splash of chicken broth if it's too thick. It won't be as good as homemade, but it'll be better than straight from the can!
               </p>
@@ -499,8 +499,8 @@ export default function CheeseEnchiladasRecipe() {
             <Link href="/recipes/cheese-quesadillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Classic Cheese Quesadillas
-                </h3>
+ Classic Cheese Quesadillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Simple, crispy quesadillas ready in 10 minutes
                 </p>
@@ -509,8 +509,8 @@ export default function CheeseEnchiladasRecipe() {
             <Link href="/recipes/bean-and-veggie-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Bean & Veggie Tacos
-                </h3>
+ Bean & Veggie Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Hearty vegetarian tacos with roasted vegetables
                 </p>
@@ -519,8 +519,8 @@ export default function CheeseEnchiladasRecipe() {
             <Link href="/guides/best-tortillas-for-every-dish" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Best Tortillas for Every Dish
-                </h3>
+ Best Tortillas for Every Dish
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Choose the perfect tortilla for any recipe
                 </p>

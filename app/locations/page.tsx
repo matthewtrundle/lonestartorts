@@ -389,8 +389,8 @@ export default function LocationsPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-5xl md:text-6xl font-bold mb-4 font-display">
-              H-E-B® Tortillas Delivered Nationwide
-            </h1>
+ H-E-B® Tortillas Delivered Nationwide
+</h1>
             <p className="text-xl text-cream-100 max-w-3xl">
               Authentic Texas tortillas shipped to your door, anywhere in the United States.
               Fast, reliable delivery with free shipping on orders $80+.
@@ -404,8 +404,8 @@ export default function LocationsPage() {
           <section className="mb-12">
             <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg">
               <h2 className="text-2xl font-bold text-charcoal-950 mb-3">
-                Bringing Texas to You
-              </h2>
+ Bringing Texas to You
+</h2>
               <p className="text-lg text-charcoal-800 leading-relaxed">
                 Missing authentic H-E-B® tortillas? We ship premium{' '}
                 <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline font-medium">
@@ -427,8 +427,8 @@ export default function LocationsPage() {
           {/* Featured Cities */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-              Popular Delivery Cities
-            </h2>
+ Popular Delivery Cities
+</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {cities.map((city) => (
                 <Link
@@ -438,8 +438,8 @@ export default function LocationsPage() {
                 >
                   <div className="text-sm text-sunset-600 font-semibold mb-2">{city.state}</div>
                   <h3 className="text-2xl font-bold text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
-                    {city.name} →
-                  </h3>
+ {city.name} →
+</h3>
                   <p className="text-charcoal-600 text-sm mb-3">{city.state}</p>
                   <p className="text-charcoal-700 mb-4">{city.description}</p>
                   <div className="flex items-center justify-between text-sm">
@@ -456,8 +456,8 @@ export default function LocationsPage() {
           {/* Browse by State */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-              Browse by State
-            </h2>
+ Browse by State
+</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {stateData.map((state) => (
                 <div key={state.slug} className="bg-white rounded-lg p-6 shadow-md">
@@ -487,8 +487,8 @@ export default function LocationsPage() {
           <section className="mb-16 bg-gradient-to-r from-masa-100 to-sunset-100 p-8 rounded-lg">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold text-charcoal-950 mb-6 text-center">
-                We Ship to All 50 States
-              </h2>
+ We Ship to All 50 States
+</h2>
               <p className="text-lg text-charcoal-800 leading-relaxed text-center mb-6">
                 Don't see your city listed? No problem! We deliver authentic H-E-B® tortillas anywhere in the continental United States, Alaska, and Hawaii. Our shelf-stable tortillas are specially designed for safe, fresh delivery nationwide.
               </p>
@@ -515,8 +515,8 @@ export default function LocationsPage() {
           {/* Shipping Info */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-              Shipping Information
-            </h2>
+ Shipping Information
+</h2>
             <div className="bg-white rounded-lg shadow-md p-8">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
@@ -572,8 +572,8 @@ export default function LocationsPage() {
           {/* CTA Section */}
           <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Order?
-            </h2>
+ Ready to Order?
+</h2>
             <p className="text-xl mb-8 text-cream-100 max-w-2xl mx-auto">
               Get authentic H-E-B® tortillas delivered to your door. Shop our full selection of corn, flour, and butter tortillas.
             </p>

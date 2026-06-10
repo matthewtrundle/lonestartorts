@@ -130,8 +130,8 @@ export default function CheeseQuesadillasRecipe() {
               <span>Cheese Quesadillas</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Classic Cheese Quesadillas Recipe
-            </h1>
+ Classic Cheese Quesadillas Recipe
+</h1>
             <p className="text-xl text-cream-100">
               Crispy, cheesy, and ready in just 10 minutes
             </p>
@@ -349,13 +349,13 @@ export default function CheeseQuesadillasRecipe() {
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
-            Frequently Asked Questions
-          </h2>
+ Frequently Asked Questions
+</h2>
           <div className="space-y-4">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What type of tortillas are best for quesadillas?
-              </h3>
+ What type of tortillas are best for quesadillas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Flour tortillas are the traditional and best choice for quesadillas. Use 8-inch or 10-inch <Link href="/products/flour-tortillas" className="text-rust-600 hover:underline">flour tortillas</Link> for perfect results. They crisp up beautifully on the outside while staying soft enough to fold and bite into. Corn tortillas can be used but they're more fragile and don't crisp up the same way.
               </p>
@@ -363,8 +363,8 @@ export default function CheeseQuesadillasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                What is the best cheese for quesadillas?
-              </h3>
+ What is the best cheese for quesadillas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Mexican blend cheese is ideal—it typically contains Monterey Jack, cheddar, asadero, and queso quesadilla, all of which melt beautifully. You can also use straight cheddar, Monterey Jack, Oaxaca cheese, or even mozzarella. The key is using cheese that melts well. Always use freshly shredded cheese rather than pre-shredded, as pre-shredded cheese contains anti-caking agents that prevent smooth melting.
               </p>
@@ -372,8 +372,8 @@ export default function CheeseQuesadillasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                How do I get crispy quesadillas without burning them?
-              </h3>
+ How do I get crispy quesadillas without burning them?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 The secret is medium heat—not too high, not too low. Too high and the tortilla burns before the cheese melts; too low and it gets chewy instead of crispy. Use a thin layer of butter or oil in your skillet, press down gently with a spatula while cooking, and give each side 2-3 minutes. You want golden brown spots, not black. Be patient and resist the urge to crank up the heat!
               </p>
@@ -381,8 +381,8 @@ export default function CheeseQuesadillasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I add other ingredients to cheese quesadillas?
-              </h3>
+ Can I add other ingredients to cheese quesadillas?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Absolutely! Quesadillas are incredibly versatile. Popular additions include cooked chicken, sautéed peppers and onions, black beans, corn, jalapeños, mushrooms, spinach, or cooked ground beef. Just remember: add fillings on top of the first layer of cheese before folding, and don't overfill. Too many ingredients make the quesadilla difficult to flip and the filling falls out when you eat it. When in doubt, less is more.
               </p>
@@ -390,8 +390,8 @@ export default function CheeseQuesadillasRecipe() {
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-charcoal-950 mb-3">
-                Can I make quesadillas ahead of time?
-              </h3>
+ Can I make quesadillas ahead of time?
+</h3>
               <p className="text-charcoal-700 leading-relaxed">
                 Quesadillas are really best made fresh, but you can reheat them if needed. To reheat: place them in a 350°F oven for 5-7 minutes, or back in a skillet over medium heat for 1-2 minutes per side. The microwave will make them soggy, so avoid that. For meal prep, you can prep all your ingredients (shredded cheese, cooked fillings) ahead of time and assemble quesadillas fresh when ready to eat—they only take 5 minutes to cook!
               </p>
@@ -406,8 +406,8 @@ export default function CheeseQuesadillasRecipe() {
             <Link href="/recipes/breakfast-tacos" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Texas-Style Breakfast Tacos
-                </h3>
+ Texas-Style Breakfast Tacos
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Authentic breakfast tacos with eggs, bacon, and cheese
                 </p>
@@ -416,8 +416,8 @@ export default function CheeseQuesadillasRecipe() {
             <Link href="/guides/how-to-reheat-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  How to Reheat Tortillas
-                </h3>
+ How to Reheat Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Learn the best methods for warming tortillas to perfection
                 </p>
@@ -426,8 +426,8 @@ export default function CheeseQuesadillasRecipe() {
             <Link href="/guides/corn-vs-flour-tortillas" className="group block">
               <div className="bg-charcoal-50 p-6 rounded-lg hover:bg-charcoal-100 transition-colors">
                 <h3 className="text-lg font-semibold text-charcoal-950 group-hover:text-rust-600 transition-colors mb-2">
-                  Corn vs Flour Tortillas
-                </h3>
+ Corn vs Flour Tortillas
+</h3>
                 <p className="text-charcoal-700 text-sm">
                   Learn the differences and when to use each type
                 </p>

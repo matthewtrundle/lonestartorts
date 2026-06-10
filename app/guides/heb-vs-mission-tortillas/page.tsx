@@ -143,8 +143,8 @@ export default function HEBvsMissionPage() {
               className="text-cream-300 mb-4"
             />
             <h1 className="text-4xl md:text-5xl font-bold mt-2">
-              H-E-B vs Mission Tortillas: Which is Better?
-            </h1>
+ H-E-B vs Mission Tortillas: Which is Better?
+</h1>
             <p className="text-cream-300 mt-4 text-lg">
               The definitive comparison of two popular tortilla brands
             </p>
@@ -181,8 +181,8 @@ export default function HEBvsMissionPage() {
           {/* Comparison Table */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-sunset-500 pb-2">
-              Side-by-Side Comparison
-            </h2>
+ Side-by-Side Comparison
+</h2>
 
             <div className="overflow-x-auto mb-8">
               <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
@@ -268,8 +268,8 @@ export default function HEBvsMissionPage() {
           {/* Detailed Analysis */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-sunset-500 pb-2">
-              Detailed Breakdown
-            </h2>
+ Detailed Breakdown
+</h2>
 
             {/* Taste & Texture */}
             <div className="mb-8">
@@ -423,8 +423,8 @@ export default function HEBvsMissionPage() {
             <div className="space-y-6">
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2 text-lg">
-                  Which is better, H-E-B or Mission tortillas?
-                </h3>
+ Which is better, H-E-B or Mission tortillas?
+</h3>
                 <p className="text-charcoal-700">
                   H-E-B tortillas are generally considered superior for taste and texture. They're made fresh
                   in Texas bakeries with simple ingredients, while Mission tortillas are mass-produced with
@@ -434,8 +434,8 @@ export default function HEBvsMissionPage() {
 
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2 text-lg">
-                  Are H-E-B tortillas made in Texas?
-                </h3>
+ Are H-E-B tortillas made in Texas?
+</h3>
                 <p className="text-charcoal-700">
                   Yes! H-E-B tortillas are made fresh in H-E-B bakeries throughout Texas. This local,
                   fresh production is why they taste so much better than nationally distributed brands.
@@ -444,8 +444,8 @@ export default function HEBvsMissionPage() {
 
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2 text-lg">
-                  Can I buy H-E-B tortillas outside of Texas?
-                </h3>
+ Can I buy H-E-B tortillas outside of Texas?
+</h3>
                 <p className="text-charcoal-700">
                   Yes! Through{' '}
                   <Link href="/shop" className="text-sunset-600 hover:text-sunset-700 font-medium">
@@ -457,8 +457,8 @@ export default function HEBvsMissionPage() {
 
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2 text-lg">
-                  What ingredients are in H-E-B vs Mission tortillas?
-                </h3>
+ What ingredients are in H-E-B vs Mission tortillas?
+</h3>
                 <p className="text-charcoal-700">
                   H-E-B tortillas contain about 6 simple ingredients: flour, water, shortening, salt, and
                   leavening. Mission tortillas typically contain 12+ ingredients including various

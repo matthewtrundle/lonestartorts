@@ -96,8 +96,8 @@ export default function HowToStoreTortillasPage() {
               ← Back to Home
             </Link>
             <h1 className="text-4xl md:text-5xl font-bold mt-2">
-              How to Store Tortillas: Complete Guide
-            </h1>
+ How to Store Tortillas: Complete Guide
+</h1>
             <p className="text-cream-300 mt-4 text-lg">
               Keep your tortillas fresh for weeks with these expert storage tips
             </p>
@@ -162,8 +162,8 @@ export default function HowToStoreTortillasPage() {
           {/* Section 1: Unopened Tortillas */}
           <section id="unopened" className="mb-12 scroll-mt-8">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4 border-b-2 border-sunset-500 pb-2">
-              Storing Unopened Tortillas
-            </h2>
+ Storing Unopened Tortillas
+</h2>
 
             <p className="text-lg text-charcoal-700 mb-4 leading-relaxed">
               Shelf-stable tortillas like H-E-B® brand are designed to stay fresh at room temperature until you're ready to use them.
@@ -200,8 +200,8 @@ export default function HowToStoreTortillasPage() {
           {/* Section 2: Opened Tortillas */}
           <section id="opened" className="mb-12 scroll-mt-8">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4 border-b-2 border-sunset-500 pb-2">
-              Storing Opened Tortillas
-            </h2>
+ Storing Opened Tortillas
+</h2>
 
             <p className="text-lg text-charcoal-700 mb-6 leading-relaxed">
               Once you open your tortilla package, proper resealing is crucial to prevent them from drying out or becoming stale.
@@ -243,8 +243,8 @@ export default function HowToStoreTortillasPage() {
           {/* Section 3: Refrigeration */}
           <section id="refrigerator" className="mb-12 scroll-mt-8">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4 border-b-2 border-sunset-500 pb-2">
-              Refrigerating Tortillas
-            </h2>
+ Refrigerating Tortillas
+</h2>
 
             <p className="text-lg text-charcoal-700 mb-4 leading-relaxed">
               Refrigeration extends tortilla shelf life significantly, especially in hot or humid climates.
@@ -296,8 +296,8 @@ export default function HowToStoreTortillasPage() {
           {/* Section 4: Freezing */}
           <section id="freezer" className="mb-12 scroll-mt-8">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4 border-b-2 border-sunset-500 pb-2">
-              Freezing Tortillas (Best for Long-Term Storage)
-            </h2>
+ Freezing Tortillas (Best for Long-Term Storage)
+</h2>
 
             <p className="text-lg text-charcoal-700 mb-6 leading-relaxed">
               Freezing is the <strong>best method for long-term tortilla storage</strong>. Tortillas freeze exceptionally
@@ -365,8 +365,8 @@ export default function HowToStoreTortillasPage() {
           {/* Section 5: Shelf Life Guide */}
           <section id="shelf-life" className="mb-12 scroll-mt-8">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4 border-b-2 border-sunset-500 pb-2">
-              Tortilla Shelf Life Guide
-            </h2>
+ Tortilla Shelf Life Guide
+</h2>
 
             <div className="overflow-x-auto mb-6">
               <table className="w-full border-collapse bg-white shadow-lg">
@@ -406,15 +406,15 @@ export default function HowToStoreTortillasPage() {
           {/* Section 6: Signs of Bad Tortillas */}
           <section id="signs-bad" className="mb-12 scroll-mt-8">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4 border-b-2 border-sunset-500 pb-2">
-              How to Tell If Tortillas Have Gone Bad
-            </h2>
+ How to Tell If Tortillas Have Gone Bad
+</h2>
 
             <p className="text-lg text-charcoal-700 mb-6 leading-relaxed">
               Knowing when to discard tortillas is important for food safety. Here are the telltale signs:
             </p>
 
             <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
-              <h3 className="font-bold text-red-900 mb-3">⚠️ Throw Away Tortillas If You See:</h3>
+              <h3 className="font-bold text-red-900 mb-3">⚠ Throw Away Tortillas If You See:</h3>
               <ul className="space-y-3 text-red-900">
                 <li className="flex items-start">
                   <span className="font-bold mr-2">✗</span>
@@ -453,8 +453,8 @@ export default function HowToStoreTortillasPage() {
           {/* Section 7: Pro Tips */}
           <section id="tips" className="mb-12 scroll-mt-8">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4 border-b-2 border-sunset-500 pb-2">
-              Pro Storage Tips & Tricks
-            </h2>
+ Pro Storage Tips & Tricks
+</h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="bg-sunset-50 p-6 rounded-lg">

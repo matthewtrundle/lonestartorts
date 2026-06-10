@@ -61,8 +61,8 @@ export default function ModestoPage() {
               className="mb-6 text-cream-300"
             />
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Authentic Texas Tortillas Delivered to Modesto
-            </h1>
+ Authentic Texas Tortillas Delivered to Modesto
+</h1>
             <p className="text-xl text-cream-200 max-w-3xl">
               Get fresh H-E-B tortillas shipped directly to your door in Modesto and throughout Stanislaus County. Experience the authentic taste of Texas.
             </p>

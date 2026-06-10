@@ -54,8 +54,8 @@ export default function HowToReheatTortillasPage() {
               ← Back to Home
             </Link>
             <h1 className="text-4xl md:text-5xl font-bold mt-2">
-              How to Reheat Tortillas: 5 Methods Compared
-            </h1>
+ How to Reheat Tortillas: 5 Methods Compared
+</h1>
             <p className="text-cream-300 mt-4 text-lg">
               The ultimate guide to warming tortillas for perfect texture every time
             </p>
@@ -116,7 +116,7 @@ export default function HowToReheatTortillasPage() {
           {/* Method 1: Stovetop */}
           <section id="stovetop" className="mb-12 scroll-mt-8">
             <div className="bg-sunset-600 text-white py-4 px-6 rounded-t-lg">
-              <h2 className="text-3xl font-bold">Method #1: Stovetop (Best Overall) 🏆</h2>
+              <h2 className="text-3xl font-bold">Method #1: Stovetop (Best Overall) </h2>
               <p className="mt-2 text-sunset-100"><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /><StarIcon className="inline-block text-sunset-500" size={16} /> - Most authentic, perfect texture</p>
             </div>
             <div className="bg-white p-6 rounded-b-lg shadow-lg border-2 border-sunset-600">
@@ -137,7 +137,7 @@ export default function HowToReheatTortillasPage() {
               </ol>
 
               <div className="bg-masa-100 p-5 rounded-lg mb-4">
-                <h4 className="font-bold text-charcoal-950 mb-2">✅ Best For:</h4>
+                <h4 className="font-bold text-charcoal-950 mb-2">Best For:</h4>
                 <ul className="text-charcoal-700 space-y-1">
                   <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> Corn tortillas (gets that authentic charred flavor)</li>
                   <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> When making tacos for immediate serving</li>

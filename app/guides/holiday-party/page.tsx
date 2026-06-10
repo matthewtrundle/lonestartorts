@@ -78,7 +78,7 @@ export default function HolidayPartyPage() {
           {/* Christmas Section */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-green-600 pb-2">
-              <span className="text-green-600">Christmas</span> & Las Posadas
+<span className="text-green-600">Christmas</span> & Las Posadas
             </h2>
 
             <div className="bg-gradient-to-r from-green-50 to-red-50 p-6 rounded-lg mb-6">
@@ -125,7 +125,7 @@ export default function HolidayPartyPage() {
           {/* Thanksgiving Section */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-sunset-500 pb-2">
-              <span className="text-sunset-600">Thanksgiving</span> with Tortillas
+<span className="text-sunset-600">Thanksgiving</span> with Tortillas
             </h2>
 
             <div className="bg-sunset-50 p-6 rounded-lg mb-6">
@@ -172,7 +172,7 @@ export default function HolidayPartyPage() {
           {/* New Year's Eve Section */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-charcoal-400 pb-2">
-              <span className="text-charcoal-700">New Year's Eve</span> Fiesta
+<span className="text-charcoal-700">New Year's Eve</span> Fiesta
             </h2>
 
             <div className="bg-charcoal-100 p-6 rounded-lg mb-6">
@@ -230,7 +230,7 @@ export default function HolidayPartyPage() {
           {/* Easter Section */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6 border-b-2 border-pink-400 pb-2">
-              <span className="text-pink-600">Easter</span> Brunch
+<span className="text-pink-600">Easter</span> Brunch
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">

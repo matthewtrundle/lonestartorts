@@ -258,7 +258,7 @@ export default function BrisketBreakfastBurritoPage() {
               <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Common Mistakes (and How to Avoid Them)</h2>
               <div className="text-charcoal-800 space-y-4">
                 <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">❌ Using Store-Brand Tortillas</h3>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">Using Store-Brand Tortillas</h3>
                   <p>
                     We&apos;ve said it before, but it bears repeating: cheap tortillas = failed burritos. Invest in authentic{' '}
                     <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
@@ -269,28 +269,28 @@ export default function BrisketBreakfastBurritoPage() {
                 </div>
 
                 <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">❌ Overfilling the Burrito</h3>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">Overfilling the Burrito</h3>
                   <p>
                     More is not always better. An overstuffed burrito is impossible to roll and will burst at the seams. Aim for about 1 to 1.5 cups of total filling.
                   </p>
                 </div>
 
                 <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">❌ Adding Too Much Salsa</h3>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">Adding Too Much Salsa</h3>
                   <p>
                     Salsa is great, but too much turns your burrito into a soggy mess. Use about 2 tablespoons max, or serve extra salsa on the side for dipping.
                   </p>
                 </div>
 
                 <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">❌ Dry Brisket</h3>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">Dry Brisket</h3>
                   <p>
                     Leftover brisket can dry out. Reheat it gently with a splash of beef broth or BBQ sauce to restore moisture. Dry brisket in a burrito is a tragedy.
                   </p>
                 </div>
 
                 <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">❌ Overcooking the Eggs</h3>
+                  <h3 className="text-xl font-bold text-charcoal-950 mb-2">Overcooking the Eggs</h3>
                   <p>
                     Hard, rubbery scrambled eggs ruin the texture. Cook your eggs low and slow, pulling them off heat while still slightly glossy. They&apos;ll be perfect.
                   </p>
@@ -307,7 +307,7 @@ export default function BrisketBreakfastBurritoPage() {
 
                 <div className="space-y-4">
                   <div className="bg-white p-6 rounded-lg border-2 border-sunset-200">
-                    <h3 className="text-xl font-bold text-sunset-600 mb-2">🔥 The Spicy Texan</h3>
+                    <h3 className="text-xl font-bold text-sunset-600 mb-2">The Spicy Texan</h3>
                     <p>
                       Pepper jack cheese, jalapeño-cheddar sausage, habanero salsa, and extra pickled jalapeños. Not for the faint of heart.
                     </p>

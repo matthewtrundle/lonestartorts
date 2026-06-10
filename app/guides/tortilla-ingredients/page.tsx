@@ -100,8 +100,8 @@ export default function TortillaIngredientsPage() {
               <span>Tortilla Ingredients</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Tortilla Ingredients
-            </h1>
+ Tortilla Ingredients
+</h1>
             <p className="text-xl text-cream-200 max-w-2xl">
               Understand what goes into authentic corn and flour tortillas.
             </p>
@@ -130,7 +130,7 @@ export default function TortillaIngredientsPage() {
             </p>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6 flex items-center gap-3">
-              <TacoIcon className="w-8 h-8 text-sunset-500" />
+<TacoIcon className="w-8 h-8 text-sunset-500" />
               Corn Tortilla Ingredients
             </h2>
 
@@ -176,8 +176,8 @@ export default function TortillaIngredientsPage() {
             </QuickAnswer>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Flour Tortilla Ingredients
-            </h2>
+ Flour Tortilla Ingredients
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               Flour tortillas have more ingredients than corn tortillas, but quality versions still keep it simple:
@@ -222,8 +222,8 @@ export default function TortillaIngredientsPage() {
             </ul>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Lard vs. Vegetable Shortening vs. Oil
-            </h2>
+ Lard vs. Vegetable Shortening vs. Oil
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               The fat you use in flour tortillas significantly impacts flavor and texture:
@@ -248,8 +248,8 @@ export default function TortillaIngredientsPage() {
             </div>
 
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              What to Avoid in Store-Bought Tortillas
-            </h2>
+ What to Avoid in Store-Bought Tortillas
+</h2>
 
             <p className="text-charcoal-700 leading-relaxed mb-6">
               While some additives help with shelf life, quality tortillas should have minimal ingredients. Watch out for:
@@ -295,8 +295,8 @@ export default function TortillaIngredientsPage() {
 
             {/* FAQ Section */}
             <h2 className="text-3xl font-bold text-charcoal-950 mt-12 mb-6">
-              Frequently Asked Questions
-            </h2>
+ Frequently Asked Questions
+</h2>
 
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm border border-charcoal-100">

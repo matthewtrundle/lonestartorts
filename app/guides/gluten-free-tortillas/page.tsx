@@ -123,7 +123,7 @@ export default function GlutenFreeTortillasPage() {
             </div>
 
             <div className="bg-rust-50 border-l-4 border-rust-500 p-6 rounded-r-lg">
-              <h3 className="text-lg font-bold text-charcoal-950 mb-2">⚠️ Important Warning</h3>
+              <h3 className="text-lg font-bold text-charcoal-950 mb-2">⚠ Important Warning</h3>
               <p className="text-charcoal-800">Some brands add wheat flour to corn tortillas to make them more pliable or extend shelf life. <strong>Always read labels!</strong> If you see "wheat flour" or "enriched flour" in the ingredients, it's not gluten-free.</p>
             </div>
           </section>

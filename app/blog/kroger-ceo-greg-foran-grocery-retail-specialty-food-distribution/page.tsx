@@ -81,8 +81,8 @@ export default function KrogerCeoGregForanGroceryRetailSpecialtyFoodDistribution
                 <span>6 min read</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-                Kroger\'s New CEO Signals Big Changes Coming to Grocery Retail - What This Means for Specialty Food Distributors
-              </h1>
+ Kroger\'s New CEO Signals Big Changes Coming to Grocery Retail - What This Means for Specialty Food Distributors
+</h1>
               <p className="text-lg text-cream-200 max-w-2xl">
                 Kroger\'s new CEO Greg Foran brings Walmart-style efficiency to grocery retail, potentially limiting authentic regional food access. Learn why independent distributors matter more than ever.
               </p>
