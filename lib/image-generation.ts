@@ -3,7 +3,7 @@
  * Uses OpenRouter API for generating high-quality images for recipes and guides
  */
 
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || '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';
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || '';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // Google's Gemini 2.5 Flash Image - State-of-the-art image generation

@@ -484,14 +484,6 @@ h1 span {
 /* Rotation Animation */
 /* Premium Text Gradients */
 /* Premium Text Stroke Effects */
-/* Hero Text - Prevent vertical stacking */
-#hero-section h1,
-#hero-section div {
-  display: block !important;
-  white-space: nowrap !important;
-  overflow: visible !important;
-}
-
 /* Hero Text Layered Effects */
 /* Advanced Glow Animations */
 /* Shimmer Animations */

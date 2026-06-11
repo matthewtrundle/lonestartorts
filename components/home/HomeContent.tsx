@@ -39,11 +39,7 @@ export default function HomeContent() {
   // Respect prefers-reduced-motion for all autoplaying media
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  // Hero background video: deferred until hero is in view (and motion is OK)
   const heroSectionRef = useRef<HTMLElement>(null);
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
-  const [heroVideoActive, setHeroVideoActive] = useState(false);
-  const [heroVideoPaused, setHeroVideoPaused] = useState(false);
 
   // Video carousel: only play while the section is in view (and motion is OK)
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -53,46 +49,6 @@ export default function HomeContent() {
   useEffect(() => {
     setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }, []);
-
-  // Mount the hero video source only once the hero is visible and the user
-  // hasn't requested reduced motion. The poster image stays as the LCP visual.
-  useEffect(() => {
-    const section = heroSectionRef.current;
-    if (!section) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        setHeroVideoActive(true);
-        observer.disconnect();
-      }
-    });
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  // Once the <source> is mounted, load and start the hero video.
-  useEffect(() => {
-    if (!heroVideoActive) return;
-    const video = heroVideoRef.current;
-    if (!video) return;
-    video.load();
-    video.play().catch(() => {
-      // Autoplay can be blocked; the poster remains visible.
-    });
-  }, [heroVideoActive]);
-
-  const toggleHeroVideo = () => {
-    const video = heroVideoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play().catch(() => {});
-      setHeroVideoPaused(false);
-    } else {
-      video.pause();
-      setHeroVideoPaused(true);
-    }
-  };
 
   // Observe the carousel section to start/stop playback with visibility.
   useEffect(() => {
@@ -143,136 +99,79 @@ export default function HomeContent() {
       <DisclaimerBanner />
 
       <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
-        {/* Hero Section with Editorial Design */}
-        <section ref={heroSectionRef} className="min-h-screen relative flex items-center justify-center overflow-x-hidden overflow-y-hidden" id="hero-section">
-          {/* Hero background: base wash + lazy video with one legibility scrim */}
-          <div className="absolute inset-0 hero-background-system">
-            <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-100/80 to-masa-50" />
-
-            <div className="absolute inset-0 parallax-layer" data-speed="0.3">
-              {/* Background Video - source mounts only when the hero is in
-                  view and prefers-reduced-motion is off; the poster is the
-                  LCP visual until then */}
-              <video
-                ref={heroVideoRef}
-                muted
-                loop
-                playsInline
-                preload="none"
-                poster="/images/hero-banner.webp"
-                aria-hidden="true"
-                className="absolute inset-0 w-full h-full object-cover opacity-30"
-              >
-                {heroVideoActive && (
-                  <source src="/hero-background-loop.mp4" type="video/mp4" />
-                )}
-              </video>
-
-              {/* Single legibility scrim */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream-50/40 to-cream-50/95" />
-            </div>
-          </div>
-
-          {/* Hero Content */}
-          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-40">
-
-            <div className="w-full">
-              {/* Main Hero Typography - MASSIVE IMPACT */}
-              <div className="text-center">
-                {/* Small Quality Badge */}
-                <div className="mb-8 reveal-text">
-                  <span className="text-xs font-bold tracking-[0.4em] uppercase text-masa-700">
-                    {t('hero.badge')}
-                  </span>
-                </div>
-
-                {/* Main Title - MASSIVE ARTISTIC IMPACT */}
-                <div className="mb-8 relative">
-                  {/* Main Hero Text - SEO-Optimized H1 (visually styled) */}
-                  <h1 className="w-full">
-                    {/* Visual "LONESTAR" - Part of H1 */}
-                    <span className="block text-[60px] sm:text-[100px] md:text-[120px] lg:text-[140px] xl:text-[160px] font-black leading-[0.8] tracking-[-0.02em] text-charcoal-950 whitespace-nowrap">
-                      LONESTAR
-                    </span>
-
-                    {/* Visual "TORTILLAS" - Part of H1 */}
-                    <span className="block text-[40px] sm:text-[70px] md:text-[90px] lg:text-[110px] xl:text-[130px] font-light leading-[0.85] tracking-[0.03em] text-sunset-600 mt-1 sm:mt-1 md:mt-2 lg:mt-3 whitespace-nowrap">
-                      TORTILLAS
-                    </span>
-
-                    {/* SEO Text - Hidden but read by search engines */}
-                    <span className="sr-only">- Authentic H-E-B® Tortillas Delivered Nationwide</span>
-                  </h1>
-
-                  {/* Single understated divider */}
-                  <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[60%]">
-                    <div className="h-[2px] bg-gradient-to-r from-transparent via-sunset-500 to-transparent" />
-                  </div>
-                </div>
-
-                {/* Divider with Badge */}
-                <div className="flex items-center justify-center gap-6 my-10">
-                  <span className="block w-20 h-px bg-charcoal-300"></span>
-                  <span className="text-[11px] font-semibold tracking-[0.35em] uppercase text-charcoal-500">
-                    {t('hero.established')}
-                  </span>
-                  <span className="block w-20 h-px bg-charcoal-300"></span>
-                </div>
-
-                {/* Tagline - Editorial dek that supports the logotype */}
-                <div className="mt-8 mb-12 max-w-3xl mx-auto text-center">
-                  <p className="text-base md:text-lg lg:text-xl font-semibold tracking-[0.2em] text-charcoal-700 mb-3 uppercase">
-                    {t('hero.tagline')}
-                  </p>
-                  <p className="text-lg md:text-xl lg:text-2xl font-light tracking-wider text-masa-700 italic">
-                    {t('hero.subtagline')}
-                  </p>
-                </div>
+        {/* Hero — Asymmetric split: editorial type left, photography right */}
+        <section ref={heroSectionRef} className="relative min-h-screen grid lg:grid-cols-12 overflow-hidden" id="hero-section">
+          {/* Left: type panel */}
+          <div className="lg:col-span-6 xl:col-span-5 flex items-center bg-gradient-to-b from-cream-50 to-cream-100 relative">
+            <div className="w-full px-6 sm:px-10 lg:pl-14 lg:pr-10 pt-36 pb-16 lg:pt-32 lg:pb-12">
+              {/* Quality badge */}
+              <div className="mb-6 reveal-text">
+                <span className="text-[10px] sm:text-xs font-bold tracking-[0.22em] sm:tracking-[0.4em] uppercase text-masa-700">
+                  {t('hero.badge')}
+                </span>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center mt-16">
-                <Link href="/shop" className="bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl">
+              {/* SEO-optimized H1, anchored left */}
+              <h1 className="mb-8">
+                <span className="block font-black leading-[0.85] tracking-[-0.02em] text-charcoal-950 text-[clamp(44px,7vw,92px)]">
+                  LONESTAR
+                </span>
+                <span className="block font-display font-light italic leading-[0.95] text-sunset-600 text-[clamp(34px,5vw,68px)] mt-1">
+                  Tortillas
+                </span>
+                <span className="sr-only">- Authentic H-E-B® Tortillas Delivered Nationwide</span>
+              </h1>
+
+              {/* Rule + established */}
+              <div className="flex items-center gap-4 mb-8">
+                <span aria-hidden="true" className="block w-14 h-[2px] bg-sunset-500" />
+                <span className="text-[11px] font-semibold tracking-[0.35em] uppercase text-charcoal-500">
+                  {t('hero.established')}
+                </span>
+              </div>
+
+              {/* Tagline */}
+              <p className="text-base lg:text-lg font-semibold tracking-[0.15em] text-charcoal-700 uppercase mb-2 max-w-md">
+                {t('hero.tagline')}
+              </p>
+              <p className="text-lg lg:text-xl font-display font-light italic text-masa-700 mb-10 max-w-md">
+                {t('hero.subtagline')}
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/shop" className="w-full sm:w-auto bg-sunset-600 hover:bg-sunset-700 text-cream-50 px-8 py-4 text-base font-bold tracking-wider uppercase transition-colors shadow-medium text-center">
                   {t('hero.cta.shop')}
                 </Link>
-                <Link href="/story" className="border-2 border-charcoal-950 text-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50 px-12 py-4 text-lg font-bold tracking-wider uppercase transition-colors">
+                <Link href="/story" className="w-full sm:w-auto border-2 border-charcoal-950 text-charcoal-950 hover:bg-charcoal-950 hover:text-cream-50 px-8 py-4 text-base font-bold tracking-wider uppercase transition-colors text-center">
                   {t('hero.cta.story')}
                 </Link>
               </div>
 
               {/* Disclaimer */}
-              <p className="text-xs text-charcoal-500 mt-8 tracking-wider uppercase">
+              <p className="text-[10px] sm:text-xs text-charcoal-500 mt-8 tracking-wide uppercase">
                 {t('disclaimer.short')}
               </p>
             </div>
-
           </div>
 
-          {/* Background video pause/play toggle (WCAG 2.2.2) */}
-          {heroVideoActive && (
-            <button
-              type="button"
-              onClick={toggleHeroVideo}
-              aria-label={heroVideoPaused ? 'Play background video' : 'Pause background video'}
-              className="absolute bottom-6 right-6 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-charcoal-950/40 text-cream-50 backdrop-blur-sm transition-colors hover:bg-charcoal-950/60 focus:outline-none focus:ring-2 focus:ring-sunset-500"
-            >
-              {heroVideoPaused ? (
-                <svg className="h-4 w-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              ) : (
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-                </svg>
-              )}
-            </button>
-          )}
-
-          {/* Decorative bottom wave */}
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 120" className="w-full h-20 text-cream-50" aria-hidden="true">
-              <path fill="currentColor" d="M0,96L48,90.7C96,85,192,75,288,74.7C384,75,480,85,576,90.7C672,96,768,96,864,90.7C960,85,1056,75,1152,74.7C1248,75,1344,85,1392,90.7L1440,96L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" />
-            </svg>
+          {/* Right: full-height photography */}
+          <div className="lg:col-span-6 xl:col-span-7 relative min-h-[55vh] lg:min-h-screen">
+            <Image
+              src="/images/brand/hero-editorial.webp"
+              alt="Stack of fresh flour tortillas steaming on a comal"
+              fill
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              className="object-cover"
+              priority
+            />
+            {/* Seam blend into the type panel */}
+            <div aria-hidden="true" className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-cream-100 to-transparent hidden lg:block" />
+            {/* Floating proof chip */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-8 bg-cream-50/95 backdrop-blur rounded-xl px-5 py-3 shadow-large flex items-center gap-3">
+              <span className="font-display text-2xl font-bold text-sunset-600">2–4</span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-charcoal-700 leading-tight">Day delivery<br />all 50 states</span>
+            </div>
           </div>
         </section>
 
@@ -505,14 +404,16 @@ export default function HomeContent() {
                 </h2>
               </div>
 
-              {/* Right Column - Editorial Text */}
+              {/* Right Column - Editorial image + text */}
               <div className="lg:col-span-5 space-y-6 slide-right">
-                <div className="flex items-center gap-4">
-                  <span aria-hidden="true" className="block h-px w-12 bg-sunset-500" />
-                  <div>
-                    <p className="text-sm font-medium tracking-mega uppercase text-masa-700">Est. 2020</p>
-                    <p className="text-2xl font-display">Texas Excellence</p>
-                  </div>
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-large -rotate-1">
+                  <Image
+                    src="/images/brand/story-hands.webp"
+                    alt="Hands pressing masa dough in a cast iron tortilla press"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
                 </div>
                 <p className="text-lg leading-relaxed text-charcoal-700">
                   Those who know Texas tortillas, know quality. We're your trusted independent source

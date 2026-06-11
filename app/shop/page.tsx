@@ -147,6 +147,33 @@ export default function ShopPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+        {/* Featured band — breaks the grid rhythm before the collections */}
+        <div className="relative rounded-2xl overflow-hidden mb-10 min-h-[260px] grid md:grid-cols-2">
+          <div className="relative min-h-[200px] md:min-h-0">
+            <Image
+              src="/images/brand/band-kitchen.webp"
+              alt="Tortillas in a cloth-lined basket beside a sizzling skillet"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="bg-charcoal-950 text-cream-50 p-8 md:p-10 flex flex-col justify-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-sunset-400 mb-2">Straight from Texas</p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold mb-3 text-balance">
+              The tortillas Texans won&apos;t move away from
+            </h2>
+            <p className="text-cream-300 mb-5 max-w-md">
+              Picked up fresh from H-E-B, packed Tuesday morning, at your door in 2&ndash;4 days.
+            </p>
+            <div>
+              <a href="#bakery" className="inline-block bg-sunset-600 hover:bg-sunset-700 text-white px-6 py-3 rounded-lg font-bold transition-colors">
+                Shop Bakery Fresh
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Section Header — left-aligned editorial */}
         <SectionHeader
           eyebrow="The Lineup"
@@ -156,7 +183,7 @@ export default function ShopPage() {
         />
 
         {/* Bakery Fresh Collection */}
-        <div className="mb-12">
+        <div className="mb-12" id="bakery">
           <div className="flex items-baseline gap-3 mb-1">
             <h3 className="font-display text-2xl font-bold text-charcoal-950">Bakery Fresh Collection</h3>
             <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
