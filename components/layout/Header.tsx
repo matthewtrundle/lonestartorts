@@ -1,13 +1,22 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, type ComponentType } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { LogoFull } from '@/components/ui/Logo';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
-import { ShoppingBag, Menu, X, ChevronDown, User, BookOpen, Newspaper, MapPin, UtensilsCrossed, Truck, MessageCircle, Info, Phone } from 'lucide-react';
+import { ShoppingBag, Menu, X, ChevronDown, User, MessageCircle, Phone } from 'lucide-react';
+import {
+  TortillaStackIcon,
+  CalendarTuesdayIcon,
+  ShipBoxIcon,
+  WheatIcon,
+  ComalIcon,
+  TexasStarIcon,
+  RouteIcon,
+} from '@/components/ui/Icons';
 
 // Lazy-load the voice call widget (retell/livekit SDK ~200KB) only when first opened
 const MariaVoiceCall = dynamic(
@@ -15,13 +24,21 @@ const MariaVoiceCall = dynamic(
   { ssr: false }
 );
 
-const resourceLinks = [
-  { href: '/craft', labelKey: 'nav.source', icon: Info, description: 'How we source our tortillas' },
-  { href: '/guides', labelKey: 'nav.guides', icon: BookOpen, description: 'Tips & storage guides' },
-  { href: '/recipes', labelKey: 'nav.recipes', icon: UtensilsCrossed, description: 'Tortilla recipes' },
-  { href: '/blog', labelKey: 'nav.blog', icon: Newspaper, description: 'Stories & updates' },
-  { href: '/locations', labelKey: 'nav.locations', icon: MapPin, description: 'Where to find us' },
-  { href: '/shipping', labelKey: 'nav.shipping', icon: Truck, description: 'Shipping info & rates' },
+// Lazy-load the text chat panel only when first opened
+const MariaChatPanel = dynamic(
+  () => import('@/components/chat/MariaChatPanel').then((mod) => mod.MariaChatPanel),
+  { ssr: false }
+);
+
+type ResourceIcon = ComponentType<{ className?: string }>;
+
+const resourceLinks: { href: string; labelKey: string; icon: ResourceIcon; description: string }[] = [
+  { href: '/craft', labelKey: 'nav.source', icon: WheatIcon, description: 'Our sourcing story' },
+  { href: '/guides', labelKey: 'nav.guides', icon: ComalIcon, description: 'Tips & storage guides' },
+  { href: '/recipes', labelKey: 'nav.recipes', icon: TortillaStackIcon, description: 'Tortilla recipes' },
+  { href: '/blog', labelKey: 'nav.blog', icon: TexasStarIcon, description: 'Stories & updates' },
+  { href: '/locations', labelKey: 'nav.locations', icon: RouteIcon, description: 'Where to find us' },
+  { href: '/shipping', labelKey: 'nav.shipping', icon: ShipBoxIcon, description: 'Shipping info & rates' },
   { href: '/contact', labelKey: 'nav.contact', icon: MessageCircle, description: 'Get in touch' },
 ];
 
@@ -35,9 +52,15 @@ export function Header() {
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
   const [isMariaOpen, setIsMariaOpen] = useState(false);
   const [hasMariaOpened, setHasMariaOpened] = useState(false);
+  const [isMariaMenuOpen, setIsMariaMenuOpen] = useState(false);
+  const [isMariaChatOpen, setIsMariaChatOpen] = useState(false);
+  const [hasMariaChatOpened, setHasMariaChatOpened] = useState(false);
+  const [isChatUnavailable, setIsChatUnavailable] = useState(false);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const resourcesButtonRef = useRef<HTMLButtonElement>(null);
   const resourcesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const mariaMenuRef = useRef<HTMLDivElement>(null);
+  const mariaButtonRef = useRef<HTMLButtonElement>(null);
 
   // Only mount the voice call widget after it has been opened at least once
   useEffect(() => {
@@ -45,6 +68,13 @@ export function Header() {
       setHasMariaOpened(true);
     }
   }, [isMariaOpen]);
+
+  // Only mount the chat panel after it has been opened at least once
+  useEffect(() => {
+    if (isMariaChatOpen) {
+      setHasMariaChatOpened(true);
+    }
+  }, [isMariaChatOpen]);
 
   // Only offset the header on homepage where DisclaimerBanner is shown
   const isHomepage = pathname === '/';
@@ -79,11 +109,14 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (resourcesRef.current && !resourcesRef.current.contains(e.target as Node)) {
         setIsResourcesOpen(false);
+      }
+      if (mariaMenuRef.current && !mariaMenuRef.current.contains(e.target as Node)) {
+        setIsMariaMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -167,7 +200,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation - Right side: one cohesive cluster */}
-          <nav className="nav-items hidden md:flex items-center gap-7">
+          <nav className="nav-items hidden md:flex items-center gap-1 lg:gap-1.5">
             {/* Resources Dropdown */}
             <div
               ref={resourcesRef}
@@ -187,22 +220,23 @@ export function Header() {
                 aria-expanded={isResourcesOpen}
                 aria-haspopup="true"
                 aria-controls="resources-menu"
-                className="group relative flex items-center gap-1"
+                className="group flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-cream-200/70 transition-colors"
               >
-                <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
+                <WheatIcon className="w-4 h-4 text-sunset-700 shrink-0" />
+                <span className="relative text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                   Resources
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 text-charcoal-500 transition-transform duration-200 ${isResourcesOpen ? 'rotate-180' : ''}`} />
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
               </button>
 
-              {/* Dropdown Panel */}
+              {/* Dropdown Panel — two-column */}
               <div
                 id="resources-menu"
                 // React 18 needs ''/undefined for inert; types expect boolean
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inert={(!isResourcesOpen ? '' : undefined) as any}
-                className={`absolute top-full left-0 mt-1 w-64 bg-cream-50 rounded-xl shadow-medium border border-cream-300 py-1.5 transition-all duration-200 ${
+                className={`absolute top-full left-0 mt-1 w-[28rem] bg-cream-50 rounded-xl shadow-medium border border-cream-300 p-3 grid grid-cols-2 gap-1 transition-all duration-200 ${
                   isResourcesOpen
                     ? 'opacity-100 translate-y-0 pointer-events-auto'
                     : 'opacity-0 -translate-y-2 pointer-events-none'
@@ -215,12 +249,12 @@ export function Header() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsResourcesOpen(false)}
-                      className="flex items-start gap-3 px-3 py-2 hover:bg-cream-100 transition-colors"
+                      className="flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-cream-200/70 transition-colors"
                     >
-                      <Icon className="w-4 h-4 text-sunset-500 mt-0.5 shrink-0" />
+                      <Icon className="w-4 h-4 text-sunset-700 mt-0.5 shrink-0" />
                       <div>
                         <p className="text-sm font-medium text-charcoal-950">{t(link.labelKey)}</p>
-                        <p className="text-xs text-charcoal-500">{link.description}</p>
+                        <p className="text-xs text-charcoal-500 leading-snug">{link.description}</p>
                       </div>
                     </Link>
                   );
@@ -228,29 +262,44 @@ export function Header() {
               </div>
             </div>
 
-            <Link href="/shop" className="group relative" aria-current={isActive('/shop') ? 'page' : undefined}>
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
+            <Link
+              href="/shop"
+              className="group flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-cream-200/70 transition-colors"
+              aria-current={isActive('/shop') ? 'page' : undefined}
+            >
+              <TortillaStackIcon className="w-4 h-4 text-sunset-700 shrink-0" />
+              <span className="relative text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.shop')}
+                <span className={navUnderline('/shop')} />
               </span>
-              <span className={navUnderline('/shop')} />
             </Link>
 
-            <Link href="/subscribe" className="group relative" aria-current={isActive('/subscribe') ? 'page' : undefined}>
-              <span className="text-sm font-medium tracking-wide text-sunset-700 transition-colors group-hover:text-sunset-800">
+            <Link
+              href="/subscribe"
+              className="group flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-cream-200/70 transition-colors"
+              aria-current={isActive('/subscribe') ? 'page' : undefined}
+            >
+              <CalendarTuesdayIcon className="w-4 h-4 text-sunset-700 shrink-0" />
+              <span className="relative text-sm font-medium tracking-wide text-sunset-700 transition-colors group-hover:text-sunset-800">
                 {t('nav.subscribe')}
+                <span className={navUnderline('/subscribe')} />
               </span>
-              <span className={navUnderline('/subscribe')} />
             </Link>
 
-            <Link href="/wholesale" className="group relative" aria-current={isActive('/wholesale') ? 'page' : undefined}>
-              <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
+            <Link
+              href="/wholesale"
+              className="group flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-cream-200/70 transition-colors"
+              aria-current={isActive('/wholesale') ? 'page' : undefined}
+            >
+              <ShipBoxIcon className="w-4 h-4 text-sunset-700 shrink-0" />
+              <span className="relative text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.wholesale')}
+                <span className={navUnderline('/wholesale')} />
               </span>
-              <span className={navUnderline('/wholesale')} />
             </Link>
 
             {/* Right-side controls: language / Maria / Account / cart / CTA */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 ml-2 lg:ml-4">
             {/* Language Toggle with Mexican Flag */}
             <button
               onClick={toggleLanguage}
@@ -283,17 +332,28 @@ export function Header() {
               )}
             </button>
 
-            {/* Ask Maria AI Button + Dropdown */}
-            {hasMariaWidget && (
-              <div className="relative">
+            {/* Ask Maria AI Button + two-option popover (voice / text chat) */}
+            {(hasMariaWidget || !isChatUnavailable) && (
+              <div
+                className="relative"
+                ref={mariaMenuRef}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape' && isMariaMenuOpen) {
+                    setIsMariaMenuOpen(false);
+                    mariaButtonRef.current?.focus();
+                  }
+                }}
+              >
                 <button
-                  onClick={() => setIsMariaOpen(!isMariaOpen)}
+                  ref={mariaButtonRef}
+                  onClick={() => setIsMariaMenuOpen(!isMariaMenuOpen)}
                   className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-sunset-200 bg-sunset-50 hover:bg-sunset-100 transition-all"
-                  aria-label="Talk to Maria, our AI assistant"
-                  aria-expanded={isMariaOpen}
+                  aria-label="Ask Maria, our AI assistant"
+                  aria-expanded={isMariaMenuOpen}
                   aria-haspopup="true"
+                  aria-controls="maria-menu"
                 >
-                  <Phone className="w-3.5 h-3.5 text-sunset-500" />
+                  <ComalIcon className="w-4 h-4 text-sunset-600" />
                   <span className="text-sm font-medium text-sunset-700 group-hover:text-sunset-800">
                     Ask Maria
                   </span>
@@ -302,7 +362,52 @@ export function Header() {
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-sunset-500" />
                   </span>
                 </button>
-                {hasMariaOpened && (
+
+                {/* Two-option popover */}
+                <div
+                  id="maria-menu"
+                  // React 18 needs ''/undefined for inert; types expect boolean
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  inert={(!isMariaMenuOpen ? '' : undefined) as any}
+                  className={`absolute top-full right-0 mt-1 w-60 bg-cream-50 rounded-xl shadow-medium border border-cream-300 p-1.5 transition-all duration-200 ${
+                    isMariaMenuOpen
+                      ? 'opacity-100 translate-y-0 pointer-events-auto'
+                      : 'opacity-0 -translate-y-2 pointer-events-none'
+                  }`}
+                >
+                  {!isChatUnavailable && (
+                    <button
+                      onClick={() => {
+                        setIsMariaMenuOpen(false);
+                        setIsMariaChatOpen(true);
+                      }}
+                      className="w-full flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-cream-200/70 transition-colors text-left"
+                    >
+                      <MessageCircle className="w-4 h-4 text-sunset-700 mt-0.5 shrink-0" />
+                      <span>
+                        <span className="block text-sm font-medium text-charcoal-950">Chat with Maria</span>
+                        <span className="block text-xs text-charcoal-500">Type your question</span>
+                      </span>
+                    </button>
+                  )}
+                  {hasMariaWidget && (
+                    <button
+                      onClick={() => {
+                        setIsMariaMenuOpen(false);
+                        setIsMariaOpen(true);
+                      }}
+                      className="w-full flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-cream-200/70 transition-colors text-left"
+                    >
+                      <Phone className="w-4 h-4 text-sunset-700 mt-0.5 shrink-0" />
+                      <span>
+                        <span className="block text-sm font-medium text-charcoal-950">Voice call</span>
+                        <span className="block text-xs text-charcoal-500">Talk it out live</span>
+                      </span>
+                    </button>
+                  )}
+                </div>
+
+                {hasMariaWidget && hasMariaOpened && (
                   <MariaVoiceCall isOpen={isMariaOpen} onClose={() => setIsMariaOpen(false)} />
                 )}
               </div>
@@ -421,19 +526,34 @@ export function Header() {
               {t('nav.shopNow')}
             </Link>
 
-            {/* Ask Maria AI - Mobile */}
-            {hasMariaWidget && (
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setTimeout(() => setIsMariaOpen(true), 300);
-                }}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg border-2 border-sunset-300 bg-sunset-50 hover:bg-sunset-100 transition-colors mb-4"
-              >
-                <Phone className="w-4 h-4 text-sunset-500" />
-                <span className="font-semibold text-sunset-700">Ask Maria</span>
-                <span className="text-xs text-sunset-500 font-normal">AI Assistant</span>
-              </button>
+            {/* Ask Maria AI - Mobile (chat + voice) */}
+            {(hasMariaWidget || !isChatUnavailable) && (
+              <div className="flex flex-col gap-2 mb-4">
+                {!isChatUnavailable && (
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => setIsMariaChatOpen(true), 300);
+                    }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-sunset-300 bg-sunset-50 hover:bg-sunset-100 transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4 text-sunset-600 shrink-0" />
+                    <span className="font-semibold text-sunset-700 whitespace-nowrap">Chat with Maria</span>
+                  </button>
+                )}
+                {hasMariaWidget && (
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => setIsMariaOpen(true), 300);
+                    }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-sunset-300 bg-sunset-50 hover:bg-sunset-100 transition-colors"
+                  >
+                    <Phone className="w-4 h-4 text-sunset-600 shrink-0" />
+                    <span className="font-semibold text-sunset-700 whitespace-nowrap">Ask Maria — voice call</span>
+                  </button>
+                )}
+              </div>
             )}
 
             {/* Primary Links */}
@@ -474,7 +594,7 @@ export function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors flex items-center gap-2"
               >
-                <UtensilsCrossed className="w-4 h-4 text-sunset-500" />
+                <TortillaStackIcon className="w-4 h-4 text-sunset-700" />
                 {t('nav.recipes')}
               </Link>
               <Link
@@ -482,7 +602,7 @@ export function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors flex items-center gap-2"
               >
-                <BookOpen className="w-4 h-4 text-sunset-500" />
+                <ComalIcon className="w-4 h-4 text-sunset-700" />
                 {t('nav.guides')}
               </Link>
               <Link
@@ -490,7 +610,7 @@ export function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors flex items-center gap-2"
               >
-                <Newspaper className="w-4 h-4 text-sunset-500" />
+                <TexasStarIcon className="w-4 h-4 text-sunset-700" />
                 {t('nav.blog')}
               </Link>
 
@@ -540,6 +660,15 @@ export function Header() {
             </Link>
           </nav>
         </div>
+
+      {/* Maria text chat panel - mounted at root level to avoid stacking context issues */}
+      {hasMariaChatOpened && (
+        <MariaChatPanel
+          isOpen={isMariaChatOpen}
+          onClose={() => setIsMariaChatOpen(false)}
+          onUnavailable={() => setIsChatUnavailable(true)}
+        />
+      )}
     </>
   );
 }

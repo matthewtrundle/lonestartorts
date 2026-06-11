@@ -40,7 +40,7 @@ function ShippingDisplay({ hasWholesaleItems, freeShippingQualifies, shipping }:
           </div>
         </div>
         {hasWholesaleItems || freeShippingQualifies ? (
-          <span className="text-xs font-semibold text-green-600">FREE</span>
+          <span className="text-xs font-semibold text-lime-700">FREE</span>
         ) : (
           <span className="text-xs font-semibold">{formatPrice(shipping)}</span>
         )}
@@ -476,7 +476,7 @@ export function CartSidebar() {
                       <span className="text-xs font-medium uppercase tracking-wide">
                         {discountApplied ? t('cart.discount.applied') : t('cart.discount.title')}
                       </span>
-                      {discountApplied && <Check className="w-3.5 h-3.5 text-green-600" />}
+                      {discountApplied && <Check className="w-3.5 h-3.5 text-lime-700" />}
                     </div>
                     <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${discountOpen ? 'rotate-180' : ''}`} />
                   </button>
@@ -484,8 +484,8 @@ export function CartSidebar() {
                   {discountOpen && (
                     <div className="px-2.5 pb-2.5 border-t border-gray-100">
                       {discountApplied ? (
-                        <div className="flex items-center justify-between p-2 mt-2 bg-green-50 border border-green-200 rounded">
-                          <span className="text-xs text-green-800 font-medium">{discountMessage}</span>
+                        <div className="flex items-center justify-between p-2 mt-2 bg-lime-50 border border-lime-200 rounded">
+                          <span className="text-xs text-lime-800 font-medium">{discountMessage}</span>
                           <button
                             onClick={handleRemoveDiscount}
                             className="text-gray-400 hover:text-gray-600 p-1"
@@ -545,7 +545,7 @@ export function CartSidebar() {
                   </div>
                   {/* Show discount line for non-shipping discounts */}
                   {discountApplied && discountType !== 'free_shipping' && discountAmount > 0 && (
-                    <div className="flex justify-between text-green-600">
+                    <div className="flex justify-between text-lime-700">
                       <span>{discountType === 'percentage' ? `Discount (${discountAmount}%)` : 'Discount'}</span>
                       <span className="font-medium">
                         -{formatPrice(discountType === 'percentage'
@@ -558,11 +558,11 @@ export function CartSidebar() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">{t('cart.shipping')}</span>
                     {hasWholesaleItems ? (
-                      <span className="font-medium text-green-600">Wholesale - FREE</span>
+                      <span className="font-medium text-lime-700">Wholesale - FREE</span>
                     ) : isFreeShipping || freeShippingProgress.qualifies ? (
                       <div className="flex items-center gap-1.5">
                         <span className="text-gray-400 line-through text-xs">{formatPrice(baseShipping)}</span>
-                        <span className="font-medium text-green-600">{t('cart.free')}</span>
+                        <span className="font-medium text-lime-700">{t('cart.free')}</span>
                       </div>
                     ) : (
                       <span className="font-medium">{formatPrice(shipping)}</span>
