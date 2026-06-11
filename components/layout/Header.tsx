@@ -124,21 +124,54 @@ export function Header() {
       {/* Brand top rule */}
       <div aria-hidden="true" className="h-[3px] w-full bg-sunset-600" />
 
-      <div className="container mx-auto px-4 md:px-8 relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative">
         <div className="header-content flex justify-between items-center py-0.5">
-          {/* Left side: Logo + Resources */}
-          <div className="flex items-center gap-4">
-            <Link href="/" className="logo-wrapper group relative block scale-[0.92] origin-left">
-              <LogoFull
-                className="text-charcoal-950 transition-transform duration-300 group-hover:scale-105"
-                size="xs"
-              />
-            </Link>
+          {/* Left side: Logo */}
+          <Link href="/" className="logo-wrapper group relative block scale-[0.92] origin-left">
+            <LogoFull
+              className="text-charcoal-950 transition-transform duration-300 group-hover:scale-105"
+              size="xs"
+            />
+          </Link>
 
-            {/* Resources Dropdown - Far left, next to logo */}
+          {/* Mobile: Hamburger Menu + Cart */}
+          <div className="flex md:hidden items-center gap-4">
+            {/* Cart Icon */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative p-2 hover:bg-sunset-50 rounded-lg transition-colors"
+              aria-label={`Open cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
+            >
+              <ShoppingBag className="w-6 h-6 text-charcoal-950" />
+              {itemCount > 0 && (
+                <span aria-hidden="true" className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Hamburger Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 hover:bg-sunset-50 rounded-lg transition-colors"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-charcoal-950" />
+              ) : (
+                <Menu className="w-6 h-6 text-charcoal-950" />
+              )}
+            </button>
+          </div>
+
+          {/* Desktop Navigation - Right side: one cohesive cluster */}
+          <nav className="nav-items hidden md:flex items-center gap-7">
+            {/* Resources Dropdown */}
             <div
               ref={resourcesRef}
-              className="relative hidden md:block"
+              className="relative"
               onMouseEnter={handleResourcesEnter}
               onMouseLeave={handleResourcesLeave}
               onKeyDown={(e) => {
@@ -194,54 +227,13 @@ export function Header() {
                 })}
               </div>
             </div>
-          </div>
 
-          {/* Mobile: Hamburger Menu + Cart */}
-          <div className="flex md:hidden items-center gap-4">
-            {/* Cart Icon */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className="relative p-2 hover:bg-sunset-50 rounded-lg transition-colors"
-              aria-label={`Open cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
-            >
-              <ShoppingBag className="w-6 h-6 text-charcoal-950" />
-              {itemCount > 0 && (
-                <span aria-hidden="true" className="absolute -top-1 -right-1 w-5 h-5 bg-sunset-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
-            </button>
-
-            {/* Hamburger Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 hover:bg-sunset-50 rounded-lg transition-colors"
-              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-charcoal-950" />
-              ) : (
-                <Menu className="w-6 h-6 text-charcoal-950" />
-              )}
-            </button>
-          </div>
-
-          {/* Desktop Navigation - Right side */}
-          <nav className={`nav-items hidden md:flex items-center transition-all duration-300 ${isScrolled ? 'gap-3' : 'gap-4'}`}>
             <Link href="/shop" className="group relative" aria-current={isActive('/shop') ? 'page' : undefined}>
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.shop')}
               </span>
               <span className={navUnderline('/shop')} />
             </Link>
-
-            {/* Tortilla divider */}
-            <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
-            </svg>
 
             <Link href="/subscribe" className="group relative" aria-current={isActive('/subscribe') ? 'page' : undefined}>
               <span className="text-sm font-medium tracking-wide text-sunset-700 transition-colors group-hover:text-sunset-800">
@@ -250,12 +242,6 @@ export function Header() {
               <span className={navUnderline('/subscribe')} />
             </Link>
 
-            {/* Tortilla divider */}
-            <svg aria-hidden="true" focusable="false" className="w-4 h-4 text-sunset-300 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
-            </svg>
-
             <Link href="/wholesale" className="group relative" aria-current={isActive('/wholesale') ? 'page' : undefined}>
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.wholesale')}
@@ -263,6 +249,8 @@ export function Header() {
               <span className={navUnderline('/wholesale')} />
             </Link>
 
+            {/* Right-side controls: language / Maria / Account / cart / CTA */}
+            <div className="flex items-center gap-3">
             {/* Language Toggle with Mexican Flag */}
             <button
               onClick={toggleLanguage}
@@ -348,6 +336,7 @@ export function Header() {
             >
               {t('nav.shopNow')}
             </Link>
+            </div>
           </nav>
         </div>
       </div>

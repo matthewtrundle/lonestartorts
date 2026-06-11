@@ -161,8 +161,8 @@ export default function HomeContent() {
           <div className="lg:col-span-6 xl:col-span-5 flex items-center bg-gradient-to-b from-cream-50 to-cream-100 relative">
             <div className="w-full px-6 sm:px-10 lg:pl-14 lg:pr-10 pt-36 pb-16 lg:pt-32 lg:pb-12">
               {/* Quality badge */}
-              <div className="mb-6 reveal-text">
-                <span className="text-[10px] sm:text-xs font-bold tracking-[0.22em] sm:tracking-[0.4em] uppercase text-masa-700">
+              <div className="mb-6 reveal-text max-w-md">
+                <span className="inline-block max-w-md text-[10px] sm:text-xs font-bold tracking-[0.22em] sm:tracking-[0.4em] uppercase text-masa-700 text-pretty">
                   {t('hero.badge')}
                 </span>
               </div>
@@ -205,7 +205,7 @@ export default function HomeContent() {
               </div>
 
               {/* Disclaimer */}
-              <p className="text-[10px] sm:text-xs text-charcoal-500 mt-8 tracking-wide uppercase">
+              <p className="text-[10px] sm:text-xs text-charcoal-500 mt-8 tracking-wide uppercase text-pretty max-w-sm">
                 {t('disclaimer.short')}
               </p>
             </div>
@@ -494,87 +494,64 @@ export default function HomeContent() {
           </div>
         </section>
 
-        {/* Product Showcase with Horizontal Scroll */}
-        <section className="horizontal-scroll min-h-[80vh] relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10 pt-14">
+        {/* Product Showcase — static editorial lineup */}
+        <section className="relative bg-charcoal-950 text-cream-50 py-14">
           {/* Section header — editorial conventions on dark */}
-          <div className="container mx-auto px-8">
-            <p className="text-sm font-bold uppercase tracking-widest text-sunset-400 mb-2">What We Ship</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-cream-50">
-              The Tortilla Lineup
-            </h2>
-          </div>
+          <div className="container mx-auto px-8 max-w-7xl">
+            <div className="mb-10">
+              <p className="text-sm font-bold uppercase tracking-widest text-sunset-400 mb-2">What We Ship</p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-cream-50">
+                The Tortilla Lineup
+              </h2>
+            </div>
 
-          <div className="horizontal-wrapper flex items-center">
-            {[
-              {
-                title: 'FLOUR',
-                subtitle: 'Soft & Versatile',
-                desc: 'Butter Flour Tortillas',
-                color: 'from-sunset-400 to-sunset-600',
-                img: '/images/product-hero.webp'
-              },
-              {
-                title: 'CORN',
-                subtitle: 'Authentic & Traditional',
-                desc: 'Traditional Corn Tortillas',
-                color: 'from-masa-400 to-masa-600',
-                img: '/images/fresh-ingredients.webp'
-              },
-              {
-                title: 'WHEAT',
-                subtitle: 'Healthy & Hearty',
-                desc: 'Whole Grain Tortillas',
-                color: 'from-cream-400 to-cream-600',
-                img: '/images/artisan-hands.webp'
-              },
-              {
-                title: 'SPECIALTY',
-                subtitle: 'Fresh & Flavorful',
-                desc: 'Spinach & Herb Tortillas',
-                color: 'from-lime-500 to-lime-700',
-                img: '/images/heritage-kitchen.webp'
-              },
-            ].map((product, i) => (
-              <div key={i} className="horizontal-item flex-shrink-0 flex items-center justify-center px-16 perspective-1000" style={{ width: '90vw' }}>
-                <div className="text-center space-y-6 preserve-3d max-w-2xl">
-                  {/* Product Image with artistic treatment */}
-                  <div className="relative mx-auto group">
-                    {/* Floating accent shapes */}
-                    <div className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-gradient-to-br from-cream-200/20 to-transparent blur-xl" />
-                    <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-sunset-300/20 to-transparent blur-xl" />
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: 'CORN',
+                  subtitle: 'Authentic & Traditional',
+                  desc: 'Traditional Corn Tortillas',
+                  img: '/images/brand/prod-corn.webp'
+                },
+                {
+                  title: 'FLOUR',
+                  subtitle: 'Soft & Versatile',
+                  desc: 'Butter Flour Tortillas',
+                  img: '/images/brand/prod-flour.webp'
+                },
+                {
+                  title: 'SPECIALTY',
+                  subtitle: 'Fresh & Flavorful',
+                  desc: 'Spinach & Herb Tortillas',
+                  img: '/images/brand/prod-specialty.webp'
+                },
+              ].map((product) => (
+                <Link
+                  key={product.title}
+                  href="/shop"
+                  className="group relative block aspect-[3/4] rounded-2xl overflow-hidden shadow-large"
+                >
+                  <Image
+                    src={product.img}
+                    alt={product.desc}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  {/* Scrim for legibility */}
+                  <div aria-hidden="true" className="absolute inset-0 bg-charcoal-950/60 transition-colors duration-500 group-hover:bg-charcoal-950/50" />
 
-                    {/* Main product image */}
-                    <div className="relative w-[280px] h-[280px] mx-auto">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-40 rounded-full blur-2xl scale-110 group-hover:scale-125 transition-transform duration-1000`} />
-                      <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cream-200/10 shadow-large">
-                        <Image
-                          src={product.img}
-                          alt=""
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent" />
-                      </div>
-                    </div>
+                  {/* Copy — bottom-left */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+                    <h3 className="text-4xl md:text-5xl font-display font-black tracking-tight leading-none text-cream-50">
+                      {product.title}
+                    </h3>
+                    <p className="mt-2 text-sm font-medium tracking-wide uppercase text-cream-100">{product.subtitle}</p>
+                    <p className="mt-1 text-sm italic font-display text-cream-300">{product.desc}</p>
                   </div>
-
-                  {/* Product Info - Enhanced Typography */}
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <h3 className="text-6xl md:text-7xl font-display font-black tracking-tighter leading-none">{product.title}</h3>
-                      <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-cream-200 to-transparent" />
-                    </div>
-                    <p className="text-xl font-light tracking-wide text-cream-100 uppercase">{product.subtitle}</p>
-                    <p className="text-base text-cream-300 italic font-display opacity-80">{product.desc}</p>
-
-                    {/* Decorative element instead of button */}
-                    <div className="flex items-center justify-center gap-4 mt-8">
-                      <span className="inline-block w-32 h-px bg-gradient-to-r from-transparent via-sunset-400 to-transparent" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -833,54 +810,52 @@ export default function HomeContent() {
                   type: 'Traditional Corn Tortillas',
                   style: 'Shelf-Stable • No Refrigeration',
                   badge: 'Pantry Ready',
-                  gradient: 'bg-gradient-to-br from-sunset-100 to-sunset-200',
-                  accent: 'text-sunset-600',
-                  shadow: 'shadow-sunset'
+                  img: '/images/brand/prod-corn.webp'
                 },
                 {
                   name: 'FLOUR POWER',
                   type: 'Soft Flour Tortillas',
                   style: 'Shelf-Stable • 30-Day Fresh',
                   badge: 'Best Seller',
-                  gradient: 'bg-gradient-to-br from-masa-100 to-masa-200',
-                  accent: 'text-masa-700',
-                  shadow: 'shadow-masa'
+                  img: '/images/brand/prod-flour.webp'
                 },
                 {
                   name: 'WILD CARDS',
                   type: 'Specialty Varieties',
                   style: 'Shelf-Stable • Limited Edition',
                   badge: 'Coming Soon',
-                  gradient: 'bg-gradient-to-br from-lime-100 to-lime-200',
-                  accent: 'text-lime-700',
-                  shadow: 'shadow-medium'
+                  img: '/images/brand/prod-specialty.webp'
                 }
               ].map((product, i) => (
                 <Link href="/shop" key={i} className="scale-in group block cursor-pointer">
-                  <div className={`relative ${product.gradient} rounded-xl p-12 h-80 flex flex-col justify-between overflow-hidden hover-lift hover:shadow-large hover:-translate-y-1 ${product.shadow} transition-all duration-500`}>
-                    {/* Background pattern */}
-                    <div className="absolute inset-0 opacity-10">
-                      <div className="absolute top-0 right-0 w-32 h-32 border-8 border-current rounded-full -translate-y-1/2 translate-x-1/2" />
-                      <div className="absolute bottom-0 left-0 w-48 h-48 border-8 border-current rounded-full translate-y-1/2 -translate-x-1/2" />
-                    </div>
+                  <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-medium hover:shadow-large hover:-translate-y-1 transition-all duration-500">
+                    {/* Photography */}
+                    <Image
+                      src={product.img}
+                      alt={product.type}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    {/* Scrim for legibility */}
+                    <div aria-hidden="true" className="absolute inset-0 bg-charcoal-950/55" />
 
                     {/* Content */}
-                    <div className="relative z-10">
-                      <p className={`text-4xl font-display font-bold mb-2 ${product.accent}`}>{product.name}</p>
-                      <p className="text-xl text-charcoal-700">{product.type}</p>
-                    </div>
+                    <div className="absolute inset-0 z-10 p-8 md:p-10 flex flex-col justify-between">
+                      <div>
+                        <p className="text-3xl md:text-4xl font-display font-bold mb-2 text-cream-50">{product.name}</p>
+                        <p className="text-xl text-cream-100">{product.type}</p>
+                      </div>
 
-                    <div className="relative z-10">
-                      <p className="text-charcoal-600">{product.style}</p>
-                      <p className="text-sm mt-2 font-medium tracking-wider uppercase opacity-60">{product.badge}</p>
-                      {/* Shop CTA indicator */}
-                      <p className="text-sm mt-3 font-semibold text-sunset-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
-                        Shop Now →
-                      </p>
+                      <div>
+                        <p className="text-cream-200">{product.style}</p>
+                        <p className="text-sm mt-2 font-medium tracking-wider uppercase text-cream-300">{product.badge}</p>
+                        {/* Shop CTA indicator */}
+                        <p className="text-sm mt-3 font-semibold text-sunset-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
+                          Shop Now →
+                        </p>
+                      </div>
                     </div>
-
-                    {/* Hover effect */}
-                    <div className="absolute inset-0 bg-charcoal-950 opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
                   </div>
                 </Link>
               ))}
@@ -1004,15 +979,14 @@ export default function HomeContent() {
                 <div className="bg-white rounded-2xl shadow-medium overflow-hidden hover:shadow-large transition-all duration-500 hover:-translate-y-2">
                   <div className="grid md:grid-cols-2">
                     {/* Image Side */}
-                    <div className="relative h-80 md:h-auto bg-gradient-to-br from-sunset-200 via-masa-200 to-rust-200">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-white/60">
-                          <svg className="w-32 h-32 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                          </svg>
-                          <p className="text-lg font-medium">Recipe Image</p>
-                        </div>
-                      </div>
+                    <div className="relative h-80 md:h-auto overflow-hidden">
+                      <Image
+                        src="/images/blog/breakfast-taco-hero.webp"
+                        alt="Texas-style breakfast tacos"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width:768px) 100vw, 50vw"
+                      />
                       <div className="absolute top-6 right-6 bg-sunset-600 text-white px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wider shadow-medium">
                         Featured Recipe
                       </div>
