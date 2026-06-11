@@ -77,6 +77,10 @@ body {
   text-wrap: balance;
 }
 
+.text-pretty {
+  text-wrap: pretty;
+}
+
 /* Massive hero text styles */
 .hero-title {
   transform-style: preserve-3d;
@@ -125,8 +129,8 @@ body {
 
 /* Header shrinking on scroll */
 .shrink-header.scrolled .header-content {
-  padding-top: 0.75rem !important;
-  padding-bottom: 0.75rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
 
 .shrink-header.scrolled .logo-wrapper {

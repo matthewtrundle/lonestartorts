@@ -1,7 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { Truck, Clock, Package, MapPin, ShieldCheck, Calendar, Snowflake } from 'lucide-react';
+import {
+  CalendarTuesdayIcon,
+  RouteIcon,
+  TexasStarIcon,
+  TortillaStackIcon,
+  ShipBoxIcon,
+} from '@/components/ui/Icons';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import { useLanguage } from '@/lib/language-context';
 import { getShippingMessage, getShipDateDisplay } from '@/lib/shipping-schedule';
 import React from 'react';
@@ -30,29 +37,32 @@ export default function ShippingPageContent() {
 
   return (
     <main className="min-h-screen bg-cream-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-charcoal-900 to-charcoal-950 text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-6">
-            <Truck className="w-5 h-5 text-sunset-500" />
-            <span className="text-sm font-medium">Freshness First Shipping</span>
-          </div>
+      {/* Page-header band */}
+      <section className="relative overflow-hidden bg-charcoal-950 text-cream-50 py-12 md:py-16">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-1/2 right-0 h-[200%] w-1/2 bg-gradient-radial from-sunset-900/40 to-transparent"
+        />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="mb-2 text-sm font-bold uppercase tracking-widest text-sunset-400">
+            Freshness First Shipping
+          </p>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="font-display text-balance text-4xl md:text-5xl font-bold mb-6">
             Freshness First Shipping
           </h1>
 
-          <p className="text-xl text-cream-200 mb-4 max-w-3xl mx-auto">
+          <p className="text-xl text-cream-200 mb-4 max-w-3xl mx-auto text-pretty">
             We ship on Tuesdays so your tortillas spend the fewest days in transit. No weekend warehouse sitting — just fresh Texas tortillas, delivered fast.
           </p>
 
-          <p className="text-lg text-green-400 font-bold mb-8">
+          <p className="text-lg text-lime-300 font-bold mb-8">
             FREE Shipping on Orders $80+
           </p>
 
           {mounted && shippingMsg && (
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 rounded-lg mb-8">
-              <Calendar className="w-5 h-5 text-sunset-400" />
+              <CalendarTuesdayIcon className="w-5 h-5 text-sunset-400" />
               <span className="font-medium">
                 Next ship date: {shipDateDisplay}
               </span>
@@ -71,36 +81,36 @@ export default function ShippingPageContent() {
       </section>
 
       {/* Shipping Details */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-14">
         {/* Key Points */}
-        <div className="grid md:grid-cols-4 gap-6 mb-16">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
-            <Calendar className="w-10 h-10 text-sunset-500 mx-auto mb-4" />
+        <div className="grid md:grid-cols-4 gap-6 mb-12">
+          <div className="bg-white rounded-xl p-6 shadow-soft border border-charcoal-200 text-center">
+            <CalendarTuesdayIcon className="w-10 h-10 text-sunset-600 mx-auto mb-4" />
             <h3 className="font-bold text-charcoal-950 mb-2">Tuesday Shipping</h3>
-            <p className="text-gray-600 text-sm">Order by Monday 9 PM CT to ship Tuesday</p>
+            <p className="text-charcoal-600 text-sm">Order by Monday 9 PM CT to ship Tuesday</p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
-            <Truck className="w-10 h-10 text-sunset-500 mx-auto mb-4" />
+          <div className="bg-white rounded-xl p-6 shadow-soft border border-charcoal-200 text-center">
+            <RouteIcon className="w-10 h-10 text-sunset-600 mx-auto mb-4" />
             <h3 className="font-bold text-charcoal-950 mb-2">{t('shipping.keyPoints.delivery')}</h3>
-            <p className="text-gray-600 text-sm">{t('shipping.keyPoints.deliveryDesc')}</p>
+            <p className="text-charcoal-600 text-sm">{t('shipping.keyPoints.deliveryDesc')}</p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
-            <MapPin className="w-10 h-10 text-sunset-500 mx-auto mb-4" />
+          <div className="bg-white rounded-xl p-6 shadow-soft border border-charcoal-200 text-center">
+            <TexasStarIcon className="w-10 h-10 text-sunset-600 mx-auto mb-4" />
             <h3 className="font-bold text-charcoal-950 mb-2">{t('shipping.keyPoints.shipsFrom')}</h3>
-            <p className="text-gray-600 text-sm">{t('shipping.keyPoints.shipsFromDesc')}</p>
+            <p className="text-charcoal-600 text-sm">{t('shipping.keyPoints.shipsFromDesc')}</p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
-            <Package className="w-10 h-10 text-sunset-500 mx-auto mb-4" />
+          <div className="bg-white rounded-xl p-6 shadow-soft border border-charcoal-200 text-center">
+            <TortillaStackIcon className="w-10 h-10 text-sunset-600 mx-auto mb-4" />
             <h3 className="font-bold text-charcoal-950 mb-2">{t('shipping.keyPoints.noRefrigeration')}</h3>
-            <p className="text-gray-600 text-sm">{t('shipping.keyPoints.noRefrigerationDesc')}</p>
+            <p className="text-charcoal-600 text-sm">{t('shipping.keyPoints.noRefrigerationDesc')}</p>
           </div>
         </div>
 
         {/* Shipping Schedule Visual */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-16">
-          <div className="bg-charcoal-900 text-white px-6 py-4">
+        <div className="bg-white rounded-xl shadow-soft border border-charcoal-200 overflow-hidden mb-12">
+          <div className="bg-charcoal-950 text-cream-50 px-6 py-4">
             <h2 className="text-xl font-bold flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
+              <CalendarTuesdayIcon className="w-5 h-5 text-sunset-400" />
               Freshness First Shipping Schedule
             </h2>
           </div>
@@ -111,13 +121,13 @@ export default function ShippingPageContent() {
                   key={day}
                   className={`text-center p-3 md:p-4 rounded-lg border-2 transition-colors ${
                     ships
-                      ? 'bg-green-50 border-green-300 text-green-800'
-                      : 'bg-gray-50 border-gray-200 text-gray-400'
+                      ? 'bg-lime-50 border-lime-300 text-lime-800'
+                      : 'bg-cream-100 border-charcoal-200 text-charcoal-400'
                   }`}
                 >
                   <p className="text-xs md:text-sm font-bold mb-1">{day.slice(0, 3)}</p>
                   {ships ? (
-                    <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 mx-auto text-green-600" />
+                    <ShipBoxIcon className="w-5 h-5 md:w-6 md:h-6 mx-auto text-lime-700" />
                   ) : (
                     <span className="text-xs">—</span>
                   )}
@@ -130,64 +140,65 @@ export default function ShippingPageContent() {
 
             <div className="space-y-3 text-sm text-charcoal-700">
               <div className="flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                <span className="mt-0.5 flex-shrink-0 font-bold text-lime-700" aria-hidden="true">✓</span>
                 <span><strong>Monday before 9 PM CT:</strong> Ships Tuesday</span>
               </div>
               <div className="flex items-start gap-2">
-                <Clock className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                <span className="mt-0.5 flex-shrink-0 font-bold text-sunset-600" aria-hidden="true">→</span>
                 <span><strong>Monday after 9 PM CT – Sunday:</strong> Ships next Tuesday</span>
               </div>
             </div>
           </div>
-          <div className="px-6 py-4 bg-cream-50 border-t border-gray-200">
-            <p className="text-sm text-gray-600">
+          <div className="px-6 py-4 bg-cream-50 border-t border-charcoal-200">
+            <p className="text-sm text-charcoal-600 text-pretty">
               <strong>Why Tuesdays only?</strong> We ship on Tuesday so your tortillas don&apos;t sit in a warehouse over the weekend. This means fresher tortillas at your door.
             </p>
           </div>
         </div>
 
         {/* Delivery Times */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-16">
-          <h2 className="text-2xl font-bold text-charcoal-950 mb-6 flex items-center gap-2">
-            <Clock className="w-6 h-6 text-sunset-500" />
-            {t('shipping.deliveryTimes.title')}
-          </h2>
+        <div className="bg-white rounded-xl shadow-soft border border-charcoal-200 p-8 mb-12">
+          <SectionHeader
+            eyebrow="USPS Priority Mail"
+            title={t('shipping.deliveryTimes.title')}
+            className="mb-6"
+          />
 
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="font-semibold text-charcoal-950 mb-3">Continental US (48 states)</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
+              <ul className="space-y-2 text-charcoal-700">
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-sunset-600" aria-hidden="true">✓</span>
                   2-3 business days typical delivery
                 </li>
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-sunset-600" aria-hidden="true">✓</span>
                   Ships Tuesdays (order by Monday 9 PM CT)
                 </li>
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-sunset-600" aria-hidden="true">✓</span>
                   USPS Priority Mail with tracking
                 </li>
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-sunset-600" aria-hidden="true">✓</span>
                   FREE shipping on orders $80+
                 </li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold text-charcoal-950 mb-3">Alaska & Hawaii</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
+              <ul className="space-y-2 text-charcoal-700">
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-sunset-600" aria-hidden="true">✓</span>
                   4-7 business days typical delivery
                 </li>
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-sunset-600" aria-hidden="true">✓</span>
                   Same shipping schedule applies
                 </li>
-                <li className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-600" />
+                <li className="flex items-start gap-2">
+                  <span className="font-bold text-sunset-600" aria-hidden="true">✓</span>
                   Full tracking included
                 </li>
               </ul>
@@ -196,19 +207,18 @@ export default function ShippingPageContent() {
         </div>
 
         {/* Freezing Tip */}
-        <div className="bg-sky-50 border border-sky-200 rounded-xl p-6 mb-16 flex items-start gap-4">
-          <Snowflake className="w-8 h-8 text-sky-600 flex-shrink-0 mt-0.5" />
-          <div>
-            <h3 className="font-bold text-sky-900 text-lg mb-1">Stock Up & Freeze for 6+ Months!</h3>
-            <p className="text-sky-700">Our tortillas freeze beautifully. Whether you order <Link href="/products/flour-tortillas" className="text-sky-800 font-semibold underline hover:text-sky-900">flour tortillas</Link> or <Link href="/products/corn-tortillas" className="text-sky-800 font-semibold underline hover:text-sky-900">corn tortillas</Link>, they&apos;ll keep for months in the freezer. Thaw at room temperature for 30 minutes or warm directly from frozen on a skillet.</p>
-          </div>
+        <div className="rounded-r-xl border-l-4 border-sunset-500 bg-sunset-50 p-6 mb-12">
+          <h3 className="font-semibold text-charcoal-950 text-lg mb-1">Stock Up &amp; Freeze for 6+ Months!</h3>
+          <p className="text-charcoal-700 text-pretty">Our tortillas freeze beautifully. Whether you order <Link href="/products/flour-tortillas" className="text-sunset-700 font-semibold underline hover:text-sunset-600">flour tortillas</Link> or <Link href="/products/corn-tortillas" className="text-sunset-700 font-semibold underline hover:text-sunset-600">corn tortillas</Link>, they&apos;ll keep for months in the freezer. Thaw at room temperature for 30 minutes or warm directly from frozen on a skillet.</p>
         </div>
 
         {/* FAQ Section */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-charcoal-950 mb-8 text-center">
-            {t('shipping.shippingFaqs')}
-          </h2>
+        <div className="mb-12">
+          <SectionHeader
+            align="center"
+            eyebrow="Good to Know"
+            title={t('shipping.shippingFaqs')}
+          />
 
           <div className="space-y-4 max-w-3xl mx-auto">
             {[
@@ -247,21 +257,19 @@ export default function ShippingPageContent() {
             ].map((faq, index) => (
               <details
                 key={index}
-                className="bg-white rounded-lg border border-gray-200 p-6 group"
+                className="group overflow-hidden rounded-xl border border-charcoal-200 bg-white"
                 open={index === 0}
               >
-                <summary className="font-semibold text-charcoal-950 cursor-pointer list-none flex justify-between items-center">
-                  {faq.q}
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <summary className="flex w-full cursor-pointer list-none items-center justify-between p-5 text-left [&::-webkit-details-marker]:hidden">
+                  <span className="pr-4 font-semibold text-charcoal-950">{faq.q}</span>
+                  <span
+                    className="flex-shrink-0 text-xl leading-none text-charcoal-600 transition-transform group-open:rotate-45"
+                    aria-hidden="true"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                    +
+                  </span>
                 </summary>
-                <p className="mt-4 text-charcoal-700 leading-relaxed">{faq.a}</p>
+                <p className="px-5 pb-5 text-charcoal-700 leading-relaxed text-pretty">{faq.a}</p>
               </details>
             ))}
           </div>
@@ -269,13 +277,13 @@ export default function ShippingPageContent() {
 
         {/* Seller Info */}
         <div className="bg-cream-100 rounded-xl p-8 text-center">
-          <h2 className="text-xl font-bold text-charcoal-950 mb-4">{t('shipping.seller.title')}</h2>
-          <p className="text-charcoal-700 mb-4 max-w-2xl mx-auto">
+          <h2 className="font-display text-balance text-2xl font-bold text-charcoal-950 mb-4">{t('shipping.seller.title')}</h2>
+          <p className="text-charcoal-700 mb-4 max-w-2xl mx-auto text-pretty">
             {t('shipping.seller.description')}
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-charcoal-900 hover:bg-charcoal-800 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-charcoal-950 hover:bg-charcoal-800 text-white font-bold rounded-lg transition-colors"
           >
             {t('shipping.seller.shopButton')}
           </Link>

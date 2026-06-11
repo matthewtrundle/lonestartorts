@@ -1,8 +1,14 @@
 'use client';
 
-import { ContactFormLight } from '@/components/ContactFormLight';
 import Link from 'next/link';
-import { MapPin, Clock, Phone, Mail, MessageCircle } from 'lucide-react';
+import { ContactFormLight } from '@/components/ContactFormLight';
+import {
+  TexasStarIcon,
+  CalendarTuesdayIcon,
+  WheatIcon,
+  ComalIcon,
+  TortillaStackIcon,
+} from '@/components/ui/Icons';
 import { useLanguage } from '@/lib/language-context';
 import { MariaCTA } from '@/components/chat/MariaCTA';
 
@@ -11,14 +17,21 @@ export function ContactPageContent() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-charcoal-950 text-white py-16">
-        <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+      {/* Editorial page header */}
+      <section className="relative overflow-hidden bg-charcoal-950 text-cream-50 py-12 md:py-16">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-1/2 right-0 h-[200%] w-1/2 bg-gradient-radial from-sunset-900/40 to-transparent"
+        />
+        <div className="container relative mx-auto px-4 md:px-8 max-w-6xl">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-sunset-400">
+              Say Howdy
+            </p>
+            <h1 className="font-display text-balance text-5xl md:text-6xl font-bold mb-4">
               {t('contactPage.title')}
             </h1>
-            <p className="text-xl text-cream-200">
+            <p className="text-xl text-cream-200 text-pretty">
               {t('contactPage.subtitle')}
             </p>
           </div>
@@ -26,55 +39,49 @@ export function ContactPageContent() {
       </section>
 
       {/* Contact Content */}
-      <section className="py-16">
+      <section className="py-12 md:py-14">
         <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-5 gap-10">
             {/* Contact Form */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-charcoal-950 mb-6">
+            <div className="lg:col-span-3 rounded-xl border border-charcoal-200/60 bg-white p-8 shadow-soft">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal-950 mb-6">
                 {t('contactPage.sendMessage')}
               </h2>
               <ContactFormLight />
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-8">
+            <div className="lg:col-span-2 space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-charcoal-950 mb-6">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal-950 mb-6">
                   {t('contactPage.getInTouch')}
                 </h2>
 
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-sunset-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-sunset-600" />
-                    </div>
+                  <div className="flex items-start gap-3">
+                    <TexasStarIcon className="mt-1 h-5 w-5 flex-shrink-0 text-sunset-600" />
                     <div>
                       <h3 className="font-semibold text-charcoal-950">{t('contactPage.location')}</h3>
                       <p className="text-charcoal-700">{t('contactPage.locationCity')}</p>
-                      <p className="text-sm text-charcoal-600 mt-1">
+                      <p className="text-sm text-charcoal-600 mt-1 text-pretty">
                         {t('contactPage.locationDesc')}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-sunset-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-sunset-600" />
-                    </div>
+                  <div className="flex items-start gap-3">
+                    <CalendarTuesdayIcon className="mt-1 h-5 w-5 flex-shrink-0 text-sunset-600" />
                     <div>
                       <h3 className="font-semibold text-charcoal-950">{t('contactPage.businessHours')}</h3>
                       <p className="text-charcoal-700">{t('contactPage.hoursValue')}</p>
-                      <p className="text-sm text-charcoal-600 mt-1">
+                      <p className="text-sm text-charcoal-600 mt-1 text-pretty">
                         {t('contactPage.hoursNote')}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-sunset-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-sunset-600" />
-                    </div>
+                  <div className="flex items-start gap-3">
+                    <WheatIcon className="mt-1 h-5 w-5 flex-shrink-0 text-sunset-600" />
                     <div>
                       <h3 className="font-semibold text-charcoal-950">Email Us</h3>
                       <a
@@ -83,16 +90,14 @@ export function ContactPageContent() {
                       >
                         howdy@lonestartortillas.com
                       </a>
-                      <p className="text-sm text-charcoal-600 mt-1">
+                      <p className="text-sm text-charcoal-600 mt-1 text-pretty">
                         We typically respond within 24 hours
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-sunset-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-sunset-600" />
-                    </div>
+                  <div className="flex items-start gap-3">
+                    <ComalIcon className="mt-1 h-5 w-5 flex-shrink-0 text-sunset-600" />
                     <div>
                       <h3 className="font-semibold text-charcoal-950">Call Maria</h3>
                       <a
@@ -101,23 +106,21 @@ export function ContactPageContent() {
                       >
                         (512) 894-6823
                       </a>
-                      <p className="text-sm text-charcoal-600 mt-1">
+                      <p className="text-sm text-charcoal-600 mt-1 text-pretty">
                         Our AI assistant is available 24/7 to answer questions about products, shipping, and orders.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-sunset-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MessageCircle className="w-6 h-6 text-sunset-600" />
-                    </div>
+                  <div className="flex items-start gap-3">
+                    <TortillaStackIcon className="mt-1 h-5 w-5 flex-shrink-0 text-sunset-600" />
                     <div>
                       <h3 className="font-semibold text-charcoal-950">Chat with Maria</h3>
                       <MariaCTA
                         heading="Start a chat now"
                         variant="inline"
                       />
-                      <p className="text-sm text-charcoal-600 mt-1">
+                      <p className="text-sm text-charcoal-600 mt-1 text-pretty">
                         Chat with Maria right here on the website — available in English and Spanish.
                       </p>
                     </div>
@@ -126,7 +129,7 @@ export function ContactPageContent() {
               </div>
 
               {/* Quick Links */}
-              <div className="bg-masa-50 rounded-xl p-6">
+              <div className="rounded-xl border border-masa-200 bg-masa-50 p-6">
                 <h3 className="font-semibold text-charcoal-950 mb-4">{t('contactPage.quickLinks')}</h3>
                 <div className="space-y-3">
                   <Link

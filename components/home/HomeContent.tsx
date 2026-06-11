@@ -6,6 +6,15 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 import { Check } from 'lucide-react'
+import {
+  TortillaStackIcon,
+  ComalIcon,
+  WheatIcon,
+  ShipBoxIcon,
+  TexasStarIcon,
+  CalendarTuesdayIcon,
+  RouteIcon,
+} from '@/components/ui/Icons'
 import { DisclaimerBanner } from '@/components/DisclaimerBanner'
 import { trackVideoPlay } from '@/lib/analytics'
 import { useLanguage } from '@/lib/language-context'
@@ -46,6 +55,12 @@ export default function HomeContent() {
   const carouselVideoRef = useRef<HTMLVideoElement>(null);
   const [carouselInView, setCarouselInView] = useState(false);
 
+  // Maria's Story video: autoplay muted while in view, pause out of view
+  const mariaFrameRef = useRef<HTMLDivElement>(null);
+  const mariaVideoRef = useRef<HTMLVideoElement>(null);
+  const [mariaInView, setMariaInView] = useState(false);
+  const mariaAutoplayTracked = useRef(false);
+
   useEffect(() => {
     setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }, []);
@@ -75,6 +90,47 @@ export default function HomeContent() {
       video.pause();
     }
   }, [carouselInView, currentVideo, reducedMotion]);
+
+  // Observe the Maria's Story phone frame (same pattern as the carousel observer).
+  useEffect(() => {
+    const el = mariaFrameRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setMariaInView(entries.some((entry) => entry.isIntersecting));
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Autoplay Maria's video MUTED when scrolled into view; pause when out of
+  // view. Controls stay available so visitors can unmute. Tracks the play
+  // event once on first autoplay.
+  useEffect(() => {
+    const video = mariaVideoRef.current;
+    if (!video || reducedMotion) return;
+    if (mariaInView) {
+      video.muted = true; // browser autoplay policies require muted playback
+      video
+        .play()
+        .then(() => {
+          if (!mariaAutoplayTracked.current) {
+            mariaAutoplayTracked.current = true;
+            trackVideoPlay({ videoTitle: "Maria's Story - A Taste of Texas" });
+          }
+          const overlay = document.getElementById('video-play-overlay');
+          if (overlay) {
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+          }
+        })
+        .catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [mariaInView, reducedMotion]);
 
   const videos = [
     { src: '/Taste of Texas_compressed.mp4', title: 'Taste of Texas' },
@@ -131,10 +187,10 @@ export default function HomeContent() {
               </div>
 
               {/* Tagline */}
-              <p className="text-base lg:text-lg font-semibold tracking-[0.15em] text-charcoal-700 uppercase mb-2 max-w-md">
+              <p className="text-base lg:text-lg font-semibold tracking-[0.15em] text-charcoal-700 uppercase mb-2 max-w-md text-pretty">
                 {t('hero.tagline')}
               </p>
-              <p className="text-lg lg:text-xl font-display font-light italic text-masa-700 mb-10 max-w-md">
+              <p className="text-lg lg:text-xl font-display font-light italic text-masa-700 mb-10 max-w-md text-pretty">
                 {t('hero.subtagline')}
               </p>
 
@@ -169,14 +225,17 @@ export default function HomeContent() {
             <div aria-hidden="true" className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-cream-100 to-transparent hidden lg:block" />
             {/* Floating proof chip */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-8 bg-cream-50/95 backdrop-blur rounded-xl px-5 py-3 shadow-large flex items-center gap-3">
-              <span className="font-display text-2xl font-bold text-sunset-600">2–4</span>
-              <span className="text-xs font-semibold uppercase tracking-wider text-charcoal-700 leading-tight">Day delivery<br />all 50 states</span>
+              <CalendarTuesdayIcon className="w-7 h-7 text-sunset-600 shrink-0" />
+              <span className="leading-tight">
+                <span className="block font-display text-lg font-bold text-sunset-600">Fast delivery</span>
+                <span className="block text-xs font-medium text-charcoal-700">We ship Tuesdays to maximize freshness.</span>
+              </span>
             </div>
           </div>
         </section>
 
         {/* Featured Video Section - Maria's Story */}
-        <section className="relative py-20 bg-gradient-to-b from-cream-50 to-masa-50 overflow-hidden">
+        <section className="relative py-14 bg-gradient-to-b from-cream-50 to-masa-50 overflow-hidden">
           <div className="container mx-auto px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
 
@@ -187,7 +246,7 @@ export default function HomeContent() {
                   <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 mb-3">
                     {t('founder.name')}
                   </h2>
-                  <p className="text-lg text-charcoal-600 leading-relaxed">
+                  <p className="text-lg text-charcoal-600 leading-relaxed text-pretty max-w-prose">
                     {t('founder.title')}
                   </p>
                 </div>
@@ -228,7 +287,7 @@ export default function HomeContent() {
 
               {/* Right Side - Portrait Video */}
               <div className="relative flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-[400px] lg:max-w-[450px]">
+                <div ref={mariaFrameRef} className="relative w-full max-w-[400px] lg:max-w-[450px]">
                   {/* Phone Frame Effect */}
                   <div className="relative rounded-[3rem] overflow-hidden bg-charcoal-950 p-2 shadow-large">
                     <div className="relative rounded-[2.5rem] overflow-hidden bg-charcoal-900">
@@ -236,8 +295,10 @@ export default function HomeContent() {
                       <div className="relative aspect-[9/16] bg-charcoal-950">
                         <video
                           id="maria-video"
+                          ref={mariaVideoRef}
                           className="absolute inset-0 w-full h-full object-cover"
                           controls
+                          muted
                           poster="/images/lonestar-logo.webp"
                           preload="metadata"
                           playsInline
@@ -291,7 +352,7 @@ export default function HomeContent() {
         </section>
 
         {/* SEO Content Section - About Our Service */}
-        <section className="relative py-20 bg-gradient-to-b from-cream-50 to-cream-100 overflow-hidden">
+        <section className="relative py-14 bg-gradient-to-b from-cream-50 to-cream-100 overflow-hidden">
           <div className="container mx-auto px-8 max-w-6xl">
             {/* Editorial header — left-aligned */}
             <div className="mb-8 md:mb-10">
@@ -358,49 +419,37 @@ export default function HomeContent() {
               </div>
             </div>
 
-            {/* Additional SEO Content - How It Works */}
-            <div className="mt-16 pt-16 border-t border-charcoal-200">
-              <div className="flex items-baseline gap-3 mb-8">
-                <h3 className="font-display text-2xl font-bold text-charcoal-950">{t('howItWorks.title')}</h3>
+            {/* Additional SEO Content - How It Works — editorial timeline */}
+            <div className="mt-12 pt-12 border-t border-charcoal-200">
+              <div className="flex items-baseline gap-3 mb-10">
+                <h3 className="font-display text-2xl font-bold text-balance text-charcoal-950">{t('howItWorks.title')}</h3>
                 <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
               </div>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div>
-                  <div className="w-12 h-12 bg-sunset-100 rounded-full flex items-center justify-center mb-4">
-                    <span className="text-xl font-bold text-sunset-600">1</span>
-                  </div>
-                  <h4 className="text-xl font-semibold text-charcoal-950 mb-3">{t('howItWorks.step1.title')}</h4>
-                  <p className="text-charcoal-700">
-                    {t('howItWorks.step1.text')}
-                  </p>
-                </div>
-                <div>
-                  <div className="w-12 h-12 bg-sunset-100 rounded-full flex items-center justify-center mb-4">
-                    <span className="text-xl font-bold text-sunset-600">2</span>
-                  </div>
-                  <h4 className="text-xl font-semibold text-charcoal-950 mb-3">{t('howItWorks.step2.title')}</h4>
-                  <p className="text-charcoal-700">
-                    {t('howItWorks.step2.text')}
-                  </p>
-                </div>
-                <div>
-                  <div className="w-12 h-12 bg-sunset-100 rounded-full flex items-center justify-center mb-4">
-                    <span className="text-xl font-bold text-sunset-600">3</span>
-                  </div>
-                  <h4 className="text-xl font-semibold text-charcoal-950 mb-3">{t('howItWorks.step3.title')}</h4>
-                  <p className="text-charcoal-700">
-                    {t('howItWorks.step3.text')}
-                  </p>
-                </div>
-              </div>
+              <ol className="grid gap-10 md:grid-cols-3 md:gap-0">
+                {[
+                  { Icon: CalendarTuesdayIcon, title: t('howItWorks.step1.title'), text: t('howItWorks.step1.text') },
+                  { Icon: ComalIcon, title: t('howItWorks.step2.title'), text: t('howItWorks.step2.text') },
+                  { Icon: RouteIcon, title: t('howItWorks.step3.title'), text: t('howItWorks.step3.text') },
+                ].map(({ Icon, title, text }, i) => (
+                  <li key={i} className="group relative md:pr-10">
+                    {/* Icon marker + thin connecting rule to the next step */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <Icon className="w-6 h-6 text-sunset-600 shrink-0" />
+                      <span aria-hidden="true" className="hidden md:block h-px flex-1 -mr-6 bg-masa-200 group-last:hidden" />
+                    </div>
+                    <h4 className="font-display text-lg font-bold text-charcoal-950 mb-2">{title}</h4>
+                    <p className="text-charcoal-600 text-pretty">{text}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
 
         {/* Magazine Typography Section — Editorial Offset */}
-        <section className="relative py-20 bg-gradient-to-b from-masa-50 to-cream-100 overflow-hidden">
+        <section className="relative py-14 bg-gradient-to-b from-masa-50 to-cream-100 overflow-hidden">
           <div className="container mx-auto px-8 relative z-10">
-            <div className="grid lg:grid-cols-12 gap-12 items-center min-h-[80vh]">
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
               {/* Left Column - Large Typography */}
               <div className="lg:col-span-7 space-y-4">
                 <h2 className="magazine-text">
@@ -430,7 +479,7 @@ export default function HomeContent() {
                     className="object-cover"
                   />
                 </div>
-                <p className="text-lg leading-relaxed text-charcoal-700">
+                <p className="text-lg leading-relaxed text-charcoal-700 text-pretty max-w-prose">
                   Those who know Texas tortillas, know quality. We're your trusted independent source
                   for authentic Texas products, delivering the tortillas Texas loves to connoisseurs nationwide.
                 </p>
@@ -446,7 +495,7 @@ export default function HomeContent() {
         </section>
 
         {/* Product Showcase with Horizontal Scroll */}
-        <section className="horizontal-scroll min-h-[80vh] relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10 pt-20">
+        <section className="horizontal-scroll min-h-[80vh] relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10 pt-14">
           {/* Section header — editorial conventions on dark */}
           <div className="container mx-auto px-8">
             <p className="text-sm font-bold uppercase tracking-widest text-sunset-400 mb-2">What We Ship</p>
@@ -645,77 +694,51 @@ export default function HomeContent() {
         </section>
 
         {/* Feature Grid with Artistic Treatment */}
-        <section className="py-20 bg-gradient-to-b from-charcoal-950 to-charcoal-900 relative overflow-hidden">
+        <section className="py-14 bg-gradient-to-b from-charcoal-950 to-charcoal-900 relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-sunset-500/10 to-transparent blur-3xl" />
           </div>
 
           <div className="container mx-auto px-8 relative z-20">
-            <div className="text-center mx-auto max-w-2xl mb-16">
+            <div className="text-center mx-auto max-w-2xl mb-10">
               <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-cream-50 reveal-text relative z-30">
                 {t('features.title')}
               </h2>
-              <p className="mt-3 text-lg text-cream-200 relative z-30">{t('features.subtitle')}</p>
+              <p className="mt-3 text-lg text-cream-200 relative z-30 text-pretty">{t('features.subtitle')}</p>
             </div>
 
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: (
-                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-                    </svg>
-                  ),
+                  icon: <TortillaStackIcon className="w-12 h-12 mx-auto" />,
                   title: 'GENUINE H-E-B®',
                   desc: 'The same products Texas trusts, sourced and delivered',
                   gradient: 'from-sunset-400 to-sunset-600',
                   bgImage: '/images/Cards/image (8).webp'
                 },
                 {
-                  icon: (
-                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="1" y="3" width="15" height="13"/>
-                      <path d="M16 8h4l3 3v5h-7V8z"/>
-                      <circle cx="5.5" cy="18.5" r="2.5"/>
-                      <circle cx="18.5" cy="18.5" r="2.5"/>
-                    </svg>
-                  ),
+                  icon: <RouteIcon className="w-12 h-12 mx-auto" />,
                   title: 'NATIONWIDE DELIVERY',
                   desc: 'Shelf-stable goodness shipped to all 50 states',
                   gradient: 'from-masa-400 to-masa-600',
                   bgImage: '/images/Cards/image (9).webp'
                 },
                 {
-                  icon: (
-                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9 11l3 3L22 4"/>
-                      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-                    </svg>
-                  ),
+                  icon: <ComalIcon className="w-12 h-12 mx-auto" />,
                   title: 'EXPERT SOURCING',
                   desc: 'We know H-E-B® quality and deliver it nationwide',
                   gradient: 'from-lime-500 to-lime-700',
                   bgImage: '/images/Cards/image (10).webp'
                 },
                 {
-                  icon: (
-                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                  ),
+                  icon: <TexasStarIcon className="w-12 h-12 mx-auto" />,
                   title: 'PREMIUM VALUE',
                   desc: 'Big flavor, fair prices, no bull',
                   gradient: 'from-sunset-500 to-masa-500',
                   bgImage: '/images/Cards/image (11).webp'
                 },
                 {
-                  icon: (
-                    <svg className="w-12 h-12 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                      <line x1="12" y1="22.08" x2="12" y2="12"/>
-                    </svg>
-                  ),
+                  icon: <ShipBoxIcon className="w-12 h-12 mx-auto" />,
                   title: 'SHELF-STABLE',
                   desc: 'No refrigeration needed - pantry-ready!',
                   gradient: 'from-cream-400 to-cream-600',
@@ -751,8 +774,9 @@ export default function HomeContent() {
                       {/* Gradient accent */}
                       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${feature.gradient}`} />
 
-                      {/* Icon */}
-                      <div className={`text-6xl mb-6 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                      {/* Icon — solid sunset accent (bg-clip-text rendered stroked
+                          SVGs invisible since currentColor resolved to transparent) */}
+                      <div className="mb-6 text-sunset-400">
                         {feature.icon}
                       </div>
 
@@ -771,18 +795,18 @@ export default function HomeContent() {
         </section>
 
         {/* Product Cards with Premium Design */}
-        <section className="py-16 bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50 relative overflow-hidden">
+        <section className="py-12 bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50 relative overflow-hidden">
           <div className="container mx-auto px-8">
-            <div className="mb-16">
+            <div className="mb-10">
               <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">Pantry Ready</p>
               <div className="flex items-baseline gap-3">
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 reveal-text">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 reveal-text">
                   Our Treasures
                 </h2>
                 <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
               </div>
-              <p className="text-lg text-charcoal-600 mt-3 slide-left">Shelf-stable Texas gold, ready for your pantry</p>
-              <p className="text-base text-charcoal-600 mt-2">
+              <p className="text-lg text-charcoal-600 mt-3 slide-left text-pretty max-w-prose">Shelf-stable Texas gold, ready for your pantry</p>
+              <p className="text-base text-charcoal-600 mt-2 text-pretty max-w-prose">
                 Made fresh, sealed for shipping — no refrigeration needed until opened.
               </p>
               {/* Trust Badges */}
@@ -865,14 +889,14 @@ export default function HomeContent() {
         </section>
 
         {/* Guides & Tips Section */}
-        <section className="py-20 bg-gradient-to-b from-masa-50 to-cream-50 relative overflow-hidden">
+        <section className="py-14 bg-gradient-to-b from-masa-50 to-cream-50 relative overflow-hidden">
           <div className="container mx-auto px-8">
-            <div className="text-center mx-auto max-w-2xl mb-16">
+            <div className="text-center mx-auto max-w-2xl mb-10">
               <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">Know-How</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 reveal-text">
                 {t('guides.title')}
               </h2>
-              <p className="mt-3 text-lg text-charcoal-600 slide-left">
+              <p className="mt-3 text-lg text-charcoal-600 slide-left text-pretty">
                 {t('guides.subtitle')}
               </p>
             </div>
@@ -882,9 +906,7 @@ export default function HomeContent() {
                 <Link href="/guides/how-to-store-tortillas" className="block">
                   <div className="p-8">
                     <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-sunset-100 text-sunset-600 group-hover:bg-sunset-600 group-hover:text-white transition-all duration-300">
-                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                      </svg>
+                      <TortillaStackIcon className="w-8 h-8" />
                     </div>
                     <h3 className="text-xl font-semibold text-charcoal-950 mb-4 group-hover:text-sunset-600 transition-colors">
                       How to Store Tortillas
@@ -907,9 +929,7 @@ export default function HomeContent() {
                 <Link href="/guides/how-to-reheat-tortillas" className="block">
                   <div className="p-8">
                     <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-masa-100 text-masa-700 group-hover:bg-masa-600 group-hover:text-white transition-all duration-300">
-                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                      </svg>
+                      <ComalIcon className="w-8 h-8" />
                     </div>
                     <h3 className="text-xl font-semibold text-charcoal-950 mb-4 group-hover:text-masa-700 transition-colors">
                       How to Reheat Tortillas
@@ -932,9 +952,7 @@ export default function HomeContent() {
                 <Link href="/guides/corn-vs-flour-tortillas" className="block">
                   <div className="p-8">
                     <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-rust-100 text-rust-600 group-hover:bg-rust-600 group-hover:text-white transition-all duration-300">
-                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                      </svg>
+                      <WheatIcon className="w-8 h-8" />
                     </div>
                     <h3 className="text-xl font-semibold text-charcoal-950 mb-4 group-hover:text-rust-600 transition-colors">
                       Corn vs Flour Tortillas
@@ -966,17 +984,17 @@ export default function HomeContent() {
         </section>
 
         {/* Featured Recipe Section */}
-        <section className="py-20 bg-gradient-to-b from-cream-50 to-sunset-50 relative overflow-hidden">
+        <section className="py-14 bg-gradient-to-b from-cream-50 to-sunset-50 relative overflow-hidden">
           <div className="container mx-auto px-8">
-            <div className="mb-16">
+            <div className="mb-10">
               <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">From Our Kitchen</p>
               <div className="flex items-baseline gap-3">
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 reveal-text">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 reveal-text">
                   {t('recipes.title')}
                 </h2>
                 <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
               </div>
-              <p className="text-lg text-charcoal-600 mt-3 max-w-3xl slide-left">
+              <p className="text-lg text-charcoal-600 mt-3 max-w-prose slide-left text-pretty">
                 {t('recipes.subtitle')}
               </p>
             </div>
@@ -1064,13 +1082,13 @@ export default function HomeContent() {
         </section>
 
         {/* CTA Section — canonical warm CTA band (matches CTABanner tone="warm") */}
-        <section className="py-16 md:py-20 bg-cream-50">
+        <section className="py-12 md:py-14 bg-cream-50">
           <div className="container mx-auto px-8 max-w-5xl">
             <div className="rounded-2xl p-8 md:p-12 text-center bg-gradient-to-r from-rust-600 to-sunset-600 text-white">
               <h2 className="font-display text-balance text-3xl md:text-4xl font-bold reveal-text">
                 {t('cta.title')}
               </h2>
-              <p className="mx-auto mt-3 max-w-xl text-lg text-white/90">
+              <p className="mx-auto mt-3 max-w-xl text-lg text-white/90 text-pretty">
                 {t('cta.subtitle')}
               </p>
 

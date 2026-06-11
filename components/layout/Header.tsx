@@ -125,10 +125,10 @@ export function Header() {
       <div aria-hidden="true" className="h-[3px] w-full bg-sunset-600" />
 
       <div className="container mx-auto px-4 md:px-8 relative">
-        <div className="header-content flex justify-between items-center py-1">
+        <div className="header-content flex justify-between items-center py-0.5">
           {/* Left side: Logo + Resources */}
           <div className="flex items-center gap-4">
-            <Link href="/" className="logo-wrapper group relative">
+            <Link href="/" className="logo-wrapper group relative block scale-[0.92] origin-left">
               <LogoFull
                 className="text-charcoal-950 transition-transform duration-300 group-hover:scale-105"
                 size="xs"
@@ -169,7 +169,7 @@ export function Header() {
                 // React 18 needs ''/undefined for inert; types expect boolean
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inert={(!isResourcesOpen ? '' : undefined) as any}
-                className={`absolute top-full left-0 mt-2 w-64 bg-cream-50 rounded-xl shadow-medium border border-cream-300 py-2 transition-all duration-200 ${
+                className={`absolute top-full left-0 mt-1 w-64 bg-cream-50 rounded-xl shadow-medium border border-cream-300 py-1.5 transition-all duration-200 ${
                   isResourcesOpen
                     ? 'opacity-100 translate-y-0 pointer-events-auto'
                     : 'opacity-0 -translate-y-2 pointer-events-none'
@@ -182,7 +182,7 @@ export function Header() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsResourcesOpen(false)}
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-cream-100 transition-colors"
+                      className="flex items-start gap-3 px-3 py-2 hover:bg-cream-100 transition-colors"
                     >
                       <Icon className="w-4 h-4 text-sunset-500 mt-0.5 shrink-0" />
                       <div>

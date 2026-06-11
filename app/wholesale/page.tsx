@@ -12,55 +12,7 @@ export const metadata: Metadata = {
   description: 'Partner with Lonestar Tortillas for wholesale pricing on premium Texas tortillas. Perfect for restaurants, caterers, and retailers.',
 };
 import { WholesaleOrderBuilder } from '@/components/wholesale/WholesaleOrderBuilder';
-import {
-  Package,
-  Truck,
-  Clock,
-  Shield,
-  Users,
-  TrendingUp,
-  Star,
-  CheckCircle,
-} from 'lucide-react';
-
-const benefits = [
-  {
-    icon: Package,
-    title: 'Long Shelf Life',
-    description:
-      'Vacuum sealed for shipping. Throw it in the freezer, and they will last for months.',
-  },
-  {
-    icon: Truck,
-    title: 'Free Shipping',
-    description:
-      'All wholesale orders ship free. Weekly delivery keeps your kitchen stocked.',
-  },
-  {
-    icon: Clock,
-    title: 'Consistent Supply',
-    description:
-      'Reliable ordering process. Never run out during your busiest service times.',
-  },
-  {
-    icon: Shield,
-    title: 'Quality Guaranteed',
-    description:
-      'Authentic H-E-B tortillas with the taste Texans have trusted for generations.',
-  },
-  {
-    icon: Users,
-    title: 'Customer Favorite',
-    description:
-      'Serve the same tortillas that made Texas famous. Your customers will notice.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Volume Discounts',
-    description:
-      'The more you order, the more you save. Up to 25% off with our tier pricing.',
-  },
-];
+import { ShipBoxIcon, TexasStarIcon, CalendarTuesdayIcon } from '@/components/ui/Icons';
 
 const businessTypes = [
   { name: 'Food Trucks', href: '/restaurants/food-trucks' },
@@ -95,7 +47,7 @@ export default function WholesalePage() {
 
       <main className="min-h-screen bg-cream-50 pt-24 pb-24 lg:pb-0">
         {/* Hero Section — photographic backdrop, single scrim */}
-        <section className="bg-charcoal-950 text-cream-50 py-16 md:py-24 overflow-hidden relative">
+        <section className="bg-charcoal-950 text-cream-50 py-12 md:py-14 overflow-hidden relative">
           <Image
             src="/images/brand/cat-wholesale.webp"
             alt="Stacked tortillas on a restaurant kitchen pass"
@@ -151,15 +103,15 @@ export default function WholesalePage() {
           <div className="container mx-auto px-4 md:px-8 max-w-6xl">
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 text-sm text-charcoal-700">
               <div className="flex items-center gap-2">
-                <Truck className="w-5 h-5 text-sunset-500" />
+                <ShipBoxIcon className="w-5 h-5 text-sunset-700" />
                 <span className="font-medium">Free Shipping on All Orders</span>
               </div>
               <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-sunset-500" />
+                <TexasStarIcon className="w-5 h-5 text-sunset-700" />
                 <span className="font-medium">Up to 25% Volume Discount</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-sunset-500" />
+                <CalendarTuesdayIcon className="w-5 h-5 text-sunset-700" />
                 <span className="font-medium">Weekly Delivery Available</span>
               </div>
             </div>
@@ -201,30 +153,8 @@ export default function WholesalePage() {
           </div>
         </section>
 
-        {/* Benefits Grid */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-8 max-w-6xl">
-            <SectionHeader
-              eyebrow="The Wholesale Advantage"
-              title="Why Restaurants Choose H-E-B Tortillas"
-              sub="The same authentic Texas tortillas your customers love, now available in bulk for your business."
-            />
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {benefits.map((benefit) => (
-                <div key={benefit.title} className="p-6 bg-cream-50 rounded-xl">
-                  <benefit.icon className="w-10 h-10 text-sunset-600 mb-4" />
-                  <h3 className="text-xl font-semibold text-charcoal-950 mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-charcoal-700">{benefit.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Inquiry Form */}
-        <section id="inquiry-form" className="py-16 bg-cream-50 scroll-mt-24">
+        <section id="inquiry-form" className="py-12 bg-white scroll-mt-24">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
             <SectionHeader
               eyebrow="Custom Quotes"
@@ -237,7 +167,7 @@ export default function WholesalePage() {
         </section>
 
         {/* Business Types */}
-        <section className="py-16 bg-charcoal-950 text-white">
+        <section className="py-12 bg-charcoal-950 text-white">
           <div className="container mx-auto px-4 md:px-8 max-w-6xl">
             <SectionHeader
               eyebrow="Who We Serve"
@@ -260,7 +190,7 @@ export default function WholesalePage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 bg-white">
+        <section className="py-12 bg-white">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
             <SectionHeader
               eyebrow="Good to Know"
@@ -446,7 +376,7 @@ export default function WholesalePage() {
         </section>
 
         {/* Final CTA — canonical warm band */}
-        <section className="py-16 bg-gradient-to-r from-rust-600 to-sunset-600 text-white">
+        <section className="py-12 bg-gradient-to-r from-rust-600 to-sunset-600 text-white">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl text-center">
             <h2 className="font-display text-balance text-3xl md:text-4xl font-bold mb-4">
               Ready to Elevate Your Menu?

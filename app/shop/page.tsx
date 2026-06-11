@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 };
 import { StickyCartBar } from '@/components/shop/StickyCartBar';
 import { ShipsTodayCountdown } from '@/components/shop/ShipsTodayCountdown';
-import { TexMexExtrasSection } from '@/components/shop/TexMexExtrasSection';
 import { SocialProofSection } from '@/components/shop/SocialProofSection';
 import { ShopFAQ } from '@/components/shop/ShopFAQ';
 import { MariaCTA } from '@/components/chat/MariaCTA';
-import { Truck, Shield, ArrowRight, Check, RefreshCw, Calendar, Pause, Wheat, Star, Package } from 'lucide-react';
+import { Truck, Shield, ArrowRight, Check, RefreshCw, Calendar, Pause } from 'lucide-react';
+import { WheatIcon, TexasStarIcon, ShipBoxIcon } from '@/components/ui/Icons';
 import Link from 'next/link';
 import { products as allProducts } from '@/lib/products';
 
@@ -148,7 +148,7 @@ export default function ShopPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
         {/* Featured band — breaks the grid rhythm before the collections */}
-        <div className="relative rounded-2xl overflow-hidden mb-10 min-h-[260px] grid md:grid-cols-2">
+        <div className="relative rounded-2xl overflow-hidden mb-10 min-h-[200px] grid md:grid-cols-2">
           <div className="relative min-h-[200px] md:min-h-0">
             <Image
               src="/images/brand/band-kitchen.webp"
@@ -158,7 +158,7 @@ export default function ShopPage() {
               className="object-cover"
             />
           </div>
-          <div className="bg-charcoal-950 text-cream-50 p-8 md:p-10 flex flex-col justify-center">
+          <div className="bg-charcoal-950 text-cream-50 p-6 md:p-8 flex flex-col justify-center">
             <p className="text-xs font-bold uppercase tracking-widest text-sunset-400 mb-2">Straight from Texas</p>
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-3 text-balance">
               The tortillas Texans won&apos;t move away from
@@ -179,11 +179,33 @@ export default function ShopPage() {
           eyebrow="The Lineup"
           title="Shop Our Tortillas"
           sub="FREE shipping on orders $80+"
-          className="mb-6 md:mb-8"
+          className="mb-4"
         />
 
+        {/* Quick nav — jump straight to a collection */}
+        <nav aria-label="Shop collections" className="flex flex-wrap gap-2 mb-6 md:mb-8">
+          <a
+            href="#bakery"
+            className="rounded-full border border-masa-300 text-charcoal-700 hover:border-sunset-600 hover:text-sunset-700 px-4 py-1.5 text-sm transition-colors"
+          >
+            Bakery Fresh
+          </a>
+          <a
+            href="#pantry"
+            className="rounded-full border border-masa-300 text-charcoal-700 hover:border-sunset-600 hover:text-sunset-700 px-4 py-1.5 text-sm transition-colors"
+          >
+            Pantry Staples
+          </a>
+          <a
+            href="#texas-brands"
+            className="rounded-full border border-masa-300 text-charcoal-700 hover:border-sunset-600 hover:text-sunset-700 px-4 py-1.5 text-sm transition-colors"
+          >
+            Texas-Born
+          </a>
+        </nav>
+
         {/* Bakery Fresh Collection */}
-        <div className="mb-12" id="bakery">
+        <div className="mb-8 scroll-mt-24" id="bakery">
           <div className="flex items-baseline gap-3 mb-1">
             <h3 className="font-display text-2xl font-bold text-charcoal-950">Bakery Fresh Collection</h3>
             <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
@@ -193,7 +215,7 @@ export default function ShopPage() {
         </div>
 
         {/* Pantry Staples */}
-        <div className="mb-12">
+        <div className="mb-8 scroll-mt-24" id="pantry">
           <div className="flex items-baseline gap-3 mb-1">
             <h3 className="font-display text-2xl font-bold text-charcoal-950">Pantry Staples</h3>
             <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
@@ -203,7 +225,7 @@ export default function ShopPage() {
         </div>
 
         {/* Texas-Born Favorites */}
-        <div className="mb-12">
+        <div className="mb-8 scroll-mt-24" id="texas-brands">
           <div className="flex items-baseline gap-3 mb-1">
             <h3 className="font-display text-2xl font-bold text-charcoal-950">Texas-Born Favorites</h3>
             <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
@@ -212,9 +234,6 @@ export default function ShopPage() {
           <ProductGrid products={texasBrandsProducts} />
         </div>
       </div>
-
-      {/* Tex-Mex Extras Section */}
-      <TexMexExtrasSection />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Best Value Banner - More prominent */}
@@ -240,7 +259,7 @@ export default function ShopPage() {
         </div>
 
         {/* Subscribe & Save Banner */}
-        <div className="mt-10 bg-gradient-to-r from-charcoal-950 to-charcoal-800 text-white rounded-xl p-6 md:p-8 shadow-lg">
+        <div className="mt-10 bg-gradient-to-r from-charcoal-950 to-charcoal-800 text-white rounded-xl p-5 md:p-6 shadow-lg">
           <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
             <div className="flex-1 text-center md:text-left">
               <div className="inline-flex items-center gap-2 bg-sunset-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">
@@ -310,24 +329,18 @@ export default function ShopPage() {
         <section className="mt-10 bg-gradient-to-r from-masa-50 to-cream-50 rounded-xl p-6 md:p-8 border border-masa-200">
           <h2 className="text-xl md:text-2xl font-bold text-charcoal-950 mb-4 text-center">Why Texans Trust H-E-B Tortillas</h2>
           <div className="grid md:grid-cols-3 gap-6 mb-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-masa-100 text-masa-700 mb-2">
-                <Wheat className="w-6 h-6" strokeWidth={1.75} />
-              </div>
+            <div>
+              <WheatIcon className="w-7 h-7 text-rust-600 mb-2" />
               <h3 className="font-semibold text-charcoal-900 mb-1">Quality Ingredients</h3>
               <p className="text-sm text-charcoal-600">Simple recipes with no artificial preservatives in our bakery-fresh line.</p>
             </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sunset-100 text-sunset-700 mb-2">
-                <Star className="w-6 h-6" strokeWidth={1.75} />
-              </div>
+            <div>
+              <TexasStarIcon className="w-7 h-7 text-rust-600 mb-2" />
               <h3 className="font-semibold text-charcoal-900 mb-1">Texas Favorite</h3>
               <p className="text-sm text-charcoal-600">H-E-B has been a Texas staple since 1905. Their tortillas are legendary.</p>
             </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cream-200 text-charcoal-700 mb-2">
-                <Package className="w-6 h-6" strokeWidth={1.75} />
-              </div>
+            <div>
+              <ShipBoxIcon className="w-7 h-7 text-rust-600 mb-2" />
               <h3 className="font-semibold text-charcoal-900 mb-1">Ships Fresh</h3>
               <p className="text-sm text-charcoal-600">We ship Tuesdays to ensure your tortillas arrive fresh.</p>
             </div>

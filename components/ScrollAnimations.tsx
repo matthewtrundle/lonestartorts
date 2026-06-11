@@ -32,12 +32,12 @@ export function ScrollAnimations({ children }: { children?: React.ReactNode }) {
 
     // Initialize Lenis smooth scroll with premium settings
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 0.9,
       easing: (t) => 1 - Math.pow(1 - t, 3), // Cubic ease out
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.8,
+      wheelMultiplier: 1.0,
       touchMultiplier: 1.8,
       infinite: false,
     })

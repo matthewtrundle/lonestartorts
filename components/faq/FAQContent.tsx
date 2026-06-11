@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 import { useLanguage } from '@/lib/language-context';
 
 interface FAQ {
@@ -31,29 +33,32 @@ export default function FAQContent({ faqs }: FAQContentProps) {
         </ol>
       </nav>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-8 py-12">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="text-5xl lg:text-7xl font-display font-black text-charcoal-950 mb-6">
+      {/* Editorial header */}
+      <section className="container mx-auto px-8 py-8 md:py-10">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <p className="mb-2 text-sm font-bold uppercase tracking-widest text-sunset-700">
+            {t('faq.breadcrumb.faq')}
+          </p>
+          <h1 className="font-display text-balance text-5xl md:text-6xl font-bold text-charcoal-950 mb-5">
             {t('faq.title')}
           </h1>
-          <p className="text-xl text-charcoal-700 leading-relaxed">
+          <p className="text-xl text-charcoal-600 leading-relaxed text-pretty">
             {t('faq.heroText')}
           </p>
         </div>
 
         {/* Quick Links */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-display font-bold text-charcoal-950 mb-4">{t('faq.jumpToSection')}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="max-w-5xl mx-auto mb-12">
+          <div className="rounded-2xl border border-charcoal-200/60 bg-white p-6 md:p-8 shadow-soft">
+            <h2 className="font-display text-2xl font-bold text-charcoal-950 mb-4">{t('faq.jumpToSection')}</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
               {faqs.map((section, idx) => (
                 <a
                   key={idx}
                   href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="block p-4 bg-cream-50 hover:bg-sunset-100 rounded-lg transition-colors group"
+                  className="block rounded-lg bg-cream-50 p-3 transition-colors hover:bg-sunset-50 group"
                 >
-                  <span className="font-bold text-charcoal-950 group-hover:text-sunset-600">
+                  <span className="font-semibold text-charcoal-950 group-hover:text-sunset-600">
                     {section.category} →
                   </span>
                 </a>
@@ -63,49 +68,38 @@ export default function FAQContent({ faqs }: FAQContentProps) {
         </div>
 
         {/* FAQ Sections */}
-        <div className="max-w-5xl mx-auto space-y-16">
+        <div className="max-w-5xl mx-auto space-y-12">
           {faqs.map((section, sectionIdx) => (
-            <div key={sectionIdx} id={section.category.toLowerCase().replace(/\s+/g, '-')}>
-              <h2 className="text-4xl font-display font-black text-charcoal-950 mb-8 pb-4 border-b-4 border-sunset-500">
-                {section.category}
-              </h2>
-
-              <div className="space-y-6">
-                {section.questions.map((faq, faqIdx) => (
-                  <div
-                    key={faqIdx}
-                    className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow p-8"
-                  >
-                    <h3 className="text-xl font-bold text-charcoal-950 mb-4 flex items-start gap-3">
-                      <span className="flex-shrink-0 w-8 h-8 bg-sunset-500 text-cream-50 rounded-full flex items-center justify-center text-sm font-black">
-                        Q
-                      </span>
-                      {faq.q}
-                    </h3>
-                    <div className="ml-11 text-lg text-charcoal-700 leading-relaxed">
-                      <span className="font-bold text-masa-600">A: </span>
-                      {faq.a}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div
+              key={sectionIdx}
+              id={section.category.toLowerCase().replace(/\s+/g, '-')}
+              className="scroll-mt-24"
+            >
+              <SectionHeader title={section.category} className="mb-6" />
+              <FAQAccordion
+                items={section.questions.map((faq) => ({
+                  question: faq.q,
+                  answer: faq.a,
+                }))}
+                defaultOpenFirst={false}
+              />
             </div>
           ))}
         </div>
 
         {/* Still Have Questions CTA */}
-        <div className="max-w-4xl mx-auto mt-20">
-          <div className="bg-gradient-to-br from-sunset-500 to-sunset-600 rounded-2xl shadow-2xl p-12 text-center text-cream-50">
-            <h2 className="text-4xl font-display font-black mb-4">
+        <div className="max-w-4xl mx-auto mt-16">
+          <div className="rounded-2xl bg-gradient-to-r from-rust-600 to-sunset-600 p-10 md:p-12 text-center text-cream-50 shadow-large">
+            <h2 className="font-display text-balance text-3xl md:text-4xl font-bold mb-4">
               {t('faq.stillHaveQuestions')}
             </h2>
-            <p className="text-xl mb-8 opacity-90">
+            <p className="text-xl mb-8 text-white/90 text-pretty">
               {t('faq.stillHaveQuestionsText')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
               <a
                 href="tel:+15128946823"
-                className="inline-block bg-cream-50 text-sunset-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors shadow-lg"
+                className="inline-block bg-cream-50 text-sunset-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors"
               >
                 Call Maria: (512) 894-6823
               </a>
@@ -126,31 +120,29 @@ export default function FAQContent({ faqs }: FAQContentProps) {
         </div>
 
         {/* Related Links */}
-        <div className="max-w-5xl mx-auto mt-16">
-          <h2 className="text-3xl font-display font-bold text-charcoal-950 mb-6 text-center">
-            {t('faq.exploreProducts')}
-          </h2>
+        <div className="max-w-5xl mx-auto mt-14">
+          <SectionHeader align="center" title={t('faq.exploreProducts')} className="mb-6" />
           <div className="grid md:grid-cols-4 gap-6">
-            <Link href="/products/corn-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-              <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
+            <Link href="/products/corn-tortillas" className="group block rounded-xl border border-charcoal-200/60 bg-white p-6 shadow-soft hover:shadow-medium transition-shadow text-center">
+              <h3 className="font-semibold text-lg text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
                 {t('faq.products.corn')}
               </h3>
               <p className="text-sm text-charcoal-600">{t('faq.products.cornDesc')}</p>
             </Link>
-            <Link href="/products/flour-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-              <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
+            <Link href="/products/flour-tortillas" className="group block rounded-xl border border-charcoal-200/60 bg-white p-6 shadow-soft hover:shadow-medium transition-shadow text-center">
+              <h3 className="font-semibold text-lg text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
                 {t('faq.products.flour')}
               </h3>
               <p className="text-sm text-charcoal-600">{t('faq.products.flourDesc')}</p>
             </Link>
-            <Link href="/products/butter-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-              <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
+            <Link href="/products/butter-tortillas" className="group block rounded-xl border border-charcoal-200/60 bg-white p-6 shadow-soft hover:shadow-medium transition-shadow text-center">
+              <h3 className="font-semibold text-lg text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
                 {t('faq.products.butter')}
               </h3>
               <p className="text-sm text-charcoal-600">{t('faq.products.butterDesc')}</p>
             </Link>
-            <Link href="/products/specialty-tortillas" className="group block bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow text-center">
-              <h3 className="font-bold text-lg text-charcoal-950 group-hover:text-sunset-500 transition-colors mb-2">
+            <Link href="/products/specialty-tortillas" className="group block rounded-xl border border-charcoal-200/60 bg-white p-6 shadow-soft hover:shadow-medium transition-shadow text-center">
+              <h3 className="font-semibold text-lg text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
                 {t('faq.products.specialty')}
               </h3>
               <p className="text-sm text-charcoal-600">{t('faq.products.specialtyDesc')}</p>
@@ -159,12 +151,12 @@ export default function FAQContent({ faqs }: FAQContentProps) {
         </div>
 
         {/* SEO Content Block */}
-        <div className="max-w-4xl mx-auto mt-20 prose prose-lg">
-          <h2 className="text-3xl font-display font-bold text-charcoal-950">{t('faq.seo.title')}</h2>
-          <p className="text-charcoal-700">
+        <div className="max-w-4xl mx-auto mt-16">
+          <h2 className="font-display text-balance text-3xl font-bold text-charcoal-950 mb-4">{t('faq.seo.title')}</h2>
+          <p className="text-charcoal-700 leading-relaxed text-pretty mb-4">
             {t('faq.seo.paragraph1')}
           </p>
-          <p className="text-charcoal-700">
+          <p className="text-charcoal-700 leading-relaxed text-pretty">
             {t('faq.seo.paragraph2')}
           </p>
         </div>

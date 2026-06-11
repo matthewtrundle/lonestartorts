@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHero } from '@/components/ui/PageHero';
-import { categoryHeroes } from '@/lib/hero-images';
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { ShipBoxIcon, TortillaStackIcon, TexasStarIcon } from '@/components/ui/Icons';
+import { categoryHeroes, locationHero } from '@/lib/hero-images';
 
 export const metadata: Metadata = {
   alternates: {
@@ -398,112 +401,122 @@ export default function LocationsPage() {
         />
 
         {/* Main Content */}
-        <main className="container mx-auto px-6 py-12 md:py-16 max-w-6xl">
+        <main className="container mx-auto px-6 py-10 md:py-14 max-w-6xl">
           {/* Introduction */}
           <section className="mb-12">
-            <div className="bg-sunset-50 border-l-4 border-sunset-500 p-6 rounded-r-lg">
-              <h2 className="text-2xl font-bold text-charcoal-950 mb-3">
- Bringing Texas to You
-</h2>
-              <p className="text-lg text-charcoal-800 leading-relaxed">
-                Missing authentic H-E-B® tortillas? We ship premium{' '}
-                <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline font-medium">
-                  corn tortillas
-                </Link>
-                ,{' '}
-                <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
-                  flour tortillas
-                </Link>
-                , and{' '}
-                <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
-                  butter tortillas
-                </Link>
-                {' '}to all 50 states. Our shelf-stable tortillas arrive fresh and ready to enjoy.
-              </p>
-            </div>
+            <SectionHeader
+              eyebrow="Nationwide Delivery"
+              title="Bringing Texas to You"
+              className="mb-4"
+            />
+            <p className="max-w-3xl text-lg text-charcoal-700 leading-relaxed text-pretty">
+              Missing authentic H-E-B® tortillas? We ship premium{' '}
+              <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline font-medium">
+                corn tortillas
+              </Link>
+              ,{' '}
+              <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
+                flour tortillas
+              </Link>
+              , and{' '}
+              <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
+                butter tortillas
+              </Link>
+              {' '}to all 50 states. Our shelf-stable tortillas arrive fresh and ready to enjoy.
+            </p>
           </section>
 
-          {/* Featured Cities */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
- Popular Delivery Cities
-</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cities.map((city) => (
-                <Link
-                  key={city.slug}
-                  href={`/locations/${city.slug}`}
-                  className="group block bg-white rounded-xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-sunset-400"
-                >
-                  <div className="text-sm text-sunset-600 font-semibold mb-2">{city.state}</div>
-                  <h3 className="text-2xl font-bold text-charcoal-950 group-hover:text-sunset-600 transition-colors mb-2">
- {city.name} →
-</h3>
-                  <p className="text-charcoal-600 text-sm mb-3">{city.state}</p>
-                  <p className="text-charcoal-700 mb-4">{city.description}</p>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="bg-masa-100 text-masa-700 px-3 py-1 rounded-full font-semibold">
-                      {city.deliveryTime}
-                    </span>
-                    <span className="text-sunset-600 font-medium">{city.highlight}</span>
-                  </div>
-                </Link>
-              ))}
+          {/* Popular Destinations */}
+          <section className="mb-14">
+            <SectionHeader
+              eyebrow="Popular Destinations"
+              title="Popular Delivery Cities"
+              sub="The routes we run most — from the Gulf Coast to all five boroughs."
+            />
+            <div className="grid md:grid-cols-2 gap-x-10 border-t border-charcoal-200">
+              {cities.map((city) => {
+                const region = locationHero(city.slug.split('/')[0]);
+                return (
+                  <Link
+                    key={city.slug}
+                    href={`/locations/${city.slug}`}
+                    className="group flex items-center gap-4 py-4 border-b border-charcoal-200"
+                  >
+                    <Image
+                      src={region.image}
+                      alt={region.alt}
+                      width={64}
+                      height={64}
+                      className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold uppercase tracking-widest text-sunset-700">
+                        {city.state}
+                      </p>
+                      <h3 className="font-semibold text-lg text-charcoal-950 transition-colors group-hover:text-sunset-600">
+                        {city.name}
+                      </h3>
+                      <p className="truncate text-sm text-charcoal-600">{city.description}</p>
+                    </div>
+                    <div className="flex-shrink-0 text-right">
+                      <p className="text-sm font-semibold text-charcoal-950">{city.deliveryTime}</p>
+                      <p className="text-xs text-charcoal-500">{city.highlight}</p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </section>
 
           {/* Browse by State */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
- Browse by State
-</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <section className="mb-14">
+            <SectionHeader
+              eyebrow="Every Route We Run"
+              title="Browse by State"
+            />
+            <ul className="columns-2 md:columns-4 gap-x-8">
               {stateData.map((state) => (
-                <div key={state.slug} className="bg-white rounded-lg p-6 shadow-md">
+                <li key={state.slug} className="break-inside-avoid py-1.5">
                   <Link
                     href={`/locations/${state.slug}`}
-                    className="text-xl font-bold text-charcoal-950 hover:text-sunset-600 transition-colors"
+                    className="group inline-flex items-baseline gap-2"
                   >
-                    {state.name} →
+                    <span className="font-semibold text-charcoal-950 transition-colors group-hover:text-sunset-600">
+                      {state.name}
+                    </span>
+                    <span className="text-sm text-charcoal-500">
+                      {state.cities.length} {state.cities.length === 1 ? 'city' : 'cities'}
+                    </span>
                   </Link>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {state.cities.map((city) => (
-                      <Link
-                        key={city.slug}
-                        href={`/locations/${state.slug}/${city.slug}`}
-                        className="text-sm text-charcoal-600 hover:text-sunset-600 transition-colors"
-                      >
-                        {city.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
           {/* Nationwide Coverage */}
-          <section className="mb-16 bg-gradient-to-r from-masa-100 to-sunset-100 p-8 rounded-lg">
+          <section className="mb-14 rounded-2xl bg-masa-100 p-8 md:p-10">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-charcoal-950 mb-6 text-center">
- We Ship to All 50 States
-</h2>
-              <p className="text-lg text-charcoal-800 leading-relaxed text-center mb-6">
+              <SectionHeader
+                align="center"
+                title="We Ship to All 50 States"
+                className="mb-4"
+              />
+              <p className="text-lg text-charcoal-800 leading-relaxed text-center text-pretty mb-8">
                 Don't see your city listed? No problem! We deliver authentic H-E-B® tortillas anywhere in the continental United States, Alaska, and Hawaii. Our shelf-stable tortillas are specially designed for safe, fresh delivery nationwide.
               </p>
-              <div className="grid md:grid-cols-3 gap-6 mt-8">
-                <div className="bg-white p-6 rounded-lg text-center">
-                  <div className="text-3xl mb-3">📦</div>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="rounded-xl bg-cream-50 p-6 text-center">
+                  <ShipBoxIcon className="mx-auto mb-3 h-8 w-8 text-sunset-600" />
                   <h3 className="font-bold text-charcoal-950 mb-2">Fast Shipping</h3>
                   <p className="text-charcoal-700 text-sm">2-4 day delivery via USPS Priority Mail</p>
                 </div>
-                <div className="bg-white p-6 rounded-lg text-center">
-                  <div className="text-3xl mb-3">🌡️</div>
+                <div className="rounded-xl bg-cream-50 p-6 text-center">
+                  <TortillaStackIcon className="mx-auto mb-3 h-8 w-8 text-sunset-600" />
                   <h3 className="font-bold text-charcoal-950 mb-2">Shelf-Stable</h3>
                   <p className="text-charcoal-700 text-sm">No refrigeration needed during shipping</p>
                 </div>
-                <div className="bg-white p-6 rounded-lg text-center">
-                  <div className="text-3xl mb-3">✅</div>
+                <div className="rounded-xl bg-cream-50 p-6 text-center">
+                  <TexasStarIcon className="mx-auto mb-3 h-8 w-8 text-sunset-600" />
                   <h3 className="font-bold text-charcoal-950 mb-2">Fresh Guarantee</h3>
                   <p className="text-charcoal-700 text-sm">30+ day shelf life upon arrival</p>
                 </div>
@@ -512,14 +525,15 @@ export default function LocationsPage() {
           </section>
 
           {/* Shipping Info */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-charcoal-950 mb-8">
- Shipping Information
-</h2>
-            <div className="bg-white rounded-lg shadow-md p-8">
+          <section className="mb-14">
+            <SectionHeader
+              eyebrow="The Fine Print"
+              title="Shipping Information"
+            />
+            <div className="rounded-xl border border-charcoal-200 bg-white p-8 shadow-soft">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-4">Delivery Times</h3>
+                  <h3 className="font-semibold text-xl text-charcoal-950 mb-4">Delivery Times</h3>
                   <ul className="space-y-3 text-charcoal-700">
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>
@@ -544,7 +558,7 @@ export default function LocationsPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-charcoal-950 mb-4">Shipping Rates</h3>
+                  <h3 className="font-semibold text-xl text-charcoal-950 mb-4">Shipping Rates</h3>
                   <ul className="space-y-3 text-charcoal-700">
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>
@@ -569,23 +583,23 @@ export default function LocationsPage() {
           </section>
 
           {/* CTA Section */}
-          <section className="bg-charcoal-950 text-cream-50 p-12 rounded-lg text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
- Texas flavor, wherever you are
-</h2>
-            <p className="text-xl mb-8 text-cream-100 max-w-2xl mx-auto">
+          <section className="rounded-2xl bg-charcoal-950 p-10 md:p-12 text-center text-cream-50">
+            <h2 className="font-display text-balance text-3xl md:text-4xl font-bold mb-4">
+              Texas flavor, wherever you are
+            </h2>
+            <p className="text-xl mb-8 text-cream-200 max-w-2xl mx-auto text-pretty">
               Get authentic H-E-B® tortillas delivered to your door. Shop our full selection of corn, flour, and butter tortillas.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/shop"
-                className="bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+                className="bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-bold transition-colors"
               >
                 Shop All Tortillas
               </Link>
               <Link
                 href="/pre-sale"
-                className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-8 py-3 rounded-lg font-semibold transition-colors"
+                className="bg-transparent border-2 border-cream-50 hover:bg-cream-50 hover:text-charcoal-950 text-cream-50 px-8 py-3 rounded-lg font-bold transition-colors"
               >
                 Join Waitlist
               </Link>

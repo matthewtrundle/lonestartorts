@@ -187,3 +187,67 @@ export const PanIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
     <path d="M4 12c0-4.4 3.6-8 8-8" />
   </svg>
 );
+
+/* ── Bespoke brand line icons (DESIGN.md: no lucide on marketing surfaces) ──
+   Single 1.5px stroke, round caps, currentColor. */
+
+export const TortillaStackIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <ellipse cx="12" cy="16.5" rx="8.5" ry="2.8" />
+    <path d="M3.8 13.4c0-1.5 3.7-2.7 8.2-2.7s8.2 1.2 8.2 2.7" />
+    <path d="M5 10.2c.9-1.2 3.7-2 7-2 3.3 0 6.1.8 7 2" />
+    <path d="M9.5 16.3h.01M13.8 17h.01M11.5 10.9h.01" strokeWidth="2" />
+  </svg>
+);
+
+export const ComalIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <ellipse cx="11" cy="16" rx="7.5" ry="3" />
+    <path d="M18.5 16h3.5" />
+    <path d="M8.5 10.5c-.8-1 .8-1.6 0-2.6M12 9.5c-.8-1 .8-1.6 0-2.6M15.5 10.5c-.8-1 .8-1.6 0-2.6" />
+  </svg>
+);
+
+export const WheatIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="M12 21V8" />
+    <path d="M12 8c-2.6 0-4-1.6-4-4 2.6 0 4 1.6 4 4Z" />
+    <path d="M12 8c2.6 0 4-1.6 4-4-2.6 0-4 1.6-4 4Z" />
+    <path d="M12 13c-2.6 0-4-1.6-4-4 2.6 0 4 1.6 4 4Z" />
+    <path d="M12 13c2.6 0 4-1.6 4-4-2.6 0-4 1.6-4 4Z" />
+    <path d="M12 18c-2.6 0-4-1.6-4-4 2.6 0 4 1.6 4 4Z" />
+    <path d="M12 18c2.6 0 4-1.6 4-4-2.6 0-4 1.6-4 4Z" />
+  </svg>
+);
+
+export const ShipBoxIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="M4 9.5 12 6l8 3.5v8L12 21l-8-3.5v-8Z" />
+    <path d="M4 9.5 12 13l8-3.5" />
+    <path d="M12 13v8" />
+    <path d="m9.2 7.2 5.8 2.6" />
+    <path d="m12 15.6.5 1 1.1.2-.8.8.2 1.1-1-.5-1 .5.2-1.1-.8-.8 1.1-.2.5-1Z" strokeWidth="1.1" />
+  </svg>
+);
+
+export const TexasStarIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="m12 3 2.5 5.6 6.1.6-4.6 4.1 1.3 6L12 16.2l-5.3 3.1 1.3-6-4.6-4.1 6.1-.6L12 3Z" />
+  </svg>
+);
+
+export const CalendarTuesdayIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" />
+    <path d="M4 10.5h16M8.5 3.5v3M15.5 3.5v3" />
+    <circle cx="9.5" cy="14.5" r="1.4" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const RouteIcon: React.FC<IconProps> = ({ className = '', size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <circle cx="5.5" cy="18.5" r="2" />
+    <path d="M7.5 18.5h7a4 4 0 0 0 0-8h-5a3.5 3.5 0 0 1 0-7H15" strokeDasharray="3.5 2.5" />
+    <path d="M18.5 2.5a2.8 2.8 0 0 1 2.8 2.8c0 2-2.8 4.7-2.8 4.7s-2.8-2.7-2.8-4.7a2.8 2.8 0 0 1 2.8-2.8Z" />
+  </svg>
+);

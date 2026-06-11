@@ -31,22 +31,44 @@ export default function ShopAdVariantPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6">
+        {/* Quick nav — jump straight to a collection */}
+        <nav aria-label="Shop collections" className="flex flex-wrap gap-2 mb-6">
+          <a
+            href="#bakery"
+            className="rounded-full border border-masa-300 text-charcoal-700 hover:border-sunset-600 hover:text-sunset-700 px-4 py-1.5 text-sm transition-colors"
+          >
+            Bakery Fresh
+          </a>
+          <a
+            href="#pantry"
+            className="rounded-full border border-masa-300 text-charcoal-700 hover:border-sunset-600 hover:text-sunset-700 px-4 py-1.5 text-sm transition-colors"
+          >
+            Pantry Staples
+          </a>
+          <a
+            href="#texas-brands"
+            className="rounded-full border border-masa-300 text-charcoal-700 hover:border-sunset-600 hover:text-sunset-700 px-4 py-1.5 text-sm transition-colors"
+          >
+            Texas-Born
+          </a>
+        </nav>
+
         {/* Bakery Fresh Section */}
-        <div className="mb-8">
+        <div className="mb-8 scroll-mt-24" id="bakery">
           <h2 className="text-lg font-bold text-charcoal-950 mb-1">Bakery Fresh Collection</h2>
           <p className="text-sm text-gray-600 mb-4">Handcrafted daily. No preservatives.</p>
           <ProductGrid products={bakeryProducts} />
         </div>
 
         {/* Pantry Staples Section */}
-        <div className="mb-8">
+        <div className="mb-8 scroll-mt-24" id="pantry">
           <h2 className="text-lg font-bold text-charcoal-950 mb-1">Pantry Staples</h2>
           <p className="text-sm text-gray-600 mb-4">Shelf-stable Texas favorites</p>
           <ProductGrid products={pantryProducts} cols={4} />
         </div>
 
         {/* Texas-Born Favorites Section */}
-        <div>
+        <div className="scroll-mt-24" id="texas-brands">
           <h2 className="text-lg font-bold text-charcoal-950 mb-1">Texas-Born Favorites</h2>
           <p className="text-sm text-gray-600 mb-4">Premium brands from the Lone Star State</p>
           <ProductGrid products={texasBrandsProducts} />
