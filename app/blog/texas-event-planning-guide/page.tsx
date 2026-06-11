@@ -122,7 +122,7 @@ export default function TexasEventPlanningGuidePage() {
                 </p>
                 <p>
                   Your tortilla choice sets the foundation for everything else. Using authentic{' '}
-                  <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                     H-E-B® tortillas
                   </Link>
                   {' '}immediately elevates your taco bar above typical catering. Here&apos;s what you need to know:
@@ -130,13 +130,13 @@ export default function TexasEventPlanningGuidePage() {
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong>Quantity Planning:</strong> Budget 3-4 tacos per person for a main course, 2-3 for appetizers. That means one 20-pack of H-E-B® tortillas serves 5-7 people for a meal.</li>
                   <li><strong>Variety Matters:</strong> Offer both{' '}
-                    <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                       flour and corn tortillas
                     </Link>
                     . Flour works better for heavier fillings like brisket, while corn pairs beautifully with lighter proteins like grilled chicken or fish.
                   </li>
                   <li><strong>The Butter Upgrade:</strong> For VIP events or when you really want to impress,{' '}
-                    <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                       H-E-B® Butter Tortillas
                     </Link>
                     {' '}add a rich, premium touch that guests notice immediately.
@@ -221,11 +221,11 @@ export default function TexasEventPlanningGuidePage() {
                 </p>
                 <p>
                   Even at a traditional BBQ event, smart hosts provide a stack of{' '}
-                  <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                     H-E-B® tortillas
                   </Link>
                   {' '}alongside the standard white bread. Many guests prefer wrapping their brisket in a tortilla, and it&apos;s become expected at your area events. Check out our detailed guide on{' '}
-                  <Link href="/blog/bbq-meets-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/blog/bbq-meets-tortillas" className="text-sunset-700 hover:underline font-medium">
                     why BBQ and tortillas are the perfect pairing
                   </Link>
                   .
@@ -251,7 +251,7 @@ export default function TexasEventPlanningGuidePage() {
                     href="https://partyondelivery.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sunset-600 hover:underline font-medium"
+                    className="text-sunset-700 hover:underline font-medium"
                   >
                     Party on Delivery
                   </a>
@@ -317,7 +317,7 @@ export default function TexasEventPlanningGuidePage() {
                   <h3 className="text-xl font-bold text-charcoal-950 mb-3">2-3 Weeks Before Event</h3>
                   <ul className="space-y-1">
                     <li>☐ Order{' '}
-                      <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                         H-E-B® tortillas
                       </Link>
                       {' '}(calculate quantities: 3-4 per person)
@@ -399,7 +399,7 @@ export default function TexasEventPlanningGuidePage() {
                       href="https://partyondelivery.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sunset-600 hover:underline font-medium"
+                      className="text-sunset-700 hover:underline font-medium"
                     >
                       Party on Delivery
                     </a>

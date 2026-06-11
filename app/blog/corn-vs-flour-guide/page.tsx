@@ -120,9 +120,9 @@ export default function CornVsFlourGuidePage() {
                 <div className="bg-masa-50 p-4 rounded-lg mt-4">
                   <p className="font-semibold text-charcoal-950">Shop our corn tortillas:</p>
                   <ul className="mt-2 space-y-1">
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B White Corn Tortillas - Texas Size (80 count)</Link></li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B Street Taco White Corn Tortillas (24 count)</Link></li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">Mission White Corn Tortillas (24 count)</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B White Corn Tortillas - Texas Size (80 count)</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B Street Taco White Corn Tortillas (24 count)</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">Mission White Corn Tortillas (24 count)</Link></li>
                   </ul>
                 </div>
               </div>
@@ -155,9 +155,9 @@ export default function CornVsFlourGuidePage() {
                 <div className="bg-masa-50 p-4 rounded-lg mt-4">
                   <p className="font-semibold text-charcoal-950">Shop our flour tortillas:</p>
                   <ul className="mt-2 space-y-1">
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B Bakery Flour Tortillas (20 count) - Best Seller</Link></li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B Bakery Butter Tortillas (20 count)</Link></li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">Mission Soft Taco Flour Tortillas (10 count)</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B Bakery Flour Tortillas (20 count) - Best Seller</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B Bakery Butter Tortillas (20 count)</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">Mission Soft Taco Flour Tortillas (10 count)</Link></li>
                   </ul>
                 </div>
               </div>
@@ -189,8 +189,8 @@ export default function CornVsFlourGuidePage() {
                 <div className="bg-masa-50 p-4 rounded-lg mt-4">
                   <p className="font-semibold text-charcoal-950">Shop specialty tortillas:</p>
                   <ul className="mt-2 space-y-1">
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B Mixla Corn & Flour Blend (24 count)</Link></li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B Mi Tienda Ready to Cook Street Taco Tortillas (50 count)</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B Mixla Corn & Flour Blend (24 count)</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B Mi Tienda Ready to Cook Street Taco Tortillas (50 count)</Link></li>
                   </ul>
                 </div>
               </div>

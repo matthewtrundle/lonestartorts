@@ -183,11 +183,11 @@ export default function HomeContent() {
               {/* Left Side - Text Content */}
               <div className="space-y-8">
                 <div>
-                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">{t('founder.label')}</span>
-                  <h2 className="text-5xl lg:text-6xl font-display font-black text-charcoal-950 mt-3 mb-6">
+                  <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">{t('founder.label')}</p>
+                  <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 mb-3">
                     {t('founder.name')}
                   </h2>
-                  <p className="text-2xl font-light text-charcoal-700 leading-relaxed">
+                  <p className="text-lg text-charcoal-600 leading-relaxed">
                     {t('founder.title')}
                   </p>
                 </div>
@@ -212,7 +212,7 @@ export default function HomeContent() {
                         video.scrollIntoView({ behavior: 'smooth', block: 'center' });
                       }
                     }}
-                    className="group flex items-center gap-4 bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+                    className="group flex items-center gap-4 bg-sunset-600 hover:bg-sunset-700 text-cream-50 px-8 py-4 rounded-full transition-all duration-300 shadow-medium hover:shadow-large"
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
@@ -230,7 +230,7 @@ export default function HomeContent() {
               <div className="relative flex justify-center lg:justify-end">
                 <div className="relative w-full max-w-[400px] lg:max-w-[450px]">
                   {/* Phone Frame Effect */}
-                  <div className="relative rounded-[3rem] overflow-hidden bg-charcoal-950 p-2 shadow-2xl">
+                  <div className="relative rounded-[3rem] overflow-hidden bg-charcoal-950 p-2 shadow-large">
                     <div className="relative rounded-[2.5rem] overflow-hidden bg-charcoal-900">
                       {/* Video Container - Portrait Style */}
                       <div className="relative aspect-[9/16] bg-charcoal-950">
@@ -282,8 +282,8 @@ export default function HomeContent() {
                   </div>
 
                   {/* Decorative Elements */}
-                  <div className="absolute -top-4 -right-4 w-32 h-32 bg-sunset-200 rounded-full blur-3xl opacity-30 animate-pulse" />
-                  <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-masa-300 rounded-full blur-2xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }} />
+                  <div className="absolute -top-4 -right-4 w-32 h-32 bg-sunset-200 rounded-full blur-3xl opacity-30" />
+                  <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-masa-300 rounded-full blur-2xl opacity-30" />
                 </div>
               </div>
             </div>
@@ -293,48 +293,60 @@ export default function HomeContent() {
         {/* SEO Content Section - About Our Service */}
         <section className="relative py-20 bg-gradient-to-b from-cream-50 to-cream-100 overflow-hidden">
           <div className="container mx-auto px-8 max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* Left Column - Main Content */}
-              <div className="space-y-6">
-                <div>
-                  <span className="text-sunset-500 text-sm font-bold tracking-wider uppercase">{t('about.label')}</span>
-                  <h2 className="text-4xl lg:text-5xl font-display font-black text-charcoal-950 mt-3 mb-6">
-                    {t('about.title')}
-                  </h2>
-                </div>
+            {/* Editorial header — left-aligned */}
+            <div className="mb-8 md:mb-10">
+              <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">{t('about.label')}</p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950">
+                {t('about.title')}
+              </h2>
+            </div>
 
-                <div className="prose prose-lg max-w-none text-charcoal-800 space-y-4">
+            {/* Asymmetric 5/7 split — photography left, benefits right */}
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              {/* Image — 5 cols */}
+              <div className="lg:col-span-5">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-large">
+                  <Image
+                    src="/images/brand/texture-comal.webp"
+                    alt="Flour tortillas blistering on a seasoned comal"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Content — 7 cols */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="space-y-4 text-charcoal-700">
                   <RichText text={t('about.intro1')} className="leading-relaxed" />
                   <RichText text={t('about.intro2')} className="leading-relaxed" />
                   <RichText text={t('about.intro3')} className="leading-relaxed" />
                 </div>
-              </div>
 
-              {/* Right Column - Key Benefits */}
-              <div className="space-y-6">
-                <div className="bg-white p-8 rounded-lg shadow-lg border-l-4 border-sunset-500">
-                  <h3 className="text-2xl font-bold text-charcoal-950 mb-4">{t('about.whyChoose')}</h3>
+                <div>
+                  <h3 className="text-xl font-semibold text-charcoal-950 mb-4">{t('about.whyChoose')}</h3>
                   <ul className="space-y-3 text-charcoal-700">
                     <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
+                      <Check className="w-5 h-5 text-sunset-600 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.genuine.title')}</strong> {t('about.benefits.genuine.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
+                      <Check className="w-5 h-5 text-sunset-600 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.nationwide.title')}</strong> {t('about.benefits.nationwide.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
+                      <Check className="w-5 h-5 text-sunset-600 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.shelfStable.title')}</strong> {t('about.benefits.shelfStable.text')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-sunset-500 mt-1 flex-shrink-0" aria-hidden="true" />
+                      <Check className="w-5 h-5 text-sunset-600 mt-1 flex-shrink-0" aria-hidden="true" />
                       <span><strong>{t('about.benefits.authentic.title')}</strong> {t('about.benefits.authentic.text')}</span>
                     </li>
                   </ul>
                 </div>
 
-                <div className="bg-masa-50 p-6 rounded-lg">
+                <div className="bg-masa-50 p-6 rounded-xl">
                   <p className="text-charcoal-700 leading-relaxed">
                     {t('about.mission')}
                   </p>
@@ -348,31 +360,34 @@ export default function HomeContent() {
 
             {/* Additional SEO Content - How It Works */}
             <div className="mt-16 pt-16 border-t border-charcoal-200">
-              <h3 className="text-3xl font-bold text-charcoal-950 mb-8 text-center">{t('howItWorks.title')}</h3>
+              <div className="flex items-baseline gap-3 mb-8">
+                <h3 className="font-display text-2xl font-bold text-charcoal-950">{t('howItWorks.title')}</h3>
+                <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
+              </div>
               <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-sunset-600">1</span>
+                <div>
+                  <div className="w-12 h-12 bg-sunset-100 rounded-full flex items-center justify-center mb-4">
+                    <span className="text-xl font-bold text-sunset-600">1</span>
                   </div>
-                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">{t('howItWorks.step1.title')}</h4>
+                  <h4 className="text-xl font-semibold text-charcoal-950 mb-3">{t('howItWorks.step1.title')}</h4>
                   <p className="text-charcoal-700">
                     {t('howItWorks.step1.text')}
                   </p>
                 </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-sunset-600">2</span>
+                <div>
+                  <div className="w-12 h-12 bg-sunset-100 rounded-full flex items-center justify-center mb-4">
+                    <span className="text-xl font-bold text-sunset-600">2</span>
                   </div>
-                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">{t('howItWorks.step2.title')}</h4>
+                  <h4 className="text-xl font-semibold text-charcoal-950 mb-3">{t('howItWorks.step2.title')}</h4>
                   <p className="text-charcoal-700">
                     {t('howItWorks.step2.text')}
                   </p>
                 </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-sunset-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-sunset-600">3</span>
+                <div>
+                  <div className="w-12 h-12 bg-sunset-100 rounded-full flex items-center justify-center mb-4">
+                    <span className="text-xl font-bold text-sunset-600">3</span>
                   </div>
-                  <h4 className="text-xl font-bold text-charcoal-950 mb-3">{t('howItWorks.step3.title')}</h4>
+                  <h4 className="text-xl font-semibold text-charcoal-950 mb-3">{t('howItWorks.step3.title')}</h4>
                   <p className="text-charcoal-700">
                     {t('howItWorks.step3.text')}
                   </p>
@@ -432,6 +447,13 @@ export default function HomeContent() {
 
         {/* Product Showcase with Horizontal Scroll */}
         <section className="horizontal-scroll min-h-[80vh] relative bg-gradient-to-b from-charcoal-950 to-charcoal-900 text-cream-50 z-10 pt-20">
+          {/* Section header — editorial conventions on dark */}
+          <div className="container mx-auto px-8">
+            <p className="text-sm font-bold uppercase tracking-widest text-sunset-400 mb-2">What We Ship</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-cream-50">
+              The Tortilla Lineup
+            </h2>
+          </div>
 
           <div className="horizontal-wrapper flex items-center">
             {[
@@ -469,13 +491,13 @@ export default function HomeContent() {
                   {/* Product Image with artistic treatment */}
                   <div className="relative mx-auto group">
                     {/* Floating accent shapes */}
-                    <div className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-gradient-to-br from-cream-200/20 to-transparent blur-xl animate-pulse" />
-                    <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-sunset-300/20 to-transparent blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
+                    <div className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-gradient-to-br from-cream-200/20 to-transparent blur-xl" />
+                    <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-sunset-300/20 to-transparent blur-xl" />
 
                     {/* Main product image */}
                     <div className="relative w-[280px] h-[280px] mx-auto">
                       <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-40 rounded-full blur-2xl scale-110 group-hover:scale-125 transition-transform duration-1000`} />
-                      <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cream-200/10 shadow-2xl">
+                      <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cream-200/10 shadow-large">
                         <Image
                           src={product.img}
                           alt=""
@@ -527,7 +549,7 @@ export default function HomeContent() {
             <div className="relative w-full max-w-md mx-auto">
               {/* Video Container - playback starts via IntersectionObserver
                   when the section is in view (no autoPlay attribute) */}
-              <div className="relative aspect-[9/16] bg-charcoal-900 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-[9/16] bg-charcoal-900 rounded-2xl overflow-hidden shadow-large">
                 <video
                   key={currentVideo}
                   ref={carouselVideoRef}
@@ -629,11 +651,11 @@ export default function HomeContent() {
           </div>
 
           <div className="container mx-auto px-8 relative z-20">
-            <div className="text-center mb-16">
-              <h2 className="text-5xl lg:text-7xl font-display font-black text-cream-50 mb-4 reveal-text relative z-30">
+            <div className="text-center mx-auto max-w-2xl mb-16">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-cream-50 reveal-text relative z-30">
                 {t('features.title')}
               </h2>
-              <p className="text-2xl lg:text-3xl font-display italic text-gradient relative z-30">{t('features.subtitle')}</p>
+              <p className="mt-3 text-lg text-cream-200 relative z-30">{t('features.subtitle')}</p>
             </div>
 
             <div className="stagger-container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -712,7 +734,7 @@ export default function HomeContent() {
                 },
               ].map((feature, i) => (
                 <div key={i} className="stagger-item group">
-                  <div className="relative bg-charcoal-800/50 backdrop-blur-sm border border-cream-200/10 overflow-hidden hover:bg-charcoal-800/70 transition-all duration-500 hover-lift">
+                  <div className="relative bg-charcoal-800/50 backdrop-blur-sm border border-cream-200/10 rounded-xl overflow-hidden hover:bg-charcoal-800/70 transition-all duration-500 hover-lift">
                     {/* Background image - subtle and opaque */}
                     <div
                       className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-700"
@@ -735,7 +757,7 @@ export default function HomeContent() {
                       </div>
 
                       {/* Content */}
-                      <h3 className="text-2xl font-bold text-cream-50 mb-3 tracking-wide">{feature.title}</h3>
+                      <h3 className="text-xl font-semibold text-cream-50 mb-3 tracking-wide">{feature.title}</h3>
                       <p className="text-cream-300 leading-relaxed">{feature.desc}</p>
                     </div>
 
@@ -752,11 +774,15 @@ export default function HomeContent() {
         <section className="py-16 bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50 relative overflow-hidden">
           <div className="container mx-auto px-8">
             <div className="mb-16">
-              <h2 className="text-7xl lg:text-8xl font-display font-black text-charcoal-950 reveal-text">
-                OUR TREASURES
-              </h2>
-              <p className="text-2xl text-charcoal-700 mt-4 slide-left">Shelf-stable Texas gold, ready for your pantry</p>
-              <p className="text-lg text-charcoal-600 mt-2">
+              <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">Pantry Ready</p>
+              <div className="flex items-baseline gap-3">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 reveal-text">
+                  Our Treasures
+                </h2>
+                <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
+              </div>
+              <p className="text-lg text-charcoal-600 mt-3 slide-left">Shelf-stable Texas gold, ready for your pantry</p>
+              <p className="text-base text-charcoal-600 mt-2">
                 Made fresh, sealed for shipping — no refrigeration needed until opened.
               </p>
               {/* Trust Badges */}
@@ -803,11 +829,11 @@ export default function HomeContent() {
                   badge: 'Coming Soon',
                   gradient: 'bg-gradient-to-br from-lime-100 to-lime-200',
                   accent: 'text-lime-700',
-                  shadow: 'shadow-xl'
+                  shadow: 'shadow-medium'
                 }
               ].map((product, i) => (
                 <Link href="/shop" key={i} className="scale-in group block cursor-pointer">
-                  <div className={`relative ${product.gradient} p-12 h-80 flex flex-col justify-between overflow-hidden hover-lift hover:shadow-2xl hover:-translate-y-1 ${product.shadow} transition-all duration-500`}>
+                  <div className={`relative ${product.gradient} rounded-xl p-12 h-80 flex flex-col justify-between overflow-hidden hover-lift hover:shadow-large hover:-translate-y-1 ${product.shadow} transition-all duration-500`}>
                     {/* Background pattern */}
                     <div className="absolute inset-0 opacity-10">
                       <div className="absolute top-0 right-0 w-32 h-32 border-8 border-current rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -841,17 +867,18 @@ export default function HomeContent() {
         {/* Guides & Tips Section */}
         <section className="py-20 bg-gradient-to-b from-masa-50 to-cream-50 relative overflow-hidden">
           <div className="container mx-auto px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-6xl lg:text-7xl font-display font-black text-charcoal-950 mb-6 reveal-text">
+            <div className="text-center mx-auto max-w-2xl mb-16">
+              <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">Know-How</p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 reveal-text">
                 {t('guides.title')}
               </h2>
-              <p className="text-2xl text-charcoal-700 max-w-3xl mx-auto slide-left">
+              <p className="mt-3 text-lg text-charcoal-600 slide-left">
                 {t('guides.subtitle')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="group bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+              <div className="group bg-white rounded-xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden hover:-translate-y-2">
                 <Link href="/guides/how-to-store-tortillas" className="block">
                   <div className="p-8">
                     <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-sunset-100 text-sunset-600 group-hover:bg-sunset-600 group-hover:text-white transition-all duration-300">
@@ -859,7 +886,7 @@ export default function HomeContent() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-sunset-600 transition-colors">
+                    <h3 className="text-xl font-semibold text-charcoal-950 mb-4 group-hover:text-sunset-600 transition-colors">
                       How to Store Tortillas
                     </h3>
                     <p className="text-charcoal-700 leading-relaxed mb-6">
@@ -876,7 +903,7 @@ export default function HomeContent() {
                 </Link>
               </div>
 
-              <div className="group bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+              <div className="group bg-white rounded-xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden hover:-translate-y-2">
                 <Link href="/guides/how-to-reheat-tortillas" className="block">
                   <div className="p-8">
                     <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-masa-100 text-masa-700 group-hover:bg-masa-600 group-hover:text-white transition-all duration-300">
@@ -884,7 +911,7 @@ export default function HomeContent() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-masa-700 transition-colors">
+                    <h3 className="text-xl font-semibold text-charcoal-950 mb-4 group-hover:text-masa-700 transition-colors">
                       How to Reheat Tortillas
                     </h3>
                     <p className="text-charcoal-700 leading-relaxed mb-6">
@@ -901,7 +928,7 @@ export default function HomeContent() {
                 </Link>
               </div>
 
-              <div className="group bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+              <div className="group bg-white rounded-xl shadow-soft hover:shadow-large transition-all duration-300 overflow-hidden hover:-translate-y-2">
                 <Link href="/guides/corn-vs-flour-tortillas" className="block">
                   <div className="p-8">
                     <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-rust-100 text-rust-600 group-hover:bg-rust-600 group-hover:text-white transition-all duration-300">
@@ -909,7 +936,7 @@ export default function HomeContent() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-bold text-charcoal-950 mb-4 group-hover:text-rust-600 transition-colors">
+                    <h3 className="text-xl font-semibold text-charcoal-950 mb-4 group-hover:text-rust-600 transition-colors">
                       Corn vs Flour Tortillas
                     </h3>
                     <p className="text-charcoal-700 leading-relaxed mb-6">
@@ -930,7 +957,7 @@ export default function HomeContent() {
             <div className="text-center">
               <Link
                 href="/guides"
-                className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-xl"
+                className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-medium"
               >
                 {t('guides.viewAll')}
               </Link>
@@ -941,18 +968,22 @@ export default function HomeContent() {
         {/* Featured Recipe Section */}
         <section className="py-20 bg-gradient-to-b from-cream-50 to-sunset-50 relative overflow-hidden">
           <div className="container mx-auto px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-6xl lg:text-7xl font-display font-black text-charcoal-950 mb-6 reveal-text">
-                {t('recipes.title')}
-              </h2>
-              <p className="text-2xl text-charcoal-700 max-w-3xl mx-auto slide-left">
+            <div className="mb-16">
+              <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">From Our Kitchen</p>
+              <div className="flex items-baseline gap-3">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal-950 reveal-text">
+                  {t('recipes.title')}
+                </h2>
+                <span aria-hidden="true" className="hidden md:block flex-1 h-px bg-masa-200" />
+              </div>
+              <p className="text-lg text-charcoal-600 mt-3 max-w-3xl slide-left">
                 {t('recipes.subtitle')}
               </p>
             </div>
 
             <div className="max-w-5xl mx-auto">
               <Link href="/recipes/breakfast-tacos" className="group block">
-                <div className="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-500 hover:-translate-y-2">
+                <div className="bg-white rounded-2xl shadow-medium overflow-hidden hover:shadow-large transition-all duration-500 hover:-translate-y-2">
                   <div className="grid md:grid-cols-2">
                     {/* Image Side */}
                     <div className="relative h-80 md:h-auto bg-gradient-to-br from-sunset-200 via-masa-200 to-rust-200">
@@ -964,7 +995,7 @@ export default function HomeContent() {
                           <p className="text-lg font-medium">Recipe Image</p>
                         </div>
                       </div>
-                      <div className="absolute top-6 right-6 bg-sunset-600 text-white px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wider shadow-lg">
+                      <div className="absolute top-6 right-6 bg-sunset-600 text-white px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wider shadow-medium">
                         Featured Recipe
                       </div>
                     </div>
@@ -977,7 +1008,7 @@ export default function HomeContent() {
                         </span>
                       </div>
 
-                      <h3 className="text-4xl font-bold text-charcoal-950 mb-4 group-hover:text-sunset-600 transition-colors">
+                      <h3 className="text-2xl font-semibold text-charcoal-950 mb-4 group-hover:text-sunset-600 transition-colors">
                         Texas-Style Breakfast Tacos
                       </h3>
 
@@ -1023,7 +1054,7 @@ export default function HomeContent() {
               <div className="text-center mt-12">
                 <Link
                   href="/recipes"
-                  className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-xl"
+                  className="inline-block bg-charcoal-950 hover:bg-charcoal-800 text-cream-50 px-10 py-4 rounded-lg font-bold text-lg tracking-wide uppercase transition-colors shadow-medium"
                 >
                   {t('recipes.comingSoon')}
                 </Link>
@@ -1032,40 +1063,27 @@ export default function HomeContent() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 relative overflow-hidden bg-charcoal-950">
-          <div className="absolute inset-0 parallax-img" data-speed="0.5">
-            <Image
-              src="/images/masa-preparation.webp"
-              alt="Masa Preparation"
-              fill
-              className="object-cover opacity-30"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/80 to-transparent" />
-          </div>
-
-          <div className="relative z-10 min-h-[60vh] flex items-center justify-center">
-            <div className="text-center space-y-6 px-8 max-w-4xl mx-auto">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-cream-50 split-text leading-tight">
+        {/* CTA Section — canonical warm CTA band (matches CTABanner tone="warm") */}
+        <section className="py-16 md:py-20 bg-cream-50">
+          <div className="container mx-auto px-8 max-w-5xl">
+            <div className="rounded-2xl p-8 md:p-12 text-center bg-gradient-to-r from-rust-600 to-sunset-600 text-white">
+              <h2 className="font-display text-balance text-3xl md:text-4xl font-bold reveal-text">
                 {t('cta.title')}
               </h2>
-
-              <p className="text-xl lg:text-2xl text-cream-200 font-light slide-left">
+              <p className="mx-auto mt-3 max-w-xl text-lg text-white/90">
                 {t('cta.subtitle')}
               </p>
 
-              <div className="flex flex-wrap gap-6 justify-center mt-12 scale-in">
-                <Link href="/shop" className="group relative overflow-hidden bg-sunset-500 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover-glow">
-                  <span className="relative z-10">{t('cta.shop')}</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-sunset-600 to-sunset-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+              <div className="flex flex-wrap gap-4 justify-center mt-8 scale-in">
+                <Link href="/shop" className="rounded-lg bg-white text-rust-700 hover:bg-cream-100 px-8 py-3 font-bold transition-colors">
+                  {t('cta.shop')}
                 </Link>
-
-                <Link href="/story" className="border-2 border-cream-50 text-cream-50 px-12 py-6 text-xl font-bold tracking-wide uppercase hover:bg-cream-50 hover:text-charcoal-950 transition-all duration-300">
+                <Link href="/story" className="rounded-lg border-2 border-white/70 text-white hover:bg-white/10 px-8 py-3 font-bold transition-colors">
                   {t('cta.story')}
                 </Link>
               </div>
 
-              <p className="text-sm text-cream-400 mt-12 tracking-wider uppercase">
+              <p className="text-xs text-white/70 mt-8 tracking-wider uppercase">
                 {t('disclaimer.short')}
               </p>
             </div>

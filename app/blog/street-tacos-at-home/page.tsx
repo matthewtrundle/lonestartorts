@@ -185,9 +185,9 @@ export default function StreetTacosAtHomePage() {
                 <div className="bg-masa-50 p-4 rounded-lg mt-4">
                   <p className="font-semibold text-charcoal-950">Best Tortillas for Street Tacos:</p>
                   <ul className="mt-2 space-y-1">
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B Street Taco White Corn Tortillas (24 count)</Link> - Made specifically for street tacos</li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">Mission White Corn Tortillas (24 count)</Link> - Reliable and authentic</li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B Mi Tienda Ready to Cook (50 count)</Link> - For the freshest taste</li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B Street Taco White Corn Tortillas (24 count)</Link> - Made specifically for street tacos</li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">Mission White Corn Tortillas (24 count)</Link> - Reliable and authentic</li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B Mi Tienda Ready to Cook (50 count)</Link> - For the freshest taste</li>
                   </ul>
                 </div>
               </div>
@@ -205,11 +205,11 @@ export default function StreetTacosAtHomePage() {
                   <p className="text-sm text-charcoal-600 mb-2">Makes 12 tacos (serves 4)</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>1.5 lbs flank or skirt steak</li>
-                    <li>24 small <Link href="/shop" className="text-sunset-600 hover:underline">corn tortillas</Link> (2 per taco)</li>
+                    <li>24 small <Link href="/shop" className="text-sunset-700 hover:underline">corn tortillas</Link> (2 per taco)</li>
                     <li>1 white onion, finely diced</li>
                     <li>1 bunch fresh cilantro, chopped</li>
                     <li>3-4 limes, quartered</li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">H-E-B That Green Sauce</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">H-E-B That Green Sauce</Link></li>
                   </ul>
 
                   <h4 className="font-bold text-charcoal-950 mt-4 mb-2">For the marinade:</h4>
@@ -397,7 +397,7 @@ export default function StreetTacosAtHomePage() {
 
                 <h3 className="text-xl font-bold text-charcoal-950 mt-6 mb-3">The Salsas</h3>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li><strong>Salsa Verde:</strong> Tomatillo-based, tangy, and versatile. <Link href="/shop" className="text-sunset-600 hover:underline">H-E-B That Green Sauce</Link> is the easy option.</li>
+                  <li><strong>Salsa Verde:</strong> Tomatillo-based, tangy, and versatile. <Link href="/shop" className="text-sunset-700 hover:underline">H-E-B That Green Sauce</Link> is the easy option.</li>
                   <li><strong>Salsa Roja:</strong> Tomato and chile based. More traditional heat.</li>
                   <li><strong>Pickled jalape&ntilde;os:</strong> Common at taquerias for extra heat.</li>
                   <li><strong>Radish slices:</strong> Traditional garnish, adds freshness.</li>
@@ -439,7 +439,7 @@ export default function StreetTacosAtHomePage() {
                 </ul>
 
                 <p className="mt-4">
-                  Use our <Link href="/tools/party-calculator" className="text-sunset-600 hover:underline">Party Calculator</Link> to get exact tortilla quantities!
+                  Use our <Link href="/tools/party-calculator" className="text-sunset-700 hover:underline">Party Calculator</Link> to get exact tortilla quantities!
                 </p>
               </div>
             </section>

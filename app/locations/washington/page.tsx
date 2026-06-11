@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { CTABanner } from '@/components/ui/CTABanner'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { locationHero } from '@/lib/hero-images'
+
+const stateHero = locationHero('washington')
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Washington',
@@ -71,8 +74,21 @@ export default function WashingtonPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
-      <header className="bg-charcoal-950 text-cream-50 py-12">
-        <div className="container mx-auto px-6 max-w-6xl">
+      <header className="relative overflow-hidden bg-charcoal-950 text-cream-50 py-12">
+        <Image
+          src={stateHero.image}
+          alt={stateHero.alt}
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        {/* Single scrim: solid left for text legibility, photo breathes right */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-950/70 to-charcoal-950/35"
+        />
+        <div className="relative container mx-auto px-6 max-w-6xl">
           <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Locations', href: '/locations' }, { label: 'Washington' }]} className="mb-6 text-cream-300" />
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Texas Tortillas Delivered to Washington</h1>
           <p className="text-xl text-cream-200 max-w-3xl">Authentic H-E-B tortillas shipped directly to the Evergreen State. From Seattle to Spokane, we bring the taste of Texas to Washington.</p>

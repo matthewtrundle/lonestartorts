@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PageHero } from '@/components/ui/PageHero';
+import { productHeroes } from '@/lib/hero-images';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { StepList } from '@/components/ui/StepList';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
@@ -129,6 +130,8 @@ export default function CornTortillasProductPage() {
         {/* Hero Section */}
         <PageHero
           size="lg"
+          image={productHeroes.corn.image}
+          imageAlt={productHeroes.corn.alt}
           eyebrow="Gluten-Free • Non-GMO • Handcrafted"
           title="Premium Corn Tortillas"
           sub="Authentic handcrafted corn tortillas made from traditional masa. Perfectly soft, naturally gluten-free, and bursting with genuine corn flavor."

@@ -45,7 +45,7 @@ export function MariaCTA({
         <p className="text-sm text-charcoal-600 mb-4 max-w-md mx-auto">{description}</p>
         <button
           onClick={openRetellWidget}
-          className="inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors"
         >
           <MessageCircle className="w-4 h-4" />
           Talk to Maria
@@ -76,7 +76,7 @@ export function MariaCTA({
       <p className="text-charcoal-600 mb-6 max-w-sm mx-auto">{description}</p>
       <button
         onClick={openRetellWidget}
-        className="inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+        className="inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
       >
         <MessageCircle className="w-5 h-5" />
         Talk to Maria

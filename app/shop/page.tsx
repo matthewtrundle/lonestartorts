@@ -301,9 +301,9 @@ export default function ShopPage() {
 
         {/* Contact - Compact */}
         <div className="mt-8 text-center text-sm text-charcoal-500">
-          Questions? <a href="tel:+15128946823" className="text-sunset-600 hover:underline">(512) 894-6823</a>
+          Questions? <a href="tel:+15128946823" className="text-sunset-700 hover:underline">(512) 894-6823</a>
           {' \u2022 '}
-          <a href="mailto:howdy@lonestartortillas.com" className="text-sunset-600 hover:underline">howdy@lonestartortillas.com</a>
+          <a href="mailto:howdy@lonestartortillas.com" className="text-sunset-700 hover:underline">howdy@lonestartortillas.com</a>
         </div>
 
         {/* Why Our Tortillas - Trust/Education Section */}

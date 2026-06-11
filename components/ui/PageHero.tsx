@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface PageHeroProps {
@@ -12,6 +13,13 @@ interface PageHeroProps {
   cta?: { label: string; href: string };
   /** py sizing */
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * Optional photographic backdrop (path under public/). Rendered behind a
+   * charcoal scrim so the white text keeps AA contrast. Omit for the flat
+   * charcoal band.
+   */
+  image?: string;
+  imageAlt?: string;
   className?: string;
   children?: ReactNode;
 }
@@ -19,7 +27,7 @@ interface PageHeroProps {
 /**
  * The canonical dark page-header band (used across guides, locations,
  * recipes, products). One gradient recipe: charcoal base + a single warm
- * radial accent — replaces the per-page gradient roulette.
+ * radial accent — or a photographic backdrop with a single scrim.
  */
 export function PageHero({
   eyebrow,
@@ -28,6 +36,8 @@ export function PageHero({
   breadcrumbs,
   cta,
   size = 'md',
+  image,
+  imageAlt = '',
   className,
   children,
 }: PageHeroProps) {
@@ -41,11 +51,29 @@ export function PageHero({
         className
       )}
     >
-      {/* single warm radial accent — the only decoration */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-1/2 right-0 h-[200%] w-1/2 bg-gradient-radial from-sunset-900/40 to-transparent"
-      />
+      {image ? (
+        <>
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+          {/* Single scrim: solid left for text legibility, photo breathes right */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-950/70 to-charcoal-950/35"
+          />
+        </>
+      ) : (
+        /* flat variant: single warm radial accent — the only decoration */
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-1/2 right-0 h-[200%] w-1/2 bg-gradient-radial from-sunset-900/40 to-transparent"
+        />
+      )}
       <div className="container relative mx-auto max-w-6xl px-6">
         {breadcrumbs && <div className="mb-6 text-cream-300">{breadcrumbs}</div>}
         {eyebrow && (

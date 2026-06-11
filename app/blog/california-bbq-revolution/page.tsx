@@ -106,7 +106,7 @@ export default function CaliforniaBBQRevolutionPage() {
                 </p>
                 <p>
                   Three California restaurants found an unexpected solution: authentic{' '}
-                  <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                     H-E-B® tortillas
                   </Link>{' '}
                   from Texas. Not because they wanted to go traditional—but because these tortillas could handle their innovation better than anything else on the market.
@@ -327,7 +327,7 @@ export default function CaliforniaBBQRevolutionPage() {
                   Whether you're running a fusion concept in the Bay Area, a Venice Beach smokehouse, or a craft beer BBQ spot in San Diego, you're competing against California's best. Don't let tortilla quality be your weak link.
                 </p>
                 <p>
-                  <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                     Order H-E-B® tortillas
                   </Link>{' '}
                   and join the California BBQ revolution. Same tortillas that won over Oakland, LA, and San Diego. Same consistent quality. Ships fresh to all California zip codes.

@@ -112,7 +112,7 @@ export default function BBQMeetsTortillasPage() {
                 </p>
                 <p>
                   BBQ isn&apos;t delicate food. You&apos;re dealing with juicy brisket, rendered fat, spicy rubs, and tangy sauces. A weak tortilla will fall apart before it reaches your mouth. H-E-B® flour tortillas, particularly the{' '}
-                  <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                     butter flour variety
                   </Link>
                   , have the structural integrity to hold up to the heaviest BBQ loads without tearing or getting soggy.
@@ -122,7 +122,7 @@ export default function BBQMeetsTortillasPage() {
                 </p>
                 <p>
                   When you&apos;ve spent hours perfecting your dry rub and smoke profile, the last thing you want is a tortilla that fights for attention. H-E-B®{' '}
-                  <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline font-medium">
                     corn tortillas
                   </Link>
                   {' '}bring a subtle, earthy sweetness that complements smoky brisket without overwhelming it. The flour tortillas add a soft, slightly rich backdrop that lets your BBQ shine.
@@ -165,7 +165,7 @@ export default function BBQMeetsTortillasPage() {
                   <h3 className="text-xl font-bold text-charcoal-950 mb-3">🐷 Pulled Pork Tacos (Corn Tortillas)</h3>
                   <p>
                     Tender pulled pork with jalapeño slaw and tangy vinegar sauce on H-E-B®{' '}
-                    <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline font-medium">
                       corn tortillas
                     </Link>
                     . The corn&apos;s subtle sweetness complements the pork&apos;s savory depth.
@@ -176,7 +176,7 @@ export default function BBQMeetsTortillasPage() {
                   <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌶 Burnt Ends Quesadilla (Butter Tortillas)</h3>
                   <p>
                     Crispy brisket burnt ends with melted cheddar between two{' '}
-                    <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                       butter flour tortillas
                     </Link>
                     , griddled until golden. The richness of butter tortillas takes this to another level.
@@ -223,7 +223,7 @@ export default function BBQMeetsTortillasPage() {
                 <ul className="list-disc pl-6 space-y-2">
                   <li><strong>Brisket Enchiladas:</strong> Shredded brisket rolled in H-E-B® corn tortillas, topped with queso and baked until bubbly</li>
                   <li><strong>BBQ Breakfast Burritos:</strong> Check out our detailed{' '}
-                    <Link href="/blog/brisket-breakfast-burrito" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/blog/brisket-breakfast-burrito" className="text-sunset-700 hover:underline font-medium">
                       brisket breakfast burrito guide
                     </Link>
                   </li>

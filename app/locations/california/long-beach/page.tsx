@@ -4,6 +4,9 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { LocationFAQ } from '@/components/location/LocationFAQ'
 import { CTABanner } from '@/components/ui/CTABanner'
+import { locationHero } from '@/lib/hero-images'
+
+const stateHero = locationHero('california')
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Long Beach',
@@ -73,8 +76,21 @@ export default function LongBeachPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         {/* Header */}
-        <header className="bg-charcoal-950 text-cream-50 py-12">
-          <div className="container mx-auto px-6 max-w-6xl">
+        <header className="relative overflow-hidden bg-charcoal-950 text-cream-50 py-12">
+          <Image
+            src={stateHero.image}
+            alt={stateHero.alt}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+          {/* Single scrim: solid left for text legibility, photo breathes right */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-950/70 to-charcoal-950/35"
+          />
+          <div className="relative container mx-auto px-6 max-w-6xl">
             <Breadcrumbs
               items={[
                 { label: 'Home', href: '/' },
@@ -92,25 +108,12 @@ export default function LongBeachPage() {
             </p>
             <Link
               href="/shop"
-              className="mt-6 inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors"
+              className="mt-6 inline-block bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-bold transition-colors"
             >
               Shop Now
             </Link>
           </div>
         </header>
-
-        {/* Hero Image */}
-        <section className="max-w-6xl mx-auto px-6 py-8">
-          <div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg">
-            <Image
-              src="/images/generated/hero-tortillas.webp"
-              alt="Fresh authentic Texas tortillas"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </section>
 
         <article className="container mx-auto px-6 py-12 max-w-4xl prose prose-lg">
           {/* Main content will be rendered from MDX or inserted here */}

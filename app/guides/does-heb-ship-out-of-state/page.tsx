@@ -144,7 +144,7 @@ export default function DoesHebShipOutOfStatePage() {
           </ol>
           <Link
             href="/shop"
-            className="mt-4 inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors"
+            className="mt-4 inline-block bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-bold transition-colors"
           >
             Shop H-E-B Tortillas
           </Link>

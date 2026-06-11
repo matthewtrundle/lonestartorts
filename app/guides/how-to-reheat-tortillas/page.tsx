@@ -107,9 +107,9 @@ export default function HowToReheatTortillasPage() {
           <nav className="bg-masa-50 p-6 rounded-lg mb-12 border border-masa-200">
             <h2 className="text-xl font-bold text-charcoal-950 mb-4">3 Methods Covered:</h2>
             <ul className="space-y-2 text-charcoal-700">
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#stovetop" className="text-sunset-600 hover:underline">Stovetop/Comal (Best Overall)</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#microwave" className="text-sunset-600 hover:underline">Microwave (Fastest)</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#oven" className="text-sunset-600 hover:underline">Oven (Large Batches)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#stovetop" className="text-sunset-700 hover:underline">Stovetop/Comal (Best Overall)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#microwave" className="text-sunset-700 hover:underline">Microwave (Fastest)</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#oven" className="text-sunset-700 hover:underline">Oven (Large Batches)</a></li>
             </ul>
           </nav>
 

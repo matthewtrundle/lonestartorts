@@ -256,7 +256,7 @@ export default function NixtamalizationSciencePage() {
               <Link href="/blog" className="text-sunset-600 hover:text-sunset-700 font-semibold">
                 ← Back to Blog
               </Link>
-              <Link href="/products/corn-tortillas" className="bg-sunset-500 hover:bg-sunset-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+              <Link href="/products/corn-tortillas" className="bg-sunset-600 hover:bg-sunset-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
                 Shop Corn Tortillas
               </Link>
             </div>

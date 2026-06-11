@@ -49,6 +49,13 @@ export function Header() {
   // Only offset the header on homepage where DisclaimerBanner is shown
   const isHomepage = pathname === '/';
 
+  // Active page gets a persistent sunset underline; others keep the grow-on-hover rule
+  const isActive = (href: string) => pathname === href;
+  const navUnderline = (href: string) =>
+    `absolute -bottom-1 left-0 h-0.5 bg-sunset-600 transition-all duration-300 ${
+      isActive(href) ? 'w-full' : 'w-0 group-hover:w-full'
+    }`;
+
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'es' : 'en');
   };
@@ -113,7 +120,9 @@ export function Header() {
 
   return (
     <>
-    <header className={`shrink-header fixed ${isHomepage ? 'top-[28px]' : 'top-0'} left-0 right-0 z-[100] transition-all duration-300 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`} id="main-header">
+    <header className={`shrink-header fixed ${isHomepage ? 'top-[28px]' : 'top-0'} left-0 right-0 z-[100] transition-all duration-300 bg-cream-50 border-b border-cream-300 shadow-subtle ${isScrolled ? 'shadow-medium' : ''}`} id="main-header">
+      {/* Brand top rule */}
+      <div aria-hidden="true" className="h-[3px] w-full bg-sunset-600" />
 
       <div className="container mx-auto px-4 md:px-8 relative">
         <div className="header-content flex justify-between items-center py-1">
@@ -160,7 +169,7 @@ export function Header() {
                 // React 18 needs ''/undefined for inert; types expect boolean
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inert={(!isResourcesOpen ? '' : undefined) as any}
-                className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-charcoal-100 py-2 transition-all duration-200 ${
+                className={`absolute top-full left-0 mt-2 w-64 bg-cream-50 rounded-xl shadow-medium border border-cream-300 py-2 transition-all duration-200 ${
                   isResourcesOpen
                     ? 'opacity-100 translate-y-0 pointer-events-auto'
                     : 'opacity-0 -translate-y-2 pointer-events-none'
@@ -173,7 +182,7 @@ export function Header() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsResourcesOpen(false)}
-                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-cream-50 transition-colors"
+                      className="flex items-start gap-3 px-4 py-2.5 hover:bg-cream-100 transition-colors"
                     >
                       <Icon className="w-4 h-4 text-sunset-500 mt-0.5 shrink-0" />
                       <div>
@@ -192,7 +201,7 @@ export function Header() {
             {/* Cart Icon */}
             <button
               onClick={() => setIsOpen(true)}
-              className="relative p-2 hover:bg-charcoal-100/50 rounded-full transition-colors"
+              className="relative p-2 hover:bg-sunset-50 rounded-lg transition-colors"
               aria-label={`Open cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
             >
               <ShoppingBag className="w-6 h-6 text-charcoal-950" />
@@ -206,7 +215,7 @@ export function Header() {
             {/* Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 hover:bg-charcoal-100/50 rounded-full transition-colors"
+              className="p-2 hover:bg-sunset-50 rounded-lg transition-colors"
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -221,11 +230,11 @@ export function Header() {
 
           {/* Desktop Navigation - Right side */}
           <nav className={`nav-items hidden md:flex items-center transition-all duration-300 ${isScrolled ? 'gap-3' : 'gap-4'}`}>
-            <Link href="/shop" className="group relative">
+            <Link href="/shop" className="group relative" aria-current={isActive('/shop') ? 'page' : undefined}>
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.shop')}
               </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+              <span className={navUnderline('/shop')} />
             </Link>
 
             {/* Tortilla divider */}
@@ -234,11 +243,11 @@ export function Header() {
               <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
             </svg>
 
-            <Link href="/subscribe" className="group relative">
+            <Link href="/subscribe" className="group relative" aria-current={isActive('/subscribe') ? 'page' : undefined}>
               <span className="text-sm font-medium tracking-wide text-sunset-700 transition-colors group-hover:text-sunset-800">
                 {t('nav.subscribe')}
               </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+              <span className={navUnderline('/subscribe')} />
             </Link>
 
             {/* Tortilla divider */}
@@ -247,11 +256,11 @@ export function Header() {
               <path d="M8 12c0-2 1.5-3.5 4-3.5s4 1.5 4 3.5-1.5 3.5-4 3.5-4-1.5-4-3.5z" />
             </svg>
 
-            <Link href="/wholesale" className="group relative">
+            <Link href="/wholesale" className="group relative" aria-current={isActive('/wholesale') ? 'page' : undefined}>
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 {t('nav.wholesale')}
               </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+              <span className={navUnderline('/wholesale')} />
             </Link>
 
             {/* Language Toggle with Mexican Flag */}
@@ -312,11 +321,11 @@ export function Header() {
             )}
 
             {/* Account Link */}
-            <Link href="/account" className="group relative">
+            <Link href="/account" className="group relative" aria-current={isActive('/account') ? 'page' : undefined}>
               <span className="text-sm font-medium tracking-wide text-charcoal-950 transition-colors group-hover:text-sunset-600">
                 Account
               </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sunset-600 transition-all duration-300 group-hover:w-full" />
+              <span className={navUnderline('/account')} />
             </Link>
 
             {/* Cart Icon */}
@@ -361,17 +370,17 @@ export function Header() {
         // React 18 needs ''/undefined for inert; types expect boolean
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         inert={(!isMobileMenuOpen ? '' : undefined) as any}
-        className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm z-[9999] bg-white shadow-2xl transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed right-0 top-0 bottom-0 w-[85%] max-w-sm z-[9999] bg-cream-50 shadow-large transition-transform duration-300 ease-out md:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
           {/* Mobile Menu Header */}
-          <div className="flex justify-between items-center p-6 border-b border-cream-200 bg-white">
+          <div className="flex justify-between items-center p-6 border-b border-cream-300 bg-cream-50">
             <LogoFull className="text-charcoal-950" size="sm" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 hover:bg-charcoal-100/50 rounded-full transition-colors"
+              className="p-2 hover:bg-sunset-50 rounded-lg transition-colors"
               aria-label="Close menu"
             >
               <X className="w-6 h-6 text-charcoal-950" />
@@ -379,7 +388,7 @@ export function Header() {
           </div>
 
           {/* Mobile Menu Content */}
-          <nav className="flex flex-col p-6 space-y-1 overflow-y-auto h-[calc(100vh-180px)] bg-white">
+          <nav className="flex flex-col p-6 space-y-1 overflow-y-auto h-[calc(100vh-180px)] bg-cream-50">
             {/* Language Toggle - Mobile with Flags */}
             <button
               onClick={() => {
@@ -442,7 +451,7 @@ export function Header() {
             <Link
               href="/shop"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors"
             >
               {t('nav.shop')}
             </Link>
@@ -456,14 +465,14 @@ export function Header() {
             <Link
               href="/wholesale"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors"
             >
               {t('nav.wholesale')}
             </Link>
             <Link
               href="/account"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors flex items-center gap-2"
             >
               <User className="w-4 h-4" />
               {t('nav.myAccount')}
@@ -474,7 +483,7 @@ export function Header() {
               <Link
                 href="/recipes"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors flex items-center gap-2"
               >
                 <UtensilsCrossed className="w-4 h-4 text-sunset-500" />
                 {t('nav.recipes')}
@@ -482,7 +491,7 @@ export function Header() {
               <Link
                 href="/guides"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors flex items-center gap-2"
               >
                 <BookOpen className="w-4 h-4 text-sunset-500" />
                 {t('nav.guides')}
@@ -490,7 +499,7 @@ export function Header() {
               <Link
                 href="/blog"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors flex items-center gap-2"
+                className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors flex items-center gap-2"
               >
                 <Newspaper className="w-4 h-4 text-sunset-500" />
                 {t('nav.blog')}
@@ -501,7 +510,7 @@ export function Header() {
                 onClick={() => setIsMobileResourcesOpen(!isMobileResourcesOpen)}
                 aria-expanded={isMobileResourcesOpen}
                 aria-controls="mobile-more-menu"
-                className="w-full flex items-center justify-between px-4 py-3 text-charcoal-700 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+                className="w-full flex items-center justify-between px-4 py-3 text-charcoal-700 font-medium hover:bg-cream-100 rounded-lg transition-colors"
               >
                 <span className="text-sm">More</span>
                 <ChevronDown className={`w-4 h-4 text-charcoal-500 transition-transform duration-200 ${isMobileResourcesOpen ? 'rotate-180' : ''}`} />
@@ -522,7 +531,7 @@ export function Header() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex items-center gap-3 pl-8 pr-4 py-2.5 text-charcoal-700 hover:bg-cream-50 rounded-lg transition-colors"
+                        className="flex items-center gap-3 pl-8 pr-4 py-2.5 text-charcoal-700 hover:bg-cream-100 rounded-lg transition-colors"
                       >
                         <Icon className="w-4 h-4 text-sunset-500" />
                         <span className="text-sm">{t(link.labelKey)}</span>
@@ -536,7 +545,7 @@ export function Header() {
             <Link
               href="/story"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-50 rounded-lg transition-colors"
+              className="px-4 py-3 text-charcoal-950 font-medium hover:bg-cream-100 rounded-lg transition-colors"
             >
               {t('nav.story')}
             </Link>

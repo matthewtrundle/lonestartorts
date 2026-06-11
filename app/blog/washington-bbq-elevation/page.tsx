@@ -105,7 +105,7 @@ export default function WashingtonBBQElevationPage() {
                 </p>
                 <p>
                   Yet when it came to tortillas, local options kept falling short. Too thick for Seattle's refined palates. Too inconsistent for Tacoma's value-conscious customers. Too expensive for Eastern Washington's price-sensitive market. Then three Washington restaurants discovered{' '}
-                  <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                     H-E-B® tortillas
                   </Link>
                   {' '}and everything changed.
@@ -203,7 +203,7 @@ export default function WashingtonBBQElevationPage() {
 
                 <p>
                   Mike tried every tortilla option available in Tacoma. Nothing hit the sweet spot of quality, consistency, and price until he found H-E-B® tortillas through{' '}
-                  <Link href="/" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/" className="text-sunset-700 hover:underline font-medium">
                     Lonestar Tortillas
                   </Link>.
                 </p>
@@ -338,7 +338,7 @@ export default function WashingtonBBQElevationPage() {
                   Whether you're in Seattle's competitive Capitol Hill scene, Tacoma's value-conscious market, or Eastern Washington's rural communities, you face the same challenge: delivering quality that justifies your prices and earns customer loyalty.
                 </p>
                 <p>
-                  <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                     Order H-E-B® tortillas
                   </Link>{' '}
                   and join Evergreen Smoke Co., Tacoma Smokehouse, and Inland Northwest Smoke. Same tortillas that earned Washington's toughest customers' approval. Ships fresh to all Washington zip codes.

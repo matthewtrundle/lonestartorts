@@ -178,7 +178,7 @@ export default function BrisketTacosRecipe() {
               </p>
               <p>
                 <strong>Authentic H-E-B® Tortillas:</strong> The only tortillas that can handle the weight and moisture of brisket without falling apart. Their structure is critical—read more in our{' '}
-                <Link href="/blog/bbq-meets-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/blog/bbq-meets-tortillas" className="text-sunset-700 hover:underline font-medium">
                   BBQ meets tortillas guide
                 </Link>
                 .
@@ -207,7 +207,7 @@ export default function BrisketTacosRecipe() {
                   <li className="flex items-start gap-2">
                     <BulletIcon className="w-5 h-5 text-sunset-500 mt-0.5 flex-shrink-0" />
                     <span>12-18{' '}
-                      <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                         H-E-B® flour tortillas
                       </Link>{' '}(8-inch)</span>
                   </li>
@@ -324,14 +324,14 @@ export default function BrisketTacosRecipe() {
                     <h3 className="text-xl font-bold text-charcoal-950 mb-2">Warm the H-E-B® Tortillas</h3>
                     <p className="text-charcoal-700 mb-3">
                       While brisket heats, warm your{' '}
-                      <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                         H-E-B® flour tortillas
                       </Link>
                       . The best method: heat a dry skillet or comal over medium-high heat and cook each tortilla for 15-20 seconds per side until they have light char marks and are pliable.
                     </p>
                     <p className="text-charcoal-700">
                       Stack them in a clean kitchen towel to keep warm. Need more tips? Check our{' '}
-                      <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-600 hover:underline">
+                      <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-700 hover:underline">
                         tortilla reheating guide
                       </Link>
                       .
@@ -386,11 +386,11 @@ export default function BrisketTacosRecipe() {
                 <h3 className="font-bold text-charcoal-950 mb-2">Why H-E-B® Flour Tortillas Matter</h3>
                 <p className="text-charcoal-700 text-sm">
                   Brisket is heavy, juicy, and full of rendered fat. Cheap tortillas will tear and fall apart. H-E-B®{' '}
-                  <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline">
+                  <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline">
                     flour tortillas
                   </Link>
                   {' '}are specifically designed to handle this. They're sturdy but still soft and delicious. Read more in our{' '}
-                  <Link href="/blog/bbq-meets-tortillas" className="text-sunset-600 hover:underline">
+                  <Link href="/blog/bbq-meets-tortillas" className="text-sunset-700 hover:underline">
                     BBQ fusion article
                   </Link>
                   .
@@ -415,7 +415,7 @@ export default function BrisketTacosRecipe() {
                 <h3 className="font-bold text-charcoal-950 mb-2">🧈 Butter Tortillas for Extra Richness</h3>
                 <p className="text-charcoal-700 text-sm">
                   Want to take these to the next level? Use H-E-B®{' '}
-                  <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline">
+                  <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline">
                     butter flour tortillas
                   </Link>
                   . The subtle richness complements the brisket perfectly and creates an even sturdier base.
@@ -454,7 +454,7 @@ export default function BrisketTacosRecipe() {
                 <h3 className="text-xl font-bold text-charcoal-950 mb-3">🌽 Corn Tortilla Version</h3>
                 <p className="text-charcoal-700 text-sm">
                   Prefer corn? Use H-E-B®{' '}
-                  <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline">
+                  <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline">
                     corn tortillas
                   </Link>
                   {' '}for a more traditional street taco vibe. Just use less brisket per taco since corn tortillas are smaller.

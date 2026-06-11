@@ -115,7 +115,7 @@ export default function HowToFreezeTortillasPage() {
           <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Freeze Tortillas?</h2>
             <p className="text-charcoal-800 mb-4 text-lg">
-              Freezing <Link href="/shop" className="text-sunset-600 hover:underline">tortillas</Link> is perfect for:
+              Freezing <Link href="/shop" className="text-sunset-700 hover:underline">tortillas</Link> is perfect for:
             </p>
             <ul className="space-y-3 text-charcoal-800">
               <li className="flex items-start gap-3">

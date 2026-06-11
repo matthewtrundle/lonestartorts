@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PageHero } from '@/components/ui/PageHero';
+import { productHeroes } from '@/lib/hero-images';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { StepList } from '@/components/ui/StepList';
 import { CTABanner } from '@/components/ui/CTABanner';
@@ -45,6 +46,8 @@ export default function ButterTortillasPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <PageHero
+          image={productHeroes.butter.image}
+          imageAlt={productHeroes.butter.alt}
           eyebrow="Premium H-E-B®"
           title="Premium H-E-B Butter Flour Tortillas"
           sub="Rich • Buttery • Premium"

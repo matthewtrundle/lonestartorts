@@ -579,7 +579,7 @@ export default function DiscountsPage() {
                       </td>
                       <td className="px-4 py-3 text-sm text-charcoal-600">{code.email}</td>
                       <td className="px-4 py-3">
-                        <a href={`/admin/orders/${code.orderNumber}`} className="text-sm text-sunset-600 hover:underline">
+                        <a href={`/admin/orders/${code.orderNumber}`} className="text-sm text-sunset-700 hover:underline">
                           {code.orderNumber}
                         </a>
                       </td>

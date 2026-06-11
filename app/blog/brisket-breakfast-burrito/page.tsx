@@ -100,7 +100,7 @@ export default function BrisketBreakfastBurritoPage() {
                 </p>
                 <p>
                   We&apos;re not talking about those paper-thin, flavorless discs from the grocery store. We&apos;re talking about real, substantial{' '}
-                  <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                     H-E-B® flour tortillas
                   </Link>
                   {' '}that can handle serious business. Because when you&apos;re loading a tortilla with a quarter pound of brisket, scrambled eggs, melted cheese, crispy potatoes, salsa, and jalapeños, you need a foundation that won&apos;t quit on you halfway through.
@@ -119,7 +119,7 @@ export default function BrisketBreakfastBurritoPage() {
                   <h3 className="text-xl font-bold text-charcoal-950 mb-3">Structural Integrity</h3>
                   <p>
                     H-E-B®{' '}
-                    <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                       butter flour tortillas
                     </Link>
                     {' '}are engineered (yes, engineered) to handle moisture. When hot eggs, fatty brisket, and salsa hit that tortilla, lesser brands turn into mush within seconds. H-E-B® tortillas? They maintain their structure through the entire meal.
@@ -161,7 +161,7 @@ export default function BrisketBreakfastBurritoPage() {
                     <h3 className="text-xl font-bold text-charcoal-950 mb-2">1. The Foundation: H-E-B® Butter Flour Tortilla (Burrito Size)</h3>
                     <p>
                       Start with a large (10-12 inch){' '}
-                      <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                         H-E-B® butter flour tortilla
                       </Link>
                       . Warm it on a flat-top or comal for 10-15 seconds per side until pliable. This step is crucial—a cold tortilla will crack when you try to roll it.
@@ -261,7 +261,7 @@ export default function BrisketBreakfastBurritoPage() {
                   <h3 className="text-xl font-bold text-charcoal-950 mb-2">Using Store-Brand Tortillas</h3>
                   <p>
                     We&apos;ve said it before, but it bears repeating: cheap tortillas = failed burritos. Invest in authentic{' '}
-                    <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                       H-E-B® flour tortillas
                     </Link>
                     . Your burrito deserves it.
@@ -331,7 +331,7 @@ export default function BrisketBreakfastBurritoPage() {
                     <h3 className="text-xl font-bold text-sunset-600 mb-2">🌱 The Veggie Option</h3>
                     <p>
                       Okay, hear us out: black beans, roasted vegetables, eggs, cheese, and salsa verde. Not traditional, but surprisingly good on H-E-B®{' '}
-                      <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                         flour tortillas
                       </Link>
                       .

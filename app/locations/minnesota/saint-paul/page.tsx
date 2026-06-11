@@ -4,6 +4,9 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { LocationFAQ } from '@/components/location/LocationFAQ'
 import { CTABanner } from '@/components/ui/CTABanner'
+import { locationHero } from '@/lib/hero-images'
+
+const stateHero = locationHero('minnesota')
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to Saint Paul',
@@ -14,15 +17,27 @@ export const metadata: Metadata = {
 export default function SaintPaulPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
-      <header className="bg-charcoal-950 text-cream-50 py-12">
-        <div className="container mx-auto px-6 max-w-6xl">
+      <header className="relative overflow-hidden bg-charcoal-950 text-cream-50 py-12">
+        <Image
+          src={stateHero.image}
+          alt={stateHero.alt}
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        {/* Single scrim: solid left for text legibility, photo breathes right */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-950/70 to-charcoal-950/35"
+        />
+        <div className="relative container mx-auto px-6 max-w-6xl">
           <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Locations', href: '/locations' }, { label: 'Minnesota', href: '/locations/minnesota' }, { label: 'Saint Paul' }]} className="mb-6 text-cream-300" />
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Authentic Texas Tortillas Delivered to Saint Paul</h1>
           <p className="text-xl text-cream-200 max-w-3xl">Get fresh H-E-B tortillas shipped directly to Minnesota's capital.</p>
-          <Link href="/shop" className="mt-6 inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors">Shop Now</Link>
+          <Link href="/shop" className="mt-6 inline-block bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-bold transition-colors">Shop Now</Link>
         </div>
       </header>
-      <section className="max-w-6xl mx-auto px-6 py-8"><div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg"><Image src="/images/generated/hero-tortillas.webp" alt="Fresh tortillas delivered to Saint Paul" fill sizes="(max-width: 1152px) 100vw, 1152px" className="object-cover" priority /></div></section>
       <article className="container mx-auto px-6 py-12 max-w-4xl">
         <section className="prose prose-lg max-w-none mb-12">
           <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Why Saint Paul Loves Texas Tortillas</h2>

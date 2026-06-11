@@ -295,7 +295,7 @@ export default function BuyHebTortillasOnlinePage() {
 
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-sunset-500 hover:bg-sunset-600 text-white font-bold rounded-lg transition-colors text-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-sunset-600 hover:bg-sunset-700 text-white font-bold rounded-lg transition-colors text-lg"
           >
             <ShoppingBag className="w-5 h-5" />
             Shop Now

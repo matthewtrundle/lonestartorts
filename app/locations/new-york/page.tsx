@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { CTABanner } from '@/components/ui/CTABanner'
+import { locationHero } from '@/lib/hero-images'
+
+const stateHero = locationHero('new-york')
 
 export const metadata: Metadata = {
   title: 'H-E-B Tortillas to New York',
@@ -85,8 +89,21 @@ export default function NewYorkPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
       {/* Header */}
-      <header className="bg-charcoal-950 text-cream-50 py-12">
-        <div className="container mx-auto px-6 max-w-6xl">
+      <header className="relative overflow-hidden bg-charcoal-950 text-cream-50 py-12">
+        <Image
+          src={stateHero.image}
+          alt={stateHero.alt}
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        {/* Single scrim: solid left for text legibility, photo breathes right */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-charcoal-950/90 via-charcoal-950/70 to-charcoal-950/35"
+        />
+        <div className="relative container mx-auto px-6 max-w-6xl">
           <Breadcrumbs
             items={[
               { label: 'Home', href: '/' },
@@ -103,7 +120,7 @@ export default function NewYorkPage() {
           </p>
           <Link
             href="/shop"
-            className="mt-6 inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-bold transition-colors"
+            className="mt-6 inline-block bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-bold transition-colors"
           >
             Shop Now
           </Link>

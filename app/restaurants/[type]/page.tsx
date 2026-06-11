@@ -306,7 +306,7 @@ export default function RestaurantPage({ params }: RestaurantPageProps) {
               </div>
               <a
                 href="/wholesale"
-                className="shrink-0 inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-5 py-2.5 rounded-lg font-bold transition-colors text-sm"
+                className="shrink-0 inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white px-5 py-2.5 rounded-lg font-bold transition-colors text-sm"
               >
                 Request Wholesale Pricing
               </a>

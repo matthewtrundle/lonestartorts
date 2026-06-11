@@ -458,16 +458,14 @@ export default function FAQPage() {
       <FAQContent faqs={faqs} />
 
       {/* Talk to Maria CTA */}
-      <section className="py-16 px-4 bg-gradient-to-b from-cream-50 to-white">
+      <section className="py-16 px-4 bg-gradient-to-b from-cream-50 to-masa-50">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-sunset-100 text-sunset-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-            </span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
             Available 24/7 in English &amp; Spanish
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-charcoal-950 mb-4">
+          <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">Still Curious?</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 mb-4">
             Still have questions? Ask Maria.
           </h2>
           <p className="text-lg text-charcoal-600 mb-8 max-w-xl mx-auto">

@@ -167,8 +167,8 @@ export default function MissionTortillasPage() {
                 <div className="bg-masa-50 p-4 rounded-lg mt-4">
                   <p className="font-semibold text-charcoal-950">Shop Mission Tortillas:</p>
                   <ul className="mt-2 space-y-1">
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">Mission Soft Taco Flour Tortillas (10 count) - $8</Link></li>
-                    <li><Link href="/shop" className="text-sunset-600 hover:underline">Mission White Corn Tortillas (24 count) - $8</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">Mission Soft Taco Flour Tortillas (10 count) - $8</Link></li>
+                    <li><Link href="/shop" className="text-sunset-700 hover:underline">Mission White Corn Tortillas (24 count) - $8</Link></li>
                   </ul>
                 </div>
               </div>

@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { PageHero } from '@/components/ui/PageHero';
+import { categoryHeroes } from '@/lib/hero-images';
 
 export const metadata: Metadata = {
   alternates: {
@@ -229,20 +231,20 @@ export default function BlogPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
-        <header className="bg-charcoal-950 text-cream-50 py-12">
-          <div className="container mx-auto px-6">
+        <PageHero
+          image={categoryHeroes.blog.image}
+          imageAlt={categoryHeroes.blog.alt}
+          title="Tortilla Stories & Traditions"
+          sub="Dive into the rich history, science, and culture that make tortillas more than just food—they're a living tradition."
+          breadcrumbs={
             <Breadcrumbs
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Blog' },
-            ]}
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Blog' },
+              ]}
             />
-            <h1 className="text-4xl md:text-5xl font-bold mt-4">Tortilla Stories & Traditions</h1>
-            <p className="text-cream-300 mt-4 text-lg max-w-2xl">
-              Dive into the rich history, science, and culture that make tortillas more than just food—they're a living tradition.
-            </p>
-          </div>
-        </header>
+          }
+        />
 
         <main className="container mx-auto px-6 py-12 max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -286,7 +288,7 @@ export default function BlogPage() {
             <p className="text-cream-100 mb-6 max-w-2xl mx-auto">
               Want more stories from the tortilla world? Follow our journey as we share recipes, traditions, and the people who keep authentic tortilla-making alive.
             </p>
-            <Link href="/shop" className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+            <Link href="/shop" className="inline-block bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
               Shop Our Tortillas
             </Link>
           </section>

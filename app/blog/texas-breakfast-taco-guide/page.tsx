@@ -141,7 +141,7 @@ export default function BreakfastTacoGuidePage() {
                     <li>Sliced jalape&ntilde;os</li>
                     <li>Shredded cheese</li>
                     <li>Warm flour tortilla</li>
-                    <li>Top with <Link href="/shop" className="text-sunset-600 hover:underline">H-E-B That Green Sauce</Link></li>
+                    <li>Top with <Link href="/shop" className="text-sunset-700 hover:underline">H-E-B That Green Sauce</Link></li>
                   </ul>
                 </div>
 
@@ -177,7 +177,7 @@ export default function BreakfastTacoGuidePage() {
                     <li>2 scrambled eggs</li>
                     <li>Caramelized onions</li>
                     <li>Shredded cheddar</li>
-                    <li>Warm <Link href="/shop" className="text-sunset-600 hover:underline">butter tortilla</Link></li>
+                    <li>Warm <Link href="/shop" className="text-sunset-700 hover:underline">butter tortilla</Link></li>
                     <li>BBQ sauce or salsa verde</li>
                   </ul>
                 </div>
@@ -230,7 +230,7 @@ export default function BreakfastTacoGuidePage() {
                 </p>
 
                 <ul className="list-disc pl-6 space-y-2">
-                  <li><strong>Salsa Verde (Green Sauce):</strong> Tangy, slightly spicy, and the most versatile option. <Link href="/shop" className="text-sunset-600 hover:underline">H-E-B That Green Sauce</Link> is legendary.</li>
+                  <li><strong>Salsa Verde (Green Sauce):</strong> Tangy, slightly spicy, and the most versatile option. <Link href="/shop" className="text-sunset-700 hover:underline">H-E-B That Green Sauce</Link> is legendary.</li>
                   <li><strong>Salsa Roja:</strong> Classic red salsa—tomato-based with chiles. Good for heartier fillings.</li>
                   <li><strong>Pico de Gallo:</strong> Fresh, chunky, and adds crunch. Best for lighter tacos.</li>
                   <li><strong>Cholula or Valentina:</strong> When you want heat without overwhelming flavor.</li>
@@ -263,7 +263,7 @@ export default function BreakfastTacoGuidePage() {
                 </p>
 
                 <p>
-                  Use our <Link href="/tools/party-calculator" className="text-sunset-600 hover:underline">Party Calculator</Link> to get exact quantities for your event!
+                  Use our <Link href="/tools/party-calculator" className="text-sunset-700 hover:underline">Party Calculator</Link> to get exact quantities for your event!
                 </p>
               </div>
             </section>

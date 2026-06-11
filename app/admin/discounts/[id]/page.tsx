@@ -248,7 +248,7 @@ export default function EditDiscountPage() {
                           {usage.orderNumber ? (
                             <a
                               href={`/admin/orders/${usage.orderNumber}`}
-                              className="text-sunset-600 hover:underline"
+                              className="text-sunset-700 hover:underline"
                             >
                               {usage.orderNumber}
                             </a>

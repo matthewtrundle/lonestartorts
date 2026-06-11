@@ -153,7 +153,7 @@ export default function BrisketQuesadillasRecipe() {
               </p>
               <p>
                 This recipe transforms leftover brisket into something completely different but equally delicious. The crispy{' '}
-                <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                   H-E-B® tortilla
                 </Link>
                 {' '}exterior, the gooey melted cheese, the chunks of smoky brisket—it's comfort food meets BBQ perfection.
@@ -176,10 +176,10 @@ export default function BrisketQuesadillasRecipe() {
                 <li className="flex items-start gap-3">
                   <BulletIcon className="w-5 h-5 text-sunset-500 mt-0.5 flex-shrink-0" />
                   <span><strong>8{' '}
-                    <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                       H-E-B® flour tortillas
                     </Link></strong> (8-10 inch) - Use{' '}
-                    <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                    <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                       butter tortillas
                     </Link>
                     {' '}for extra richness</span>

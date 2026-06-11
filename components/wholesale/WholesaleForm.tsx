@@ -329,7 +329,7 @@ export function WholesaleForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-4 rounded-lg font-bold transition-colors disabled:bg-charcoal-400 disabled:cursor-not-allowed"
+          className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-4 rounded-lg font-bold transition-colors disabled:bg-charcoal-400 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>

@@ -235,7 +235,7 @@ export default function GlutenFreeTortillasPage() {
           <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-6">Making Homemade Gluten-Free Tortillas</h2>
             <p className="text-charcoal-800 mb-4">
-              Want complete control over ingredients? Make your own! See our <Link href="/guides/how-to-make-tortillas" className="text-sunset-600 hover:underline">tortilla-making guide</Link> for complete instructions.
+              Want complete control over ingredients? Make your own! See our <Link href="/guides/how-to-make-tortillas" className="text-sunset-700 hover:underline">tortilla-making guide</Link> for complete instructions.
             </p>
 
             <div className="bg-charcoal-50 p-6 rounded">
@@ -263,7 +263,7 @@ export default function GlutenFreeTortillasPage() {
 
               <div className="bg-charcoal-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-2">Are gluten-free tortillas less nutritious?</h3>
-                <p className="text-charcoal-800">Not necessarily! Corn tortillas are naturally nutritious with fiber and minerals. Gluten-free flour alternatives vary—some are higher in protein (almond flour) or fiber (coconut flour). Check our <Link href="/guides/tortilla-nutrition" className="text-sunset-600 hover:underline">nutrition guide</Link> for details.</p>
+                <p className="text-charcoal-800">Not necessarily! Corn tortillas are naturally nutritious with fiber and minerals. Gluten-free flour alternatives vary—some are higher in protein (almond flour) or fiber (coconut flour). Check our <Link href="/guides/tortilla-nutrition" className="text-sunset-700 hover:underline">nutrition guide</Link> for details.</p>
               </div>
             </div>
           </section>

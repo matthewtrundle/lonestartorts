@@ -204,9 +204,9 @@ export default function BBQTortillasGuidePage() {
                 <div className="mb-4">
                   <div className="font-bold text-charcoal-900 mb-2">Best Applications:</div>
                   <ul className="list-disc list-inside space-y-1 text-charcoal-800 ml-4">
-                    <li><Link href="/recipes/brisket-tacos" className="text-sunset-600 hover:underline">Brisket tacos</Link> with pickled onions and cilantro</li>
-                    <li><Link href="/recipes/brisket-breakfast-burrito" className="text-sunset-600 hover:underline">Breakfast burritos</Link> with eggs and potatoes</li>
-                    <li><Link href="/recipes/brisket-quesadillas" className="text-sunset-600 hover:underline">Brisket quesadillas</Link> with melted cheese</li>
+                    <li><Link href="/recipes/brisket-tacos" className="text-sunset-700 hover:underline">Brisket tacos</Link> with pickled onions and cilantro</li>
+                    <li><Link href="/recipes/brisket-breakfast-burrito" className="text-sunset-700 hover:underline">Breakfast burritos</Link> with eggs and potatoes</li>
+                    <li><Link href="/recipes/brisket-quesadillas" className="text-sunset-700 hover:underline">Brisket quesadillas</Link> with melted cheese</li>
                   </ul>
                 </div>
 
@@ -657,7 +657,7 @@ export default function BBQTortillasGuidePage() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/shop"
-                className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+                className="bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
               >
                 Shop H-E-B® Tortillas
               </Link>

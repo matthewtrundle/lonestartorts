@@ -162,7 +162,7 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
           ) : (
             <button
               onClick={onAddToCart}
-              className="w-full flex items-center justify-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-bold py-3.5 px-6 rounded-lg text-sm transition-colors active:scale-[0.98]"
+              className="w-full flex items-center justify-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white font-bold py-3.5 px-6 rounded-lg text-sm transition-colors active:scale-[0.98]"
             >
               <ShoppingBag className="w-5 h-5" />
               Add {totalPacks} Pack{totalPacks !== 1 ? 's' : ''} to Cart
@@ -211,7 +211,7 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
             ) : (
               <button
                 onClick={onAddToCart}
-                className="flex-1 max-w-[200px] flex items-center justify-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white font-bold py-3 px-4 rounded-lg text-sm transition-colors active:scale-[0.98]"
+                className="flex-1 max-w-[200px] flex items-center justify-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white font-bold py-3 px-4 rounded-lg text-sm transition-colors active:scale-[0.98]"
               >
                 <ShoppingBag className="w-4 h-4" />
                 Add to Cart

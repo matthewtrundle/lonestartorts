@@ -97,7 +97,7 @@ export default function BBQSuccessStoriesPage() {
                 </p>
                 <p>
                   We&apos;ve talked to dozens of BBQ restaurant owners, food truck operators, and catering businesses nationwide. They all have one thing in common: switching to authentic{' '}
-                  <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                     H-E-B® tortillas
                   </Link>
                   {' '}was a turning point for their business.
@@ -146,7 +146,7 @@ export default function BBQSuccessStoriesPage() {
                 </p>
                 <p>
                   After switching to H-E-B®{' '}
-                  <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                     butter flour tortillas
                   </Link>
                   {' '}for their taco menu, the transformation was immediate.
@@ -218,11 +218,11 @@ export default function BBQSuccessStoriesPage() {
                 </p>
                 <p>
                   His biggest challenge? Finding authentic{' '}
-                  <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline font-medium">
                     H-E-B® corn tortillas
                   </Link>
                   {' '}and{' '}
-                  <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                     flour tortillas
                   </Link>
                   {' '}in bulk quantities, delivered reliably. &quot;That&apos;s when I found Lonestar Tortillas. They delivered authentic H-E-B® tortillas right to my truck, consistently, every week.&quot;
@@ -294,7 +294,7 @@ export default function BBQSuccessStoriesPage() {
                 </p>
                 <p>
                   She discovered H-E-B®{' '}
-                  <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                     butter flour tortillas
                   </Link>
                   {' '}not only tasted better, but their moisture content and structural integrity made them perfect for catering.
@@ -436,7 +436,7 @@ export default function BBQSuccessStoriesPage() {
                     <strong>Start with a Test Run</strong>
                     <p className="mt-1">
                       Order{' '}
-                      <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                         sample quantities
                       </Link>
                       {' '}of both corn and flour tortillas. Test them with your team and select customers.
@@ -461,11 +461,11 @@ export default function BBQSuccessStoriesPage() {
                     <strong>Train Your Team</strong>
                     <p className="mt-1">
                       H-E-B® tortillas handle differently than cheap alternatives. Train your team on proper warming, storage, and handling. Check out our{' '}
-                      <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-700 hover:underline font-medium">
                         reheating guide
                       </Link>
                       {' '}and{' '}
-                      <Link href="/guides/how-to-store-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/guides/how-to-store-tortillas" className="text-sunset-700 hover:underline font-medium">
                         storage guide
                       </Link>
                       .
@@ -503,7 +503,7 @@ export default function BBQSuccessStoriesPage() {
                   <h3 className="text-lg font-bold text-charcoal-950 mb-2">Q: How long do H-E-B® tortillas stay fresh?</h3>
                   <p>
                     A: When stored properly (see our{' '}
-                    <Link href="/guides/how-to-store-tortillas" className="text-sunset-600 hover:underline">
+                    <Link href="/guides/how-to-store-tortillas" className="text-sunset-700 hover:underline">
                       storage guide
                     </Link>
                     ), our tortillas stay fresh for 7-10 days refrigerated, or up to 3 months frozen. Most restaurants order weekly.
@@ -514,7 +514,7 @@ export default function BBQSuccessStoriesPage() {
                   <h3 className="text-lg font-bold text-charcoal-950 mb-2">Q: Can I get bulk discounts?</h3>
                   <p>
                     A: Yes! We offer volume pricing for restaurants and catering businesses. Contact us through our{' '}
-                    <Link href="/shop" className="text-sunset-600 hover:underline">
+                    <Link href="/shop" className="text-sunset-700 hover:underline">
                       shop page
                     </Link>
                     {' '}to discuss bulk orders.
@@ -532,7 +532,7 @@ export default function BBQSuccessStoriesPage() {
                   <h3 className="text-lg font-bold text-charcoal-950 mb-2">Q: Do you deliver nationwide?</h3>
                   <p>
                     A: Yes! We ship authentic H-E-B® tortillas to restaurants anywhere in the continental US. Check our{' '}
-                    <Link href="/locations" className="text-sunset-600 hover:underline">
+                    <Link href="/locations" className="text-sunset-700 hover:underline">
                       locations page
                     </Link>
                     {' '}for delivery times to your area.

@@ -62,7 +62,7 @@ export default function ShippingPageContent() {
           <div>
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-sunset-500 hover:bg-sunset-600 text-white font-bold rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-sunset-600 hover:bg-sunset-700 text-white font-bold rounded-lg transition-colors"
             >
               {t('shipping.hero.orderNow')}
             </Link>

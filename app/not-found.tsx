@@ -33,7 +33,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/"
-              className="inline-flex items-center justify-center px-6 py-3 bg-sunset-500 hover:bg-sunset-600 text-white font-semibold rounded-lg transition-colors w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-6 py-3 bg-sunset-600 hover:bg-sunset-700 text-white font-semibold rounded-lg transition-colors w-full sm:w-auto"
             >
               Back to Home
             </Link>

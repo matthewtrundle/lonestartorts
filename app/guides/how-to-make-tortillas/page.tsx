@@ -120,7 +120,7 @@ export default function HowToMakeTortillasPage() {
           <section className="prose prose-lg max-w-none mb-12">
             <h2 className="text-3xl font-bold text-charcoal-950 mb-4">Why Make Tortillas at Home?</h2>
             <p className="text-charcoal-800 leading-relaxed mb-4">
-              There's something magical about fresh, warm tortillas straight from your own kitchen. While high-quality <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline">store-bought tortillas</Link> are convenient and delicious, making tortillas from scratch is a rewarding skill that connects you to centuries of tradition. Fresh homemade tortillas have unbeatable flavor, perfect texture, and that incomparable aroma that fills your kitchen.
+              There's something magical about fresh, warm tortillas straight from your own kitchen. While high-quality <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline">store-bought tortillas</Link> are convenient and delicious, making tortillas from scratch is a rewarding skill that connects you to centuries of tradition. Fresh homemade tortillas have unbeatable flavor, perfect texture, and that incomparable aroma that fills your kitchen.
             </p>
             <p className="text-charcoal-800 leading-relaxed">
               Whether you're making flour tortillas for breakfast tacos or corn tortillas for authentic street tacos, the process is simpler than you might think. This guide walks you through both methods step-by-step.
@@ -241,7 +241,7 @@ export default function HowToMakeTortillasPage() {
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-2">How do I store homemade tortillas?</h3>
                 <p className="text-charcoal-800">
-                  Let tortillas cool completely, then store in an airtight container or ziplock bag. They'll keep at room temperature for 2-3 days, refrigerated for up to a week, or frozen for several months. Always reheat before serving—see our <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-600 hover:underline">reheating guide</Link> for best methods.
+                  Let tortillas cool completely, then store in an airtight container or ziplock bag. They'll keep at room temperature for 2-3 days, refrigerated for up to a week, or frozen for several months. Always reheat before serving—see our <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-700 hover:underline">reheating guide</Link> for best methods.
                 </p>
               </div>
             </div>

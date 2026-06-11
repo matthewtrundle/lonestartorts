@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PageHero } from '@/components/ui/PageHero';
+import { productHeroes } from '@/lib/hero-images';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { StepList } from '@/components/ui/StepList';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
@@ -129,6 +130,8 @@ export default function FlourTortillasProductPage() {
         {/* Hero Section */}
         <PageHero
           size="lg"
+          image={productHeroes.flour.image}
+          imageAlt={productHeroes.flour.alt}
           eyebrow="Soft & Pillowy • Handcrafted • Premium"
           title="Premium Flour Tortillas"
           sub="Handcrafted flour tortillas made from scratch daily. Incredibly soft, wonderfully pliable, and perfect for any meal."

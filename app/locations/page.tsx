@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { PageHero } from '@/components/ui/PageHero';
+import { categoryHeroes } from '@/lib/hero-images';
 
 export const metadata: Metadata = {
   alternates: {
@@ -379,24 +381,21 @@ export default function LocationsPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50">
         {/* Header */}
-        <header className="bg-charcoal-950 text-cream-50 py-12 md:py-16">
-          <div className="container mx-auto px-6 max-w-6xl">
+        <PageHero
+          image={categoryHeroes.locations.image}
+          imageAlt={categoryHeroes.locations.alt}
+          className="md:py-16"
+          title="H-E-B® Tortillas Delivered Nationwide"
+          sub="Authentic Texas tortillas shipped to your door, anywhere in the United States. Fast, reliable delivery with free shipping on orders $80+."
+          breadcrumbs={
             <Breadcrumbs
               items={[
                 { label: 'Home', href: '/' },
                 { label: 'Locations' },
               ]}
-              className="mb-6 text-cream-300"
             />
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 font-display">
- H-E-B® Tortillas Delivered Nationwide
-</h1>
-            <p className="text-xl text-cream-100 max-w-3xl">
-              Authentic Texas tortillas shipped to your door, anywhere in the United States.
-              Fast, reliable delivery with free shipping on orders $80+.
-            </p>
-          </div>
-        </header>
+          }
+        />
 
         {/* Main Content */}
         <main className="container mx-auto px-6 py-12 md:py-16 max-w-6xl">
@@ -408,15 +407,15 @@ export default function LocationsPage() {
 </h2>
               <p className="text-lg text-charcoal-800 leading-relaxed">
                 Missing authentic H-E-B® tortillas? We ship premium{' '}
-                <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline font-medium">
                   corn tortillas
                 </Link>
                 ,{' '}
-                <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                   flour tortillas
                 </Link>
                 , and{' '}
-                <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                   butter tortillas
                 </Link>
                 {' '}to all 50 states. Our shelf-stable tortillas arrive fresh and ready to enjoy.
@@ -580,7 +579,7 @@ export default function LocationsPage() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/shop"
-                className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+                className="bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
               >
                 Shop All Tortillas
               </Link>

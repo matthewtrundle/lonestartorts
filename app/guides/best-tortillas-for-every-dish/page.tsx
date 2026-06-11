@@ -125,7 +125,7 @@ export default function BestTortillasPage() {
                     <p className="text-sm text-charcoal-800">Tex-Mex style, breakfast tacos, fajita tacos. Better for heavier, saucier fillings that might soak through corn.</p>
                   </div>
                 </div>
-                <p className="text-xs text-charcoal-600 mt-3 italic">💡 Pro tip: For street tacos, use two small <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline">corn tortillas</Link> per taco like in Mexico!</p>
+                <p className="text-xs text-charcoal-600 mt-3 italic">💡 Pro tip: For street tacos, use two small <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline">corn tortillas</Link> per taco like in Mexico!</p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-md">
@@ -138,7 +138,7 @@ export default function BestTortillasPage() {
                   <p className="text-sm text-charcoal-800 mb-2">
                     Flour tortillas are the ONLY choice for burritos. Their pliability and strength make them perfect for wrapping without tearing. Corn tortillas will crack and can't hold the generous fillings.
                   </p>
-                  <p className="text-xs text-charcoal-600"><strong>Size:</strong> 10-12 inch burrito-size <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline">flour tortillas</Link></p>
+                  <p className="text-xs text-charcoal-600"><strong>Size:</strong> 10-12 inch burrito-size <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline">flour tortillas</Link></p>
                 </div>
               </div>
 
@@ -180,7 +180,7 @@ export default function BestTortillasPage() {
                   <p className="text-sm text-charcoal-800 mb-2">
                     Fajitas are Tex-Mex, and flour tortillas are the traditional choice. They're perfect for wrapping the sizzling peppers, onions, and meat without tearing. The soft texture complements the crunchy vegetables.
                   </p>
-                  <p className="text-xs text-charcoal-600"><strong>Size:</strong> 8-inch flour tortillas. See our <Link href="/recipes/chicken-fajitas" className="text-sunset-600 hover:underline">fajitas recipe</Link>!</p>
+                  <p className="text-xs text-charcoal-600"><strong>Size:</strong> 8-inch flour tortillas. See our <Link href="/recipes/chicken-fajitas" className="text-sunset-700 hover:underline">fajitas recipe</Link>!</p>
                 </div>
               </div>
 
@@ -199,7 +199,7 @@ export default function BestTortillasPage() {
                     <p className="text-sm text-charcoal-800">Authentic Mexican breakfast uses corn tortillas. Works great with beans, eggs, and salsa.</p>
                   </div>
                 </div>
-                <p className="text-xs text-charcoal-600 mt-3">Both work—it's personal preference! Try our <Link href="/recipes/breakfast-tacos" className="text-sunset-600 hover:underline">breakfast taco recipe</Link>.</p>
+                <p className="text-xs text-charcoal-600 mt-3">Both work—it's personal preference! Try our <Link href="/recipes/breakfast-tacos" className="text-sunset-700 hover:underline">breakfast taco recipe</Link>.</p>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-md">
@@ -282,7 +282,7 @@ export default function BestTortillasPage() {
                 <span className="text-2xl flex-shrink-0">🌾</span>
                 <div>
                   <p className="font-bold text-charcoal-950">Gluten-free → Corn Tortillas</p>
-                  <p className="text-sm text-charcoal-800">100% corn tortillas are naturally gluten-free. See our <Link href="/guides/gluten-free-tortillas" className="text-sunset-600 hover:underline">gluten-free guide</Link>.</p>
+                  <p className="text-sm text-charcoal-800">100% corn tortillas are naturally gluten-free. See our <Link href="/guides/gluten-free-tortillas" className="text-sunset-700 hover:underline">gluten-free guide</Link>.</p>
                 </div>
               </div>
             </div>

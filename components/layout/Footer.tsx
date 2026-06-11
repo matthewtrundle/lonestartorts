@@ -2,7 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLanguage } from '@/lib/language-context';
+import { BrandRule } from '@/components/ui/BrandRule';
 
 export function Footer() {
   const { t } = useLanguage();
@@ -10,21 +12,38 @@ export function Footer() {
 
   return (
     <footer className="bg-charcoal-950 text-white">
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 gap-y-10">
-          {/* Brand Column */}
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-xl font-bold mb-4">Lonestar Tortillas</h3>
-            <p className="text-charcoal-300 text-sm max-w-md">
-              Bringing authentic H-E-B bakery tortillas to Texas expats nationwide.
-              Same-day shipping, shelf-stable for weeks.
-            </p>
-          </div>
+      {/* Photographic brand strip */}
+      <div className="relative h-20 md:h-28 overflow-hidden">
+        <Image
+          src="/images/brand/strip-footer.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-charcoal-950/40" />
+      </div>
 
+      {/* Main Footer Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        {/* Wordmark block */}
+        <div className="mb-12">
+          <p className="font-display text-4xl md:text-5xl text-cream-50">Lonestar Tortillas</p>
+          <p className="mt-3 text-cream-300 text-sm uppercase tracking-widest">Premium Texas Tortillas</p>
+          <p className="mt-3 text-charcoal-300 text-sm max-w-md">
+            Bringing authentic H-E-B bakery tortillas to Texas expats nationwide.
+            Same-day shipping, shelf-stable for weeks.
+          </p>
+          <div className="mt-6">
+            <BrandRule align="left" />
+          </div>
+        </div>
+
+        {/* Link columns */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 gap-y-10">
           {/* Shop */}
           <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-white border-b border-charcoal-800 pb-2">Shop</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-4 text-cream-400">Shop</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/shop" className="text-charcoal-300 hover:text-white transition-colors">
@@ -56,7 +75,7 @@ export function Footer() {
 
           {/* Resources */}
           <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-white border-b border-charcoal-800 pb-2">Resources</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-4 text-cream-400">Resources</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/guides" className="text-charcoal-300 hover:text-white transition-colors">
@@ -83,7 +102,7 @@ export function Footer() {
 
           {/* Programs */}
           <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-white border-b border-charcoal-800 pb-2">Programs</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-4 text-cream-400">Programs</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/hook-em-tortillas" className="text-charcoal-300 hover:text-white transition-colors">
@@ -110,7 +129,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-white border-b border-charcoal-800 pb-2">Support</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-4 text-cream-400">Support</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a

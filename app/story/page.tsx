@@ -19,50 +19,21 @@ export default function StoryPage() {
   return (
     <ScrollAnimations>
         <div className="relative bg-cream-50 text-charcoal-950 overflow-hidden">
-          {/* Hero Section with Animated Background */}
+          {/* Hero Section — photographic backdrop, single scrim */}
           <section className="min-h-screen relative flex items-center justify-center overflow-hidden pt-32">
-            {/* Multi-layer Animated Background System */}
-            <div className="absolute inset-0 hero-background-system">
-              {/* Layer 1: Deep background with texture */}
-              <div className="absolute inset-0 parallax-layer" data-speed="0.1">
-                <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-100/80 to-masa-50" />
-              </div>
-
-              {/* Layer 2: Atmospheric gradients */}
-              <div className="absolute inset-0 parallax-layer" data-speed="0.2">
-                <div className="absolute top-[-50%] left-[-25%] w-[150%] h-[150%] bg-gradient-radial from-sunset-200/30 via-sunset-100/10 to-transparent blur-[100px] animate-float-slow" />
-                <div className="absolute bottom-[-50%] right-[-25%] w-[150%] h-[150%] bg-gradient-radial from-masa-200/20 via-masa-100/10 to-transparent blur-[120px] animate-float-slow-reverse" />
-              </div>
-
-              {/* Layer 3: Background Video */}
-              <div className="absolute inset-0 parallax-layer" data-speed="0.3" data-rotation="2">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover opacity-30"
-                >
-                  <source src="/hero-background_compressed.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream-50/40 to-cream-50/95" />
-                <div className="absolute inset-0 bg-gradient-to-t from-cream-50/50 via-transparent to-transparent" />
-                <div className="absolute inset-0 backdrop-blur-[0.5px]" />
-              </div>
-            </div>
-
-            {/* Floating Decorative Elements */}
-            <div className="absolute inset-0 pointer-events-none hidden md:block">              <div className="absolute top-[15%] left-[10%] float-element opacity-20">
-                <svg width="80" height="80" viewBox="0 0 100 100" className="text-sunset-300 rotate-slow">
-                  <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                </svg>
-              </div>
-              <div className="absolute bottom-[20%] right-[10%] float-element opacity-15" style={{ animationDelay: '2s' }}>
-                <svg width="60" height="60" viewBox="0 0 80 80" className="text-masa-400">
-                  <circle cx="40" cy="40" r="38" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="5 10" />
-                </svg>
-              </div>
-            </div>
+            <Image
+              src="/images/brand/cat-story.webp"
+              alt="Heritage Texas kitchen with a comal over flame"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
+            {/* Single scrim: cream wash keeps the dark editorial type legible */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-cream-50/80 via-cream-50/70 to-cream-50"
+            />
 
             {/* Hero Content */}
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -80,12 +51,15 @@ export default function StoryPage() {
         {/* Texas Food Culture Section */}
         <section className="py-16 md:py-20 bg-gradient-to-b from-cream-50 to-cream-100">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-center mb-6 reveal-text">
-              A Texas Tradition
-            </h2>
-            <p className="text-xl text-center text-charcoal-700 max-w-3xl mx-auto mb-12 md:mb-16">
-              Tortillas are more than food in Texas — they&apos;re a way of life
-            </p>
+            <div className="text-center mx-auto max-w-2xl mb-12 md:mb-16">
+              <p className="text-sm font-bold uppercase tracking-widest text-sunset-700 mb-2">Roots</p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-balance text-charcoal-950 reveal-text">
+                A Texas Tradition
+              </h2>
+              <p className="mt-3 text-lg text-charcoal-600">
+                Tortillas are more than food in Texas — they&apos;re a way of life
+              </p>
+            </div>
 
             <div className="max-w-4xl mx-auto">
               {[
@@ -165,7 +139,7 @@ export default function StoryPage() {
             <div className="text-center mt-12 md:mt-16">
               <Link
                 href="/shop"
-                className="inline-block bg-sunset-500 hover:bg-sunset-600 text-cream-50 px-8 sm:px-12 py-4 text-base sm:text-lg font-bold tracking-wider uppercase transition-colors shadow-lg hover:shadow-xl"
+                className="inline-block bg-sunset-600 hover:bg-sunset-700 text-cream-50 px-8 sm:px-12 py-4 text-base sm:text-lg font-bold tracking-wider uppercase transition-colors shadow-medium hover:shadow-large"
               >
                 Taste the Tradition
               </Link>
@@ -247,6 +221,18 @@ export default function StoryPage() {
           </div>
         </section>
 
+        {/* Photographic interlude — mid-page break */}
+        <section aria-hidden="true" className="relative h-48 md:h-64 overflow-hidden">
+          <Image
+            src="/images/brand/band-story.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-charcoal-950/30" />
+        </section>
+
         {/* Founder Section */}
         <section className="py-16 md:py-20 bg-charcoal-950 text-cream-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -270,7 +256,7 @@ export default function StoryPage() {
                     I didn't start sooner. We're not affiliated with H-E-B® - we're just superfans with a shipping account."
                   </p>
                 </div>
-                <div className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden order-1 md:order-2">
+                <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-large order-1 md:order-2">
                   <Image
                     src="/images/product-hero.webp"
                     alt="Tortilla Making"

@@ -559,7 +559,7 @@ export default function PitmastersRefuseStoreTortillasPage() {
             </p>
             <Link
               href="/shop"
-              className="inline-block bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+              className="inline-block bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
             >
               Shop Professional Tortillas
             </Link>

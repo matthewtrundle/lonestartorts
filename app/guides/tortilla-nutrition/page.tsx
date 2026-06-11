@@ -203,7 +203,7 @@ export default function TortillaNutritionPage() {
               </div>
               <div className="bg-charcoal-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For Gluten-Free Diets</h3>
-                <p className="text-charcoal-800">Corn tortillas are naturally gluten-free and safe for celiac disease and gluten sensitivity. Always check labels to ensure no wheat flour is added. See our <Link href="/guides/gluten-free-tortillas" className="text-sunset-600 hover:underline">gluten-free guide</Link> for more.</p>
+                <p className="text-charcoal-800">Corn tortillas are naturally gluten-free and safe for celiac disease and gluten sensitivity. Always check labels to ensure no wheat flour is added. See our <Link href="/guides/gluten-free-tortillas" className="text-sunset-700 hover:underline">gluten-free guide</Link> for more.</p>
               </div>
               <div className="bg-charcoal-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-charcoal-950 mb-3">For Diabetes Management</h3>

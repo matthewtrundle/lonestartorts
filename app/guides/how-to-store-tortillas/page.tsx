@@ -149,13 +149,13 @@ export default function HowToStoreTortillasPage() {
           <nav className="bg-masa-50 p-6 rounded-lg mb-12 border border-masa-200">
             <h2 className="text-xl font-bold text-charcoal-950 mb-4">In This Guide:</h2>
             <ul className="space-y-2 text-charcoal-700">
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#unopened" className="text-sunset-600 hover:underline">Storing Unopened Tortillas</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#opened" className="text-sunset-600 hover:underline">Storing Opened Tortillas</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#refrigerator" className="text-sunset-600 hover:underline">Refrigeration Method</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#freezer" className="text-sunset-600 hover:underline">Freezing Tortillas</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#shelf-life" className="text-sunset-600 hover:underline">Shelf Life Guide</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#signs-bad" className="text-sunset-600 hover:underline">How to Tell If Tortillas Are Bad</a></li>
-              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#tips" className="text-sunset-600 hover:underline">Pro Storage Tips</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#unopened" className="text-sunset-700 hover:underline">Storing Unopened Tortillas</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#opened" className="text-sunset-700 hover:underline">Storing Opened Tortillas</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#refrigerator" className="text-sunset-700 hover:underline">Refrigeration Method</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#freezer" className="text-sunset-700 hover:underline">Freezing Tortillas</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#shelf-life" className="text-sunset-700 hover:underline">Shelf Life Guide</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#signs-bad" className="text-sunset-700 hover:underline">How to Tell If Tortillas Are Bad</a></li>
+              <li><BulletIcon className="inline-block text-sunset-600 mx-2" size={6} /> <a href="#tips" className="text-sunset-700 hover:underline">Pro Storage Tips</a></li>
             </ul>
           </nav>
 

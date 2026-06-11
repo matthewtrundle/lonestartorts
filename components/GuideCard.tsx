@@ -32,7 +32,7 @@ export function GuideCard({
               </div>
             )}
             {category && (
-              <span className="text-xs font-semibold uppercase tracking-wider text-sunset-600 bg-sunset-50 px-3 py-1 rounded-full">
+              <span className="text-xs font-semibold uppercase tracking-wider text-sunset-700 bg-sunset-50 px-3 py-1 rounded-full">
                 {category}
               </span>
             )}

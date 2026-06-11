@@ -36,7 +36,7 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <main className="min-h-screen bg-cream-50 pt-24">
+      <main className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50 pt-24">
         <ContactPageContent />
       </main>
     </>

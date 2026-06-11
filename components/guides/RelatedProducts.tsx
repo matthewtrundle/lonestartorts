@@ -65,7 +65,7 @@ export function RelatedProducts({
       <div className="text-center mt-6">
         <Link
           href={ctaLink}
-          className="inline-flex items-center gap-2 bg-sunset-500 hover:bg-sunset-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          className="inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
         >
           <ShoppingBag className="w-5 h-5" />
           {ctaText}

@@ -172,11 +172,11 @@ export default function BrisketBreakfastBurritoRecipe() {
               </p>
               <p>
                 H-E-B®{' '}
-                <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                   butter flour tortillas
                 </Link>
                 {' '}are engineered for this exact scenario. Their structure, moisture content, and pliability make them the ONLY tortillas capable of handling serious breakfast burrito duty. Read the full explanation in our{' '}
-                <Link href="/blog/brisket-breakfast-burrito" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/blog/brisket-breakfast-burrito" className="text-sunset-700 hover:underline font-medium">
                   brisket breakfast burrito article
                 </Link>
                 .
@@ -202,7 +202,7 @@ export default function BrisketBreakfastBurritoRecipe() {
                   <li className="flex items-start gap-2">
                     <BulletIcon className="w-5 h-5 text-sunset-500 mt-0.5 flex-shrink-0" />
                     <span>4 large{' '}
-                      <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                         H-E-B® butter flour tortillas
                       </Link>{' '}(burrito size, 10-12 inch)</span>
                   </li>
@@ -325,14 +325,14 @@ export default function BrisketBreakfastBurritoRecipe() {
                     <h3 className="text-xl font-bold text-charcoal-950 mb-2">Warm the Tortillas (Don't Skip!)</h3>
                     <p className="text-charcoal-700 mb-3">
                       This step is NON-NEGOTIABLE. Cold tortillas will crack when you try to roll them. Warm each{' '}
-                      <Link href="/products/butter-tortillas" className="text-sunset-600 hover:underline font-medium">
+                      <Link href="/products/butter-tortillas" className="text-sunset-700 hover:underline font-medium">
                         H-E-B® tortilla
                       </Link>
                       {' '}on a dry skillet or comal over medium-high heat for 15-20 seconds per side until pliable and slightly puffy.
                     </p>
                     <p className="text-charcoal-700">
                       Stack them in a clean kitchen towel to keep warm. This makes rolling SO much easier. See our{' '}
-                      <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-600 hover:underline">
+                      <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-700 hover:underline">
                         tortilla warming guide
                       </Link>
                       {' '}for more techniques.

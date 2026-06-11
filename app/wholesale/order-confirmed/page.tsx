@@ -66,7 +66,7 @@ export default function WholesaleOrderConfirmedPage() {
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
             href="/account?tab=wholesale"
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-sunset-500 hover:bg-sunset-600 text-white font-bold rounded-lg transition-colors text-sm"
+            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-sunset-600 hover:bg-sunset-700 text-white font-bold rounded-lg transition-colors text-sm"
           >
             View Account
             <ArrowRight className="w-4 h-4" />

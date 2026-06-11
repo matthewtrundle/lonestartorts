@@ -305,6 +305,23 @@ export default function SubscribePage() {
       </nav>
 
       <div className="max-w-4xl mx-auto px-4 pb-16">
+        {/* Photographic confidence band */}
+        <div className="relative h-32 overflow-hidden rounded-2xl mb-8">
+          <Image
+            src="/images/brand/band-subscribe.webp"
+            alt=""
+            fill
+            sizes="(max-width: 896px) 100vw, 896px"
+            className="object-cover"
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-charcoal-950/50" />
+          <div className="absolute inset-0 flex items-center px-6 md:px-10">
+            <p className="font-display text-xl md:text-2xl font-bold text-cream-50 text-balance">
+              Fresh Texas tortillas on your doorstep, on your schedule.
+            </p>
+          </div>
+        </div>
+
         {error && (
           <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
             {error}
@@ -411,7 +428,7 @@ export default function SubscribePage() {
 
             {/* Cart Summary & Continue */}
             {selectedItems.length > 0 && (
-              <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-charcoal-200 shadow-xl p-4 z-50">
+              <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-charcoal-200 shadow-large p-4 z-50">
                 <div className="max-w-4xl mx-auto flex items-center justify-between">
                   <div>
                     <p className="text-sm text-charcoal-600">{selectedItems.reduce((sum, i) => sum + i.quantity, 0)} items</p>

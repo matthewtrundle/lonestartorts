@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { RecipeCard } from '@/components/RecipeCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { PageHero } from '@/components/ui/PageHero';
+import { categoryHeroes } from '@/lib/hero-images';
 
 export const metadata: Metadata = {
   alternates: {
@@ -186,24 +188,21 @@ export default function RecipesPage() {
 
       <div className="min-h-screen bg-gradient-to-b from-cream-50 via-cream-100 to-masa-50">
         {/* Header */}
-        <header className="bg-charcoal-950 text-cream-50 py-12 md:py-16">
-          <div className="container mx-auto px-6 max-w-6xl">
+        <PageHero
+          image={categoryHeroes.recipes.image}
+          imageAlt={categoryHeroes.recipes.alt}
+          className="md:py-16"
+          title="Authentic Texas Tortilla Recipes & Cooking Guides"
+          sub="Discover authentic Texas recipes that showcase the versatility of quality tortillas. From quick breakfast tacos to elaborate dinner spreads, we've got you covered."
+          breadcrumbs={
             <Breadcrumbs
               items={[
                 { label: 'Home', href: '/' },
                 { label: 'Recipes' },
               ]}
-              className="mb-6 text-cream-300"
             />
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 font-display">
- Authentic Texas Tortilla Recipes & Cooking Guides
-</h1>
-            <p className="text-xl text-cream-100 max-w-3xl">
-              Discover authentic Texas recipes that showcase the versatility of quality tortillas.
-              From quick breakfast tacos to elaborate dinner spreads, we've got you covered.
-            </p>
-          </div>
-        </header>
+          }
+        />
 
         {/* Main Content */}
         <main className="container mx-auto px-6 py-12 md:py-16 max-w-6xl">
@@ -215,11 +214,11 @@ export default function RecipesPage() {
 </h2>
               <p className="text-lg text-charcoal-800 leading-relaxed">
                 These recipes celebrate the authentic taste of Texas using quality{' '}
-                <Link href="/products/flour-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/products/flour-tortillas" className="text-sunset-700 hover:underline font-medium">
                   H-E-B® flour tortillas
                 </Link>{' '}
                 and{' '}
-                <Link href="/products/corn-tortillas" className="text-sunset-600 hover:underline font-medium">
+                <Link href="/products/corn-tortillas" className="text-sunset-700 hover:underline font-medium">
                   corn tortillas
                 </Link>
                 . Whether you're a beginner or experienced cook, you'll find recipes that are easy to follow and delicious to eat.
@@ -304,7 +303,7 @@ export default function RecipesPage() {
                 <div>
                   <h3 className="font-bold mb-1">Warm Your Tortillas</h3>
                   <p className="text-sm">Always warm tortillas before using for better texture and flavor. See our{' '}
-                    <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-600 hover:underline">
+                    <Link href="/guides/how-to-reheat-tortillas" className="text-sunset-700 hover:underline">
                       reheating guide
                     </Link>.
                   </p>
@@ -317,7 +316,7 @@ export default function RecipesPage() {
                 <div>
                   <h3 className="font-bold mb-1">Crisp for Texture</h3>
                   <p className="text-sm">Add crunch to your dishes! Learn our{' '}
-                    <Link href="/guides/how-to-crisp-tortillas" className="text-sunset-600 hover:underline">
+                    <Link href="/guides/how-to-crisp-tortillas" className="text-sunset-700 hover:underline">
                       crisping and toasting techniques
                     </Link>.
                   </p>
@@ -330,7 +329,7 @@ export default function RecipesPage() {
                 <div>
                   <h3 className="font-bold mb-1">Choose the Right Size</h3>
                   <p className="text-sm">Size matters! Check our{' '}
-                    <Link href="/guides/tortilla-sizes" className="text-sunset-600 hover:underline">
+                    <Link href="/guides/tortilla-sizes" className="text-sunset-700 hover:underline">
                       tortilla size guide
                     </Link>{' '}for perfect portions.
                   </p>
@@ -359,7 +358,7 @@ export default function RecipesPage() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/shop"
-                className="bg-sunset-500 hover:bg-sunset-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+                className="bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg"
               >
                 Shop Tortillas
               </Link>

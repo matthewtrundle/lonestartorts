@@ -737,6 +737,23 @@ export default function CheckoutPage() {
                   </>
                 )}
 
+                {/* Photographic strip */}
+                <div className="relative h-20 overflow-hidden rounded-xl">
+                  <Image
+                    src="/images/brand/band-checkout.webp"
+                    alt=""
+                    fill
+                    sizes="400px"
+                    className="object-cover"
+                  />
+                  <div aria-hidden="true" className="absolute inset-0 bg-charcoal-950/50" />
+                  <div className="absolute inset-0 flex items-center justify-center px-4">
+                    <p className="text-sm font-semibold text-cream-50 text-center text-balance">
+                      Packed fresh in Texas, shipped to your door.
+                    </p>
+                  </div>
+                </div>
+
                 {/* Trust Indicators */}
                 <div className="flex items-center justify-center gap-4 text-xs text-charcoal-500 pt-2">
                   <div className="flex items-center gap-1">

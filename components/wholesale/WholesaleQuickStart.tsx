@@ -248,7 +248,7 @@ export const WholesaleQuickStart: React.FC<WholesaleQuickStartProps> = ({
           {/* Apply Button */}
           <button
             onClick={handleApply}
-            className="w-full mt-2 py-2.5 bg-sunset-500 hover:bg-sunset-600 text-white font-bold rounded-lg text-sm transition-colors active:scale-[0.98]"
+            className="w-full mt-2 py-2.5 bg-sunset-600 hover:bg-sunset-700 text-white font-bold rounded-lg text-sm transition-colors active:scale-[0.98]"
           >
             Apply {activePreset.label} Mix ({packCount} packs)
           </button>

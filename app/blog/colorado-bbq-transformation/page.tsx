@@ -105,7 +105,7 @@ export default function ColoradoBBQTransformationPage() {
                   But there's been one persistent problem: sourcing authentic tortillas at altitude. Colorado's 5,280+ foot elevation creates unique challenges for baking and tortilla production. Most local options couldn't deliver the quality, consistency, and structural integrity that BBQ tacos demand.
                 </p>
                 <p>
-                  Enter <Link href="/shop" className="text-sunset-600 hover:underline font-medium">H-E-B® tortillas</Link>, shipped fresh from Texas. Three Colorado BBQ restaurants made the switch and never looked back.
+                  Enter <Link href="/shop" className="text-sunset-700 hover:underline font-medium">H-E-B® tortillas</Link>, shipped fresh from Texas. Three Colorado BBQ restaurants made the switch and never looked back.
                 </p>
               </div>
             </section>
@@ -140,7 +140,7 @@ export default function ColoradoBBQTransformationPage() {
                 <h3 className="text-2xl font-bold text-charcoal-950 mt-8 mb-4">The Switch to H-E-B®</h3>
                 <p>
                   In March 2024, Sarah discovered{' '}
-                  <Link href="/" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/" className="text-sunset-700 hover:underline font-medium">
                     Lonestar Tortillas
                   </Link>{' '}
                   through a Texas pitmaster friend. She ordered a case of H-E-B® flour tortillas to test.
@@ -312,7 +312,7 @@ export default function ColoradoBBQTransformationPage() {
                   Whether you're in Denver, Boulder, Fort Collins, or running a mountain smokehouse, you face the same challenges these restaurants overcame. Don't let tortilla quality be the weak link in your BBQ operation.
                 </p>
                 <p>
-                  <Link href="/shop" className="text-sunset-600 hover:underline font-medium">
+                  <Link href="/shop" className="text-sunset-700 hover:underline font-medium">
                     Order H-E-B® tortillas
                   </Link>{' '}
                   and join the Colorado BBQ restaurants that have already made the switch. Same tortillas that made these three successful. Same consistent quality. Shipped fresh to Colorado.
