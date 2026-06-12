@@ -41,6 +41,14 @@ const ScrollAnimations = dynamic(
   { ssr: false }
 )
 
+// Hero right-panel: rotating series of real H-E-B footage. Each clip plays
+// once, then onEnded advances to the next (no `loop` attribute).
+const heroVideos = [
+  '/hero-background-loop.mp4',
+  '/tiks/H-E-B Tortillas_ Ride With Us_compressed.mp4',
+  '/tiks/Texan Tortilla Secret_compressed.mp4',
+];
+
 export default function HomeContent() {
   const { t } = useLanguage();
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -49,6 +57,17 @@ export default function HomeContent() {
   const [reducedMotion, setReducedMotion] = useState(false);
 
   const heroSectionRef = useRef<HTMLElement>(null);
+
+  // Hero video series: index advances on `ended`; the element remounts via key.
+  const [heroVideoIdx, setHeroVideoIdx] = useState(0);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Kick playback after every mount/remount (autoplay attr alone can be
+  // ignored after a key-driven remount in some browsers).
+  useEffect(() => {
+    if (reducedMotion) return;
+    heroVideoRef.current?.play().catch(() => {});
+  }, [heroVideoIdx, reducedMotion]);
 
   // Video carousel: only play while the section is in view (and motion is OK)
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -211,16 +230,33 @@ export default function HomeContent() {
             </div>
           </div>
 
-          {/* Right: full-height photography */}
+          {/* Right: full-height real H-E-B footage (rotating series) */}
           <div className="lg:col-span-6 xl:col-span-7 relative min-h-[55vh] lg:min-h-screen">
-            <Image
-              src="/images/brand/hero-editorial.webp"
-              alt="Stack of fresh flour tortillas steaming on a comal"
-              fill
-              sizes="(max-width: 1024px) 100vw, 58vw"
-              className="object-cover"
-              priority
-            />
+            {reducedMotion ? (
+              <Image
+                src="/images/brand/hero-editorial.webp"
+                alt="Stack of fresh flour tortillas steaming on a comal"
+                fill
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="object-cover"
+                priority
+              />
+            ) : (
+              <video
+                key={heroVideoIdx}
+                ref={heroVideoRef}
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                poster="/images/hero-banner.webp"
+                onEnded={() => setHeroVideoIdx((i) => (i + 1) % heroVideos.length)}
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src={heroVideos[heroVideoIdx]} type="video/mp4" />
+              </video>
+            )}
             {/* Seam blend into the type panel */}
             <div aria-hidden="true" className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-cream-100 to-transparent hidden lg:block" />
             {/* Floating proof chip */}
