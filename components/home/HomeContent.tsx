@@ -45,7 +45,6 @@ const ScrollAnimations = dynamic(
 // once, then onEnded advances to the next (no `loop` attribute).
 const heroVideos = [
   '/hero-background-loop.mp4',
-  '/tiks/H-E-B Tortillas_ Ride With Us_compressed.mp4',
   '/tiks/Texan Tortilla Secret_compressed.mp4',
 ];
 
@@ -153,7 +152,6 @@ export default function HomeContent() {
 
   const videos = [
     { src: '/Taste of Texas_compressed.mp4', title: 'Taste of Texas' },
-    { src: '/tiks/H-E-B Tortillas_ Ride With Us_compressed.mp4', title: 'Ride With Us' },
     { src: '/tiks/Texan Tortilla Secret_compressed.mp4', title: 'Texan Secret' }
   ];
 
