@@ -192,7 +192,7 @@ export default function BuyHebTortillasOnlinePage() {
         name: 'How much does it cost to ship H-E-B tortillas?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $12.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
+          text: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $14.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
         },
       },
       {
@@ -410,7 +410,7 @@ export default function BuyHebTortillasOnlinePage() {
               },
               {
                 question: 'How much does it cost to ship H-E-B tortillas?',
-                answer: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $12.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
+                answer: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $14.99. We ship on Tuesdays as part of our Freshness First Shipping program. Orders before Monday 9 PM CT ship the following Tuesday via USPS Priority Mail, arriving in 2-3 business days.',
               },
               {
                 question: 'Are the H-E-B tortillas authentic?',
