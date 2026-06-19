@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { AttributionTracker } from '@/components/AttributionTracker';
+import { MariaLauncher } from '@/components/chat/MariaLauncher';
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import './globals.css';
@@ -373,6 +374,8 @@ export default function RootLayout({
                 </main>
                 <Footer />
               </div>
+              {/* Floating Maria launcher — chat + voice + click-to-call */}
+              <MariaLauncher />
             </ToastProvider>
           </CartProvider>
         </LanguageProvider>
