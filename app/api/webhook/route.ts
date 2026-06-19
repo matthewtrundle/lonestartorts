@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { getProductBySku, getDisplayName } from '@/lib/products';
 import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
 import { trackTikTokPurchase } from '@/lib/tiktok';
+import { uploadOfflineConversion } from '@/lib/analytics/google-ads';
 import { recordDiscountUsage, AppliedRule } from '@/lib/discount-engine';
 import { evaluateTermsPromotion, applyTermsDemotion } from '@/lib/wholesale/terms-progression';
 import { getShipDateDisplay } from '@/lib/shipping-schedule';
@@ -179,6 +180,18 @@ export async function POST(req: NextRequest) {
             }
           }
 
+          // Idempotency: Stripe may redeliver checkout.session.completed. If we
+          // already created an order for this checkout session, skip — avoids
+          // duplicate orders and double-counted (offline) conversions.
+          const duplicate = await prisma.order.findFirst({
+            where: { stripePaymentId: session.id },
+            select: { orderNumber: true },
+          });
+          if (duplicate) {
+            console.log(`Duplicate checkout.session.completed for ${session.id}; order ${duplicate.orderNumber} already exists — skipping.`);
+            return NextResponse.json({ received: true, duplicate: true });
+          }
+
           // Save order to Prisma database
           const order = await prisma.order.create({
             data: {
@@ -218,6 +231,10 @@ export async function POST(req: NextRequest) {
               firstVisitAt: fullSession.metadata?.attrFirstVisitAt
                 ? new Date(parseInt(fullSession.metadata.attrFirstVisitAt))
                 : null,
+              // Google Ads click ids — enable offline conversion import
+              gclid: fullSession.metadata?.attrGclid || null,
+              gbraid: fullSession.metadata?.attrGbraid || null,
+              wbraid: fullSession.metadata?.attrWbraid || null,
 
               updatedAt: new Date(),
 
@@ -332,6 +349,32 @@ export async function POST(req: NextRequest) {
               });
             } catch (tiktokError) {
               console.error('Failed to send TikTok purchase event:', tiktokError);
+            }
+
+            // Upload the true order value to Google Ads as an offline
+            // conversion, keyed on the click id. This is the durable,
+            // server-side source of truth for conversion value. Skipped
+            // automatically when no click id is present or the integration
+            // is not configured; never throws.
+            if (order.gclid || order.gbraid || order.wbraid) {
+              try {
+                // Format createdAt as 'YYYY-MM-DD HH:MM:SS+00:00' (UTC)
+                const conversionDateTime = `${order.createdAt
+                  .toISOString()
+                  .slice(0, 19)
+                  .replace('T', ' ')}+00:00`;
+
+                await uploadOfflineConversion({
+                  gclid: order.gclid,
+                  gbraid: order.gbraid,
+                  wbraid: order.wbraid,
+                  orderNumber: order.orderNumber,
+                  value: order.subtotal / 100, // merchandise value (excl. shipping/tax)
+                  conversionDateTime,
+                });
+              } catch (googleAdsError) {
+                console.error('Failed to upload Google Ads offline conversion:', googleAdsError);
+              }
             }
 
             // Mark feedback coupon as used if applicable

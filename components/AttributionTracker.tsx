@@ -29,8 +29,11 @@ export function AttributionTracker() {
         us: trim(params.get('utm_source'), 80),
         um: trim(params.get('utm_medium'), 80),
         uc: trim(params.get('utm_campaign'), 80),
-        // gclid presence implies Google Ads even without UTMs
-        g: params.has('gclid') ? 1 : undefined,
+        // Google Ads click ids — stored verbatim (not just a flag) so we can run
+        // offline conversion import and separate paid Google from organic Google.
+        gc: trim(params.get('gclid'), 120),
+        gb: trim(params.get('gbraid'), 120),
+        wb: trim(params.get('wbraid'), 120),
         ts: Date.now(),
       };
 

@@ -47,13 +47,21 @@ export async function POST(req: NextRequest) {
       if (attrCookie) {
         const parsed = JSON.parse(decodeURIComponent(attrCookie));
         const clamp = (v: unknown) => (typeof v === 'string' ? v.slice(0, 200) : undefined);
+        const gclid = clamp(parsed.gc);
+        const gbraid = clamp(parsed.gb);
+        const wbraid = clamp(parsed.wb);
+        const hasGoogleClick = Boolean(gclid || gbraid || wbraid || parsed.g === 1);
         attribution = {
           ...(clamp(parsed.lp) && { attrLandingPath: clamp(parsed.lp)! }),
           ...(clamp(parsed.ref) && { attrReferrer: clamp(parsed.ref)! }),
           ...(clamp(parsed.us) && { attrUtmSource: clamp(parsed.us)! }),
           ...(clamp(parsed.um) && { attrUtmMedium: clamp(parsed.um)! }),
           ...(clamp(parsed.uc) && { attrUtmCampaign: clamp(parsed.uc)! }),
-          ...(parsed.g === 1 && !parsed.us && { attrUtmSource: 'google' }),
+          ...(gclid && { attrGclid: gclid }),
+          ...(gbraid && { attrGbraid: gbraid }),
+          ...(wbraid && { attrWbraid: wbraid }),
+          // A Google click id implies Google Ads even without UTMs.
+          ...(hasGoogleClick && !parsed.us && { attrUtmSource: 'google' }),
           ...(typeof parsed.ts === 'number' && { attrFirstVisitAt: String(parsed.ts) }),
         };
       }

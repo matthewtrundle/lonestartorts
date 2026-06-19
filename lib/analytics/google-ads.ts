@@ -150,6 +150,109 @@ export async function getGoogleAdsMetrics(
 }
 
 /**
+ * Upload a single offline conversion (true order value) to Google Ads keyed
+ * on the click id (gclid/gbraid/wbraid). This is the durable, server-side
+ * source of truth for conversion value — it does not depend on the browser
+ * firing a client-side tag.
+ *
+ * Guarded by isGoogleAdsConfigured() AND the presence of
+ * GOOGLE_ADS_CONVERSION_ACTION_ID. If not configured, it logs and skips
+ * (never throws) so callers in critical paths (e.g. the Stripe webhook) are
+ * never broken by a missing/optional integration.
+ */
+export async function uploadOfflineConversion(params: {
+  gclid?: string | null;
+  gbraid?: string | null;
+  wbraid?: string | null;
+  orderNumber: string;
+  value: number;
+  conversionDateTime: string;
+}): Promise<void> {
+  const { gclid, gbraid, wbraid, orderNumber, value, conversionDateTime } = params;
+
+  if (!isGoogleAdsConfigured() || !process.env.GOOGLE_ADS_CONVERSION_ACTION_ID) {
+    console.log('Google Ads offline conversion not configured - skipping upload');
+    return;
+  }
+
+  // Need at least one click identifier to attribute the conversion
+  if (!gclid && !gbraid && !wbraid) {
+    console.log(`No click id for order ${orderNumber} - skipping offline conversion upload`);
+    return;
+  }
+
+  try {
+    // Dynamic import to avoid build errors when not configured
+    const { GoogleAdsApi, services } = await import('google-ads-api');
+
+    const client = new GoogleAdsApi({
+      client_id: process.env.GOOGLE_ADS_CLIENT_ID!,
+      client_secret: process.env.GOOGLE_ADS_CLIENT_SECRET!,
+      developer_token: process.env.GOOGLE_ADS_DEVELOPER_TOKEN!,
+    });
+
+    // Remove dashes from customer ID if present
+    const customerId = process.env.GOOGLE_ADS_CUSTOMER_ID!.replace(/-/g, '');
+    const loginCustomerId = process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID?.replace(/-/g, '');
+
+    const customer = client.Customer({
+      customer_id: customerId,
+      login_customer_id: loginCustomerId,
+      refresh_token: process.env.GOOGLE_ADS_REFRESH_TOKEN!,
+    });
+
+    const conversionActionId = process.env.GOOGLE_ADS_CONVERSION_ACTION_ID!;
+    const conversionAction = `customers/${customerId}/conversionActions/${conversionActionId}`;
+
+    const clickConversion: {
+      conversion_action: string;
+      conversion_date_time: string;
+      conversion_value: number;
+      currency_code: string;
+      order_id: string;
+      gclid?: string;
+      gbraid?: string;
+      wbraid?: string;
+    } = {
+      conversion_action: conversionAction,
+      conversion_date_time: conversionDateTime,
+      conversion_value: value,
+      currency_code: 'USD',
+      order_id: orderNumber,
+    };
+
+    // Prefer gclid; fall back to gbraid/wbraid (iOS/privacy click ids)
+    if (gclid) {
+      clickConversion.gclid = gclid;
+    } else if (gbraid) {
+      clickConversion.gbraid = gbraid;
+    } else if (wbraid) {
+      clickConversion.wbraid = wbraid;
+    }
+
+    const request = new services.UploadClickConversionsRequest({
+      customer_id: customerId,
+      conversions: [clickConversion],
+      partial_failure: true,
+    });
+
+    const response = await customer.conversionUploads.uploadClickConversions(request);
+
+    if (response?.partial_failure_error) {
+      console.error(
+        `Google Ads offline conversion partial failure for order ${orderNumber}:`,
+        response.partial_failure_error
+      );
+    } else {
+      console.log(`Uploaded offline conversion for order ${orderNumber} ($${value})`);
+    }
+  } catch (error) {
+    // Never throw — graceful degradation so callers are never broken
+    console.error(`Failed to upload offline conversion for order ${orderNumber}:`, error);
+  }
+}
+
+/**
  * Get Google Ads configuration status for debugging
  */
 export function getGoogleAdsConfigStatus(): {

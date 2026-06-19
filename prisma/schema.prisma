@@ -101,6 +101,7 @@ model RetailSubscription {
 
   // Relations
   customer             Customer           @relation(fields: [customerId], references: [id])
+  orders               Order[]
 
   @@index([customerId])
   @@index([stripeSubscriptionId])
@@ -154,6 +155,8 @@ model Order {
   carrier          String?
   paymentStatus    PaymentStatus     @default(PENDING)
   stripePaymentId  String?
+  // Set when this order was generated from a recurring subscription renewal.
+  retailSubscriptionId String?
   trackingNumber   String?
   status           OrderStatus       @default(PENDING)
   shippingName     String?
@@ -175,10 +178,16 @@ model Order {
   utmMedium        String?
   utmCampaign      String?
   firstVisitAt     DateTime?
+  // Google Ads click identifiers — required for offline conversion import and
+  // to distinguish paid Google from organic Google (utmSource alone cannot).
+  gclid            String?
+  gbraid           String?
+  wbraid           String?
 
   Customer         Customer?         @relation(fields: [customerId], references: [id])
   OrderItem        OrderItem[]
   CustomerFeedback CustomerFeedback?
+  RetailSubscription RetailSubscription? @relation(fields: [retailSubscriptionId], references: [id])
 
   @@index([customerId])
   @@index([email])
@@ -186,6 +195,7 @@ model Order {
   @@index([status])
   @@index([paymentStatus])
   @@index([createdAt])
+  @@index([retailSubscriptionId])
 }
 
 model CustomerFeedback {
