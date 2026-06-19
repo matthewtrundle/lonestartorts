@@ -41,9 +41,17 @@ export async function ensureOrderForPaidInvoice(
 
   const existing = await prisma.order.findFirst({
     where: { stripePaymentId: paymentIntentId },
-    select: { id: true, orderNumber: true },
+    select: { id: true, orderNumber: true, retailSubscriptionId: true },
   });
   if (existing) {
+    // Backfill the subscription link on orders created before this field existed,
+    // so the fulfillment view can flag them as recurring.
+    if (!existing.retailSubscriptionId) {
+      await prisma.order.update({
+        where: { id: existing.id },
+        data: { retailSubscriptionId: retailSub.id },
+      });
+    }
     return { orderId: existing.id, orderNumber: existing.orderNumber, created: false };
   }
 
@@ -95,6 +103,7 @@ export async function ensureOrderForPaidInvoice(
       customerId: retailSub.customerId,
       email: retailSub.customer.email,
       stripePaymentId: paymentIntentId,
+      retailSubscriptionId: retailSub.id,
       subtotal: retailSub.subtotal,
       shipping: retailSub.shipping,
       tax: retailSub.tax,

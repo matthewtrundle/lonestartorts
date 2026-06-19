@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAuthenticated } from '@/lib/auth';
+import { getNextShipDate, formatShipDate } from '@/lib/shipping-schedule';
 
 export const dynamic = 'force-dynamic';
 
@@ -51,6 +52,7 @@ export async function GET() {
       status: o.status,
       total: o.total,
       createdAt: o.createdAt.toISOString(),
+      isSubscription: o.retailSubscriptionId != null,
       items: o.OrderItem.filter((i) => i.sku !== 'SHIPPING').map((i) => ({
         sku: i.sku || '',
         name: i.name,
@@ -77,6 +79,7 @@ export async function GET() {
       status: o.orderStatus,
       total: o.total,
       createdAt: o.createdAt.toISOString(),
+      isSubscription: false,
       items: o.items.map((i) => ({
         sku: i.sku || '',
         name: i.name,
@@ -120,10 +123,15 @@ export async function GET() {
     const pendingCount = orders.filter((o) => o.status === 'PENDING').length;
     const processingCount = orders.filter((o) => o.status === 'PROCESSING').length;
     const readyCount = orders.filter((o) => o.status === 'READY').length;
+    const subscriptionCount = orders.filter((o) => o.isSubscription).length;
     const totalItemsToPack = orders.reduce(
       (sum, o) => sum + o.items.reduce((s, i) => s + i.quantity, 0),
       0
     );
+
+    // All unfulfilled orders ship on the same upcoming ship day (Tuesdays, Central).
+    // This is the actionable date for fulfillment — not the backdated charge date.
+    const nextShipDate = getNextShipDate();
 
     return NextResponse.json({
       orders,
@@ -132,8 +140,11 @@ export async function GET() {
         pendingCount,
         processingCount,
         readyCount,
+        subscriptionCount,
         totalUnfulfilled: orders.length,
         totalItemsToPack,
+        nextShipDate: nextShipDate.toISOString(),
+        shipByDisplay: formatShipDate(nextShipDate),
       },
     });
   } catch (error) {

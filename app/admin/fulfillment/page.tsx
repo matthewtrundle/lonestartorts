@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { formatPrice } from '@/lib/utils';
-import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList, AlertTriangle, Printer } from 'lucide-react';
+import { Download, Upload, ChevronDown, ChevronRight, Package, Clock, Truck, ShoppingCart, ClipboardList, AlertTriangle, Printer, Repeat } from 'lucide-react';
 import { getHebLimit, getOrdersNeeded } from '@/lib/inventory/constants';
 
 interface FulfillmentOrder {
@@ -24,6 +24,7 @@ interface FulfillmentOrder {
   status: string;
   total: number;
   createdAt: string;
+  isSubscription: boolean;
   items: { sku: string; name: string; quantity: number; price: number }[];
 }
 
@@ -38,8 +39,11 @@ interface Summary {
   pendingCount: number;
   processingCount: number;
   readyCount: number;
+  subscriptionCount: number;
   totalUnfulfilled: number;
   totalItemsToPack: number;
+  nextShipDate: string;
+  shipByDisplay: string;
 }
 
 interface ImportResult {
@@ -59,7 +63,7 @@ export default function FulfillmentPage() {
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState<FulfillmentOrder[]>([]);
   const [skuAggregates, setSkuAggregates] = useState<SkuAggregate[]>([]);
-  const [summary, setSummary] = useState<Summary>({ pendingCount: 0, processingCount: 0, readyCount: 0, totalUnfulfilled: 0, totalItemsToPack: 0 });
+  const [summary, setSummary] = useState<Summary>({ pendingCount: 0, processingCount: 0, readyCount: 0, subscriptionCount: 0, totalUnfulfilled: 0, totalItemsToPack: 0, nextShipDate: '', shipByDisplay: '' });
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [itemsToBuyOpen, setItemsToBuyOpen] = useState(true);
   const [exporting, setExporting] = useState(false);
@@ -356,7 +360,7 @@ export default function FulfillmentPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="bg-white rounded-lg shadow p-4 border-l-4 border-amber-400">
           <div className="flex items-center gap-2 text-amber-600 mb-1">
             <Clock className="w-4 h-4" />
@@ -377,6 +381,13 @@ export default function FulfillmentPage() {
             <span className="text-xs font-medium uppercase">Ready to Ship</span>
           </div>
           <p className="text-2xl font-bold text-charcoal-950">{summary.readyCount}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4 border-l-4 border-sunset-400">
+          <div className="flex items-center gap-2 text-sunset-600 mb-1">
+            <Repeat className="w-4 h-4" />
+            <span className="text-xs font-medium uppercase">Subscriptions</span>
+          </div>
+          <p className="text-2xl font-bold text-charcoal-950">{summary.subscriptionCount}</p>
         </div>
         <div className="bg-white rounded-lg shadow p-4 border-l-4 border-charcoal-400">
           <div className="flex items-center gap-2 text-charcoal-600 mb-1">
@@ -618,7 +629,8 @@ export default function FulfillmentPage() {
                 <th className="px-4 py-3 font-medium text-charcoal-600">Customer</th>
                 <th className="px-4 py-3 font-medium text-charcoal-600">Items</th>
                 <th className="px-4 py-3 font-medium text-charcoal-600">Status</th>
-                <th className="px-4 py-3 font-medium text-charcoal-600">Date</th>
+                <th className="px-4 py-3 font-medium text-charcoal-600">Placed</th>
+                <th className="px-4 py-3 font-medium text-charcoal-600">Ships</th>
                 <th className="px-4 py-3 font-medium text-charcoal-600 text-right">Total</th>
               </tr>
             </thead>
@@ -645,15 +657,23 @@ export default function FulfillmentPage() {
                   </td>
                   <td className="px-4 py-3 font-medium text-charcoal-950">{order.orderNumber}</td>
                   <td className="px-4 py-3">
-                    <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                        order.type === 'wholesale'
-                          ? 'bg-purple-100 text-purple-800'
-                          : 'bg-sky-100 text-sky-800'
-                      }`}
-                    >
-                      {order.type === 'wholesale' ? 'W' : 'R'}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span
+                        className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                          order.type === 'wholesale'
+                            ? 'bg-purple-100 text-purple-800'
+                            : 'bg-sky-100 text-sky-800'
+                        }`}
+                      >
+                        {order.type === 'wholesale' ? 'W' : 'R'}
+                      </span>
+                      {order.isSubscription && (
+                        <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded text-xs font-medium bg-sunset-100 text-sunset-800">
+                          <Repeat className="w-3 h-3" />
+                          Sub
+                        </span>
+                      )}
+                    </div>
                   </td>
                   <td className="px-4 py-3">
                     <div className="text-charcoal-900">{order.name}</div>
@@ -670,6 +690,9 @@ export default function FulfillmentPage() {
                   <td className="px-4 py-3 text-charcoal-600">
                     {new Date(order.createdAt).toLocaleDateString()}
                   </td>
+                  <td className="px-4 py-3 font-medium text-charcoal-900">
+                    {summary.shipByDisplay || '—'}
+                  </td>
                   <td className="px-4 py-3 text-right font-medium text-charcoal-950">
                     {formatPrice(order.total)}
                   </td>
@@ -677,7 +700,7 @@ export default function FulfillmentPage() {
               ))}
               {orders.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="px-4 py-12 text-center text-charcoal-500">
+                  <td colSpan={9} className="px-4 py-12 text-center text-charcoal-500">
                     No unfulfilled orders. All caught up!
                   </td>
                 </tr>

@@ -28,6 +28,7 @@ interface FulfillmentOrder {
   status: string;
   total: number;
   createdAt: string;
+  isSubscription: boolean;
   items: FulfillmentItem[];
 }
 
@@ -44,6 +45,7 @@ export default function PrintFulfillmentPage() {
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState<FulfillmentOrder[]>([]);
   const [skuAggregates, setSkuAggregates] = useState<SkuAggregate[]>([]);
+  const [shipByDisplay, setShipByDisplay] = useState('');
   const [generatedAt] = useState(() => new Date());
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function PrintFulfillmentPage() {
         const data = await res.json();
         setOrders(data.orders);
         setSkuAggregates(data.skuAggregates);
+        setShipByDisplay(data.summary?.shipByDisplay || '');
       } catch (err) {
         console.error('Error fetching fulfillment data:', err);
       } finally {
@@ -127,6 +130,9 @@ export default function PrintFulfillmentPage() {
               {orders.reduce((s, o) => s + o.items.reduce((ss, i) => ss + i.quantity, 0), 0)} total
               units
             </p>
+            {shipByDisplay && (
+              <p className="text-sm font-semibold">Ships: {shipByDisplay}</p>
+            )}
           </header>
 
           <h2 className="text-lg font-semibold mb-2">Items needed (aggregated)</h2>
@@ -169,12 +175,16 @@ export default function PrintFulfillmentPage() {
                     <h2 className="text-xl font-bold">
                       Order #{order.orderNumber}{' '}
                       <span className="text-sm font-normal">
-                        ({order.type === 'wholesale' ? 'Wholesale' : 'Retail'})
+                        ({order.type === 'wholesale' ? 'Wholesale' : 'Retail'}
+                        {order.isSubscription ? ' · Subscription' : ''})
                       </span>
                     </h2>
                     <p className="text-xs">
                       Placed {new Date(order.createdAt).toLocaleString()} · Status: {order.status}
                     </p>
+                    {shipByDisplay && (
+                      <p className="text-xs font-semibold">Ships {shipByDisplay}</p>
+                    )}
                   </div>
                   <div className="text-right text-xs">
                     <div className="font-semibold">Box: {length}″ × {width}″ × {height}″</div>
