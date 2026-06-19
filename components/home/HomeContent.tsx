@@ -60,13 +60,18 @@ export default function HomeContent() {
   // Hero video series: index advances on `ended`; the element remounts via key.
   const [heroVideoIdx, setHeroVideoIdx] = useState(0);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
+  // Hero audio: starts muted (required for autoplay); visitors can unmute.
+  const [heroMuted, setHeroMuted] = useState(true);
 
   // Kick playback after every mount/remount (autoplay attr alone can be
-  // ignored after a key-driven remount in some browsers).
+  // ignored after a key-driven remount in some browsers). Also (re)applies the
+  // current mute state so unmuting survives clip changes.
   useEffect(() => {
-    if (reducedMotion) return;
-    heroVideoRef.current?.play().catch(() => {});
-  }, [heroVideoIdx, reducedMotion]);
+    const video = heroVideoRef.current;
+    if (!video || reducedMotion) return;
+    video.muted = heroMuted;
+    video.play().catch(() => {});
+  }, [heroVideoIdx, reducedMotion, heroMuted]);
 
   // Video carousel: only play while the section is in view (and motion is OK)
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -254,6 +259,29 @@ export default function HomeContent() {
               >
                 <source src={heroVideos[heroVideoIdx]} type="video/mp4" />
               </video>
+            )}
+            {/* Audio toggle — clips start muted for autoplay; let visitors hear them */}
+            {!reducedMotion && (
+              <button
+                type="button"
+                onClick={() => setHeroMuted((m) => !m)}
+                aria-label={heroMuted ? 'Unmute video' : 'Mute video'}
+                aria-pressed={!heroMuted}
+                className="absolute bottom-4 left-4 z-20 flex h-11 w-11 items-center justify-center rounded-full text-white backdrop-blur transition-transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                style={{ background: 'rgba(40,28,18,0.45)' }}
+              >
+                {heroMuted ? (
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden>
+                    <path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor" />
+                    <path d="M17 9l4 6M21 9l-4 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden>
+                    <path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor" />
+                    <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                )}
+              </button>
             )}
             {/* Seam blend into the type panel */}
             <div aria-hidden="true" className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-cream-100 to-transparent hidden lg:block" />
