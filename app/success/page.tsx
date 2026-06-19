@@ -113,13 +113,48 @@ function SuccessContent() {
 
           // Track conversion in Google Ads
           if (typeof window !== 'undefined' && (window as any).gtag) {
-            // Google Ads "Website Purchase" conversion action (created 2026-03-29, replaces removed Purchase (1))
-            (window as any).gtag('event', 'conversion', {
-              'send_to': 'AW-17804372077/4O_4CKfWgpIcEO3Q5KlC',
-              'value': data.order.total / 100,
-              'currency': 'USD',
-              'transaction_id': data.order.orderNumber,
-            });
+            // Enhanced Conversions: provide user-provided data (hashed email)
+            // before firing the conversion. Best-effort — never break the page.
+            // NOTE: Enhanced Conversions must also be toggled ON for the
+            // "Website Purchase" action in the Google Ads UI for this to take effect.
+            const fireConversion = () => {
+              (window as any).gtag('event', 'conversion', {
+                'send_to': 'AW-17804372077/4O_4CKfWgpIcEO3Q5KlC',
+                // Merchandise value (subtotal) — excludes shipping & tax, per
+                // Google's ecommerce guidance, so reported ROAS reflects real
+                // product revenue. Matches the server-side offline upload basis.
+                'value': data.order.subtotal / 100,
+                'currency': 'USD',
+                'transaction_id': data.order.orderNumber,
+              });
+            };
+
+            const sha256Hex = async (value: string): Promise<string> => {
+              const encoded = new TextEncoder().encode(value);
+              const digest = await crypto.subtle.digest('SHA-256', encoded);
+              return Array.from(new Uint8Array(digest))
+                .map((b) => b.toString(16).padStart(2, '0'))
+                .join('');
+            };
+
+            const email = data.order.email;
+            if (email && typeof crypto !== 'undefined' && crypto.subtle) {
+              sha256Hex(String(email).trim().toLowerCase())
+                .then((hashedEmail) => {
+                  // Google Ads "Website Purchase" conversion action (created 2026-03-29, replaces removed Purchase (1))
+                  (window as any).gtag('set', 'user_data', {
+                    'sha256_email_address': hashedEmail,
+                  });
+                })
+                .catch((err) => {
+                  console.error('Enhanced Conversions email hashing failed:', err);
+                })
+                .finally(() => {
+                  fireConversion();
+                });
+            } else {
+              fireConversion();
+            }
 
           }
 
