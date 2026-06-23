@@ -1,6 +1,6 @@
 // Product catalog - centralized source of truth
 // Pricing: 4x markup on all products
-// Shipping: FREE on orders $80+, flat $12.99 under $80
+// Shipping: FREE on orders $80+, flat $14.99 under $80
 
 // No minimum order amount (removed)
 export const MINIMUM_ORDER_AMOUNT = 0;
@@ -8,14 +8,14 @@ export const MINIMUM_ORDER_AMOUNT = 0;
 // Free shipping threshold in cents ($80)
 export const FREE_SHIPPING_THRESHOLD = 8000;
 
-// Flat shipping rate for orders under $80 ($12.99)
-export const FLAT_SHIPPING_RATE = 1299;
+// Flat shipping rate for orders under $80 ($14.99)
+export const FLAT_SHIPPING_RATE = 1499;
 
 // Legacy shipping rates (kept for reference)
 export const SHIPPING_RATES = {
-  small: 1299,
-  large: 1299,
-  sauce: 1299,
+  small: 1499,
+  large: 1499,
+  sauce: 1499,
 };
 
 export interface Product {
@@ -302,7 +302,7 @@ export function getDisplayName(product: { name: string; tortillaCount?: number }
   return product.name;
 }
 
-// Calculate shipping - FREE on orders $80+, flat $12.99 under $80
+// Calculate shipping - FREE on orders $80+, flat $14.99 under $80
 export function calculateShipping(
   items: { productType?: string; quantity: number; sku?: string }[],
   subtotal?: number

@@ -56,7 +56,7 @@ const itemListSchema = {
             '@type': 'MonetaryAmount',
             value: '0',
             currency: 'USD',
-            description: 'Free shipping on orders $80+. Flat $12.99 under $80.'
+            description: 'Free shipping on orders $80+. Flat $14.99 under $80.'
           },
           deliveryTime: {
             '@type': 'ShippingDeliveryTime',

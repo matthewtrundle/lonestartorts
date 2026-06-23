@@ -566,7 +566,7 @@ export default function LocationsPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>
-                      <span><strong>Standard Shipping:</strong> $12.99 flat rate</span>
+                      <span><strong>Standard Shipping:</strong> $14.99 flat rate</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>

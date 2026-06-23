@@ -32,7 +32,7 @@ We deliver fresh tortillas to every ZIP code in Bakersfield – from Downtown to
 **How It Works**  
 - Orders placed by 2 PM CT Tuesday ship Wednesday  
 - Arrive at Bakersfield doors Thursday/Friday in insulated coolers  
-- $12.99 flat-rate shipping on orders under $80  
+- $14.99 flat-rate shipping on orders under $80  
 - FREE shipping on orders $80+  
 
 **Serving All Central Valley**  

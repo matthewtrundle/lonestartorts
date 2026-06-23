@@ -228,7 +228,7 @@ export default function ShippingPageContent() {
               },
               {
                 q: 'How much does shipping cost?',
-                a: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $12.99. We ship via USPS Priority Mail.',
+                a: 'Shipping is FREE on orders $80+. Orders under $80 ship for a flat $14.99. We ship via USPS Priority Mail.',
               },
               {
                 q: 'What days do you ship?',

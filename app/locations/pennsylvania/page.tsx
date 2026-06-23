@@ -47,7 +47,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to Pennsylvania?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $80+ to Pennsylvania and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Pennsylvania.',
+        text: 'Yes! We offer free shipping on orders $80+ to Pennsylvania and all other US states. For smaller orders, our flat-rate shipping is $14.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Pennsylvania.',
       },
     },
     {
@@ -162,7 +162,7 @@ export default function PennsylvaniaPage() {
               <div className="p-4 bg-white border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
                   Yes! We offer free shipping on orders $80+ to Pennsylvania and all other US states.
-                  For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure
+                  For smaller orders, our flat-rate shipping is $14.99. We use USPS Priority Mail to ensure
                   fast, reliable delivery to every address in Pennsylvania.
                 </p>
               </div>

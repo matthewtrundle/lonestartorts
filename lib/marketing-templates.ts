@@ -907,7 +907,7 @@ export const MARKETING_TEMPLATES: EmailTemplate[] = [
                       <p style="margin: 0; font-size: 15px; color: #57534e;">Shipping</p>
                     </td>
                     <td style="padding: 8px 0; text-align: right;">
-                      <p style="margin: 0; font-size: 15px; color: #1c1917;">$12.99</p>
+                      <p style="margin: 0; font-size: 15px; color: #1c1917;">$14.99</p>
                     </td>
                   </tr>
                   <tr>
