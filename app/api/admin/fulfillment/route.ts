@@ -12,11 +12,20 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Replacement orders can be scheduled for a future ship week — hold them out
+    // of the queue until their week is the upcoming batch. Orders with no
+    // scheduledShipDate (the normal case) always show.
+    const nextShip = getNextShipDate();
+
     // Fetch unfulfilled retail orders (PENDING/PROCESSING with successful payment)
     const retailOrders = await prisma.order.findMany({
       where: {
         status: { in: ['PENDING', 'PROCESSING'] },
         paymentStatus: 'SUCCEEDED',
+        OR: [
+          { scheduledShipDate: null },
+          { scheduledShipDate: { lte: nextShip } },
+        ],
       },
       include: { OrderItem: true },
       orderBy: { createdAt: 'desc' },

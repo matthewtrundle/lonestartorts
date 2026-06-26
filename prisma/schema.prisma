@@ -170,6 +170,13 @@ model Order {
   labelUrl         String?
   shippingCost     Int?              // Actual shipping cost paid (cents), e.g. from Pirate Ship
 
+  // Replacement / comp orders created by CoreLinq ("Resend order" from an
+  // escalation). A future scheduledShipDate holds the order out of the
+  // fulfillment queue until that ship week.
+  scheduledShipDate        DateTime? // hold until this ship week; null = next batch
+  replacementOfOrderNumber String?   // the original LST- order this replaces
+  sourceIdempotencyKey     String?   @unique // dedupe replacement creates
+
   // First-touch attribution (captured via lst_attr cookie on first visit,
   // passed through Stripe checkout metadata into the webhook)
   landingPath      String?
