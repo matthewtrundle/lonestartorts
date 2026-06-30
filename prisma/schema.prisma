@@ -152,6 +152,7 @@ model Order {
   shippedAt        DateTime?
   deliveredAt      DateTime?
   shippedEmailSentAt DateTime?
+  confirmationEmailSentAt DateTime?
   carrier          String?
   paymentStatus    PaymentStatus     @default(PENDING)
   stripePaymentId  String?

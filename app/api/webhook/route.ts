@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 import { getProductBySku, getDisplayName } from '@/lib/products';
-import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
+import { sendOrderConfirmationEmail, sendAdminOrderNotification, sendConfirmationEmailFailureAlert } from '@/lib/email';
 import { trackTikTokPurchase } from '@/lib/tiktok';
 import { uploadOfflineConversion } from '@/lib/analytics/google-ads';
 import { recordDiscountUsage, AppliedRule } from '@/lib/discount-engine';
@@ -318,10 +318,38 @@ export async function POST(req: NextRequest) {
               estimatedShipDate: getShipDateDisplay(),
             };
 
+            // The confirmation senders return { success:false } instead of
+            // throwing, so we MUST inspect the result — a try/catch alone never
+            // sees a Resend failure. Stamp confirmationEmailSentAt on success;
+            // on failure, fire a loud admin alert instead of swallowing it.
             try {
-              await sendOrderConfirmationEmail(emailData);
+              const sendResult = await sendOrderConfirmationEmail(emailData);
+              if (sendResult?.success) {
+                await prisma.order.update({
+                  where: { id: order.id },
+                  data: { confirmationEmailSentAt: new Date() },
+                });
+              } else {
+                const reason =
+                  (sendResult?.error instanceof Error
+                    ? sendResult.error.message
+                    : JSON.stringify(sendResult?.error)) || 'unknown error';
+                console.error(`Confirmation email failed for ${order.orderNumber}:`, reason);
+                await sendConfirmationEmailFailureAlert({
+                  orderNumber: order.orderNumber,
+                  customerEmail: order.email,
+                  total: order.total,
+                  reason,
+                });
+              }
             } catch (emailError) {
               console.error('Failed to send confirmation email:', emailError);
+              await sendConfirmationEmailFailureAlert({
+                orderNumber: order.orderNumber,
+                customerEmail: order.email,
+                total: order.total,
+                reason: emailError instanceof Error ? emailError.message : String(emailError),
+              }).catch(() => {});
             }
 
             // Send admin notification email

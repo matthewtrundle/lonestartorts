@@ -62,6 +62,47 @@ interface OrderShippedEmailProps {
 }
 
 /**
+ * Loud admin alert when an order-confirmation email fails to send. The
+ * confirmation senders return { success:false } instead of throwing, so without
+ * this a Resend failure is completely silent and the customer just never hears
+ * from us about an order they paid for. Best-effort; never throws.
+ */
+export async function sendConfirmationEmailFailureAlert(params: {
+  orderNumber: string;
+  customerEmail: string;
+  total: number; // cents
+  reason: string;
+}) {
+  const { orderNumber, customerEmail, total, reason } = params;
+  try {
+    const resend = getResendClient();
+    const { error } = await resend.emails.send({
+      from: fromEmail,
+      to: ADMIN_EMAILS,
+      subject: `⚠️ Confirmation email FAILED for order ${orderNumber}`,
+      html: `<div style="font-family:-apple-system,sans-serif;font-size:15px;color:#1c1917">
+        <h2 style="color:#b91c1c">Order confirmation email did not send</h2>
+        <p>The customer paid but did <strong>not</strong> get their confirmation. Reach out manually.</p>
+        <ul>
+          <li><strong>Order:</strong> ${orderNumber}</li>
+          <li><strong>Customer:</strong> ${customerEmail || '(no email on file)'}</li>
+          <li><strong>Total:</strong> $${(total / 100).toFixed(2)}</li>
+          <li><strong>Reason:</strong> ${reason}</li>
+        </ul>
+      </div>`,
+    });
+    if (error) {
+      console.error('Failed to send confirmation-failure alert:', error);
+      return { success: false, error };
+    }
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending confirmation-failure alert:', error);
+    return { success: false, error };
+  }
+}
+
+/**
  * Send order confirmation email
  */
 export async function sendOrderConfirmationEmail(props: OrderConfirmationEmailProps) {
