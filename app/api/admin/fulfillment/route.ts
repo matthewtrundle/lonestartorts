@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAuthenticated } from '@/lib/auth';
 import { getNextShipDate, formatShipDate } from '@/lib/shipping-schedule';
+import { products, getProductBySku } from '@/lib/products';
 
 export const dynamic = 'force-dynamic';
 
@@ -101,12 +102,28 @@ export async function GET() {
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
-    // Aggregate items by SKU (fall back to name as key when SKU is empty)
+    // Resolve each line item to its canonical catalog product so the buy list
+    // groups by the real product, not the raw stored SKU. This matters because
+    // the same tortilla can reach us under different SKU strings depending on
+    // how the order was created — checkout reads the SKU from Stripe price
+    // metadata (blank when a price is missing it), while subscription orders
+    // carry the SKU frozen into the subscription. Without this, e.g. butter
+    // tortillas split into two identical-named rows (one per SKU spelling),
+    // which throws off the HEB per-order limit math (the count that decides how
+    // many separate HEB purchases a product needs).
+    const canonicalize = (item: { sku: string; name: string }) => {
+      const product = getProductBySku(item.sku) || products.find((p) => p.name === item.name);
+      if (product) return { key: product.sku, sku: product.sku, name: product.name };
+      // Unknown item (e.g. wholesale-only SKU): fall back to prior behavior.
+      return { key: item.sku || item.name, sku: item.sku || '-', name: item.name };
+    };
+
+    // Aggregate items by canonical product.
     const skuMap = new Map<string, { sku: string; name: string; totalQuantity: number; orderCount: number }>();
     for (const order of orders) {
       const orderKeys = new Set<string>();
       for (const item of order.items) {
-        const key = item.sku || item.name;
+        const { key, sku, name } = canonicalize(item);
         if (!key) continue;
         const existing = skuMap.get(key);
         if (existing) {
@@ -116,8 +133,8 @@ export async function GET() {
           }
         } else {
           skuMap.set(key, {
-            sku: item.sku || '-',
-            name: item.name,
+            sku,
+            name,
             totalQuantity: item.quantity,
             orderCount: 1,
           });
