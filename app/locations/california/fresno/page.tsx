@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to Fresno?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2–3 days. We ship via FedEx with tracking.',
+        text: 'Most orders arrive in 2â3 days. We ship via FedEx with tracking.',
       },
     },
     {
@@ -55,7 +55,7 @@ const faqSchema = {
       name: 'What\'s the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No minimum! Order 1 pack or 20—we’ve got you.',
+        text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',
       },
     },
     {

@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to San Jose?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Orders arrive in 2 business days. We ship Monday–Thursday to ensure weekend-ready deliveries!',
+        text: 'Orders arrive in 2 business days. We ship MondayâThursday to ensure weekend-ready deliveries!',
       },
     },
     {
@@ -55,7 +55,7 @@ const faqSchema = {
       name: 'What\'s the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No minimum! Order one pack or ten.',
+        text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',
       },
     },
     {

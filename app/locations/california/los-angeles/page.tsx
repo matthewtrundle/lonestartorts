@@ -55,7 +55,7 @@ const faqSchema = {
       name: 'What is the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No minimum! Order 1 package or 20—we ship any quantity.',
+        text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',
       },
     },
     {
@@ -132,7 +132,7 @@ export default function LosAngelesPage() {
               Craving the authentic taste of Texas in the heart of Los Angeles? Lonestar Tortillas brings the legendary flavor of H-E-B tortillas straight from the Lone Star State to your California doorstep. As the premier source for genuine Texas-style tortillas in LA, we specialize in shipping fresh, never-frozen tortillas that capture the soul of Tex-Mex cuisine.
             </p>
             <p className="text-lg text-charcoal-600 leading-relaxed">
-              Whether you're a homesick Texan missing that perfect chew or a Los Angeles foodie seeking truly exceptional tortillas for taco night, our direct-from-Texas delivery ensures you get the real deal. Skip the grocery store imitations—every bite of our corn, flour, and butter tortillas delivers the authentic texture and flavor that made H-E-B a Texas icon.
+              Whether you're a homesick Texan missing that perfect chew or a Los Angeles foodie seeking truly exceptional tortillas for taco night, our direct-from-Texas delivery ensures you get the real deal. Skip the grocery store imitationsâevery bite of our corn, flour, and butter tortillas delivers the authentic texture and flavor that made H-E-B a Texas icon.
             </p>
           </div>
 
@@ -143,13 +143,13 @@ export default function LosAngelesPage() {
 </h2>
             <div className="prose prose-lg max-w-none text-charcoal-700">
               <p>
-                In a city bursting with incredible Mexican food, Los Angeles residents know quality when they taste it—and that's exactly why they're turning to Texas tortillas. While LA's local tortillerias offer great options, there's something uniquely irresistible about Texas-style tortillas. Made with H-E-B's original recipes (the same ones you'd find in stores across Texas), our tortillas boast a distinct flavor profile and texture perfected over decades.
+                In a city bursting with incredible Mexican food, Los Angeles residents know quality when they taste itâand that's exactly why they're turning to Texas tortillas. While LA's local tortillerias offer great options, there's something uniquely irresistible about Texas-style tortillas. Made with H-E-B's original recipes (the same ones you'd find in stores across Texas), our tortillas boast a distinct flavor profile and texture perfected over decades.
               </p>
               <p>
                 What makes Texas tortillas special? It starts with heritage. H-E-B has been a Texas institution since 1905, crafting tortillas with time-honored techniques that balance tenderness with just the right amount of pull. Our flour tortillas are rolled slightly thicker than West Coast styles, creating the perfect pliable base for brisket tacos or breakfast burritos. The corn tortillas feature a robust masa flavor that holds up beautifully on LA's famous fish tacos. And our cult-favorite butter tortillas? They're the secret weapon for next-level quesadillas.
               </p>
               <p>
-                For transplanted Texans in neighborhoods like Silver Lake or Santa Monica, our tortillas are a taste of home. For Angelenos, they're a delicious discovery—a way to elevate homemade Mexican food with authentic regional character.
+                For transplanted Texans in neighborhoods like Silver Lake or Santa Monica, our tortillas are a taste of home. For Angelenos, they're a delicious discoveryâa way to elevate homemade Mexican food with authentic regional character.
               </p>
             </div>
           </section>
@@ -164,7 +164,7 @@ export default function LosAngelesPage() {
                   Our stone-ground corn tortillas are a love letter to tradition. Made with non-GMO maize and a touch of lime, they deliver the authentic earthy flavor and sturdy texture perfect for LA's taco culture. Ideal for crispy carnitas tacos, enchiladas, or chilaquiles.
                 </p>
                 <Link href="/products/corn-tortillas" className="text-sunset-600 font-semibold hover:text-sunset-700">
-                  Shop Corn Tortillas →
+                  Shop Corn Tortillas â
                 </Link>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md border border-charcoal-100">
@@ -173,7 +173,7 @@ export default function LosAngelesPage() {
                   The holy grail of burrito-wrapping and quesadilla-making. Our flour tortillas feature a signature blend for that quintessential Texas chew. Slightly thicker than most California-style versions, they're strong enough for overstuffed Mission-style burritos.
                 </p>
                 <Link href="/products/flour-tortillas" className="text-sunset-600 font-semibold hover:text-sunset-700">
-                  Shop Flour Tortillas →
+                  Shop Flour Tortillas â
                 </Link>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md border border-charcoal-100">
@@ -182,7 +182,7 @@ export default function LosAngelesPage() {
                   Indulgence meets versatility. Enriched with real butter, these rich, flaky tortillas are a Texas delicacy Angelenos adore. Perfect for sweet applications like cinnamon-sugar roll-ups or savory masterpieces like gourmet quesadillas.
                 </p>
                 <Link href="/products/butter-tortillas" className="text-sunset-600 font-semibold hover:text-sunset-700">
-                  Shop Butter Tortillas →
+                  Shop Butter Tortillas â
                 </Link>
               </div>
             </div>
@@ -217,7 +217,7 @@ export default function LosAngelesPage() {
 </h2>
             <div className="prose prose-lg max-w-none text-charcoal-700">
               <p>
-                From the iconic birria tacos of Boyle Heights to the innovative Mexican-Korean fusion of Kogi BBQ trucks, Los Angeles has one of the world's most vibrant Mexican food landscapes. Yet even in this culinary paradise, home cooks and chefs alike seek authentic foundations—the building blocks that let quality ingredients shine. That's where Texas tortillas make their mark.
+                From the iconic birria tacos of Boyle Heights to the innovative Mexican-Korean fusion of Kogi BBQ trucks, Los Angeles has one of the world's most vibrant Mexican food landscapes. Yet even in this culinary paradise, home cooks and chefs alike seek authentic foundationsâthe building blocks that let quality ingredients shine. That's where Texas tortillas make their mark.
               </p>
               <p>
                 In neighborhoods like East LA and Highland Park, where multi-generational Mexican kitchens craft family recipes daily, our tortillas have become a quiet staple. They're the canvas for weekend barbacoa feasts in Echo Park, the base for seafood-topped tacos in Venice Beach, and the secret behind those irresistible food truck quesadillas.
@@ -238,7 +238,7 @@ export default function LosAngelesPage() {
                   Scramble eggs with diced Hatch chiles, pile onto warmed flour tortillas, and top with crispy bacon, shredded cheese, and a drizzle of salsa verde. LA twist: add avocado slices.
                 </p>
                 <Link href="/recipes/breakfast-tacos" className="text-sunset-600 text-sm font-semibold mt-2 inline-block">
-                  View Recipe →
+                  View Recipe â
                 </Link>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-sunset-500">
@@ -247,16 +247,16 @@ export default function LosAngelesPage() {
                   Marinate mahi-mahi in lime and chipotle, grill until flaky, and serve on corn tortillas with purple cabbage slaw and cilantro-lime crema.
                 </p>
                 <Link href="/recipes/fish-tacos" className="text-sunset-600 text-sm font-semibold mt-2 inline-block">
-                  View Recipe →
+                  View Recipe â
                 </Link>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-sunset-500">
                 <h3 className="font-bold text-charcoal-950 mb-2">Carne Asada Quesadillas</h3>
                 <p className="text-charcoal-700 text-sm">
-                  Layer butter tortillas with Oaxacan cheese, thinly sliced grilled steak, and caramelized onions. Cook until golden—perfect for Dodger game nights.
+                  Layer butter tortillas with Oaxacan cheese, thinly sliced grilled steak, and caramelized onions. Cook until goldenâperfect for Dodger game nights.
                 </p>
                 <Link href="/recipes/cheese-quesadillas" className="text-sunset-600 text-sm font-semibold mt-2 inline-block">
-                  View Recipe →
+                  View Recipe â
                 </Link>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-sunset-500">
@@ -265,13 +265,13 @@ export default function LosAngelesPage() {
                   Stuff flour tortillas with smoked brisket (from your favorite LA BBQ spot), black beans, Spanish rice, and pickled red onions.
                 </p>
                 <Link href="/recipes/brisket-breakfast-burrito" className="text-sunset-600 text-sm font-semibold mt-2 inline-block">
-                  View Recipe →
+                  View Recipe â
                 </Link>
               </div>
             </div>
             <div className="mt-6 text-center">
               <Link href="/recipes" className="text-sunset-600 font-bold hover:text-sunset-700">
-                Browse All Recipes →
+                Browse All Recipes â
               </Link>
             </div>
           </section>
@@ -288,19 +288,19 @@ export default function LosAngelesPage() {
                 <h3 className="font-bold text-charcoal-950 mb-2">How should I store my tortillas?</h3>
                 <p className="text-charcoal-700">
                   Keep refrigerated for up to 2 weeks or freeze for 6 months. Always reheat on a dry skillet for that fresh-off-the-griddle texture.
-                  <Link href="/guides/how-to-store-tortillas" className="text-sunset-600 ml-1 font-semibold">Learn more →</Link>
+                  <Link href="/guides/how-to-store-tortillas" className="text-sunset-600 ml-1 font-semibold">Learn more â</Link>
                 </p>
               </div>
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2">Are your tortillas gluten-free?</h3>
                 <p className="text-charcoal-700">
                   Our corn tortillas are gluten-free. Flour tortillas contain wheat.
-                  <Link href="/guides/gluten-free-tortillas" className="text-sunset-600 ml-1 font-semibold">Gluten-free guide →</Link>
+                  <Link href="/guides/gluten-free-tortillas" className="text-sunset-600 ml-1 font-semibold">Gluten-free guide â</Link>
                 </p>
               </div>
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2">What's the minimum order?</h3>
-                <p className="text-charcoal-700">No minimum! Order 1 package or 20—we ship any quantity.</p>
+                <p className="text-charcoal-700">We have an $80 minimum order — and every order ships free. Stock up; unopened packs freeze beautifully for up to 6 months.</p>
               </div>
               <div className="bg-cream-100 p-6 rounded-lg">
                 <h3 className="font-bold text-charcoal-950 mb-2">Do you ship to other cities in California?</h3>

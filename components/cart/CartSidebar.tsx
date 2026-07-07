@@ -8,7 +8,7 @@ import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed, getGA4Category, type CartItemData } from '@/lib/analytics';
-import { getProductBySku } from '@/lib/products';
+import { getProductBySku, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
 
 import { X, Minus, Plus, ShoppingBag, Truck, Lock, Tag, Check, ChevronDown } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
@@ -178,6 +178,10 @@ export function CartSidebar() {
   const isFreeShipping = discountApplied && discountType === 'free_shipping';
   const displayShipping = isFreeShipping ? 0 : shipping;
   const displayTotal = calculateDiscountedTotal() + displayShipping;
+
+  // Retail orders require an $80 minimum (wholesale has its own 16-pack minimum)
+  const belowMinimum = !hasWholesaleItems && subtotal < MINIMUM_ORDER_AMOUNT;
+  const minimumRemaining = MINIMUM_ORDER_AMOUNT - subtotal;
 
   // Validate discount code
   const handleApplyDiscount = async () => {
@@ -579,14 +583,21 @@ export function CartSidebar() {
                   {t('cart.trust.secure')} &bull; {t('cart.trust.fast')} &bull; {t('cart.trust.guaranteed')}
                 </p>
 
+                {/* Minimum Order Notice */}
+                {belowMinimum && (
+                  <p className="mb-2 text-center text-xs text-sunset-700 font-medium" role="status">
+                    Add {formatPrice(minimumRemaining)} more to reach our $80 minimum — and unlock free shipping
+                  </p>
+                )}
+
                 {/* Checkout Button */}
                 <button
                   onClick={handleCheckout}
-                  disabled={isProcessing}
+                  disabled={isProcessing || belowMinimum}
                   className="flex items-center justify-center gap-2 w-full py-3 bg-black text-white text-center text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   <Lock className="w-3.5 h-3.5" />
-                  {isProcessing ? t('cart.processing') : t('cart.checkout')}
+                  {isProcessing ? t('cart.processing') : belowMinimum ? '$80 minimum order' : t('cart.checkout')}
                 </button>
 
                 {/* Error Message */}

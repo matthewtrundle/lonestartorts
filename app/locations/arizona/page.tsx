@@ -50,7 +50,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to Arizona?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $80+ to Arizona and all other US states. For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Arizona.',
+        text: 'Yes! We offer free shipping on orders $80+ to Arizona and all other US states. All orders ship free with our $80 minimum order. We use USPS Priority Mail to ensure fast, reliable delivery to every address in Arizona.',
       },
     },
     {
@@ -124,7 +124,7 @@ export default function ArizonaPage() {
           <div className="grid md:grid-cols-3 gap-6 mt-6">
             <div className="text-center"><div className="text-3xl font-bold text-sunset-600">2-3</div><div className="text-sm text-charcoal-600">Days to Arizona</div></div>
             <div className="text-center"><div className="text-3xl font-bold text-sunset-600">8+</div><div className="text-sm text-charcoal-600">AZ Cities Served</div></div>
-            <div className="text-center"><div className="text-3xl font-bold text-sunset-600">$12.99</div><div className="text-sm text-charcoal-600">Flat Rate Shipping</div></div>
+            <div className="text-center"><div className="text-3xl font-bold text-sunset-600">FREE</div><div className="text-sm text-charcoal-600">Shipping on Every Order</div></div>
           </div>
         </section>
         {/* FAQ Section - SEO Content */}
@@ -172,7 +172,7 @@ export default function ArizonaPage() {
               <div className="p-4 bg-white border-t border-charcoal-200">
                 <p className="text-charcoal-700 leading-relaxed">
                   Yes! We offer free shipping on orders $80+ to Arizona and all other US states.
-                  For smaller orders, our flat-rate shipping is $12.99. We use USPS Priority Mail to ensure
+                  All orders ship free with our $80 minimum order. We use USPS Priority Mail to ensure
                   fast, reliable delivery to every address in Arizona.
                 </p>
               </div>

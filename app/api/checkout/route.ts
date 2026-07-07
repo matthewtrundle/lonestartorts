@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getRetailSkuFromWholesale, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE } from '@/lib/products';
+import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getRetailSkuFromWholesale, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
 import { getTierForPackCount, getWholesalePrice } from '@/lib/wholesale-tiers';
 
 // Texas sales tax rate
@@ -121,6 +121,13 @@ export async function POST(req: NextRequest) {
 
     // Calculate subtotal for free shipping threshold check
     const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Enforce retail minimum order (wholesale has its own 16-pack minimum)
+    if (!isWholesaleOrder && subtotal < MINIMUM_ORDER_AMOUNT) {
+      return NextResponse.json({
+        error: `Minimum order is $${(MINIMUM_ORDER_AMOUNT / 100).toFixed(0)}. Add $${((MINIMUM_ORDER_AMOUNT - subtotal) / 100).toFixed(2)} more to check out — shipping is free at $${(MINIMUM_ORDER_AMOUNT / 100).toFixed(0)}+.`
+      }, { status: 400 });
+    }
 
     // Calculate shipping based on subtotal ($12.99 flat, free on $80+)
     let shippingCost = calculateShipping(fullItems, subtotal);

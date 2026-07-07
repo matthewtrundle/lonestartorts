@@ -36,7 +36,7 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
       <p className="text-sm text-charcoal-700 mb-2">
         You&apos;re{' '}
         <span className="font-display font-bold text-sunset-700">{formatPrice(amountRemaining)}</span>{' '}
-        from free shipping
+        from our $80 minimum &mdash; ships free
       </p>
       {/* Progress bar */}
       <div className="h-2 bg-masa-100 rounded-full overflow-hidden">
@@ -46,7 +46,7 @@ export function FreeShippingProgress({ className = '', compact = false }: FreeSh
         />
       </div>
       {!compact && (
-        <p className="text-[10px] text-charcoal-500 mt-1.5">Orders under $80 ship for $12.99</p>
+        <p className="text-[10px] text-charcoal-500 mt-1.5">$80 minimum order &mdash; every order ships free</p>
       )}
     </div>
   );

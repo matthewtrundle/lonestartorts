@@ -121,7 +121,7 @@ const faqSchema = {
       name: 'How much does shipping cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'FREE shipping on orders $80+ (flat $12.99 under $80)! All orders are carefully packaged with insulation to ensure freshness during transit.'
+        text: 'FREE shipping on every order ($80 minimum order)! All orders are carefully packaged with insulation to ensure freshness during transit.'
       }
     },
     {
@@ -279,7 +279,7 @@ const faqs = [
       },
       {
         q: 'How much does shipping cost?',
-        a: 'FREE shipping on orders $80+ (flat $12.99 under $80)! All orders are carefully packaged with insulation to ensure freshness during transit.'
+        a: 'FREE shipping on every order ($80 minimum order)! All orders are carefully packaged with insulation to ensure freshness during transit.'
       },
       {
         q: 'How long does shipping take?',
@@ -334,7 +334,7 @@ const faqs = [
     questions: [
       {
         q: 'How much do the tortillas cost?',
-        a: 'Pricing varies by product - check our shop page for current prices. FREE shipping on orders $80+, flat $12.99 under $80.'
+        a: 'Pricing varies by product - check our shop page for current prices. FREE shipping on every order ($80 minimum order).'
       },
       {
         q: 'Do you offer subscriptions or recurring orders?',

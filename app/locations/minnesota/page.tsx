@@ -46,7 +46,7 @@ const faqSchema = {
       name: 'Do you offer free shipping to Minnesota?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! We offer free shipping on orders $80+ to Minnesota and all other US states. Flat-rate shipping is $12.99 for smaller orders.',
+        text: 'Yes! We offer free shipping on orders $80+ to Minnesota and all other US states. All orders ship free with our $80 minimum order.',
       },
     },
     {
@@ -140,7 +140,7 @@ export default function MinnesotaPage() {
                 </svg>
               </summary>
               <div className="p-4 bg-white border-t border-charcoal-200">
-                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders $80+ to Minnesota and all other US states. Flat-rate shipping is $12.99 for smaller orders.</p>
+                <p className="text-charcoal-700 leading-relaxed">Yes! We offer free shipping on orders $80+ to Minnesota and all other US states. All orders ship free with our $80 minimum order.</p>
               </div>
             </details>
             <details className="group border border-charcoal-200 rounded-lg overflow-hidden">

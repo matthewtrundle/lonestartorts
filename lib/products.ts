@@ -1,9 +1,9 @@
 // Product catalog - centralized source of truth
 // Pricing: 4x markup on all products
-// Shipping: FREE on orders $80+, flat $12.99 under $80
+// Shipping: FREE on all retail orders ($80 minimum order = free shipping threshold)
 
-// No minimum order amount (removed)
-export const MINIMUM_ORDER_AMOUNT = 0;
+// Minimum order amount in cents ($80) — retail checkout only, matches free shipping threshold
+export const MINIMUM_ORDER_AMOUNT = 8000;
 
 // Free shipping threshold in cents ($80)
 export const FREE_SHIPPING_THRESHOLD = 8000;

@@ -39,7 +39,7 @@ const faqSchema = {
       name: 'How should I store my tortillas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Keep them refrigerated and consume within 14 days. For longer storage, freeze in airtight bags – they’ll taste fresh-thawed for up to 3 months! [Link to: /guides/how-to-store-tortillas]',
+        text: 'Keep them refrigerated and consume within 14 days. For longer storage, freeze in airtight bags â theyâll taste fresh-thawed for up to 3 months! [Link to: /guides/how-to-store-tortillas]',
       },
     },
     {
@@ -55,7 +55,7 @@ const faqSchema = {
       name: 'What\'s the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No minimum! Though many San Diego customers save by ordering 5+ packs (and earning free shipping over $75).',
+        text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',
       },
     },
     {

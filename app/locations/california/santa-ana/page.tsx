@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to Santa Ana?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2–3 days! We ship via UPS Ground with insulated packaging to ensure freshness.',
+        text: 'Most orders arrive in 2â3 days! We ship via UPS Ground with insulated packaging to ensure freshness.',
       },
     },
     {
@@ -55,7 +55,7 @@ const faqSchema = {
       name: 'What\'s the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No minimum! Order one pack or stock up for the whole neighborhood.',
+        text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',
       },
     },
     {

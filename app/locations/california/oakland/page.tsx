@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to Oakland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2–3 days. We ship via FedEx or UPS with tracking updates sent straight to your inbox.',
+        text: 'Most orders arrive in 2â3 days. We ship via FedEx or UPS with tracking updates sent straight to your inbox.',
       },
     },
     {
@@ -52,10 +52,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'What’s the minimum order?',
+      name: 'Whatâs the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No minimum! Order one pack or stock up for the month.',
+        text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',
       },
     },
     {
