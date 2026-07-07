@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { prisma } from '@/lib/prisma';
-import { getProductBySku, getDisplayName } from '@/lib/products';
+import { getProductBySku, getDisplayName, products } from '@/lib/products';
 import { sendOrderConfirmationEmail, sendAdminOrderNotification } from '@/lib/email';
 import { trackTikTokPurchase } from '@/lib/tiktok';
 import { uploadOfflineConversion } from '@/lib/analytics/google-ads';
@@ -77,9 +77,12 @@ export async function POST(req: NextRequest) {
         const session = event.data.object as Stripe.Checkout.Session;
 
         try {
-          // Retrieve full session details with line items
+          // Retrieve full session details with line items. Expand the price's
+          // product too: checkout stores the SKU on the product metadata
+          // (price_data.product_data.metadata.sku), so we need the product to
+          // read it back.
           const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
-            expand: ['line_items'],
+            expand: ['line_items.data.price.product'],
           });
 
           // Generate simple order number: LST-{6-digit-counter}
@@ -92,9 +95,22 @@ export async function POST(req: NextRequest) {
           const items = fullSession.line_items?.data
             .filter((item) => !item.description?.includes('Sales Tax'))
             .map((item) => {
-              const sku = item.price?.metadata?.sku || '';
               const name = item.description || '';
-              const product = getProductBySku(sku);
+              // The SKU lives on the Stripe *product* metadata, not the price.
+              // Read it there, then fall back to matching the catalog by name so
+              // the order item always carries a real SKU. (Previously this read
+              // item.price.metadata.sku, which is never set, so every retail
+              // order item was saved with an empty SKU — which split the
+              // fulfillment buy-list into duplicate rows per product.)
+              const stripeProduct = item.price?.product;
+              const productMetaSku =
+                stripeProduct && typeof stripeProduct === 'object' && 'metadata' in stripeProduct
+                  ? stripeProduct.metadata?.sku
+                  : undefined;
+              const product =
+                (productMetaSku ? getProductBySku(productMetaSku) : undefined) ||
+                products.find((p) => p.name === name);
+              const sku = product?.sku || productMetaSku || '';
               // Generate displayName with count for tortilla products
               const displayName = product ? getDisplayName(product) : name;
               return {
