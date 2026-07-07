@@ -22,7 +22,7 @@ export function StickyCartBar() {
         <div className="bg-amber-50 px-4 py-2 text-center text-sm border-t border-amber-200">
           <div className="flex items-center justify-center gap-2 text-amber-700">
             <span className="font-medium">
-              Add {formatPrice(amountRemaining)} more for FREE shipping
+              Add {formatPrice(amountRemaining)} more to reach the $80 minimum &mdash; ships FREE
             </span>
           </div>
           <div className="mt-1 h-1.5 bg-amber-200 rounded-full overflow-hidden">

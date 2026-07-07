@@ -9,7 +9,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Other H-E-B Products — Salsas, Sauces & Texas Favorites',
   description:
-    'Texas favorites beyond tortillas — authentic H-E-B salsas, sauces, seasonings, and more, shipped nationwide. Ships with tortilla orders or $12.99 alone.',
+    'Texas favorites beyond tortillas — authentic H-E-B salsas, sauces, seasonings, and more, shipped nationwide. Ships free with your $80+ order.',
   alternates: { canonical: '/shop/heb-products' },
 };
 
@@ -45,7 +45,7 @@ export default function HEBProductsPage() {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Truck className="w-5 h-5 text-blue-600" aria-hidden="true" />
-                <span>Ships with tortilla orders or $12.99 alone</span>
+                <span>Ships free with your $80+ order</span>
               </div>
             </div>
           </div>

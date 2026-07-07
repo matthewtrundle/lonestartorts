@@ -562,11 +562,11 @@ export default function LocationsPage() {
                   <ul className="space-y-3 text-charcoal-700">
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>
-                      <span><strong>Free Shipping:</strong> Orders $80+</span>
+                      <span><strong>Free Shipping:</strong> Every order</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>
-                      <span><strong>Standard Shipping:</strong> $12.99 flat rate</span>
+                      <span><strong>Minimum Order:</strong> $80</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-sunset-500 mt-1">•</span>
