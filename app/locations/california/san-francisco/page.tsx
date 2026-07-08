@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to San Francisco?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2â3 business days via refrigerated shipping. We ship Tuesday if ordered by Monday 9 PM CT.',
+        text: 'Most orders arrive in 2–3 business days via refrigerated shipping. We ship Tuesday if ordered by Monday 9 PM CT.',
       },
     },
     {
@@ -52,7 +52,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Whatâs the minimum order?',
+      name: 'What’s the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',

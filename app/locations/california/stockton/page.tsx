@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to Stockton?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2â3 business days. We ship via UPS Ground with ice packs to ensure freshness.',
+        text: 'Most orders arrive in 2–3 business days. We ship via UPS Ground with ice packs to ensure freshness.',
       },
     },
     {
@@ -52,7 +52,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Whatâs the minimum order?',
+      name: 'What’s the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',

@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to Fresno?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most orders arrive in 2â3 days. We ship via FedEx with tracking.',
+        text: 'Most orders arrive in 2–3 days. We ship via FedEx with tracking.',
       },
     },
     {

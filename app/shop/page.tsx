@@ -56,7 +56,7 @@ const itemListSchema = {
             '@type': 'MonetaryAmount',
             value: '0',
             currency: 'USD',
-            description: 'Free shipping on every order â $80 minimum order.'
+            description: 'Free shipping on every order — $80 minimum order.'
           },
           deliveryTime: {
             '@type': 'ShippingDeliveryTime',

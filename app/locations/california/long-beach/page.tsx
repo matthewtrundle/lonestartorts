@@ -52,7 +52,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Whatâs the minimum order?',
+      name: 'What’s the minimum order?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'We have an $80 minimum order — and every order ships free. Stock up on your favorites; unopened packs freeze beautifully for up to 6 months.',

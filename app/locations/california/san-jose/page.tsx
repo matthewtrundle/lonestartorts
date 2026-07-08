@@ -31,7 +31,7 @@ const faqSchema = {
       name: 'How long does shipping take to San Jose?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Orders arrive in 2 business days. We ship MondayâThursday to ensure weekend-ready deliveries!',
+        text: 'Orders arrive in 2 business days. We ship Monday–Thursday to ensure weekend-ready deliveries!',
       },
     },
     {
