@@ -34,9 +34,33 @@ export interface Product {
   collection?: 'bakery' | 'pantry' | 'texas-brands'; // Product collection for shop sections
   brand?: 'heb' | 'mission' | 'la-banderita'; // Brand identifier for Texas brands section
   bundleOnly?: boolean; // Product only available in bundles (not sold standalone)
+  packsPerUnit?: number; // How many tortilla packs one unit counts as toward volume-tier pricing (default 1 for tortillas, 0 otherwise)
 }
 
 export const products: Product[] = [
+  // ============================================
+  // STARTER PACK — the "try us" bundle. One click, hits the order minimum,
+  // free shipping. This is the landing target for every "can I get a
+  // sample?" conversation now that free samples are off (2026-07 pivot):
+  // AI agents and nurture emails point prospects here for a first order.
+  // ============================================
+  {
+    sku: 'STARTER-PACK',
+    name: 'Lone Star Starter Pack',
+    description:
+      'The easiest way to try us: 2× Bakery Flour (20ct each), Mi Tienda Street Taco Flour (50ct), Texas-Size White Corn (80ct), Street Taco White Corn (24ct), plus a bottle of That Green Sauce. $89 value — ships free.',
+    image: '/images/products/flour-tortillas-heb.webp',
+    price: 8000, // $80 — exactly the order minimum, free shipping
+    tortillaCount: 194,
+    storage: 'refrigerated',
+    category: 'bundle',
+    productType: 'tortilla',
+    tortillaType: 'Assorted',
+    isBestSeller: true,
+    savingsPercent: 10,
+    collection: 'bakery',
+    packsPerUnit: 5, // counts as 5 packs toward volume-tier pricing
+  },
   // ============================================
   // BAKERY FRESH COLLECTION - Premium Products
   // ============================================
@@ -292,6 +316,25 @@ export function getWholesaleProductBySku(sku: string): Product | undefined {
 // Helper function to get product by SKU
 export function getProductBySku(sku: string) {
   return products.find((p) => p.sku === sku);
+}
+
+/**
+ * Total tortilla packs in a set of cart/checkout items, for volume-tier
+ * pricing. Counts EVERY tortilla product regardless of SKU family — retail
+ * SKUs and legacy WHOLESALE- SKUs alike — so a shopper buying 20 packs the
+ * normal way earns the same tier a wholesale-builder cart does. Bundles use
+ * packsPerUnit; non-tortilla products (sauces, salsas) count 0.
+ */
+export function getTortillaPackCount(items: { sku: string; quantity: number }[]): number {
+  return items.reduce((sum, item) => {
+    const baseSku = isWholesaleProduct(item.sku)
+      ? getRetailSkuFromWholesale(item.sku)
+      : item.sku;
+    if (!baseSku) return sum;
+    const product = products.find((p) => p.sku === baseSku);
+    if (!product || product.productType !== 'tortilla') return sum;
+    return sum + item.quantity * (product.packsPerUnit ?? 1);
+  }, 0);
 }
 
 // Generate display name with count for tortilla products

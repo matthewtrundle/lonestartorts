@@ -75,22 +75,22 @@ export default function WholesalePage() {
                 </h1>
                 <p className="text-xl text-cream-200 mb-8">
                   Our full range of H-E-B tortillas for your restaurant, food
-                  truck, or catering business. Choose from 11 varieties with
-                  volume discounts up to 25% off, weekly delivery, and free
-                  shipping on every order.
+                  truck, or catering business. Volume discounts up to 25% off
+                  apply automatically at checkout — no account, no application,
+                  no waiting. Order in minutes with free shipping on every order.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a
                     href="#pricing"
                     className="inline-flex items-center gap-2 bg-sunset-600 hover:bg-sunset-700 text-white px-8 py-4 rounded-lg font-bold transition-colors"
                   >
-                    Build Your Order
+                    Build Your Order — No Account Needed
                   </a>
                   <a
                     href="#inquiry-form"
-                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-lg font-medium transition-colors text-sm"
                   >
-                    Request Custom Quote
+                    100+ packs/month or NET terms? Talk to us
                   </a>
                 </div>
               </div>
@@ -133,21 +133,21 @@ export default function WholesalePage() {
 
             <div className="mt-8 text-center space-y-3">
               <p className="text-charcoal-600">
-                Pack sizes vary by product (10-80 tortillas per pack). Need a custom volume?
+                Pack sizes vary by product (10-80 tortillas per pack). Checkout takes an email — that's it.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="#inquiry-form"
+                <Link
+                  href="/shop"
                   className="inline-flex items-center gap-2 text-sunset-600 hover:text-sunset-700 font-semibold underline underline-offset-4"
                 >
-                  Request a Custom Quote
-                </a>
-                <Link
-                  href="/account/login"
+                  Just want to try us first? Grab the Starter Pack →
+                </Link>
+                <a
+                  href="#inquiry-form"
                   className="inline-flex items-center gap-2 text-charcoal-600 hover:text-charcoal-800 font-medium"
                 >
-                  Already have an account? Sign in →
-                </Link>
+                  Ordering 100+ packs/month or need NET terms?
+                </a>
               </div>
             </div>
           </div>
@@ -157,9 +157,9 @@ export default function WholesalePage() {
         <section id="inquiry-form" className="py-12 bg-white scroll-mt-24">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
             <SectionHeader
-              eyebrow="Custom Quotes"
-              title="Request Custom Pricing"
-              sub="Need a custom volume, mixed varieties, or special delivery schedule? Tell us about your business and we'll create a tailored solution."
+              eyebrow="Enterprise & NET Terms"
+              title="High-Volume and Invoice Accounts"
+              sub="Ordering 100+ packs a month, need NET-terms invoicing, or a custom delivery schedule? Tell us about your business and we'll set you up. Everyone else: just build your order above — discounts apply automatically."
               align="center"
             />
             <WholesaleForm />

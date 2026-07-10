@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getRetailSkuFromWholesale, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
+import { getProductBySku, getWholesaleProductBySku, isWholesaleProduct, getRetailSkuFromWholesale, getTortillaPackCount, calculateShipping, calculateBaseShipping, FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
 import { getTierForPackCount, getWholesalePrice } from '@/lib/wholesale-tiers';
 
 // Texas sales tax rate
@@ -73,20 +73,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid items' }, { status: 400 });
     }
 
-    // Count total wholesale packs for tier determination
-    const totalWholesalePacks = items
-      .filter((item: { sku: string; quantity: number }) => isWholesaleProduct(item.sku))
-      .reduce((sum: number, item: { sku: string; quantity: number }) => sum + item.quantity, 0);
-
-    // Determine wholesale tier (if any wholesale items)
-    const wholesaleTier = totalWholesalePacks > 0 ? getTierForPackCount(totalWholesalePacks) : null;
-
-    // Validate minimum wholesale pack count
-    if (totalWholesalePacks > 0 && !wholesaleTier) {
-      return NextResponse.json({
-        error: 'Minimum 16 packs required for wholesale pricing. Please add more items or shop retail.'
-      }, { status: 400 });
-    }
+    // Volume tier from TOTAL tortilla packs across the whole cart — retail
+    // and legacy WHOLESALE- SKUs alike. Wholesale is not a separate store:
+    // any cart that reaches 16+ packs earns tier pricing automatically, no
+    // account, no special SKUs. (Legacy WHOLESALE- carts below a tier are
+    // simply priced at retail instead of erroring.)
+    const totalTortillaPacks = getTortillaPackCount(items);
+    const wholesaleTier = getTierForPackCount(totalTortillaPacks);
 
     // Build full items array with productType, sku, and server-validated price
     const fullItems = items.map((item: { sku: string; quantity: number; price?: number }) => {
@@ -95,17 +88,15 @@ export async function POST(req: NextRequest) {
         throw new Error(`Invalid product SKU: ${item.sku}`);
       }
 
-      let price = product.price;
-
-      // For wholesale items, compute server-side price from tier discount
-      if (isWholesaleProduct(item.sku) && wholesaleTier) {
-        const retailSku = getRetailSkuFromWholesale(item.sku);
-        if (retailSku) {
-          const retailProduct = getProductBySku(retailSku);
-          if (retailProduct) {
-            price = getWholesalePrice(retailProduct.price, wholesaleTier.discountPercent);
-          }
-        }
+      // Server-side price. Tier pricing applies to every tortilla product
+      // when the cart reaches a tier; the base (retail) product price is
+      // always the starting point, so legacy WHOLESALE- SKUs and retail SKUs
+      // price identically.
+      const retailSku = isWholesaleProduct(item.sku) ? getRetailSkuFromWholesale(item.sku) : item.sku;
+      const baseProduct = retailSku ? getProductBySku(retailSku) : undefined;
+      let price = baseProduct?.price ?? product.price;
+      if (wholesaleTier && baseProduct?.productType === 'tortilla') {
+        price = getWholesalePrice(price, wholesaleTier.discountPercent);
       }
 
       return {
@@ -116,13 +107,14 @@ export async function POST(req: NextRequest) {
       };
     });
 
-    // Check if this is a wholesale order (for free shipping and metadata)
-    const isWholesaleOrder = fullItems.some(item => isWholesaleProduct(item.sku));
+    // "Wholesale order" now means: tier pricing applied (free shipping + ACH
+    // payment option + metadata for ops/analytics).
+    const isWholesaleOrder = !!wholesaleTier;
 
     // Calculate subtotal for free shipping threshold check
     const subtotal = fullItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    // Enforce retail minimum order (wholesale has its own 16-pack minimum)
+    // Enforce minimum order (tier carts are always far above it)
     if (!isWholesaleOrder && subtotal < MINIMUM_ORDER_AMOUNT) {
       return NextResponse.json({
         error: `Minimum order is $${(MINIMUM_ORDER_AMOUNT / 100).toFixed(0)}. Add $${((MINIMUM_ORDER_AMOUNT - subtotal) / 100).toFixed(2)} more to check out — shipping is free at $${(MINIMUM_ORDER_AMOUNT / 100).toFixed(0)}+.`
@@ -413,24 +405,23 @@ export async function POST(req: NextRequest) {
       return `Freshness First Shipping ($${(FLAT_SHIPPING_RATE / 100).toFixed(2)}) — Ships ${shipDateDisplay}`;
     };
 
-    // Wholesale order: verify customer and link Stripe customer
+    // Tier orders need NO account — the old hard wall here ("Account required
+    // for wholesale orders") forced mid-purchase registration that
+    // auto-approved anyone anyway, and was the store's worst abandonment
+    // point. If the buyer happens to be a signed-in wholesale customer we
+    // still link their Stripe customer + WholesaleClient for order history
+    // and NET-terms continuity; guests just check out.
     let stripeCustomerIdForSession: string | undefined;
     let wholesaleClientId: string | undefined;
-    if (isWholesaleOrder) {
-      if (!customerId) {
-        return NextResponse.json({ error: 'Account required for wholesale orders. Please sign in or register.' }, { status: 400 });
-      }
+    if (isWholesaleOrder && customerId) {
       const customer = await prisma.customer.findUnique({
         where: { id: customerId },
         include: { WholesaleClient: true },
       });
-      if (!customer || !customer.isWholesale) {
-        return NextResponse.json({ error: 'Wholesale account required. Please register as a wholesale customer.' }, { status: 400 });
-      }
-      if (customer.stripeCustomerId) {
+      if (customer?.stripeCustomerId) {
         stripeCustomerIdForSession = customer.stripeCustomerId;
       }
-      if (customer.WholesaleClient) {
+      if (customer?.WholesaleClient) {
         wholesaleClientId = customer.WholesaleClient.id;
       }
     }
@@ -457,6 +448,11 @@ export async function POST(req: NextRequest) {
         subtotal: subtotal.toString(), // Order subtotal
         taxAmount: taxAmount.toString(), // Sales tax amount
         isWholesaleOrder: isWholesaleOrder.toString(), // Track wholesale orders
+        ...(wholesaleTier && {
+          volumeTierName: wholesaleTier.name,
+          volumeTierPercent: wholesaleTier.discountPercent.toString(),
+          volumeTierPacks: totalTortillaPacks.toString(),
+        }),
         estimatedShipDate, // Freshness First ship date
         ...(customerId && { customerId }),
         ...(wholesaleClientId && { wholesaleClientId }),

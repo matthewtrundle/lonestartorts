@@ -8,7 +8,9 @@ import {
   FREE_SHIPPING_THRESHOLD,
   products,
   isWholesaleProduct,
+  getTortillaPackCount,
 } from '@/lib/products';
+import { getTierForPackCount, getWholesalePrice, wholesaleTiers } from '@/lib/wholesale-tiers';
 
 // Texas sales tax rate
 export const TAX_RATE = 0.0825; // 8.25%
@@ -33,6 +35,21 @@ interface FreeShippingProgress {
   savedAmount: number;
 }
 
+/**
+ * Volume-tier state for the whole cart. Wholesale is not a separate store —
+ * any cart whose tortilla-pack count reaches a tier gets that discount
+ * automatically (display here; the checkout API recomputes server-side).
+ */
+export interface VolumeTierInfo {
+  packCount: number;
+  discountPercent: number;
+  /** Cents off the subtotal from tier pricing (0 when below the first tier). */
+  discountAmount: number;
+  tierName: string | null;
+  /** The next tier worth nudging toward, if any. */
+  next: { tierName: string; discountPercent: number; packsNeeded: number } | null;
+}
+
 interface SpinPrize {
   id: string;
   name: string;
@@ -53,6 +70,7 @@ interface CartContextType {
   shipping: number;
   baseShipping: number; // What shipping would be without free shipping
   total: number;
+  volumeTier: VolumeTierInfo;
   freeShippingProgress: FreeShippingProgress;
   freeShippingThreshold: number;
   addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
@@ -199,15 +217,49 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Calculate totals with shipping
   // Shipping: FREE on orders $80+, flat $12.99 under $80
-  const { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress } = useMemo(() => {
+  const { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress, volumeTier } = useMemo(() => {
     const itemCount = items.reduce((total, item) => total + item.quantity, 0);
     const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const tax = Math.round(subtotal * TAX_RATE); // 8.25% Texas sales tax
-    const shipping = calculateShipping(items, subtotal);
+
+    // Volume-tier discount: computed from total tortilla packs across the
+    // whole cart. Legacy WHOLESALE- items already carry tier pricing in their
+    // stored price, so they count toward the pack total but are excluded from
+    // the discount amount (no double discount). Mirrors the checkout API's
+    // server-side math (per-unit rounding).
+    const packCount = getTortillaPackCount(items);
+    const tier = getTierForPackCount(packCount);
+    const discountPercent = tier?.discountPercent ?? 0;
+    const discountAmount = !tier
+      ? 0
+      : items.reduce((sum, item) => {
+          if (isWholesaleProduct(item.sku)) return sum;
+          const product = products.find((p) => p.sku === item.sku);
+          if (!product || product.productType !== 'tortilla') return sum;
+          return sum + (item.price - getWholesalePrice(item.price, discountPercent)) * item.quantity;
+        }, 0);
+    const tierIndex = tier ? wholesaleTiers.findIndex((t) => t.id === tier.id) : -1;
+    const nextTier = tierIndex < wholesaleTiers.length - 1 ? wholesaleTiers[tierIndex + 1] : null;
+    const volumeTier: VolumeTierInfo = {
+      packCount,
+      discountPercent,
+      discountAmount,
+      tierName: tier?.name ?? null,
+      next: nextTier
+        ? {
+            tierName: nextTier.name,
+            discountPercent: nextTier.discountPercent,
+            packsNeeded: Math.max(0, nextTier.packsPerMonth - packCount),
+          }
+        : null,
+    };
+
+    const discountedSubtotal = subtotal - discountAmount;
+    const tax = Math.round(discountedSubtotal * TAX_RATE); // 8.25% Texas sales tax
+    const shipping = calculateShipping(items, discountedSubtotal);
     const baseShipping = calculateBaseShipping(items); // What shipping would be without free threshold
-    const total = subtotal + tax + shipping;
-    const freeShippingProgress = getFreeShippingProgress(subtotal);
-    return { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress };
+    const total = discountedSubtotal + tax + shipping;
+    const freeShippingProgress = getFreeShippingProgress(discountedSubtotal);
+    return { itemCount, subtotal, tax, shipping, baseShipping, total, freeShippingProgress, volumeTier };
   }, [items]);
 
   const value: CartContextType = {
@@ -218,6 +270,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     shipping,
     baseShipping,
     total,
+    volumeTier,
     freeShippingProgress,
     freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
     addItem,

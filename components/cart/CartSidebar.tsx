@@ -50,7 +50,7 @@ function ShippingDisplay({ hasWholesaleItems, freeShippingQualifies, shipping }:
 }
 
 export function CartSidebar() {
-  const { items, itemCount, subtotal, shipping, baseShipping, total, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
+  const { items, itemCount, subtotal, shipping, baseShipping, total, volumeTier, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
   const { t } = useLanguage();
   const router = useRouter();
   const hasWholesaleItems = items.some(item => item.productType === 'wholesale');
@@ -148,28 +148,32 @@ export function CartSidebar() {
     }
   };
 
+  // Volume-tier pricing comes off the subtotal first; discount codes apply on
+  // top of the tier-adjusted amount (mirrors checkout + server math).
+  const tierSubtotal = subtotal - volumeTier.discountAmount;
+
   // Calculate display totals based on discount type
   // Note: This returns the SUBTOTAL portion (before shipping), not the full total
   const calculateDiscountedTotal = () => {
-    if (!discountApplied) return subtotal; // Return subtotal, NOT total (shipping is added separately)
+    if (!discountApplied) return tierSubtotal; // Return subtotal, NOT total (shipping is added separately)
 
-    let discountedTotal = subtotal;
+    let discountedTotal = tierSubtotal;
 
     // Apply product discount (free shipping types)
     if (discountType === 'free_shipping') {
       // Free shipping - just use subtotal (no shipping cost added)
-      return subtotal;
+      return tierSubtotal;
     }
 
     // Apply fixed discount ($5 off, free sauce value, etc.)
     if (discountType === 'fixed' || discountType === 'product' || discountType === 'bonus') {
-      discountedTotal = Math.max(0, subtotal - discountAmount);
+      discountedTotal = Math.max(0, tierSubtotal - discountAmount);
     }
 
     // Apply percentage discount (10% off) - no cap for most codes
     if (discountType === 'percentage') {
-      const percentOff = Math.round(subtotal * (discountAmount / 100));
-      discountedTotal = subtotal - percentOff;
+      const percentOff = Math.round(tierSubtotal * (discountAmount / 100));
+      discountedTotal = tierSubtotal - percentOff;
     }
 
     return discountedTotal;
@@ -179,9 +183,9 @@ export function CartSidebar() {
   const displayShipping = isFreeShipping ? 0 : shipping;
   const displayTotal = calculateDiscountedTotal() + displayShipping;
 
-  // Retail orders require an $80 minimum (wholesale has its own 16-pack minimum)
-  const belowMinimum = !hasWholesaleItems && subtotal < MINIMUM_ORDER_AMOUNT;
-  const minimumRemaining = MINIMUM_ORDER_AMOUNT - subtotal;
+  // Orders require an $80 minimum — tier carts (16+ packs) always clear it
+  const belowMinimum = !hasWholesaleItems && volumeTier.discountPercent === 0 && tierSubtotal < MINIMUM_ORDER_AMOUNT;
+  const minimumRemaining = MINIMUM_ORDER_AMOUNT - tierSubtotal;
 
   // Validate discount code
   const handleApplyDiscount = async () => {
@@ -465,6 +469,28 @@ export function CartSidebar() {
             {/* Footer with totals and checkout - sticky at bottom */}
             {items.length > 0 && (
               <div className="border-t border-gray-200 p-3 bg-gray-50 mt-auto sticky bottom-0">
+                {/* Volume-tier status / nudge — the wholesale program IS the
+                    normal cart: tiers unlock automatically by pack count. */}
+                {volumeTier.discountPercent > 0 ? (
+                  <div className="mb-2 p-2 bg-lime-50 border border-lime-200 rounded-lg text-xs">
+                    <span className="font-semibold text-lime-800">
+                      {volumeTier.tierName} volume pricing — {volumeTier.discountPercent}% off ({volumeTier.packCount} packs)
+                    </span>
+                    {volumeTier.next && (
+                      <span className="block text-lime-700 mt-0.5">
+                        Add {volumeTier.next.packsNeeded} more pack{volumeTier.next.packsNeeded !== 1 ? 's' : ''} for {volumeTier.next.discountPercent}% off
+                      </span>
+                    )}
+                  </div>
+                ) : volumeTier.packCount >= 8 && volumeTier.next ? (
+                  <div className="mb-2 p-2 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
+                    <span className="font-semibold">
+                      {volumeTier.next.packsNeeded} pack{volumeTier.next.packsNeeded !== 1 ? 's' : ''} away from {volumeTier.next.discountPercent}% volume pricing
+                    </span>
+                    <span className="block mt-0.5">Buying for a restaurant or event? Bulk discounts apply automatically.</span>
+                  </div>
+                ) : null}
+
                 {/* Free Shipping Progress */}
                 <FreeShippingProgress className="mb-2" compact />
 
@@ -547,13 +573,19 @@ export function CartSidebar() {
                     <span className="text-gray-600">{t('cart.subtotal')}</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
+                  {volumeTier.discountAmount > 0 && (
+                    <div className="flex justify-between text-lime-700">
+                      <span>Volume discount ({volumeTier.discountPercent}%)</span>
+                      <span className="font-medium">-{formatPrice(volumeTier.discountAmount)}</span>
+                    </div>
+                  )}
                   {/* Show discount line for non-shipping discounts */}
                   {discountApplied && discountType !== 'free_shipping' && discountAmount > 0 && (
                     <div className="flex justify-between text-lime-700">
                       <span>{discountType === 'percentage' ? `Discount (${discountAmount}%)` : 'Discount'}</span>
                       <span className="font-medium">
                         -{formatPrice(discountType === 'percentage'
-                          ? Math.round(subtotal * (discountAmount / 100))
+                          ? Math.round(tierSubtotal * (discountAmount / 100))
                           : discountAmount
                         )}
                       </span>

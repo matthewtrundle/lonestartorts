@@ -13,12 +13,11 @@ import { getShippingMessage, getTimeUntilCutoff } from '@/lib/shipping-schedule'
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle, Star, Gift, FileText } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
-import { WholesaleAuthGate } from '@/components/wholesale/WholesaleAuthGate';
 import WholesaleCheckoutSummary from '@/components/checkout/WholesaleCheckoutSummary';
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, itemCount, subtotal, tax, shipping, total, clearCart, isHydrated, updateQuantity, removeItem } = useCart();
+  const { items, itemCount, subtotal, tax, shipping, total, volumeTier, clearCart, isHydrated, updateQuantity, removeItem } = useCart();
   const { t } = useLanguage();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +51,6 @@ export default function CheckoutPage() {
   }, []);
 
   // Wholesale auth state
-  const hasWholesaleItems = items.some(item => item.productType === 'wholesale');
   const [wholesaleCustomer, setWholesaleCustomer] = useState<{
     id: string;
     email: string;
@@ -66,8 +64,6 @@ export default function CheckoutPage() {
       discountPercent: number;
     };
   } | null>(null);
-  const [checkingAuth, setCheckingAuth] = useState(false);
-  const [wholesaleAuthError, setWholesaleAuthError] = useState<string | null>(null);
 
   // Loyalty points state
   const [loyaltyBalance, setLoyaltyBalance] = useState<number>(0);
@@ -76,66 +72,48 @@ export default function CheckoutPage() {
   const [loyaltyCode, setLoyaltyCode] = useState<string | null>(null);
   const [customerEmail, setCustomerEmail] = useState<string | null>(null);
 
-  // Check if already logged in for wholesale orders + fetch loyalty data
+  // Fetch customer session once — for loyalty data on every order, and to
+  // recognize signed-in wholesale customers (NET-terms invoicing, account
+  // linking). NO ORDER IS GATED ON THIS: guests check out with any quantity,
+  // and volume-tier pricing applies automatically. The old mid-checkout
+  // wholesale registration wall is gone.
   React.useEffect(() => {
-    if (hasWholesaleItems && !wholesaleCustomer) {
-      setCheckingAuth(true);
-      setWholesaleAuthError(null);
-      setLoyaltyLoading(true);
-      fetch('/api/customer/me')
-        .then(res => res.ok ? res.json() : null)
-        .then(data => {
-          if (data?.customer?.isWholesale) {
-            setWholesaleCustomer({
-              ...data.customer,
-              wholesale: data.customer.wholesale ? {
-                businessName: data.customer.wholesale.businessName,
-                paymentTerms: data.customer.wholesale.paymentTerms,
-                paymentTermsLevel: data.customer.wholesale.termsProgress?.currentLevel || 'NEW',
-                pricingTier: data.customer.wholesale.pricingTier,
-                discountPercent: data.customer.wholesale.discountPercent || 0,
-              } : undefined,
-            });
-          } else if (data?.customer && !data.customer.isWholesale) {
-            setWholesaleAuthError('Your account is not approved for wholesale ordering. Please register a new wholesale account below.');
-          }
-          // Extract loyalty data
-          if (data?.customer?.email) {
-            setCustomerEmail(data.customer.email);
-          }
-          if (data?.loyaltyData) {
-            setLoyaltyBalance(data.loyaltyData.balance || 0);
-          }
-        })
-        .catch(() => {})
-        .finally(() => {
-          setCheckingAuth(false);
-          setLoyaltyLoading(false);
-        });
-    }
-  }, [hasWholesaleItems]);
+    setLoyaltyLoading(true);
+    fetch('/api/customer/me')
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data?.customer?.isWholesale) {
+          setWholesaleCustomer({
+            ...data.customer,
+            wholesale: data.customer.wholesale ? {
+              businessName: data.customer.wholesale.businessName,
+              paymentTerms: data.customer.wholesale.paymentTerms,
+              paymentTermsLevel: data.customer.wholesale.termsProgress?.currentLevel || 'NEW',
+              pricingTier: data.customer.wholesale.pricingTier,
+              discountPercent: data.customer.wholesale.discountPercent || 0,
+            } : undefined,
+          });
+        }
+        // Extract loyalty data
+        if (data?.customer?.email) {
+          setCustomerEmail(data.customer.email);
+        }
+        if (data?.loyaltyData) {
+          setLoyaltyBalance(data.loyaltyData.balance || 0);
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        setLoyaltyLoading(false);
+      });
+  }, []);
 
-  // Fetch loyalty data for non-wholesale orders
-  React.useEffect(() => {
-    if (!hasWholesaleItems) {
-      setLoyaltyLoading(true);
-      fetch('/api/customer/me')
-        .then(res => res.ok ? res.json() : null)
-        .then(data => {
-          if (data?.customer?.email) {
-            setCustomerEmail(data.customer.email);
-          }
-          if (data?.loyaltyData) {
-            setLoyaltyBalance(data.loyaltyData.balance || 0);
-          }
-        })
-        .catch(() => {})
-        .finally(() => setLoyaltyLoading(false));
-    }
-  }, [hasWholesaleItems]);
-
-  const wholesaleAuthReady = !hasWholesaleItems || !!wholesaleCustomer;
-  const isNetTerms = hasWholesaleItems && wholesaleCustomer?.wholesale?.paymentTerms && wholesaleCustomer.wholesale.paymentTerms !== 'DUE_ON_RECEIPT';
+  // NET-terms invoicing: only for signed-in wholesale customers with terms,
+  // on carts that actually reach a volume tier (16+ packs).
+  const isNetTerms =
+    !!wholesaleCustomer?.wholesale?.paymentTerms &&
+    wholesaleCustomer.wholesale.paymentTerms !== 'DUE_ON_RECEIPT' &&
+    volumeTier.discountPercent > 0;
 
   // Discount code state
   const [email, setEmail] = useState('');
@@ -195,17 +173,20 @@ export default function CheckoutPage() {
   }, [items.length, subtotal, shipping, total, pageLoadTime, didProceedToPayment]);
 
   // Calculate display total (with discount if applied)
+  // Volume-tier pricing comes off the subtotal first; discount codes apply on
+  // top of the tier-adjusted amount (mirrors the server's math).
+  const tierAdjustedSubtotal = subtotal - volumeTier.discountAmount;
   const isFreeShipping = discountApplied && discountType === 'free_shipping';
   const isPercentageDiscount = discountApplied && discountType === 'percentage';
   const isFixedAmountDiscount = discountApplied && discountType === 'fixed_amount';
-  const percentageDiscountValue = isPercentageDiscount ? Math.round(subtotal * (discountAmount / 100)) : 0;
+  const percentageDiscountValue = isPercentageDiscount ? Math.round(tierAdjustedSubtotal * (discountAmount / 100)) : 0;
   const fixedDiscountValue = isFixedAmountDiscount ? discountAmount : 0;
   const displayShipping = isFreeShipping ? 0 : shipping;
   const displaySubtotalAfterDiscount = isPercentageDiscount
-    ? subtotal - percentageDiscountValue
+    ? tierAdjustedSubtotal - percentageDiscountValue
     : isFixedAmountDiscount
-      ? Math.max(0, subtotal - fixedDiscountValue)
-      : subtotal;
+      ? Math.max(0, tierAdjustedSubtotal - fixedDiscountValue)
+      : tierAdjustedSubtotal;
   // Recalculate tax based on discounted subtotal
   const displayTax = Math.round(displaySubtotalAfterDiscount * 0.0825);
   const displayTotal = displaySubtotalAfterDiscount + displayTax + displayShipping;
@@ -489,25 +470,10 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* Wholesale Auth Gate */}
-              {hasWholesaleItems && !wholesaleCustomer && !checkingAuth && (
-                <>
-                  {wholesaleAuthError && (
-                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
-                      <p className="text-sm text-red-700">{wholesaleAuthError}</p>
-                    </div>
-                  )}
-                  <WholesaleAuthGate
-                    onAuthenticated={(customer) => {
-                      setWholesaleAuthError(null);
-                      setWholesaleCustomer(customer);
-                    }}
-                  />
-                </>
-              )}
-
-              {/* Wholesale Checkout Summary */}
-              {hasWholesaleItems && wholesaleCustomer && (
+              {/* Wholesale Checkout Summary — signed-in wholesale customers
+                  on tier carts see their business/terms context; guests just
+                  check out (no auth gate; the account wall is gone). */}
+              {volumeTier.discountPercent > 0 && wholesaleCustomer && (
                 <WholesaleCheckoutSummary
                   businessName={wholesaleCustomer.wholesale?.businessName || 'Wholesale Account'}
                   paymentTerms={wholesaleCustomer.wholesale?.paymentTerms || 'DUE_ON_RECEIPT'}
@@ -573,6 +539,14 @@ export default function CheckoutPage() {
                     <span className="text-charcoal-600">Subtotal</span>
                     <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
+                  {volumeTier.discountAmount > 0 && (
+                    <div className="flex justify-between items-center text-green-600">
+                      <span>
+                        Volume discount — {volumeTier.tierName} ({volumeTier.discountPercent}% off, {volumeTier.packCount} packs)
+                      </span>
+                      <span className="font-medium">-{formatPrice(volumeTier.discountAmount)}</span>
+                    </div>
+                  )}
                   {isPercentageDiscount && (
                     <div className="flex justify-between items-center text-green-600">
                       <span>Discount ({discountAmount}%)</span>
@@ -587,7 +561,7 @@ export default function CheckoutPage() {
                   )}
                   <div className="flex justify-between items-center">
                     <span className="text-charcoal-600">Shipping</span>
-                    {subtotal >= 8000 || isFreeShipping ? (
+                    {tierAdjustedSubtotal >= 8000 || isFreeShipping ? (
                       <span className="font-medium text-green-600">FREE</span>
                     ) : (
                       <span className="font-medium">{formatPrice(shipping)}</span>
@@ -613,7 +587,7 @@ export default function CheckoutPage() {
                     variant="cart"
                     size="lg"
                     onClick={handleWholesalePlaceOrder}
-                    disabled={isProcessing || !wholesaleAuthReady}
+                    disabled={isProcessing}
                     className="w-full rounded-lg uppercase flex items-center justify-center gap-2"
                   >
                     <FileText className="w-4 h-4" />
@@ -624,11 +598,11 @@ export default function CheckoutPage() {
                     variant="cart"
                     size="lg"
                     onClick={handleCheckout}
-                    disabled={isProcessing || !wholesaleAuthReady}
+                    disabled={isProcessing}
                     className="w-full rounded-lg uppercase flex items-center justify-center gap-2"
                   >
                     <Lock className="w-4 h-4" />
-                    {isProcessing ? 'Processing...' : !wholesaleAuthReady ? 'Sign In to Checkout' : 'Proceed to Payment'}
+                    {isProcessing ? 'Processing...' : 'Proceed to Payment'}
                   </Button>
                 )}
 
