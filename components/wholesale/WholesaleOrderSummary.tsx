@@ -6,7 +6,6 @@ import {
   ChevronDown,
   ChevronUp,
   Truck,
-  Lock,
 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { WholesaleTier } from '@/lib/wholesale-tiers';
@@ -143,21 +142,14 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
             <span className="font-medium">Free shipping on all wholesale orders</span>
           </div>
 
-          {/* Add to Cart Button */}
+          {/* Add to Cart Button — no lock below a tier anymore: small carts
+              just add at retail price and the cart nudges toward 16 packs. */}
           {totalPacks === 0 ? (
             <button
               disabled
               className="w-full flex items-center justify-center gap-2 bg-gray-300 text-gray-500 font-bold py-3.5 px-6 rounded-lg text-sm cursor-not-allowed"
             >
               Select Products to Continue
-            </button>
-          ) : !hasTier ? (
-            <button
-              disabled
-              className="w-full flex items-center justify-center gap-2 bg-amber-500 text-white font-bold py-3.5 px-6 rounded-lg text-sm cursor-not-allowed"
-            >
-              <Lock className="w-4 h-4" />
-              Add {packsToMinimum} More to Unlock
             </button>
           ) : (
             <button
@@ -166,6 +158,7 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
             >
               <ShoppingBag className="w-5 h-5" />
               Add {totalPacks} Pack{totalPacks !== 1 ? 's' : ''} to Cart
+              {!hasTier && packsToMinimum > 0 ? ` — ${packsToMinimum} more for 10% off` : ''}
             </button>
           )}
         </div>
@@ -199,14 +192,6 @@ export const WholesaleOrderSummary: React.FC<WholesaleOrderSummaryProps> = ({
                 className="flex-1 max-w-[200px] flex items-center justify-center gap-2 bg-gray-300 text-gray-500 font-bold py-3 px-4 rounded-lg text-sm cursor-not-allowed"
               >
                 Add Products
-              </button>
-            ) : !hasTier ? (
-              <button
-                disabled
-                className="flex-1 max-w-[200px] flex items-center justify-center gap-1.5 bg-amber-500 text-white font-bold py-3 px-4 rounded-lg text-sm cursor-not-allowed"
-              >
-                <Lock className="w-4 h-4" />
-                {packsToMinimum} More
               </button>
             ) : (
               <button

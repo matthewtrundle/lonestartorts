@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useCart } from '@/lib/cart-context';
-import { getTortillaProducts, getWholesaleSku } from '@/lib/products';
+import { getTortillaProducts } from '@/lib/products';
 import {
   getTierForPackCount,
   getWholesalePrice,
@@ -90,19 +90,21 @@ export const WholesaleOrderBuilder: React.FC = () => {
   };
 
   const handleAddToCart = () => {
-    if (!currentTier) return;
-
+    // Regular retail SKUs at retail price — the cart computes the volume-tier
+    // discount from the TOTAL pack count across everything in it (and the
+    // checkout API re-derives it server-side). No WHOLESALE- SKU family, no
+    // account, no tier minimum to add: below 16 packs it's simply a retail
+    // order, and the cart nudges toward the next tier.
     for (const product of tortillaProducts) {
       const qty = quantities[product.sku] || 0;
       if (qty > 0) {
-        const wholesalePrice = getWholesalePrice(product.price, currentTier.discountPercent);
         addItem(
           {
-            sku: getWholesaleSku(product.sku),
-            name: `Wholesale ${product.name}`,
-            price: wholesalePrice,
-            productType: 'wholesale',
-            description: `${currentTier.discountPercent}% wholesale discount`,
+            sku: product.sku,
+            name: product.name,
+            price: product.price,
+            productType: product.productType,
+            description: product.description,
             image: product.image,
           },
           qty
