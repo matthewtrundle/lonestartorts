@@ -351,7 +351,8 @@ export async function POST(req: NextRequest) {
         amount_off: discountAmount,
         currency: 'usd',
         duration: 'once',
-        name: couponName,
+        // Stripe rejects coupon names longer than 40 chars
+        name: couponName.slice(0, 40),
         metadata: {
           ...(newSystemDiscountId && { newSystemDiscountId, discountCode: discountCode?.toUpperCase() }),
           ...(feedbackCouponCode && { feedbackCouponCode }),
