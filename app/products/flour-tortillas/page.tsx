@@ -7,6 +7,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { StepList } from '@/components/ui/StepList';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { getStoreStatus } from '@/lib/store-status';
 
 export const metadata: Metadata = {
   title: 'Premium Flour Tortillas',
@@ -25,7 +26,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FlourTortillasProductPage() {
+export default async function FlourTortillasProductPage() {
+  const { salesPaused } = await getStoreStatus();
   // Product Schema
   const productSchema = {
     '@context': 'https://schema.org',
@@ -41,7 +43,7 @@ export default function FlourTortillasProductPage() {
       price: '6.99',
       priceCurrency: 'USD',
       priceValidUntil: '2026-12-31',
-      availability: 'https://schema.org/PreOrder',
+      availability: salesPaused ? 'https://schema.org/OutOfStock' : 'https://schema.org/PreOrder',
       url: 'https://lonestartortillas.com/products/flour-tortillas',
     },
     aggregateRating: {

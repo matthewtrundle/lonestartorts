@@ -9,6 +9,8 @@ import { ShopBundle, getBundleSavings } from '@/lib/bundles';
 import { getProductBySku } from '@/lib/products';
 import { Button } from '@/components/ui/button';
 import { trackAddToCart, getGA4Category } from '@/lib/analytics';
+import { NotifyMeForm } from '@/components/NotifyMeForm';
+import { useStoreStatus } from '@/components/StoreStatusProvider';
 
 interface BundleCardProps {
   bundle: ShopBundle;
@@ -16,6 +18,7 @@ interface BundleCardProps {
 
 export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
   const { addItem } = useCart();
+  const { salesPaused } = useStoreStatus();
   const { savingsAmount, savingsPercent } = getBundleSavings(bundle);
 
   const handleAddBundle = () => {
@@ -139,15 +142,24 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
         </div>
 
         {/* CTA Button */}
-        <Button
-          variant="cart"
-          size="lg"
-          onClick={handleAddBundle}
-          className="w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-soft hover:shadow-medium active:scale-[0.98] transition-all"
-        >
-          <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
-          Add Bundle to Cart
-        </Button>
+        {salesPaused ? (
+          <div className="rounded-lg bg-cream-50 p-3 text-center">
+            <p className="text-[11px] md:text-xs font-medium text-charcoal-700 mb-2">
+              Ordering is paused while we take a short break. Get notified when we&apos;re back:
+            </p>
+            <NotifyMeForm source="product" variant="full" className="mx-auto" />
+          </div>
+        ) : (
+          <Button
+            variant="cart"
+            size="lg"
+            onClick={handleAddBundle}
+            className="w-full uppercase flex items-center justify-center gap-2 text-xs md:text-sm font-bold tracking-wide min-h-[44px] md:min-h-[48px] rounded-lg shadow-soft hover:shadow-medium active:scale-[0.98] transition-all"
+          >
+            <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
+            Add Bundle to Cart
+          </Button>
+        )}
       </div>
     </div>
   );

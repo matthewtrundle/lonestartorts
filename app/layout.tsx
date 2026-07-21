@@ -10,6 +10,9 @@ import { LanguageProvider } from '@/lib/language-context';
 import { ToastProvider } from '@/components/ui/Toast';
 import { Footer } from '@/components/layout/Footer';
 import { HeaderWrapper } from '@/components/layout/HeaderWrapper';
+import { AnnouncementBanner } from '@/components/layout/AnnouncementBanner';
+import { StoreStatusProvider } from '@/components/StoreStatusProvider';
+import { getStoreStatus } from '@/lib/store-status';
 
 // Lazy load CartSidebar - not needed on initial page render
 const CartSidebar = dynamic(
@@ -273,11 +276,13 @@ const localBusinessSchema = {
   ]
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { salesPaused, pauseMessage } = await getStoreStatus();
+
   return (
     <html lang="en">
       <head>
@@ -356,6 +361,7 @@ export default function RootLayout({
         {/* First-touch attribution cookie (read at checkout) */}
         <AttributionTracker />
 
+        <StoreStatusProvider salesPaused={salesPaused} pauseMessage={pauseMessage}>
         <LanguageProvider>
           <CartProvider>
             <ToastProvider>
@@ -367,6 +373,7 @@ export default function RootLayout({
               </a>
               <CartSidebar />
               <div className="min-h-screen flex flex-col">
+                <AnnouncementBanner />
                 <HeaderWrapper />
                 <main id="main-content" className="flex-grow">
                   {children}
@@ -376,6 +383,7 @@ export default function RootLayout({
             </ToastProvider>
           </CartProvider>
         </LanguageProvider>
+        </StoreStatusProvider>
       </body>
     </html>
   );

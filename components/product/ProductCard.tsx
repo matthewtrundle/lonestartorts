@@ -8,6 +8,8 @@ import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
 import { trackAddToCart, getGA4Category } from '@/lib/analytics';
 import { Button } from '@/components/ui/button';
+import { NotifyMeForm } from '@/components/NotifyMeForm';
+import { useStoreStatus } from '@/components/StoreStatusProvider';
 
 interface ProductCardProps {
   sku: string;
@@ -45,6 +47,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onAddToOrder,
 }) => {
   const { addItem } = useCart();
+  const { salesPaused } = useStoreStatus();
   const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
 
@@ -192,6 +195,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             >
               View Bundles
             </a>
+          </div>
+        ) : salesPaused ? (
+          <div className="rounded-lg bg-cream-50 p-3 text-center">
+            <p className="text-[11px] md:text-xs font-medium text-charcoal-700 mb-2">
+              Ordering is paused while we take a short break. Get notified when we&apos;re back:
+            </p>
+            <NotifyMeForm source="product" variant="full" className="mx-auto" />
           </div>
         ) : (
           <>

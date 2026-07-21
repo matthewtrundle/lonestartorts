@@ -41,6 +41,7 @@ const navEntries: NavEntry[] = [
     ],
   },
   { href: '/admin/analytics', label: 'Analytics' },
+  { href: '/admin/settings', label: 'Settings' },
 ];
 
 export default function AdminLayout({

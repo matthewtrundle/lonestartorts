@@ -131,6 +131,12 @@ export async function cancelSubscription(stripeSubscriptionId: string) {
   });
 }
 
+// Immediate cancellation (no further invoices) — used by the admin
+// pause-sales action. Customer-facing cancellation stays period-end above.
+export async function cancelSubscriptionImmediately(stripeSubscriptionId: string) {
+  return stripe.subscriptions.cancel(stripeSubscriptionId);
+}
+
 export async function reactivateSubscription(stripeSubscriptionId: string) {
   return stripe.subscriptions.update(stripeSubscriptionId, {
     cancel_at_period_end: false,

@@ -6,6 +6,7 @@ import { productHeroes } from '@/lib/hero-images';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { StepList } from '@/components/ui/StepList';
 import { CTABanner } from '@/components/ui/CTABanner';
+import { getStoreStatus } from '@/lib/store-status';
 
 export const metadata: Metadata = {
   title: 'HEB Butter Tortillas Shipped Nationwide',
@@ -40,10 +41,14 @@ const productSchema = {
   }
 };
 
-export default function ButterTortillasPage() {
+export default async function ButterTortillasPage() {
+  const { salesPaused } = await getStoreStatus();
+  const schema = salesPaused
+    ? { ...productSchema, offers: { ...productSchema.offers, availability: 'https://schema.org/OutOfStock' } }
+    : productSchema;
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-masa-50">
         <PageHero
           image={productHeroes.butter.image}

@@ -8,6 +8,8 @@ import { Check, Minus, Plus, Truck, Calendar, Shield, ArrowRight, ArrowLeft, Map
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import AddressForm from '@/components/account/AddressForm';
+import { SalesPausedNotice } from '@/components/SalesPausedNotice';
+import { useStoreStatus } from '@/components/StoreStatusProvider';
 import { products } from '@/lib/products';
 import { formatPrice } from '@/lib/utils';
 import type { AddressFields } from '@/lib/address-validation';
@@ -48,6 +50,14 @@ const focusRing =
   'focus:outline-none focus-visible:ring-2 focus-visible:ring-sunset-500 focus-visible:ring-offset-2';
 
 export default function SubscribePage() {
+  const { salesPaused } = useStoreStatus();
+  if (salesPaused) {
+    return <SalesPausedNotice source="subscribe-page" title="Subscriptions are paused" />;
+  }
+  return <SubscribePageContent />;
+}
+
+function SubscribePageContent() {
   const router = useRouter();
   const [step, setStep] = useState<Step>('products');
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { products } from '@/lib/products';
+import { getStoreStatus } from '@/lib/store-status';
 
 // OpenAI product feed for ChatGPT Shopping (Agentic Commerce Protocol).
 // Spec: https://developers.openai.com/commerce/specs/file-upload/products
@@ -26,6 +27,7 @@ function brandName(p: (typeof products)[number]): string {
 }
 
 export async function GET() {
+  const { salesPaused } = await getStoreStatus();
   const items = products
     .filter(p => p.category !== 'wholesale' && !p.bundleOnly)
     .map(p => ({
@@ -36,7 +38,7 @@ export async function GET() {
       brand: brandName(p),
       price: `${(p.price / 100).toFixed(2)} USD`,
       image_url: `${SITE}${p.image}`,
-      availability: 'in_stock',
+      availability: salesPaused ? 'out_of_stock' : 'in_stock',
       is_eligible_search: true,
       is_eligible_checkout: false,
       seller_name: 'Lonestar Tortillas',

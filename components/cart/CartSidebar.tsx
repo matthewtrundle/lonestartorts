@@ -9,6 +9,8 @@ import { useLanguage } from '@/lib/language-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCartSidebarOpened, trackCartSidebarClosed, getGA4Category, type CartItemData } from '@/lib/analytics';
 import { getProductBySku, MINIMUM_ORDER_AMOUNT } from '@/lib/products';
+import { NotifyMeForm } from '@/components/NotifyMeForm';
+import { useStoreStatus } from '@/components/StoreStatusProvider';
 
 import { X, Minus, Plus, ShoppingBag, Truck, Lock, Tag, Check, ChevronDown } from 'lucide-react';
 import { FreeShippingProgress } from '@/components/shop/FreeShippingProgress';
@@ -52,6 +54,7 @@ function ShippingDisplay({ hasWholesaleItems, freeShippingQualifies, shipping }:
 export function CartSidebar() {
   const { items, itemCount, subtotal, shipping, baseShipping, total, volumeTier, freeShippingProgress, updateQuantity, removeItem, isOpen, setIsOpen, spinPrize } = useCart();
   const { t } = useLanguage();
+  const { salesPaused } = useStoreStatus();
   const router = useRouter();
   const hasWholesaleItems = items.some(item => item.productType === 'wholesale');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -615,22 +618,34 @@ export function CartSidebar() {
                   {t('cart.trust.secure')} &bull; {t('cart.trust.fast')} &bull; {t('cart.trust.guaranteed')}
                 </p>
 
-                {/* Minimum Order Notice */}
-                {belowMinimum && (
-                  <p className="mb-2 text-center text-xs text-sunset-700 font-medium" role="status">
-                    Add {formatPrice(minimumRemaining)} more to reach our $80 minimum — and unlock free shipping
-                  </p>
-                )}
+                {salesPaused ? (
+                  <div className="mb-2 rounded-lg border border-sunset-200 bg-cream-50 p-3 text-center">
+                    <p className="text-xs font-medium text-charcoal-800 mb-2">
+                      We&apos;re taking a short break — ordering is paused. Leave your email and
+                      we&apos;ll let you know the moment we&apos;re back.
+                    </p>
+                    <NotifyMeForm source="cart" variant="full" className="mx-auto" />
+                  </div>
+                ) : (
+                  <>
+                    {/* Minimum Order Notice */}
+                    {belowMinimum && (
+                      <p className="mb-2 text-center text-xs text-sunset-700 font-medium" role="status">
+                        Add {formatPrice(minimumRemaining)} more to reach our $80 minimum — and unlock free shipping
+                      </p>
+                    )}
 
-                {/* Checkout Button */}
-                <button
-                  onClick={handleCheckout}
-                  disabled={isProcessing || belowMinimum}
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-black text-white text-center text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  <Lock className="w-3.5 h-3.5" />
-                  {isProcessing ? t('cart.processing') : belowMinimum ? '$80 minimum order' : t('cart.checkout')}
-                </button>
+                    {/* Checkout Button */}
+                    <button
+                      onClick={handleCheckout}
+                      disabled={isProcessing || belowMinimum}
+                      className="flex items-center justify-center gap-2 w-full py-3 bg-black text-white text-center text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors rounded-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    >
+                      <Lock className="w-3.5 h-3.5" />
+                      {isProcessing ? t('cart.processing') : belowMinimum ? '$80 minimum order' : t('cart.checkout')}
+                    </button>
+                  </>
+                )}
 
                 {/* Error Message */}
                 {error && (

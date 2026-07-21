@@ -9,6 +9,8 @@ import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned, getGA4Category, type CartItemData } from '@/lib/analytics';
 import { getProductBySku } from '@/lib/products';
 import { getShippingMessage, getTimeUntilCutoff } from '@/lib/shipping-schedule';
+import { SalesPausedNotice } from '@/components/SalesPausedNotice';
+import { useStoreStatus } from '@/components/StoreStatusProvider';
 
 import { Button } from '@/components/ui/button';
 import { Lock, ShieldCheck, Truck, ArrowLeft, Tag, Check, X, Minus, Plus, Trash2, ChevronDown, Snowflake, CheckCircle, Star, Gift, FileText } from 'lucide-react';
@@ -16,6 +18,14 @@ import { useLanguage } from '@/lib/language-context';
 import WholesaleCheckoutSummary from '@/components/checkout/WholesaleCheckoutSummary';
 
 export default function CheckoutPage() {
+  const { salesPaused } = useStoreStatus();
+  if (salesPaused) {
+    return <SalesPausedNotice source="checkout" title="Ordering is paused" />;
+  }
+  return <CheckoutPageContent />;
+}
+
+function CheckoutPageContent() {
   const router = useRouter();
   const { items, itemCount, subtotal, tax, shipping, total, volumeTier, clearCart, isHydrated, updateQuantity, removeItem } = useCart();
   const { t } = useLanguage();

@@ -1,10 +1,12 @@
 'use client';
 
 import { useCart } from '@/lib/cart-context';
+import { useStoreStatus } from '@/components/StoreStatusProvider';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 export function StickyCartBar() {
   const { itemCount, subtotal, setIsOpen, freeShippingProgress } = useCart();
+  const { salesPaused } = useStoreStatus();
 
   // Don't show if cart is empty
   if (itemCount === 0) return null;
@@ -18,7 +20,7 @@ export function StickyCartBar() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[90] md:hidden">
       {/* Free shipping nudge */}
-      {!qualifies && subtotal > 0 && (
+      {!salesPaused && !qualifies && subtotal > 0 && (
         <div className="bg-amber-50 px-4 py-2 text-center text-sm border-t border-amber-200">
           <div className="flex items-center justify-center gap-2 text-amber-700">
             <span className="font-medium">

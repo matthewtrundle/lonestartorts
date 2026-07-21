@@ -9,6 +9,7 @@ import { prisma } from '@/lib/prisma';
 import { getAuthenticatedCustomer } from '@/lib/customer-auth';
 import { validateDiscount, includesFreeShipping, ApplicableDiscount, AppliedRule } from '@/lib/discount-engine';
 import { getNextShipDate, getShipDateDisplay, formatShipDate } from '@/lib/shipping-schedule';
+import { getStoreStatusUncached } from '@/lib/store-status';
 
 // Helper to get any product by SKU (retail or wholesale)
 function getAnyProductBySku(sku: string) {
@@ -31,6 +32,14 @@ export async function POST(req: NextRequest) {
     if (!stripe) {
       console.warn('Stripe not configured - checkout disabled');
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
+    }
+
+    const { salesPaused } = await getStoreStatusUncached();
+    if (salesPaused) {
+      return NextResponse.json(
+        { error: 'Sales are temporarily paused', code: 'SALES_PAUSED' },
+        { status: 503 }
+      );
     }
 
     const { items, email, discountCode } = await req.json();

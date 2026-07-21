@@ -3,12 +3,21 @@ import { prisma } from '@/lib/prisma';
 import { getAuthenticatedCustomer } from '@/lib/customer-auth';
 import { createRetailSubscription, mapStripeIntervalToDb } from '@/lib/subscription/stripe';
 import { getProductBySku } from '@/lib/products';
+import { getStoreStatusUncached } from '@/lib/store-status';
 // Emails are now sent from webhook handler after payment confirms
 
 const TAX_RATE = 0.0825;
 
 export async function POST(request: NextRequest) {
   try {
+    const { salesPaused } = await getStoreStatusUncached();
+    if (salesPaused) {
+      return NextResponse.json(
+        { error: 'Sales are temporarily paused', code: 'SALES_PAUSED' },
+        { status: 503 }
+      );
+    }
+
     const customer = await getAuthenticatedCustomer();
     if (!customer) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });

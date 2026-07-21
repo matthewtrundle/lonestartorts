@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getAuthenticatedCustomer } from '@/lib/customer-auth';
+import { getStoreStatusUncached } from '@/lib/store-status';
 
 function generateOrderNumber(): string {
   const timestamp = Date.now().toString().slice(-8);
@@ -10,6 +11,14 @@ function generateOrderNumber(): string {
 
 export async function POST(request: NextRequest) {
   try {
+    const { salesPaused } = await getStoreStatusUncached();
+    if (salesPaused) {
+      return NextResponse.json(
+        { error: 'Sales are temporarily paused', code: 'SALES_PAUSED' },
+        { status: 503 }
+      );
+    }
+
     const customer = await getAuthenticatedCustomer();
     if (!customer) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });

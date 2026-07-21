@@ -30,22 +30,22 @@ model Address {
 }
 
 model Customer {
-  id               String    @id
-  clerkUserId      String    @unique
-  email            String    @unique
-  passwordHash     String?
-  firstName        String?
-  lastName         String?
-  stripeCustomerId String?   @unique
-  lastLoginAt      DateTime?
-  signupSource     String?
-  isWholesale      Boolean   @default(false)
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime
-  privateMetadata  Json?
-  publicMetadata   Json?
-  Address          Address[]
-  Order            Order[]
+  id                 String               @id
+  clerkUserId        String               @unique
+  email              String               @unique
+  passwordHash       String?
+  firstName          String?
+  lastName           String?
+  stripeCustomerId   String?              @unique
+  lastLoginAt        DateTime?
+  signupSource       String?
+  isWholesale        Boolean              @default(false)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime
+  privateMetadata    Json?
+  publicMetadata     Json?
+  Address            Address[]
+  Order              Order[]
   RetailSubscription RetailSubscription[]
   LoyaltyAccount     LoyaltyAccount?
 
@@ -59,49 +59,49 @@ model Customer {
 }
 
 model RetailSubscription {
-  id                   String             @id @default(uuid())
-  customerId           String
+  id         String @id @default(uuid())
+  customerId String
 
   // Stripe references
-  stripeSubscriptionId String?            @unique
+  stripeSubscriptionId String? @unique
   stripePriceId        String?
   stripeProductId      String?
 
   // Subscription details
-  name                 String
-  status               SubscriptionStatus @default(ACTIVE)
+  name   String
+  status SubscriptionStatus @default(ACTIVE)
 
   // Billing cycle
-  interval             BillingInterval    @default(MONTHLY)
-  intervalCount        Int                @default(1)
+  interval      BillingInterval @default(MONTHLY)
+  intervalCount Int             @default(1)
 
   // Dates
-  nextBillingDate      DateTime?
-  lastBilledAt         DateTime?
-  currentPeriodStart   DateTime?
-  currentPeriodEnd     DateTime?
+  nextBillingDate    DateTime?
+  lastBilledAt       DateTime?
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
 
   // Items (JSON: array of {sku, name, quantity, unitPrice})
-  items                Json
+  items Json
 
   // Totals in cents
-  subtotal             Int
-  shipping             Int                @default(0)
-  tax                  Int                @default(0)
-  total                Int
+  subtotal Int
+  shipping Int @default(0)
+  tax      Int @default(0)
+  total    Int
 
   // Shipping preference
-  preferredShippingDay String?            // e.g. "1st_tuesday", "2nd_tuesday", "3rd_tuesday", "4th_tuesday"
+  preferredShippingDay String? // e.g. "1st_tuesday", "2nd_tuesday", "3rd_tuesday", "4th_tuesday"
 
   // Management
-  pausedUntil          DateTime?
-  cancelledAt          DateTime?
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
+  pausedUntil DateTime?
+  cancelledAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   // Relations
-  customer             Customer           @relation(fields: [customerId], references: [id])
-  orders               Order[]
+  customer Customer @relation(fields: [customerId], references: [id])
+  orders   Order[]
 
   @@index([customerId])
   @@index([stripeSubscriptionId])
@@ -139,61 +139,61 @@ model Note {
 }
 
 model Order {
-  id               String            @id
-  orderNumber      String            @unique
-  customerId       String?
-  email            String
-  subtotal         Int
-  shipping         Int
-  tax              Int
-  total            Int
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime
-  shippedAt        DateTime?
-  deliveredAt      DateTime?
-  shippedEmailSentAt DateTime?
-  carrier          String?
-  paymentStatus    PaymentStatus     @default(PENDING)
-  stripePaymentId  String?
+  id                   String        @id
+  orderNumber          String        @unique
+  customerId           String?
+  email                String
+  subtotal             Int
+  shipping             Int
+  tax                  Int
+  total                Int
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime
+  shippedAt            DateTime?
+  deliveredAt          DateTime?
+  shippedEmailSentAt   DateTime?
+  carrier              String?
+  paymentStatus        PaymentStatus @default(PENDING)
+  stripePaymentId      String?
   // Set when this order was generated from a recurring subscription renewal.
   retailSubscriptionId String?
-  trackingNumber   String?
-  status           OrderStatus       @default(PENDING)
-  shippingName     String?
-  shippingAddress1 String?
-  shippingAddress2 String?
-  shippingCity     String?
-  shippingState    String?
-  shippingZip      String?
-  shippingCountry  String?
-  shippingPhone    String?
-  labelUrl         String?
-  shippingCost     Int?              // Actual shipping cost paid (cents), e.g. from Pirate Ship
+  trackingNumber       String?
+  status               OrderStatus   @default(PENDING)
+  shippingName         String?
+  shippingAddress1     String?
+  shippingAddress2     String?
+  shippingCity         String?
+  shippingState        String?
+  shippingZip          String?
+  shippingCountry      String?
+  shippingPhone        String?
+  labelUrl             String?
+  shippingCost         Int? // Actual shipping cost paid (cents), e.g. from Pirate Ship
 
   // Replacement / comp orders created by CoreLinq ("Resend order" from an
   // escalation). A future scheduledShipDate holds the order out of the
   // fulfillment queue until that ship week.
   scheduledShipDate        DateTime? // hold until this ship week; null = next batch
-  replacementOfOrderNumber String?   // the original LST- order this replaces
+  replacementOfOrderNumber String? // the original LST- order this replaces
   sourceIdempotencyKey     String?   @unique // dedupe replacement creates
 
   // First-touch attribution (captured via lst_attr cookie on first visit,
   // passed through Stripe checkout metadata into the webhook)
-  landingPath      String?
-  referrer         String?
-  utmSource        String?
-  utmMedium        String?
-  utmCampaign      String?
-  firstVisitAt     DateTime?
+  landingPath  String?
+  referrer     String?
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+  firstVisitAt DateTime?
   // Google Ads click identifiers — required for offline conversion import and
   // to distinguish paid Google from organic Google (utmSource alone cannot).
-  gclid            String?
-  gbraid           String?
-  wbraid           String?
+  gclid        String?
+  gbraid       String?
+  wbraid       String?
 
-  Customer         Customer?         @relation(fields: [customerId], references: [id])
-  OrderItem        OrderItem[]
-  CustomerFeedback CustomerFeedback?
+  Customer           Customer?           @relation(fields: [customerId], references: [id])
+  OrderItem          OrderItem[]
+  CustomerFeedback   CustomerFeedback?
   RetailSubscription RetailSubscription? @relation(fields: [retailSubscriptionId], references: [id])
 
   @@index([customerId])
@@ -246,13 +246,13 @@ model OrderItem {
 model SpinWheelEntry {
   id        String    @id @default(uuid())
   email     String
-  prize     String    // 'jackpot', 'free_sauce', 'free_shipping', 'bonus_tortillas', 'five_off'
+  prize     String // 'jackpot', 'free_sauce', 'free_shipping', 'bonus_tortillas', 'five_off'
   code      String    @unique
   used      Boolean   @default(false)
   usedAt    DateTime?
   expiresAt DateTime
   createdAt DateTime  @default(now())
-  utmSource String?   // Track which campaign
+  utmSource String? // Track which campaign
 
   // Drip campaign relation
   dripCampaign DripCampaignProgress?
@@ -268,21 +268,21 @@ model SpinWheelEntry {
 
 // Tracks progress of leads through the drip email sequence
 model DripCampaignProgress {
-  id                String              @id @default(uuid())
-  spinWheelEntryId  String              @unique
-  spinWheelEntry    SpinWheelEntry      @relation(fields: [spinWheelEntryId], references: [id])
-  email             String              // Denormalized for easy querying
-  status            DripCampaignStatus  @default(ACTIVE)
-  currentStep       Int                 @default(1) // 1-6, which email is next
-  lastEmailSentAt   DateTime?
-  nextEmailDueAt    DateTime
-  enrolledAt        DateTime            @default(now())
-  convertedAt       DateTime?
-  unsubscribedAt    DateTime?
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
+  id               String             @id @default(uuid())
+  spinWheelEntryId String             @unique
+  spinWheelEntry   SpinWheelEntry     @relation(fields: [spinWheelEntryId], references: [id])
+  email            String // Denormalized for easy querying
+  status           DripCampaignStatus @default(ACTIVE)
+  currentStep      Int                @default(1) // 1-6, which email is next
+  lastEmailSentAt  DateTime?
+  nextEmailDueAt   DateTime
+  enrolledAt       DateTime           @default(now())
+  convertedAt      DateTime?
+  unsubscribedAt   DateTime?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
 
-  emailLogs         DripEmailLog[]
+  emailLogs DripEmailLog[]
 
   @@index([status, nextEmailDueAt])
   @@index([email])
@@ -290,15 +290,15 @@ model DripCampaignProgress {
 
 // Individual email log for drip campaign
 model DripEmailLog {
-  id              String               @id @default(uuid())
-  dripCampaignId  String
-  dripCampaign    DripCampaignProgress @relation(fields: [dripCampaignId], references: [id], onDelete: Cascade)
-  emailNumber     Int                  // 1-6
-  subject         String
-  sentAt          DateTime             @default(now())
-  openedAt        DateTime?
-  clickedAt       DateTime?
-  discountCode    String?              // Generated code for emails 4-6
+  id             String               @id @default(uuid())
+  dripCampaignId String
+  dripCampaign   DripCampaignProgress @relation(fields: [dripCampaignId], references: [id], onDelete: Cascade)
+  emailNumber    Int // 1-6
+  subject        String
+  sentAt         DateTime             @default(now())
+  openedAt       DateTime?
+  clickedAt      DateTime?
+  discountCode   String? // Generated code for emails 4-6
 
   @@index([dripCampaignId])
 }
@@ -436,7 +436,7 @@ enum UserRole {
 
 // Stores wholesale inquiry submissions from the public form
 model WholesaleInquiry {
-  id              String              @id @default(uuid())
+  id              String        @id @default(uuid())
   businessName    String
   contactName     String
   email           String
@@ -444,12 +444,12 @@ model WholesaleInquiry {
   businessType    String
   estimatedVolume String
   message         String?
-  status          InquiryStatus       @default(PENDING)
+  status          InquiryStatus @default(PENDING)
   reviewedAt      DateTime?
   reviewedBy      String?
   notes           String?
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 
   // If approved, links to the created client
   wholesaleClient WholesaleClient?
@@ -461,64 +461,64 @@ model WholesaleInquiry {
 
 // Approved wholesale customer account
 model WholesaleClient {
-  id                  String                @id @default(uuid())
-  businessName        String
-  contactName         String
-  email               String                @unique
-  phone               String?
-  businessType        String
+  id           String  @id @default(uuid())
+  businessName String
+  contactName  String
+  email        String  @unique
+  phone        String?
+  businessType String
 
   // Stripe integration
-  stripeCustomerId    String?               @unique
+  stripeCustomerId String? @unique
 
   // Pricing and terms
-  pricingTier         PricingTier           @default(STANDARD)
-  discountPercent     Int                   @default(0)
-  paymentTerms        PaymentTerms          @default(DUE_ON_RECEIPT)
-  creditLimit         Int?
+  pricingTier     PricingTier  @default(STANDARD)
+  discountPercent Int          @default(0)
+  paymentTerms    PaymentTerms @default(DUE_ON_RECEIPT)
+  creditLimit     Int?
 
   // Payment terms progression
-  paymentTermsLevel   String    @default("NEW")       // NEW, TRUSTED, ESTABLISHED, PREMIUM
-  termsAutoPromoted   Boolean   @default(true)         // false if admin manually overrode terms
-  onTimePaymentCount  Int       @default(0)
-  latePaymentCount    Int       @default(0)
-  termsLockedUntil    DateTime?                        // freeze promotions after late payment
-  lastTermsChange     DateTime?
+  paymentTermsLevel  String    @default("NEW") // NEW, TRUSTED, ESTABLISHED, PREMIUM
+  termsAutoPromoted  Boolean   @default(true) // false if admin manually overrode terms
+  onTimePaymentCount Int       @default(0)
+  latePaymentCount   Int       @default(0)
+  termsLockedUntil   DateTime? // freeze promotions after late payment
+  lastTermsChange    DateTime?
 
   // Shipping address
-  shippingName        String?
-  shippingAddress1    String?
-  shippingAddress2    String?
-  shippingCity        String?
-  shippingState       String?
-  shippingZip         String?
-  shippingCountry     String                @default("US")
+  shippingName     String?
+  shippingAddress1 String?
+  shippingAddress2 String?
+  shippingCity     String?
+  shippingState    String?
+  shippingZip      String?
+  shippingCountry  String  @default("US")
 
   // Billing address (if different)
-  billingName         String?
-  billingAddress1     String?
-  billingAddress2     String?
-  billingCity         String?
-  billingState        String?
-  billingZip          String?
-  billingCountry      String                @default("US")
+  billingName     String?
+  billingAddress1 String?
+  billingAddress2 String?
+  billingCity     String?
+  billingState    String?
+  billingZip      String?
+  billingCountry  String  @default("US")
 
   // Account status
-  status              ClientStatus          @default(ACTIVE)
-  accountNotes        String?
+  status       ClientStatus @default(ACTIVE)
+  accountNotes String?
 
   // Timestamps
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  approvedAt          DateTime?
-  approvedBy          String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  approvedAt DateTime?
+  approvedBy String?
 
   // Relations
-  inquiryId           String?               @unique
-  inquiry             WholesaleInquiry?     @relation(fields: [inquiryId], references: [id])
-  orders              WholesaleOrder[]
-  subscriptions       WholesaleSubscription[]
-  customer            Customer?
+  inquiryId     String?                 @unique
+  inquiry       WholesaleInquiry?       @relation(fields: [inquiryId], references: [id])
+  orders        WholesaleOrder[]
+  subscriptions WholesaleSubscription[]
+  customer      Customer?
 
   @@index([status])
   @@index([email])
@@ -527,59 +527,59 @@ model WholesaleClient {
 
 // Individual wholesale order/invoice
 model WholesaleOrder {
-  id                  String                   @id @default(uuid())
-  orderNumber         String                   @unique
-  clientId            String
+  id          String @id @default(uuid())
+  orderNumber String @unique
+  clientId    String
 
   // Stripe invoice reference
-  stripeInvoiceId     String?                  @unique
+  stripeInvoiceId     String? @unique
   stripeInvoiceUrl    String?
   stripeInvoiceNumber String?
 
   // Order details
-  subtotal            Int
-  discount            Int                      @default(0)
-  shipping            Int                      @default(0)
-  tax                 Int                      @default(0)
-  total               Int
+  subtotal Int
+  discount Int @default(0)
+  shipping Int @default(0)
+  tax      Int @default(0)
+  total    Int
 
   // Payment tracking
-  paymentStatus       WholesalePaymentStatus   @default(DRAFT)
-  paymentTerms        PaymentTerms
-  dueDate             DateTime?
-  paidAt              DateTime?
+  paymentStatus WholesalePaymentStatus @default(DRAFT)
+  paymentTerms  PaymentTerms
+  dueDate       DateTime?
+  paidAt        DateTime?
 
   // Fulfillment
-  orderStatus         WholesaleOrderStatus     @default(PENDING)
-  shippedAt           DateTime?
-  deliveredAt         DateTime?
-  shippedEmailSentAt  DateTime?
-  trackingNumber      String?
-  carrier             String?
+  orderStatus        WholesaleOrderStatus @default(PENDING)
+  shippedAt          DateTime?
+  deliveredAt        DateTime?
+  shippedEmailSentAt DateTime?
+  trackingNumber     String?
+  carrier            String?
 
   // Shipping address (snapshot at order time)
-  shippingName        String?
-  shippingAddress1    String?
-  shippingAddress2    String?
-  shippingCity        String?
-  shippingState       String?
-  shippingZip         String?
-  shippingCountry     String?
+  shippingName     String?
+  shippingAddress1 String?
+  shippingAddress2 String?
+  shippingCity     String?
+  shippingState    String?
+  shippingZip      String?
+  shippingCountry  String?
 
   // Notes
-  internalNotes       String?
-  customerNotes       String?
+  internalNotes String?
+  customerNotes String?
 
   // Timestamps
-  createdAt           DateTime                 @default(now())
-  updatedAt           DateTime                 @updatedAt
-  invoiceSentAt       DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  invoiceSentAt DateTime?
 
   // Relations
-  client              WholesaleClient          @relation(fields: [clientId], references: [id])
-  items               WholesaleOrderItem[]
-  subscription        WholesaleSubscription?   @relation(fields: [subscriptionId], references: [id])
-  subscriptionId      String?
+  client         WholesaleClient        @relation(fields: [clientId], references: [id])
+  items          WholesaleOrderItem[]
+  subscription   WholesaleSubscription? @relation(fields: [subscriptionId], references: [id])
+  subscriptionId String?
 
   @@index([clientId])
   @@index([paymentStatus])
@@ -590,7 +590,7 @@ model WholesaleOrder {
 
 // Line items for wholesale orders
 model WholesaleOrderItem {
-  id          String          @id @default(uuid())
+  id          String   @id @default(uuid())
   orderId     String
   sku         String?
   name        String
@@ -598,55 +598,55 @@ model WholesaleOrderItem {
   quantity    Int
   unitPrice   Int
   totalPrice  Int
-  createdAt   DateTime        @default(now())
+  createdAt   DateTime @default(now())
 
-  order       WholesaleOrder  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order WholesaleOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
 }
 
 // Recurring subscription for wholesale clients
 model WholesaleSubscription {
-  id                   String             @id @default(uuid())
-  clientId             String
+  id       String @id @default(uuid())
+  clientId String
 
   // Stripe subscription reference
-  stripeSubscriptionId String?            @unique
+  stripeSubscriptionId String? @unique
   stripePriceId        String?
 
   // Subscription details
-  name                 String
-  status               SubscriptionStatus @default(ACTIVE)
+  name   String
+  status SubscriptionStatus @default(ACTIVE)
 
   // Billing cycle
-  interval             BillingInterval    @default(MONTHLY)
-  intervalCount        Int                @default(1)
+  interval      BillingInterval @default(MONTHLY)
+  intervalCount Int             @default(1)
 
   // Next billing/order
-  nextBillingDate      DateTime?
-  lastBilledAt         DateTime?
+  nextBillingDate DateTime?
+  lastBilledAt    DateTime?
 
   // Default order items (JSON for flexibility)
-  defaultItems         Json
+  defaultItems Json
 
   // Pricing
-  subtotal             Int
-  discount             Int                @default(0)
-  shipping             Int                @default(0)
-  estimatedTotal       Int
+  subtotal       Int
+  discount       Int @default(0)
+  shipping       Int @default(0)
+  estimatedTotal Int
 
   // Configuration
-  autoSendInvoice      Boolean            @default(true)
-  pausedUntil          DateTime?
+  autoSendInvoice Boolean   @default(true)
+  pausedUntil     DateTime?
 
   // Timestamps
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
-  cancelledAt          DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  cancelledAt DateTime?
 
   // Relations
-  client               WholesaleClient    @relation(fields: [clientId], references: [id])
-  orders               WholesaleOrder[]
+  client WholesaleClient  @relation(fields: [clientId], references: [id])
+  orders WholesaleOrder[]
 
   @@index([clientId])
   @@index([status])
@@ -727,40 +727,40 @@ enum BillingInterval {
 // ===========================================
 
 model AnalyticsEvent {
-  id            String   @id @default(uuid())
-  receivedAt    DateTime @default(now())
+  id         String   @id @default(uuid())
+  receivedAt DateTime @default(now())
 
   // Core event data
-  eventType     String   // "pageview" or "event"
-  eventName     String?  // for custom events
-  timestamp     BigInt   // Unix timestamp from Vercel
+  eventType String // "pageview" or "event"
+  eventName String? // for custom events
+  timestamp BigInt // Unix timestamp from Vercel
 
   // Page info
-  path          String?
-  route         String?
-  origin        String?
-  referrer      String?
-  queryParams   String?  // contains utm_source, utm_medium, etc.
+  path        String?
+  route       String?
+  origin      String?
+  referrer    String?
+  queryParams String? // contains utm_source, utm_medium, etc.
 
   // Session/device
-  sessionId     BigInt?
-  deviceId      BigInt?
+  sessionId BigInt?
+  deviceId  BigInt?
 
   // Geo
-  country       String?
-  region        String?
-  city          String?
+  country String?
+  region  String?
+  city    String?
 
   // Device/browser
-  osName        String?
-  clientName    String?  // browser name
-  deviceType    String?  // desktop, mobile, tablet
+  osName     String?
+  clientName String? // browser name
+  deviceType String? // desktop, mobile, tablet
 
   // Full payload for future use
-  rawJson       Json
+  rawJson Json
 
   // Dedup hash
-  payloadHash   String?  @unique
+  payloadHash String? @unique
 
   @@index([receivedAt])
   @@index([path])
@@ -775,43 +775,43 @@ model AnalyticsEvent {
 // ===========================================
 
 model DiscountCode {
-  id                 String    @id @default(uuid())
-  code               String    @unique
-  name               String
-  description        String?
+  id          String  @id @default(uuid())
+  code        String  @unique
+  name        String
+  description String?
 
   // Source tracking - where did this code originate
-  source             DiscountSource @default(ADMIN)
-  sourceRef          String?    // Reference to source record (e.g., spinWheelEntryId)
+  source    DiscountSource @default(ADMIN)
+  sourceRef String? // Reference to source record (e.g., spinWheelEntryId)
 
   // Validity
-  isActive           Boolean   @default(true)
-  startsAt           DateTime?
-  expiresAt          DateTime?
+  isActive  Boolean   @default(true)
+  startsAt  DateTime?
+  expiresAt DateTime?
 
   // Global restrictions
-  minOrderAmount     Int?      // Minimum subtotal in cents
-  maxDiscountAmount  Int?      // Cap on total discount value
+  minOrderAmount    Int? // Minimum subtotal in cents
+  maxDiscountAmount Int? // Cap on total discount value
 
   // Usage limits
-  maxUsageTotal      Int?      // null = unlimited total uses
-  maxUsagePerEmail   Int       @default(1)  // Uses per email
-  currentUsageCount  Int       @default(0)
+  maxUsageTotal     Int? // null = unlimited total uses
+  maxUsagePerEmail  Int  @default(1) // Uses per email
+  currentUsageCount Int  @default(0)
 
   // Targeting
-  firstOrderOnly     Boolean   @default(false)
+  firstOrderOnly Boolean @default(false)
 
   // Combination rules
-  stackable          Boolean   @default(false)  // Can be combined with other codes
-  priority           Int       @default(0)      // Higher priority wins for non-stackable
+  stackable Boolean @default(false) // Can be combined with other codes
+  priority  Int     @default(0) // Higher priority wins for non-stackable
 
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  createdBy          String?   // Admin user who created it
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String? // Admin user who created it
 
-  rules              DiscountRule[]
-  restrictions       DiscountRestriction[]
-  usages             DiscountUsage[]
+  rules        DiscountRule[]
+  restrictions DiscountRestriction[]
+  usages       DiscountUsage[]
 
   @@index([code])
   @@index([isActive])
@@ -820,65 +820,65 @@ model DiscountCode {
 }
 
 model DiscountRule {
-  id                 String       @id @default(uuid())
-  discountId         String
+  id         String @id @default(uuid())
+  discountId String
 
-  type               RuleType
+  type RuleType
 
   // For PERCENTAGE and FIXED_AMOUNT rules
-  value              Int?         // Percentage (1-100) or cents
-  maxDiscount        Int?         // Cap for percentage discounts
+  value       Int? // Percentage (1-100) or cents
+  maxDiscount Int? // Cap for percentage discounts
 
   // For BOGO rules
-  buyProductSku      String?      // SKU customer must buy
-  buyQuantity        Int?         // Minimum quantity to trigger BOGO
-  getProductSku      String?      // SKU customer receives
-  getQuantity        Int?         // How many they receive
-  getDiscountPct     Int?         // Discount on free item (100 = free)
+  buyProductSku  String? // SKU customer must buy
+  buyQuantity    Int? // Minimum quantity to trigger BOGO
+  getProductSku  String? // SKU customer receives
+  getQuantity    Int? // How many they receive
+  getDiscountPct Int? // Discount on free item (100 = free)
 
   // Tier threshold - for tiered discounts
-  minOrderAmount     Int?         // Minimum order to qualify for this rule
-  priority           Int          @default(0) // Higher priority checked first
+  minOrderAmount Int? // Minimum order to qualify for this rule
+  priority       Int  @default(0) // Higher priority checked first
 
-  createdAt          DateTime     @default(now())
+  createdAt DateTime @default(now())
 
-  discount           DiscountCode @relation(fields: [discountId], references: [id], onDelete: Cascade)
+  discount DiscountCode @relation(fields: [discountId], references: [id], onDelete: Cascade)
 
   @@index([discountId])
   @@index([type])
 }
 
 model DiscountRestriction {
-  id                 String       @id @default(uuid())
-  discountId         String
+  id         String @id @default(uuid())
+  discountId String
 
-  type               RestrictionType
-  value              String       // SKU or email domain
-  include            Boolean      @default(true) // true = only these, false = exclude these
+  type    RestrictionType
+  value   String // SKU or email domain
+  include Boolean         @default(true) // true = only these, false = exclude these
 
-  createdAt          DateTime     @default(now())
+  createdAt DateTime @default(now())
 
-  discount           DiscountCode @relation(fields: [discountId], references: [id], onDelete: Cascade)
+  discount DiscountCode @relation(fields: [discountId], references: [id], onDelete: Cascade)
 
   @@index([discountId])
   @@index([type])
 }
 
 model DiscountUsage {
-  id                 String       @id @default(uuid())
-  discountId         String
-  email              String
-  orderId            String?
-  orderNumber        String?
-  subtotal           Int          // Order subtotal in cents
-  discountApplied    Int          // Actual discount amount in cents
-  rulesApplied       Json         // Which rules were applied
-  usedAt             DateTime     @default(now())
+  id              String   @id @default(uuid())
+  discountId      String
+  email           String
+  orderId         String?
+  orderNumber     String?
+  subtotal        Int // Order subtotal in cents
+  discountApplied Int // Actual discount amount in cents
+  rulesApplied    Json // Which rules were applied
+  usedAt          DateTime @default(now())
 
   // Fraud tracking
-  ipAddress          String?
+  ipAddress String?
 
-  discount           DiscountCode @relation(fields: [discountId], references: [id])
+  discount DiscountCode @relation(fields: [discountId], references: [id])
 
   @@index([discountId])
   @@index([email])
@@ -913,21 +913,21 @@ enum DiscountSource {
 // ============================================
 
 model ExitSurveyResponse {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
 
   // Where the exit happened
-  page        String   // 'cart' or 'checkout'
+  page String // 'cart' or 'checkout'
 
   // What they selected
-  reason      String   // 'price_too_high', 'shipping_expensive', 'just_browsing', 'will_order_later', 'other'
-  otherText   String?  // Free text if they selected 'other'
+  reason    String // 'price_too_high', 'shipping_expensive', 'just_browsing', 'will_order_later', 'other'
+  otherText String? // Free text if they selected 'other'
 
   // Cart context at time of exit
-  itemCount   Int
-  subtotal    Int      // In cents
-  shipping    Int      // In cents
-  total       Int      // In cents
+  itemCount Int
+  subtotal  Int // In cents
+  shipping  Int // In cents
+  total     Int // In cents
 
   // Traffic source for correlation
   utmSource   String?
@@ -935,7 +935,7 @@ model ExitSurveyResponse {
   utmCampaign String?
 
   // Device info
-  deviceType  String?  // 'mobile', 'desktop', 'tablet'
+  deviceType String? // 'mobile', 'desktop', 'tablet'
 
   @@index([createdAt])
   @@index([reason])
@@ -947,30 +947,30 @@ model ExitSurveyResponse {
 // ===========================================
 
 model LoyaltyAccount {
-  id               String               @id @default(uuid())
-  customerId       String               @unique
-  balance          Int                  @default(0)
-  lifetimeEarned   Int                  @default(0)
-  lifetimeRedeemed Int                  @default(0)
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
+  id               String   @id @default(uuid())
+  customerId       String   @unique
+  balance          Int      @default(0)
+  lifetimeEarned   Int      @default(0)
+  lifetimeRedeemed Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
-  customer         Customer             @relation(fields: [customerId], references: [id])
-  transactions     LoyaltyTransaction[]
+  customer     Customer             @relation(fields: [customerId], references: [id])
+  transactions LoyaltyTransaction[]
 
   @@index([customerId])
 }
 
 model LoyaltyTransaction {
-  id               String              @id @default(uuid())
+  id               String                 @id @default(uuid())
   loyaltyAccountId String
   type             LoyaltyTransactionType
   points           Int
   description      String
   orderId          String?
-  createdAt        DateTime            @default(now())
+  createdAt        DateTime               @default(now())
 
-  account          LoyaltyAccount      @relation(fields: [loyaltyAccountId], references: [id])
+  account LoyaltyAccount @relation(fields: [loyaltyAccountId], references: [id])
 
   @@index([loyaltyAccountId])
   @@index([createdAt])
@@ -1001,4 +1001,15 @@ model Referral {
 
   @@index([referrerEmail])
   @@index([referralCode])
+}
+
+// ===========================================
+// STORE SETTINGS (singleton row)
+// ===========================================
+
+model StoreSettings {
+  id           String   @id @default("singleton")
+  salesPaused  Boolean  @default(false)
+  pauseMessage String?
+  updatedAt    DateTime @updatedAt
 }

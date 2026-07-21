@@ -5,6 +5,7 @@ import {
   FREE_SHIPPING_THRESHOLD,
   type Product,
 } from '@/lib/products';
+import { getStoreStatus } from '@/lib/store-status';
 
 // Revalidate the feed once per day (Merchant Center crawls daily).
 export const revalidate = 86400;
@@ -73,7 +74,7 @@ function formatPrice(cents: number): string {
   return `${(cents / 100).toFixed(2)} USD`;
 }
 
-function buildItem(product: Product): string {
+function buildItem(product: Product, availability: string): string {
   const title = getDisplayName(product);
   const imageLink = `${BASE_URL}${product.image}`;
   const productLink = `${SHOP_URL}#${encodeURIComponent(product.sku)}`;
@@ -85,7 +86,7 @@ function buildItem(product: Product): string {
       <g:link>${escapeXml(productLink)}</g:link>
       <g:image_link>${escapeXml(imageLink)}</g:image_link>
       <g:price>${formatPrice(product.price)}</g:price>
-      <g:availability>in_stock</g:availability>
+      <g:availability>${availability}</g:availability>
       <g:condition>new</g:condition>
       <g:brand>${escapeXml(brandFor(product))}</g:brand>
       <g:identifier_exists>no</g:identifier_exists>
@@ -99,8 +100,9 @@ function buildItem(product: Product): string {
     </item>`;
 }
 
-function buildFeed(): string {
-  const items = products.filter(isRetailSku).map(buildItem).join('\n');
+function buildFeed(salesPaused: boolean): string {
+  const availability = salesPaused ? 'out_of_stock' : 'in_stock';
+  const items = products.filter(isRetailSku).map(p => buildItem(p, availability)).join('\n');
 
   // Free-shipping threshold expressed for context in the channel description.
   const freeShippingDollars = (FREE_SHIPPING_THRESHOLD / 100).toFixed(2);
@@ -119,7 +121,8 @@ ${items}
 }
 
 export async function GET() {
-  const body = buildFeed();
+  const { salesPaused } = await getStoreStatus();
+  const body = buildFeed(salesPaused);
 
   return new Response(body, {
     headers: {

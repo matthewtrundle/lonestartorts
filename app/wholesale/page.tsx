@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { WholesaleForm } from '@/components/wholesale/WholesaleForm';
+import { SalesPausedNotice } from '@/components/SalesPausedNotice';
+import { getStoreStatus } from '@/lib/store-status';
 
 export const metadata: Metadata = {
   alternates: {
@@ -24,7 +26,8 @@ const businessTypes = [
   { name: 'Breakfast Spots', href: '/restaurants/breakfast' },
 ];
 
-export default function WholesalePage() {
+export default async function WholesalePage() {
+  const { salesPaused } = await getStoreStatus();
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -129,7 +132,11 @@ export default function WholesalePage() {
               className="mb-6"
             />
 
-            <WholesaleOrderBuilder />
+            {salesPaused ? (
+              <SalesPausedNotice source="wholesale" title="Wholesale ordering is paused" />
+            ) : (
+              <WholesaleOrderBuilder />
+            )}
 
             <div className="mt-8 text-center space-y-3">
               <p className="text-charcoal-600">

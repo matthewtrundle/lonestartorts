@@ -20,6 +20,7 @@ import {
   type DripEmailData,
 } from '@/lib/drip-email-templates';
 import { generateDripDiscountCode } from '@/lib/drip-discount';
+import { getStoreStatusUncached } from '@/lib/store-status';
 
 // Get Resend client
 let resendClient: Resend | null = null;
@@ -75,6 +76,12 @@ export async function GET(req: NextRequest) {
   // Verify authorization
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // Buy-now drip emails make no sense while ordering is paused
+  const { salesPaused } = await getStoreStatusUncached();
+  if (salesPaused) {
+    return NextResponse.json({ skipped: 'sales paused' });
   }
 
   try {
