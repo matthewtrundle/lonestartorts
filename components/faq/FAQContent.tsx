@@ -98,10 +98,10 @@ export default function FAQContent({ faqs }: FAQContentProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
               <a
-                href="tel:+15128946823"
+                href="mailto:howdy@lonestartortillas.com"
                 className="inline-block bg-cream-50 text-sunset-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors"
               >
-                Call Maria: (512) 894-6823
+                Email howdy@lonestartortillas.com
               </a>
               <Link
                 href="/contact"

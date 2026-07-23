@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getNextShipDate, formatShipDate } from '@/lib/shipping-schedule';
+import { getStoreStatusUncached } from '@/lib/store-status';
 import { getProductBySku, getDisplayName } from '@/lib/products';
 
 export const dynamic = 'force-dynamic';
@@ -70,7 +71,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Calculate estimated ship date from order creation time
-    const shipDate = getNextShipDate(new Date(order.createdAt));
+    const shipDate = getNextShipDate(new Date(order.createdAt), (await getStoreStatusUncached()).nextShipDate);
     const estimatedShipDate = formatShipDate(shipDate);
 
     // Add displayName to each item based on product data

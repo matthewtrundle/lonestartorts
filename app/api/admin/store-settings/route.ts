@@ -18,6 +18,8 @@ export async function GET() {
   return NextResponse.json({
     salesPaused: settings?.salesPaused ?? false,
     pauseMessage: settings?.pauseMessage ?? null,
+    nextShipDate: settings?.nextShipDate ?? null,
+    announcement: settings?.announcement ?? null,
     updatedAt: settings?.updatedAt ?? null,
   });
 }
@@ -40,11 +42,24 @@ export async function PUT(req: NextRequest) {
     typeof body.pauseMessage === 'string' && body.pauseMessage.trim()
       ? body.pauseMessage.trim().slice(0, 500)
       : null;
+  const announcement =
+    typeof body.announcement === 'string' && body.announcement.trim()
+      ? body.announcement.trim().slice(0, 500)
+      : null;
+  let nextShipDate: Date | null = null;
+  if (body.nextShipDate) {
+    const d = new Date(body.nextShipDate);
+    if (isNaN(d.getTime())) {
+      return NextResponse.json({ error: 'nextShipDate is not a valid date' }, { status: 400 });
+    }
+    nextShipDate = d;
+  }
 
+  const data = { salesPaused: body.salesPaused, pauseMessage, announcement, nextShipDate };
   const settings = await prisma.storeSettings.upsert({
     where: { id: 'singleton' },
-    update: { salesPaused: body.salesPaused, pauseMessage },
-    create: { id: 'singleton', salesPaused: body.salesPaused, pauseMessage },
+    update: data,
+    create: { id: 'singleton', ...data },
   });
 
   // Bust every cached surface that renders differently while paused
@@ -55,6 +70,8 @@ export async function PUT(req: NextRequest) {
   return NextResponse.json({
     salesPaused: settings.salesPaused,
     pauseMessage: settings.pauseMessage,
+    nextShipDate: settings.nextShipDate,
+    announcement: settings.announcement,
     updatedAt: settings.updatedAt,
   });
 }

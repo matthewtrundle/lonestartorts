@@ -6,6 +6,8 @@ import { AlertTriangle, CheckCircle, Loader2, PauseCircle, PlayCircle } from 'lu
 interface StoreSettings {
   salesPaused: boolean;
   pauseMessage: string | null;
+  nextShipDate: string | null;
+  announcement: string | null;
   updatedAt: string | null;
 }
 
@@ -17,6 +19,8 @@ interface CancelResult {
 export default function SettingsPage() {
   const [settings, setSettings] = useState<StoreSettings | null>(null);
   const [pauseMessage, setPauseMessage] = useState('');
+  const [announcement, setAnnouncement] = useState('');
+  const [nextShipDate, setNextShipDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -30,6 +34,8 @@ export default function SettingsPage() {
       .then((data: StoreSettings) => {
         setSettings(data);
         setPauseMessage(data.pauseMessage || '');
+        setAnnouncement(data.announcement || '');
+        setNextShipDate(data.nextShipDate ? data.nextShipDate.slice(0, 10) : '');
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -43,7 +49,13 @@ export default function SettingsPage() {
       const res = await fetch('/api/admin/store-settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ salesPaused, pauseMessage: pauseMessage || null }),
+        body: JSON.stringify({
+          salesPaused,
+          pauseMessage: pauseMessage || null,
+          announcement: announcement || null,
+          // Noon Central on the chosen day so timezone shifts can't move the date
+          nextShipDate: nextShipDate ? `${nextShipDate}T12:00:00-05:00` : null,
+        }),
       });
       if (!res.ok) throw new Error((await res.json()).error || 'Failed to save');
       const data = await res.json();
@@ -163,6 +175,51 @@ export default function SettingsPage() {
             </span>
           )}
         </div>
+      </div>
+
+      {/* Vacation mode */}
+      <div className="rounded-xl border border-gray-200 bg-white p-6">
+        <h2 className="text-lg font-semibold text-gray-900">Vacation mode (ship-date override)</h2>
+        <p className="text-sm text-gray-500 mt-1 max-w-lg">
+          While a future date is set, orders stay open but every ship-date on the site — banner,
+          cart, checkout, confirmation emails, Maria — says this date instead of next Tuesday.
+          Clear the date to return to the normal Tuesday schedule.
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-[200px,1fr]">
+          <div>
+            <label htmlFor="next-ship-date" className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+              Next ship date
+            </label>
+            <input
+              id="next-ship-date"
+              type="date"
+              value={nextShipDate}
+              onChange={(e) => setNextShipDate(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+          </div>
+          <div>
+            <label htmlFor="announcement" className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+              Site-wide announcement banner
+            </label>
+            <textarea
+              id="announcement"
+              value={announcement}
+              onChange={(e) => setAnnouncement(e.target.value)}
+              rows={2}
+              maxLength={500}
+              placeholder="We're on a family summer vacation! Orders are open — everything ships Tuesday, August 11."
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+          </div>
+        </div>
+        <button
+          onClick={() => save(paused)}
+          disabled={saving}
+          className="mt-3 px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 disabled:opacity-50"
+        >
+          {saving ? 'Saving…' : 'Save vacation settings'}
+        </button>
       </div>
 
       {/* Subscription cancellation */}

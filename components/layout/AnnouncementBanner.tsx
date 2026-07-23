@@ -9,19 +9,35 @@ const DEFAULT_MESSAGE =
 
 export function AnnouncementBanner() {
   const pathname = usePathname();
-  const { salesPaused, pauseMessage } = useStoreStatus();
+  const { salesPaused, pauseMessage, announcement } = useStoreStatus();
 
   // Admin pages have their own chrome
-  if (!salesPaused || pathname?.startsWith('/admin')) {
+  if (pathname?.startsWith('/admin')) {
     return null;
   }
 
-  return (
-    <div className="bg-charcoal-950 text-white">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 text-center sm:flex-row sm:justify-between sm:text-left">
-        <p className="text-sm font-medium leading-snug">{pauseMessage || DEFAULT_MESSAGE}</p>
-        <NotifyMeForm source="banner" variant="compact" className="w-full max-w-xs sm:w-auto" />
+  // Hard pause: message + email capture
+  if (salesPaused) {
+    return (
+      <div className="bg-charcoal-950 text-white">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-3 text-center sm:flex-row sm:justify-between sm:text-left">
+          <p className="text-sm font-medium leading-snug">{pauseMessage || DEFAULT_MESSAGE}</p>
+          <NotifyMeForm source="banner" variant="compact" className="w-full max-w-xs sm:w-auto" />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  // Vacation / announcement mode: sales are live, just tell people what's up
+  if (announcement) {
+    return (
+      <div className="bg-sunset-600 text-white">
+        <div className="mx-auto max-w-6xl px-4 py-2.5 text-center">
+          <p className="text-sm font-medium leading-snug">{announcement}</p>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }

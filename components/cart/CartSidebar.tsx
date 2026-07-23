@@ -19,13 +19,14 @@ import { getShippingMessage } from '@/lib/shipping-schedule';
 // Separate component to avoid hydration issues with dynamic ship dates
 function ShippingDisplay({ hasWholesaleItems, freeShippingQualifies, shipping }: { hasWholesaleItems: boolean; freeShippingQualifies: boolean; shipping: number }) {
   const [mounted, setMounted] = useState(false);
-  const [message, setMessage] = useState(getShippingMessage());
+  const { nextShipDate } = useStoreStatus();
+  const [message, setMessage] = useState(getShippingMessage(new Date(), nextShipDate));
 
   useEffect(() => {
     setMounted(true);
-    const timer = setInterval(() => setMessage(getShippingMessage()), 60000);
+    const timer = setInterval(() => setMessage(getShippingMessage(new Date(), nextShipDate)), 60000);
     return () => clearInterval(timer);
-  }, []);
+  }, [nextShipDate]);
 
   return (
     <div className="mb-2 bg-white rounded-lg border border-gray-200 p-2">

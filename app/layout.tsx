@@ -281,7 +281,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { salesPaused, pauseMessage } = await getStoreStatus();
+  const { salesPaused, pauseMessage, nextShipDate, announcement } = await getStoreStatus();
 
   return (
     <html lang="en">
@@ -361,7 +361,7 @@ export default async function RootLayout({
         {/* First-touch attribution cookie (read at checkout) */}
         <AttributionTracker />
 
-        <StoreStatusProvider salesPaused={salesPaused} pauseMessage={pauseMessage}>
+        <StoreStatusProvider salesPaused={salesPaused} pauseMessage={pauseMessage} nextShipDate={nextShipDate} announcement={announcement}>
         <LanguageProvider>
           <CartProvider>
             <ToastProvider>

@@ -8,7 +8,7 @@ import { useCart } from '@/lib/cart-context';
 import { formatPrice } from '@/lib/utils';
 import { trackBeginCheckout, trackCheckoutPageViewed, trackCheckoutAbandoned, getGA4Category, type CartItemData } from '@/lib/analytics';
 import { getProductBySku } from '@/lib/products';
-import { getShippingMessage, getTimeUntilCutoff } from '@/lib/shipping-schedule';
+import { getShippingMessage, getTimeUntilCutoff, parseShipDateOverride } from '@/lib/shipping-schedule';
 import { SalesPausedNotice } from '@/components/SalesPausedNotice';
 import { useStoreStatus } from '@/components/StoreStatusProvider';
 
@@ -29,6 +29,7 @@ function CheckoutPageContent() {
   const router = useRouter();
   const { items, itemCount, subtotal, tax, shipping, total, volumeTier, clearCart, isHydrated, updateQuantity, removeItem } = useCart();
   const { t } = useLanguage();
+  const { nextShipDate } = useStoreStatus();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,13 +42,16 @@ function CheckoutPageContent() {
   } | null>(null);
   React.useEffect(() => {
     const update = () => {
-      const msg = getShippingMessage();
-      const cutoff = getTimeUntilCutoff();
+      const overrideActive = !!parseShipDateOverride(nextShipDate);
+      const msg = getShippingMessage(new Date(), nextShipDate);
+      const cutoff = overrideActive ? null : getTimeUntilCutoff();
       setShippingCallout({
         headline: msg.type === 'ships-tomorrow'
           ? `Ships tomorrow — ${msg.shipDateFormatted}`
           : `Ships ${msg.shipDateFormatted}`,
-        subtext: msg.type === 'ships-tomorrow'
+        subtext: overrideActive
+          ? msg.subtext
+          : msg.type === 'ships-tomorrow'
           ? 'We ship every Tuesday so your tortillas spend the fewest days in transit. Order before 9 PM CT tonight to go out tomorrow.'
           : 'We ship once a week — every Tuesday — for maximum freshness. Your order goes out in the next batch.',
         isShipsTomorrow: msg.type === 'ships-tomorrow',
@@ -58,7 +62,7 @@ function CheckoutPageContent() {
     // Re-check every minute so the cutoff countdown stays accurate
     const interval = setInterval(update, 60_000);
     return () => clearInterval(interval);
-  }, []);
+  }, [nextShipDate]);
 
   // Wholesale auth state
   const [wholesaleCustomer, setWholesaleCustomer] = useState<{

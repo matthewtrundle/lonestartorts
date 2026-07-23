@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
               <p className="text-charcoal-700 mb-4">We collect information you voluntarily provide when you:</p>
               <ul className="list-disc pl-6 text-charcoal-700 space-y-2 mb-4">
                 <li><strong>Place an order:</strong> Name, email address, shipping address, billing address, and phone number</li>
-                <li><strong>Contact us:</strong> Information submitted through our contact form, email (howdy@lonestartortillas.com), or phone calls to (512) 894-6823</li>
+                <li><strong>Contact us:</strong> Information submitted through our contact form or email (howdy@lonestartortillas.com)</li>
                 <li><strong>Subscribe to updates:</strong> Email address for order notifications and promotional communications</li>
               </ul>
 
@@ -140,7 +140,6 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul className="list-none pl-0 text-charcoal-700 space-y-2 mb-4">
                 <li><strong>Email:</strong> howdy@lonestartortillas.com</li>
-                <li><strong>Phone:</strong> (512) 894-6823</li>
                 <li><strong>Website:</strong> lonestartortillas.com/contact</li>
               </ul>
 

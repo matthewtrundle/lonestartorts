@@ -225,7 +225,7 @@ const faqSchema = {
       name: 'Can I call Lonestar Tortillas for customer support?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! Call Maria, our friendly AI assistant, anytime 24/7. Maria can answer questions about products, prices, shipping, and orders. For complex issues, she will collect your information so our team can follow up. You can also call us at (512) 894-6823 or email howdy@lonestartortillas.com.'
+        text: 'Yes! Ask Maria, our friendly AI assistant, anytime 24/7 right on the site — voice or text chat. Maria can answer questions about products, prices, shipping, and orders. For complex issues, she will collect your information so our team can follow up. You can also email howdy@lonestartortillas.com or use our contact form.'
       }
     }
   ]
@@ -346,7 +346,7 @@ const faqs = [
       },
       {
         q: 'Can I call for customer support?',
-        a: 'Yes! Call Maria, our friendly AI assistant, anytime 24/7. Maria can answer questions about products, prices, shipping, and orders. For complex issues, she\'ll collect your info so our team can follow up. You can also call us at (512) 894-6823 or email howdy@lonestartortillas.com.'
+        a: 'Yes! Ask Maria, our friendly AI assistant, anytime 24/7 right on the site — voice or text chat. Maria can answer questions about products, prices, shipping, and orders. For complex issues, she\'ll collect your info so our team can follow up. You can also email howdy@lonestartortillas.com or use our contact form.'
       }
     ]
   },

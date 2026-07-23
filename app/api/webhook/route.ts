@@ -9,6 +9,7 @@ import { uploadOfflineConversion } from '@/lib/analytics/google-ads';
 import { recordDiscountUsage, AppliedRule } from '@/lib/discount-engine';
 import { evaluateTermsPromotion, applyTermsDemotion } from '@/lib/wholesale/terms-progression';
 import { getShipDateDisplay } from '@/lib/shipping-schedule';
+import { getStoreStatusUncached } from '@/lib/store-status';
 import { randomUUID } from 'crypto';
 
 const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -315,7 +316,7 @@ export async function POST(req: NextRequest) {
                 zip: order.shippingZip || undefined,
                 country: order.shippingCountry || undefined,
               },
-              estimatedShipDate: getShipDateDisplay(),
+              estimatedShipDate: getShipDateDisplay(new Date(), (await getStoreStatusUncached()).nextShipDate),
             };
 
             try {
@@ -521,7 +522,7 @@ export async function POST(req: NextRequest) {
               try {
                 const { sendSubscriptionRenewalEmail } = await import('@/lib/email');
                 const { getNextShipDate, formatShipDate } = await import('@/lib/shipping-schedule');
-                const shipDate = getNextShipDate();
+                const shipDate = getNextShipDate(new Date(), (await getStoreStatusUncached()).nextShipDate);
                 const estimatedShipDate = formatShipDate(shipDate);
                 const nextBillingDate = new Date(stripeSub.current_period_end * 1000)
                   .toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });

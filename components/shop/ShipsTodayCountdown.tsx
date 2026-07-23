@@ -5,23 +5,27 @@ import { Clock, Truck } from 'lucide-react';
 import {
   getShippingMessage,
   getTimeUntilCutoff,
+  parseShipDateOverride,
   type ShippingMessage,
 } from '@/lib/shipping-schedule';
+import { useStoreStatus } from '@/components/StoreStatusProvider';
 
 export function ShipsTodayCountdown() {
-  const [message, setMessage] = useState<ShippingMessage>(getShippingMessage());
-  const [countdown, setCountdown] = useState(getTimeUntilCutoff());
+  const { nextShipDate } = useStoreStatus();
+  const overrideActive = !!parseShipDateOverride(nextShipDate);
+  const [message, setMessage] = useState<ShippingMessage>(getShippingMessage(new Date(), nextShipDate));
+  const [countdown, setCountdown] = useState(overrideActive ? null : getTimeUntilCutoff());
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
-      setMessage(getShippingMessage());
-      setCountdown(getTimeUntilCutoff());
+      setMessage(getShippingMessage(new Date(), nextShipDate));
+      setCountdown(overrideActive ? null : getTimeUntilCutoff());
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [nextShipDate, overrideActive]);
 
   // Don't render dynamic content on server to avoid hydration mismatch
   if (!mounted) {
@@ -89,19 +93,21 @@ export function ShipsTodayCountdown() {
 
 // Compact version for product cards
 export function ShipsTodayBadge() {
-  const [message, setMessage] = useState<ShippingMessage>(getShippingMessage());
-  const [countdown, setCountdown] = useState(getTimeUntilCutoff());
+  const { nextShipDate } = useStoreStatus();
+  const overrideActive = !!parseShipDateOverride(nextShipDate);
+  const [message, setMessage] = useState<ShippingMessage>(getShippingMessage(new Date(), nextShipDate));
+  const [countdown, setCountdown] = useState(overrideActive ? null : getTimeUntilCutoff());
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
-      setMessage(getShippingMessage());
-      setCountdown(getTimeUntilCutoff());
+      setMessage(getShippingMessage(new Date(), nextShipDate));
+      setCountdown(overrideActive ? null : getTimeUntilCutoff());
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [nextShipDate, overrideActive]);
 
   if (!mounted) {
     return (

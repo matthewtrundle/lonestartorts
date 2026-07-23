@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { products, FREE_SHIPPING_THRESHOLD, FLAT_SHIPPING_RATE } from '@/lib/products';
-import { getShippingScheduleInfo } from '@/lib/shipping-schedule';
+import { getShippingScheduleInfo, parseShipDateOverride, formatShipDate } from '@/lib/shipping-schedule';
+import { getStoreStatus } from '@/lib/store-status';
 
 // Same graceful-degradation pattern as the Stripe guard in app/api/checkout/route.ts:
 // if the key isn't configured we return a 503 and the UI hides the chat option.
@@ -64,7 +65,7 @@ function parseMessages(body: unknown): ChatMessage[] | null {
 }
 
 // ── Maria's knowledge base (sourced from lib/products + lib/shipping-schedule) ──
-function buildSystemPrompt(): string {
+function buildSystemPrompt(shipNotice?: string | null): string {
   const schedule = getShippingScheduleInfo();
   const catalog = products
     .map((p) => {
@@ -84,7 +85,7 @@ PRODUCT CATALOG (prices in USD per pack):
 ${catalog}
 
 SHIPPING (Freshness First):
-- We ship ${schedule.shipDays}s only, with a ${schedule.cutoffTime} order cutoff. ${schedule.scheduleDescription}
+${shipNotice ? `- IMPORTANT CURRENT NOTICE (mention whenever shipping timing comes up): ${shipNotice}\n` : ''}- We ship ${schedule.shipDays}s only, with a ${schedule.cutoffTime} order cutoff. ${schedule.scheduleDescription}
 - Delivery takes ${schedule.deliveryTime}.
 - Flat rate $${(FLAT_SHIPPING_RATE / 100).toFixed(2)}; FREE shipping on orders of $${(FREE_SHIPPING_THRESHOLD / 100).toFixed(0)} or more.
 - US delivery addresses only.
@@ -127,10 +128,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid messages' }, { status: 400 });
     }
 
+    const status = await getStoreStatus();
+    const overrideDate = parseShipDateOverride(status.nextShipDate);
+    const shipNotice = overrideDate
+      ? `The team is on a short summer break. Orders are open, and every order placed now ships ${formatShipDate(overrideDate)}. Normal Tuesday shipping resumes after that.`
+      : null;
+
     const response = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 600,
-      system: buildSystemPrompt(),
+      system: buildSystemPrompt(shipNotice),
       messages,
     });
 

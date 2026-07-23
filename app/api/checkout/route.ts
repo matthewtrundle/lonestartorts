@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 503 });
     }
 
-    const { salesPaused } = await getStoreStatusUncached();
+    const { salesPaused, nextShipDate: shipDateOverride } = await getStoreStatusUncached();
     if (salesPaused) {
       return NextResponse.json(
         { error: 'Sales are temporarily paused', code: 'SALES_PAUSED' },
@@ -396,9 +396,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Calculate ship date for display
-    const shipDateDisplay = getShipDateDisplay();
-    const nextShipDate = getNextShipDate();
+    // Calculate ship date for display (honors StoreSettings.nextShipDate override)
+    const shipDateDisplay = getShipDateDisplay(new Date(), shipDateOverride);
+    const nextShipDate = getNextShipDate(new Date(), shipDateOverride);
     const estimatedShipDate = formatShipDate(nextShipDate);
 
     // Build shipping display name - Freshness First branding

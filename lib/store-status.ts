@@ -4,6 +4,11 @@ import { prisma } from '@/lib/prisma'
 export interface StoreStatus {
   salesPaused: boolean
   pauseMessage: string | null
+  /** ISO string; when set to a future date, all ship-date displays and
+   *  checkout metadata use this instead of the normal Tuesday schedule. */
+  nextShipDate: string | null
+  /** Site-wide banner message shown even while sales are live (vacation mode). */
+  announcement: string | null
 }
 
 export const DEFAULT_PAUSE_MESSAGE =
@@ -14,14 +19,22 @@ async function fetchStoreStatus(): Promise<StoreStatus> {
     const settings = await prisma.storeSettings.findUnique({
       where: { id: 'singleton' },
     })
+    // An override in the past is ignored — the schedule falls back to normal
+    // Tuesdays automatically once the date passes.
+    const override =
+      settings?.nextShipDate && settings.nextShipDate.getTime() > Date.now()
+        ? settings.nextShipDate.toISOString()
+        : null
     return {
       salesPaused: settings?.salesPaused ?? false,
       pauseMessage: settings?.pauseMessage ?? null,
+      nextShipDate: override,
+      announcement: settings?.announcement ?? null,
     }
   } catch (error) {
     // Fail open: a DB hiccup should never take down the storefront
     console.error('Failed to read store status:', error)
-    return { salesPaused: false, pauseMessage: null }
+    return { salesPaused: false, pauseMessage: null, nextShipDate: null, announcement: null }
   }
 }
 

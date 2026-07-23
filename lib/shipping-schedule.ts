@@ -56,8 +56,21 @@ export function isBeforeCutoff(now: Date = new Date()): boolean {
   return ct.dayOfWeek === CUTOFF_DAY && ct.hour < CUTOFF_HOUR;
 }
 
+/**
+ * Normalize a StoreSettings.nextShipDate override (Date or ISO string).
+ * Returns the override as a Date when it's still in the future, else null.
+ */
+export function parseShipDateOverride(override?: Date | string | null): Date | null {
+  if (!override) return null;
+  const d = typeof override === 'string' ? new Date(override) : override;
+  if (isNaN(d.getTime()) || d.getTime() <= Date.now()) return null;
+  return d;
+}
+
 /** Get the next ship date from a given time */
-export function getNextShipDate(now: Date = new Date()): Date {
+export function getNextShipDate(now: Date = new Date(), override?: Date | string | null): Date {
+  const overrideDate = parseShipDateOverride(override);
+  if (overrideDate) return overrideDate;
   const ct = getCentralTime(now);
   const todayDow = ct.dayOfWeek;
 
@@ -92,8 +105,8 @@ export function formatShipDate(date: Date): string {
 }
 
 /** Get a formatted string of the next ship date */
-export function getShipDateDisplay(now: Date = new Date()): string {
-  return formatShipDate(getNextShipDate(now));
+export function getShipDateDisplay(now: Date = new Date(), override?: Date | string | null): string {
+  return formatShipDate(getNextShipDate(now, override));
 }
 
 /** Get time remaining until Monday 9 PM CT cutoff. Returns null if not cutoff day or past cutoff. */
@@ -121,7 +134,18 @@ export interface ShippingMessage {
 }
 
 /** Get the full shipping message for display */
-export function getShippingMessage(now: Date = new Date()): ShippingMessage {
+export function getShippingMessage(now: Date = new Date(), override?: Date | string | null): ShippingMessage {
+  const overrideDate = parseShipDateOverride(override);
+  if (overrideDate) {
+    const formatted = formatShipDate(overrideDate);
+    return {
+      type: 'ships-next-shipday',
+      headline: `Ships ${formatted}`,
+      subtext: `We're on a short summer break — every order placed now ships ${formatted}`,
+      shipDate: overrideDate,
+      shipDateFormatted: formatted,
+    };
+  }
   const ct = getCentralTime(now);
   const todayDow = ct.dayOfWeek;
   const shipDate = getNextShipDate(now);

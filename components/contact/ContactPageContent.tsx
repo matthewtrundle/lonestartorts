@@ -99,15 +99,10 @@ export function ContactPageContent() {
                   <div className="flex items-start gap-3">
                     <ComalIcon className="mt-1 h-5 w-5 flex-shrink-0 text-sunset-600" />
                     <div>
-                      <h3 className="font-semibold text-charcoal-950">Call Maria</h3>
-                      <a
-                        href="tel:+15128946823"
-                        className="text-charcoal-700 hover:text-sunset-600 transition-colors"
-                      >
-                        (512) 894-6823
-                      </a>
+                      <h3 className="font-semibold text-charcoal-950">Ask Maria</h3>
                       <p className="text-sm text-charcoal-600 mt-1 text-pretty">
-                        Our AI assistant is available 24/7 to answer questions about products, shipping, and orders.
+                        Our AI assistant is available 24/7 right here on the site — tap “Ask Maria”
+                        in the menu for a voice or text chat about products, shipping, and orders.
                       </p>
                     </div>
                   </div>

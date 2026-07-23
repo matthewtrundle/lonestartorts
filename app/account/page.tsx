@@ -271,9 +271,6 @@ export default function AccountPage() {
             <div className="bg-white rounded-xl shadow-soft p-6">
               <h2 className="text-lg font-bold text-charcoal-950 mb-3">Need Help?</h2>
               <div className="space-y-2 text-sm">
-                <a href="tel:+15128946823" className="block text-charcoal-600 hover:text-sunset-600">
-                  (512) 894-6823
-                </a>
                 <a href="mailto:howdy@lonestartortillas.com" className="block text-charcoal-600 hover:text-sunset-600">
                   howdy@lonestartortillas.com
                 </a>

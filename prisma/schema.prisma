@@ -1008,8 +1008,10 @@ model Referral {
 // ===========================================
 
 model StoreSettings {
-  id           String   @id @default("singleton")
-  salesPaused  Boolean  @default(false)
+  id           String    @id @default("singleton")
+  salesPaused  Boolean   @default(false)
   pauseMessage String?
-  updatedAt    DateTime @updatedAt
+  nextShipDate DateTime?
+  announcement String?
+  updatedAt    DateTime  @updatedAt
 }

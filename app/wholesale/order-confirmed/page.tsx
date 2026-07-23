@@ -87,10 +87,6 @@ export default function WholesaleOrderConfirmedPage() {
             <a href="mailto:howdy@lonestartortillas.com" className="text-sunset-600 hover:text-sunset-700">
               howdy@lonestartortillas.com
             </a>
-            {' '}or call{' '}
-            <a href="tel:+15128946823" className="text-sunset-600 hover:text-sunset-700">
-              (512) 894-6823
-            </a>
           </p>
         </div>
       </div>

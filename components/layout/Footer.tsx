@@ -133,14 +133,6 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="tel:+15128946823"
-                  className="text-charcoal-300 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <span>(512) 894-6823</span>
-                </a>
-              </li>
-              <li>
-                <a
                   href="mailto:howdy@lonestartortillas.com"
                   className="text-charcoal-300 hover:text-white transition-colors"
                 >

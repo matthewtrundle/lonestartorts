@@ -20,7 +20,6 @@ export default function ContactPage() {
       '@type': 'Organization',
       name: 'Lonestar Tortillas',
       email: 'howdy@lonestartortillas.com',
-      telephone: '+1-512-894-6823',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Austin',
